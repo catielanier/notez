@@ -39,7 +39,7 @@ const Logo = styled.h1`
 const StyledHeader = styled.header`
     .bar {
         border-bottom: 5px solid ${props => props.theme.action};
-        background: black;
+        background: ${props => props.theme.background};
         display: grid;
         grid-template-columns: auto 1fr;
         justify-content: space-between;

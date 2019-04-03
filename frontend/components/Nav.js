@@ -9,6 +9,9 @@ const Nav = () => (
         <Link href="/players">
             <a>Player Notes</a>
         </Link>
+        <Link href="/login">
+            <a>Sign In</a>
+        </Link>
     </NavStyles>
 );
 
