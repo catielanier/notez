@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Router from 'next/router';
 import NProgress from 'nprogress';
+import Nav from './Nav';
 
 Router.onRouteChangeStart = () => {
     NProgress.start();
@@ -37,7 +38,7 @@ const Logo = styled.h1`
 
 const StyledHeader = styled.header`
     .bar {
-        border-bottom: 5px solid ${props => props.theme.lightgrey};
+        border-bottom: 5px solid ${props => props.theme.action};
         background: black;
         display: grid;
         grid-template-columns: auto 1fr;
@@ -46,7 +47,7 @@ const StyledHeader = styled.header`
         @media (max-width: 1300px) {
             grid-template-columns: 1fr;
             justify-content: center;
-            border-bottom: 1px solid ${props => props.theme.lightgrey};
+            border-bottom: 1px solid ${props => props.theme.action};
         }
     }
 `;
@@ -59,6 +60,7 @@ const Header = () => (
                     <a>NoteZ</a>
                 </Link>
             </Logo>
+            <Nav />
         </div>
     </StyledHeader>
 )
