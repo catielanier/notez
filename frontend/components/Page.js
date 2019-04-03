@@ -8,11 +8,18 @@ const theme = {
     foreground: '#f5f5f5',
     action: '#ff7148',
     lightgrey: '#E1E1E1',
+    maxWidth: '1200px',
     bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
 }
 
 const StyledPage = styled.div`
     color: ${props => props.theme.foreground};
+`;
+
+const Inner = styled.div`
+    max-width: ${props => props.theme.maxWidth};
+    margin: 0 auto;
+    padding: 2rem;
 `;
 
 injectGlobal`
@@ -54,7 +61,9 @@ class Page extends Component {
                 <StyledPage>
                     <Meta />
                     <Header />
-                    {this.props.children}
+                    <Inner>
+                        {this.props.children}
+                    </Inner>
                 </StyledPage>
             </ThemeProvider>
         )
