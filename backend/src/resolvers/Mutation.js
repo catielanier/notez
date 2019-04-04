@@ -15,16 +15,16 @@ const mutations = {
             throw new Error("Your passwords do not match.");
         }
         // hash their password
-        const password = await bcrypt.hash(args.password, 93);
+        const password = await bcrypt.hash(args.password, 10);
         // create the user in the db
-        delete args.verifyPassword;
         const user = await ctx.db.mutation.createUser(
             {
                 data: {
-                    ...args,
+                    username: args.username,
+                    email: args.email,
                     password,
-                    permissions: { set: ['USER'] }
-                }
+                    permissions: { set: ['USER'] },
+                },
             },
             info
         );
