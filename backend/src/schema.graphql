@@ -1,0 +1,45 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  permissions: [Permission!]!
+}
+
+type SuccessMessage {
+    message: String
+}
+
+type Mutation {
+    
+    # Create the mutation for creating new users.
+    signup(
+        email: String!
+        password: String!
+        verifyPassword: String!
+        username: String!
+    ): User!
+
+    # Create mutation for logging in new user
+    signin(
+        email: String!
+        password: String!
+    ): User!
+
+    # Create mutation that will handle creating a reset token for password resets.
+    requestReset(email: String!): SuccessMessage
+
+    # Reset the password
+    resetPassword(
+        resetToken: String!
+        password: String!
+        verifyPassword: String!
+    ): User!
+
+    # Simple sign-out mutation
+
+    signout: SuccessMessage
+}
+
+type Query {
+    me: User
+}
