@@ -1,0 +1,18 @@
+enum Permission {
+  ADMIN
+  USER
+  NOTECREATE
+  NOTEUPDATE
+  NOTEDELETE
+  PERMISSIONUPDATE
+}
+
+type User {
+  id: ID! @unique
+  username: String! @unique
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission]
+}
