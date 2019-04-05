@@ -36,5 +36,15 @@ type Mutation {
 }
 
 type Query {
+    # Get the current user if logged in.
     me: User
+
+    users: [User]!
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  permissions: [Permission!]!
 }

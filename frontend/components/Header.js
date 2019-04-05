@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import styled from 'styled-components';
 import Router from 'next/router';
@@ -18,6 +17,7 @@ Router.onRouteChangeError = () => {
 const Logo = styled.h1`
     font-size: 4rem;
     font-family: 'American Captain';
+    letter-spacing: 4px;
     margin-left: 2rem;
     position: relative;
     z-index: 2;
