@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import PropTypes from 'prop-types';
+import { CURRENT_USER_QUERY } from './User';
 
 const RESET_MUTATION = gql`
     mutation RESET_MUTATION(
@@ -45,7 +46,7 @@ class Reset extends Component {
                 resetToken: this.props.resetToken,
                 password: this.state.password,
                 verifyPassword: this.state.verifyPassword
-            }}>
+            }} refetchQueries={CURRENT_USER_QUERY}>
                 {(resetPassword, { error, loading, called }) => {
                     return (
                         <Form method="post" onSubmit={async (e) => {
