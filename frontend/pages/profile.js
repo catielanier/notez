@@ -1,5 +1,6 @@
 import Profile from '../components/Profile';
 import PleaseSignIn from '../components/PleaseSignIn';
+import Columns from './login';
 
 const ProfilePage = (props) => {
     return( 

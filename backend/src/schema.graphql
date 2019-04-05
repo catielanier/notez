@@ -34,7 +34,17 @@ type Mutation {
     signout: SuccessMessage
 
     # Update users' permissions
-    updatePermissions(permissions: [Permission], userId: ID!): User
+    updatePermissions(
+        permissions: [Permission]
+        userId: ID!
+    ): User
+
+    # Allow users to change their password
+    changePassword(
+        oldPassword: String!
+        newPassword: String!
+        verifyNewPassword: String!
+    ): User
 }
 
 type Query {
@@ -43,11 +53,4 @@ type Query {
 
     # Pull all users for updating permissions
     users: [User]!
-}
-
-type User {
-    id: ID!
-    username: String!
-    email: String!
-    permissions: [Permission!]!
 }

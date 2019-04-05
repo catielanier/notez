@@ -101,7 +101,7 @@ const mutations = {
     async resetPassword(parent, args, ctx, info) {
         // 1. check if the passwords match
         if (args.password !== args.verifyPassword) {
-            throw new Error("Yo Passwords don't match!");
+            throw new Error("Your passwords don't match!");
         }
         // 2. check if its a legit reset token
         // 3. Check if its expired
@@ -174,6 +174,40 @@ const mutations = {
             info
         );
     },
+
+    // Create front-facing mutation to update user password
+    async changePassword(parent, args, ctx, info) {
+        // Check if they're logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+        // Query the user
+        const user = await ctx.db.query.user({ where: { email: ctx.request.user.email } });
+        // Verify old password
+        const valid = await bcrypt.compare(args.oldPassword, user.password);
+        if (!valid) {
+            throw new Error('Invalid Password!');
+        }
+        // Check if new passwords match
+        if (args.newPassword !== args.verifyNewPassword) {
+            throw new Error("Your passwords don't match!");
+        }
+        // Make sure new password is not the same as the old one
+        if (args.newPassword === args.oldPassword) {
+            throw new Error("You cannot make your new password the same as your current one!");
+        }
+        // Hash the new password
+        const password = await bcrypt.hash(args.newPassword, 10);
+        // Update the user's password
+        const updatedUser = await ctx.db.mutation.updateUser({
+            where: { email: ctx.request.user.email },
+            data: {
+                password
+            }
+        }, info);
+        // Return the user
+        return updatedUser;
+    }
 };
 
 module.exports = mutations;
