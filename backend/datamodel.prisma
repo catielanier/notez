@@ -17,3 +17,15 @@ type User {
   resetTokenExpiry: Float
   permissions: [Permission]
 }
+
+type Game {
+  id: ID! @unique
+  name: String! @unique
+  characters: [Character!]!
+}
+
+type Character {
+  id: ID! @unique
+  name: String! @unique
+  games: [Game!]!
+}
