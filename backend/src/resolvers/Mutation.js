@@ -134,6 +134,12 @@ const mutations = {
         });
         // 8. return the new user
         return updatedUser;
+    },
+
+    // Sign the user out
+    signout(parent, args, ctx, info) {
+        ctx.response.clearCookie('token');
+        return { message: 'Goodbye!' };
     }
 };
 

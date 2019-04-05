@@ -13,6 +13,8 @@ const NavStyles = styled.ul`
     align-items: center;
     position: relative;
     text-transform: uppercase;
+    font-family: 'Falling Sky';
+    color: ${props => props.theme.foreground};
     font-weight: 900;
     font-size: 1em;
     background: none;
