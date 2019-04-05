@@ -10,7 +10,7 @@ const Nav = () => (
                 {me && (
                     <>
                         <Link href="/">
-                            <a>{me.username}</a>
+                            <a style={{textTransform: 'initial'}}>{me.username}</a>
                         </Link>
                         <Link href="/games">
                             <a>Game Notes</a>
@@ -18,6 +18,11 @@ const Nav = () => (
                         <Link href="/players">
                             <a>Player Notes</a>
                         </Link>
+                        {me.permissions.indexOf('ADMIN') !== -1 && (
+                            <Link href="/permissions">
+                                <a>Permissions</a>
+                            </Link>
+                        )}
                         <Signout />
                     </>
                 )}

@@ -46,8 +46,8 @@ type Query {
 }
 
 type User {
-  id: ID!
-  username: String!
-  email: String!
-  permissions: [Permission!]!
+    id: ID!
+    username: String!
+    email: String!
+    permissions: [Permission!]!
 }
