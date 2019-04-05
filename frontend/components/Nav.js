@@ -9,7 +9,7 @@ const Nav = () => (
             <NavStyles data-test="nav">
                 {me && (
                     <>
-                        <Link href="/">
+                        <Link href="/profile">
                             <a style={{textTransform: 'initial'}}>{me.username}</a>
                         </Link>
                         <Link href="/games">
@@ -19,8 +19,18 @@ const Nav = () => (
                             <a>Player Notes</a>
                         </Link>
                         {me.permissions.indexOf('ADMIN') !== -1 && (
-                            <Link href="/permissions">
-                                <a>Permissions</a>
+                            <>
+                                <Link href="/permissions">
+                                    <a>Permissions</a>
+                                </Link>
+                                <Link href="/creategame">
+                                    <a>Create Games</a>
+                                </Link>
+                            </>
+                        )}
+                        {me.permissions.indexOf('GAMECREATE') !== -1 && me.permissions.indexOf('ADMIN') === -1 && (
+                            <Link href="/creategame">
+                                <a>Create Games</a>
                             </Link>
                         )}
                         <Signout />
