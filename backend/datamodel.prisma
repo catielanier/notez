@@ -1,10 +1,11 @@
 enum Permission {
   ADMIN
   USER
-  NOTECREATE
   NOTEUPDATE
   NOTEDELETE
   PERMISSIONUPDATE
+  GAMECREATE
+  BAN
 }
 
 type User {

@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Thu Apr 04 2019 14:14:01 GMT-0400 (Eastern Daylight Time)
+# timestamp: Fri Apr 05 2019 14:14:21 GMT-0400 (Eastern Daylight Time)
 
 type AggregateUser {
   count: Int!
@@ -59,6 +59,7 @@ enum Permission {
   NOTEUPDATE
   NOTEDELETE
   PERMISSIONUPDATE
+  GAMECREATE
 }
 
 type Query {

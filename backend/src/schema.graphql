@@ -31,14 +31,17 @@ type Mutation {
     ): User!
 
     # Simple sign-out mutation
-
     signout: SuccessMessage
+
+    # Update users' permissions
+    updatePermissions(permissions: [Permission], userId: ID!): User
 }
 
 type Query {
     # Get the current user if logged in.
     me: User
 
+    # Pull all users for updating permissions
     users: [User]!
 }
 
