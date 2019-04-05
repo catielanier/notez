@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
@@ -42,7 +43,7 @@ class Signup extends Component {
 
     render() {
         return(
-            <Mutation mutation={SIGNUP_MUTATION} refetchQueries={CURRENT_USER_QUERY} variables={this.state}>
+            <Mutation mutation={SIGNUP_MUTATION} refetchQueries={[{query: CURRENT_USER_QUERY}]} variables={this.state}>
                 {(signup, {error, loading}) => {
                     return(
                         <Form method="post" onSubmit={async (e) => {
@@ -55,6 +56,9 @@ class Signup extends Component {
                                 password: '',
                                 verifyPassword: ''
                             });
+                            if (res.data) {
+                                Router.back();
+                            }
                         }}>
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>New User? Sign up here!</h2>

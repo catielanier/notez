@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import PropTypes from 'prop-types';
@@ -46,8 +47,8 @@ class Reset extends Component {
                 resetToken: this.props.resetToken,
                 password: this.state.password,
                 verifyPassword: this.state.verifyPassword
-            }} refetchQueries={CURRENT_USER_QUERY}>
-                {(resetPassword, { error, loading, called }) => {
+            }} refetchQueries={[{query: CURRENT_USER_QUERY}]}>
+                {(resetPassword, { error, loading }) => {
                     return (
                         <Form method="post" onSubmit={async (e) => {
                             e.preventDefault();
