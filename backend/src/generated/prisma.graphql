@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Fri Apr 05 2019 18:35:02 GMT-0400 (Eastern Daylight Time)
+# timestamp: Fri Apr 05 2019 19:18:16 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!

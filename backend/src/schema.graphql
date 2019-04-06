@@ -53,4 +53,16 @@ type Query {
 
     # Pull all users for updating permissions
     users: [User]!
+
+    # Query for all games
+    games(
+        where: GameWhereInput
+        orderBy: GameOrderByInput
+    ): [Game]!
+
+    # Query for all characters in a game
+    characters(
+        where: CharacterWhereInput
+        orderBy: CharacterOrderByInput
+    ): [Character]!
 }

@@ -1,3 +1,4 @@
+const { forwardTo } = require('prisma-binding');
 const { hasPermission } = require ('../utils');
 
 const Query = {
@@ -24,7 +25,11 @@ const Query = {
 
         // If they do, query all the users
         return ctx.db.query.users({}, info);
-    }
+    },
+    
+    games: forwardTo('db'),
+    
+    characters: forwardTo('db')
 };
 
 module.exports = Query;
