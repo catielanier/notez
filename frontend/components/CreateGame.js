@@ -14,6 +14,23 @@ const ALL_GAMES_QUERY = gql`
         ) {
             id
             name
+            characters {
+                id
+                name
+            }
+        }
+    }
+`;
+
+const CREATE_GAME_MUTATION = gql`
+    mutation CREATE_GAME_MUTATION(
+        $gameName: String!
+    ) {
+        createGame(
+            gameName: $gameName
+        ) {
+            id
+            name
         }
     }
 `;
@@ -53,7 +70,6 @@ class CreateGame extends Component {
                                 <Query query={ALL_GAMES_QUERY}>
                                     {({data: {games}}) => (
                                         <label htmlFor="gameName">Game:
-                                            {}
                                             <CreatableSelect options={games.map((game) => {
                                                 return {
                                                     label: game.name,
