@@ -211,13 +211,15 @@ const mutations = {
 
     // Create a game
     async createGame(parent, args, ctx, info) {
-        console.log(args);
+        // Get the arguments from the user.
         const name = args.gameName;
+        // create the game
         const createdGame = await ctx.db.mutation.createGame({
             data: {
                 name
             }
         }, info);
+        // return the game to the user.
         return createdGame;
     }
 };

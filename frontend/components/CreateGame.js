@@ -51,10 +51,16 @@ class CreateGame extends Component {
                         <fieldset>
                             <h2>Add New Games and Characters</h2>
                                 <Query query={ALL_GAMES_QUERY}>
-                                    {(gameData) => (
-                                        <>
-                                            {console.log(gameData)}
-                                        </>
+                                    {({data: {games}}) => (
+                                        <label htmlFor="gameName">Game:
+                                            {}
+                                            <CreatableSelect options={games.map((game) => {
+                                                return {
+                                                    label: game.name,
+                                                    value: game.name
+                                                }
+                                            })} />
+                                        </label>
                                     )}
                                 </Query>
                         </fieldset>
