@@ -207,6 +207,18 @@ const mutations = {
         }, info);
         // Return the user
         return updatedUser;
+    },
+
+    // Create a game
+    async createGame(parent, args, ctx, info) {
+        console.log(args);
+        const name = args.gameName;
+        const createdGame = await ctx.db.mutation.createGame({
+            data: {
+                name
+            }
+        }, info);
+        return createdGame;
     }
 };
 

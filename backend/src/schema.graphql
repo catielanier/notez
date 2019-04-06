@@ -45,6 +45,11 @@ type Mutation {
         newPassword: String!
         verifyNewPassword: String!
     ): User
+
+    # Create game
+    createGame(
+        gameName: String!
+    ): Game!
 }
 
 type Query {
