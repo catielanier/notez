@@ -28,8 +28,8 @@ const Query = {
     },
     
     games: forwardTo('db'),
-    
-    characters: forwardTo('db')
+
+    globalFilters: forwardTo('db')
 };
 
 module.exports = Query;

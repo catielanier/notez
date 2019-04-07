@@ -49,12 +49,9 @@ type Mutation {
     # Create game
     createGame(
         gameName: String!
+        characters: [String]!
+        filters: [String]!
     ): Game!
-    
-    createCharacter(
-        characterList: [String!]!
-        gameName: String!
-    ): Character!
 }
 
 type Query {
@@ -70,9 +67,8 @@ type Query {
         orderBy: GameOrderByInput
     ): [Game]!
 
-    # Query for all characters in a game
-    characters(
-        where: CharacterWhereInput
-        orderBy: CharacterOrderByInput
-    ): [Character]!
+    globalFilters(
+        where: GlobalFilterWhereInput
+        orderBy: GlobalFilterOrderByInput
+    ): [GlobalFilter]!
 }

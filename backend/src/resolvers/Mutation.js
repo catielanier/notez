@@ -247,43 +247,6 @@ const mutations = {
         }, info);
         // return the game to the user.
         return createdGame;
-    },
-
-    async createCharacter(parent, args, ctx, info) {
-        console.log(args);
-        // Pull the array of characters.
-        const {characterList} = args;
-        // Pull the game name
-        const game = args.gameName;
-        // Map through the character list.
-        characterList.map(async (character) => {
-            // Check to see if the character already exists
-            const alreadyCreated = await ctx.db.query.characters({
-                where: {
-                    name: character
-                }
-            });
-            // If the character already exists, check to see if the character is already in the game
-            if (alreadyCreated.length !== 0) {
-                console.log(alreadyCreated[0]);
-                // If the character is already attached to the game, return nothing.
-
-                // If the character is not in the game, add the relationship.
-            }
-            // If the character doesn't exist, create the character and add the relationship to the current game.
-            const createdCharacter = await ctx.db.mutation.createCharacter({
-                data: {
-                    name: character,
-                    games: {
-                        connect: {
-                            name: game
-                        }
-                    }
-                }
-            }, info);
-            // Return the character.
-            return createdCharacter;
-        })
     }
 };
 

@@ -15,29 +15,11 @@ const ALL_GAMES_QUERY = gql`
         ) {
             id
             name
-            characters {
-                id
-                name
-            }
+            characters
+            filters
         }
     }
 `;
-
-const GAME_CHARACTERS_QUERY = gql`
-    query GAME_CHARACTERS_QUERY($searchTerm: String!) {
-        characters(
-            where: {
-                games_some: {
-                    name: $searchTerm
-                }
-            }
-            orderBy: name_ASC
-        ) {
-            id
-            name
-        }
-    }
-`
 
 const CREATE_GAME_MUTATION = gql`
     mutation CREATE_GAME_MUTATION(
@@ -48,24 +30,6 @@ const CREATE_GAME_MUTATION = gql`
         ) {
             id
             name
-        }
-    }
-`;
-
-const CREATE_CHARACTER_MUTATION = gql`
-    mutation CREATE_CHARACTER_MUTATION(
-        $characterList: [String!]!
-        $gameName: String!
-    ) {
-        createCharacter(
-            characterList: $characterList
-            gameName: $gameName
-        ) {
-            id
-            name
-            games {
-                name
-            }
         }
     }
 `;
@@ -100,75 +64,49 @@ class CreateGame extends Component {
         return(
             <User>
                 {({data: {me}}) => (
-                    <Mutation mutation={CREATE_GAME_MUTATION} variables={{ gameName: this.state.gameName }} refetchQueries={[{
-                        query: GAME_CHARACTERS_QUERY,
-                        variables: {
-                            searchTerm: this.state.gameName
-                        }
-                    }]}>
-                        {(createGame) => (
+                    <Mutation mutation={CREATE_GAME_MUTATION} variables={{ gameName: this.state.gameName }}>
+                        {(createGame, {loading, error}) => (
                             <Query query={ALL_GAMES_QUERY}>
                                 {({data: {games}}) => (
-                                    <Query query={GAME_CHARACTERS_QUERY} variables={{searchTerm: this.state.gameName}}>
-                                        {({data: {characters}}) => (
-                                            <>
-                                                <h2>Add New Games and Characters</h2>
-                                                <Mutation mutation={CREATE_CHARACTER_MUTATION} variables={this.state} refetchQueries={[{
-                                                    query: GAME_CHARACTERS_QUERY,
-                                                    variables: {
-                                                        searchTerm: this.state.gameName
-                                                    }
-                                                }]}>
-                                                    {(createCharacter, {loading, error}) => (
-                                                        <Form method="post" onSubmit={async (e) => {
-                                                            e.preventDefault();
-                                                            const res = await createCharacter();
-                                                            console.log(res);
-                                                            this.setState({
-                                                                characterList: []
-                                                            });
-                                                        }}>
-                                                            <fieldset disabled={loading} aria-busy={loading}>
-                                                                <label htmlFor="gameName">Game:
-                                                                    <CreatableSelect options={games.map((game) => {
-                                                                        return {
-                                                                            label: game.name,
-                                                                            value: game.name
-                                                                        }
-                                                                    })} onChange={async (e) => {
-                                                                        const gameName = e.value;
-                                                                        await this.setState({
-                                                                            gameName
-                                                                        });
-                                                                        const res = await createGame();
-                                                                    }} />
-                                                                </label>
-                                                                <Columns>
-                                                                    <div>
-                                                                        <label htmlFor="currentCharacters">
-                                                                            Current Characters:
-                                                                            <select name="currentCharacters" size={characters.length} defaultValue="" disabled>
-                                                                                {characters.map(character => (
-                                                                                    <option value={character.name} key={character.id}>{character.name}</option>
-                                                                                    ))}
-                                                                            </select>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label htmlFor="characterList">
-                                                                            New Characters:
-                                                                            <textarea name="characterList" onChange={this.createCharacterList} rows={this.state.characterList.length || 1}></textarea>
-                                                                        </label>
-                                                                    </div>
-                                                                </Columns>
-                                                                <button type="submit">Add characters</button>
-                                                            </fieldset>
-                                                        </Form>
-                                                    )}
-                                                </Mutation>
-                                            </>
-                                        )}
-                                    </Query>
+                                    <>
+                                        <h2>Add New Games and Characters</h2>
+                                        <Form method="post">
+                                            <fieldset disabled={loading} aria-busy={loading}>
+                                                <label htmlFor="gameName">Game:
+                                                    <CreatableSelect options={games.map((game) => {
+                                                        return {
+                                                            label: game.name,
+                                                            value: game.name
+                                                        }
+                                                    })} onChange={async (e) => {
+                                                        const gameName = e.value;
+                                                        await this.setState({
+                                                            gameName
+                                                        });
+                                                        console.log(this.state.gameName);
+                                                        const res = await createGame();
+                                                        console.log(res)
+                                                    }} />
+                                                </label>
+                                                <Columns>
+                                                    <div>
+                                                        <label htmlFor="currentCharacters">
+                                                            Current Characters:
+                                                            <select name="currentCharacters" defaultValue="" disabled>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor="characterList">
+                                                            New Characters:
+                                                            <textarea name="characterList" onChange={this.createCharacterList} rows={this.state.characterList.length || 1}></textarea>
+                                                        </label>
+                                                    </div>
+                                                </Columns>
+                                                <button type="submit">Add characters</button>
+                                            </fieldset>
+                                        </Form>
+                                    </>
                                 )}
                             </Query>
                         )}
@@ -180,4 +118,4 @@ class CreateGame extends Component {
 }
 
 export default CreateGame;
-export {ALL_GAMES_QUERY, GAME_CHARACTERS_QUERY};
+export {ALL_GAMES_QUERY};
