@@ -50,6 +50,11 @@ type Mutation {
     createGame(
         gameName: String!
     ): Game!
+    
+    createCharacter(
+        characterList: [String!]!
+        gameName: String!
+    ): Character!
 }
 
 type Query {
