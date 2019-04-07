@@ -21,11 +21,33 @@ type User {
 type Game {
   id: ID! @unique
   name: String! @unique
-  characters: [String]!
-  filters: [String]!
+  name_jp: String @unique
+  name_ko: String @unique
+  name_zh_CN: String @unique
+  name_zh_TW: String @unique
+  name_zh_HK: String @unique
+  characters: [Character]
+  filters: [Filter]
 }
 
-type GlobalFilter {
+type Character {
   id: ID! @unique
   name: String! @unique
+  name_jp: String @unique
+  name_ko: String @unique
+  name_zh_CN: String @unique
+  name_zh_TW: String @unique
+  name_zh_HK: String @unique
+  games: [Game]
+}
+
+type Filter {
+  id: ID! @unique
+  name: String! @unique
+  name_jp: String @unique
+  name_ko: String @unique
+  name_zh_CN: String @unique
+  name_zh_TW: String @unique
+  name_zh_HK: String @unique
+  games: [Game]
 }
