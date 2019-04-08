@@ -82,6 +82,21 @@ type Mutation {
         filterName_zh_TW: String
         filterName_zh_HK: String
     ): PlayerFilter!
+
+    createGameNote(
+        gameName: String!
+        you: String!
+        opponent: String!
+        filter: String!
+        note: String!
+    ): GameNote
+
+    createPlayerNote(
+        opponent: String!
+        gameName: String!
+        filter: String!
+        note: String!
+    ): PlayerNote
 }
 
 type Query {
@@ -96,9 +111,4 @@ type Query {
         where: GameWhereInput
         orderBy: GameOrderByInput
     ): [Game]!
-
-    globalFilters(
-        where: GlobalFilterWhereInput
-        orderBy: GlobalFilterOrderByInput
-    ): [GlobalFilter]!
 }

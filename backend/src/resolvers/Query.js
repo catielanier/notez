@@ -27,9 +27,7 @@ const Query = {
         return ctx.db.query.users({}, info);
     },
     
-    games: forwardTo('db'),
-
-    globalFilters: forwardTo('db')
+    games: forwardTo('db')
 };
 
 module.exports = Query;
