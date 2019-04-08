@@ -1,15 +1,27 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Sun Apr 07 2019 17:13:44 GMT-0400 (Eastern Daylight Time)
+# timestamp: Mon Apr 08 2019 18:42:35 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!
 }
 
-type AggregateFilter {
+type AggregateGame {
   count: Int!
 }
 
-type AggregateGame {
+type AggregateGameFilter {
+  count: Int!
+}
+
+type AggregateGameNote {
+  count: Int!
+}
+
+type AggregatePlayerFilter {
+  count: Int!
+}
+
+type AggregatePlayerNote {
   count: Int!
 }
 
@@ -57,6 +69,11 @@ input CharacterCreateInput {
 input CharacterCreateManyWithoutGamesInput {
   create: [CharacterCreateWithoutGamesInput!]
   connect: [CharacterWhereUniqueInput!]
+}
+
+input CharacterCreateOneInput {
+  create: CharacterCreateInput
+  connect: CharacterWhereUniqueInput
 }
 
 input CharacterCreateWithoutGamesInput {
@@ -439,6 +456,16 @@ input CharacterSubscriptionWhereInput {
   node: CharacterWhereInput
 }
 
+input CharacterUpdateDataInput {
+  name: String
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  games: GameUpdateManyWithoutCharactersInput
+}
+
 input CharacterUpdateInput {
   name: String
   name_jp: String
@@ -484,6 +511,13 @@ input CharacterUpdateManyWithWhereNestedInput {
   data: CharacterUpdateManyDataInput!
 }
 
+input CharacterUpdateOneRequiredInput {
+  create: CharacterCreateInput
+  connect: CharacterWhereUniqueInput
+  update: CharacterUpdateDataInput
+  upsert: CharacterUpsertNestedInput
+}
+
 input CharacterUpdateWithoutGamesDataInput {
   name: String
   name_jp: String
@@ -496,6 +530,11 @@ input CharacterUpdateWithoutGamesDataInput {
 input CharacterUpdateWithWhereUniqueWithoutGamesInput {
   where: CharacterWhereUniqueInput!
   data: CharacterUpdateWithoutGamesDataInput!
+}
+
+input CharacterUpsertNestedInput {
+  update: CharacterUpdateDataInput!
+  create: CharacterCreateInput!
 }
 
 input CharacterUpsertWithWhereUniqueWithoutGamesInput {
@@ -808,7 +847,89 @@ input CharacterWhereUniqueInput {
   name_zh_HK: String
 }
 
-type Filter implements Node {
+scalar DateTime
+
+type Game implements Node {
+  id: ID!
+  name: String!
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
+  filters(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameFilter!]
+}
+
+"""A connection to a list of items."""
+type GameConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GameEdge]!
+  aggregate: AggregateGame!
+}
+
+input GameCreateInput {
+  id: ID
+  name: String!
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  characters: CharacterCreateManyWithoutGamesInput
+  filters: GameFilterCreateManyWithoutGamesInput
+}
+
+input GameCreateManyWithoutCharactersInput {
+  create: [GameCreateWithoutCharactersInput!]
+  connect: [GameWhereUniqueInput!]
+}
+
+input GameCreateManyWithoutFiltersInput {
+  create: [GameCreateWithoutFiltersInput!]
+  connect: [GameWhereUniqueInput!]
+}
+
+input GameCreateOneInput {
+  create: GameCreateInput
+  connect: GameWhereUniqueInput
+}
+
+input GameCreateWithoutCharactersInput {
+  id: ID
+  name: String!
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  filters: GameFilterCreateManyWithoutGamesInput
+}
+
+input GameCreateWithoutFiltersInput {
+  id: ID
+  name: String!
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  characters: CharacterCreateManyWithoutGamesInput
+}
+
+"""An edge in a connection."""
+type GameEdge {
+  """The item at the end of the edge."""
+  node: Game!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type GameFilter implements Node {
   id: ID!
   name: String!
   name_jp: String
@@ -820,16 +941,16 @@ type Filter implements Node {
 }
 
 """A connection to a list of items."""
-type FilterConnection {
+type GameFilterConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [FilterEdge]!
-  aggregate: AggregateFilter!
+  edges: [GameFilterEdge]!
+  aggregate: AggregateGameFilter!
 }
 
-input FilterCreateInput {
+input GameFilterCreateInput {
   id: ID
   name: String!
   name_jp: String
@@ -840,12 +961,17 @@ input FilterCreateInput {
   games: GameCreateManyWithoutFiltersInput
 }
 
-input FilterCreateManyWithoutGamesInput {
-  create: [FilterCreateWithoutGamesInput!]
-  connect: [FilterWhereUniqueInput!]
+input GameFilterCreateManyWithoutGamesInput {
+  create: [GameFilterCreateWithoutGamesInput!]
+  connect: [GameFilterWhereUniqueInput!]
 }
 
-input FilterCreateWithoutGamesInput {
+input GameFilterCreateOneInput {
+  create: GameFilterCreateInput
+  connect: GameFilterWhereUniqueInput
+}
+
+input GameFilterCreateWithoutGamesInput {
   id: ID
   name: String!
   name_jp: String
@@ -856,15 +982,15 @@ input FilterCreateWithoutGamesInput {
 }
 
 """An edge in a connection."""
-type FilterEdge {
+type GameFilterEdge {
   """The item at the end of the edge."""
-  node: Filter!
+  node: GameFilter!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum FilterOrderByInput {
+enum GameFilterOrderByInput {
   id_ASC
   id_DESC
   name_ASC
@@ -885,7 +1011,7 @@ enum FilterOrderByInput {
   createdAt_DESC
 }
 
-type FilterPreviousValues {
+type GameFilterPreviousValues {
   id: ID!
   name: String!
   name_jp: String
@@ -895,15 +1021,15 @@ type FilterPreviousValues {
   name_zh_HK: String
 }
 
-input FilterScalarWhereInput {
+input GameFilterScalarWhereInput {
   """Logical AND on all given filters."""
-  AND: [FilterScalarWhereInput!]
+  AND: [GameFilterScalarWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [FilterScalarWhereInput!]
+  OR: [GameFilterScalarWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [FilterScalarWhereInput!]
+  NOT: [GameFilterScalarWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1186,22 +1312,22 @@ input FilterScalarWhereInput {
   name_zh_HK_not_ends_with: String
 }
 
-type FilterSubscriptionPayload {
+type GameFilterSubscriptionPayload {
   mutation: MutationType!
-  node: Filter
+  node: GameFilter
   updatedFields: [String!]
-  previousValues: FilterPreviousValues
+  previousValues: GameFilterPreviousValues
 }
 
-input FilterSubscriptionWhereInput {
+input GameFilterSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [FilterSubscriptionWhereInput!]
+  AND: [GameFilterSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [FilterSubscriptionWhereInput!]
+  OR: [GameFilterSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [FilterSubscriptionWhereInput!]
+  NOT: [GameFilterSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1222,10 +1348,10 @@ input FilterSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: FilterWhereInput
+  node: GameFilterWhereInput
 }
 
-input FilterUpdateInput {
+input GameFilterUpdateDataInput {
   name: String
   name_jp: String
   name_ko: String
@@ -1235,7 +1361,17 @@ input FilterUpdateInput {
   games: GameUpdateManyWithoutFiltersInput
 }
 
-input FilterUpdateManyDataInput {
+input GameFilterUpdateInput {
+  name: String
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  games: GameUpdateManyWithoutFiltersInput
+}
+
+input GameFilterUpdateManyDataInput {
   name: String
   name_jp: String
   name_ko: String
@@ -1244,7 +1380,7 @@ input FilterUpdateManyDataInput {
   name_zh_HK: String
 }
 
-input FilterUpdateManyMutationInput {
+input GameFilterUpdateManyMutationInput {
   name: String
   name_jp: String
   name_ko: String
@@ -1253,24 +1389,31 @@ input FilterUpdateManyMutationInput {
   name_zh_HK: String
 }
 
-input FilterUpdateManyWithoutGamesInput {
-  create: [FilterCreateWithoutGamesInput!]
-  connect: [FilterWhereUniqueInput!]
-  set: [FilterWhereUniqueInput!]
-  disconnect: [FilterWhereUniqueInput!]
-  delete: [FilterWhereUniqueInput!]
-  update: [FilterUpdateWithWhereUniqueWithoutGamesInput!]
-  updateMany: [FilterUpdateManyWithWhereNestedInput!]
-  deleteMany: [FilterScalarWhereInput!]
-  upsert: [FilterUpsertWithWhereUniqueWithoutGamesInput!]
+input GameFilterUpdateManyWithoutGamesInput {
+  create: [GameFilterCreateWithoutGamesInput!]
+  connect: [GameFilterWhereUniqueInput!]
+  set: [GameFilterWhereUniqueInput!]
+  disconnect: [GameFilterWhereUniqueInput!]
+  delete: [GameFilterWhereUniqueInput!]
+  update: [GameFilterUpdateWithWhereUniqueWithoutGamesInput!]
+  updateMany: [GameFilterUpdateManyWithWhereNestedInput!]
+  deleteMany: [GameFilterScalarWhereInput!]
+  upsert: [GameFilterUpsertWithWhereUniqueWithoutGamesInput!]
 }
 
-input FilterUpdateManyWithWhereNestedInput {
-  where: FilterScalarWhereInput!
-  data: FilterUpdateManyDataInput!
+input GameFilterUpdateManyWithWhereNestedInput {
+  where: GameFilterScalarWhereInput!
+  data: GameFilterUpdateManyDataInput!
 }
 
-input FilterUpdateWithoutGamesDataInput {
+input GameFilterUpdateOneRequiredInput {
+  create: GameFilterCreateInput
+  connect: GameFilterWhereUniqueInput
+  update: GameFilterUpdateDataInput
+  upsert: GameFilterUpsertNestedInput
+}
+
+input GameFilterUpdateWithoutGamesDataInput {
   name: String
   name_jp: String
   name_ko: String
@@ -1279,26 +1422,31 @@ input FilterUpdateWithoutGamesDataInput {
   name_zh_HK: String
 }
 
-input FilterUpdateWithWhereUniqueWithoutGamesInput {
-  where: FilterWhereUniqueInput!
-  data: FilterUpdateWithoutGamesDataInput!
+input GameFilterUpdateWithWhereUniqueWithoutGamesInput {
+  where: GameFilterWhereUniqueInput!
+  data: GameFilterUpdateWithoutGamesDataInput!
 }
 
-input FilterUpsertWithWhereUniqueWithoutGamesInput {
-  where: FilterWhereUniqueInput!
-  update: FilterUpdateWithoutGamesDataInput!
-  create: FilterCreateWithoutGamesInput!
+input GameFilterUpsertNestedInput {
+  update: GameFilterUpdateDataInput!
+  create: GameFilterCreateInput!
 }
 
-input FilterWhereInput {
+input GameFilterUpsertWithWhereUniqueWithoutGamesInput {
+  where: GameFilterWhereUniqueInput!
+  update: GameFilterUpdateWithoutGamesDataInput!
+  create: GameFilterCreateWithoutGamesInput!
+}
+
+input GameFilterWhereInput {
   """Logical AND on all given filters."""
-  AND: [FilterWhereInput!]
+  AND: [GameFilterWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [FilterWhereInput!]
+  OR: [GameFilterWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [FilterWhereInput!]
+  NOT: [GameFilterWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1584,7 +1732,7 @@ input FilterWhereInput {
   games_none: GameWhereInput
 }
 
-input FilterWhereUniqueInput {
+input GameFilterWhereUniqueInput {
   id: ID
   name: String
   name_jp: String
@@ -1594,79 +1742,404 @@ input FilterWhereUniqueInput {
   name_zh_HK: String
 }
 
-type Game implements Node {
+type GameNote implements Node {
   id: ID!
-  name: String!
-  name_jp: String
-  name_ko: String
-  name_zh_CN: String
-  name_zh_TW: String
-  name_zh_HK: String
-  characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
-  filters(where: FilterWhereInput, orderBy: FilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Filter!]
+  opponent: Character!
+  you: Character!
+  filter: GameFilter!
+  note: String!
+  game: Game!
+  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
-type GameConnection {
+type GameNoteConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [GameEdge]!
-  aggregate: AggregateGame!
+  edges: [GameNoteEdge]!
+  aggregate: AggregateGameNote!
 }
 
-input GameCreateInput {
+input GameNoteCreateInput {
   id: ID
-  name: String!
-  name_jp: String
-  name_ko: String
-  name_zh_CN: String
-  name_zh_TW: String
-  name_zh_HK: String
-  characters: CharacterCreateManyWithoutGamesInput
-  filters: FilterCreateManyWithoutGamesInput
+  note: String!
+  opponent: CharacterCreateOneInput!
+  you: CharacterCreateOneInput!
+  filter: GameFilterCreateOneInput!
+  game: GameCreateOneInput!
+  user: UserCreateManyWithoutGameNoteInput
 }
 
-input GameCreateManyWithoutCharactersInput {
-  create: [GameCreateWithoutCharactersInput!]
-  connect: [GameWhereUniqueInput!]
+input GameNoteCreateManyWithoutUserInput {
+  create: [GameNoteCreateWithoutUserInput!]
+  connect: [GameNoteWhereUniqueInput!]
 }
 
-input GameCreateManyWithoutFiltersInput {
-  create: [GameCreateWithoutFiltersInput!]
-  connect: [GameWhereUniqueInput!]
-}
-
-input GameCreateWithoutCharactersInput {
+input GameNoteCreateWithoutUserInput {
   id: ID
-  name: String!
-  name_jp: String
-  name_ko: String
-  name_zh_CN: String
-  name_zh_TW: String
-  name_zh_HK: String
-  filters: FilterCreateManyWithoutGamesInput
-}
-
-input GameCreateWithoutFiltersInput {
-  id: ID
-  name: String!
-  name_jp: String
-  name_ko: String
-  name_zh_CN: String
-  name_zh_TW: String
-  name_zh_HK: String
-  characters: CharacterCreateManyWithoutGamesInput
+  note: String!
+  opponent: CharacterCreateOneInput!
+  you: CharacterCreateOneInput!
+  filter: GameFilterCreateOneInput!
+  game: GameCreateOneInput!
 }
 
 """An edge in a connection."""
-type GameEdge {
+type GameNoteEdge {
   """The item at the end of the edge."""
-  node: Game!
+  node: GameNote!
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+enum GameNoteOrderByInput {
+  id_ASC
+  id_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type GameNotePreviousValues {
+  id: ID!
+  note: String!
+  createdAt: DateTime!
+}
+
+input GameNoteScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GameNoteScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GameNoteScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GameNoteScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+}
+
+type GameNoteSubscriptionPayload {
+  mutation: MutationType!
+  node: GameNote
+  updatedFields: [String!]
+  previousValues: GameNotePreviousValues
+}
+
+input GameNoteSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GameNoteSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GameNoteSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GameNoteSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: GameNoteWhereInput
+}
+
+input GameNoteUpdateInput {
+  note: String
+  opponent: CharacterUpdateOneRequiredInput
+  you: CharacterUpdateOneRequiredInput
+  filter: GameFilterUpdateOneRequiredInput
+  game: GameUpdateOneRequiredInput
+  user: UserUpdateManyWithoutGameNoteInput
+}
+
+input GameNoteUpdateManyDataInput {
+  note: String
+}
+
+input GameNoteUpdateManyMutationInput {
+  note: String
+}
+
+input GameNoteUpdateManyWithoutUserInput {
+  create: [GameNoteCreateWithoutUserInput!]
+  connect: [GameNoteWhereUniqueInput!]
+  set: [GameNoteWhereUniqueInput!]
+  disconnect: [GameNoteWhereUniqueInput!]
+  delete: [GameNoteWhereUniqueInput!]
+  update: [GameNoteUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [GameNoteUpdateManyWithWhereNestedInput!]
+  deleteMany: [GameNoteScalarWhereInput!]
+  upsert: [GameNoteUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input GameNoteUpdateManyWithWhereNestedInput {
+  where: GameNoteScalarWhereInput!
+  data: GameNoteUpdateManyDataInput!
+}
+
+input GameNoteUpdateWithoutUserDataInput {
+  note: String
+  opponent: CharacterUpdateOneRequiredInput
+  you: CharacterUpdateOneRequiredInput
+  filter: GameFilterUpdateOneRequiredInput
+  game: GameUpdateOneRequiredInput
+}
+
+input GameNoteUpdateWithWhereUniqueWithoutUserInput {
+  where: GameNoteWhereUniqueInput!
+  data: GameNoteUpdateWithoutUserDataInput!
+}
+
+input GameNoteUpsertWithWhereUniqueWithoutUserInput {
+  where: GameNoteWhereUniqueInput!
+  update: GameNoteUpdateWithoutUserDataInput!
+  create: GameNoteCreateWithoutUserInput!
+}
+
+input GameNoteWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GameNoteWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GameNoteWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GameNoteWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  opponent: CharacterWhereInput
+  you: CharacterWhereInput
+  filter: GameFilterWhereInput
+  game: GameWhereInput
+  user_every: UserWhereInput
+  user_some: UserWhereInput
+  user_none: UserWhereInput
+}
+
+input GameNoteWhereUniqueInput {
+  id: ID
 }
 
 enum GameOrderByInput {
@@ -1674,8 +2147,8 @@ enum GameOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  name_jp_ASC
-  name_jp_DESC
+  name_ja_ASC
+  name_ja_DESC
   name_ko_ASC
   name_ko_DESC
   name_zh_CN_ASC
@@ -1693,7 +2166,7 @@ enum GameOrderByInput {
 type GamePreviousValues {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1789,46 +2262,46 @@ input GameScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -2030,20 +2503,31 @@ input GameSubscriptionWhereInput {
   node: GameWhereInput
 }
 
-input GameUpdateInput {
+input GameUpdateDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
   characters: CharacterUpdateManyWithoutGamesInput
-  filters: FilterUpdateManyWithoutGamesInput
+  filters: GameFilterUpdateManyWithoutGamesInput
+}
+
+input GameUpdateInput {
+  name: String
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+  characters: CharacterUpdateManyWithoutGamesInput
+  filters: GameFilterUpdateManyWithoutGamesInput
 }
 
 input GameUpdateManyDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -2052,7 +2536,7 @@ input GameUpdateManyDataInput {
 
 input GameUpdateManyMutationInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -2088,19 +2572,26 @@ input GameUpdateManyWithWhereNestedInput {
   data: GameUpdateManyDataInput!
 }
 
+input GameUpdateOneRequiredInput {
+  create: GameCreateInput
+  connect: GameWhereUniqueInput
+  update: GameUpdateDataInput
+  upsert: GameUpsertNestedInput
+}
+
 input GameUpdateWithoutCharactersDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
-  filters: FilterUpdateManyWithoutGamesInput
+  filters: GameFilterUpdateManyWithoutGamesInput
 }
 
 input GameUpdateWithoutFiltersDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -2116,6 +2607,11 @@ input GameUpdateWithWhereUniqueWithoutCharactersInput {
 input GameUpdateWithWhereUniqueWithoutFiltersInput {
   where: GameWhereUniqueInput!
   data: GameUpdateWithoutFiltersDataInput!
+}
+
+input GameUpsertNestedInput {
+  update: GameUpdateDataInput!
+  create: GameCreateInput!
 }
 
 input GameUpsertWithWhereUniqueWithoutCharactersInput {
@@ -2139,6 +2635,554 @@ input GameWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [GameWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  name_ja: String
+
+  """All values that are not equal to given value."""
+  name_ja_not: String
+
+  """All values that are contained in given list."""
+  name_ja_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_ja_not_in: [String!]
+
+  """All values less than the given value."""
+  name_ja_lt: String
+
+  """All values less than or equal the given value."""
+  name_ja_lte: String
+
+  """All values greater than the given value."""
+  name_ja_gt: String
+
+  """All values greater than or equal the given value."""
+  name_ja_gte: String
+
+  """All values containing the given string."""
+  name_ja_contains: String
+
+  """All values not containing the given string."""
+  name_ja_not_contains: String
+
+  """All values starting with the given string."""
+  name_ja_starts_with: String
+
+  """All values not starting with the given string."""
+  name_ja_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ja_ends_with: String
+
+  """All values not ending with the given string."""
+  name_ja_not_ends_with: String
+  name_ko: String
+
+  """All values that are not equal to given value."""
+  name_ko_not: String
+
+  """All values that are contained in given list."""
+  name_ko_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_ko_not_in: [String!]
+
+  """All values less than the given value."""
+  name_ko_lt: String
+
+  """All values less than or equal the given value."""
+  name_ko_lte: String
+
+  """All values greater than the given value."""
+  name_ko_gt: String
+
+  """All values greater than or equal the given value."""
+  name_ko_gte: String
+
+  """All values containing the given string."""
+  name_ko_contains: String
+
+  """All values not containing the given string."""
+  name_ko_not_contains: String
+
+  """All values starting with the given string."""
+  name_ko_starts_with: String
+
+  """All values not starting with the given string."""
+  name_ko_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ko_ends_with: String
+
+  """All values not ending with the given string."""
+  name_ko_not_ends_with: String
+  name_zh_CN: String
+
+  """All values that are not equal to given value."""
+  name_zh_CN_not: String
+
+  """All values that are contained in given list."""
+  name_zh_CN_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_zh_CN_not_in: [String!]
+
+  """All values less than the given value."""
+  name_zh_CN_lt: String
+
+  """All values less than or equal the given value."""
+  name_zh_CN_lte: String
+
+  """All values greater than the given value."""
+  name_zh_CN_gt: String
+
+  """All values greater than or equal the given value."""
+  name_zh_CN_gte: String
+
+  """All values containing the given string."""
+  name_zh_CN_contains: String
+
+  """All values not containing the given string."""
+  name_zh_CN_not_contains: String
+
+  """All values starting with the given string."""
+  name_zh_CN_starts_with: String
+
+  """All values not starting with the given string."""
+  name_zh_CN_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_zh_CN_ends_with: String
+
+  """All values not ending with the given string."""
+  name_zh_CN_not_ends_with: String
+  name_zh_TW: String
+
+  """All values that are not equal to given value."""
+  name_zh_TW_not: String
+
+  """All values that are contained in given list."""
+  name_zh_TW_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_zh_TW_not_in: [String!]
+
+  """All values less than the given value."""
+  name_zh_TW_lt: String
+
+  """All values less than or equal the given value."""
+  name_zh_TW_lte: String
+
+  """All values greater than the given value."""
+  name_zh_TW_gt: String
+
+  """All values greater than or equal the given value."""
+  name_zh_TW_gte: String
+
+  """All values containing the given string."""
+  name_zh_TW_contains: String
+
+  """All values not containing the given string."""
+  name_zh_TW_not_contains: String
+
+  """All values starting with the given string."""
+  name_zh_TW_starts_with: String
+
+  """All values not starting with the given string."""
+  name_zh_TW_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_zh_TW_ends_with: String
+
+  """All values not ending with the given string."""
+  name_zh_TW_not_ends_with: String
+  name_zh_HK: String
+
+  """All values that are not equal to given value."""
+  name_zh_HK_not: String
+
+  """All values that are contained in given list."""
+  name_zh_HK_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_zh_HK_not_in: [String!]
+
+  """All values less than the given value."""
+  name_zh_HK_lt: String
+
+  """All values less than or equal the given value."""
+  name_zh_HK_lte: String
+
+  """All values greater than the given value."""
+  name_zh_HK_gt: String
+
+  """All values greater than or equal the given value."""
+  name_zh_HK_gte: String
+
+  """All values containing the given string."""
+  name_zh_HK_contains: String
+
+  """All values not containing the given string."""
+  name_zh_HK_not_contains: String
+
+  """All values starting with the given string."""
+  name_zh_HK_starts_with: String
+
+  """All values not starting with the given string."""
+  name_zh_HK_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_zh_HK_ends_with: String
+
+  """All values not ending with the given string."""
+  name_zh_HK_not_ends_with: String
+  characters_every: CharacterWhereInput
+  characters_some: CharacterWhereInput
+  characters_none: CharacterWhereInput
+  filters_every: GameFilterWhereInput
+  filters_some: GameFilterWhereInput
+  filters_none: GameFilterWhereInput
+}
+
+input GameWhereUniqueInput {
+  id: ID
+  name: String
+  name_ja: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createGameNote(data: GameNoteCreateInput!): GameNote!
+  createPlayerNote(data: PlayerNoteCreateInput!): PlayerNote!
+  createGameFilter(data: GameFilterCreateInput!): GameFilter!
+  createPlayerFilter(data: PlayerFilterCreateInput!): PlayerFilter!
+  createGame(data: GameCreateInput!): Game!
+  createCharacter(data: CharacterCreateInput!): Character!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateGameNote(data: GameNoteUpdateInput!, where: GameNoteWhereUniqueInput!): GameNote
+  updatePlayerNote(data: PlayerNoteUpdateInput!, where: PlayerNoteWhereUniqueInput!): PlayerNote
+  updateGameFilter(data: GameFilterUpdateInput!, where: GameFilterWhereUniqueInput!): GameFilter
+  updatePlayerFilter(data: PlayerFilterUpdateInput!, where: PlayerFilterWhereUniqueInput!): PlayerFilter
+  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
+  updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteGameNote(where: GameNoteWhereUniqueInput!): GameNote
+  deletePlayerNote(where: PlayerNoteWhereUniqueInput!): PlayerNote
+  deleteGameFilter(where: GameFilterWhereUniqueInput!): GameFilter
+  deletePlayerFilter(where: PlayerFilterWhereUniqueInput!): PlayerFilter
+  deleteGame(where: GameWhereUniqueInput!): Game
+  deleteCharacter(where: CharacterWhereUniqueInput!): Character
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertGameNote(where: GameNoteWhereUniqueInput!, create: GameNoteCreateInput!, update: GameNoteUpdateInput!): GameNote!
+  upsertPlayerNote(where: PlayerNoteWhereUniqueInput!, create: PlayerNoteCreateInput!, update: PlayerNoteUpdateInput!): PlayerNote!
+  upsertGameFilter(where: GameFilterWhereUniqueInput!, create: GameFilterCreateInput!, update: GameFilterUpdateInput!): GameFilter!
+  upsertPlayerFilter(where: PlayerFilterWhereUniqueInput!, create: PlayerFilterCreateInput!, update: PlayerFilterUpdateInput!): PlayerFilter!
+  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
+  upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyGameNotes(data: GameNoteUpdateManyMutationInput!, where: GameNoteWhereInput): BatchPayload!
+  updateManyPlayerNotes(data: PlayerNoteUpdateManyMutationInput!, where: PlayerNoteWhereInput): BatchPayload!
+  updateManyGameFilters(data: GameFilterUpdateManyMutationInput!, where: GameFilterWhereInput): BatchPayload!
+  updateManyPlayerFilters(data: PlayerFilterUpdateManyMutationInput!, where: PlayerFilterWhereInput): BatchPayload!
+  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
+  updateManyCharacters(data: CharacterUpdateManyMutationInput!, where: CharacterWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyGameNotes(where: GameNoteWhereInput): BatchPayload!
+  deleteManyPlayerNotes(where: PlayerNoteWhereInput): BatchPayload!
+  deleteManyGameFilters(where: GameFilterWhereInput): BatchPayload!
+  deleteManyPlayerFilters(where: PlayerFilterWhereInput): BatchPayload!
+  deleteManyGames(where: GameWhereInput): BatchPayload!
+  deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+enum Permission {
+  ADMIN
+  USER
+  NOTEUPDATE
+  NOTEDELETE
+  PERMISSIONUPDATE
+  GAMECREATE
+  BAN
+}
+
+type PlayerFilter implements Node {
+  id: ID!
+  name: String!
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+"""A connection to a list of items."""
+type PlayerFilterConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PlayerFilterEdge]!
+  aggregate: AggregatePlayerFilter!
+}
+
+input PlayerFilterCreateInput {
+  id: ID
+  name: String!
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+input PlayerFilterCreateOneInput {
+  create: PlayerFilterCreateInput
+  connect: PlayerFilterWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type PlayerFilterEdge {
+  """The item at the end of the edge."""
+  node: PlayerFilter!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PlayerFilterOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  name_jp_ASC
+  name_jp_DESC
+  name_ko_ASC
+  name_ko_DESC
+  name_zh_CN_ASC
+  name_zh_CN_DESC
+  name_zh_TW_ASC
+  name_zh_TW_DESC
+  name_zh_HK_ASC
+  name_zh_HK_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PlayerFilterPreviousValues {
+  id: ID!
+  name: String!
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+type PlayerFilterSubscriptionPayload {
+  mutation: MutationType!
+  node: PlayerFilter
+  updatedFields: [String!]
+  previousValues: PlayerFilterPreviousValues
+}
+
+input PlayerFilterSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlayerFilterSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlayerFilterSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlayerFilterSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PlayerFilterWhereInput
+}
+
+input PlayerFilterUpdateDataInput {
+  name: String
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+input PlayerFilterUpdateInput {
+  name: String
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+input PlayerFilterUpdateManyMutationInput {
+  name: String
+  name_jp: String
+  name_ko: String
+  name_zh_CN: String
+  name_zh_TW: String
+  name_zh_HK: String
+}
+
+input PlayerFilterUpdateOneRequiredInput {
+  create: PlayerFilterCreateInput
+  connect: PlayerFilterWhereUniqueInput
+  update: PlayerFilterUpdateDataInput
+  upsert: PlayerFilterUpsertNestedInput
+}
+
+input PlayerFilterUpsertNestedInput {
+  update: PlayerFilterUpdateDataInput!
+  create: PlayerFilterCreateInput!
+}
+
+input PlayerFilterWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlayerFilterWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlayerFilterWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlayerFilterWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -2419,15 +3463,9 @@ input GameWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
-  characters_every: CharacterWhereInput
-  characters_some: CharacterWhereInput
-  characters_none: CharacterWhereInput
-  filters_every: FilterWhereInput
-  filters_some: FilterWhereInput
-  filters_none: FilterWhereInput
 }
 
-input GameWhereUniqueInput {
+input PlayerFilterWhereUniqueInput {
   id: ID
   name: String
   name_jp: String
@@ -2437,89 +3475,506 @@ input GameWhereUniqueInput {
   name_zh_HK: String
 }
 
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  createGame(data: GameCreateInput!): Game!
-  createCharacter(data: CharacterCreateInput!): Character!
-  createFilter(data: FilterCreateInput!): Filter!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
-  updateFilter(data: FilterUpdateInput!, where: FilterWhereUniqueInput!): Filter
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteGame(where: GameWhereUniqueInput!): Game
-  deleteCharacter(where: CharacterWhereUniqueInput!): Character
-  deleteFilter(where: FilterWhereUniqueInput!): Filter
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
-  upsertFilter(where: FilterWhereUniqueInput!, create: FilterCreateInput!, update: FilterUpdateInput!): Filter!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
-  updateManyCharacters(data: CharacterUpdateManyMutationInput!, where: CharacterWhereInput): BatchPayload!
-  updateManyFilters(data: FilterUpdateManyMutationInput!, where: FilterWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyGames(where: GameWhereInput): BatchPayload!
-  deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
-  deleteManyFilters(where: FilterWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
+type PlayerNote implements Node {
   id: ID!
+  opponent: String
+  game: Game!
+  filter: PlayerFilter!
+  note: String!
+  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  createdAt: DateTime!
 }
 
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
+"""A connection to a list of items."""
+type PlayerNoteConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
+  """A list of edges."""
+  edges: [PlayerNoteEdge]!
+  aggregate: AggregatePlayerNote!
 }
 
-enum Permission {
-  ADMIN
-  USER
-  NOTEUPDATE
-  NOTEDELETE
-  PERMISSIONUPDATE
-  GAMECREATE
-  BAN
+input PlayerNoteCreateInput {
+  id: ID
+  opponent: String
+  note: String!
+  game: GameCreateOneInput!
+  filter: PlayerFilterCreateOneInput!
+  user: UserCreateManyWithoutPlayerNotesInput
+}
+
+input PlayerNoteCreateManyWithoutUserInput {
+  create: [PlayerNoteCreateWithoutUserInput!]
+  connect: [PlayerNoteWhereUniqueInput!]
+}
+
+input PlayerNoteCreateWithoutUserInput {
+  id: ID
+  opponent: String
+  note: String!
+  game: GameCreateOneInput!
+  filter: PlayerFilterCreateOneInput!
+}
+
+"""An edge in a connection."""
+type PlayerNoteEdge {
+  """The item at the end of the edge."""
+  node: PlayerNote!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PlayerNoteOrderByInput {
+  id_ASC
+  id_DESC
+  opponent_ASC
+  opponent_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type PlayerNotePreviousValues {
+  id: ID!
+  opponent: String
+  note: String!
+  createdAt: DateTime!
+}
+
+input PlayerNoteScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlayerNoteScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlayerNoteScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlayerNoteScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  opponent: String
+
+  """All values that are not equal to given value."""
+  opponent_not: String
+
+  """All values that are contained in given list."""
+  opponent_in: [String!]
+
+  """All values that are not contained in given list."""
+  opponent_not_in: [String!]
+
+  """All values less than the given value."""
+  opponent_lt: String
+
+  """All values less than or equal the given value."""
+  opponent_lte: String
+
+  """All values greater than the given value."""
+  opponent_gt: String
+
+  """All values greater than or equal the given value."""
+  opponent_gte: String
+
+  """All values containing the given string."""
+  opponent_contains: String
+
+  """All values not containing the given string."""
+  opponent_not_contains: String
+
+  """All values starting with the given string."""
+  opponent_starts_with: String
+
+  """All values not starting with the given string."""
+  opponent_not_starts_with: String
+
+  """All values ending with the given string."""
+  opponent_ends_with: String
+
+  """All values not ending with the given string."""
+  opponent_not_ends_with: String
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+}
+
+type PlayerNoteSubscriptionPayload {
+  mutation: MutationType!
+  node: PlayerNote
+  updatedFields: [String!]
+  previousValues: PlayerNotePreviousValues
+}
+
+input PlayerNoteSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlayerNoteSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlayerNoteSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlayerNoteSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PlayerNoteWhereInput
+}
+
+input PlayerNoteUpdateInput {
+  opponent: String
+  note: String
+  game: GameUpdateOneRequiredInput
+  filter: PlayerFilterUpdateOneRequiredInput
+  user: UserUpdateManyWithoutPlayerNotesInput
+}
+
+input PlayerNoteUpdateManyDataInput {
+  opponent: String
+  note: String
+}
+
+input PlayerNoteUpdateManyMutationInput {
+  opponent: String
+  note: String
+}
+
+input PlayerNoteUpdateManyWithoutUserInput {
+  create: [PlayerNoteCreateWithoutUserInput!]
+  connect: [PlayerNoteWhereUniqueInput!]
+  set: [PlayerNoteWhereUniqueInput!]
+  disconnect: [PlayerNoteWhereUniqueInput!]
+  delete: [PlayerNoteWhereUniqueInput!]
+  update: [PlayerNoteUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [PlayerNoteUpdateManyWithWhereNestedInput!]
+  deleteMany: [PlayerNoteScalarWhereInput!]
+  upsert: [PlayerNoteUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input PlayerNoteUpdateManyWithWhereNestedInput {
+  where: PlayerNoteScalarWhereInput!
+  data: PlayerNoteUpdateManyDataInput!
+}
+
+input PlayerNoteUpdateWithoutUserDataInput {
+  opponent: String
+  note: String
+  game: GameUpdateOneRequiredInput
+  filter: PlayerFilterUpdateOneRequiredInput
+}
+
+input PlayerNoteUpdateWithWhereUniqueWithoutUserInput {
+  where: PlayerNoteWhereUniqueInput!
+  data: PlayerNoteUpdateWithoutUserDataInput!
+}
+
+input PlayerNoteUpsertWithWhereUniqueWithoutUserInput {
+  where: PlayerNoteWhereUniqueInput!
+  update: PlayerNoteUpdateWithoutUserDataInput!
+  create: PlayerNoteCreateWithoutUserInput!
+}
+
+input PlayerNoteWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PlayerNoteWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PlayerNoteWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PlayerNoteWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  opponent: String
+
+  """All values that are not equal to given value."""
+  opponent_not: String
+
+  """All values that are contained in given list."""
+  opponent_in: [String!]
+
+  """All values that are not contained in given list."""
+  opponent_not_in: [String!]
+
+  """All values less than the given value."""
+  opponent_lt: String
+
+  """All values less than or equal the given value."""
+  opponent_lte: String
+
+  """All values greater than the given value."""
+  opponent_gt: String
+
+  """All values greater than or equal the given value."""
+  opponent_gte: String
+
+  """All values containing the given string."""
+  opponent_contains: String
+
+  """All values not containing the given string."""
+  opponent_not_contains: String
+
+  """All values starting with the given string."""
+  opponent_starts_with: String
+
+  """All values not starting with the given string."""
+  opponent_not_starts_with: String
+
+  """All values ending with the given string."""
+  opponent_ends_with: String
+
+  """All values not ending with the given string."""
+  opponent_not_ends_with: String
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  game: GameWhereInput
+  filter: PlayerFilterWhereInput
+  user_every: UserWhereInput
+  user_some: UserWhereInput
+  user_none: UserWhereInput
+}
+
+input PlayerNoteWhereUniqueInput {
+  id: ID
 }
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  gameNotes(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote]!
+  playerNotes(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerNote]!
+  gameFilters(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameFilter]!
+  playerFilters(where: PlayerFilterWhereInput, orderBy: PlayerFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerFilter]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
-  filters(where: FilterWhereInput, orderBy: FilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Filter]!
   user(where: UserWhereUniqueInput!): User
+  gameNote(where: GameNoteWhereUniqueInput!): GameNote
+  playerNote(where: PlayerNoteWhereUniqueInput!): PlayerNote
+  gameFilter(where: GameFilterWhereUniqueInput!): GameFilter
+  playerFilter(where: PlayerFilterWhereUniqueInput!): PlayerFilter
   game(where: GameWhereUniqueInput!): Game
   character(where: CharacterWhereUniqueInput!): Character
-  filter(where: FilterWhereUniqueInput!): Filter
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  gameNotesConnection(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameNoteConnection!
+  playerNotesConnection(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlayerNoteConnection!
+  gameFiltersConnection(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameFilterConnection!
+  playerFiltersConnection(where: PlayerFilterWhereInput, orderBy: PlayerFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlayerFilterConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
   charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
-  filtersConnection(where: FilterWhereInput, orderBy: FilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FilterConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2530,9 +3985,12 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  gameNote(where: GameNoteSubscriptionWhereInput): GameNoteSubscriptionPayload
+  playerNote(where: PlayerNoteSubscriptionWhereInput): PlayerNoteSubscriptionPayload
+  gameFilter(where: GameFilterSubscriptionWhereInput): GameFilterSubscriptionPayload
+  playerFilter(where: PlayerFilterSubscriptionWhereInput): PlayerFilterSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
   character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
-  filter(where: FilterSubscriptionWhereInput): FilterSubscriptionPayload
 }
 
 type User implements Node {
@@ -2543,6 +4001,8 @@ type User implements Node {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  playerNotes(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerNote!]
+  gameNote(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote!]
 }
 
 """A connection to a list of items."""
@@ -2563,10 +4023,44 @@ input UserCreateInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
+  playerNotes: PlayerNoteCreateManyWithoutUserInput
+  gameNote: GameNoteCreateManyWithoutUserInput
+}
+
+input UserCreateManyWithoutGameNoteInput {
+  create: [UserCreateWithoutGameNoteInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutPlayerNotesInput {
+  create: [UserCreateWithoutPlayerNotesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreatepermissionsInput {
   set: [Permission!]
+}
+
+input UserCreateWithoutGameNoteInput {
+  id: ID
+  username: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+  playerNotes: PlayerNoteCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutPlayerNotesInput {
+  id: ID
+  username: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+  gameNote: GameNoteCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -2605,6 +4099,239 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+}
+
+input UserScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  username: String
+
+  """All values that are not equal to given value."""
+  username_not: String
+
+  """All values that are contained in given list."""
+  username_in: [String!]
+
+  """All values that are not contained in given list."""
+  username_not_in: [String!]
+
+  """All values less than the given value."""
+  username_lt: String
+
+  """All values less than or equal the given value."""
+  username_lte: String
+
+  """All values greater than the given value."""
+  username_gt: String
+
+  """All values greater than or equal the given value."""
+  username_gte: String
+
+  """All values containing the given string."""
+  username_contains: String
+
+  """All values not containing the given string."""
+  username_not_contains: String
+
+  """All values starting with the given string."""
+  username_starts_with: String
+
+  """All values not starting with the given string."""
+  username_not_starts_with: String
+
+  """All values ending with the given string."""
+  username_ends_with: String
+
+  """All values not ending with the given string."""
+  username_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: Float
 }
 
 type UserSubscriptionPayload {
@@ -2653,6 +4380,17 @@ input UserUpdateInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
+  playerNotes: PlayerNoteUpdateManyWithoutUserInput
+  gameNote: GameNoteUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyDataInput {
+  username: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
@@ -2664,8 +4402,79 @@ input UserUpdateManyMutationInput {
   permissions: UserUpdatepermissionsInput
 }
 
+input UserUpdateManyWithoutGameNoteInput {
+  create: [UserCreateWithoutGameNoteInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutGameNoteInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutGameNoteInput!]
+}
+
+input UserUpdateManyWithoutPlayerNotesInput {
+  create: [UserCreateWithoutPlayerNotesInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPlayerNotesInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPlayerNotesInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
 input UserUpdatepermissionsInput {
   set: [Permission!]
+}
+
+input UserUpdateWithoutGameNoteDataInput {
+  username: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+  playerNotes: PlayerNoteUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutPlayerNotesDataInput {
+  username: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+  gameNote: GameNoteUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithWhereUniqueWithoutGameNoteInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutGameNoteDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutPlayerNotesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPlayerNotesDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutGameNoteInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutGameNoteDataInput!
+  create: UserCreateWithoutGameNoteInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPlayerNotesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPlayerNotesDataInput!
+  create: UserCreateWithoutPlayerNotesInput!
 }
 
 input UserWhereInput {
@@ -2899,6 +4708,12 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  playerNotes_every: PlayerNoteWhereInput
+  playerNotes_some: PlayerNoteWhereInput
+  playerNotes_none: PlayerNoteWhereInput
+  gameNote_every: GameNoteWhereInput
+  gameNote_some: GameNoteWhereInput
+  gameNote_none: GameNoteWhereInput
 }
 
 input UserWhereUniqueInput {

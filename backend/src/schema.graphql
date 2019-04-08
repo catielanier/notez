@@ -49,9 +49,39 @@ type Mutation {
     # Create game
     createGame(
         gameName: String!
-        characters: [String]!
-        filters: [String]!
+        gameName_ja: String
+        gameName_ko: String
+        gameName_zh_CN: String
+        gameName_zh_TW: String
+        gameName_zh_HK: String
     ): Game!
+
+    createCharacter(
+        characterName: String!
+        characterName_ja: String
+        characterName_ko: String
+        characterName_zh_CN: String
+        characterName_zh_TW: String
+        characterName_zh_HK: String
+    ): Character!
+
+    createGameFilter(
+        filterName: String!
+        filterName_ja: String
+        filterName_ko: String
+        filterName_zh_CN: String
+        filterName_zh_TW: String
+        filterName_zh_HK: String
+    ): GameFilter!
+
+    createPlayerFilter(
+        filterName: String!
+        filterName_ja: String
+        filterName_ko: String
+        filterName_zh_CN: String
+        filterName_zh_TW: String
+        filterName_zh_HK: String
+    ): PlayerFilter!
 }
 
 type Query {

@@ -25,13 +25,13 @@ type User {
 type Game {
   id: ID! @unique
   name: String! @unique
-  name_jp: String @unique
+  name_ja: String @unique
   name_ko: String @unique
   name_zh_CN: String @unique
   name_zh_TW: String @unique
   name_zh_HK: String @unique
   characters: [Character]
-  filters: [Filter]
+  filters: [GameFilter]
 }
 
 # Characters need a relationship with game, also needs fields for i18n.
@@ -47,7 +47,7 @@ type Character {
 }
 
 # Filters need a relationship with game, also needs fields for i18n.
-type Filter {
+type GameFilter {
   id: ID! @unique
   name: String! @unique
   name_jp: String @unique
@@ -58,23 +58,35 @@ type Filter {
   games: [Game]
 }
 
+type PlayerFilter {
+  id: ID! @unique
+  name: String! @unique
+  name_jp: String @unique
+  name_ko: String @unique
+  name_zh_CN: String @unique
+  name_zh_TW: String @unique
+  name_zh_HK: String @unique
+}
+
 # Game notes need to tie the characters to player and opponent, also needs to grab the proper filter and game.
 type GameNote {
   id: ID! @unique
-  opponent: Character!
-  you: Character!
-  filter: Filter!
+  opponent: Character! @relation(name: "OpponentOnNote")
+  you: Character! @relation(name: "YouOnNote")
+  filter: GameFilter!
   note: String!
   game: Game!
   user: [User]!
+  createdAt: DateTime!
 }
 
-# Player notes need to grab the proper filter and game.
+# Player notes need to grab the proper filter and game. Also passing users in an array so that I can add in sharing later.
 type PlayerNote {
   id: ID! @unique
   opponent: String
   game: Game!
-  filter: Filter!
+  filter: PlayerFilter!
   note: String!
   user: [User]!
+  createdAt: DateTime!
 }
