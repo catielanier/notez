@@ -9,41 +9,40 @@ import { Columns } from '../pages/login';
 
 const CREATE_GAME_MUTATION = gql`
     mutation CREATE_GAME_MUTATION(
-        $gameName: String!
+        $name: String!
+        $name_ja: String!
+        $name_ko: String!
+        $name_zh_CN: String!
+        $name_zh_TW: String!
+        $name_zh_HK: String!
     ) {
         createGame(
-            gameName: $gameName
+            name: $name
+            name_ja: $name_ja
+            name_ko: $name_ko
+            name_zh_CN: $name_zh_CN
+            name_zh_TW: $name_zh_TW
+            name_zh_HK: $name_zh_HK
         ) {
             id
             name
+            name_ja
+            name_ko
+            name_zh_CN
+            name_zh_TW
+            name_zh_HK
         }
     }
 `;
 
 class CreateGame extends Component {
     state = {
-        gameName: '',
-        characterList: []
-    }
-
-    changeGame = (e) => {
-        const {value} = e;
-        this.setState({
-            gameName: value
-        });
-    }
-
-    changeSearchable = (e) => {
-        this.setState({
-            searchVariable: e
-        });
-    }
-
-    createCharacterList = (e) => {
-        const characterList = e.target.value.split(/\n/);
-        this.setState({
-            characterList
-        });
+        name: '',
+        name_ja: '',
+        name_ko: '',
+        name_zh_CN: '',
+        name_zh_TW: '',
+        name_zh_HK: '',
     }
 
     render() {
