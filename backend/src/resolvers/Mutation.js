@@ -225,6 +225,11 @@ const mutations = {
         }, info);
 
         return newGame;
+    },
+
+    // Create a character
+    async createCharacter(parent, args, ctx, info) {
+        
     }
 };
 

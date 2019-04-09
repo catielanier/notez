@@ -57,30 +57,30 @@ type Mutation {
     ): Game!
 
     createCharacter(
-        characterName: String!
-        characterName_ja: String
-        characterName_ko: String
-        characterName_zh_CN: String
-        characterName_zh_TW: String
-        characterName_zh_HK: String
+        name: String!
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_TW: String
+        name_zh_HK: String
     ): Character!
 
     createGameFilter(
-        filterName: String!
-        filterName_ja: String
-        filterName_ko: String
-        filterName_zh_CN: String
-        filterName_zh_TW: String
-        filterName_zh_HK: String
+        name: String!
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_TW: String
+        name_zh_HK: String
     ): GameFilter!
 
     createPlayerFilter(
-        filterName: String!
-        filterName_ja: String
-        filterName_ko: String
-        filterName_zh_CN: String
-        filterName_zh_TW: String
-        filterName_zh_HK: String
+        name: String!
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_TW: String
+        name_zh_HK: String
     ): PlayerFilter!
 
     createGameNote(

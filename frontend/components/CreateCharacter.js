@@ -1,0 +1,138 @@
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import User, { CURRENT_USER_QUERY } from './User';
+import Form from './styles/Form';
+import Error from './ErrorMessage';
+import Select from 'react-select';
+
+const CREATE_CHARACTER_MUTATION = gql`
+    mutation CREATE_CHARACTER_MUTATION(
+        $name: String!
+        $name_ja: String!
+        $name_ko: String!
+        $name_zh_CN: String!
+        $name_zh_TW: String!
+        $name_zh_HK: String!
+        $game: String!
+    ) {
+        createCharacter(
+            name: $name
+            name_ja: $name_ja
+            name_ko: $name_ko
+            name_zh_CN: $name_zh_CN
+            name_zh_TW: $name_zh_TW
+            name_zh_HK: $name_zh_HK
+            game: $game
+        ) {
+            id
+            name
+            name_ja
+            name_ko
+            name_zh_CN
+            name_zh_TW
+            name_zh_HK
+            games {
+                id
+                name
+            }
+        }
+    }
+`;
+
+const ALL_GAMES_QUERY = gql`
+    query ALL_GAMES_QUERY {
+        games(
+            orderBy: name_ASC
+        ) {
+            id
+            name
+        }
+    }
+`;
+
+class CreateCharacter extends Component {
+    state = {
+        name: '',
+        name_ja: '',
+        name_ko: '',
+        name_zh_CN: '',
+        name_zh_TW: '',
+        name_zh_HK: ''
+    }
+
+    changeState(e, a) {
+        const value = e.value || e.target.value;
+        const { name } = a || e.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    render() {
+        return(
+            <User>
+                {({data: {me}}) => (
+                    <Mutation mutation={CREATE_CHARACTER_MUTATION} variables={this.state}>
+                    {(createCharacter, {loading, error, called}) => (
+                        <>
+                            <h2>Add New Characters</h2>
+                            <Form method="post" onSubmit={async (e) => {
+                                e.preventDefault();
+                                const res = await createCharacter();
+                                console.log(res);
+                                this.setState({
+                                    name: '',
+                                    name_ja: '',
+                                    name_ko: '',
+                                    name_zh_CN: '',
+                                    name_zh_TW: '',
+                                    name_zh_HK: '',
+                                    game: ''
+                                })
+                            }}>
+                                <fieldset disabled={loading} aria-busy={loading}>
+                                    <Error error={error} />
+                                    {!error && !loading && called && <p>Character successfully created.</p>}
+                                    <label htmlFor="name">
+                                        Character Name:
+                                        <input type="text" name="name" value={this.state.name} onChange={this.changeState} placeholder="Character name" />
+                                    </label>
+                                    <label htmlFor="name_ja">
+                                        日本語の名前:
+                                        <input type="text" name="name_ja" value={this.state.name_ja} onChange={this.changeState} placeholder="キャラクター名" />
+                                    </label>
+                                    <label htmlFor="name_ko">
+                                        한국어 이름:
+                                        <input type="text" name="name_ko" value={this.state.name_ko} onChange={this.changeState} placeholder="캐릭터 이름" />
+                                    </label>
+                                    <label htmlFor="name_zh_CN">
+                                        简体中文名字：
+                                        <input type="text" name="name_zh_CN" value={this.state.name_zh_CN} onChange={this.changeState} placeholder="角色名字" />
+                                    </label>
+                                    <label htmlFor="name_zh_TW">
+                                        繁體中文名字：
+                                        <input type="text" name="name_zh_TW" value={this.state.name_zh_TW} onChange={this.changeState} placeholder="角色名字" />
+                                    </label>
+                                    <label htmlFor="name_zh_HK">
+                                        廣東話名字：
+                                        <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="角色名字" />
+                                    </label>
+                                    <label htmlFor="game">
+                                        Principal Game:
+                                        <Select />
+                                    </label>
+                                    <button type="submit">Add Character</button>
+                                </fieldset>
+                            </Form>
+                        </>
+                    )}
+                    </Mutation>
+                )}
+            </User>
+        )
+    }
+}
+
+export default CreateCharacter;
+export { ALL_GAMES_QUERY };
