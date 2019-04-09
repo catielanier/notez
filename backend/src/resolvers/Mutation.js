@@ -215,38 +215,22 @@ const mutations = {
         if (!ctx.request.userId) {
             throw new Error('You must be logged in');
         }
-        // Query the current user.
-        const currentUser = await ctx.db.query.user(
-            {
-                where: {
-                    id: ctx.request.userId,
-                },
-            },
-            info
-        );
-        // Check to see if user has the proper permissions.
-        hasPermission(currentUser, ['ADMIN', 'GAMECREATE']);
         // Get the arguments from the user.
-        const name = args.gameName;
+        const game = {...args};
         // Check to see if the game already exists
-        const alreadyCreated = await ctx.db.query.games({
+        const alreadyExists = ctx.db.query.games({
             where: {
-                name: args.gameName
+                name: game.name
             }
         });
-        // If the game exists, then end the mutation.
-        if (alreadyCreated.length !== 0) {
-            const created = "The game is already in the DB, and will now pull its existing characters.";
-            return created;
-        }
-        // create the game
-        const createdGame = await ctx.db.mutation.createGame({
+
+        const newGame = await ctx.db.mutation.createGame({
             data: {
-                name
+                ...game
             }
         }, info);
-        // return the game to the user.
-        return createdGame;
+
+        return newGame;
     }
 };
 

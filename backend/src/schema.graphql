@@ -48,12 +48,12 @@ type Mutation {
 
     # Create game
     createGame(
-        gameName: String!
-        gameName_ja: String
-        gameName_ko: String
-        gameName_zh_CN: String
-        gameName_zh_TW: String
-        gameName_zh_HK: String
+        name: String!
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_TW: String
+        name_zh_HK: String
     ): Game!
 
     createCharacter(
@@ -84,7 +84,7 @@ type Mutation {
     ): PlayerFilter!
 
     createGameNote(
-        gameName: String!
+        name: String!
         you: String!
         opponent: String!
         filter: String!
@@ -93,7 +93,7 @@ type Mutation {
 
     createPlayerNote(
         opponent: String!
-        gameName: String!
+        name: String!
         filter: String!
         note: String!
     ): PlayerNote
