@@ -217,12 +217,6 @@ const mutations = {
         }
         // Get the arguments from the user.
         const game = {...args};
-        // Check to see if the game already exists
-        const alreadyExists = ctx.db.query.games({
-            where: {
-                name: game.name
-            }
-        });
 
         const newGame = await ctx.db.mutation.createGame({
             data: {
