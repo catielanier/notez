@@ -251,7 +251,56 @@ const mutations = {
     },
 
     async createGameFilter(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
 
+        const filter = {...args};
+        const emptyKey = [];
+
+        // Check for any empty strings
+        for (let item in filter) {
+            if (filter[item] === '') {
+                emptyKey.push(item);
+            }
+        }
+        
+        // Delete the empty strings from the object
+        emptyKey.forEach(key => {
+            delete filter[key];
+        })
+        
+        const game = filter.game;
+
+        // Check to see if the user forgot to put in a game and set the global boolean to false. If they did, throw back an error.
+        if (filter.game === '' && !filter.isGlobal) {
+            throw new Error('You must choose a game to assign the filter to, or set it as a global filter.')
+        }
+
+        if (game !== undefined) {
+            delete filter.game;
+            const res = await ctx.db.mutation.createGameFilter({
+                data: {
+                    ...filter,
+                    games: {
+                        connect: {
+                            name: game
+                        }
+                    }
+                }
+            }, info);
+            return res;
+        }
+
+        if (game === undefined) {
+            const res = await ctx.db.mutation.createGameFilter({
+                data: {
+                    ...filter
+                }
+            }, info);
+            return res;
+        }
     }
 };
 

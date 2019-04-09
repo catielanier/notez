@@ -10,12 +10,13 @@ import { ALL_GAMES_QUERY } from './CreateCharacter';
 const CREATE_GAME_FILTER_MUTATION = gql`
     mutation CREATE_GAME_FILTER_MUTATION(
         $name: String!
-        $name_ja: String!
-        $name_ko: String!
-        $name_zh_CN: String!
-        $name_zh_TW: String!
-        $name_zh_HK: String!
-        $game: String!
+        $name_ja: String
+        $name_ko: String
+        $name_zh_CN: String
+        $name_zh_TW: String
+        $name_zh_HK: String
+        $game: String
+        $isGlobal: Boolean!
     ) {
         createGameFilter(
             name: $name
@@ -25,6 +26,7 @@ const CREATE_GAME_FILTER_MUTATION = gql`
             name_zh_TW: $name_zh_TW
             name_zh_HK: $name_zh_HK
             game: $game
+            isGlobal: $isGlobal
         ) {
             id
             name
@@ -49,7 +51,26 @@ class CreateGameFilter extends Component {
         name_zh_CN: '',
         name_zh_TW: '',
         name_zh_HK: '',
-        game: ''
+        game: '',
+        isGlobal: false,
+        storedGameValue: ''
+    }
+
+    changeBoolean = (e) => {
+        const isGlobal = e.target.checked;
+        this.setState({
+            isGlobal
+        })
+        if (isGlobal === true) {
+            this.setState({
+                game: ''
+            });
+        }
+        if (isGlobal === false) {
+            this.setState({
+                game: this.state.storedGameValue
+            });
+        }
     }
 
     changeState = (e, a) => {
@@ -58,6 +79,12 @@ class CreateGameFilter extends Component {
         this.setState({
             [name]: value
         });
+
+        if (name === 'game') {
+            this.setState({
+                storedGameValue: value
+            });
+        }
     }
 
     render() {
@@ -73,6 +100,8 @@ class CreateGameFilter extends Component {
                                 <Form method="post" onSubmit={async (e) => {
                                     e.preventDefault();
                                     const res = await createGameFilter();
+                                    const storedGame = this.state.storedGameValue;
+                                    delete this.state.storedGameValue;
                                     console.log(res);
                                     this.setState({
                                         name: '',
@@ -81,14 +110,15 @@ class CreateGameFilter extends Component {
                                         name_zh_CN: '',
                                         name_zh_TW: '',
                                         name_zh_HK: ''
-                                    })
+                                    });
+                                    this.state.storedGameValue = storedGame;
                                 }}>
                                     <fieldset disabled={loading} aria-busy={loading}>
                                         <Error error={error} />
-                                        {!error && !loading && called && <p>Character successfully created.</p>}
+                                        {!error && !loading && called && <p>Filter successfully created.</p>}
                                         <label htmlFor="name">
                                             Filter Name:
-                                            <input type="text" name="name" value={this.state.name} onChange={this.changeState} placeholder="Character name" />
+                                            <input type="text" name="name" value={this.state.name} onChange={this.changeState} placeholder="Filter name" />
                                         </label>
                                         <label htmlFor="name_ja">
                                             日本語の名前:
@@ -110,9 +140,13 @@ class CreateGameFilter extends Component {
                                             廣東話名字：
                                             <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="過濾器名稱" />
                                         </label>
+                                        <label htmlFor="isGlobal">
+                                            The filter should be accessible across all games.
+                                            <input type="checkbox" name="isGlobal" checked={this.state.isGlobal} onChange={this.changeBoolean} />
+                                        </label>
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" onChange={this.changeState} options={games.map((game) => {
+                                            <Select name="game" isDisabled={this.state.isGlobal === true} onChange={this.changeState} options={games.map((game) => {
                                                 return {
                                                     label: game.name,
                                                     value: game.name

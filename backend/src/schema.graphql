@@ -121,16 +121,6 @@ type Mutation {
         id: ID!
     ): Game!
 
-    updateGame(
-        name: String
-        name_ja: String
-        name_ko: String
-        name_zh_CN: String
-        name_zh_HK: String
-        name_zh_TW: String
-        id: ID!
-    ): Game!
-
     updateGameFilter(
         name: String
         name_ja: String
