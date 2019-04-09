@@ -248,6 +248,10 @@ const mutations = {
             }
         }, info);
         return newCharacter;
+    },
+
+    async createGameFilter(parent, args, ctx, info) {
+
     }
 };
 
