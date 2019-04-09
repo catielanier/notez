@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Mon Apr 08 2019 18:42:35 GMT-0400 (Eastern Daylight Time)
+# timestamp: Mon Apr 08 2019 23:36:39 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!
@@ -37,7 +37,7 @@ type BatchPayload {
 type Character implements Node {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -58,7 +58,7 @@ type CharacterConnection {
 input CharacterCreateInput {
   id: ID
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -79,7 +79,7 @@ input CharacterCreateOneInput {
 input CharacterCreateWithoutGamesInput {
   id: ID
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -100,8 +100,8 @@ enum CharacterOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  name_jp_ASC
-  name_jp_DESC
+  name_ja_ASC
+  name_ja_DESC
   name_ko_ASC
   name_ko_DESC
   name_zh_CN_ASC
@@ -119,7 +119,7 @@ enum CharacterOrderByInput {
 type CharacterPreviousValues {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -215,46 +215,46 @@ input CharacterScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -458,7 +458,7 @@ input CharacterSubscriptionWhereInput {
 
 input CharacterUpdateDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -468,7 +468,7 @@ input CharacterUpdateDataInput {
 
 input CharacterUpdateInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -478,7 +478,7 @@ input CharacterUpdateInput {
 
 input CharacterUpdateManyDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -487,7 +487,7 @@ input CharacterUpdateManyDataInput {
 
 input CharacterUpdateManyMutationInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -520,7 +520,7 @@ input CharacterUpdateOneRequiredInput {
 
 input CharacterUpdateWithoutGamesDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -632,46 +632,46 @@ input CharacterWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -840,7 +840,7 @@ input CharacterWhereInput {
 input CharacterWhereUniqueInput {
   id: ID
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -932,7 +932,7 @@ type GameEdge {
 type GameFilter implements Node {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -953,7 +953,7 @@ type GameFilterConnection {
 input GameFilterCreateInput {
   id: ID
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -974,7 +974,7 @@ input GameFilterCreateOneInput {
 input GameFilterCreateWithoutGamesInput {
   id: ID
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -995,8 +995,8 @@ enum GameFilterOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  name_jp_ASC
-  name_jp_DESC
+  name_ja_ASC
+  name_ja_DESC
   name_ko_ASC
   name_ko_DESC
   name_zh_CN_ASC
@@ -1014,7 +1014,7 @@ enum GameFilterOrderByInput {
 type GameFilterPreviousValues {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1110,46 +1110,46 @@ input GameFilterScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -1353,7 +1353,7 @@ input GameFilterSubscriptionWhereInput {
 
 input GameFilterUpdateDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1363,7 +1363,7 @@ input GameFilterUpdateDataInput {
 
 input GameFilterUpdateInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1373,7 +1373,7 @@ input GameFilterUpdateInput {
 
 input GameFilterUpdateManyDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1382,7 +1382,7 @@ input GameFilterUpdateManyDataInput {
 
 input GameFilterUpdateManyMutationInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1415,7 +1415,7 @@ input GameFilterUpdateOneRequiredInput {
 
 input GameFilterUpdateWithoutGamesDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -1527,46 +1527,46 @@ input GameFilterWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -1735,7 +1735,7 @@ input GameFilterWhereInput {
 input GameFilterWhereUniqueInput {
   id: ID
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3024,7 +3024,7 @@ enum Permission {
 type PlayerFilter implements Node {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3044,7 +3044,7 @@ type PlayerFilterConnection {
 input PlayerFilterCreateInput {
   id: ID
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3070,8 +3070,8 @@ enum PlayerFilterOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  name_jp_ASC
-  name_jp_DESC
+  name_ja_ASC
+  name_ja_DESC
   name_ko_ASC
   name_ko_DESC
   name_zh_CN_ASC
@@ -3089,7 +3089,7 @@ enum PlayerFilterOrderByInput {
 type PlayerFilterPreviousValues {
   id: ID!
   name: String!
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3137,7 +3137,7 @@ input PlayerFilterSubscriptionWhereInput {
 
 input PlayerFilterUpdateDataInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3146,7 +3146,7 @@ input PlayerFilterUpdateDataInput {
 
 input PlayerFilterUpdateInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3155,7 +3155,7 @@ input PlayerFilterUpdateInput {
 
 input PlayerFilterUpdateManyMutationInput {
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String
@@ -3263,46 +3263,46 @@ input PlayerFilterWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  name_jp: String
+  name_ja: String
 
   """All values that are not equal to given value."""
-  name_jp_not: String
+  name_ja_not: String
 
   """All values that are contained in given list."""
-  name_jp_in: [String!]
+  name_ja_in: [String!]
 
   """All values that are not contained in given list."""
-  name_jp_not_in: [String!]
+  name_ja_not_in: [String!]
 
   """All values less than the given value."""
-  name_jp_lt: String
+  name_ja_lt: String
 
   """All values less than or equal the given value."""
-  name_jp_lte: String
+  name_ja_lte: String
 
   """All values greater than the given value."""
-  name_jp_gt: String
+  name_ja_gt: String
 
   """All values greater than or equal the given value."""
-  name_jp_gte: String
+  name_ja_gte: String
 
   """All values containing the given string."""
-  name_jp_contains: String
+  name_ja_contains: String
 
   """All values not containing the given string."""
-  name_jp_not_contains: String
+  name_ja_not_contains: String
 
   """All values starting with the given string."""
-  name_jp_starts_with: String
+  name_ja_starts_with: String
 
   """All values not starting with the given string."""
-  name_jp_not_starts_with: String
+  name_ja_not_starts_with: String
 
   """All values ending with the given string."""
-  name_jp_ends_with: String
+  name_ja_ends_with: String
 
   """All values not ending with the given string."""
-  name_jp_not_ends_with: String
+  name_ja_not_ends_with: String
   name_ko: String
 
   """All values that are not equal to given value."""
@@ -3468,7 +3468,7 @@ input PlayerFilterWhereInput {
 input PlayerFilterWhereUniqueInput {
   id: ID
   name: String
-  name_jp: String
+  name_ja: String
   name_ko: String
   name_zh_CN: String
   name_zh_TW: String

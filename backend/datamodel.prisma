@@ -38,7 +38,7 @@ type Game {
 type Character {
   id: ID! @unique
   name: String! @unique
-  name_jp: String @unique
+  name_ja: String @unique
   name_ko: String @unique
   name_zh_CN: String @unique
   name_zh_TW: String @unique
@@ -50,7 +50,7 @@ type Character {
 type GameFilter {
   id: ID! @unique
   name: String! @unique
-  name_jp: String @unique
+  name_ja: String @unique
   name_ko: String @unique
   name_zh_CN: String @unique
   name_zh_TW: String @unique
@@ -61,7 +61,7 @@ type GameFilter {
 type PlayerFilter {
   id: ID! @unique
   name: String! @unique
-  name_jp: String @unique
+  name_ja: String @unique
   name_ko: String @unique
   name_zh_CN: String @unique
   name_zh_TW: String @unique

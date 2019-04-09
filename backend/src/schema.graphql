@@ -63,6 +63,7 @@ type Mutation {
         name_zh_CN: String
         name_zh_TW: String
         name_zh_HK: String
+        game: String!
     ): Character!
 
     createGameFilter(
