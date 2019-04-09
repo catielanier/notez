@@ -27,7 +27,17 @@ const Query = {
         return ctx.db.query.users({}, info);
     },
     
-    games: forwardTo('db')
+    games: forwardTo('db'),
+    
+    gameNotes: forwardTo('db'),
+
+    playerNotes: forwardTo('db'),
+    
+    characters: forwardTo('db'),
+
+    gameFilters: forwardTo('db'),
+
+    playerFilters: forwardTo('db')
 };
 
 module.exports = Query;

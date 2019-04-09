@@ -73,6 +73,7 @@ type Mutation {
         name_zh_CN: String
         name_zh_TW: String
         name_zh_HK: String
+        isGlobal: Boolean!
     ): GameFilter!
 
     createPlayerFilter(
@@ -90,14 +91,74 @@ type Mutation {
         opponent: String!
         filter: String!
         note: String!
-    ): GameNote
+    ): GameNote!
 
     createPlayerNote(
         opponent: String!
         name: String!
         filter: String!
         note: String!
-    ): PlayerNote
+    ): PlayerNote!
+
+    updateCharacter(
+        name: String
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_HK: String
+        name_zh_TW: String
+        id: ID!
+    ): Character!
+
+    updateGame(
+        name: String
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_HK: String
+        name_zh_TW: String
+        id: ID!
+    ): Game!
+
+    updateGame(
+        name: String
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_HK: String
+        name_zh_TW: String
+        id: ID!
+    ): Game!
+
+    updateGameFilter(
+        name: String
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_HK: String
+        name_zh_TW: String
+        id: ID!
+    ): GameFilter!
+
+    updatePlayerFilter(
+        name: String
+        name_ja: String
+        name_ko: String
+        name_zh_CN: String
+        name_zh_HK: String
+        name_zh_TW: String
+        id: ID!
+    ): PlayerFilter!
+
+    updateCharacterRelation(
+        id: ID!
+        game: String
+    ): Character!
+
+    updateGameFilterRelation(
+        id: ID!
+        game: String
+    ): GameFilter!
 }
 
 type Query {
@@ -112,4 +173,29 @@ type Query {
         where: GameWhereInput
         orderBy: GameOrderByInput
     ): [Game]!
+
+    characters(
+        where: CharacterWhereInput
+        orderBy: CharacterOrderByInput
+    ): [Character]!
+
+    gameFilters(
+        where: GameFilterWhereInput
+        orderBy: GameFilterOrderByInput
+    ): [GameFilter]!
+
+    playerFilters(
+        where: PlayerFilterWhereInput
+        orderBy: PlayerFilterOrderByInput
+    ): [PlayerFilter]!
+    
+    gameNotes(
+        where: GameNoteWhereInput
+        orderBy: GameNoteOrderByInput
+    ): [GameNote]!
+
+    playerNotes(
+        where: PlayerNoteWhereInput
+        orderBy: PlayerNoteOrderByInput
+    ): [PlayerNote]!
 }

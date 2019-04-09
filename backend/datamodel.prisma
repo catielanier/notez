@@ -49,6 +49,7 @@ type Character {
 # Filters need a relationship with game, also needs fields for i18n.
 type GameFilter {
   id: ID! @unique
+  isGlobal: Boolean!
   name: String! @unique
   name_ja: String @unique
   name_ko: String @unique

@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Mon Apr 08 2019 23:36:39 GMT-0400 (Eastern Daylight Time)
+# timestamp: Tue Apr 09 2019 01:50:34 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!
@@ -931,6 +931,7 @@ type GameEdge {
 
 type GameFilter implements Node {
   id: ID!
+  isGlobal: Boolean!
   name: String!
   name_ja: String
   name_ko: String
@@ -952,6 +953,7 @@ type GameFilterConnection {
 
 input GameFilterCreateInput {
   id: ID
+  isGlobal: Boolean!
   name: String!
   name_ja: String
   name_ko: String
@@ -973,6 +975,7 @@ input GameFilterCreateOneInput {
 
 input GameFilterCreateWithoutGamesInput {
   id: ID
+  isGlobal: Boolean!
   name: String!
   name_ja: String
   name_ko: String
@@ -993,6 +996,8 @@ type GameFilterEdge {
 enum GameFilterOrderByInput {
   id_ASC
   id_DESC
+  isGlobal_ASC
+  isGlobal_DESC
   name_ASC
   name_DESC
   name_ja_ASC
@@ -1013,6 +1018,7 @@ enum GameFilterOrderByInput {
 
 type GameFilterPreviousValues {
   id: ID!
+  isGlobal: Boolean!
   name: String!
   name_ja: String
   name_ko: String
@@ -1070,6 +1076,10 @@ input GameFilterScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  isGlobal: Boolean
+
+  """All values that are not equal to given value."""
+  isGlobal_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -1352,6 +1362,7 @@ input GameFilterSubscriptionWhereInput {
 }
 
 input GameFilterUpdateDataInput {
+  isGlobal: Boolean
   name: String
   name_ja: String
   name_ko: String
@@ -1362,6 +1373,7 @@ input GameFilterUpdateDataInput {
 }
 
 input GameFilterUpdateInput {
+  isGlobal: Boolean
   name: String
   name_ja: String
   name_ko: String
@@ -1372,6 +1384,7 @@ input GameFilterUpdateInput {
 }
 
 input GameFilterUpdateManyDataInput {
+  isGlobal: Boolean
   name: String
   name_ja: String
   name_ko: String
@@ -1381,6 +1394,7 @@ input GameFilterUpdateManyDataInput {
 }
 
 input GameFilterUpdateManyMutationInput {
+  isGlobal: Boolean
   name: String
   name_ja: String
   name_ko: String
@@ -1414,6 +1428,7 @@ input GameFilterUpdateOneRequiredInput {
 }
 
 input GameFilterUpdateWithoutGamesDataInput {
+  isGlobal: Boolean
   name: String
   name_ja: String
   name_ko: String
@@ -1487,6 +1502,10 @@ input GameFilterWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  isGlobal: Boolean
+
+  """All values that are not equal to given value."""
+  isGlobal_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
