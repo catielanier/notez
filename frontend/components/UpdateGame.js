@@ -15,7 +15,7 @@ const UPDATE_GAME_MUTATION = gql`
         $name_zh_CN: String
         $name_zh_TW: String
         $name_zh_HK: String
-        $game: String!
+        $id: ID!
     ) {
         updateGame(
             name: $name
@@ -24,7 +24,7 @@ const UPDATE_GAME_MUTATION = gql`
             name_zh_CN: $name_zh_CN
             name_zh_TW: $name_zh_TW
             name_zh_HK: $name_zh_HK
-            game: $game
+            id: $id
         ) {
             id
             name
@@ -45,7 +45,7 @@ class UpdateGame extends Component {
         name_zh_CN: '',
         name_zh_TW: '',
         name_zh_HK: '',
-        game: ''
+        id: ''
     }
 
     changeState = (e, a) => {
@@ -82,7 +82,7 @@ class UpdateGame extends Component {
                                 }}>
                                     <fieldset disabled={loading} aria-busy={loading}>
                                         <Error error={error} />
-                                        {!error && !loading && called && <p>Character successfully created.</p>}
+                                        {!error && !loading && called && <p>Game updated.</p>}
                                         <label htmlFor="game">
                                             Principal Game:
                                             <Select name="game" onChange={(e, a) => {
@@ -93,7 +93,6 @@ class UpdateGame extends Component {
                                                         this.setState({
                                                             ...game
                                                         });
-                                                        delete this.state.game;
                                                     }
                                                 });
                                             }} options={games.map((game) => {

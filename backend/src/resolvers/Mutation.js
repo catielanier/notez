@@ -332,6 +332,29 @@ const mutations = {
             }
         }, info);
         return res;
+    },
+
+    async updateGame(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        // Grab the data
+        const updates = {...args};
+
+        // Remove the id
+        delete updates.id;
+
+        // Update the data
+        const res = await ctx.db.mutation.updateGame({
+            data: updates,
+            where: {
+                id: args.id
+            }
+        }, info);
+
+        return res;
     }
 };
 
