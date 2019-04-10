@@ -47,6 +47,20 @@ const ALL_GAMES_QUERY = gql`
         ) {
             id
             name
+            name_ja
+            name_ko
+            name_zh_CN
+            name_zh_HK
+            name_zh_TW
+            characters {
+                id
+                name
+                name_ja
+                name_ko
+                name_zh_CN
+                name_zh_HK
+                name_zh_TW
+            }
         }
     }
 `;
@@ -95,7 +109,7 @@ class CreateCharacter extends Component {
                                 }}>
                                     <fieldset disabled={loading} aria-busy={loading}>
                                         <Error error={error} />
-                                        {!error && !loading && called && <p>Character successfully created.</p>}
+                                        {!error && !loading && called && <p>Game successfully updated.</p>}
                                         <label htmlFor="name">
                                             Character Name:
                                             <input type="text" name="name" value={this.state.name} onChange={this.changeState} placeholder="Character name" />

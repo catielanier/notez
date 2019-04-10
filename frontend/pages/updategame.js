@@ -1,4 +1,4 @@
-import CreateGame from '../components/CreateGame';
+import UpdateGame from '../components/UpdateGame';
 import PleaseSignIn from '../components/PleaseSignIn';
 import AdminNav from '../components/AdminNav';
 
@@ -7,7 +7,7 @@ const CreateGamePage = (props) => {
         <div>
             <PleaseSignIn>
                 <AdminNav />
-                <CreateGame />
+                <UpdateGame />
             </PleaseSignIn>
         </div>
     )

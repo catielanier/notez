@@ -7,7 +7,7 @@ import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 
-const UPDATE_CHARACTER_MUTATION = gql`
+const UPDATE_GAME_MUTATION = gql`
     mutation UPDATE_GAME_MUTATION(
         $name: String
         $name_ja: String
@@ -62,13 +62,13 @@ class CreateCharacter extends Component {
                 {({data: {me}}) => (
                     <Query query={ALL_GAMES_QUERY}>
                     {({data: {games}}) => (
-                        <Mutation mutation={CREATE_CHARACTER_MUTATION} variables={this.state}>
-                        {(createCharacter, {loading, error, called}) => (
+                        <Mutation mutation={UPDATE_GAME_MUTATION} variables={this.state}>
+                        {(updateGame, {loading, error, called}) => (
                             <>
-                                <h2>Add New Characters</h2>
+                                <h2>Update Game</h2>
                                 <Form method="post" onSubmit={async (e) => {
                                     e.preventDefault();
-                                    const res = await createCharacter();
+                                    const res = await updateGame();
                                     console.log(res);
                                     this.setState({
                                         name: '',
@@ -87,7 +87,7 @@ class CreateCharacter extends Component {
                                             <Select name="game" onChange={this.changeState} options={games.map((game) => {
                                                 return {
                                                     label: game.name,
-                                                    value: game.name
+                                                    value: game.id
                                                 }
                                             })} />
                                         </label>
@@ -115,7 +115,7 @@ class CreateCharacter extends Component {
                                             廣東話名字：
                                             <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="角色名字" />
                                         </label>
-                                        <button type="submit">Add Character</button>
+                                        <button type="submit">Update Game</button>
                                     </fieldset>
                                 </Form>
                             </>
@@ -130,4 +130,3 @@ class CreateCharacter extends Component {
 }
 
 export default CreateCharacter;
-export { ALL_GAMES_QUERY };

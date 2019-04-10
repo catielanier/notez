@@ -57,7 +57,7 @@ class CreateGame extends Component {
                     <Mutation mutation={CREATE_GAME_MUTATION} variables={this.state}>
                     {(createGame, {loading, error, called}) => (
                         <>
-                            <h2>Add New Games and Characters</h2>
+                            <h2>Add New Games</h2>
                             <Form method="post" onSubmit={async (e) => {
                                 e.preventDefault();
                                 const res = await createGame();
