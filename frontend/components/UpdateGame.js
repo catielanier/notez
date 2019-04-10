@@ -37,7 +37,7 @@ const UPDATE_GAME_MUTATION = gql`
     }
 `;
 
-class CreateCharacter extends Component {
+class UpdateGame extends Component {
     state = {
         name: '',
         name_ja: '',
@@ -76,7 +76,8 @@ class CreateCharacter extends Component {
                                         name_ko: '',
                                         name_zh_CN: '',
                                         name_zh_TW: '',
-                                        name_zh_HK: ''
+                                        name_zh_HK: '',
+                                        id: ''
                                     })
                                 }}>
                                     <fieldset disabled={loading} aria-busy={loading}>
@@ -84,7 +85,18 @@ class CreateCharacter extends Component {
                                         {!error && !loading && called && <p>Character successfully created.</p>}
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" onChange={this.changeState} options={games.map((game) => {
+                                            <Select name="game" onChange={(e, a) => {
+                                                const {value} = e;
+                                                games.map(game => {
+                                                    if (game.id === value) {
+                                                        delete game.characters;
+                                                        this.setState({
+                                                            ...game
+                                                        });
+                                                        delete this.state.game;
+                                                    }
+                                                });
+                                            }} options={games.map((game) => {
                                                 return {
                                                     label: game.name,
                                                     value: game.id
@@ -129,4 +141,4 @@ class CreateCharacter extends Component {
     }
 }
 
-export default CreateCharacter;
+export default UpdateGame;
