@@ -153,7 +153,7 @@ class CreateGameFilter extends Component {
                                                 }
                                             })} />
                                         </label>
-                                        <button type="submit">Add Character</button>
+                                        <button type="submit">Add Filter</button>
                                     </fieldset>
                                 </Form>
                             </>
