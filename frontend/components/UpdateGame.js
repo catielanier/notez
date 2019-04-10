@@ -85,7 +85,7 @@ class UpdateGame extends Component {
                                         {!error && !loading && called && <p>Game updated.</p>}
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" onChange={(e, a) => {
+                                            <Select name="game" onChange={(e) => {
                                                 const {value} = e;
                                                 games.map(game => {
                                                     if (game.id === value) {

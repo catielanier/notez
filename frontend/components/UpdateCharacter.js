@@ -71,7 +71,7 @@ class UpdateCharacter extends Component {
         name_zh_CN: '',
         name_zh_TW: '',
         name_zh_HK: '',
-        game: '',
+        games: [],
         id: ''
     }
 
@@ -80,6 +80,19 @@ class UpdateCharacter extends Component {
         const { name } = a || e.target;
         this.setState({
             [name]: value
+        });
+    }
+
+    addGame = (e, a) => {
+        const games = this.state.games
+        const newGame = {
+            id: e.value,
+            name: e.label
+        }
+
+        games.push(newGame);
+        this.setState({
+            games
         });
     }
 
@@ -105,12 +118,34 @@ class UpdateCharacter extends Component {
                                                     name_ko: '',
                                                     name_zh_CN: '',
                                                     name_zh_TW: '',
-                                                    name_zh_HK: ''
+                                                    name_zh_HK: '',
+                                                    id: '',
+                                                    games: []
                                                 })
                                             }}>
                                                 <fieldset disabled={loading} aria-busy={loading}>
                                                     <Error error={error} />
-                                                    {!error && !loading && called && <p>Game successfully updated.</p>}
+                                                    {!error && !loading && called && <p>Character successfully updated.</p>}
+                                                    <label htmlFor="id">
+                                                        Select Characer:
+                                                        <Select options={
+                                                            characters.map(character => {
+                                                                return {
+                                                                    label: character.name,
+                                                                    value: character.id
+                                                                }
+                                                            })
+                                                        } name="id" onChange={(e) => {
+                                                            const {value} = e;
+                                                            characters.map(character => {
+                                                                if (character.id === value) {
+                                                                    this.setState({
+                                                                        ...character
+                                                                    });
+                                                                }
+                                                            });
+                                                        }} />
+                                                    </label>
                                                     <label htmlFor="name">
                                                         Character Name:
                                                         <input type="text" name="name" value={this.state.name} onChange={this.changeState} placeholder="Character name" />
@@ -135,12 +170,17 @@ class UpdateCharacter extends Component {
                                                         廣東話名字：
                                                         <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="角色名字" />
                                                     </label>
+                                                    <p>Current Game{this.state.games.length === 1 ? null : 's'}: {this.state.games.map(game => {
+                                                        return (
+                                                            <span>{game.name} &nbsp;</span>
+                                                        )
+                                                    })}</p>
                                                     <label htmlFor="game">
                                                         Principal Game:
-                                                        <Select name="game" onChange={this.changeState} options={games.map((game) => {
+                                                        <Select name="game" onChange={this.addGame} options={games.map((game) => {
                                                             return {
                                                                 label: game.name,
-                                                                value: game.name
+                                                                value: game.id
                                                             }
                                                         })} />
                                                     </label>
