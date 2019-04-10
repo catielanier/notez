@@ -301,6 +301,37 @@ const mutations = {
             }, info);
             return res;
         }
+    },
+
+    async createPlayerFilter(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        const filter = {...args};
+
+        const emptyKey = [];
+
+        // Check for any empty strings
+        for (let item in filter) {
+            if (filter[item] === '') {
+                emptyKey.push(item);
+            }
+        }
+        
+        // Delete the empty strings from the object
+        emptyKey.forEach(key => {
+            delete filter[key];
+        })
+
+        // Create the filter and return it
+        const res = await ctx.db.mutation.createPlayerFilter({
+            data: {
+                ...filter
+            }
+        }, info);
+        return res;
     }
 };
 

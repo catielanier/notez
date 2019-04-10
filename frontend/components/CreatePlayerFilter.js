@@ -56,7 +56,7 @@ class CreatePlayerFilter extends Component {
             <User>
                 {({data: {me}}) => (
                     <Mutation mutation={CREATE_PLAYER_FILTER_MUTATION} variables={this.state}>
-                    {(createGameFilter, {loading, error, called}) => (
+                    {(createPlayerFilter, {loading, error, called}) => (
                         <>
                             <h2>Add New Player Filters</h2>
                             <Form method="post" onSubmit={async (e) => {
