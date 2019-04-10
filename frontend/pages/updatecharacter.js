@@ -1,16 +1,16 @@
-import UpdateGame from '../components/UpdateGame';
+import UpdateCharacter from '../components/UpdateCharacter';
 import PleaseSignIn from '../components/PleaseSignIn';
 import AdminNav from '../components/AdminNav';
 
-const UpdateGamePage = (props) => {
+const UpdateCharacterPage = (props) => {
     return( 
         <div>
             <PleaseSignIn>
                 <AdminNav />
-                <UpdateGame />
+                <UpdateCharacter />
             </PleaseSignIn>
         </div>
     )
 }
 
-export default UpdateGamePage;
+export default UpdateCharacterPage;
