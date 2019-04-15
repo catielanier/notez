@@ -16,7 +16,7 @@ const UPDATE_CHARACTER_MUTATION = gql`
         $name_zh_TW: String!
         $name_zh_HK: String!
         $id: ID!
-        $game: String!
+        $games: [ID]!
     ) {
         updateCharacter(
             name: $name
@@ -25,7 +25,7 @@ const UPDATE_CHARACTER_MUTATION = gql`
             name_zh_CN: $name_zh_CN
             name_zh_TW: $name_zh_TW
             name_zh_HK: $name_zh_HK
-            game: $game
+            games: $games
             id: $id
         ) {
             id
@@ -72,7 +72,8 @@ class UpdateCharacter extends Component {
         name_zh_TW: '',
         name_zh_HK: '',
         games: [],
-        id: ''
+        id: '',
+        gameFull: []
     }
 
     changeState = (e, a) => {
@@ -84,7 +85,7 @@ class UpdateCharacter extends Component {
     }
 
     addGame = (e, a) => {
-        const games = this.state.games
+        const games = this.state.gameFull
         const newGame = {
             id: e.value,
             name: e.label
@@ -108,8 +109,18 @@ class UpdateCharacter extends Component {
                                     {(updateCharacter, {loading, error, called}) => (
                                         <>
                                             <h2>Update Characters</h2>
-                                            <Form method="post" onSubmit={async (e) => {
+                                            <Form method="post" onSubmit={async (e) => {                                              
                                                 e.preventDefault();
+                                                const unfilteredGames = this.state.gameFull;
+                                                const games = [];
+                                                unfilteredGames.map(game => {
+                                                    games.push(game.id)
+                                                });
+                                                await this.setState({
+                                                    games
+                                                })
+                                                delete this.state.gameFull;
+                                                console.log(this.state.games);
                                                 const res = await updateCharacter();
                                                 console.log(res);
                                                 this.setState({
@@ -120,7 +131,8 @@ class UpdateCharacter extends Component {
                                                     name_zh_TW: '',
                                                     name_zh_HK: '',
                                                     id: '',
-                                                    games: []
+                                                    games: [],
+                                                    gameFull: []
                                                 })
                                             }}>
                                                 <fieldset disabled={loading} aria-busy={loading}>
@@ -140,7 +152,9 @@ class UpdateCharacter extends Component {
                                                             characters.map(character => {
                                                                 if (character.id === value) {
                                                                     this.setState({
-                                                                        ...character
+                                                                        ...character,
+                                                                        gameFull: character.games,
+                                                                        games: ''
                                                                     });
                                                                 }
                                                             });
@@ -170,7 +184,7 @@ class UpdateCharacter extends Component {
                                                         廣東話名字：
                                                         <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="角色名字" />
                                                     </label>
-                                                    <p>Current Game{this.state.games.length === 1 ? null : 's'}: {this.state.games.map(game => {
+                                                    <p>Current Game{this.state.gameFull !== undefined && this.state.gameFull.length === 1 ? null : 's'}: {this.state.gameFull !== undefined && this.state.gameFull.map(game => {
                                                         return (
                                                             <span>{game.name} &nbsp;</span>
                                                         )
