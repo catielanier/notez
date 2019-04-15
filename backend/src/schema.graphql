@@ -109,6 +109,7 @@ type Mutation {
         name_zh_HK: String
         name_zh_TW: String
         id: ID!
+        games: [ID]
     ): Character!
 
     updateGame(

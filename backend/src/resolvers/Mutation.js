@@ -355,6 +355,36 @@ const mutations = {
         }, info);
 
         return res;
+    },
+
+    async updateCharacter(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        // Grab the data
+        const updates = {...args};
+
+        // Remove the ID and games
+        delete updates.id;
+        delete updates.games;
+
+        console.log(args.games);
+
+        // Update the data
+        const res = await ctx.db.mutation.updateCharacter({
+            data: updates,
+            games: {
+                connect: {
+                    id: args.games
+                }
+            },
+            where: {
+                id: args.id
+            }
+        }, info);
+        return res;
     }
 };
 
