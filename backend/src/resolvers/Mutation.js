@@ -431,7 +431,30 @@ const mutations = {
             }
         }, info);
         return res;
+    }, 
+    
+    async updatePlayerFilter(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        const filter = {...args};
+
+        delete filter.id
+
+        // Create the filter and return it
+        const res = await ctx.db.mutation.updatePlayerFilter({
+            data: {
+                ...filter
+            },
+            where: {
+                id: args.id
+            }
+        }, info);
+        return res;
     }
+
 };
 
 module.exports = mutations;
