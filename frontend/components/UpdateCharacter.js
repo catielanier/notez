@@ -7,8 +7,6 @@ import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 
-console.log("Dangerman was here xD");
-
 const UPDATE_CHARACTER_MUTATION = gql`
     mutation UPDATE_CHARACTER_MUTATION(
         $name: String!
@@ -140,7 +138,7 @@ class UpdateCharacter extends Component {
                                                         <Error error={error} />
                                                         {!error && !loading && called && <p>Character successfully updated.</p>}
                                                         <label htmlFor="id">
-                                                            Select Characer:
+                                                            Select Character:
                                                             <Select options={
                                                                 characters.map(character => {
                                                                     return {
@@ -148,8 +146,18 @@ class UpdateCharacter extends Component {
                                                                         value: character.id
                                                                     }
                                                                 })
-                                                            } name="id" onChange={(e) => {
+                                                            } name="id" onChange={async (e) => {
                                                                 const {value} = e;
+                                                                await this.setState({
+                                                                    name: '',
+                                                                    name_ja: '',
+                                                                    name_ko: '',
+                                                                    name_zh_CN: '',
+                                                                    name_zh_TW: '',
+                                                                    name_zh_HK: '',
+                                                                    games: [],
+                                                                    id: ''
+                                                                });
                                                                 characters.map(character => {
                                                                     if (character.id === value) {
                                                                         this.setState({

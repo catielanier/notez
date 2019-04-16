@@ -85,8 +85,17 @@ class UpdateGame extends Component {
                                         {!error && !loading && called && <p>Game updated.</p>}
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" onChange={(e) => {
+                                            <Select name="game" onChange={async (e) => {
                                                 const {value} = e;
+                                                await this.setState({
+                                                    name: '',
+                                                    name_ja: '',
+                                                    name_ko: '',
+                                                    name_zh_CN: '',
+                                                    name_zh_TW: '',
+                                                    name_zh_HK: '',
+                                                    id: ''
+                                                })
                                                 games.map(game => {
                                                     if (game.id === value) {
                                                         delete game.characters;
