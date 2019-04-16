@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Tue Apr 09 2019 01:50:34 GMT-0400 (Eastern Daylight Time)
+# timestamp: Tue Apr 16 2019 19:11:50 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!
@@ -1789,7 +1789,7 @@ input GameNoteCreateInput {
   you: CharacterCreateOneInput!
   filter: GameFilterCreateOneInput!
   game: GameCreateOneInput!
-  user: UserCreateManyWithoutGameNoteInput
+  user: UserCreateManyWithoutGameNotesInput
 }
 
 input GameNoteCreateManyWithoutUserInput {
@@ -1990,7 +1990,7 @@ input GameNoteUpdateInput {
   you: CharacterUpdateOneRequiredInput
   filter: GameFilterUpdateOneRequiredInput
   game: GameUpdateOneRequiredInput
-  user: UserUpdateManyWithoutGameNoteInput
+  user: UserUpdateManyWithoutGameNotesInput
 }
 
 input GameNoteUpdateManyDataInput {
@@ -4021,7 +4021,7 @@ type User implements Node {
   resetTokenExpiry: Float
   permissions: [Permission!]!
   playerNotes(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerNote!]
-  gameNote(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote!]
+  gameNotes(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote!]
 }
 
 """A connection to a list of items."""
@@ -4043,11 +4043,11 @@ input UserCreateInput {
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
   playerNotes: PlayerNoteCreateManyWithoutUserInput
-  gameNote: GameNoteCreateManyWithoutUserInput
+  gameNotes: GameNoteCreateManyWithoutUserInput
 }
 
-input UserCreateManyWithoutGameNoteInput {
-  create: [UserCreateWithoutGameNoteInput!]
+input UserCreateManyWithoutGameNotesInput {
+  create: [UserCreateWithoutGameNotesInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -4060,7 +4060,7 @@ input UserCreatepermissionsInput {
   set: [Permission!]
 }
 
-input UserCreateWithoutGameNoteInput {
+input UserCreateWithoutGameNotesInput {
   id: ID
   username: String!
   email: String!
@@ -4079,7 +4079,7 @@ input UserCreateWithoutPlayerNotesInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
-  gameNote: GameNoteCreateManyWithoutUserInput
+  gameNotes: GameNoteCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -4400,7 +4400,7 @@ input UserUpdateInput {
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
   playerNotes: PlayerNoteUpdateManyWithoutUserInput
-  gameNote: GameNoteUpdateManyWithoutUserInput
+  gameNotes: GameNoteUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyDataInput {
@@ -4421,16 +4421,16 @@ input UserUpdateManyMutationInput {
   permissions: UserUpdatepermissionsInput
 }
 
-input UserUpdateManyWithoutGameNoteInput {
-  create: [UserCreateWithoutGameNoteInput!]
+input UserUpdateManyWithoutGameNotesInput {
+  create: [UserCreateWithoutGameNotesInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutGameNoteInput!]
+  update: [UserUpdateWithWhereUniqueWithoutGameNotesInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]
   deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutGameNoteInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutGameNotesInput!]
 }
 
 input UserUpdateManyWithoutPlayerNotesInput {
@@ -4454,7 +4454,7 @@ input UserUpdatepermissionsInput {
   set: [Permission!]
 }
 
-input UserUpdateWithoutGameNoteDataInput {
+input UserUpdateWithoutGameNotesDataInput {
   username: String
   email: String
   password: String
@@ -4471,12 +4471,12 @@ input UserUpdateWithoutPlayerNotesDataInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
-  gameNote: GameNoteUpdateManyWithoutUserInput
+  gameNotes: GameNoteUpdateManyWithoutUserInput
 }
 
-input UserUpdateWithWhereUniqueWithoutGameNoteInput {
+input UserUpdateWithWhereUniqueWithoutGameNotesInput {
   where: UserWhereUniqueInput!
-  data: UserUpdateWithoutGameNoteDataInput!
+  data: UserUpdateWithoutGameNotesDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutPlayerNotesInput {
@@ -4484,10 +4484,10 @@ input UserUpdateWithWhereUniqueWithoutPlayerNotesInput {
   data: UserUpdateWithoutPlayerNotesDataInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutGameNoteInput {
+input UserUpsertWithWhereUniqueWithoutGameNotesInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateWithoutGameNoteDataInput!
-  create: UserCreateWithoutGameNoteInput!
+  update: UserUpdateWithoutGameNotesDataInput!
+  create: UserCreateWithoutGameNotesInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutPlayerNotesInput {
@@ -4730,9 +4730,9 @@ input UserWhereInput {
   playerNotes_every: PlayerNoteWhereInput
   playerNotes_some: PlayerNoteWhereInput
   playerNotes_none: PlayerNoteWhereInput
-  gameNote_every: GameNoteWhereInput
-  gameNote_some: GameNoteWhereInput
-  gameNote_none: GameNoteWhereInput
+  gameNotes_every: GameNoteWhereInput
+  gameNotes_some: GameNoteWhereInput
+  gameNotes_none: GameNoteWhereInput
 }
 
 input UserWhereUniqueInput {

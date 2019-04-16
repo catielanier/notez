@@ -18,7 +18,7 @@ type User {
   resetTokenExpiry: Float
   permissions: [Permission]
   playerNotes: [PlayerNote]!
-  gameNote: [GameNote]!
+  gameNotes: [GameNote]!
 }
 
 # Game needs a relationship to filters and characters, also needs fields for i18n.
