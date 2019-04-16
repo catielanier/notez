@@ -5,6 +5,7 @@ import User, { CURRENT_USER_QUERY } from './User';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const CREATE_CHARACTER_MUTATION = gql`
     mutation CREATE_CHARACTER_MUTATION(
@@ -136,7 +137,7 @@ class CreateCharacter extends Component {
                                         </label>
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" onChange={this.changeState} options={games.map((game) => {
+                                            <Select name="game" styles={ReactSelectStyles} onChange={this.changeState} options={games.map((game) => {
                                                 return {
                                                     label: game.name,
                                                     value: game.name

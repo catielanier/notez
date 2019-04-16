@@ -7,6 +7,7 @@ import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 import {Item} from './UpdateCharacter';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const UPDATE_GAME_FILTER_MUTATION = gql`
     mutation UPDATE_GAME_FILTER_MUTATION(
@@ -195,7 +196,7 @@ class UpdateGameFilters extends Component {
                                                                         });
                                                                     }
                                                                 });
-                                                            }} />
+                                                            }} styles={ReactSelectStyles} />
                                                         </label>
                                                         <label htmlFor="name">
                                                             Filter Name:
@@ -237,7 +238,7 @@ class UpdateGameFilters extends Component {
                                                                     label: game.name,
                                                                     value: game.id
                                                                 }
-                                                            })} />
+                                                            })} styles={ReactSelectStyles} />
                                                         </label>
                                                         <button type="submit">Update Filter</button>
                                                     </fieldset>

@@ -5,6 +5,7 @@ import User, { CURRENT_USER_QUERY } from './User';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const UPDATE_PLAYER_FILTER_MUTATION = gql`
     mutation UPDATE_PLAYER_FILTER_MUTATION(
@@ -127,7 +128,7 @@ class UpdatePlayerFilter extends Component {
                                                             });
                                                         }
                                                     });
-                                                }} />
+                                                }} styles={ReactSelectStyles} />
                                             </label>
                                             <label htmlFor="name">
                                                 Filter Name:

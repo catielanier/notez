@@ -7,6 +7,7 @@ import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 import styled from 'styled-components';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const UPDATE_CHARACTER_MUTATION = gql`
     mutation UPDATE_CHARACTER_MUTATION(
@@ -185,7 +186,7 @@ class UpdateCharacter extends Component {
                                                                         });
                                                                     }
                                                                 });
-                                                            }} />
+                                                            }} styles={ReactSelectStyles} />
                                                         </label>
                                                         <label htmlFor="name">
                                                             Character Name:
@@ -223,7 +224,7 @@ class UpdateCharacter extends Component {
                                                                     label: game.name,
                                                                     value: game.id
                                                                 }
-                                                            })} />
+                                                            })} styles={ReactSelectStyles} />
                                                         </label>
                                                         <button type="submit">Update Character</button>
                                                     </fieldset>

@@ -6,6 +6,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const UPDATE_GAME_MUTATION = gql`
     mutation UPDATE_GAME_MUTATION(
@@ -109,7 +110,7 @@ class UpdateGame extends Component {
                                                     label: game.name,
                                                     value: game.id
                                                 }
-                                            })} />
+                                            })} styles={ReactSelectStyles} />
                                         </label>
                                         <label htmlFor="name">
                                             Character Name:

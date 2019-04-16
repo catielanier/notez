@@ -6,6 +6,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
 import { ALL_GAMES_QUERY } from './CreateCharacter';
+import ReactSelectStyles from './styles/ReactSelectStyles';
 
 const CREATE_GAME_FILTER_MUTATION = gql`
     mutation CREATE_GAME_FILTER_MUTATION(
@@ -146,7 +147,7 @@ class CreateGameFilter extends Component {
                                         </label>
                                         <label htmlFor="game">
                                             Principal Game:
-                                            <Select name="game" isDisabled={this.state.isGlobal === true} onChange={this.changeState} options={games.map((game) => {
+                                            <Select name="game" isDisabled={this.state.isGlobal === true} onChange={this.changeState} styles={ReactSelectStyles} options={games.map((game) => {
                                                 return {
                                                     label: game.name,
                                                     value: game.name
