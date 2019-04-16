@@ -372,6 +372,7 @@ const mutations = {
 
         gameIds = [];
 
+        // format the games into an object format that will be accepted by the mutation.
         args.games.map(game => {
             gameIds.push({
                 id: game

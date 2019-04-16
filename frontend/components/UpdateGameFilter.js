@@ -7,10 +7,8 @@ import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 
-console.log("Dangerman was here xD");
-
-const UPDATE_CHARACTER_MUTATION = gql`
-    mutation UPDATE_CHARACTER_MUTATION(
+const UPDATE_GAME_FILTER_MUTATION = gql`
+    mutation UPDATE_GAME_FILTER_MUTATION(
         $name: String!
         $name_ja: String!
         $name_ko: String!
@@ -20,7 +18,7 @@ const UPDATE_CHARACTER_MUTATION = gql`
         $id: ID!
         $games: [ID]!
     ) {
-        updateCharacter(
+        updateGameFilter(
             name: $name
             name_ja: $name_ja
             name_ko: $name_ko
@@ -45,9 +43,9 @@ const UPDATE_CHARACTER_MUTATION = gql`
     }
 `;
 
-const ALL_CHARACTERS_QUERY = gql`
-    query ALL_CHARACTERS_QUERY {
-        characters(
+const ALL_GAME_FILTERS_QUERY = gql`
+    query ALL_GAME_FILTERS_QUERY {
+        gameFilters(
             orderBy: name_ASC
         ) {
             id
@@ -65,7 +63,7 @@ const ALL_CHARACTERS_QUERY = gql`
     }
 `
 
-class UpdateCharacter extends Component {
+class UpdateGameFilters extends Component {
     state = {
         name: '',
         name_ja: '',
@@ -102,13 +100,14 @@ class UpdateCharacter extends Component {
         return(
             <User>
                 {({data: {me}}) => (
-                    <Query query={ALL_CHARACTERS_QUERY}>
-                        {({data: {characters}}) => (
+                    <Query query={ALL_GAME_FILTERS_QUERY}>
+                        {({data: {gameFilters}}) => (
                             <Query query={ALL_GAMES_QUERY}>
                                 {({data: {games}}) => (
-                                    <Mutation mutation={UPDATE_CHARACTER_MUTATION} variables={this.state}>
-                                        {(updateCharacter, {loading, error, called}) => (
+                                    <Mutation mutation={UPDATE_GAME_FILTER_MUTATION} variables={this.state}>
+                                        {(updateGameFilter, {loading, error, called}) => (
                                             <>
+                                            {console.log(gameFilters)}
                                                 <h2>Update Characters</h2>
                                                 <Form method="post" onSubmit={async (e) => {                                              
                                                     e.preventDefault();
@@ -123,7 +122,7 @@ class UpdateCharacter extends Component {
                                                         games: gameIds
                                                     });
 
-                                                    const res = await updateCharacter();
+                                                    const res = await updateGameFilter();
                                                     console.log(res);
                                                     this.setState({
                                                         name: '',
@@ -136,7 +135,7 @@ class UpdateCharacter extends Component {
                                                         games: []
                                                     })
                                                 }}>
-                                                    <fieldset disabled={loading} aria-busy={loading}>
+                                                    {/* <fieldset disabled={loading} aria-busy={loading}>
                                                         <Error error={error} />
                                                         {!error && !loading && called && <p>Character successfully updated.</p>}
                                                         <label htmlFor="id">
@@ -199,7 +198,7 @@ class UpdateCharacter extends Component {
                                                             })} />
                                                         </label>
                                                         <button type="submit">Update Character</button>
-                                                    </fieldset>
+                                                    </fieldset> */}
                                                 </Form>
                                             </>
                                         )}
@@ -214,5 +213,5 @@ class UpdateCharacter extends Component {
     }
 }
 
-export default UpdateCharacter;
-export {ALL_CHARACTERS_QUERY};
+export default UpdateGameFilters;
+export {ALL_GAME_FILTERS_QUERY};
