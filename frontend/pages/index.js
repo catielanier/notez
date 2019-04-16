@@ -1,10 +1,11 @@
-
+import PleaseSignIn from '../components/PleaseSignIn';
+import Games from '../components/Games';
 import Link from 'next/link';
 
 const Home = props => (
-  <div>
-    <p>This is the start of the app.</p>
-  </div>
+  <PleaseSignIn>
+    <Games />
+  </PleaseSignIn>
 );
 
 export default Home;
