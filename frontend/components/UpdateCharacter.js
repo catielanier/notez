@@ -6,6 +6,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
+import styled from 'styled-components';
 
 const UPDATE_CHARACTER_MUTATION = gql`
     mutation UPDATE_CHARACTER_MUTATION(
@@ -61,7 +62,16 @@ const ALL_CHARACTERS_QUERY = gql`
             }
         }
     }
-`
+`;
+
+const Item = styled.span`
+    padding: 2px 5px;
+    background: ${props => props.theme.foreground};
+    margin: 0 10px;
+    a {
+        color: ${props => props.theme.background};
+    }
+`;
 
 class UpdateCharacter extends Component {
     state = {
@@ -94,6 +104,15 @@ class UpdateCharacter extends Component {
         this.setState({
             games
         });
+    }
+
+    deleteGame = (id) => {
+        const {games} = this.state
+        const index = games.findIndex(game => game.id === id);
+        games.splice(index, 1);
+        this.setState({
+            games
+        })
     }
 
     render() {
@@ -194,7 +213,7 @@ class UpdateCharacter extends Component {
                                                         </label>
                                                         <p>Current Game{this.state.games.length === 1 ? null : 's'}: {this.state.games.map(game => {
                                                             return (
-                                                                <span>{game.name} &nbsp;</span>
+                                                                <Item key={game.id}><a onClick={() => this.deleteGame(game.id)}>{game.name} &times;</a></Item>
                                                             )
                                                         })}</p>
                                                         <label htmlFor="game">
@@ -223,4 +242,4 @@ class UpdateCharacter extends Component {
 }
 
 export default UpdateCharacter;
-export {ALL_CHARACTERS_QUERY};
+export {ALL_CHARACTERS_QUERY, Item};

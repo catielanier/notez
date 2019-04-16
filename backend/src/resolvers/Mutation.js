@@ -393,6 +393,44 @@ const mutations = {
             }
         }, info);
         return res;
+    },
+
+    async updateGameFilter(parent, args, ctx, info) {
+        // Check if user is logged in.
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        // Grab the data
+        const updates = {...args};
+
+        // Remove the ID and games
+        delete updates.id;
+        delete updates.games;
+
+        gameIds = [];
+
+        // format the games into an object format that will be accepted by the mutation.
+        args.games.map(game => {
+            gameIds.push({
+                id: game
+            });
+        })
+        
+
+        // Update the data
+        const res = await ctx.db.mutation.updateGameFilter({
+            data: {
+                ...updates,
+                games: {
+                    connect: gameIds
+                }
+            },
+            where: {
+                id: args.id
+            }
+        }, info);
+        return res;
     }
 };
 

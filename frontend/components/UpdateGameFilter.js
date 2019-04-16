@@ -6,15 +6,16 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Select from 'react-select';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
+import {Item} from './UpdateCharacter';
 
 const UPDATE_GAME_FILTER_MUTATION = gql`
     mutation UPDATE_GAME_FILTER_MUTATION(
         $name: String!
-        $name_ja: String!
-        $name_ko: String!
-        $name_zh_CN: String!
-        $name_zh_TW: String!
-        $name_zh_HK: String!
+        $name_ja: String
+        $name_ko: String
+        $name_zh_CN: String
+        $name_zh_TW: String
+        $name_zh_HK: String
         $id: ID!
         $games: [ID]!
         $isGlobal: Boolean!
@@ -111,6 +112,15 @@ class UpdateGameFilters extends Component {
         this.setState({
             games
         });
+    }
+
+    deleteGame = (id) => {
+        const {games} = this.state
+        const index = games.findIndex(game => game.id === id);
+        games.splice(index, 1);
+        this.setState({
+            games
+        })
     }
 
     render() {
@@ -217,7 +227,7 @@ class UpdateGameFilters extends Component {
                                                         </label>
                                                         <p>Current Game{this.state.games.length === 1 ? null : 's'}: {this.state.games.map(game => {
                                                             return (
-                                                                <span>{game.name} &nbsp;</span>
+                                                                <Item><a onClick={() => this.deleteGame(game.id)}>{game.name} &times;</a></Item>
                                                             )
                                                         })}</p>
                                                         <label htmlFor="game">
