@@ -72,8 +72,7 @@ class UpdateCharacter extends Component {
         name_zh_TW: '',
         name_zh_HK: '',
         games: [],
-        id: '',
-        gameFull: []
+        id: ''
     }
 
     changeState = (e, a) => {
@@ -85,7 +84,7 @@ class UpdateCharacter extends Component {
     }
 
     addGame = (e, a) => {
-        const games = this.state.gameFull
+        const {games} = this.state;
         const newGame = {
             id: e.value,
             name: e.label
@@ -111,15 +110,16 @@ class UpdateCharacter extends Component {
                                             <h2>Update Characters</h2>
                                             <Form method="post" onSubmit={async (e) => {                                              
                                                 e.preventDefault();
-                                                const unfilteredGames = this.state.gameFull;
-                                                const games = [];
-                                                unfilteredGames.map(game => {
-                                                    games.push(game.id)
+                                                const gameIds = [];
+                                                this.state.games.map(game => {
+                                                    delete game.name
+                                                    delete game.__typename
+                                                    gameIds.push(game.id);
                                                 });
+                                                console.log(this.state.games);
                                                 await this.setState({
-                                                    games
-                                                })
-                                                delete this.state.gameFull;
+                                                    games: gameIds
+                                                });
                                                 console.log(this.state.games);
                                                 const res = await updateCharacter();
                                                 console.log(res);
@@ -131,8 +131,7 @@ class UpdateCharacter extends Component {
                                                     name_zh_TW: '',
                                                     name_zh_HK: '',
                                                     id: '',
-                                                    games: [],
-                                                    gameFull: []
+                                                    games: []
                                                 })
                                             }}>
                                                 <fieldset disabled={loading} aria-busy={loading}>
@@ -153,8 +152,7 @@ class UpdateCharacter extends Component {
                                                                 if (character.id === value) {
                                                                     this.setState({
                                                                         ...character,
-                                                                        gameFull: character.games,
-                                                                        games: ''
+                                                                        games: character.games
                                                                     });
                                                                 }
                                                             });
@@ -184,13 +182,13 @@ class UpdateCharacter extends Component {
                                                         廣東話名字：
                                                         <input type="text" name="name_zh_HK" value={this.state.name_zh_HK} onChange={this.changeState} placeholder="角色名字" />
                                                     </label>
-                                                    <p>Current Game{this.state.gameFull !== undefined && this.state.gameFull.length === 1 ? null : 's'}: {this.state.gameFull !== undefined && this.state.gameFull.map(game => {
+                                                    <p>Current Game{this.state.games.length === 1 ? null : 's'}: {this.state.games.map(game => {
                                                         return (
                                                             <span>{game.name} &nbsp;</span>
                                                         )
                                                     })}</p>
                                                     <label htmlFor="game">
-                                                        Principal Game:
+                                                        Add Game:
                                                         <Select name="game" onChange={this.addGame} options={games.map((game) => {
                                                             return {
                                                                 label: game.name,

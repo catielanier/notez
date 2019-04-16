@@ -370,13 +370,14 @@ const mutations = {
         delete updates.id;
         delete updates.games;
 
-        const gameIds = [];
+        gameIds = [];
 
         args.games.map(game => {
-            gameIds.push({id: game});
-        });
-
-        console.log(gameIds);
+            gameIds.push({
+                id: game
+            });
+        })
+        
 
         // Update the data
         const res = await ctx.db.mutation.updateCharacter({
