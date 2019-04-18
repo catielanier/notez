@@ -42,11 +42,21 @@ class Games extends Component {
                         </label>
                         <label htmlFor="yourCharacter">
                             Your Character:
-                            <Select name="yourCharacter" styles={ReactSelectStyles} />
+                            <Select name="yourCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                return {
+                                    label: character.name,
+                                    value: character.id
+                                }
+                            })}/>
                         </label>
                         <label htmlFor="oppCharacter">
                             Opponent's Character:
-                            <Select name="oppCharacter" styles={ReactSelectStyles} />
+                            <Select name="oppCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                return {
+                                    label: character.name,
+                                    value: character.id
+                                }
+                            })}/>
                         </label>
                         <label htmlFor="filter">
                             Filter By:
