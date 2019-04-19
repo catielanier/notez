@@ -17,6 +17,14 @@ class Games extends Component {
         filters: []
     }
 
+    changeState = (e, a) => {
+        const {value} = e;
+        const {name} = a;
+        this.setState({
+            [name]: value
+        });
+    }
+
     render() {
         return(
             <Query query={ALL_GAMES_QUERY}>
@@ -67,7 +75,7 @@ class Games extends Component {
                                             label: character.name,
                                             value: character.id
                                         }
-                                    })}/>
+                                    })} onChange={this.changeState} />
                                 </label>
                                 <label htmlFor="oppCharacter">
                                     Opponent's Character:
@@ -76,7 +84,7 @@ class Games extends Component {
                                             label: character.name,
                                             value: character.id
                                         }
-                                    })}/>
+                                    })} onChange={this.changeState} />
                                 </label>
                                 <label htmlFor="filter">
                                     Filter By:
@@ -85,7 +93,7 @@ class Games extends Component {
                                             label: filter.name,
                                             value: filter.id
                                         }
-                                    })} />
+                                    })} onChange={this.changeState} />
                                 </label>
                             </>
                         )}
