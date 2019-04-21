@@ -15,6 +15,31 @@ const Columns = styled.div`
     grid-gap: 20px;
 `;
 
+const CREATE_GAME_NOTE_MUTATION = gql`
+    mutation CREATE_GAME_NOTE_MUTATION(
+        $game: ID!
+        $yourCharacter: ID!
+        $oppCharacter: ID!
+        $filter: ID!
+        $note: String!
+    ) {
+        createGameNote(
+            game: $game
+            yourCharacter: $yourCharacter
+            oppCharacter: $oppCharacter
+            filter: $filter
+            note: $note
+        ) {
+            id
+            game
+            yourCharacter
+            oppCharacter
+            filter
+            note
+        }
+    }
+`
+
 class Games extends Component {
     state = {
         game: '',
