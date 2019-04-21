@@ -230,12 +230,13 @@ const mutations = {
     // Create a character
     async createCharacter(parent, args, ctx, info) {
         // Check if user is logged in.
-        if (!ctx.request.userId) {
-            throw new Error('You must be logged in');
-        }
+        // if (!ctx.request.userId) {
+        //     throw new Error('You must be logged in');
+        // }
         // Get the arguments
         const character = {...args};
         const game = args.game
+        console.log(character);
         delete character.game;
         const newCharacter = await ctx.db.mutation.createCharacter({
             data: {

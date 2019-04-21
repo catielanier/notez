@@ -91,7 +91,7 @@ class CreateCharacter extends Component {
                 {({data: {me}}) => (
                     <Query query={ALL_GAMES_QUERY}>
                     {({data: {games}}) => (
-                        <Mutation mutation={CREATE_CHARACTER_MUTATION} variables={this.state}>
+                        <Mutation mutation={CREATE_CHARACTER_MUTATION} variables={this.state} refetchQueries={ALL_GAMES_QUERY}>
                         {(createCharacter, {loading, error, called}) => (
                             <>
                                 <h2>Add New Characters</h2>
