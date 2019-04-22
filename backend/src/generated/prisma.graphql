@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/corey-lanier/notez/dev
-# timestamp: Tue Apr 16 2019 19:11:50 GMT-0400 (Eastern Daylight Time)
+# timestamp: Mon Apr 22 2019 17:12:50 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCharacter {
   count: Int!
@@ -43,6 +43,8 @@ type Character implements Node {
   name_zh_TW: String
   name_zh_HK: String
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -124,6 +126,8 @@ type CharacterPreviousValues {
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input CharacterScalarWhereInput {
@@ -415,6 +419,50 @@ input CharacterScalarWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type CharacterSubscriptionPayload {
@@ -832,6 +880,50 @@ input CharacterWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
@@ -839,12 +931,6 @@ input CharacterWhereInput {
 
 input CharacterWhereUniqueInput {
   id: ID
-  name: String
-  name_ja: String
-  name_ko: String
-  name_zh_CN: String
-  name_zh_TW: String
-  name_zh_HK: String
 }
 
 scalar DateTime
@@ -859,6 +945,8 @@ type Game implements Node {
   name_zh_HK: String
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character!]
   filters(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameFilter!]
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -939,6 +1027,8 @@ type GameFilter implements Node {
   name_zh_TW: String
   name_zh_HK: String
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1025,6 +1115,8 @@ type GameFilterPreviousValues {
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input GameFilterScalarWhereInput {
@@ -1320,6 +1412,50 @@ input GameFilterScalarWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type GameFilterSubscriptionPayload {
@@ -1746,6 +1882,50 @@ input GameFilterWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
@@ -1769,6 +1949,7 @@ type GameNote implements Node {
   note: String!
   game: Game!
   user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  updatedAt: DateTime!
   createdAt: DateTime!
 }
 
@@ -1820,15 +2001,16 @@ enum GameNoteOrderByInput {
   id_DESC
   note_ASC
   note_DESC
-  createdAt_ASC
-  createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type GameNotePreviousValues {
   id: ID!
   note: String!
+  updatedAt: DateTime!
   createdAt: DateTime!
 }
 
@@ -1921,6 +2103,28 @@ input GameNoteScalarWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -2126,6 +2330,28 @@ input GameNoteWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -2190,6 +2416,8 @@ type GamePreviousValues {
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input GameScalarWhereInput {
@@ -2481,6 +2709,50 @@ input GameScalarWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type GameSubscriptionPayload {
@@ -2934,6 +3206,50 @@ input GameWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   characters_every: CharacterWhereInput
   characters_some: CharacterWhereInput
   characters_none: CharacterWhereInput
@@ -2962,43 +3278,43 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createGameNote(data: GameNoteCreateInput!): GameNote!
   createPlayerNote(data: PlayerNoteCreateInput!): PlayerNote!
-  createGameFilter(data: GameFilterCreateInput!): GameFilter!
   createPlayerFilter(data: PlayerFilterCreateInput!): PlayerFilter!
+  createGameFilter(data: GameFilterCreateInput!): GameFilter!
   createGame(data: GameCreateInput!): Game!
   createCharacter(data: CharacterCreateInput!): Character!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateGameNote(data: GameNoteUpdateInput!, where: GameNoteWhereUniqueInput!): GameNote
   updatePlayerNote(data: PlayerNoteUpdateInput!, where: PlayerNoteWhereUniqueInput!): PlayerNote
-  updateGameFilter(data: GameFilterUpdateInput!, where: GameFilterWhereUniqueInput!): GameFilter
   updatePlayerFilter(data: PlayerFilterUpdateInput!, where: PlayerFilterWhereUniqueInput!): PlayerFilter
+  updateGameFilter(data: GameFilterUpdateInput!, where: GameFilterWhereUniqueInput!): GameFilter
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
   updateCharacter(data: CharacterUpdateInput!, where: CharacterWhereUniqueInput!): Character
   deleteUser(where: UserWhereUniqueInput!): User
   deleteGameNote(where: GameNoteWhereUniqueInput!): GameNote
   deletePlayerNote(where: PlayerNoteWhereUniqueInput!): PlayerNote
-  deleteGameFilter(where: GameFilterWhereUniqueInput!): GameFilter
   deletePlayerFilter(where: PlayerFilterWhereUniqueInput!): PlayerFilter
+  deleteGameFilter(where: GameFilterWhereUniqueInput!): GameFilter
   deleteGame(where: GameWhereUniqueInput!): Game
   deleteCharacter(where: CharacterWhereUniqueInput!): Character
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertGameNote(where: GameNoteWhereUniqueInput!, create: GameNoteCreateInput!, update: GameNoteUpdateInput!): GameNote!
   upsertPlayerNote(where: PlayerNoteWhereUniqueInput!, create: PlayerNoteCreateInput!, update: PlayerNoteUpdateInput!): PlayerNote!
-  upsertGameFilter(where: GameFilterWhereUniqueInput!, create: GameFilterCreateInput!, update: GameFilterUpdateInput!): GameFilter!
   upsertPlayerFilter(where: PlayerFilterWhereUniqueInput!, create: PlayerFilterCreateInput!, update: PlayerFilterUpdateInput!): PlayerFilter!
+  upsertGameFilter(where: GameFilterWhereUniqueInput!, create: GameFilterCreateInput!, update: GameFilterUpdateInput!): GameFilter!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
   upsertCharacter(where: CharacterWhereUniqueInput!, create: CharacterCreateInput!, update: CharacterUpdateInput!): Character!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyGameNotes(data: GameNoteUpdateManyMutationInput!, where: GameNoteWhereInput): BatchPayload!
   updateManyPlayerNotes(data: PlayerNoteUpdateManyMutationInput!, where: PlayerNoteWhereInput): BatchPayload!
-  updateManyGameFilters(data: GameFilterUpdateManyMutationInput!, where: GameFilterWhereInput): BatchPayload!
   updateManyPlayerFilters(data: PlayerFilterUpdateManyMutationInput!, where: PlayerFilterWhereInput): BatchPayload!
+  updateManyGameFilters(data: GameFilterUpdateManyMutationInput!, where: GameFilterWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
   updateManyCharacters(data: CharacterUpdateManyMutationInput!, where: CharacterWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyGameNotes(where: GameNoteWhereInput): BatchPayload!
   deleteManyPlayerNotes(where: PlayerNoteWhereInput): BatchPayload!
-  deleteManyGameFilters(where: GameFilterWhereInput): BatchPayload!
   deleteManyPlayerFilters(where: PlayerFilterWhereInput): BatchPayload!
+  deleteManyGameFilters(where: GameFilterWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
   deleteManyCharacters(where: CharacterWhereInput): BatchPayload!
 }
@@ -3048,6 +3364,8 @@ type PlayerFilter implements Node {
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -3113,6 +3431,8 @@ type PlayerFilterPreviousValues {
   name_zh_CN: String
   name_zh_TW: String
   name_zh_HK: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type PlayerFilterSubscriptionPayload {
@@ -3482,6 +3802,50 @@ input PlayerFilterWhereInput {
 
   """All values not ending with the given string."""
   name_zh_HK_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 input PlayerFilterWhereUniqueInput {
@@ -3501,6 +3865,7 @@ type PlayerNote implements Node {
   filter: PlayerFilter!
   note: String!
   user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  updatedAt: DateTime!
   createdAt: DateTime!
 }
 
@@ -3552,16 +3917,17 @@ enum PlayerNoteOrderByInput {
   opponent_DESC
   note_ASC
   note_DESC
-  createdAt_ASC
-  createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type PlayerNotePreviousValues {
   id: ID!
   opponent: String
   note: String!
+  updatedAt: DateTime!
   createdAt: DateTime!
 }
 
@@ -3694,6 +4060,28 @@ input PlayerNoteScalarWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3939,6 +4327,28 @@ input PlayerNoteWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3976,22 +4386,22 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   gameNotes(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote]!
   playerNotes(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerNote]!
-  gameFilters(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameFilter]!
   playerFilters(where: PlayerFilterWhereInput, orderBy: PlayerFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerFilter]!
+  gameFilters(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameFilter]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   characters(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Character]!
   user(where: UserWhereUniqueInput!): User
   gameNote(where: GameNoteWhereUniqueInput!): GameNote
   playerNote(where: PlayerNoteWhereUniqueInput!): PlayerNote
-  gameFilter(where: GameFilterWhereUniqueInput!): GameFilter
   playerFilter(where: PlayerFilterWhereUniqueInput!): PlayerFilter
+  gameFilter(where: GameFilterWhereUniqueInput!): GameFilter
   game(where: GameWhereUniqueInput!): Game
   character(where: CharacterWhereUniqueInput!): Character
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   gameNotesConnection(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameNoteConnection!
   playerNotesConnection(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlayerNoteConnection!
-  gameFiltersConnection(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameFilterConnection!
   playerFiltersConnection(where: PlayerFilterWhereInput, orderBy: PlayerFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlayerFilterConnection!
+  gameFiltersConnection(where: GameFilterWhereInput, orderBy: GameFilterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameFilterConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
   charactersConnection(where: CharacterWhereInput, orderBy: CharacterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CharacterConnection!
 
@@ -4006,8 +4416,8 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   gameNote(where: GameNoteSubscriptionWhereInput): GameNoteSubscriptionPayload
   playerNote(where: PlayerNoteSubscriptionWhereInput): PlayerNoteSubscriptionPayload
-  gameFilter(where: GameFilterSubscriptionWhereInput): GameFilterSubscriptionPayload
   playerFilter(where: PlayerFilterSubscriptionWhereInput): PlayerFilterSubscriptionPayload
+  gameFilter(where: GameFilterSubscriptionWhereInput): GameFilterSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
   character(where: CharacterSubscriptionWhereInput): CharacterSubscriptionPayload
 }
@@ -4022,6 +4432,8 @@ type User implements Node {
   permissions: [Permission!]!
   playerNotes(where: PlayerNoteWhereInput, orderBy: PlayerNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayerNote!]
   gameNotes(where: GameNoteWhereInput, orderBy: GameNoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GameNote!]
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -4118,6 +4530,8 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input UserScalarWhereInput {
@@ -4351,6 +4765,50 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type UserSubscriptionPayload {
@@ -4727,6 +5185,50 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   playerNotes_every: PlayerNoteWhereInput
   playerNotes_some: PlayerNoteWhereInput
   playerNotes_none: PlayerNoteWhereInput
