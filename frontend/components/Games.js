@@ -7,7 +7,8 @@ import Select from 'react-select';
 import ReactSelectStyles from './styles/ReactSelectStyles';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 import {ALL_GAME_FILTERS_QUERY} from './UpdateGameFilter';
-import Form from './styles/Form'
+import Form from './styles/Form';
+import { create } from 'domain';
 
 const Columns = styled.div`
     display: grid;
@@ -38,7 +39,7 @@ const CREATE_GAME_NOTE_MUTATION = gql`
             note
         }
     }
-`
+`;
 
 class Games extends Component {
     state = {
@@ -66,96 +67,113 @@ class Games extends Component {
                 {({data: {games}}) => (
                     <Query query={ALL_GAME_FILTERS_QUERY}>
                         {({data: {gameFilters}}) => (
-                            <Columns>
-                                <div>
-                                    <h2>Game Notes</h2>
-                                    <label htmlFor="game">
-                                        Select your game:
-                                        <Select name="game" styles={ReactSelectStyles} options={games.map((game) => {
-                                            return {
-                                                label: game.name,
-                                                value: game.id
-                                            }
-                                        })} onChange={(e) => {
-                                            const {value} = e;
-                                            games.map(async game => {
-                                                if (game.id === value) {
-                                                    await this.setState({
-                                                        game: value,
-                                                        characters: game.characters
-                                                    });
-                                                }
-                                            });
-                                            
-                                            const filters = [];
-                                            gameFilters.map(async filter => {
-                                                if (filter.isGlobal === true) {
-                                                    filters.push(filter)
-                                                }
-                                                
-                                                filter.games.map(game => {
-                                                    if (game.id === value) {
-                                                        filters.push(filter);
+                            <Mutation mutation={CREATE_GAME_NOTE_MUTATION} variables={{
+                                game: this.state.game,
+                                yourCharacter: this.state.yourCharacter,
+                                oppCharacter: this.state.oppCharacter,
+                                filter: this.state.addFilter,
+                                note: this.state.note
+                            }}>
+                                {(createGameNote, {loading, error, called}) => (
+                                    <Columns>
+                                        <div>
+                                            <h2>Game Notes</h2>
+                                            <label htmlFor="game">
+                                                Select your game:
+                                                <Select name="game" styles={ReactSelectStyles} options={games.map((game) => {
+                                                    return {
+                                                        label: game.name,
+                                                        value: game.id
                                                     }
-                                                });
-                                            });
-                                            this.setState({
-                                                filters
-                                            });
-                                        }} />
-                                    </label>
-                                    <label htmlFor="yourCharacter">
-                                        Your Character:
-                                        <Select name="yourCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
-                                            return {
-                                                label: character.name,
-                                                value: character.id
-                                            }
-                                        })} onChange={this.changeState} />
-                                    </label>
-                                    <label htmlFor="oppCharacter">
-                                        Opponent's Character:
-                                        <Select name="oppCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
-                                            return {
-                                                label: character.name,
-                                                value: character.id
-                                            }
-                                        })} onChange={this.changeState} />
-                                    </label>
-                                    <label htmlFor="filter">
-                                        Filter By:
-                                        <Select name="filter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                            return {
-                                                label: filter.name,
-                                                value: filter.id
-                                            }
-                                        })} onChange={this.changeState} />
-                                    </label>
-                                </div>
-                                <div>
-                                    {this.state.game !== '' && this.state.yourCharacter !== '' && this.state.oppCharacter !== '' && (
-                                        <Form>
-                                            <fieldset>
-                                                <h3>Add New Note:</h3>
-                                                <label htmlFor="addFilter">
-                                                    Note Filter:
-                                                    <Select name="addFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                                        return {
-                                                            label: filter.name,
-                                                            value: filter.id
+                                                })} onChange={(e) => {
+                                                    const {value} = e;
+                                                    games.map(async game => {
+                                                        if (game.id === value) {
+                                                            await this.setState({
+                                                                game: value,
+                                                                characters: game.characters
+                                                            });
                                                         }
-                                                    })} onChange={this.changeState} placeholder="New note filter" />
-                                                </label>
-                                                <label htmlFor="note">
-                                                    Note Text:
-                                                    <textarea name="note" value={this.state.note} onChange={this.changeState} placeholder="Write your note text here." />
-                                                </label>
-                                                <button type="submit">Add Note</button>
-                                            </fieldset>
-                                        </Form>
-                                    )}
-                                </div>
-                            </Columns>
+                                                    });
+                                                    
+                                                    const filters = [];
+                                                    gameFilters.map(async filter => {
+                                                        if (filter.isGlobal === true) {
+                                                            filters.push(filter)
+                                                        }
+                                                        
+                                                        filter.games.map(game => {
+                                                            if (game.id === value) {
+                                                                filters.push(filter);
+                                                            }
+                                                        });
+                                                    });
+                                                    this.setState({
+                                                        filters
+                                                    });
+                                                }} />
+                                            </label>
+                                            <label htmlFor="yourCharacter">
+                                                Your Character:
+                                                <Select name="yourCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                                    return {
+                                                        label: character.name,
+                                                        value: character.id
+                                                    }
+                                                })} onChange={this.changeState} />
+                                            </label>
+                                            <label htmlFor="oppCharacter">
+                                                Opponent's Character:
+                                                <Select name="oppCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                                    return {
+                                                        label: character.name,
+                                                        value: character.id
+                                                    }
+                                                })} onChange={this.changeState} />
+                                            </label>
+                                            <label htmlFor="filter">
+                                                Filter By:
+                                                <Select name="filter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
+                                                    return {
+                                                        label: filter.name,
+                                                        value: filter.id
+                                                    }
+                                                })} onChange={this.changeState} />
+                                            </label>
+                                        </div>
+                                        <div>
+                                            {this.state.game !== '' && this.state.yourCharacter !== '' && this.state.oppCharacter !== '' && (
+                                                <Form method="post" onSubmit={async (e) => {
+                                                    e.preventDefault();
+                                                    const res = await createGameNote();
+                                                    console.log(res);
+                                                    this.setState({
+                                                        note: ''
+                                                    });
+                                                }}>
+                                                    <fieldset>
+                                                        <h3>Add New Note:</h3>
+                                                        <label htmlFor="addFilter">
+                                                            Note Filter:
+                                                            <Select name="addFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
+                                                                return {
+                                                                    label: filter.name,
+                                                                    value: filter.id
+                                                                }
+                                                            })} onChange={this.changeState} placeholder="New note filter" />
+                                                        </label>
+                                                        <label htmlFor="note">
+                                                            Note Text:
+                                                            <textarea name="note" value={this.state.note} onChange={this.changeState} placeholder="Write your note text here." />
+                                                        </label>
+                                                        <button type="submit">Add Note</button>
+                                                    </fieldset>
+                                                </Form>
+                                            )}
+                                        </div>
+                                    </Columns>
+                                )}
+                            </Mutation>
                         )}
                     </Query>
                 )}
