@@ -463,7 +463,40 @@ const mutations = {
         // grab the note from the frontend
         const note = {...args};
 
-        console.log(note);
+        console.log(note, ctx.request.userId);
+
+        // create the note
+        const res = await ctx.db.mutation.createGameNote({
+            data: {
+                user: {
+                    connect: {
+                        id: ctx.request.userId
+                    }
+                },
+                game: {
+                    connect: {
+                        id: note.game
+                    }
+                },
+                you: {
+                    connect: {
+                        id: note.you
+                    }
+                },
+                opponent: {
+                    connect: {
+                        id: note.opponent
+                    }
+                },
+                filter: {
+                    connect: {
+                        id: note.filter
+                    }
+                },
+                note: note.note
+            }
+        }, info);
+        return res;
     }
 };
 

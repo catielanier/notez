@@ -8,6 +8,7 @@ import ReactSelectStyles from './styles/ReactSelectStyles';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 import {ALL_GAME_FILTERS_QUERY} from './UpdateGameFilter';
 import Form from './styles/Form';
+import Error from './ErrorMessage';
 import { create } from 'domain';
 
 const Columns = styled.div`
@@ -163,7 +164,9 @@ class Games extends Component {
                                                         note: ''
                                                     });
                                                 }}>
-                                                    <fieldset>
+                                                    <fieldset disabled={loading} aria-busy={loading}>
+                                                        <Error error={error} />
+                                                        {!error && !loading && called && <p>Successfully added to notes.</p>}
                                                         <h3>Add New Note:</h3>
                                                         <label htmlFor="addFilter">
                                                             Note Filter:
