@@ -87,11 +87,12 @@ type Mutation {
     ): PlayerFilter!
 
     createGameNote(
-        name: String!
-        you: String!
-        opponent: String!
-        filter: String!
+        game: ID!
+        you: ID!
+        opponent: ID!
+        filter: ID!
         note: String!
+        user: ID
     ): GameNote!
 
     createPlayerNote(

@@ -19,24 +19,35 @@ const Columns = styled.div`
 const CREATE_GAME_NOTE_MUTATION = gql`
     mutation CREATE_GAME_NOTE_MUTATION(
         $game: ID!
-        $yourCharacter: ID!
-        $oppCharacter: ID!
+        $you: ID!
+        $opponent: ID!
         $filter: ID!
         $note: String!
     ) {
         createGameNote(
             game: $game
-            yourCharacter: $yourCharacter
-            oppCharacter: $oppCharacter
+            you: $you
+            opponent: $opponent
             filter: $filter
             note: $note
         ) {
             id
-            game
-            yourCharacter
-            oppCharacter
-            filter
+            game {
+                id
+            }
+            you {
+                id
+            }
+            opponent {
+                id
+            }
+            filter {
+                id
+            }
             note
+            user {
+                id
+            }
         }
     }
 `;
@@ -44,8 +55,8 @@ const CREATE_GAME_NOTE_MUTATION = gql`
 class Games extends Component {
     state = {
         game: '',
-        yourCharacter: '',
-        oppCharacter: '',
+        you: '',
+        opponent: '',
         filter: '',
         characters: [],
         filters: [],
@@ -54,8 +65,9 @@ class Games extends Component {
     }
 
     changeState = (e, a) => {
-        const {value} = e;
-        const {name} = a;
+        const {value} = e.target || e;
+        const {name} = a || e.target;
+        console.log(name, value);
         this.setState({
             [name]: value
         });
@@ -69,8 +81,8 @@ class Games extends Component {
                         {({data: {gameFilters}}) => (
                             <Mutation mutation={CREATE_GAME_NOTE_MUTATION} variables={{
                                 game: this.state.game,
-                                yourCharacter: this.state.yourCharacter,
-                                oppCharacter: this.state.oppCharacter,
+                                you: this.state.you,
+                                opponent: this.state.opponent,
                                 filter: this.state.addFilter,
                                 note: this.state.note
                             }}>
@@ -113,18 +125,18 @@ class Games extends Component {
                                                     });
                                                 }} />
                                             </label>
-                                            <label htmlFor="yourCharacter">
+                                            <label htmlFor="you">
                                                 Your Character:
-                                                <Select name="yourCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                                <Select name="you" styles={ReactSelectStyles} options={this.state.characters.map(character => {
                                                     return {
                                                         label: character.name,
                                                         value: character.id
                                                     }
                                                 })} onChange={this.changeState} />
                                             </label>
-                                            <label htmlFor="oppCharacter">
+                                            <label htmlFor="opponent">
                                                 Opponent's Character:
-                                                <Select name="oppCharacter" styles={ReactSelectStyles} options={this.state.characters.map(character => {
+                                                <Select name="opponent" styles={ReactSelectStyles} options={this.state.characters.map(character => {
                                                     return {
                                                         label: character.name,
                                                         value: character.id

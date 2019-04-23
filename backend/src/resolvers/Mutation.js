@@ -454,8 +454,17 @@ const mutations = {
             }
         }, info);
         return res;
-    }
+    },
 
+    async createGameNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+        // grab the note from the frontend
+        const note = {...args};
+
+        console.log(note);
+    }
 };
 
 module.exports = mutations;
