@@ -15,6 +15,15 @@ const Columns = styled.div`
     grid-gap: 20px;
 `;
 
+const NoteList = styled.div`
+    display: grid;
+    grid-template-columns: 12% 80% 8%;
+
+    .filter {
+        color: ${props => props.theme.action};
+    }
+`;
+
 const USER_NOTES_QUERY = gql`
     query USER_NOTES_QUERY {
         me{
@@ -181,6 +190,7 @@ class Games extends Component {
                                                     </label>
                                                 </div>
                                                 <div>
+                                                    
                                                     {this.state.game !== '' && this.state.yourCharacter !== '' && this.state.oppCharacter !== '' && (
                                                         <Form method="post" onSubmit={async (e) => {
                                                             e.preventDefault();
@@ -226,4 +236,4 @@ class Games extends Component {
 }
 
 export default Games;
-export {USER_NOTES_QUERY};
+export {USER_NOTES_QUERY, Columns, NoteList};
