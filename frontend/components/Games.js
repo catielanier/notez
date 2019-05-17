@@ -32,15 +32,19 @@ const USER_NOTES_QUERY = gql`
                 id
                 game {
                     id
+                    name
                 }
                 you {
                     id
+                    name
                 }
                 opponent {
                     id
+                    name
                 }
                 filter {
                     id
+                    name
                 }
                 note
                 createdAt
@@ -190,40 +194,55 @@ class Games extends Component {
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    
-                                                    {this.state.game !== '' && this.state.yourCharacter !== '' && this.state.oppCharacter !== '' && (
-                                                        <Form method="post" onSubmit={async (e) => {
-                                                            e.preventDefault();
-                                                            const res = await createGameNote();
-                                                            console.log(res);
-                                                            this.setState({
-                                                                note: ''
-                                                            });
-                                                        }}>
-                                                            <fieldset disabled={loading} aria-busy={loading}>
-                                                                <Error error={error} />
-                                                                {!error && !loading && called && <p>Successfully added to notes.</p>}
-                                                                <h3>Add New Note:</h3>
-                                                                <label htmlFor="addFilter">
-                                                                    Note Filter:
-                                                                    <Select name="addFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                                                        return {
-                                                                            label: filter.name,
-                                                                            value: filter.id
-                                                                        }
-                                                                    })} onChange={this.changeState} placeholder="New note filter" />
-                                                                </label>
-                                                                <label htmlFor="note">
-                                                                    Note Text:
-                                                                    <textarea name="note" value={this.state.note} onChange={this.changeState} placeholder="Write your note text here." />
-                                                                </label>
-                                                                <button type="submit">Add Note</button>
-                                                            </fieldset>
-                                                        </Form>
+                                                    <NoteList>
+                                                        {gameNotes.map(note => {
+                                                            {note.game.id === this.state.game && note.you.id === this.state.you && note.opponent.id === this.state.opponent ? 
+                                                                <>
+                                                                    {console.log(note.note)}
+                                                                    <div className="filter" key={note.id}>{note.filter.name}</div>
+                                                                    <div>{note.note}</div>
+                                                                    <div>Edit Delete</div>
+                                                                </>
+                                                                :
+                                                                null
+                                                            }
+                                                        })}
+                                                    </NoteList>
+                                                    {this.state.game !== '' && this.state.you !== '' && this.state.opponent !== '' && (
+                                                        <>
+                                                            <Form method="post" onSubmit={async (e) => {
+                                                                e.preventDefault();
+                                                                const res = await createGameNote();
+                                                                console.log(res);
+                                                                this.setState({
+                                                                    note: ''
+                                                                });
+                                                            }}>
+                                                                <fieldset disabled={loading} aria-busy={loading}>
+                                                                    <Error error={error} />
+                                                                    {!error && !loading && called && <p>Successfully added to notes.</p>}
+                                                                    <h3>Add New Note:</h3>
+                                                                    <label htmlFor="addFilter">
+                                                                        Note Filter:
+                                                                        <Select name="addFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
+                                                                            return {
+                                                                                label: filter.name,
+                                                                                value: filter.id
+                                                                            }
+                                                                        })} onChange={this.changeState} placeholder="New note filter" />
+                                                                    </label>
+                                                                    <label htmlFor="note">
+                                                                        Note Text:
+                                                                        <textarea name="note" value={this.state.note} onChange={this.changeState} placeholder="Write your note text here." />
+                                                                    </label>
+                                                                    <button type="submit">Add Note</button>
+                                                                </fieldset>
+                                                            </Form>
+                                                        </>
                                                     )}
                                                 </div>
                                             </Columns>
-                                        )}
+                                            )}
                                     </Mutation>
                                 )}
                             </Query>

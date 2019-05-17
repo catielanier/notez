@@ -29,7 +29,27 @@ const Query = {
     
     games: forwardTo('db'),
     
-    gameNotes: forwardTo('db'),
+    async gameNotes(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to view notes.');
+        }
+
+        const { userId } = ctx.request;
+
+        const { you, opponent, filter, game } = args;
+        
+        return ctx.db.query.gameNotes({
+            where: {
+                user: {
+                    id: userId,
+                    you,
+                    opponent,
+                    filter,
+                    game
+                }
+            }
+        }, info);
+    },
 
     playerNotes: forwardTo('db'),
     
