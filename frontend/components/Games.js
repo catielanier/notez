@@ -53,12 +53,31 @@ const USER_NOTES_QUERY = gql`
     }
 `;
 
+const GAME_NOTES_QUERY = gql`
+    query GAME_NOTES_QUERY(
+        $game: ID!
+        $you: ID!
+        $opponent: ID!
+        $filter: ID!
+    ) {
+        gameNotes( 
+            orderBy: createdAt_DESC
+            where: {
+                game: $game
+                you: $you
+                opponent: $opponent
+                filter: $filter
+            }
+        )
+    }
+`
+
 const CREATE_GAME_NOTE_MUTATION = gql`
     mutation CREATE_GAME_NOTE_MUTATION(
         $game: ID!
         $you: ID!
         $opponent: ID!
-        $filter: ID!
+        $filter: ID
         $note: String!
     ) {
         createGameNote(
