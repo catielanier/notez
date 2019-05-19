@@ -110,23 +110,19 @@ const CREATE_GAME_NOTE_MUTATION = gql`
 
 class Games extends Component {
     state = {
-        game: '',
-        you: '',
-        opponent: '',
-        filter: '',
+        game: null,
+        you: null,
+        opponent: null,
+        filter: null,
         characters: [],
         filters: [],
         addFilter: '',
-        note: ''
+        note: '',
+        notes: []
     }
 
-    changeState = (e, a) => {
-        const {value} = e.target || e;
-        const {name} = a || e.target;
-        console.log(name, value);
-        this.setState({
-            [name]: value
-        });
+    changeState = async (e, a) => {
+        
     }
 
     render() {
@@ -143,10 +139,13 @@ class Games extends Component {
                                         opponent: this.state.opponent,
                                         filter: this.state.addFilter,
                                         note: this.state.note
-                                    }}>
+                                    }} refetchQueries={
+                                        [{
+                                            query: USER_NOTES_QUERY
+                                        }]
+                                    }>
                                         {(createGameNote, {loading, error, called}) => (
                                             <Columns>
-                                            {console.log(gameNotes)}
                                                 <div>
                                                     <h2>Game Notes</h2>
                                                     <label htmlFor="game">
@@ -191,7 +190,21 @@ class Games extends Component {
                                                                 label: character.name,
                                                                 value: character.id
                                                             }
-                                                        })} onChange={this.changeState} />
+                                                        })} onChange={async (e, a) => {
+                                                            const {value} = e.target || e;
+                                                            const {name} = a || e.target;
+                                                            console.log(name, value);
+                                                            await this.setState({
+                                                                [name]: value
+                                                            });
+                                                            if (this.state.game !== null && this.state.you !== null && this.state.opponent !== null) {
+                                                                gameNotes.map(note => {
+                                                                    if (note.you.id === this.state.you && note.opponent.id === this.state.opponent && note.game.id === this.state.game) {
+                                                                        this.state.notes.push(note);
+                                                                    }
+                                                                });
+                                                            }
+                                                        }} />
                                                     </label>
                                                     <label htmlFor="opponent">
                                                         Opponent's Character:
@@ -200,7 +213,21 @@ class Games extends Component {
                                                                 label: character.name,
                                                                 value: character.id
                                                             }
-                                                        })} onChange={this.changeState} />
+                                                        })} onChange={async (e, a) => {
+                                                            const {value} = e.target || e;
+                                                            const {name} = a || e.target;
+                                                            console.log(name, value);
+                                                            await this.setState({
+                                                                [name]: value
+                                                            });
+                                                            if (this.state.game !== null && this.state.you !== null && this.state.opponent !== null) {
+                                                                gameNotes.map(note => {
+                                                                    if (note.you.id === this.state.you && note.opponent.id === this.state.opponent && note.game.id === this.state.game) {
+                                                                        this.state.notes.push(note);
+                                                                    }
+                                                                });
+                                                            }
+                                                        }} />
                                                     </label>
                                                     <label htmlFor="filter">
                                                         Filter By:
@@ -214,18 +241,14 @@ class Games extends Component {
                                                 </div>
                                                 <div>
                                                     <NoteList>
-                                                        {gameNotes.map(note => {
-                                                            {note.game.id === this.state.game && note.you.id === this.state.you && note.opponent.id === this.state.opponent ? 
+                                                        {this.state.notes.map(note => (
                                                                 <>
                                                                     {console.log(note.note)}
                                                                     <div className="filter" key={note.id}>{note.filter.name}</div>
                                                                     <div>{note.note}</div>
                                                                     <div>Edit Delete</div>
                                                                 </>
-                                                                :
-                                                                null
-                                                            }
-                                                        })}
+                                                        ))}
                                                     </NoteList>
                                                     {this.state.game !== '' && this.state.you !== '' && this.state.opponent !== '' && (
                                                         <>
