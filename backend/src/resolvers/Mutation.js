@@ -497,6 +497,36 @@ const mutations = {
             }
         }, info);
         return res;
+    },
+
+    async createPlayerNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+        const note = {...args};
+
+        const res = await ctx.db.mutation.createPlayerNote({
+            data: {
+                user: {
+                    connect: {
+                        id: ctx.request.userId
+                    }
+                },
+                game: {
+                    connect: {
+                        id: note.game
+                    }
+                },
+                opponent: note.opponent,
+                filter: {
+                    connect: {
+                        id: note.filter
+                    }
+                },
+                note: note.note
+            }
+        }, info);
+        return res;
     }
 };
 
