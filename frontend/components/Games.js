@@ -123,7 +123,11 @@ class Games extends Component {
     }
 
     changeState = async (e, a) => {
-        
+        const {value} = e.target || e;
+        const {name} = a || e.target;
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
@@ -192,18 +196,22 @@ class Games extends Component {
                                                                 value: character.id
                                                             }
                                                         })} onChange={async (e, a) => {
-                                                            const {value} = e.target || e;
-                                                            const {name} = a || e.target;
-                                                            console.log(name, value);
-                                                            await this.setState({
-                                                                [name]: value
-                                                            });
-                                                            if (this.state.game !== null && this.state.you !== null && this.state.opponent !== null) {
+                                                            const you = e.value;
+                                                            const {opponent, game} = this.state;
+                                                            const notes = [];
+                                                            // const {value} = e.target || e;
+                                                            // const {name} = a || e.target;
+                                                            // console.log(name, value);
+                                                            this.changeState(e, a);
+                                                            if (opponent !== undefined && opponent !== null) {
                                                                 gameNotes.map(note => {
-                                                                    if (note.you.id === this.state.you && note.opponent.id === this.state.opponent && note.game.id === this.state.game) {
-                                                                        this.state.notes.push(note);
+                                                                    if (note.you.id === you && note.opponent.id === opponent && note.game.id === game) {
+                                                                        notes.push(note);
                                                                     }
                                                                 });
+                                                                this.setState({
+                                                                    notes
+                                                                })
                                                             }
                                                         }} />
                                                     </label>
@@ -215,17 +223,21 @@ class Games extends Component {
                                                                 value: character.id
                                                             }
                                                         })} onChange={async (e, a) => {
-                                                            const {value} = e.target || e;
-                                                            const {name} = a || e.target;
-                                                            console.log(name, value);
-                                                            await this.setState({
-                                                                [name]: value
-                                                            });
-                                                            if (this.state.game !== null && this.state.you !== null && this.state.opponent !== null) {
+                                                            const {you, game} = this.state;
+                                                            const opponent = e.value;
+                                                            const notes = [];
+                                                            // const {value} = e.target || e;
+                                                            // const {name} = a || e.target;
+                                                            // console.log(name, value);
+                                                            this.changeState(e, a);
+                                                            if (you !== undefined && opponent !== null) {
                                                                 gameNotes.map(note => {
-                                                                    if (note.you.id === this.state.you && note.opponent.id === this.state.opponent && note.game.id === this.state.game) {
-                                                                        this.state.notes.push(note);
+                                                                    if (note.you.id === you && note.opponent.id === opponent && note.game.id === game) {
+                                                                        notes.push(note);
                                                                     }
+                                                                });
+                                                                this.setState({
+                                                                    notes
                                                                 });
                                                             }
                                                         }} />
