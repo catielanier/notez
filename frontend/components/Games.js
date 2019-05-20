@@ -17,7 +17,8 @@ const Columns = styled.div`
 
 const NoteList = styled.div`
     display: grid;
-    grid-template-columns: 12% 80% 8%;
+    grid-template-columns: 1fr 5fr 2fr;
+    padding-bottom: 25px;
 
     .filter {
         color: ${props => props.theme.action};
