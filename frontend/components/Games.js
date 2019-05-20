@@ -199,9 +199,6 @@ class Games extends Component {
                                                             const you = e.value;
                                                             const {opponent, game} = this.state;
                                                             const notes = [];
-                                                            // const {value} = e.target || e;
-                                                            // const {name} = a || e.target;
-                                                            // console.log(name, value);
                                                             this.changeState(e, a);
                                                             if (opponent !== undefined && opponent !== null) {
                                                                 gameNotes.map(note => {
@@ -226,9 +223,6 @@ class Games extends Component {
                                                             const {you, game} = this.state;
                                                             const opponent = e.value;
                                                             const notes = [];
-                                                            // const {value} = e.target || e;
-                                                            // const {name} = a || e.target;
-                                                            // console.log(name, value);
                                                             this.changeState(e, a);
                                                             if (you !== undefined && opponent !== null) {
                                                                 gameNotes.map(note => {
