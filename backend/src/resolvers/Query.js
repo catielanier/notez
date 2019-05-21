@@ -57,7 +57,11 @@ const Query = {
 
     gameFilters: forwardTo('db'),
 
-    playerFilters: forwardTo('db')
+    playerFilters: forwardTo('db'),
+
+    gameNote: forwardTo('db'),
+    
+    playerNote: forwardTo('db')
 };
 
 module.exports = Query;

@@ -101,12 +101,26 @@ type Mutation {
         note: String!
     ): GameNote!
 
+    deleteGameNote(
+        id: ID!
+    ): PlayerNote
+
     createPlayerNote(
         opponent: String!
         name: String!
         filter: String!
         note: String!
     ): PlayerNote!
+
+    updatePlayerNote(
+        id: ID!
+        filter: ID!
+        note: String!
+    ): PlayerNote!
+
+    deletePlayerNote(
+        id: ID!
+    ): PlayerNote
 
     updateCharacter(
         name: String
@@ -199,4 +213,12 @@ type Query {
         where: PlayerNoteWhereInput
         orderBy: PlayerNoteOrderByInput
     ): [PlayerNote]!
+
+    gameNote(
+        where: GameNoteWhereInput
+    ): GameNote
+
+    playerNote(
+        where: PlayerNoteWhereInput
+    ): PlayerNote
 }

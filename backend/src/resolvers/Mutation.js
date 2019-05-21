@@ -571,7 +571,43 @@ const mutations = {
             }
         }, info);
         return res;
-    }
+    },
+
+    async deleteGameNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        const where = args.id;
+
+        const note = await ctx.db.query.gameNote({where}, `{id note user { id }}`);
+
+        const ownsNote = ctx.request.userId === note.user.id;
+
+        if (!ownsNote) {
+            throw new Error('You do not have permission to delete this note!');
+        }
+
+        return ctx.db.mutation.deleteGameNote({where}, info);
+    },
+
+    async deletePlayerNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+
+        const where = args.id;
+
+        const note = await ctx.db.query.playerNote({where}, `{id note user { id }}`);
+
+        const ownsNote = ctx.request.userId === note.user.id;
+
+        if (!ownsNote) {
+            throw new Error('You do not have permission to delete this note!');
+        }
+
+        return ctx.db.mutation.deletePlayerNote({where}, info);
+    },
 };
 
 module.exports = mutations;
