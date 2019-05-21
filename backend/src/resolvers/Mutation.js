@@ -527,6 +527,50 @@ const mutations = {
             }
         }, info);
         return res;
+    },
+
+    async updateGameNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+        const note = {...args};
+
+        const res = await ctx.db.mutation.updateGameNote({
+            data: {
+                filter: {
+                    connect: {
+                        id: note.filter
+                    }
+                },
+                note: note.note
+            },
+            where: {
+                id: note.id
+            }
+        }, info);
+        return res;
+    },
+
+    async updatePlayerNote(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in');
+        }
+        const note = {...args};
+
+        const res = await ctx.db.mutation.updatePlayerNote({
+            data: {
+                filter: {
+                    connect: {
+                        id: note.filter
+                    }
+                },
+                note: note.note
+            },
+            where: {
+                id: note.id
+            }
+        }, info);
+        return res;
     }
 };
 

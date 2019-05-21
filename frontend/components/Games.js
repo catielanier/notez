@@ -272,7 +272,6 @@ class Games extends Component {
                                                             <Form method="post" onSubmit={async (e) => {
                                                                 e.preventDefault();
                                                                 const res = await createGameNote();
-                                                                console.log(res);
                                                                 this.setState({
                                                                     note: ''
                                                                 });
@@ -303,7 +302,7 @@ class Games extends Component {
                                                     )}
                                                 </div>
                                             </Columns>
-                                            )}
+                                        )}
                                     </Mutation>
                                 )}
                             </Query>
