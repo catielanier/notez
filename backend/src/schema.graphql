@@ -95,6 +95,12 @@ type Mutation {
         user: ID
     ): GameNote!
 
+    updateGameNote(
+        id: ID!
+        filter: ID!
+        note: String!
+    ): GameNote!
+
     createPlayerNote(
         opponent: String!
         name: String!

@@ -17,11 +17,20 @@ const Columns = styled.div`
 
 const NoteList = styled.div`
     display: grid;
-    grid-template-columns: 1fr 5fr 2fr;
+    grid-template-columns: 2fr 7fr 3fr;
+    grid-gap: 10px;
     padding-bottom: 25px;
 
     .filter {
         color: ${props => props.theme.action};
+    }
+
+    div img {
+        width: 25px;
+
+        &:first-of-type {
+            padding-right: 10px;
+        }
     }
 `;
 
@@ -78,7 +87,7 @@ const CREATE_GAME_NOTE_MUTATION = gql`
         $game: ID!
         $you: ID!
         $opponent: ID!
-        $filter: ID
+        $filter: ID!
         $note: String!
     ) {
         createGameNote(
@@ -100,6 +109,7 @@ const CREATE_GAME_NOTE_MUTATION = gql`
             }
             filter {
                 id
+                name
             }
             note
             user {
@@ -253,7 +263,7 @@ class Games extends Component {
                                                                     {console.log(note.note)}
                                                                     <div className="filter" key={note.id}>{note.filter.name}</div>
                                                                     <div>{note.note}</div>
-                                                                    <div>Edit Delete</div>
+                                                                    <div><img src="/static/edit.png" alt="Edit"/> Delete</div>
                                                                 </>
                                                         ))}
                                                     </NoteList>
@@ -266,6 +276,8 @@ class Games extends Component {
                                                                 this.setState({
                                                                     note: ''
                                                                 });
+                                                                const formattedNote = res.data.createGameNote;
+                                                                this.state.notes.push(formattedNote);
                                                             }}>
                                                                 <fieldset disabled={loading} aria-busy={loading}>
                                                                     <Error error={error} />

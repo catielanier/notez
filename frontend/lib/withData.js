@@ -13,6 +13,15 @@ function createClient({ headers }) {
         headers,
       });
     },
+    clientState: {
+      resolvers: {
+
+      },
+      defaults: {
+        gameNotes: [],
+        playerNotes: []
+      }
+    }
   });
 }
 
