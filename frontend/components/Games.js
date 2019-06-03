@@ -381,7 +381,8 @@ class Games extends Component {
                                                             this.setState({
                                                                 editId: '',
                                                                 editFilter: '',
-                                                                editNote: ''
+                                                                editNote: '',
+                                                                showEditor: false
                                                             });
                                                             const formattedNote = res.data.updateGameNote;
                                                             const noteIndex = this.state.notes.map((note, index) => {
@@ -392,7 +393,21 @@ class Games extends Component {
                                                             this.state.notes[noteIndex] = formattedNote;
                                                         }}>
                                                             <fieldset>
-
+                                                                <Error error={error} />
+                                                                <label htmlFor="editFilter">
+                                                                    Note Filter:
+                                                                    <Select name="editFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
+                                                                        return {
+                                                                            label: filter.name,
+                                                                            value: filter.id
+                                                                        }
+                                                                    })} onChange={this.changeState} defaultValue={this.state.editFilter} />
+                                                                </label>
+                                                                <label htmlFor="editNote">
+                                                                    Note Text:
+                                                                    <textarea name="editNote" value={this.state.editNote} onChange={this.changeState} placeholder="Write your note text here." />
+                                                                </label>
+                                                                <button type="submit">Edit Note</button>
                                                             </fieldset>
                                                         </form>
                                                     </Modal.Body>
