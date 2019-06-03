@@ -179,6 +179,21 @@ class Games extends Component {
         });
     }
 
+    openNoteEditor = (id) => {
+        const editId = id;
+        const editNote = this.state.notes.map(note => {
+            if (note.id === id) {
+                return note
+            }
+        });
+        this.setState({
+            editId,
+            editFilter: editNote.filter.id,
+            editNote: editNote.note,
+            showEditor: true
+        });
+    }
+
     render() {
         return(
             <Query query={USER_NOTES_QUERY}>
