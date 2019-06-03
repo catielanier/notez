@@ -3,6 +3,7 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Select from 'react-select';
+import Modal from 'react-bootstrap/Modal';
 import ReactSelectStyles from './styles/ReactSelectStyles';
 import {ALL_GAMES_QUERY} from './CreateCharacter';
 import {ALL_GAME_FILTERS_QUERY} from './UpdateGameFilter';
@@ -166,7 +167,8 @@ class Games extends Component {
         editFilter: '',
         editId: '',
         editNote: '',
-        deleteId: ''
+        deleteId: '',
+        showEditor: false
     }
 
     changeState = async (e, a) => {
@@ -310,7 +312,7 @@ class Games extends Component {
                                                                             {console.log(note.note)}
                                                                             <div className="filter" key={note.id}>{note.filter.name}</div>
                                                                             <div>{note.note}</div>
-                                                                            <div><img src="/static/edit.png" alt="Edit"/> Delete</div>
+                                                                            <div><a href="#" onClick={() => this.openNoteEditor(note.id)}><img src="/static/edit.png" alt="Edit"/></a> Delete</div>
                                                                         </>
                                                                 ))}
                                                             </NoteList>
