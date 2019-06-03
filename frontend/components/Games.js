@@ -374,7 +374,27 @@ class Games extends Component {
                                                         <Modal.Title>Edit Existing Note</Modal.Title>
                                                     </Modal.Header>
                                                     <Modal.Body>
+                                                        <form method="post" onSubmit={async e => {
+                                                            const id = this.state.editId;
+                                                            e.preventDefault();
+                                                            const res = await updateGameNote();
+                                                            this.setState({
+                                                                editId: '',
+                                                                editFilter: '',
+                                                                editNote: ''
+                                                            });
+                                                            const formattedNote = res.data.updateGameNote;
+                                                            const noteIndex = this.state.notes.map((note, index) => {
+                                                                if (note.id === id) {
+                                                                    return index;
+                                                                }
+                                                            })
+                                                            this.state.notes[noteIndex] = formattedNote;
+                                                        }}>
+                                                            <fieldset>
 
+                                                            </fieldset>
+                                                        </form>
                                                     </Modal.Body>
                                                 </Modal>
                                             </>
