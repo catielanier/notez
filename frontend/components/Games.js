@@ -97,6 +97,18 @@ const UPDATE_GAME_NOTE_MUTATION = gql`
     }
 `;
 
+const DELETE_GAME_NOTE_MUTATION = gql`
+    mutation DELETE_GAME_NOTE_MUTATION(
+        $id: ID!
+    ) {
+        deleteGameNote(
+            id: $id
+        ) {
+            id
+        }
+    }
+`;
+
 const GAME_NOTES_QUERY = gql`
     query GAME_NOTES_QUERY(
         $game: ID!
