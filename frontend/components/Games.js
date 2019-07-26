@@ -237,6 +237,11 @@ class Games extends Component {
                                                     }]
                                                 }>
                                                     {(createGameNote, {loading, error, called}) => (
+                                                        <Mutation mutation={DELETE_GAME_NOTE_MUTATION} variables={{
+                                                            id: this.state.deleteId
+                                                        }}>
+                                                            {(deleteGameNote, {loading, error, called }) => (
+
                                                         <Columns>
                                                             <div>
                                                                 <h2>Game Notes</h2>
@@ -337,11 +342,24 @@ class Games extends Component {
                                                                 <NoteList>
                                                                     {this.state.notes.map(note => (
                                                                         <>
-                                                                                {console.log(note.note)}
-                                                                                <div className="filter" key={note.id}>{note.filter.name}</div>
-                                                                                <div>{note.note}</div>
-                                                                                <div><a href="#" onClick={() => this.openNoteEditor(note.id)}><img src="/static/edit.png" alt="Edit"/></a> Delete</div>
-                                                                            </>
+                                                                            {console.log(note.note)}
+                                                                            <div className="filter" key={note.id}>{note.filter.name}</div>
+                                                                            <div>{note.note}</div>
+                                                                            <div><a href="#" onClick={() => this.openNoteEditor(note.id)}><img src="/static/edit.png" alt="Edit"/></a> <a href="#" onClick={async e => {
+                                                                                e.preventDefault();
+                                                                                const {id} = note;
+                                                                                await this.setState({
+                                                                                    deleteId: id
+                                                                                });
+                                                                                const res = await deleteGameNote();
+                                                                                const noteIndex = this.state.notes.map((note, index) => {
+                                                                                    if (note.id === id) {
+                                                                                        return index;
+                                                                                    }
+                                                                                });
+                                                                                this.state.notes.splice(noteIndex, 1);
+                                                                            }}><img src="/static/trash.png" alt="Delete"/></a></div>
+                                                                        </>
                                                                     ))}
                                                                 </NoteList>
                                                                 {this.state.game !== '' && this.state.you !== '' && this.state.opponent !== '' && (
@@ -379,6 +397,8 @@ class Games extends Component {
                                                                 )}
                                                             </div>
                                                         </Columns>
+                                                        )}
+                                                    </Mutation>
                                                     )}
                                                 </Mutation>
                                                 <Modal show={this.state.showEditor} onHide={this.cancelEdit}>
