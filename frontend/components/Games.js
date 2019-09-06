@@ -1,461 +1,559 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import styled from 'styled-components';
-import Select from 'react-select';
-import Modal from 'react-bootstrap/Modal';
-import ReactSelectStyles from './styles/ReactSelectStyles';
-import {ALL_GAMES_QUERY} from './CreateCharacter';
-import {ALL_GAME_FILTERS_QUERY} from './UpdateGameFilter';
-import Form from './styles/Form';
-import Error from './ErrorMessage';
+import React, { Component } from "react";
+import { Mutation, Query } from "react-apollo";
+import gql from "graphql-tag";
+import styled from "styled-components";
+import Select from "react-select";
+import Modal from "react-bootstrap/Modal";
+import ReactSelectStyles from "./styles/ReactSelectStyles";
+import { ALL_GAMES_QUERY } from "./CreateCharacter";
+import { ALL_GAME_FILTERS_QUERY } from "./UpdateGameFilter";
+import Form from "./styles/Form";
+import Error from "./ErrorMessage";
 
 const Columns = styled.div`
-    display: grid;
-    grid-template-columns: 1.5fr 2fr;
-    grid-gap: 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  grid-gap: 20px;
 `;
 
 const NoteList = styled.div`
-    display: grid;
-    grid-template-columns: 2fr 7fr 3fr;
-    grid-gap: 10px;
-    padding-bottom: 25px;
+  display: grid;
+  grid-template-columns: 2fr 7fr 3fr;
+  grid-gap: 10px;
+  padding-bottom: 25px;
 
-    .filter {
-        color: ${props => props.theme.action};
+  .filter {
+    color: ${props => props.theme.action};
+  }
+
+  div img {
+    width: 25px;
+
+    &:first-of-type {
+      padding-right: 10px;
     }
-
-    div img {
-        width: 25px;
-
-        &:first-of-type {
-            padding-right: 10px;
-        }
-    }
+  }
 `;
 
 const USER_NOTES_QUERY = gql`
-    query USER_NOTES_QUERY {
-        me{
-            id
-            gameNotes {
-                id
-                game {
-                    id
-                    name
-                }
-                you {
-                    id
-                    name
-                }
-                opponent {
-                    id
-                    name
-                }
-                filter {
-                    id
-                    name
-                }
-                note
-                createdAt
-            }
+  query USER_NOTES_QUERY {
+    me {
+      id
+      gameNotes {
+        id
+        game {
+          id
+          name
         }
+        you {
+          id
+          name
+        }
+        opponent {
+          id
+          name
+        }
+        filter {
+          id
+          name
+        }
+        note
+        createdAt
+      }
     }
+  }
 `;
 
 const UPDATE_GAME_NOTE_MUTATION = gql`
-    mutation UPDATE_GAME_NOTE_MUTATION(
-        $id: ID!
-        $filter: ID!
-        $note: String!
-    ) {
-        updatedGameNote(
-            id: $id
-            filter: $filter
-            note: $note
-        ) {
-            id
-            game {
-                id
-            }
-            you {
-                id
-            }
-            opponent {
-                id
-            }
-            filter {
-                id
-                name
-            }
-            note
-            user {
-                id
-            }
-        }
+  mutation UPDATE_GAME_NOTE_MUTATION($id: ID!, $filter: ID!, $note: String!) {
+    updatedGameNote(id: $id, filter: $filter, note: $note) {
+      id
+      game {
+        id
+      }
+      you {
+        id
+      }
+      opponent {
+        id
+      }
+      filter {
+        id
+        name
+      }
+      note
+      user {
+        id
+      }
     }
+  }
 `;
 
 const DELETE_GAME_NOTE_MUTATION = gql`
-    mutation DELETE_GAME_NOTE_MUTATION(
-        $id: ID!
-    ) {
-        deleteGameNote(
-            id: $id
-        ) {
-            id
-        }
+  mutation DELETE_GAME_NOTE_MUTATION($id: ID!) {
+    deleteGameNote(id: $id) {
+      id
     }
+  }
 `;
 
 const GAME_NOTES_QUERY = gql`
-    query GAME_NOTES_QUERY(
-        $game: ID!
-        $you: ID!
-        $opponent: ID!
-        $filter: ID!
-    ) {
-        gameNotes( 
-            orderBy: createdAt_DESC
-            where: {
-                game: $game
-                you: $you
-                opponent: $opponent
-                filter: $filter
-            }
-        )
-    }
-`
+  query GAME_NOTES_QUERY($game: ID!, $you: ID!, $opponent: ID!, $filter: ID!) {
+    gameNotes(
+      orderBy: createdAt_DESC
+      where: { game: $game, you: $you, opponent: $opponent, filter: $filter }
+    )
+  }
+`;
 
 const CREATE_GAME_NOTE_MUTATION = gql`
-    mutation CREATE_GAME_NOTE_MUTATION(
-        $game: ID!
-        $you: ID!
-        $opponent: ID!
-        $filter: ID!
-        $note: String!
+  mutation CREATE_GAME_NOTE_MUTATION(
+    $game: ID!
+    $you: ID!
+    $opponent: ID!
+    $filter: ID!
+    $note: String!
+  ) {
+    createGameNote(
+      game: $game
+      you: $you
+      opponent: $opponent
+      filter: $filter
+      note: $note
     ) {
-        createGameNote(
-            game: $game
-            you: $you
-            opponent: $opponent
-            filter: $filter
-            note: $note
-        ) {
-            id
-            game {
-                id
-            }
-            you {
-                id
-            }
-            opponent {
-                id
-            }
-            filter {
-                id
-                name
-            }
-            note
-            user {
-                id
-            }
-        }
+      id
+      game {
+        id
+      }
+      you {
+        id
+      }
+      opponent {
+        id
+      }
+      filter {
+        id
+        name
+      }
+      note
+      user {
+        id
+      }
     }
+  }
 `;
 
 class Games extends Component {
-    state = {
-        game: null,
-        you: null,
-        opponent: null,
-        filter: null,
-        characters: [],
-        filters: [],
-        addFilter: '',
-        note: '',
-        notes: [],
-        editFilter: '',
-        editId: '',
-        editNote: '',
-        deleteId: '',
-        showEditor: false
-    }
+  state = {
+    game: null,
+    you: null,
+    opponent: null,
+    filter: null,
+    characters: [],
+    filters: [],
+    addFilter: "",
+    note: "",
+    notes: [],
+    editFilter: "",
+    editId: "",
+    editNote: "",
+    deleteId: "",
+    showEditor: false
+  };
 
-    changeState = async (e, a) => {
-        const {value} = e.target || e;
-        const {name} = a || e.target;
-        this.setState({
-            [name]: value
-        });
-    }
+  changeState = async (e, a) => {
+    const { value } = e.target || e;
+    const { name } = a || e.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-    openNoteEditor = (id) => {
-        const editId = id;
-        const editNote = this.state.notes.map(note => {
-            if (note.id === id) {
-                return note
-            }
-        });
-        this.setState({
-            editId,
-            editFilter: editNote.filter.id,
-            editNote: editNote.note,
-            showEditor: true
-        });
-    }
+  openNoteEditor = id => {
+    const editId = id;
+    const editNote = this.state.notes.map(note => {
+      if (note.id === id) {
+        return note;
+      }
+    });
+    this.setState({
+      editId,
+      editFilter: editNote.filter.id,
+      editNote: editNote.note,
+      showEditor: true
+    });
+  };
 
-    render() {
-        return(
-            <Query query={USER_NOTES_QUERY}>
-                {({data: {me: {gameNotes}}}) => (
-                    <Query query={ALL_GAMES_QUERY}>
-                        {({data: {games}}) => (
-                            <Query query={ALL_GAME_FILTERS_QUERY}>
-                                {({data: {gameFilters}}) => (
-                                    <Mutation mutation={UPDATE_GAME_NOTE_MUTATION} variables={{
-                                        id: this.state.editId,
-                                        filter: this.state.editFilter,
-                                        note: this.state.editNote
-                                    }} refetchQueries={
-                                        [{
-                                            query: USER_NOTES_QUERY
-                                        }]
-                                    }>
-                                        {(updateGameNote, {loading, error, called}) => (
-                                            <>
-                                                <Mutation mutation={CREATE_GAME_NOTE_MUTATION} variables={{
-                                                    game: this.state.game,
-                                                    you: this.state.you,
-                                                    opponent: this.state.opponent,
-                                                    filter: this.state.addFilter,
-                                                    note: this.state.note
-                                                }} refetchQueries={
-                                                    [{
-                                                        query: USER_NOTES_QUERY
-                                                    }]
-                                                }>
-                                                    {(createGameNote, {loading, error, called}) => (
-                                                        <Mutation mutation={DELETE_GAME_NOTE_MUTATION} variables={{
-                                                            id: this.state.deleteId
-                                                        }}>
-                                                            {(deleteGameNote, {loading, error, called }) => (
+  render() {
+    return (
+      <Query query={USER_NOTES_QUERY}>
+        {({
+          data: {
+            me: { gameNotes }
+          }
+        }) => (
+          <Query query={ALL_GAMES_QUERY}>
+            {({ data: { games } }) => (
+              <Query query={ALL_GAME_FILTERS_QUERY}>
+                {({ data: { gameFilters } }) => (
+                  <Mutation
+                    mutation={UPDATE_GAME_NOTE_MUTATION}
+                    variables={{
+                      id: this.state.editId,
+                      filter: this.state.editFilter,
+                      note: this.state.editNote
+                    }}
+                    refetchQueries={[
+                      {
+                        query: USER_NOTES_QUERY
+                      }
+                    ]}
+                  >
+                    {(updateGameNote, { loading, error, called }) => (
+                      <>
+                        <Mutation
+                          mutation={CREATE_GAME_NOTE_MUTATION}
+                          variables={{
+                            game: this.state.game,
+                            you: this.state.you,
+                            opponent: this.state.opponent,
+                            filter: this.state.addFilter,
+                            note: this.state.note
+                          }}
+                          refetchQueries={[
+                            {
+                              query: USER_NOTES_QUERY
+                            }
+                          ]}
+                        >
+                          {(createGameNote, { loading, error, called }) => (
+                            <Columns>
+                              <div>
+                                <h2>Game Notes</h2>
+                                <label htmlFor="game">
+                                  Select your game:
+                                  <Select
+                                    name="game"
+                                    styles={ReactSelectStyles}
+                                    options={games.map(game => {
+                                      return {
+                                        label: game.name,
+                                        value: game.id
+                                      };
+                                    })}
+                                    onChange={e => {
+                                      const { value } = e;
+                                      games.map(async game => {
+                                        if (game.id === value) {
+                                          await this.setState({
+                                            game: value,
+                                            characters: game.characters
+                                          });
+                                        }
+                                      });
 
-                                                        <Columns>
-                                                            <div>
-                                                                <h2>Game Notes</h2>
-                                                                <label htmlFor="game">
-                                                                    Select your game:
-                                                                    <Select name="game" styles={ReactSelectStyles} options={games.map((game) => {
-                                                                        return {
-                                                                            label: game.name,
-                                                                            value: game.id
-                                                                        }
-                                                                    })} onChange={(e) => {
-                                                                        const {value} = e;
-                                                                        games.map(async game => {
-                                                                            if (game.id === value) {
-                                                                                await this.setState({
-                                                                                    game: value,
-                                                                                    characters: game.characters
-                                                                                });
-                                                                            }
-                                                                        });
-                                                                        
-                                                                        const filters = [];
-                                                                        gameFilters.map(async filter => {
-                                                                            if (filter.isGlobal === true) {
-                                                                                filters.push(filter)
-                                                                            }
-                                                                            
-                                                                            filter.games.map(game => {
-                                                                                if (game.id === value) {
-                                                                                    filters.push(filter);
-                                                                                }
-                                                                            });
-                                                                        });
-                                                                        this.setState({
-                                                                            filters
-                                                                        });
-                                                                    }} />
-                                                                </label>
-                                                                <label htmlFor="you">
-                                                                    Your Character:
-                                                                    <Select name="you" styles={ReactSelectStyles} options={this.state.characters.map(character => {
-                                                                        return {
-                                                                            label: character.name,
-                                                                            value: character.id
-                                                                        }
-                                                                    })} onChange={async (e, a) => {
-                                                                        const you = e.value;
-                                                                        const {opponent, game} = this.state;
-                                                                        const notes = [];
-                                                                        this.changeState(e, a);
-                                                                        if (opponent !== undefined && opponent !== null) {
-                                                                            gameNotes.map(note => {
-                                                                                if (note.you.id === you && note.opponent.id === opponent && note.game.id === game) {
-                                                                                    notes.push(note);
-                                                                                }
-                                                                            });
-                                                                            this.setState({
-                                                                                notes
-                                                                            })
-                                                                        }
-                                                                    }} />
-                                                                </label>
-                                                                <label htmlFor="opponent">
-                                                                    Opponent's Character:
-                                                                    <Select name="opponent" styles={ReactSelectStyles} options={this.state.characters.map(character => {
-                                                                        return {
-                                                                            label: character.name,
-                                                                            value: character.id
-                                                                        }
-                                                                    })} onChange={async (e, a) => {
-                                                                        const {you, game} = this.state;
-                                                                        const opponent = e.value;
-                                                                        const notes = [];
-                                                                        this.changeState(e, a);
-                                                                        if (you !== undefined && opponent !== null) {
-                                                                            gameNotes.map(note => {
-                                                                                if (note.you.id === you && note.opponent.id === opponent && note.game.id === game) {
-                                                                                    notes.push(note);
-                                                                                }
-                                                                            });
-                                                                            this.setState({
-                                                                                notes
-                                                                            });
-                                                                        }
-                                                                    }} />
-                                                                </label>
-                                                                <label htmlFor="filter">
-                                                                    Filter By:
-                                                                    <Select name="filter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                                                        return {
-                                                                            label: filter.name,
-                                                                            value: filter.id
-                                                                        }
-                                                                    })} onChange={this.changeState} />
-                                                                </label>
-                                                            </div>
-                                                            <div>
-                                                                <NoteList>
-                                                                    {this.state.notes.map(note => (
-                                                                        <>
-                                                                            {console.log(note.note)}
-                                                                            <div className="filter" key={note.id}>{note.filter.name}</div>
-                                                                            <div>{note.note}</div>
-                                                                            <div><a href="#" onClick={() => this.openNoteEditor(note.id)}><img src="/static/edit.png" alt="Edit"/></a> <a href="#" onClick={async e => {
-                                                                                e.preventDefault();
-                                                                                const {id} = note;
-                                                                                await this.setState({
-                                                                                    deleteId: id
-                                                                                });
-                                                                                const res = await deleteGameNote();
-                                                                                const noteIndex = this.state.notes.map((note, index) => {
-                                                                                    if (note.id === id) {
-                                                                                        return index;
-                                                                                    }
-                                                                                });
-                                                                                this.state.notes.splice(noteIndex, 1);
-                                                                            }}><img src="/static/trash.png" alt="Delete"/></a></div>
-                                                                        </>
-                                                                    ))}
-                                                                </NoteList>
-                                                                {this.state.game !== '' && this.state.you !== '' && this.state.opponent !== '' && (
-                                                                    <>
-                                                                        <Form method="post" onSubmit={async (e) => {
-                                                                            e.preventDefault();
-                                                                            const res = await createGameNote();
-                                                                            this.setState({
-                                                                                note: ''
-                                                                            });
-                                                                            const formattedNote = res.data.createGameNote;
-                                                                            this.state.notes.push(formattedNote);
-                                                                        }}>
-                                                                            <fieldset disabled={loading} aria-busy={loading}>
-                                                                                <Error error={error} />
-                                                                                {!error && !loading && called && <p>Successfully added to notes.</p>}
-                                                                                <h3>Add New Note:</h3>
-                                                                                <label htmlFor="addFilter">
-                                                                                    Note Filter:
-                                                                                    <Select name="addFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                                                                        return {
-                                                                                            label: filter.name,
-                                                                                            value: filter.id
-                                                                                        }
-                                                                                    })} onChange={this.changeState} placeholder="New note filter" />
-                                                                                </label>
-                                                                                <label htmlFor="note">
-                                                                                    Note Text:
-                                                                                    <textarea name="note" value={this.state.note} onChange={this.changeState} placeholder="Write your note text here." />
-                                                                                </label>
-                                                                                <button type="submit">Add Note</button>
-                                                                            </fieldset>
-                                                                        </Form>
-                                                                    </>
-                                                                )}
-                                                            </div>
-                                                        </Columns>
-                                                        )}
-                                                    </Mutation>
-                                                    )}
-                                                </Mutation>
-                                                <Modal show={this.state.showEditor} onHide={this.cancelEdit}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Edit Existing Note</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>
-                                                        <form method="post" onSubmit={async e => {
-                                                            const id = this.state.editId;
-                                                            e.preventDefault();
-                                                            const res = await updateGameNote();
-                                                            this.setState({
-                                                                editId: '',
-                                                                editFilter: '',
-                                                                editNote: '',
-                                                                showEditor: false
-                                                            });
-                                                            const formattedNote = res.data.updateGameNote;
-                                                            const noteIndex = this.state.notes.map((note, index) => {
-                                                                if (note.id === id) {
-                                                                    return index;
-                                                                }
-                                                            })
-                                                            this.state.notes[noteIndex] = formattedNote;
-                                                        }}>
-                                                            <fieldset>
-                                                                <Error error={error} />
-                                                                <label htmlFor="editFilter">
-                                                                    Note Filter:
-                                                                    <Select name="editFilter" styles={ReactSelectStyles} options={this.state.filters.map(filter => {
-                                                                        return {
-                                                                            label: filter.name,
-                                                                            value: filter.id
-                                                                        }
-                                                                    })} onChange={this.changeState} defaultValue={this.state.editFilter} />
-                                                                </label>
-                                                                <label htmlFor="editNote">
-                                                                    Note Text:
-                                                                    <textarea name="editNote" value={this.state.editNote} onChange={this.changeState} placeholder="Write your note text here." />
-                                                                </label>
-                                                                <button type="submit">Edit Note</button>
-                                                            </fieldset>
-                                                        </form>
-                                                    </Modal.Body>
-                                                </Modal>
-                                            </>
-                                        )}
-                                    </Mutation>
-                                )}
-                            </Query>
-                        )}
-                    </Query>
+                                      const filters = [];
+                                      gameFilters.map(async filter => {
+                                        if (filter.isGlobal === true) {
+                                          filters.push(filter);
+                                        }
+
+                                        filter.games.map(game => {
+                                          if (game.id === value) {
+                                            filters.push(filter);
+                                          }
+                                        });
+                                      });
+                                      this.setState({
+                                        filters
+                                      });
+                                    }}
+                                  />
+                                </label>
+                                <label htmlFor="you">
+                                  Your Character:
+                                  <Select
+                                    name="you"
+                                    styles={ReactSelectStyles}
+                                    options={this.state.characters.map(
+                                      character => {
+                                        return {
+                                          label: character.name,
+                                          value: character.id
+                                        };
+                                      }
+                                    )}
+                                    onChange={async (e, a) => {
+                                      const you = e.value;
+                                      const { opponent, game } = this.state;
+                                      const notes = [];
+                                      this.changeState(e, a);
+                                      if (
+                                        opponent !== undefined &&
+                                        opponent !== null
+                                      ) {
+                                        gameNotes.map(note => {
+                                          if (
+                                            note.you.id === you &&
+                                            note.opponent.id === opponent &&
+                                            note.game.id === game
+                                          ) {
+                                            notes.push(note);
+                                          }
+                                        });
+                                        this.setState({
+                                          notes
+                                        });
+                                      }
+                                    }}
+                                  />
+                                </label>
+                                <label htmlFor="opponent">
+                                  Opponent's Character:
+                                  <Select
+                                    name="opponent"
+                                    styles={ReactSelectStyles}
+                                    options={this.state.characters.map(
+                                      character => {
+                                        return {
+                                          label: character.name,
+                                          value: character.id
+                                        };
+                                      }
+                                    )}
+                                    onChange={async (e, a) => {
+                                      const { you, game } = this.state;
+                                      const opponent = e.value;
+                                      const notes = [];
+                                      this.changeState(e, a);
+                                      if (
+                                        you !== undefined &&
+                                        opponent !== null
+                                      ) {
+                                        gameNotes.map(note => {
+                                          if (
+                                            note.you.id === you &&
+                                            note.opponent.id === opponent &&
+                                            note.game.id === game
+                                          ) {
+                                            notes.push(note);
+                                          }
+                                        });
+                                        this.setState({
+                                          notes
+                                        });
+                                      }
+                                    }}
+                                  />
+                                </label>
+                                <label htmlFor="filter">
+                                  Filter By:
+                                  <Select
+                                    name="filter"
+                                    styles={ReactSelectStyles}
+                                    options={this.state.filters.map(filter => {
+                                      return {
+                                        label: filter.name,
+                                        value: filter.id
+                                      };
+                                    })}
+                                    onChange={this.changeState}
+                                  />
+                                </label>
+                              </div>
+                              <div>
+                                <NoteList>
+                                  {this.state.notes.map(note => (
+                                    <>
+                                      <div className="filter" key={note.id}>
+                                        {note.filter.name}
+                                      </div>
+                                      <div>{note.note}</div>
+                                      <div>
+                                        <a
+                                          href="#"
+                                          onClick={() =>
+                                            this.openNoteEditor(note.id)
+                                          }
+                                        >
+                                          <img
+                                            src="/static/edit.png"
+                                            alt="Edit"
+                                          />
+                                        </a>
+                                        <Mutation
+                                          mutation={DELETE_GAME_NOTE_MUTATION}
+                                          variables={{
+                                            id: this.state.deleteId
+                                          }}
+                                        >
+                                          {(
+                                            deleteGameNote,
+                                            { loading, error, called }
+                                          ) => (
+                                            <a
+                                              href="#"
+                                              onClick={async e => {
+                                                e.preventDefault();
+                                                const { id } = note;
+                                                await this.setState({
+                                                  deleteId: id
+                                                });
+                                                const noteIndex = this.state.notes.findIndex(
+                                                  note => note.id === id
+                                                );
+                                                console.log(noteIndex);
+                                                const res = await deleteGameNote();
+                                                await this.state.notes.splice(
+                                                  noteIndex,
+                                                  1
+                                                );
+                                              }}
+                                            >
+                                              <img
+                                                src="/static/trash.png"
+                                                alt="Delete"
+                                              />
+                                            </a>
+                                          )}
+                                        </Mutation>
+                                      </div>
+                                    </>
+                                  ))}
+                                </NoteList>
+                                {this.state.game !== "" &&
+                                  this.state.you !== "" &&
+                                  this.state.opponent !== "" && (
+                                    <>
+                                      <Form
+                                        method="post"
+                                        onSubmit={async e => {
+                                          e.preventDefault();
+                                          const res = await createGameNote();
+                                          this.setState({
+                                            note: ""
+                                          });
+                                          const formattedNote =
+                                            res.data.createGameNote;
+                                          this.state.notes.push(formattedNote);
+                                        }}
+                                      >
+                                        <fieldset
+                                          disabled={loading}
+                                          aria-busy={loading}
+                                        >
+                                          <Error error={error} />
+                                          {!error && !loading && called && (
+                                            <p>Successfully added to notes.</p>
+                                          )}
+                                          <h3>Add New Note:</h3>
+                                          <label htmlFor="addFilter">
+                                            Note Filter:
+                                            <Select
+                                              name="addFilter"
+                                              styles={ReactSelectStyles}
+                                              options={this.state.filters.map(
+                                                filter => {
+                                                  return {
+                                                    label: filter.name,
+                                                    value: filter.id
+                                                  };
+                                                }
+                                              )}
+                                              onChange={this.changeState}
+                                              placeholder="New note filter"
+                                            />
+                                          </label>
+                                          <label htmlFor="note">
+                                            Note Text:
+                                            <textarea
+                                              name="note"
+                                              value={this.state.note}
+                                              onChange={this.changeState}
+                                              placeholder="Write your note text here."
+                                            />
+                                          </label>
+                                          <button type="submit">
+                                            Add Note
+                                          </button>
+                                        </fieldset>
+                                      </Form>
+                                    </>
+                                  )}
+                              </div>
+                            </Columns>
+                          )}
+                        </Mutation>
+                        <Modal
+                          show={this.state.showEditor}
+                          onHide={this.cancelEdit}
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Edit Existing Note</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <form
+                              method="post"
+                              onSubmit={async e => {
+                                const id = this.state.editId;
+                                e.preventDefault();
+                                const res = await updateGameNote();
+                                this.setState({
+                                  editId: "",
+                                  editFilter: "",
+                                  editNote: "",
+                                  showEditor: false
+                                });
+                                const formattedNote = res.data.updateGameNote;
+                                const noteIndex = this.state.notes.findIndex(
+                                  note => note.id === id
+                                );
+                                this.state.notes[noteIndex] = formattedNote;
+                              }}
+                            >
+                              <fieldset>
+                                <Error error={error} />
+                                <label htmlFor="editFilter">
+                                  Note Filter:
+                                  <Select
+                                    name="editFilter"
+                                    styles={ReactSelectStyles}
+                                    options={this.state.filters.map(filter => {
+                                      return {
+                                        label: filter.name,
+                                        value: filter.id
+                                      };
+                                    })}
+                                    onChange={this.changeState}
+                                    defaultValue={this.state.editFilter}
+                                  />
+                                </label>
+                                <label htmlFor="editNote">
+                                  Note Text:
+                                  <textarea
+                                    name="editNote"
+                                    value={this.state.editNote}
+                                    onChange={this.changeState}
+                                    placeholder="Write your note text here."
+                                  />
+                                </label>
+                                <button type="submit">Edit Note</button>
+                              </fieldset>
+                            </form>
+                          </Modal.Body>
+                        </Modal>
+                      </>
+                    )}
+                  </Mutation>
                 )}
-            </Query>
-        )
-    }
+              </Query>
+            )}
+          </Query>
+        )}
+      </Query>
+    );
+  }
 }
 
 export default Games;
-export {USER_NOTES_QUERY, Columns, NoteList};
+export { USER_NOTES_QUERY, Columns, NoteList };
