@@ -1,5 +1,7 @@
 import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Login from "./components/Login";
 import "./App.css";
 
 class App extends React.Component {
@@ -16,7 +18,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Router>
+          <Header user={this.state.user} role={this.state.role} />
+          <Route path="/login" component={() => <Login />} />
+        </Router>
       </div>
     );
   }
