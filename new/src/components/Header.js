@@ -33,7 +33,23 @@ export default function Header(props) {
                 </Link>
                 {props.role === "Admin" && (
                   <>
-                    <li>Settings</li>
+                    <li>
+                      Settings
+                      <ul>
+                        <Link to="/add-game">
+                          <li>Add Game</li>
+                        </Link>
+                        <Link to="/add-character">
+                          <li>Add Character</li>
+                        </Link>
+                        <Link to="/add-filter">
+                          <li>Add Filter</li>
+                        </Link>
+                        <Link to="/user-settings">
+                          <li>User Settings</li>
+                        </Link>
+                      </ul>
+                    </li>
                   </>
                 )}
                 <button>

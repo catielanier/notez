@@ -16,15 +16,39 @@ header .grid-container nav ul {
   justify-content: flex-end;
 }
 
-header .grid-container nav ul a li,
-header .grid-container nav ul button li {
+header .grid-container nav > ul > a li,
+header .grid-container nav > ul > button li,
+header .grid-container nav > ul > li {
   margin-left: 10px;
-  position: relative;
   z-index: 5;
 }
 
+header .grid-container nav ul > li {
+  position: relative;
+}
+
+header .grid-container nav ul li ul {
+  display: none;
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  width: 125px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+header .grid-container nav ul li ul li {
+  padding: 5px;
+}
+
+header .grid-container nav ul li:hover ul {
+  display: block;
+}
+
 header .grid-container nav ul a,
-header .grid-container nav ul button {
+header .grid-container nav ul button,
+header .grid-container nav ul > li {
   color: #3493db;
   text-decoration: none;
 }
