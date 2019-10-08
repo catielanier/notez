@@ -1,6 +1,7 @@
 header .grid-container {
   display: grid;
   grid-template-columns: 1fr 6fr;
+  align-items: center;
 }
 
 header .grid-container,
@@ -21,6 +22,7 @@ header .grid-container nav > ul > button li,
 header .grid-container nav > ul > li {
   margin-left: 10px;
   z-index: 5;
+  padding-left: 0;
 }
 
 header .grid-container nav ul > li {
@@ -70,21 +72,62 @@ fieldset {
   padding: 30px 15px;
 }
 
+@keyframes loading {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+fieldset::before,
+fieldset::after {
+  height: 10px;
+  content: "";
+  display: block;
+  background-image: linear-gradient(
+    to right,
+    #3493db 0%,
+    #fdff32 50%,
+    #3493db 100%
+  );
+  margin-bottom: 20px;
+}
+
+fieldset[aria-busy="true"]::before,
+fieldset[aria-busy="true"]::after {
+  background-size: 50% auto;
+  animation: loading 0.5s linear infinite;
+}
+
+fieldset::after {
+  margin-top: 30px;
+}
+
 form input {
-  width: 94%;
+  width: 100%;
   border: 0;
   border-bottom: 3px solid #3493db;
   padding: 5px 10px;
+}
+
+form label {
+  display: grid;
+  grid-template-columns: 1fr 22fr;
+  align-items: center;
   margin-bottom: 15px;
 }
 
 form label svg {
+  width: 100%;
   margin-right: 5px;
   color: #3493db;
 }
 
 .login form button,
-.signup form button {
+.signup form button,
+.add-game form button {
   width: 100%;
   background: #3493db;
   border: 0;
@@ -95,7 +138,8 @@ form label svg {
 }
 
 .login form button:hover,
-.signup form button:hover {
+.signup form button:hover,
+.add-game form button:hover {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 

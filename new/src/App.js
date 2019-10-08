@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import AddGame from "./components/AddGame";
 import "./App.css";
 
 export default class App extends React.Component {
@@ -52,6 +53,10 @@ export default class App extends React.Component {
               component={() => <Login setUser={this.setUser} />}
             />
             <Route path="/signup" component={() => <Signup />} />
+            <Route
+              path="/add-game"
+              component={() => <AddGame user={this.state.user} />}
+            />
           </main>
         </Router>
       </div>
