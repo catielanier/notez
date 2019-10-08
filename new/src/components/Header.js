@@ -31,6 +31,11 @@ export default function Header(props) {
                 <Link to="/profile">
                   <li>Profile</li>
                 </Link>
+                {props.role === "Admin" && (
+                  <>
+                    <li>Settings</li>
+                  </>
+                )}
                 <button>
                   <li>Logout</li>
                 </button>

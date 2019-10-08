@@ -16,15 +16,23 @@ header .grid-container nav ul {
   justify-content: flex-end;
 }
 
-header .grid-container nav ul a li {
+header .grid-container nav ul a li,
+header .grid-container nav ul button li {
   margin-left: 10px;
   position: relative;
   z-index: 5;
 }
 
-header .grid-container nav ul a {
+header .grid-container nav ul a,
+header .grid-container nav ul button {
   color: #3493db;
   text-decoration: none;
+}
+
+header .grid-container nav ul button {
+  background: none;
+  border: 0;
+  padding: 0;
 }
 
 .login form,

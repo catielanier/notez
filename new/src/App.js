@@ -12,11 +12,14 @@ export default class App extends React.Component {
     role: null
   };
 
-  componentDidMount = async () => {
+  componentWillMount = () => {
     const user = localStorage.getItem("notezId");
     this.setState({
       user
     });
+  };
+
+  componentDidMount = async () => {
     await this.checkRole();
   };
 
