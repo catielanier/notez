@@ -1,6 +1,7 @@
 import React from "react";
 import Flag from "react-world-flags";
 import axios from "axios";
+import { getToken } from "../services/tokenService";
 
 export default class AddGame extends React.Component {
   state = {
@@ -17,12 +18,65 @@ export default class AddGame extends React.Component {
       [name]: value
     });
   };
+  addGame = async e => {
+    e.preventDefault();
+    this.setState({
+      loading: true
+    });
+    const {
+      name,
+      name_ja,
+      name_ko,
+      "name_zh-cn": name_cn,
+      "name_zh-tw": name_tw,
+      "name_zh-hk": name_hk
+    } = this.state;
+    const { user } = this.props;
+    const token = await getToken();
+    const game = {
+      name,
+      name_ja,
+      name_ko,
+      "name_zh-cn": name_cn,
+      "name_zh-tw": name_tw,
+      "name_zh-hk": name_hk
+    };
+    for (let x in game) {
+      if (game[x].length === 0) {
+        delete game[x];
+      }
+    }
+    try {
+      const res = await axios.post("/api/games/new", {
+        user,
+        token,
+        game
+      });
+      if (res) {
+        this.setState({
+          success: true,
+          loading: false
+        });
+      }
+    } catch (e) {
+      this.setState({
+        error: e,
+        loading: false
+      });
+    }
+  };
   render() {
     return (
       <section className="add-game">
         <h2>Add Game</h2>
-        <form>
+        <form onSubmit={this.addGame}>
           <fieldset>
+            {this.state.success && <p>Game created successfully.</p>}
+            {this.state.error && (
+              <p className="error">
+                <span>Error:</span> {this.state.error}
+              </p>
+            )}
             <label htmlFor="name">
               <Flag code="GBR" height="18" />
               <input
