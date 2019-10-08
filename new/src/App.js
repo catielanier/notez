@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import "./App.css";
 
-class App extends React.Component {
+export default class App extends React.Component {
   state = {
     user: null,
     role: null
@@ -47,11 +48,10 @@ class App extends React.Component {
               path="/login"
               component={() => <Login setUser={this.setUser} />}
             />
+            <Route path="/signup" component={() => <Signup />} />
           </main>
         </Router>
       </div>
     );
   }
 }
-
-export default App;
