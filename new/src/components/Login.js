@@ -61,6 +61,11 @@ export default class Login extends React.Component {
         <h2>Login</h2>
         <form disabled={this.state.loading} onSubmit={this.login}>
           <fieldset aria-busy={this.state.loading}>
+            {this.state.error && (
+              <p className="error">
+                <span>Error:</span> {this.state.error}
+              </p>
+            )}
             <label htmlFor="email">
               <FontAwesomeIcon icon={faEnvelope} />
               <input

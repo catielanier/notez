@@ -76,6 +76,14 @@ export default class Signup extends React.Component {
       <section className="signup">
         <h2>Signup</h2>
         <form disabled={this.state.loading} onSubmit={this.signup}>
+          {this.state.success && (
+            <p>Registration success! Please check your email.</p>
+          )}
+          {this.state.error && (
+            <p className="error">
+              <span>Error:</span> {this.state.error}
+            </p>
+          )}
           <fieldset aria-busy={this.state.loading}>
             <label htmlFor="email">
               <FontAwesomeIcon icon={faEnvelope} />

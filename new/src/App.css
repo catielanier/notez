@@ -67,4 +67,8 @@ form label svg {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.error span {
+  color: #ff501c;
+  font-weight: bold;
+}
 /* #FDFF32 */
