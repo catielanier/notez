@@ -1,8 +1,12 @@
 header .grid-container {
-  width: 90%;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 6fr;
+}
+
+header .grid-container,
+main section {
+  width: 90%;
+  margin: 0 auto;
 }
 
 header .grid-container nav ul {
@@ -12,6 +16,55 @@ header .grid-container nav ul {
   justify-content: flex-end;
 }
 
-header .grid-container nav ul li {
+header .grid-container nav ul a li {
   margin-left: 10px;
+  position: relative;
+  z-index: 5;
 }
+
+header .grid-container nav ul a {
+  color: #3493db;
+  text-decoration: none;
+}
+
+.login form,
+.signup form {
+  width: 30%;
+  margin: 0 auto;
+}
+
+fieldset {
+  border: 0;
+  padding: 30px 15px;
+}
+
+form input {
+  width: 94%;
+  border: 0;
+  border-bottom: 3px solid #3493db;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+}
+
+form label svg {
+  margin-right: 5px;
+  color: #3493db;
+}
+
+.login form button,
+.signup form button {
+  width: 100%;
+  background: #3493db;
+  border: 0;
+  padding: 5px;
+  color: #fff;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  transition: all 0.3s ease-in-out;
+}
+
+.login form button:hover,
+.signup form button:hover {
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* #FDFF32 */
