@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import AddGame from "./components/AddGame";
+import AddCharacter from "./components/AddCharacter";
 import "./App.css";
 
 export default class App extends React.Component {
@@ -56,6 +57,10 @@ export default class App extends React.Component {
             <Route
               path="/add-game"
               component={() => <AddGame user={this.state.user} />}
+            />
+            <Route
+              path="/add-character"
+              component={() => <AddCharacter user={this.state.user} />}
             />
           </main>
         </Router>

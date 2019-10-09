@@ -16,9 +16,13 @@ applyMiddleware(middleWare, router);
 // Routes
 const { router: userRouter } = require("./routes/users/userRoutes");
 const { router: gameRouter } = require("./routes/games/gameRoutes");
+const {
+  router: characterRouter
+} = require("./routes/characters/characterRoutes");
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
+router.use("/api/characters", characterRouter);
 
 // Setup server
 const server = http.createServer(router);
