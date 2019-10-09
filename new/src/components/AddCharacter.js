@@ -1,9 +1,35 @@
 import React from "react";
-import Flag from "react-world-flags";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  CircularProgress
+} from "@material-ui/core";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
 
-export default class AddCharacter extends React.Component {
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  button: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(2)
+  },
+  header: {
+    textAlign: "center"
+  },
+  buttonRow: {
+    alignItems: "center"
+  }
+});
+
+class AddCharacter extends React.Component {
   state = {
     name: "",
     name_ja: "",
@@ -66,81 +92,90 @@ export default class AddCharacter extends React.Component {
     }
   };
   render() {
+    const { classes } = this.props;
     return (
       <section className="add-character">
-        <h2>Add Character</h2>
+        <Typography className={classes.header} variant="h5">
+          Add Character
+        </Typography>
         <form onSubmit={this.addCharacter} disabled={this.state.loading}>
-          <fieldset aria-busy={this.state.loading}>
-            {this.state.success && <p>Character created successfully.</p>}
+          <Container maxWidth="sm">
+            {this.state.success && <p>Characters created successfully.</p>}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
               </p>
             )}
-            <label htmlFor="name">
-              <Flag code="GBR" height="18" />
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.changeState}
-                placeholder="Character name"
-              />
-            </label>
-            <label htmlFor="name_ja">
-              <Flag code="JPN" height="22" />
-              <input
-                type="text"
-                name="name_ja"
-                value={this.state.name_ja}
-                onChange={this.changeState}
-                placeholder="キャラクター名"
-              />
-            </label>
-            <label htmlFor="name_ko">
-              <Flag code="KOR" height="22" />
-              <input
-                type="text"
-                name="name_ko"
-                value={this.state.name_ko}
-                onChange={this.changeState}
-                placeholder="캐릭터 이름"
-              />
-            </label>
-            <label htmlFor="name_zh-cn">
-              <Flag code="CHN" height="22" />
-              <input
-                type="text"
-                name="name_zh-cn"
-                value={this.state["name_zh-cn"]}
-                onChange={this.changeState}
-                placeholder="角色名字"
-              />
-            </label>
-            <label htmlFor="name_zh-tw">
-              <Flag code="TWN" height="22" />
-              <input
-                type="text"
-                name="name_zh-tw"
-                value={this.state["name_zh-tw"]}
-                onChange={this.changeState}
-                placeholder="角色名字"
-              />
-            </label>
-            <label htmlFor="name_zh-hk">
-              <Flag code="HKG" height="22" />
-              <input
-                type="text"
-                name="name_zh-hk"
-                value={this.state["name_zh-hk"]}
-                onChange={this.changeState}
-                placeholder="角色名"
-              />
-            </label>
-            <button type="submit">Add Character</button>
-          </fieldset>
+            <TextField
+              label="English Character Name"
+              id="standard-name-required"
+              value={this.state.name}
+              name="name"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="Character Name"
+              required
+            />
+            <TextField
+              label="Japanese Character Name"
+              value={this.state.name}
+              name="name_ja"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="キャラクター名"
+            />
+            <TextField
+              label="Korean Character Name"
+              value={this.state.name_ko}
+              name="name_ko"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="캐릭터 이름"
+            />
+            <TextField
+              label="Mandarin (Simplified) Character Name"
+              value={this.state["name_zh-cn"]}
+              name="name_zh-cn"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="角色名字"
+            />
+            <TextField
+              label="Mandarin (Traditional) Character Name"
+              value={this.state["name_zh-tw"]}
+              name="name_zh-tw"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="角色名字"
+            />
+            <TextField
+              label="Cantonese Character Name"
+              value={this.state["name_zh-hk"]}
+              name="name_zh-hk"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="角色名字"
+            />
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              type="submit"
+            >
+              Add Character
+            </Button>
+            <Button color="inherit" variant="text" className={classes.button}>
+              Clear Form
+            </Button>
+          </Container>
         </form>
       </section>
     );
   }
 }
+
+AddCharacter.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(AddCharacter);

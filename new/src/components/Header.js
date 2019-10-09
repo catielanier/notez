@@ -38,7 +38,7 @@ export default function Header(props) {
   };
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -53,20 +53,40 @@ export default function Header(props) {
           </Typography>
           {!props.user && (
             <>
-              <Button href="/login" color="inherit">
+              <Button
+                component={React.forwardRef((props, ref) => (
+                  <RouterLink innerRef={ref} to="/login" {...props} />
+                ))}
+                color="inherit"
+              >
                 Login
               </Button>
-              <Button href="/signup" color="inherit">
+              <Button
+                component={React.forwardRef((props, ref) => (
+                  <RouterLink innerRef={ref} to="/signup" {...props} />
+                ))}
+                color="inherit"
+              >
                 Signup
               </Button>
             </>
           )}
           {props.user && (
             <>
-              <Button href="/game" color="inherit">
+              <Button
+                component={React.forwardRef((props, ref) => (
+                  <RouterLink innerRef={ref} to="/game" {...props} />
+                ))}
+                color="inherit"
+              >
                 Game Notes
               </Button>
-              <Button href="/player" color="inherit">
+              <Button
+                component={React.forwardRef((props, ref) => (
+                  <RouterLink innerRef={ref} to="/player" {...props} />
+                ))}
+                color="inherit"
+              >
                 Player Notes
               </Button>
               {props.role === "Admin" && (

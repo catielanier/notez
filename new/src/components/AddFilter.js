@@ -1,9 +1,35 @@
 import React from "react";
-import Flag from "react-world-flags";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  CircularProgress
+} from "@material-ui/core";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
 
-export default class AddFilter extends React.Component {
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  button: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(2)
+  },
+  header: {
+    textAlign: "center"
+  },
+  buttonRow: {
+    alignItems: "center"
+  }
+});
+
+class AddFilter extends React.Component {
   state = {
     name: "",
     name_ja: "",
@@ -66,81 +92,90 @@ export default class AddFilter extends React.Component {
     }
   };
   render() {
+    const { classes } = this.props;
     return (
-      <section className="add-filter">
-        <h2>Add Filter</h2>
-        <form onSubmit={this.addFilter} disabled={this.state.loading}>
-          <fieldset aria-busy={this.state.loading}>
+      <section className="add-character">
+        <Typography className={classes.header} variant="h5">
+          Add Filters
+        </Typography>
+        <form onSubmit={this.addCharacter} disabled={this.state.loading}>
+          <Container maxWidth="sm">
             {this.state.success && <p>Filter created successfully.</p>}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
               </p>
             )}
-            <label htmlFor="name">
-              <Flag code="GBR" height="18" />
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.changeState}
-                placeholder="Filter name"
-              />
-            </label>
-            <label htmlFor="name_ja">
-              <Flag code="JPN" height="22" />
-              <input
-                type="text"
-                name="name_ja"
-                value={this.state.name_ja}
-                onChange={this.changeState}
-                placeholder="ゲームタイトル"
-              />
-            </label>
-            <label htmlFor="name_ko">
-              <Flag code="KOR" height="22" />
-              <input
-                type="text"
-                name="name_ko"
-                value={this.state.name_ko}
-                onChange={this.changeState}
-                placeholder="게임 제목"
-              />
-            </label>
-            <label htmlFor="name_zh-cn">
-              <Flag code="CHN" height="22" />
-              <input
-                type="text"
-                name="name_zh-cn"
-                value={this.state["name_zh-cn"]}
-                onChange={this.changeState}
-                placeholder="电子游戏标题"
-              />
-            </label>
-            <label htmlFor="name_zh-tw">
-              <Flag code="TWN" height="22" />
-              <input
-                type="text"
-                name="name_zh-tw"
-                value={this.state["name_zh-tw"]}
-                onChange={this.changeState}
-                placeholder="電子遊戲標題"
-              />
-            </label>
-            <label htmlFor="name_zh-hk">
-              <Flag code="HKG" height="22" />
-              <input
-                type="text"
-                name="name_zh-hk"
-                value={this.state["name_zh-hk"]}
-                onChange={this.changeState}
-                placeholder="電子遊戲標題"
-              />
-            </label>
-            <button type="submit">Add Filter</button>
-          </fieldset>
+            <TextField
+              label="English Filter Type"
+              id="standard-name-required"
+              value={this.state.name}
+              name="name"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="Filter Type"
+              required
+            />
+            <TextField
+              label="Japanese Filter Type"
+              value={this.state.name}
+              name="name_ja"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="フィルタータイプ"
+            />
+            <TextField
+              label="Korean Filter Type"
+              value={this.state.name_ko}
+              name="name_ko"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="필터 타입"
+            />
+            <TextField
+              label="Mandarin (Simplified) Filter Type"
+              value={this.state["name_zh-cn"]}
+              name="name_zh-cn"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="过滤器类型"
+            />
+            <TextField
+              label="Mandarin (Traditional) Filter Type"
+              value={this.state["name_zh-tw"]}
+              name="name_zh-tw"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="過濾器類型"
+            />
+            <TextField
+              label="Cantonese Filter Type"
+              value={this.state["name_zh-hk"]}
+              name="name_zh-hk"
+              onChange={this.changeState}
+              fullWidth="true"
+              placeholder="過濾器類型"
+            />
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              type="submit"
+            >
+              Add Filter
+            </Button>
+            <Button color="inherit" variant="text" className={classes.button}>
+              Clear Form
+            </Button>
+          </Container>
         </form>
       </section>
     );
   }
 }
+
+AddFilter.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(AddFilter);
