@@ -3,7 +3,7 @@ import Flag from "react-world-flags";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
 
-export default class AddCharacter extends React.Component {
+export default class AddFilter extends React.Component {
   state = {
     name: "",
     name_ja: "",
@@ -18,7 +18,7 @@ export default class AddCharacter extends React.Component {
       [name]: value
     });
   };
-  addCharacter = async e => {
+  addFilter = async e => {
     e.preventDefault();
     this.setState({
       loading: true
@@ -33,7 +33,7 @@ export default class AddCharacter extends React.Component {
     } = this.state;
     const { user } = this.props;
     const token = await getToken();
-    const character = {
+    const filter = {
       name,
       name_ja,
       name_ko,
@@ -41,16 +41,16 @@ export default class AddCharacter extends React.Component {
       "name_zh-tw": name_tw,
       "name_zh-hk": name_hk
     };
-    for (let x in character) {
-      if (character[x].length === 0) {
-        delete character[x];
+    for (let x in filter) {
+      if (filter[x].length === 0) {
+        delete filter[x];
       }
     }
     try {
-      const res = await axios.post("/api/characters/new", {
+      const res = await axios.post("/api/filters/new", {
         user,
         token,
-        character
+        filter
       });
       if (res) {
         this.setState({
@@ -67,11 +67,11 @@ export default class AddCharacter extends React.Component {
   };
   render() {
     return (
-      <section className="add-character">
-        <h2>Add Character</h2>
-        <form onSubmit={this.addCharacter} disabled={this.state.loading}>
+      <section className="add-filter">
+        <h2>Add Filter</h2>
+        <form onSubmit={this.addFilter} disabled={this.state.loading}>
           <fieldset aria-busy={this.state.loading}>
-            {this.state.success && <p>Character created successfully.</p>}
+            {this.state.success && <p>Filter created successfully.</p>}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
@@ -84,7 +84,7 @@ export default class AddCharacter extends React.Component {
                 name="name"
                 value={this.state.name}
                 onChange={this.changeState}
-                placeholder="Character name"
+                placeholder="Filter name"
               />
             </label>
             <label htmlFor="name_ja">
@@ -94,7 +94,7 @@ export default class AddCharacter extends React.Component {
                 name="name_ja"
                 value={this.state.name_ja}
                 onChange={this.changeState}
-                placeholder="キャラクター名"
+                placeholder="ゲームタイトル"
               />
             </label>
             <label htmlFor="name_ko">
@@ -104,7 +104,7 @@ export default class AddCharacter extends React.Component {
                 name="name_ko"
                 value={this.state.name_ko}
                 onChange={this.changeState}
-                placeholder="캐릭터 이름"
+                placeholder="게임 제목"
               />
             </label>
             <label htmlFor="name_zh-cn">
@@ -114,7 +114,7 @@ export default class AddCharacter extends React.Component {
                 name="name_zh-cn"
                 value={this.state["name_zh-cn"]}
                 onChange={this.changeState}
-                placeholder="角色名字"
+                placeholder="电子游戏标题"
               />
             </label>
             <label htmlFor="name_zh-tw">
@@ -124,7 +124,7 @@ export default class AddCharacter extends React.Component {
                 name="name_zh-tw"
                 value={this.state["name_zh-tw"]}
                 onChange={this.changeState}
-                placeholder="角色名字"
+                placeholder="電子遊戲標題"
               />
             </label>
             <label htmlFor="name_zh-hk">
@@ -134,10 +134,10 @@ export default class AddCharacter extends React.Component {
                 name="name_zh-hk"
                 value={this.state["name_zh-hk"]}
                 onChange={this.changeState}
-                placeholder="角色名"
+                placeholder="電子遊戲標題"
               />
             </label>
-            <button type="submit">Add Character</button>
+            <button type="submit">Add Filter</button>
           </fieldset>
         </form>
       </section>

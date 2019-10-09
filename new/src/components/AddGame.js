@@ -69,8 +69,8 @@ export default class AddGame extends React.Component {
     return (
       <section className="add-game">
         <h2>Add Game</h2>
-        <form onSubmit={this.addGame}>
-          <fieldset>
+        <form onSubmit={this.addGame} disabled={this.state.loading}>
+          <fieldset aria-busy={this.state.loading}>
             {this.state.success && <p>Game created successfully.</p>}
             {this.state.error && (
               <p className="error">

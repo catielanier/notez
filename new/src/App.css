@@ -128,7 +128,8 @@ form label svg {
 .login form button,
 .signup form button,
 .add-game form button,
-.add-character form button {
+.add-character form button,
+.add-filter form button {
   width: 100%;
   background: #3493db;
   border: 0;
@@ -141,7 +142,8 @@ form label svg {
 .login form button:hover,
 .signup form button:hover,
 .add-game form button:hover,
-.add-character form button:hover {
+.add-character form button:hover,
+.add-filter form button:hover {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
