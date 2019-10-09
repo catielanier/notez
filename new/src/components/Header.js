@@ -1,65 +1,156 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link as RouterLink } from "react-router-dom";
+import {
+  AppBar,
+  Typography,
+  Toolbar,
+  IconButton,
+  Button,
+  Menu,
+  MenuItem,
+  Link
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  }
+}));
 
 export default function Header(props) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
-    <header>
-      <div className="grid-container">
-        <div className="title">
-          <h1>NoteZ</h1>
-        </div>
-        <nav>
-          <ul>
-            {!props.user && (
-              <>
-                <Link to="/login">
-                  <li>Login</li>
-                </Link>
-                <Link to="/signup">
-                  <li>Signup</li>
-                </Link>
-              </>
-            )}
-            {props.user && (
-              <>
-                <Link to="/game">
-                  <li>Game Notes</li>
-                </Link>
-                <Link to="/player">
-                  <li>Player Notes</li>
-                </Link>
-                <Link to="/profile">
-                  <li>Profile</li>
-                </Link>
-                {props.role === "Admin" && (
-                  <>
-                    <li>
-                      Settings
-                      <ul>
-                        <Link to="/add-game">
-                          <li>Add Game</li>
-                        </Link>
-                        <Link to="/add-character">
-                          <li>Add Character</li>
-                        </Link>
-                        <Link to="/add-filter">
-                          <li>Add Filter</li>
-                        </Link>
-                        <Link to="/user-settings">
-                          <li>User Settings</li>
-                        </Link>
-                      </ul>
-                    </li>
-                  </>
-                )}
-                <button>
-                  <li>Logout</li>
-                </button>
-              </>
-            )}
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <div className={classes.root}>
+      <AppBar>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            NoteZ
+          </Typography>
+          {!props.user && (
+            <>
+              <Button href="/login" color="inherit">
+                Login
+              </Button>
+              <Button href="/signup" color="inherit">
+                Signup
+              </Button>
+            </>
+          )}
+          {props.user && (
+            <>
+              <Button href="/game" color="inherit">
+                Game Notes
+              </Button>
+              <Button href="/player" color="inherit">
+                Player Notes
+              </Button>
+              {props.role === "Admin" && (
+                <>
+                  <Button onClick={handleClick} color="inherit">
+                    Settings
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink innerRef={ref} to="/add-game" {...props} />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>Add Games</MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/add-character"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>Add Characters</MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/add-filter"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>Add Filters</MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/link-character"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>Link Characters</MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/link-filter"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>Link Filters</MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/user-settings"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>User Settings</MenuItem>
+                    </Link>
+                  </Menu>
+                </>
+              )}
+              <Button color="inherit">Logout</Button>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

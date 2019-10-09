@@ -139,6 +139,10 @@ form label svg {
   transition: all 0.3s ease-in-out;
 }
 
+.MuiListItem-root .MuiLink-root:hover {
+  text-decoration: none;
+}
+
 .login form button:hover,
 .signup form button:hover,
 .add-game form button:hover,
