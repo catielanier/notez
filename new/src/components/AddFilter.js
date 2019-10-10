@@ -16,16 +16,24 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap"
   },
-  button: {
-    marginRight: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(2)
-  },
   header: {
     textAlign: "center"
   },
   buttonRow: {
-    alignItems: "center"
+    display: "flex",
+    alignItems: "center",
+    marginTop: theme.spacing(2)
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: "relative"
+  },
+  buttonProgress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -156,17 +164,29 @@ class AddFilter extends React.Component {
               fullWidth="true"
               placeholder="過濾器類型"
             />
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.button}
-              type="submit"
-            >
-              Add Filter
-            </Button>
-            <Button color="inherit" variant="text" className={classes.button}>
-              Clear Form
-            </Button>
+            <Container className={classes.buttonRow}>
+              <div className={classes.wrapper}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  onClick={this.addFilter}
+                  disabled={this.state.loading}
+                >
+                  Add Filter
+                </Button>
+                {this.state.loading && (
+                  <CircularProgress
+                    size={20}
+                    color="secondary"
+                    className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+              <div className={classes.wrapper}>
+                <Button>Clear Form</Button>
+              </div>
+            </Container>
           </Container>
         </form>
       </section>

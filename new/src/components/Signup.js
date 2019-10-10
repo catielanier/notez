@@ -1,15 +1,43 @@
 import React from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link as RouterLink } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 import {
-  faEnvelope,
-  faKey,
-  faUser,
-  faUserTie,
-  faGlobe
-} from "@fortawesome/free-solid-svg-icons";
+  TextField,
+  Button,
+  Typography,
+  Container,
+  CircularProgress
+} from "@material-ui/core";
 
-export default class Signup extends React.Component {
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  header: {
+    textAlign: "center"
+  },
+  buttonRow: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: theme.spacing(2)
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: "relative"
+  },
+  buttonProgress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
+  }
+});
+
+class Signup extends React.Component {
   state = {
     loading: false,
     success: false,
@@ -72,83 +100,102 @@ export default class Signup extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <section className="signup">
-        <h2>Signup</h2>
-        <form disabled={this.state.loading} onSubmit={this.signup}>
-          {this.state.success && (
-            <p>Registration success! Please check your email.</p>
-          )}
-          {this.state.error && (
-            <p className="error">
-              <span>Error:</span> {this.state.error}
-            </p>
-          )}
-          <fieldset aria-busy={this.state.loading}>
-            <label htmlFor="email">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.changeState}
-                placeholder="Email Address"
-              />
-            </label>
-            <label htmlFor="password">
-              <FontAwesomeIcon icon={faKey} />
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.changeState}
-                placeholder="Password"
-              />
-            </label>
-            <label htmlFor="verifyPassword">
-              <FontAwesomeIcon icon={faKey} />
-              <input
-                type="password"
-                name="verifyPassword"
-                value={this.state.verifyPassword}
-                onChange={this.changeState}
-                placeholder="Verify Password"
-              />
-            </label>
-            <label htmlFor="username">
-              <FontAwesomeIcon icon={faUser} />
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.changeState}
-                placeholder="Username"
-              />
-            </label>
-            <label htmlFor="realName">
-              <FontAwesomeIcon icon={faUserTie} />
-              <input
-                type="text"
-                name="realName"
-                value={this.state.realName}
-                onChange={this.changeState}
-                placeholder="Real Name"
-              />
-            </label>
-            <label htmlFor="country">
-              <FontAwesomeIcon icon={faGlobe} />
-              <input
-                type="text"
-                name="country"
-                value={this.state.country}
-                onChange={this.changeState}
-                placeholder="Country"
-              />
-            </label>
-            <button type="submit">Signup</button>
-          </fieldset>
-        </form>
+        <Container maxWidth="xs">
+          <Typography className={classes.header} variant="h5">
+            Signup
+          </Typography>
+          <form disabled={this.state.loading} onSubmit={this.signup}>
+            {this.state.success && (
+              <p>Registration success! Please check your email.</p>
+            )}
+            {this.state.error && (
+              <p className="error">
+                <span>Error:</span> {this.state.error}
+              </p>
+            )}
+            <TextField
+              label="Email Address"
+              required
+              name="email"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.email}
+            />
+            <TextField
+              label="Password"
+              required
+              name="password"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.password}
+              type="password"
+            />
+            <TextField
+              label="Verify Password"
+              required
+              name="verifyPassword"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.verifyPassword}
+              type="password"
+            />
+            <TextField
+              label="Username"
+              required
+              name="username"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.username}
+            />
+            <TextField
+              label="Real Name"
+              name="realName"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.realName}
+            />
+            <TextField
+              label="Country"
+              name="country"
+              onChange={this.changeState}
+              fullWidth
+              value={this.state.country}
+            />
+            <Container className={classes.buttonRow}>
+              <div className={classes.wrapper}>
+                <Button color="primary" variant="contained" type="submit">
+                  Signup
+                </Button>
+                {this.state.loading && (
+                  <CircularProgress
+                    size={20}
+                    color="secondary"
+                    className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+              <div className={classes.wrapper}>
+                <Button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/" {...props} />
+                  ))}
+                >
+                  Go Back
+                </Button>
+              </div>
+            </Container>
+          </form>
+        </Container>
       </section>
     );
   }
 }
+
+Signup.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Signup);
