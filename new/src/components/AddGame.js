@@ -46,12 +46,14 @@ class AddGame extends React.Component {
     "name_zh-tw": "",
     "name_zh-hk": ""
   };
+
   changeState = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+
   addGame = async e => {
     e.preventDefault();
     this.setState({
@@ -99,6 +101,19 @@ class AddGame extends React.Component {
       });
     }
   };
+
+  clearForm = e => {
+    e.preventDefault();
+    this.setState({
+      name: "",
+      name_ja: "",
+      name_ko: "",
+      "name_zh-cn": "",
+      "name_zh-tw": "",
+      "name_zh-hk": ""
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -126,7 +141,7 @@ class AddGame extends React.Component {
             />
             <TextField
               label="Japanese Game Title"
-              value={this.state.name}
+              value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
               fullWidth="true"
@@ -184,7 +199,7 @@ class AddGame extends React.Component {
                 )}
               </div>
               <div className={classes.wrapper}>
-                <Button>Clear Form</Button>
+                <Button onClick={this.clearForm}>Clear Form</Button>
               </div>
             </Container>
           </Container>

@@ -6,7 +6,9 @@ import {
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  FormControlLabel,
+  Checkbox
 } from "@material-ui/core";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
@@ -44,14 +46,35 @@ class AddFilter extends React.Component {
     name_ko: "",
     "name_zh-cn": "",
     "name_zh-tw": "",
-    "name_zh-hk": ""
+    "name_zh-hk": "",
+    playerFilter: false
   };
+
   changeState = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+
+  handleCheck = e => {
+    const playerFilter = !this.state.playerFilter;
+    this.setState({ playerFilter });
+  };
+
+  clearForm = e => {
+    e.preventDefault();
+    this.setState({
+      name: "",
+      name_ja: "",
+      name_ko: "",
+      "name_zh-cn": "",
+      "name_zh-tw": "",
+      "name_zh-hk": "",
+      playerFilter: false
+    });
+  };
+
   addFilter = async e => {
     e.preventDefault();
     this.setState({
@@ -99,6 +122,7 @@ class AddFilter extends React.Component {
       });
     }
   };
+
   render() {
     const { classes } = this.props;
     return (
@@ -114,6 +138,17 @@ class AddFilter extends React.Component {
                 <span>Error:</span> {this.state.error}
               </p>
             )}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.playerFilter}
+                  onChange={this.handleCheck}
+                  value={this.state.playerFilter}
+                  color="primary"
+                />
+              }
+              label="Player Filter"
+            />
             <TextField
               label="English Filter Type"
               id="standard-name-required"
@@ -126,7 +161,7 @@ class AddFilter extends React.Component {
             />
             <TextField
               label="Japanese Filter Type"
-              value={this.state.name}
+              value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
               fullWidth="true"
@@ -184,7 +219,7 @@ class AddFilter extends React.Component {
                 )}
               </div>
               <div className={classes.wrapper}>
-                <Button>Clear Form</Button>
+                <Button onClick={this.clearForm}>Clear Form</Button>
               </div>
             </Container>
           </Container>

@@ -46,12 +46,26 @@ class AddCharacter extends React.Component {
     "name_zh-tw": "",
     "name_zh-hk": ""
   };
+
   changeState = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
+
+  clearForm = e => {
+    e.preventDefault();
+    this.setState({
+      name: "",
+      name_ja: "",
+      name_ko: "",
+      "name_zh-cn": "",
+      "name_zh-tw": "",
+      "name_zh-hk": ""
+    });
+  };
+
   addCharacter = async e => {
     e.preventDefault();
     this.setState({
@@ -99,6 +113,7 @@ class AddCharacter extends React.Component {
       });
     }
   };
+
   render() {
     const { classes } = this.props;
     return (
@@ -184,7 +199,7 @@ class AddCharacter extends React.Component {
                 )}
               </div>
               <div className={classes.wrapper}>
-                <Button>Clear Form</Button>
+                <Button onClick={this.clearForm}>Clear Form</Button>
               </div>
             </Container>
           </Container>
