@@ -141,7 +141,7 @@ class AddCharacter extends React.Component {
             />
             <TextField
               label="Japanese Character Name"
-              value={this.state.name}
+              value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
               fullWidth="true"
