@@ -28,4 +28,17 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
+router.route("/").get(async (_, res) => {
+  try {
+    const characters = await characterServices.getAllCharacters();
+    if (characters) {
+      res.status(200).json({
+        data: characters
+      });
+    }
+  } catch (e) {
+    res.status(201).statusMessage(e);
+  }
+});
+
 exports.router = router;

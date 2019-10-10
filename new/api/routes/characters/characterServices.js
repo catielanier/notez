@@ -8,3 +8,14 @@ exports.createCharacter = async characterData => {
     throw e;
   }
 };
+
+exports.getAllCharacters = async () => {
+  try {
+    const characters = await Character.find({});
+    if (characters) {
+      return characters;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
