@@ -1,5 +1,8 @@
 "use strict";
 
+const { model: GameNote } = require("../notes/games/gameNoteModel");
+const { model: PlayerNote } = require("../notes/players/playerNoteModel");
+
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
@@ -34,7 +37,19 @@ const userSchema = new Schema({
   },
   realName: {
     type: String
-  }
+  },
+  gameNotes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: GameNote
+    }
+  ],
+  playerNotes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: PlayerNote
+    }
+  ]
 });
 
 userSchema.pre("save", async function(next) {
