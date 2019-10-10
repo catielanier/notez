@@ -28,4 +28,17 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
+router.route("/").get(async (_, res) => {
+  try {
+    const filters = await filterServices.getAllFilters();
+    if (filters) {
+      res.status(200).json({
+        data: filters
+      });
+    }
+  } catch (e) {
+    res.status(201).statusMessage(e);
+  }
+});
+
 exports.router = router;

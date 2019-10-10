@@ -8,3 +8,14 @@ exports.createFilter = async filterData => {
     throw e;
   }
 };
+
+exports.getAllFilters = async () => {
+  try {
+    const filters = await Filter.find({});
+    if (filters) {
+      return filters;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
