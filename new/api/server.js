@@ -19,10 +19,12 @@ const { router: gameRouter } = require("./routes/games/gameRoutes");
 const {
   router: characterRouter
 } = require("./routes/characters/characterRoutes");
+const { router: filterRouter } = require("./routes/filters/filterRoutes");
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
 router.use("/api/characters", characterRouter);
+router.use("/api/filters", filterRouter);
 
 // Setup server
 const server = http.createServer(router);
