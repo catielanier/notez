@@ -28,4 +28,17 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
+router.route("/").get(async (_, res) => {
+  try {
+    const games = await gameServices.getAllGames();
+    if (games) {
+      res.status(200).json({
+        data: games
+      });
+    }
+  } catch (e) {
+    res.status(201).statusMessage(e);
+  }
+});
+
 exports.router = router;

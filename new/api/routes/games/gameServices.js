@@ -8,3 +8,14 @@ exports.createGame = async gameData => {
     throw e;
   }
 };
+
+exports.getAllGames = async () => {
+  try {
+    const games = await Game.find({});
+    if (games) {
+      return games;
+    }
+  } catch (e) {
+    throw e
+  }
+}
