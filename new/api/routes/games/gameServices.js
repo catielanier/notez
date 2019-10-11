@@ -34,3 +34,18 @@ exports.linkCharacters = async (game, characters) => {
     throw e;
   }
 };
+
+exports.linkFilters = async (game, filters) => {
+  try {
+    const updatedGame = await Game.findByIdAndUpdate(game, {
+      $update: {
+        filters
+      }
+    });
+    if (updatedGame) {
+      return updatedGame;
+    }
+  } catch (e) {
+    throw e;
+  }
+};

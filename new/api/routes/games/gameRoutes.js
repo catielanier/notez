@@ -57,7 +57,9 @@ router.route("/:id/character").put(async (req, res) => {
     // Query the user and check for admin privileges.
     const user = await userServices.getUserById(id);
     if (user.role !== "Admin") {
-      res.status(503).statusMessage("Only admins can create games.");
+      res
+        .status(503)
+        .statusMessage("Only admins can link characters to games.");
     }
     // Take the game and characters to update the character array on the document
     const update = gameServices.linkCharacters(game, characters);
@@ -71,6 +73,30 @@ router.route("/:id/character").put(async (req, res) => {
   }
 });
 
-router.route("/:id/filter").put(async (req, res) => {});
+router.route("/:id/filter").put(async (req, res) => {
+  // Grab the token, user id, and game from frontend.
+  const { token, user: id, filters, game } = req.body;
+  try {
+    // Check if the login is valid
+    const loggedIn = await tokenService.verifyToken(token);
+    if (!loggedIn) {
+      res.status(503).statusMessage("You are not logged in.");
+    }
+    // Query the user and check for admin privileges.
+    const user = await userServices.getUserById(id);
+    if (user.role !== "Admin") {
+      res.status(503).statusMessage("Only admins can link filters to games.");
+    }
+    // Take the game and characters to update the character array on the document
+    const update = gameServices.linkFilters(game, filters);
+    if (update) {
+      res.status(201).json({
+        data: update
+      });
+    }
+  } catch (e) {
+    res.status(401).statusMessage(e);
+  }
+});
 
 exports.router = router;
