@@ -11,14 +11,17 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import Select from "react-select";
-import getToken from "../services/tokenService";
+import { getToken } from "../services/tokenService";
 
 class LinkCharacter extends React.Component {
   state = {
     games: [],
     game: "",
     characters: [],
-    selected: []
+    selected: [],
+    loading: false,
+    success: false,
+    error: null
   };
 
   pickGame = e => {
@@ -42,6 +45,34 @@ class LinkCharacter extends React.Component {
       selected.splice(character, 1);
       this.setState({
         selected
+      });
+    }
+  };
+
+  linkCharacters = async e => {
+    e.preventDefault();
+    this.setState({
+      loading: true
+    });
+    const token = await getToken();
+    const { user } = this.props;
+    const { game, selected: characters } = this.state;
+    try {
+      const res = await axios.put(`/api/games/${game}/character`, {
+        user,
+        token,
+        characters,
+        game
+      });
+      console.log(res);
+      this.setState({
+        loading: false,
+        success: true
+      });
+    } catch (e) {
+      this.setState({
+        loading: false,
+        error: e
       });
     }
   };
@@ -100,7 +131,11 @@ class LinkCharacter extends React.Component {
                   );
                 })}
               </Grid>
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.linkCharacters}
+              >
                 Link Characters
               </Button>
             </>

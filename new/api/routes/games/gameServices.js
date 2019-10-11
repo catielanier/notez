@@ -16,6 +16,21 @@ exports.getAllGames = async () => {
       return games;
     }
   } catch (e) {
-    throw e
+    throw e;
   }
-}
+};
+
+exports.linkCharacters = async (game, characters) => {
+  try {
+    const updatedGame = await Game.findByIdAndUpdate(game, {
+      $update: {
+        characters
+      }
+    });
+    if (updatedGame) {
+      return updatedGame;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
