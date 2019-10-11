@@ -19,7 +19,7 @@ router.route("/new").post(async (req, res) => {
       res.status(503).statusMessage("Only admins can create games.");
     }
     // Create new filter.
-    const newFilter = await filterServices.createGame(filter);
+    const newFilter = await filterServices.createFilter(filter);
     res.status(201).json({
       data: newFilter
     });

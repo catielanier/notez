@@ -86,7 +86,8 @@ class AddFilter extends React.Component {
       name_ko,
       "name_zh-cn": name_cn,
       "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
+      "name_zh-hk": name_hk,
+      playerFilter
     } = this.state;
     const { user } = this.props;
     const token = await getToken();
@@ -96,7 +97,8 @@ class AddFilter extends React.Component {
       name_ko,
       "name_zh-cn": name_cn,
       "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
+      "name_zh-hk": name_hk,
+      playerFilter
     };
     for (let x in filter) {
       if (filter[x].length === 0) {

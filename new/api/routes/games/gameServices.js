@@ -23,7 +23,7 @@ exports.getAllGames = async () => {
 exports.linkCharacters = async (game, characters) => {
   try {
     const updatedGame = await Game.findByIdAndUpdate(game, {
-      $update: {
+      $set: {
         characters
       }
     });
@@ -38,7 +38,7 @@ exports.linkCharacters = async (game, characters) => {
 exports.linkFilters = async (game, filters) => {
   try {
     const updatedGame = await Game.findByIdAndUpdate(game, {
-      $update: {
+      $set: {
         filters
       }
     });

@@ -13,11 +13,11 @@ import axios from "axios";
 import Select from "react-select";
 import { getToken } from "../services/tokenService";
 
-class LinkCharacter extends React.Component {
+class LinkFilter extends React.Component {
   state = {
     games: [],
     game: "",
-    characters: [],
+    filters: [],
     selected: [],
     loading: false,
     success: false,
@@ -27,43 +27,43 @@ class LinkCharacter extends React.Component {
   pickGame = e => {
     const game = e.value;
     const index = this.state.games.findIndex(oneGame => oneGame._id === game);
-    const { characters: selected } = this.state.games[index];
+    const { filters: selected } = this.state.games[index];
     this.setState({
       game,
       selected
     });
   };
 
-  handleCharacters = e => {
-    const character = e.target.value;
+  handleFilters = e => {
+    const filter = e.target.value;
     const { selected } = this.state;
-    const index = selected.indexOf(character);
+    const index = selected.indexOf(filter);
     if (index === -1) {
-      selected.push(character);
+      selected.push(filter);
       this.setState({
         selected
       });
     } else {
-      selected.splice(character, 1);
+      selected.splice(filter, 1);
       this.setState({
         selected
       });
     }
   };
 
-  linkCharacters = async e => {
+  linkFilters = async e => {
     e.preventDefault();
     this.setState({
       loading: true
     });
     const token = await getToken();
     const { user } = this.props;
-    const { game, selected: characters } = this.state;
+    const { game, selected: filters } = this.state;
     try {
-      const res = await axios.put(`/api/games/${game}/character`, {
+      const res = await axios.put(`/api/games/${game}/filter`, {
         user,
         token,
-        characters,
+        filters,
         game
       });
       console.log(res);
@@ -83,14 +83,14 @@ class LinkCharacter extends React.Component {
     try {
       const res = await axios.get("/api/games");
       const games = res.data.data;
-      const res2 = await axios.get("/api/characters");
-      const characters = res2.data.data;
-      characters.sort(function(x, y) {
+      const res2 = await axios.get("/api/filters/game");
+      const filters = res2.data.data;
+      filters.sort(function(x, y) {
         return x.name.localeCompare(y.name);
       });
       this.setState({
         games,
-        characters
+        filters
       });
     } catch (e) {
       console.log(e);
@@ -99,9 +99,9 @@ class LinkCharacter extends React.Component {
 
   render() {
     return (
-      <section className="link-character">
+      <section className="link-filter">
         <Container maxWidth="sm">
-          <Typography variant="h5">Link Characters to Game</Typography>
+          <Typography variant="h5">Link Filters to Game</Typography>
           <Select
             options={this.state.games.map(game => {
               return {
@@ -116,21 +116,21 @@ class LinkCharacter extends React.Component {
           {this.state.game !== "" && (
             <>
               <Grid container spacing={2}>
-                {this.state.characters.map((character, index) => {
+                {this.state.filters.map((filter, index) => {
                   return (
                     <Grid item key={index} md={3} sm={4} xs={6}>
                       <FormControlLabel
                         control={
                           <Checkbox
-                            value={character._id}
-                            onChange={this.handleCharacters}
+                            value={filter._id}
+                            onChange={this.handleFilters}
                             color="primary"
                             checked={
-                              this.state.selected.indexOf(character._id) !== -1
+                              this.state.selected.indexOf(filter._id) !== -1
                             }
                           />
                         }
-                        label={character.name}
+                        label={filter.name}
                       />
                     </Grid>
                   );
@@ -139,9 +139,9 @@ class LinkCharacter extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.linkCharacters}
+                onClick={this.linkFilters}
               >
-                Link Characters
+                Link Filters
               </Button>
             </>
           )}
@@ -151,4 +151,4 @@ class LinkCharacter extends React.Component {
   }
 }
 
-export default LinkCharacter;
+export default LinkFilter;
