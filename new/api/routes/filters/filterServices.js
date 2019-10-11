@@ -9,6 +9,32 @@ exports.createFilter = async filterData => {
   }
 };
 
+exports.getAllGameFilters = async () => {
+  try {
+    const filters = await Filter.find({
+      playerFilter: false
+    });
+    if (filters) {
+      return filters;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.getAllPlayerFilters = async () => {
+  try {
+    const filters = await Filter.find({
+      playerFilter: true
+    });
+    if (filters) {
+      return filters;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
 exports.getAllFilters = async () => {
   try {
     const filters = await Filter.find({});

@@ -28,6 +28,32 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
+router.route("/game").get(async (_, res) => {
+  try {
+    const filters = await filterServices.getAllGameFilters();
+    if (filters) {
+      res.status(200).json({
+        data: filters
+      });
+    }
+  } catch (e) {
+    res.status(400).statusMessage(e);
+  }
+});
+
+router.route("/player").get(async (_, res) => {
+  try {
+    const filters = await filterServices.getAllPlayerFilters();
+    if (filters) {
+      res.status(200).json({
+        data: filters
+      });
+    }
+  } catch (e) {
+    res.status(400).statusMessage(e);
+  }
+});
+
 router.route("/").get(async (_, res) => {
   try {
     const filters = await filterServices.getAllFilters();
@@ -37,7 +63,7 @@ router.route("/").get(async (_, res) => {
       });
     }
   } catch (e) {
-    res.status(201).statusMessage(e);
+    res.status(400).statusMessage(e);
   }
 });
 
