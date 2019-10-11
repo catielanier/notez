@@ -10,6 +10,7 @@ import Signup from "./components/Signup";
 import AddGame from "./components/AddGame";
 import AddCharacter from "./components/AddCharacter";
 import AddFilter from "./components/AddFilter";
+import LinkCharacter from "./components/LinkCharacter";
 import "./App.css";
 
 const theme = createMuiTheme({
@@ -77,6 +78,10 @@ export default class App extends React.Component {
               <Route
                 path="/add-filter"
                 component={() => <AddFilter user={this.state.user} />}
+              />
+              <Route
+                path="/link-character"
+                component={() => <LinkCharacter user={this.state.user} />}
               />
             </main>
           </Router>

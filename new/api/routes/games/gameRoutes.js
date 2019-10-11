@@ -41,4 +41,12 @@ router.route("/").get(async (_, res) => {
   }
 });
 
+router.route("/:id").get(async (req, res) => {});
+
+router.route("/:id").put(async (req, res) => {});
+
+router.route("/:id/character").put(async (req, res) => {});
+
+router.route("/:id/filter").put(async (req, res) => {});
+
 exports.router = router;
