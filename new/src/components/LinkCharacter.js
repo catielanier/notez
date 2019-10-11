@@ -27,8 +27,11 @@ class LinkCharacter extends React.Component {
   pickGame = e => {
     const game = e.value;
     console.log(e.value);
+    const index = this.state.games.findIndex(oneGame => oneGame._id === game);
+    const { characters: selected } = this.state.games[index];
     this.setState({
-      game
+      game,
+      selected
     });
   };
 
@@ -123,6 +126,9 @@ class LinkCharacter extends React.Component {
                             value={character._id}
                             onChange={this.handleCharacters}
                             color="primary"
+                            checked={
+                              this.state.selected.indexOf(character._id) !== -1
+                            }
                           />
                         }
                         label={character.name}
