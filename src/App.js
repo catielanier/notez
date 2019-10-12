@@ -13,6 +13,7 @@ import AddFilter from "./components/AddFilter";
 import LinkCharacter from "./components/LinkCharacter";
 import LinkFilter from "./components/LinkFilter";
 import GameNotes from "./components/GameNotes";
+import { removeToken } from "./services/tokenService";
 import "./App.css";
 
 const theme = createMuiTheme({
@@ -57,18 +58,34 @@ export default class App extends React.Component {
     }
   };
 
+  logout = async e => {
+    e.preventDefault();
+    await removeToken();
+    localStorage.removeItem("notezId");
+    this.setState({
+      user: null,
+      role: null
+    });
+  };
+
   render() {
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router>
-            <Header user={this.state.user} role={this.state.role} />
+            <Header
+              user={this.state.user}
+              role={this.state.role}
+              logout={this.logout}
+            />
             <main>
-              <Route
-                exact
-                path="/"
-                component={() => <GameNotes user={this.state.user} />}
-              />
+              {this.state.user && (
+                <Route
+                  exact
+                  path="/"
+                  component={() => <GameNotes user={this.state.user} />}
+                />
+              )}
               <Route
                 path="/login"
                 component={() => <Login setUser={this.setUser} />}

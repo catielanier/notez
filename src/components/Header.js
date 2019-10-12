@@ -166,7 +166,9 @@ export default function Header(props) {
                   </Menu>
                 </>
               )}
-              <Button color="inherit">Logout</Button>
+              <Button color="inherit" onClick={props.logout}>
+                Logout
+              </Button>
             </>
           )}
         </Toolbar>

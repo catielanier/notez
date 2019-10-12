@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Container, Typography } from "@material-ui/core";
 
 class GameNotes extends React.Component {
   state = {
@@ -25,7 +26,13 @@ class GameNotes extends React.Component {
   }
 
   render() {
-    return <p>Game Notes</p>;
+    return (
+      <section className="game-notes">
+        <Container>
+          <Typography variant="h5">Game Notes</Typography>
+        </Container>
+      </section>
+    );
   }
 }
 
