@@ -11,7 +11,9 @@ exports.createGame = async gameData => {
 
 exports.getAllGames = async () => {
   try {
-    const games = await Game.find({});
+    const games = await Game.find({})
+      .populate("characters")
+      .populate("filters");
     if (games) {
       return games;
     }
