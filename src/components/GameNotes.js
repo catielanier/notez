@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Container, Typography, Grid } from "@material-ui/core";
+import { Container, Typography, Grid, Button } from "@material-ui/core";
 import Select from "react-select";
 
 class GameNotes extends React.Component {
@@ -43,13 +43,34 @@ class GameNotes extends React.Component {
     });
   };
 
+  setMyCharacter = e => {
+    const myCharacter = e.value;
+    this.setState({
+      myCharacter
+    });
+  }
+
+  setOpponentCharacter = e => {
+    const opponentCharacter = e.value;
+    this.setState({
+      opponentCharacter
+    })
+  }
+
+  setFilter = e => {
+    const filter = e.value;
+    this.setState({
+      filter
+    })
+  }
+
   render() {
     return (
       <section className="game-notes">
         <Container>
           <Typography variant="h5">Game Notes</Typography>
           <Grid container spacing={2}>
-            <Grid md={6} xs={12}>
+            <Grid item md={6} xs={12}>
               <Typography variant="h6">Choose a game:</Typography>
               <Select
                 options={this.state.games.map(game => {
@@ -61,7 +82,7 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.characters.map(character => {
                   return { label: character.name, value: character._id };
-                })}
+                })} onChange={this.setMyCharacter}
               />
               <Typography variant="h6">
                 Choose your opponent's character:
@@ -69,7 +90,7 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.characters.map(character => {
                   return { label: character.name, value: character._id };
-                })}
+                })} onChange={this.setOpponentCharacter}
               />
               <Typography variant="h6">
                 Choose your filter (optional):
@@ -77,10 +98,15 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.filters.map(filter => {
                   return { label: filter.name, value: filter._id };
-                })}
+                })} onChange={this.setFilter}
               />
+              {this.state.filter !== "" && (
+                <Button variant="outlined" color="secondary">
+                  Clear Filter
+                </Button>
+              )}
             </Grid>
-            <Grid md={6} xs={12}></Grid>
+            <Grid item md={6} xs={12}></Grid>
           </Grid>
         </Container>
       </section>
