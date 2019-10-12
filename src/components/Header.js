@@ -75,7 +75,7 @@ export default function Header(props) {
             <>
               <Button
                 component={React.forwardRef((props, ref) => (
-                  <RouterLink innerRef={ref} to="/game" {...props} />
+                  <RouterLink innerRef={ref} to="/" {...props} />
                 ))}
                 color="inherit"
               >
