@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Container, Typography, Grid, Button } from "@material-ui/core";
 import Select from "react-select";
+import QuickAddGameNote from "./QuickAddGameNote";
 
 class GameNotes extends React.Component {
   state = {
@@ -48,21 +49,21 @@ class GameNotes extends React.Component {
     this.setState({
       myCharacter
     });
-  }
+  };
 
   setOpponentCharacter = e => {
     const opponentCharacter = e.value;
     this.setState({
       opponentCharacter
-    })
-  }
+    });
+  };
 
   setFilter = e => {
     const filter = e.value;
     this.setState({
       filter
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -82,7 +83,8 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.characters.map(character => {
                   return { label: character.name, value: character._id };
-                })} onChange={this.setMyCharacter}
+                })}
+                onChange={this.setMyCharacter}
               />
               <Typography variant="h6">
                 Choose your opponent's character:
@@ -90,7 +92,8 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.characters.map(character => {
                   return { label: character.name, value: character._id };
-                })} onChange={this.setOpponentCharacter}
+                })}
+                onChange={this.setOpponentCharacter}
               />
               <Typography variant="h6">
                 Choose your filter (optional):
@@ -98,7 +101,8 @@ class GameNotes extends React.Component {
               <Select
                 options={this.state.filters.map(filter => {
                   return { label: filter.name, value: filter._id };
-                })} onChange={this.setFilter}
+                })}
+                onChange={this.setFilter}
               />
               {this.state.filter !== "" && (
                 <Button variant="outlined" color="secondary">
@@ -106,7 +110,18 @@ class GameNotes extends React.Component {
                 </Button>
               )}
             </Grid>
-            <Grid item md={6} xs={12}></Grid>
+            <Grid item md={6} xs={12}>
+              {this.state.game !== "" &&
+                this.state.myCharacter !== "" &&
+                this.state.opponentCharacter !== "" && (
+                  <QuickAddGameNote
+                    user={this.props.user}
+                    game={this.state.game}
+                    myCharacter={this.state.myCharacter}
+                    opponentCharacter={this.state.opponentCharacter}
+                  />
+                )}
+            </Grid>
           </Grid>
         </Container>
       </section>

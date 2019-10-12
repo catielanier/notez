@@ -22,7 +22,8 @@ const gameNoteSchema = new Schema({
   },
   universal: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   filter: {
     type: mongoose.Schema.Types.ObjectId,
