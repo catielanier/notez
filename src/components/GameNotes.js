@@ -119,6 +119,7 @@ class GameNotes extends React.Component {
                     game={this.state.game}
                     myCharacter={this.state.myCharacter}
                     opponentCharacter={this.state.opponentCharacter}
+                    filters={this.state.filters}
                   />
                 )}
             </Grid>
