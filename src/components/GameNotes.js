@@ -69,9 +69,9 @@ class GameNotes extends React.Component {
     return (
       <section className="game-notes">
         <Container>
-          <Typography variant="h5">Game Notes</Typography>
           <Grid container spacing={2}>
             <Grid item md={6} xs={12}>
+              <Typography variant="h5">Game Notes</Typography>
               <Typography variant="h6">Choose a game:</Typography>
               <Select
                 options={this.state.games.map(game => {

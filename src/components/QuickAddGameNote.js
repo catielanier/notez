@@ -17,7 +17,7 @@ class QuickAddGameNote extends React.Component {
     note: "",
     universal: false,
     loading: false,
-    success: true,
+    success: false,
     error: null
   };
 
@@ -44,9 +44,48 @@ class QuickAddGameNote extends React.Component {
 
   postNote = async e => {
     e.preventDefault();
-    const { filter, note } = this.state;
+    this.setState({
+      loading: true
+    });
+    const { filter, note: noteBody, universal } = this.state;
     const { myCharacter, opponentCharacter, game, user } = this.props;
+    let note = null;
+    if (universal) {
+      note = {
+        filter,
+        note: noteBody,
+        myCharacter,
+        game,
+        universal
+      };
+    } else {
+      note = {
+        filter,
+        note: noteBody,
+        myCharacter,
+        opponentCharacter,
+        game
+      };
+    }
     const token = await getToken();
+    try {
+      const res = await axios.post("/api/notes/game", {
+        token,
+        user,
+        note
+      });
+      if (res) {
+        this.setState({
+          loading: false,
+          success: true
+        });
+      }
+    } catch (e) {
+      this.setState({
+        loading: false,
+        error: e
+      });
+    }
   };
 
   render() {
@@ -81,6 +120,7 @@ class QuickAddGameNote extends React.Component {
             name="note"
             value={this.state.note}
             onChange={this.setNote}
+            fullWidth
           />
           <Button onClick={this.postNote} variant="contained" color="primary">
             Create Note
