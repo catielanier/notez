@@ -31,3 +31,5 @@ router.route("/").post(async (req, res) => {
     res.status(401);
   }
 });
+
+exports.router = router;
