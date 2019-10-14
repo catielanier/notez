@@ -27,7 +27,7 @@ exports.getUserById = async id => {
   try {
     const user = await User.findById(id)
       .populate({ path: "gameNotes", populate: { path: "filter" } })
-      .populate("playerNotes");
+      .populate({ path: "playerNotes", populate: { path: "filter" } });
     if (user) {
       return user;
     }
