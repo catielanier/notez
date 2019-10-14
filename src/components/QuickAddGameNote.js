@@ -91,41 +91,39 @@ class QuickAddGameNote extends React.Component {
   render() {
     return (
       <div className="quick-add">
-        <Container>
-          <Typography variant="h5">Quick Add:</Typography>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.universal}
-                onChange={this.handleCheck}
-                value={this.state.universal}
-                color="primary"
-              />
-            }
-            label="This note should be across all opponents."
-          />
-          <Typography variant="h6">New note filter:</Typography>
-          <Select
-            options={this.props.filters.map(filter => {
-              return {
-                label: filter.name,
-                value: filter._id
-              };
-            })}
-            onChange={this.setFilter}
-          />
-          <Typography variant="h6">Note:</Typography>
-          <TextField
-            multiline
-            name="note"
-            value={this.state.note}
-            onChange={this.setNote}
-            fullWidth
-          />
-          <Button onClick={this.postNote} variant="contained" color="primary">
-            Create Note
-          </Button>
-        </Container>
+        <Typography variant="h5">Quick Add:</Typography>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={this.state.universal}
+              onChange={this.handleCheck}
+              value={this.state.universal}
+              color="primary"
+            />
+          }
+          label="This note should be across all opponents."
+        />
+        <Typography variant="h6">New note filter:</Typography>
+        <Select
+          options={this.props.filters.map(filter => {
+            return {
+              label: filter.name,
+              value: filter._id
+            };
+          })}
+          onChange={this.setFilter}
+        />
+        <Typography variant="h6">Note:</Typography>
+        <TextField
+          multiline
+          name="note"
+          value={this.state.note}
+          onChange={this.setNote}
+          fullWidth
+        />
+        <Button onClick={this.postNote} variant="contained" color="primary">
+          Create Note
+        </Button>
       </div>
     );
   }
