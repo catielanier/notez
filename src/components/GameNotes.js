@@ -108,8 +108,41 @@ class GameNotes extends React.Component {
 
   setFilter = e => {
     const filter = e.value;
+    const { myCharacter, opponentCharacter, fullGameNotes } = this.state;
+    if (myCharacter !== "" && opponentCharacter !== "") {
+      const gameNotes = [];
+      fullGameNotes.forEach(note => {
+        if (
+          note.myCharacter === myCharacter &&
+          note.universal &&
+          note.filter._id === filter
+        ) {
+          gameNotes.push(note);
+        }
+      });
+      fullGameNotes.forEach(note => {
+        if (
+          note.myCharacter === myCharacter &&
+          note.opponentCharacter === opponentCharacter &&
+          note.filter._id === filter
+        ) {
+          gameNotes.push(note);
+        }
+      });
+      console.log(gameNotes);
+      this.setState({
+        filter,
+        gameNotes
+      });
+    }
+  };
+
+  clearFilter = e => {
+    e.preventDefault();
+    const { fullGameNotes } = this.state;
     this.setState({
-      filter
+      gameNotes: fullGameNotes,
+      filter: ""
     });
   };
 
@@ -150,10 +183,18 @@ class GameNotes extends React.Component {
                 options={this.state.filters.map(filter => {
                   return { label: filter.name, value: filter._id };
                 })}
+                disabled={
+                  this.state.myCharacter === "" &&
+                  this.state.opponentCharacter === ""
+                }
                 onChange={this.setFilter}
               />
               {this.state.filter !== "" && (
-                <Button variant="outlined" color="secondary">
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.clearFilter}
+                >
                   Clear Filter
                 </Button>
               )}
@@ -175,7 +216,10 @@ class GameNotes extends React.Component {
                           );
                         })
                       ) : (
-                        <PopulateNotes filter="Notice" note="You do not have any notes for this matchup. Add some below!" />
+                        <PopulateNotes
+                          filter="Notice"
+                          note="You do not have any notes for this matchup. Add some below!"
+                        />
                       )}
                     </Grid>
                     <QuickAddGameNote
