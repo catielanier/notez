@@ -32,19 +32,14 @@ router.route("/").post(async (req, res) => {
   }
 });
 
-router.route("/:id").delete(async (req, res) => {
-  const { id: noteId } = req.params;
-  const { user: userId, token } = req.body;
+router.route("/").delete(async (req, res) => {
+  const { user: userId, token, noteId } = req.body;
   try {
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
       res.status(503).statusMessage("You are not logged in.");
     }
     const user = await userServices.getUserById(userId);
-    const index = user.gameNotes.findIndex(note => note._id === noteId);
-    if (index === -1) {
-      res.status(404).statusMessage("That note does not exist.");
-    }
     const relationship = await gameNoteServices.unlinkGameNote(userId, noteId);
     const note = await gameNoteServices.deleteNote(noteId);
     res.status(200).json({

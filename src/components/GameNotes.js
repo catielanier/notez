@@ -151,13 +151,18 @@ class GameNotes extends React.Component {
     this.setState({
       loading: true
     });
-    const { user } = this.state;
+    const { user } = this.props;
     const token = await getToken();
     const { allGameNotes, fullGameNotes, gameNotes } = this.state;
     try {
-      const res = await axios.delete(`/api/notes/game/${id}`, {
-        user,
-        token
+      const res = await axios({
+        method: "DELETE",
+        url: "/api/notes/game",
+        data: {
+          user,
+          token,
+          noteId: id
+        }
       });
       if (res) {
         const index1 = allGameNotes.findIndex(note => note._id === id);
