@@ -45,3 +45,13 @@ exports.deleteNote = async noteId => {
     throw e;
   }
 };
+
+exports.getNoteById = async noteId => {
+  try {
+    return await GameNote.findById({ _id: noteId }).populate({
+      path: "filter"
+    });
+  } catch (e) {
+    throw e;
+  }
+};

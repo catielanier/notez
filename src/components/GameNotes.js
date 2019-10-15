@@ -184,18 +184,15 @@ class GameNotes extends React.Component {
   };
 
   addToNotes = note => {
-    const { gameNotes, allGameNotes, fullGameNotes } = this.state;
+    const { allGameNotes, fullGameNotes } = this.state;
     if (note.universal === true) {
-      gameNotes.unshift(note);
       allGameNotes.unshift(note);
       fullGameNotes.unshift(note);
     } else {
-      gameNotes.push(note);
       allGameNotes.push(note);
       fullGameNotes.push(note);
     }
     this.setState({
-      gameNotes,
       allGameNotes,
       fullGameNotes
     });
@@ -286,6 +283,7 @@ class GameNotes extends React.Component {
                       myCharacter={this.state.myCharacter}
                       opponentCharacter={this.state.opponentCharacter}
                       filters={this.state.filters}
+                      addToNotes={this.addToNotes}
                     />
                   </Container>
                 )}
