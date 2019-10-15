@@ -178,6 +178,24 @@ class GameNotes extends React.Component {
     }
   };
 
+  addToNotes = note => {
+    const { gameNotes, allGameNotes, fullGameNotes } = this.state;
+    if (note.universal === true) {
+      gameNotes.unshift(note);
+      allGameNotes.unshift(note);
+      fullGameNotes.unshift(note);
+    } else {
+      gameNotes.push(note);
+      allGameNotes.push(note);
+      fullGameNotes.push(note);
+    }
+    this.setState({
+      gameNotes,
+      allGameNotes,
+      fullGameNotes
+    });
+  };
+
   render() {
     return (
       <section className="game-notes">

@@ -73,6 +73,7 @@ class QuickAddGameNote extends React.Component {
         user,
         note
       });
+      await this.props.addToNotes(res.data.data);
       if (res) {
         this.setState({
           loading: false,
