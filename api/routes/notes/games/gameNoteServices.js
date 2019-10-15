@@ -26,3 +26,22 @@ exports.linkNoteToUser = async (userId, noteId) => {
     throw e;
   }
 };
+
+exports.unlinkGameNote = async (userId, noteId) => {
+  try {
+    return await User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { gameNotes: { _id: noteId } } }
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.deleteNote = async noteId => {
+  try {
+    return await GameNote.findByIdAndDelete({ _id: noteId });
+  } catch (e) {
+    throw e;
+  }
+};

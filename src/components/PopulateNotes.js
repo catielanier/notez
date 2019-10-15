@@ -22,7 +22,11 @@ function PopulateNotes(props) {
                 </IconButton>
               </Grid>
               <Grid item md={6}>
-                <IconButton color="secondary" size="small">
+                <IconButton
+                  color="secondary"
+                  size="small"
+                  onClick={() => props.deleteNote(props.id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </Grid>

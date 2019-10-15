@@ -4,6 +4,7 @@ import { Container, Typography, Grid, Button } from "@material-ui/core";
 import Select from "react-select";
 import QuickAddGameNote from "./QuickAddGameNote";
 import PopulateNotes from "./PopulateNotes";
+import { getToken } from "../services/tokenService";
 
 class GameNotes extends React.Component {
   state = {
@@ -146,6 +147,37 @@ class GameNotes extends React.Component {
     });
   };
 
+  deleteNote = async id => {
+    this.setState({
+      loading: true
+    });
+    const { user } = this.state;
+    const token = await getToken();
+    const { allGameNotes, fullGameNotes, gameNotes } = this.state;
+    try {
+      const res = await axios.delete(`/api/notes/game/${id}`, {
+        user,
+        token
+      });
+      if (res) {
+        const index1 = allGameNotes.findIndex(note => note._id === id);
+        const index2 = fullGameNotes.findIndex(note => note._id === id);
+        const index3 = gameNotes.findIndex(note => note._id === id);
+        allGameNotes.splice(index1, 1);
+        fullGameNotes.splice(index2, 1);
+        gameNotes.splice(index3, 1);
+        this.setState({
+          allGameNotes,
+          fullGameNotes,
+          gameNotes,
+          loading: false
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   render() {
     return (
       <section className="game-notes">
@@ -210,8 +242,11 @@ class GameNotes extends React.Component {
                         this.state.gameNotes.map(note => {
                           return (
                             <PopulateNotes
+                              key={note._id}
+                              id={note._id}
                               note={note.note}
                               filter={note.filter.name}
+                              deleteNote={this.deleteNote}
                             />
                           );
                         })
