@@ -54,7 +54,6 @@ router.route("/").delete(async (req, res) => {
 router.route("/:id").put(async (req, res) => {
   const { id: noteId } = req.params;
   const { token, note, filter } = req.body;
-  console.log(note, filter);
   try {
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
@@ -63,7 +62,6 @@ router.route("/:id").put(async (req, res) => {
     const results = await gameNoteServices.updateNote(noteId, note, filter);
     if (results) {
       const updatedNote = await gameNoteServices.getNoteById(noteId);
-      console.log(updatedNote);
       res.status(201).json({
         data: updatedNote
       });

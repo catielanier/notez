@@ -57,7 +57,6 @@ exports.getNoteById = async noteId => {
 };
 
 exports.updateNote = async (id, note, filter) => {
-  console.log("firing");
   try {
     return await GameNote.findByIdAndUpdate(
       { _id: id },
