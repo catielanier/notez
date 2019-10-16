@@ -1,10 +1,40 @@
 import React from "react";
 import axios from "axios";
-import { Container, Typography, Grid, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import {
+  Container,
+  Typography,
+  Grid,
+  Button,
+  Modal,
+  TextField
+} from "@material-ui/core";
 import Select from "react-select";
 import QuickAddGameNote from "./QuickAddGameNote";
 import PopulateNotes from "./PopulateNotes";
 import { getToken } from "../services/tokenService";
+
+const styles = theme => ({
+  paper: {
+    position: "absolute",
+    width: "50%",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
+  },
+  button: {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2)
+  },
+  spaced: {
+    marginBottom: theme.spacing(2)
+  }
+});
 
 class GameNotes extends React.Component {
   state = {
@@ -45,6 +75,15 @@ class GameNotes extends React.Component {
       noteId,
       noteFilter,
       noteBody
+    });
+  };
+
+  hideEditor = () => {
+    this.setState({
+      noteEditor: false,
+      noteId: "",
+      noteFilter: "",
+      noteBody: ""
     });
   };
 
@@ -151,6 +190,13 @@ class GameNotes extends React.Component {
     }
   };
 
+  setEditFilter = e => {
+    const noteFilter = e.value;
+    this.setState({
+      noteFilter
+    });
+  };
+
   clearFilter = e => {
     e.preventDefault();
     const { fullGameNotes } = this.state;
@@ -211,19 +257,30 @@ class GameNotes extends React.Component {
     });
   };
 
+  setEditNote = e => {
+    const noteBody = e.target.value;
+    this.setState({
+      noteBody
+    });
+  };
+
   render() {
+    const { classes } = this.props;
     return (
       <section className="game-notes">
         <Container>
           <Grid container spacing={2}>
             <Grid item md={6} xs={12}>
-              <Typography variant="h5">Game Notes</Typography>
+              <Typography variant="h5" className={classes.spaced}>
+                Game Notes
+              </Typography>
               <Typography variant="h6">Choose a game:</Typography>
               <Select
                 options={this.state.games.map(game => {
                   return { label: game.name, value: game._id };
                 })}
                 onChange={this.setGame}
+                className={classes.spaced}
               />
               <Typography variant="h6">Choose your character:</Typography>
               <Select
@@ -231,6 +288,7 @@ class GameNotes extends React.Component {
                   return { label: character.name, value: character._id };
                 })}
                 onChange={this.setMyCharacter}
+                className={classes.spaced}
               />
               <Typography variant="h6">
                 Choose your opponent's character:
@@ -240,6 +298,7 @@ class GameNotes extends React.Component {
                   return { label: character.name, value: character._id };
                 })}
                 onChange={this.setOpponentCharacter}
+                className={classes.spaced}
               />
               <Typography variant="h6">
                 Choose your filter (optional):
@@ -253,6 +312,7 @@ class GameNotes extends React.Component {
                   this.state.opponentCharacter === ""
                 }
                 onChange={this.setFilter}
+                className={classes.spaced}
               />
               {this.state.filter !== "" && (
                 <Button
@@ -270,7 +330,7 @@ class GameNotes extends React.Component {
                 this.state.opponentCharacter !== "" && (
                   <Container>
                     <Typography variant="h5">Notes:</Typography>
-                    <Grid container>
+                    <Grid container className={classes.spaced}>
                       {this.state.gameNotes.length > 0 ? (
                         this.state.gameNotes.map(note => {
                           return (
@@ -304,9 +364,57 @@ class GameNotes extends React.Component {
             </Grid>
           </Grid>
         </Container>
+        <Modal
+          aria-labelledby="editor-title"
+          open={this.state.noteEditor}
+          onClose={this.hideEditor}
+        >
+          <Container className={classes.paper}>
+            <Typography
+              variant="h5"
+              id="editor-title"
+              className={classes.spaced}
+            >
+              Editing Note
+            </Typography>
+            <Typography variant="h6">Filter:</Typography>
+            <Select
+              options={this.state.filters.map(filter => {
+                return {
+                  label: filter.name,
+                  value: filter._id
+                };
+              })}
+              onChange={this.setEditFilter}
+              defaultValue={this.state.noteFilter}
+              className={classes.spaced}
+            />
+            <TextField
+              multiline
+              name="note"
+              value={this.state.noteBody}
+              onChange={this.setEditNote}
+              fullWidth
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Edit Note
+            </Button>
+            <Button className={classes.button} onClick={this.hideEditor}>
+              Cancel
+            </Button>
+          </Container>
+        </Modal>
       </section>
     );
   }
 }
 
-export default GameNotes;
+GameNotes.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(GameNotes);
