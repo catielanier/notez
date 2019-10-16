@@ -13,6 +13,7 @@ import AddFilter from "./components/AddFilter";
 import LinkCharacter from "./components/LinkCharacter";
 import LinkFilter from "./components/LinkFilter";
 import GameNotes from "./components/GameNotes";
+import PlayerNotes from "./components/PlayerNotes";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -86,6 +87,11 @@ export default class App extends React.Component {
                   component={() => <GameNotes user={this.state.user} />}
                 />
               )}
+              <Route
+                exact
+                path="/player"
+                component={() => <PlayerNotes user={this.state.user} />}
+              />
               <Route
                 path="/login"
                 component={() => <Login setUser={this.setUser} />}

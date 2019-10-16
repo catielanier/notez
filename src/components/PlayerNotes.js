@@ -11,7 +11,7 @@ import {
   TextField
 } from "@material-ui/core";
 import Select from "react-select";
-import QuickAddGameNote from "./QuickAddGameNote";
+import QuickAddPlayerNote from "./QuickAddPlayerNote";
 import PopulateNotes from "./PopulateNotes";
 import { getToken } from "../services/tokenService";
 
@@ -36,7 +36,7 @@ const styles = theme => ({
   }
 });
 
-class GameNotes extends React.Component {
+class PlayerNotes extends React.Component {
   state = {
     games: [],
     myCharacter: "",
@@ -302,12 +302,12 @@ class GameNotes extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <section className="game-notes">
+      <section className="player-notes">
         <Container>
           <Grid container spacing={2}>
             <Grid item md={6} xs={12}>
               <Typography variant="h5" className={classes.spaced}>
-                Game Notes
+                Player Notes
               </Typography>
               <Typography variant="h6">Choose a game:</Typography>
               <Select
@@ -389,7 +389,7 @@ class GameNotes extends React.Component {
                         />
                       )}
                     </Grid>
-                    <QuickAddGameNote
+                    <QuickAddPlayerNote
                       user={this.props.user}
                       game={this.state.game}
                       myCharacter={this.state.myCharacter}
@@ -452,8 +452,8 @@ class GameNotes extends React.Component {
   }
 }
 
-GameNotes.propTypes = {
+PlayerNotes.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(GameNotes);
+export default withStyles(styles)(PlayerNotes);
