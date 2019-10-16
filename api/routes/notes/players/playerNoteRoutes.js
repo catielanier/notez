@@ -22,8 +22,9 @@ router.route("/").post(async (req, res) => {
       const noteId = newNote._id;
       const relationship = await playerNoteServices.linkNoteToUser(id, noteId);
       if (relationship) {
+        const fullNote = await playerNoteServices.getNoteById(noteId);
         res.status(201).json({
-          data: newNote
+          data: fullNote
         });
       }
     }
