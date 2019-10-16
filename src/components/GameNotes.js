@@ -376,6 +376,7 @@ class GameNotes extends React.Component {
                               id={note._id}
                               note={note.note}
                               filter={note.filter.name}
+                              filterId={note.filter._id}
                               deleteNote={this.deleteNote}
                               showEditor={this.showEditor}
                             />

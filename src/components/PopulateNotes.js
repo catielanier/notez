@@ -43,7 +43,7 @@ function PopulateNotes(props) {
                   color="secondary"
                   size="small"
                   onClick={() =>
-                    props.showEditor(props.id, props.filter, props.note)
+                    props.showEditor(props.id, props.filterId, props.note)
                   }
                 >
                   <EditIcon />
