@@ -17,7 +17,11 @@ class GameNotes extends React.Component {
     allGameNotes: [],
     fullGameNotes: [],
     gameNotes: [],
-    game: ""
+    game: "",
+    noteEditor: false,
+    noteId: null,
+    noteFilter: "",
+    noteBody: ""
   };
 
   async componentDidMount() {
@@ -34,6 +38,15 @@ class GameNotes extends React.Component {
       allGameNotes
     });
   }
+
+  showEditor = (noteId, noteFilter, noteBody) => {
+    this.setState({
+      noteEditor: true,
+      noteId,
+      noteFilter,
+      noteBody
+    });
+  };
 
   setGame = e => {
     const { value: game } = e;
@@ -267,6 +280,7 @@ class GameNotes extends React.Component {
                               note={note.note}
                               filter={note.filter.name}
                               deleteNote={this.deleteNote}
+                              showEditor={this.showEditor}
                             />
                           );
                         })

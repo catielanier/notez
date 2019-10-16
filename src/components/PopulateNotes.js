@@ -17,7 +17,13 @@ function PopulateNotes(props) {
           <Grid item md={2}>
             <Grid container>
               <Grid item md={6}>
-                <IconButton color="secondary" size="small">
+                <IconButton
+                  color="secondary"
+                  size="small"
+                  onClick={() =>
+                    props.showEditor(props.id, props.filter, props.note)
+                  }
+                >
                   <EditIcon />
                 </IconButton>
               </Grid>
