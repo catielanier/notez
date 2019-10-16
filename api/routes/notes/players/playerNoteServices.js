@@ -62,3 +62,14 @@ exports.updateNote = async (id, note, filter) => {
     throw e;
   }
 };
+
+exports.unlinkPlayerNote = async (userId, noteId) => {
+  try {
+    return await User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { playerNotes: { _id: noteId } } }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

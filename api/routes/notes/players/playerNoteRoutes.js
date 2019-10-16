@@ -41,7 +41,7 @@ router.route("/").delete(async (req, res) => {
       res.status(503).statusMessage("You are not logged in.");
     }
     const user = await userServices.getUserById(userId);
-    const relationship = await playerNoteServices.unlinkGameNote(
+    const relationship = await playerNoteServices.unlinkPlayerNote(
       userId,
       noteId
     );

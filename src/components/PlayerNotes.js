@@ -196,7 +196,7 @@ class PlayerNotes extends React.Component {
     try {
       const res = await axios({
         method: "DELETE",
-        url: "/api/notes/game",
+        url: "/api/notes/player",
         data: {
           user,
           token,
@@ -252,7 +252,7 @@ class PlayerNotes extends React.Component {
     } = this.state;
     const token = await getToken();
     try {
-      const res = await axios.put(`/api/notes/game/${id}`, {
+      const res = await axios.put(`/api/notes/player/${id}`, {
         filter,
         token,
         note
