@@ -70,7 +70,7 @@ class PlayerNotes extends React.Component {
       return x.name.localeCompare(y.name);
     });
     const players = [];
-    allPlayerNotes.map(note => {
+    allPlayerNotes.forEach(note => {
       const index = players.indexOf(note.player);
       if (index === -1) {
         players.push(note.player);
@@ -192,7 +192,7 @@ class PlayerNotes extends React.Component {
     });
     const { user } = this.props;
     const token = await getToken();
-    const { allGameNotes, fullGameNotes, gameNotes } = this.state;
+    const { allPlayerNotes, fullPlayerNotes, playerNotes } = this.state;
     try {
       const res = await axios({
         method: "DELETE",
@@ -204,16 +204,16 @@ class PlayerNotes extends React.Component {
         }
       });
       if (res) {
-        const index1 = allGameNotes.findIndex(note => note._id === id);
-        const index2 = fullGameNotes.findIndex(note => note._id === id);
-        const index3 = gameNotes.findIndex(note => note._id === id);
-        allGameNotes.splice(index1, 1);
-        fullGameNotes.splice(index2, 1);
-        gameNotes.splice(index3, 1);
+        const index1 = allPlayerNotes.findIndex(note => note._id === id);
+        const index2 = fullPlayerNotes.findIndex(note => note._id === id);
+        const index3 = playerNotes.findIndex(note => note._id === id);
+        allPlayerNotes.splice(index1, 1);
+        fullPlayerNotes.splice(index2, 1);
+        playerNotes.splice(index3, 1);
         this.setState({
-          allGameNotes,
-          fullGameNotes,
-          gameNotes,
+          allPlayerNotes,
+          fullPlayerNotes,
+          playerNotes,
           loading: false
         });
       }
@@ -248,7 +248,7 @@ class PlayerNotes extends React.Component {
       noteId: id,
       noteFilter: filter,
       noteBody: note,
-      fullGameNotes
+      fullPlayerNotes
     } = this.state;
     const token = await getToken();
     try {
@@ -257,11 +257,11 @@ class PlayerNotes extends React.Component {
         token,
         note
       });
-      const index = fullGameNotes.findIndex(note => note._id === id);
-      fullGameNotes[index] = res.data.data;
+      const index = fullPlayerNotes.findIndex(note => note._id === id);
+      fullPlayerNotes[index] = res.data.data;
       this.setState({
         loading: false,
-        fullGameNotes,
+        fullPlayerNotes,
         noteFilter: "",
         noteBody: "",
         noteId: null,

@@ -36,3 +36,29 @@ exports.getNoteById = async noteId => {
     throw e;
   }
 };
+
+exports.deleteNote = async noteId => {
+  try {
+    return await PlayerNote.findByIdAndDelete({ _id: noteId });
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.updateNote = async (id, note, filter) => {
+  try {
+    return await PlayerNote.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          filter: {
+            _id: filter
+          },
+          note
+        }
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

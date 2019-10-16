@@ -63,7 +63,6 @@ class QuickAddPlayerNote extends React.Component {
         user,
         note
       });
-      console.log(res.data.data);
       await this.props.addToNotes(res.data.data);
       if (res) {
         this.setState({
