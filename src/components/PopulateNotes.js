@@ -62,7 +62,7 @@ function PopulateNotes(props) {
           </Grid>
         </>
       ) : (
-        <Grid item md={10} className={classes.padding}>
+        <Grid item md={9} className={classes.padding}>
           {props.note}
         </Grid>
       )}

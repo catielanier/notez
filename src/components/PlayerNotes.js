@@ -11,6 +11,7 @@ import {
   TextField
 } from "@material-ui/core";
 import Select from "react-select";
+import Creatable from "react-select/creatable";
 import QuickAddPlayerNote from "./QuickAddPlayerNote";
 import PopulateNotes from "./PopulateNotes";
 import { getToken } from "../services/tokenService";
@@ -39,14 +40,14 @@ const styles = theme => ({
 class PlayerNotes extends React.Component {
   state = {
     games: [],
-    myCharacter: "",
-    opponentCharacter: "",
+    player: "",
     filter: "",
     characters: [],
     filters: [],
-    allGameNotes: [],
-    fullGameNotes: [],
-    gameNotes: [],
+    players: [],
+    allPlayerNotes: [],
+    fullPlayerNotes: [],
+    playerNotes: [],
     game: "",
     noteEditor: false,
     noteId: null,
@@ -57,15 +58,32 @@ class PlayerNotes extends React.Component {
   async componentDidMount() {
     const { user } = this.props;
     const resUser = await axios.get(`/api/users/${user}`);
-    const allGameNotes = resUser.data.data.gameNotes;
+    const allPlayerNotes = resUser.data.data.playerNotes;
     const resGames = await axios.get("/api/games");
+    const resFilters = await axios.get("/api/filters/player");
+    const filters = resFilters.data.data;
     const games = resGames.data.data;
     games.sort((x, y) => {
       return x.name.localeCompare(y.name);
     });
+    filters.sort((x, y) => {
+      return x.name.localeCompare(y.name);
+    });
+    const players = [];
+    allPlayerNotes.map(note => {
+      const index = players.indexOf(note.player);
+      if (index === -1) {
+        players.push(note.player);
+      }
+    });
+    players.sort((x, y) => {
+      return x.localeCompare(y);
+    });
     this.setState({
       games,
-      allGameNotes
+      allPlayerNotes,
+      filters,
+      players
     });
   }
 
@@ -87,105 +105,67 @@ class PlayerNotes extends React.Component {
     });
   };
 
-  setGame = e => {
-    const { value: game } = e;
-    const index = this.state.games.findIndex(x => x._id === game);
-    const { characters, filters } = this.state.games[index];
-    this.setState({
-      game,
-      characters,
-      filters
-    });
-  };
-
-  setMyCharacter = e => {
-    const myCharacter = e.value;
-    const { opponentCharacter } = this.state;
-    if (myCharacter !== "" && opponentCharacter !== "") {
-      const fullGameNotes = [];
-      this.state.allGameNotes.forEach(note => {
-        if (note.myCharacter === myCharacter && note.universal) {
-          fullGameNotes.push(note);
-        }
-      });
-      this.state.allGameNotes.forEach(note => {
-        if (
-          note.myCharacter === myCharacter &&
-          note.opponentCharacter === opponentCharacter
-        ) {
-          fullGameNotes.push(note);
+  setPlayer = e => {
+    const player = e.value;
+    const { game } = this.state;
+    if (player !== "" && game !== "") {
+      const fullPlayerNotes = [];
+      this.state.allPlayerNotes.forEach(note => {
+        if (note.player === player && note.game === game) {
+          fullPlayerNotes.push(note);
         }
       });
       this.setState({
-        fullGameNotes,
-        gameNotes: fullGameNotes,
-        myCharacter
+        fullPlayerNotes,
+        gameNotes: fullPlayerNotes,
+        player
       });
     } else {
       this.setState({
-        myCharacter
+        player
       });
     }
   };
 
-  setOpponentCharacter = e => {
-    const opponentCharacter = e.value;
-    const { myCharacter } = this.state;
-    if (myCharacter !== "" && opponentCharacter !== "") {
-      const fullGameNotes = [];
-      this.state.allGameNotes.forEach(note => {
-        if (note.myCharacter === myCharacter && note.universal) {
-          fullGameNotes.push(note);
-        }
-      });
-      this.state.allGameNotes.forEach(note => {
-        if (
-          note.myCharacter === myCharacter &&
-          note.opponentCharacter === opponentCharacter
-        ) {
-          fullGameNotes.push(note);
+  setGame = e => {
+    const game = e.value;
+    const { player } = this.state;
+    if (player !== "" && game !== "") {
+      const fullPlayerNotes = [];
+      this.state.allPlayerNotes.forEach(note => {
+        if (note.player === player && note.game === game) {
+          fullPlayerNotes.push(note);
         }
       });
       this.setState({
-        fullGameNotes,
-        gameNotes: fullGameNotes,
-        opponentCharacter
+        fullPlayerNotes,
+        gameNotes: fullPlayerNotes,
+        game
       });
     } else {
       this.setState({
-        opponentCharacter,
-        fullGameNotes: []
+        game
       });
     }
   };
 
   setFilter = e => {
     const filter = e.value;
-    const { myCharacter, opponentCharacter, fullGameNotes } = this.state;
-    if (myCharacter !== "" && opponentCharacter !== "") {
-      const gameNotes = [];
-      fullGameNotes.forEach(note => {
+    const { player, game, fullPlayerNotes } = this.state;
+    if (player !== "" && game !== "") {
+      const playerNotes = [];
+      fullPlayerNotes.forEach(note => {
         if (
-          note.myCharacter === myCharacter &&
-          note.universal &&
+          note.player === player &&
+          note.game === game &&
           note.filter._id === filter
         ) {
-          gameNotes.push(note);
+          playerNotes.push(note);
         }
       });
-      fullGameNotes.forEach(note => {
-        if (
-          note.myCharacter === myCharacter &&
-          note.opponentCharacter === opponentCharacter &&
-          note.filter._id === filter
-        ) {
-          gameNotes.push(note);
-        }
-      });
-      console.log(gameNotes);
       this.setState({
         filter,
-        gameNotes
+        playerNotes
       });
     }
   };
@@ -199,9 +179,9 @@ class PlayerNotes extends React.Component {
 
   clearFilter = e => {
     e.preventDefault();
-    const { fullGameNotes } = this.state;
+    const { fullPlayerNotes } = this.state;
     this.setState({
-      gameNotes: fullGameNotes,
+      playerNotes: fullPlayerNotes,
       filter: ""
     });
   };
@@ -309,30 +289,20 @@ class PlayerNotes extends React.Component {
               <Typography variant="h5" className={classes.spaced}>
                 Player Notes
               </Typography>
-              <Typography variant="h6">Choose a game:</Typography>
+              <Typography variant="h6">Choose your opponent:</Typography>
+              <Creatable
+                options={this.state.players.map(player => {
+                  return { label: player, value: player };
+                })}
+                onChange={this.setPlayer}
+                className={classes.spaced}
+              />
+              <Typography variant="h6">Choose your game:</Typography>
               <Select
                 options={this.state.games.map(game => {
                   return { label: game.name, value: game._id };
                 })}
                 onChange={this.setGame}
-                className={classes.spaced}
-              />
-              <Typography variant="h6">Choose your character:</Typography>
-              <Select
-                options={this.state.characters.map(character => {
-                  return { label: character.name, value: character._id };
-                })}
-                onChange={this.setMyCharacter}
-                className={classes.spaced}
-              />
-              <Typography variant="h6">
-                Choose your opponent's character:
-              </Typography>
-              <Select
-                options={this.state.characters.map(character => {
-                  return { label: character.name, value: character._id };
-                })}
-                onChange={this.setOpponentCharacter}
                 className={classes.spaced}
               />
               <Typography variant="h6">
@@ -392,8 +362,7 @@ class PlayerNotes extends React.Component {
                     <QuickAddPlayerNote
                       user={this.props.user}
                       game={this.state.game}
-                      myCharacter={this.state.myCharacter}
-                      opponentCharacter={this.state.opponentCharacter}
+                      player={this.state.player}
                       filters={this.state.filters}
                       addToNotes={this.addToNotes}
                     />

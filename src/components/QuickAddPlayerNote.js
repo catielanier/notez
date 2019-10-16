@@ -1,13 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import {
-  Typography,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Button
-} from "@material-ui/core";
+import { Typography, TextField, Button } from "@material-ui/core";
 import Select from "react-select";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
@@ -54,29 +48,17 @@ class QuickAddPlayerNote extends React.Component {
     this.setState({
       loading: true
     });
-    const { filter, note: noteBody, universal } = this.state;
-    const { myCharacter, opponentCharacter, game, user } = this.props;
-    let note = null;
-    if (universal) {
-      note = {
-        filter,
-        note: noteBody,
-        myCharacter,
-        game,
-        universal
-      };
-    } else {
-      note = {
-        filter,
-        note: noteBody,
-        myCharacter,
-        opponentCharacter,
-        game
-      };
-    }
+    const { filter, note: noteBody } = this.state;
+    const { player, game, user } = this.props;
+    const note = {
+      filter,
+      note: noteBody,
+      player,
+      game
+    };
     const token = await getToken();
     try {
-      const res = await axios.post("/api/notes/game", {
+      const res = await axios.post("/api/notes/player", {
         token,
         user,
         note
@@ -103,18 +85,6 @@ class QuickAddPlayerNote extends React.Component {
         <Typography variant="h5" className={classes.spaced}>
           Quick Add:
         </Typography>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.universal}
-              onChange={this.handleCheck}
-              value={this.state.universal}
-              color="primary"
-            />
-          }
-          label="This note should be across all opponents."
-          className={classes.spaced}
-        />
         <Typography variant="h6">New note filter:</Typography>
         <Select
           options={this.props.filters.map(filter => {

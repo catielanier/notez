@@ -26,3 +26,13 @@ exports.linkNoteToUser = async (userId, noteId) => {
     throw e;
   }
 };
+
+exports.getNoteById = async noteId => {
+  try {
+    return await PlayerNote.findById({ _id: noteId }).populate({
+      path: "filter"
+    });
+  } catch (e) {
+    throw e;
+  }
+};
