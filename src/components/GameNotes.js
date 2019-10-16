@@ -264,6 +264,41 @@ class GameNotes extends React.Component {
     });
   };
 
+  editNote = async e => {
+    e.preventDefault();
+    this.setState({
+      loading: true
+    });
+    const {
+      noteId: id,
+      noteFilter: filter,
+      noteBody: note,
+      fullGameNotes
+    } = this.state;
+    const token = await getToken();
+    try {
+      const res = await axios.put(`/api/notes/game/${id}`, {
+        filter,
+        token,
+        note
+      });
+      const index = fullGameNotes.findIndex(note => note._id === id);
+      fullGameNotes[index] = res.data.data;
+      this.setState({
+        loading: false,
+        fullGameNotes,
+        noteFilter: "",
+        noteBody: "",
+        noteId: null,
+        noteEditor: false
+      });
+    } catch (e) {
+      this.setState({
+        loading: false
+      });
+    }
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -402,6 +437,7 @@ class GameNotes extends React.Component {
               variant="contained"
               color="primary"
               className={classes.button}
+              onClick={this.editNote}
             >
               Edit Note
             </Button>
