@@ -55,3 +55,19 @@ exports.getNoteById = async noteId => {
     throw e;
   }
 };
+
+exports.updateNote = async (id, note, filter) => {
+  try {
+    return await GameNote.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          filter,
+          note
+        }
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

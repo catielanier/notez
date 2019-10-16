@@ -329,7 +329,9 @@ class GameNotes extends React.Component {
                 this.state.myCharacter !== "" &&
                 this.state.opponentCharacter !== "" && (
                   <Container>
-                    <Typography variant="h5">Notes:</Typography>
+                    <Typography variant="h5" classes={classes.spaced}>
+                      Notes:
+                    </Typography>
                     <Grid container className={classes.spaced}>
                       {this.state.gameNotes.length > 0 ? (
                         this.state.gameNotes.map(note => {

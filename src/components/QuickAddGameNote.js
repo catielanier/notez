@@ -1,4 +1,6 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 import {
   Typography,
   TextField,
@@ -9,6 +11,12 @@ import {
 import Select from "react-select";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
+
+const styles = theme => ({
+  spaced: {
+    marginBottom: theme.spacing(2)
+  }
+});
 
 class QuickAddGameNote extends React.Component {
   state = {
@@ -89,9 +97,12 @@ class QuickAddGameNote extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div className="quick-add">
-        <Typography variant="h5">Quick Add:</Typography>
+        <Typography variant="h5" className={classes.spaced}>
+          Quick Add:
+        </Typography>
         <FormControlLabel
           control={
             <Checkbox
@@ -102,6 +113,7 @@ class QuickAddGameNote extends React.Component {
             />
           }
           label="This note should be across all opponents."
+          className={classes.spaced}
         />
         <Typography variant="h6">New note filter:</Typography>
         <Select
@@ -112,6 +124,7 @@ class QuickAddGameNote extends React.Component {
             };
           })}
           onChange={this.setFilter}
+          className={classes.spaced}
         />
         <Typography variant="h6">Note:</Typography>
         <TextField
@@ -120,6 +133,7 @@ class QuickAddGameNote extends React.Component {
           value={this.state.note}
           onChange={this.setNote}
           fullWidth
+          className={classes.spaced}
         />
         <Button onClick={this.postNote} variant="contained" color="primary">
           Create Note
@@ -129,4 +143,8 @@ class QuickAddGameNote extends React.Component {
   }
 }
 
-export default QuickAddGameNote;
+QuickAddGameNote.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(QuickAddGameNote);

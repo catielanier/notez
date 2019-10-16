@@ -51,4 +51,24 @@ router.route("/").delete(async (req, res) => {
   }
 });
 
+router.route("/:id").put(async (req, res) => {
+  const { id: noteId } = req.params;
+  const { token, note, filter } = req.body;
+  try {
+    const loggedIn = await tokenService.verifyToken(token);
+    if (!loggedIn) {
+      res.status(503).statusMessage("You are not logged in.");
+    }
+    const results = await gameNoteServices.updateNote(noteId, note, filter);
+    if (results) {
+      const updatedNote = await gameNoteServices.getNoteById(noteId);
+      res.status(201).json({
+        data: updatedNote
+      });
+    }
+  } catch (e) {
+    res.status(401);
+  }
+});
+
 exports.router = router;
