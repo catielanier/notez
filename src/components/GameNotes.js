@@ -60,9 +60,28 @@ class GameNotes extends React.Component {
     const allGameNotes = resUser.data.data.gameNotes;
     const resGames = await axios.get("/api/games");
     const games = resGames.data.data;
-    games.sort((x, y) => {
-      return x.name.localeCompare(y.name);
-    });
+    if (this.props.language === "ja") {
+      games.sort((x, y) => {
+        return x.name_ja.localeCompare(y.name_ja);
+      });
+    } else if (this.props.language === "ko") {
+      games.sort((x, y) => {
+        return x.name_ko.localeCompare(y.name_ko);
+      });
+    } else if (
+      this.props.language === "zh-CN" ||
+      this.props.language === "zh-TW" ||
+      this.props.language === "zh-HK"
+    ) {
+      games.sort((x, y) => {
+        return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+      });
+    } else {
+      games.sort((x, y) => {
+        return x.name.localeCompare(y.name);
+      });
+    }
+
     this.setState({
       games,
       allGameNotes
@@ -91,6 +110,39 @@ class GameNotes extends React.Component {
     const { value: game } = e;
     const index = this.state.games.findIndex(x => x._id === game);
     const { characters, filters } = this.state.games[index];
+    if (this.props.language === "ja") {
+      characters.sort((x, y) => {
+        return x.name_ja.localeCompare(y.name_ja);
+      });
+      filters.sort((x, y) => {
+        return x.name_ja.localeCompare(y.name_ja);
+      });
+    } else if (this.props.language === "ko") {
+      characters.sort((x, y) => {
+        return x.name_ko.localeCompare(y.name_ko);
+      });
+      filters.sort((x, y) => {
+        return x.name_ko.localeCompare(y.name_ko);
+      });
+    } else if (
+      this.props.language === "zh-CN" ||
+      this.props.language === "zh-TW" ||
+      this.props.language === "zh-HK"
+    ) {
+      characters.sort((x, y) => {
+        return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+      });
+      filters.sort((x, y) => {
+        return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+      });
+    } else {
+      characters.sort((x, y) => {
+        return x.name.localeCompare(y.name);
+      });
+      filters.sort((x, y) => {
+        return x.name.localeCompare(y.name);
+      });
+    }
     this.setState({
       game,
       characters,
@@ -307,41 +359,226 @@ class GameNotes extends React.Component {
           <Grid container spacing={2}>
             <Grid item md={6} xs={12}>
               <Typography variant="h5" className={classes.spaced}>
-                Game Notes
+                {this.props.language === "ja"
+                  ? "ゲームノート"
+                  : this.props.language === "ko"
+                  ? "게임 노트"
+                  : this.props.language === "zh-CN"
+                  ? "游戏笔记"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "遊戲筆記"
+                  : "Game Notes"}
               </Typography>
-              <Typography variant="h6">Choose a game:</Typography>
+              <Typography variant="h6">
+                {this.props.language === "ja"
+                  ? "ゲームを選択してください："
+                  : this.props.language === "ko"
+                  ? "게임을 선택하십시오:"
+                  : this.props.language === "zh-CN"
+                  ? "选择一个游戏："
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "選擇一個遊戲："
+                  : "Choose a game:"}
+              </Typography>
               <Select
-                options={this.state.games.map(game => {
-                  return { label: game.name, value: game._id };
-                })}
+                options={
+                  this.props.language === "ja"
+                    ? this.state.games.map(game => {
+                        return { label: game.name_ja, value: game._id };
+                      })
+                    : this.props.language === "ko"
+                    ? this.state.games.map(game => {
+                        return { label: game.name_ko, value: game._id };
+                      })
+                    : this.props.language === "zh-CN"
+                    ? this.state.games.map(game => {
+                        return {
+                          label: game["name_zh-cn"],
+                          value: game._id
+                        };
+                      })
+                    : this.props.language === "zh-TW"
+                    ? this.state.games.map(game => {
+                        return {
+                          label: game["name_zh-tw"],
+                          value: game._id
+                        };
+                      })
+                    : this.props.language === "zh-HK"
+                    ? this.state.games.map(game => {
+                        return {
+                          label: game["name_zh-hk"],
+                          value: game._id
+                        };
+                      })
+                    : this.state.games.map(game => {
+                        return { label: game.name, value: game._id };
+                      })
+                }
                 onChange={this.setGame}
                 className={classes.spaced}
               />
-              <Typography variant="h6">Choose your character:</Typography>
+              <Typography variant="h6">
+                {this.props.language === "ja"
+                  ? "キャラクターを選択してください："
+                  : this.props.language === "ko"
+                  ? "당신의 성격을 선택하십시오:"
+                  : this.props.language === "zh-CN"
+                  ? "选择你的角色："
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "選擇你的角色："
+                  : "Choose your character:"}
+              </Typography>
               <Select
-                options={this.state.characters.map(character => {
-                  return { label: character.name, value: character._id };
-                })}
+                options={
+                  this.props.language === "ja"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character.name_ja,
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "ko"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character.name_ko,
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-CN"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-cn"],
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-TW"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-tw"],
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-HK"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-hk"],
+                          value: character._id
+                        };
+                      })
+                    : this.state.characters.map(character => {
+                        return { label: character.name, value: character._id };
+                      })
+                }
                 onChange={this.setMyCharacter}
                 className={classes.spaced}
               />
               <Typography variant="h6">
-                Choose your opponent's character:
+                {this.props.language === "ja"
+                  ? "対戦相手のキャラクターを選択してください："
+                  : this.props.language === "ko"
+                  ? "상대의 캐릭터를 선택하십시오:"
+                  : this.props.language === "zh-CN"
+                  ? "选择对手的角色："
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "選擇對手的角色："
+                  : "Choose your opponent's character:"}
               </Typography>
               <Select
-                options={this.state.characters.map(character => {
-                  return { label: character.name, value: character._id };
-                })}
+                options={
+                  this.props.language === "ja"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character.name_ja,
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "ko"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character.name_ko,
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-CN"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-cn"],
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-TW"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-tw"],
+                          value: character._id
+                        };
+                      })
+                    : this.props.language === "zh-HK"
+                    ? this.state.characters.map(character => {
+                        return {
+                          label: character["name_zh-hk"],
+                          value: character._id
+                        };
+                      })
+                    : this.state.characters.map(character => {
+                        return { label: character.name, value: character._id };
+                      })
+                }
                 onChange={this.setOpponentCharacter}
                 className={classes.spaced}
               />
               <Typography variant="h6">
-                Choose your filter (optional):
+                {this.props.language === "ja"
+                  ? "（オプション）フィルターを選択します："
+                  : this.props.language === "ko"
+                  ? "(선택 사항) 필터를 선택하십시오:"
+                  : this.props.language === "zh-CN"
+                  ? "（可选）选择您的过滤器："
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "（可選）選擇您的過濾器："
+                  : "Choose your filter (optional):"}
               </Typography>
               <Select
-                options={this.state.filters.map(filter => {
-                  return { label: filter.name, value: filter._id };
-                })}
+                options={
+                  this.props.language === "ja"
+                    ? this.state.filters.map(filter => {
+                        return { label: filter.name_ja, value: filter._id };
+                      })
+                    : this.props.language === "ko"
+                    ? this.state.filters.map(filter => {
+                        return { label: filter.name_ko, value: filter._id };
+                      })
+                    : this.props.language === "zh-CN"
+                    ? this.state.filters.map(filter => {
+                        return {
+                          label: filter["name_zh-cn"],
+                          value: filter._id
+                        };
+                      })
+                    : this.props.language === "zh-TW"
+                    ? this.state.filters.map(filter => {
+                        return {
+                          label: filter["name_zh-tw"],
+                          value: filter._id
+                        };
+                      })
+                    : this.props.language === "zh-HK"
+                    ? this.state.filters.map(filter => {
+                        return {
+                          label: filter["name_zh-hk"],
+                          value: filter._id
+                        };
+                      })
+                    : this.state.filters.map(filter => {
+                        return { label: filter.name, value: filter._id };
+                      })
+                }
                 disabled={
                   this.state.myCharacter === "" &&
                   this.state.opponentCharacter === ""
@@ -355,7 +592,16 @@ class GameNotes extends React.Component {
                   color="secondary"
                   onClick={this.clearFilter}
                 >
-                  Clear Filter
+                  {this.props.language === "ja"
+                    ? "フィルターをクリア"
+                    : this.props.language === "ko"
+                    ? "필터 지우기"
+                    : this.props.language === "zh-CN"
+                    ? "清除筛选"
+                    : this.props.language === "zh-HK" ||
+                      this.props.language === "zh-TW"
+                    ? "清除篩選"
+                    : "Clear Filter"}
                 </Button>
               )}
             </Grid>
@@ -365,7 +611,16 @@ class GameNotes extends React.Component {
                 this.state.opponentCharacter !== "" && (
                   <Container>
                     <Typography variant="h5" className={classes.spaced}>
-                      Notes:
+                      {this.props.language === "ja"
+                        ? "ノート:"
+                        : this.props.language === "ko"
+                        ? "노트:"
+                        : this.props.language === "zh-CN"
+                        ? "笔记："
+                        : this.props.language === "zh-HK" ||
+                          this.props.language === "zh-TW"
+                        ? "筆記："
+                        : "Notes:"}
                     </Typography>
                     <Grid container className={classes.spaced}>
                       {this.state.gameNotes.length > 0 ? (
@@ -379,13 +634,37 @@ class GameNotes extends React.Component {
                               filterId={note.filter._id}
                               deleteNote={this.deleteNote}
                               showEditor={this.showEditor}
+                              filter_ja={note.filter.name_ja}
+                              filter_ko={note.filter.name_ko}
+                              filter_zh-cn={note.filter["name_zh-cn"]}
+                              filter_zh-tw={note.filter["name_zh-tw"]}
+                              filter_zh-hk={note.filter["name_zh-hk"]}
+                              language={this.props.language}
                             />
                           );
                         })
                       ) : (
                         <PopulateNotes
                           filter="Notice"
-                          note="You do not have any notes for this matchup. Add some below!"
+                          filter_ja="通知"
+                          filter_ko="주의"
+                          filter_zh-cn="注意"
+                          filter_zh-hk="注意"
+                          filter_zh-tw="注意"
+                          language={this.props.language}
+                          note={
+                            this.props.language === "ja"
+                              ? "この対戦についてのメモはありません。 以下を追加してください！"
+                              : this.props.language === "ko"
+                              ? "이 경기에 대한 메모가 없습니다. 아래에 몇 가지를 추가하십시오!"
+                              : this.props.language === "zh-CN"
+                              ? "您没有关于这场比赛的任何笔记。 在下面添加一些！"
+                              : this.props.language === "zh-TW"
+                              ? "您沒有關於這場比賽的任何筆記。 在下面添加一些！"
+                              : this.props.language === "zh-HK"
+                              ? "你冇关於呢场比赛嘅任何碌士。喺下面添加啲！"
+                              : "You do not have any notes for this matchup. Add some below!"
+                          }
                         />
                       )}
                     </Grid>
