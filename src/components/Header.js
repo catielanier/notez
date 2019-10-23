@@ -49,7 +49,15 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            NoteZ
+            {props.language === "ja"
+              ? "ノートZ"
+              : props.language === "ko"
+              ? "노트Z"
+              : props.language === "zh-CN"
+              ? "笔记Z"
+              : props.language === "zh-TW" || props.language === "zh-HK"
+              ? "筆記Z"
+              : "NoteZ"}
           </Typography>
           {!props.user && (
             <>
@@ -59,7 +67,15 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                Login
+                {props.language === "ja"
+                  ? "ログイン"
+                  : props.language === "ko"
+                  ? "로그인"
+                  : props.language === "zh-CN"
+                  ? "登录"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "登錄"
+                  : "Login"}
               </Button>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -67,7 +83,15 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                Signup
+                {props.language === "ja"
+                  ? "サインアップ"
+                  : props.language === "ko"
+                  ? "가입하기"
+                  : props.language === "zh-CN"
+                  ? "注册"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "註冊"
+                  : "Signup"}
               </Button>
             </>
           )}
@@ -79,7 +103,15 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                Game Notes
+                {props.language === "ja"
+                  ? "ゲームノート"
+                  : props.language === "ko"
+                  ? "게임 노트"
+                  : props.language === "zh-CN"
+                  ? "游戏笔记"
+                  : props.language === "zh-HK" || props.language === "zh-TW"
+                  ? "遊戲筆記"
+                  : "Game Notes"}
               </Button>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -87,12 +119,28 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                Player Notes
+                {props.language === "ja"
+                  ? "プレイヤーノート"
+                  : props.language === "ko"
+                  ? "플레이어 노트"
+                  : props.language === "zh-CN"
+                  ? "玩家笔记"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "玩家筆記"
+                  : "Player Notes"}
               </Button>
               {props.role === "Admin" && (
                 <>
                   <Button onClick={handleClick} color="inherit">
-                    Settings
+                    {props.language === "ja"
+                      ? "設定"
+                      : props.language === "ko"
+                      ? "설정"
+                      : props.language === "zh-CN"
+                      ? "设定值"
+                      : props.language === "zh-TW"
+                      ? "設定值"
+                      : "Settings"}
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -167,7 +215,15 @@ export default function Header(props) {
                 </>
               )}
               <Button color="inherit" onClick={props.logout}>
-                Logout
+                {props.language === "ja"
+                  ? "ログアウト"
+                  : props.language === "ko"
+                  ? "로그아웃"
+                  : props.language === "zh-CN"
+                  ? "登出"
+                  : props.language === "zh-HK" || props.language === "zh-TW"
+                  ? "登出"
+                  : "Logout"}
               </Button>
             </>
           )}

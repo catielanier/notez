@@ -28,7 +28,8 @@ const theme = createMuiTheme({
 export default class App extends React.Component {
   state = {
     user: null,
-    role: null
+    role: null,
+    language: ""
   };
 
   componentWillMount = () => {
@@ -36,6 +37,19 @@ export default class App extends React.Component {
     this.setState({
       user
     });
+    const locale = navigator.language;
+    const index = locale.indexOf("zh");
+    if (index !== 0) {
+      const language = locale.split(/[-_]/)[0];
+      this.setState({
+        language
+      });
+    } else {
+      const language = locale;
+      this.setState({
+        language
+      });
+    }
   };
 
   componentDidMount = async () => {
@@ -78,6 +92,7 @@ export default class App extends React.Component {
             <Header
               user={this.state.user}
               role={this.state.role}
+              language={this.state.language}
               logout={this.logout}
             />
             <main>
@@ -85,7 +100,12 @@ export default class App extends React.Component {
                 <Route
                   exact
                   path="/"
-                  component={() => <GameNotes user={this.state.user} />}
+                  component={() => (
+                    <GameNotes
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
                 />
               ) : (
                 <Route exact path="/" component={Attract} />
@@ -93,32 +113,70 @@ export default class App extends React.Component {
               <Route
                 exact
                 path="/player"
-                component={() => <PlayerNotes user={this.state.user} />}
+                component={() => (
+                  <PlayerNotes
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
               <Route
                 path="/login"
-                component={() => <Login setUser={this.setUser} />}
+                component={() => (
+                  <Login
+                    setUser={this.setUser}
+                    language={this.state.language}
+                  />
+                )}
               />
-              <Route path="/signup" component={() => <Signup />} />
+              <Route
+                path="/signup"
+                component={() => <Signup language={this.state.language} />}
+              />
               <Route
                 path="/add-game"
-                component={() => <AddGame user={this.state.user} />}
+                component={() => (
+                  <AddGame
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
               <Route
                 path="/add-character"
-                component={() => <AddCharacter user={this.state.user} />}
+                component={() => (
+                  <AddCharacter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
               <Route
                 path="/add-filter"
-                component={() => <AddFilter user={this.state.user} />}
+                component={() => (
+                  <AddFilter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
               <Route
                 path="/link-character"
-                component={() => <LinkCharacter user={this.state.user} />}
+                component={() => (
+                  <LinkCharacter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
               <Route
                 path="/link-filter"
-                component={() => <LinkFilter user={this.state.user} />}
+                component={() => (
+                  <LinkFilter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
               />
             </main>
           </Router>
