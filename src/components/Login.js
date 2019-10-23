@@ -94,7 +94,16 @@ class Login extends React.Component {
       <section>
         <Container maxWidth="xs">
           <Typography className={classes.header} variant="h5">
-            Login
+            {this.props.language === "ja"
+              ? "ログイン"
+              : this.props.language === "ko"
+              ? "로그인"
+              : this.props.language === "zh-CN"
+              ? "登录"
+              : this.props.language === "zh-TW" ||
+                this.props.language === "zh-HK"
+              ? "登錄"
+              : "Login"}
           </Typography>
           <form
             disabled={this.state.loading}
@@ -109,7 +118,18 @@ class Login extends React.Component {
               )}
               <Container maxWidth="xs">
                 <TextField
-                  label="Email Address"
+                  label={
+                    this.props.language === "ja"
+                      ? "Eメールアドレス"
+                      : this.props.language === "ko"
+                      ? "이메일 주소"
+                      : this.props.language === "zh-CN"
+                      ? "电邮地址"
+                      : this.props.language === "zh-HK" ||
+                        this.props.language === "zh-TW"
+                      ? "電郵地址"
+                      : "Email Address"
+                  }
                   id="standard-name"
                   value={this.state.email}
                   name="email"
@@ -119,7 +139,18 @@ class Login extends React.Component {
               </Container>
               <Container maxWidth="xs">
                 <TextField
-                  label="Password"
+                  label={
+                    this.props.language === "ja"
+                      ? "パスワード"
+                      : this.props.language === "ko"
+                      ? "비밀번호"
+                      : this.props.language === "zh-CN"
+                      ? "密码"
+                      : this.props.language === "zh-HK" ||
+                        this.props.language === "zh-TW"
+                      ? "密碼"
+                      : "Password"
+                  }
                   value={this.state.password}
                   id="standard-password-input"
                   type="password"
@@ -137,7 +168,16 @@ class Login extends React.Component {
                     onClick={this.login}
                     disabled={this.state.loading}
                   >
-                    Login
+                    {this.props.language === "ja"
+                      ? "ログイン"
+                      : this.props.language === "ko"
+                      ? "로그인"
+                      : this.props.language === "zh-CN"
+                      ? "登录"
+                      : this.props.language === "zh-TW" ||
+                        this.props.language === "zh-HK"
+                      ? "登錄"
+                      : "Login"}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
@@ -153,7 +193,16 @@ class Login extends React.Component {
                       <RouterLink innerRef={ref} to="/" {...props} />
                     ))}
                   >
-                    Go Back
+                    {this.props.language === "ja"
+                      ? "戻る"
+                      : this.props.language === "ko"
+                      ? "돌아가다"
+                      : this.props.language === "zh-CN"
+                      ? "回去"
+                      : this.props.language === "zh-TW" ||
+                        this.props.language === "zh-HK"
+                      ? "回去"
+                      : "Go Back"}
                   </Button>
                 </div>
               </Container>

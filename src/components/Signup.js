@@ -105,7 +105,16 @@ class Signup extends React.Component {
       <section className="signup">
         <Container maxWidth="xs">
           <Typography className={classes.header} variant="h5">
-            Signup
+            {this.props.language === "ja"
+              ? "サインアップ"
+              : this.props.language === "ko"
+              ? "가입하기"
+              : this.props.language === "zh-CN"
+              ? "注册"
+              : this.props.language === "zh-TW" ||
+                this.props.language === "zh-HK"
+              ? "註冊"
+              : "Signup"}
           </Typography>
           <form disabled={this.state.loading} onSubmit={this.signup}>
             {this.state.success && (
@@ -117,7 +126,18 @@ class Signup extends React.Component {
               </p>
             )}
             <TextField
-              label="Email Address"
+              label={
+                this.props.language === "ja"
+                  ? "Eメールアドレス"
+                  : this.props.language === "ko"
+                  ? "이메일 주소"
+                  : this.props.language === "zh-CN"
+                  ? "电邮地址"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "電郵地址"
+                  : "Email Address"
+              }
               required
               name="email"
               onChange={this.changeState}
@@ -125,7 +145,18 @@ class Signup extends React.Component {
               value={this.state.email}
             />
             <TextField
-              label="Password"
+              label={
+                this.props.language === "ja"
+                  ? "パスワード"
+                  : this.props.language === "ko"
+                  ? "비밀번호"
+                  : this.props.language === "zh-CN"
+                  ? "密码"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "密碼"
+                  : "Password"
+              }
               required
               name="password"
               onChange={this.changeState}
@@ -134,7 +165,18 @@ class Signup extends React.Component {
               type="password"
             />
             <TextField
-              label="Verify Password"
+              label={
+                this.props.language === "ja"
+                  ? "パスワードを照合します"
+                  : this.props.language === "ko"
+                  ? "비밀번호 확인"
+                  : this.props.language === "zh-CN"
+                  ? "验证密码"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "驗證密碼"
+                  : "Verify Password"
+              }
               required
               name="verifyPassword"
               onChange={this.changeState}
@@ -143,7 +185,18 @@ class Signup extends React.Component {
               type="password"
             />
             <TextField
-              label="Username"
+              label={
+                this.props.language === "ja"
+                  ? "ユーザー名"
+                  : this.props.language === "ko"
+                  ? "사용자 이름"
+                  : this.props.language === "zh-CN"
+                  ? "用户名"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "用户名"
+                  : "Username"
+              }
               required
               name="username"
               onChange={this.changeState}
@@ -151,14 +204,36 @@ class Signup extends React.Component {
               value={this.state.username}
             />
             <TextField
-              label="Real Name"
+              label={
+                this.props.language === "ja"
+                  ? "本名"
+                  : this.props.language === "ko"
+                  ? "실제 이름"
+                  : this.props.language === "zh-CN"
+                  ? "真正的名字"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "真正的名字"
+                  : "Real Name"
+              }
               name="realName"
               onChange={this.changeState}
               fullWidth
               value={this.state.realName}
             />
             <TextField
-              label="Country"
+              label={
+                this.props.language === "ja"
+                  ? "国"
+                  : this.props.language === "ko"
+                  ? "국가"
+                  : this.props.language === "zh-CN"
+                  ? "国家"
+                  : this.props.language === "zh-HK" ||
+                    this.props.language === "zh-TW"
+                  ? "國家"
+                  : "Country"
+              }
               name="country"
               onChange={this.changeState}
               fullWidth
@@ -167,7 +242,16 @@ class Signup extends React.Component {
             <Container className={classes.buttonRow}>
               <div className={classes.wrapper}>
                 <Button color="primary" variant="contained" type="submit">
-                  Signup
+                  {this.props.language === "ja"
+                    ? "サインアップ"
+                    : this.props.language === "ko"
+                    ? "가입하기"
+                    : this.props.language === "zh-CN"
+                    ? "注册"
+                    : this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "註冊"
+                    : "Signup"}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
@@ -183,7 +267,16 @@ class Signup extends React.Component {
                     <RouterLink innerRef={ref} to="/" {...props} />
                   ))}
                 >
-                  Go Back
+                  {this.props.language === "ja"
+                    ? "戻る"
+                    : this.props.language === "ko"
+                    ? "돌아가다"
+                    : this.props.language === "zh-CN"
+                    ? "回去"
+                    : this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "回去"
+                    : "Go Back"}
                 </Button>
               </div>
             </Container>
