@@ -550,16 +550,65 @@ class PlayerNotes extends React.Component {
               id="editor-title"
               className={classes.spaced}
             >
-              Editing Note
+              {this.props.language === "ja"
+                ? "編集ノート"
+                : this.props.language === "ko"
+                ? "편집 노트"
+                : this.props.language === "zh-CN"
+                ? "编辑笔记"
+                : this.props.language === "zh-TW"
+                ? "編輯筆記"
+                : this.props.language === "zh-HK"
+                ? "編輯筆記"
+                : "Editing Note"}
             </Typography>
-            <Typography variant="h6">Filter:</Typography>
+            <Typography variant="h6">
+              {this.props.language === "ja"
+                ? "フィルター"
+                : this.props.language === "ko"
+                ? "필터"
+                : this.props.language === "zh-CN"
+                ? "过滤器"
+                : this.props.language === "zh-HK" ||
+                  this.props.language === "zh-TW"
+                ? "過濾器"
+                : "Filter"}
+            </Typography>
             <Select
-              options={this.state.filters.map(filter => {
-                return {
-                  label: filter.name,
-                  value: filter._id
-                };
-              })}
+              options={
+                this.props.language === "ja"
+                  ? this.state.filters.map(filter => {
+                      return { label: filter.name_ja, value: filter._id };
+                    })
+                  : this.props.language === "ko"
+                  ? this.state.filters.map(filter => {
+                      return { label: filter.name_ko, value: filter._id };
+                    })
+                  : this.props.language === "zh-CN"
+                  ? this.state.filters.map(filter => {
+                      return {
+                        label: filter["name_zh-cn"],
+                        value: filter._id
+                      };
+                    })
+                  : this.props.language === "zh-TW"
+                  ? this.state.filters.map(filter => {
+                      return {
+                        label: filter["name_zh-tw"],
+                        value: filter._id
+                      };
+                    })
+                  : this.props.language === "zh-HK"
+                  ? this.state.filters.map(filter => {
+                      return {
+                        label: filter["name_zh-hk"],
+                        value: filter._id
+                      };
+                    })
+                  : this.state.filters.map(filter => {
+                      return { label: filter.name, value: filter._id };
+                    })
+              }
               onChange={this.setEditFilter}
               defaultValue={this.state.noteFilter}
               className={classes.spaced}
@@ -577,10 +626,30 @@ class PlayerNotes extends React.Component {
               className={classes.button}
               onClick={this.editNote}
             >
-              Edit Note
+              {this.props.language === "ja"
+                ? "ノートを編集"
+                : this.props.language === "ko"
+                ? "노트 수정"
+                : this.props.language === "zh-CN"
+                ? "编辑笔记"
+                : this.props.language === "zh-TW"
+                ? "編輯筆記"
+                : this.props.language === "zh-HK"
+                ? "編輯筆記"
+                : "Edit Note"}
             </Button>
             <Button className={classes.button} onClick={this.hideEditor}>
-              Cancel
+              {this.props.language === "ja"
+                ? "キャンセル"
+                : this.props.language === "ko"
+                ? "취소"
+                : this.props.language === "zh-CN"
+                ? "取消"
+                : this.props.language === "zh-TW"
+                ? "取消"
+                : this.props.language === "zh-HK"
+                ? "取消"
+                : "Cancel"}
             </Button>
           </Container>
         </Modal>
