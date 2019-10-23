@@ -675,6 +675,7 @@ class GameNotes extends React.Component {
                       opponentCharacter={this.state.opponentCharacter}
                       filters={this.state.filters}
                       addToNotes={this.addToNotes}
+                      language={this.props.language}
                     />
                   </Container>
                 )}

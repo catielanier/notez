@@ -140,6 +140,8 @@ export default function Header(props) {
                       ? "设定值"
                       : props.language === "zh-TW"
                       ? "設定值"
+                      : props.language === "zh-HK"
+                      ? "設定值"
                       : "Settings"}
                   </Button>
                   <Menu
