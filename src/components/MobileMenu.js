@@ -18,13 +18,33 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
-              <ListItemText>Login</ListItemText>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "ログイン"
+                  : props.language === "ko"
+                  ? "로그인"
+                  : props.language === "zh-CN"
+                  ? "登录"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "登錄"
+                  : "Login"}
+              </ListItemText>
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <PersonAdd />
               </ListItemIcon>
-              <ListItemText>Signup</ListItemText>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "サインアップ"
+                  : props.language === "ko"
+                  ? "가입하기"
+                  : props.language === "zh-CN"
+                  ? "注册"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "註冊"
+                  : "Signup"}
+              </ListItemText>
             </ListItem>
           </>
         )}
@@ -34,13 +54,33 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <Gamepad />
               </ListItemIcon>
-              <ListItemText>Game Notes</ListItemText>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "ゲームノート"
+                  : props.language === "ko"
+                  ? "게임 노트"
+                  : props.language === "zh-CN"
+                  ? "游戏笔记"
+                  : props.language === "zh-HK" || props.language === "zh-TW"
+                  ? "遊戲筆記"
+                  : "Game Notes"}
+              </ListItemText>
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <Face />
               </ListItemIcon>
-              <ListItemText>Player Notes</ListItemText>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "プレイヤーノート"
+                  : props.language === "ko"
+                  ? "플레이어 노트"
+                  : props.language === "zh-CN"
+                  ? "玩家笔记"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "玩家筆記"
+                  : "Player Notes"}
+              </ListItemText>
             </ListItem>
             {props.role === "Admin" && (
               <>
@@ -65,7 +105,17 @@ export default function MobileMenu(props) {
               </>
             )}
             <ListItem button>
-              <ListItemText>Logout</ListItemText>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "ログアウト"
+                  : props.language === "ko"
+                  ? "로그아웃"
+                  : props.language === "zh-CN"
+                  ? "登出"
+                  : props.language === "zh-HK" || props.language === "zh-TW"
+                  ? "登出"
+                  : "Logout"}
+              </ListItemText>
             </ListItem>
           </>
         )}
