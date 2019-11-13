@@ -16,6 +16,7 @@ import LinkFilter from "./components/LinkFilter";
 import GameNotes from "./components/GameNotes";
 import PlayerNotes from "./components/PlayerNotes";
 import Attract from "./components/Attract";
+import MobileMenu from "./components/MobileMenu";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -30,7 +31,8 @@ export default class App extends React.Component {
   state = {
     user: null,
     role: null,
-    language: ""
+    language: "",
+    menu: false
   };
 
   componentWillMount = () => {
@@ -62,6 +64,13 @@ export default class App extends React.Component {
       user
     });
     this.checkRole();
+  };
+
+  showMenu = () => {
+    const menu = !this.state.menu;
+    this.setState({
+      menu
+    });
   };
 
   checkRole = async () => {
@@ -104,11 +113,20 @@ export default class App extends React.Component {
         </Helmet>
         <div className="App">
           <Router>
+            <MobileMenu
+              user={this.state.user}
+              role={this.state.role}
+              language={this.state.language}
+              logout={this.logout}
+              showMenu={this.showMenu}
+              menu={this.state.menu}
+            />
             <Header
               user={this.state.user}
               role={this.state.role}
               language={this.state.language}
               logout={this.logout}
+              showMenu={this.showMenu}
             />
             <main>
               {this.state.user ? (

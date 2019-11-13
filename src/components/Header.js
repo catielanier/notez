@@ -47,6 +47,7 @@ export default function Header(props) {
               color="inherit"
               aria-label="menu"
               className={classes.menuButton}
+              onClick={props.showMenu}
             >
               <MenuIcon />
             </IconButton>
