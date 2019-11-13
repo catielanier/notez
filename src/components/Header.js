@@ -9,7 +9,8 @@ import {
   Button,
   Menu,
   MenuItem,
-  Link
+  Link,
+  Hidden
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -40,14 +41,16 @@ export default function Header(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Hidden smUp>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <Typography variant="h6" className={classes.title}>
             {props.language === "ja"
               ? "ノートZ"
@@ -60,7 +63,7 @@ export default function Header(props) {
               : "NoteZ"}
           </Typography>
           {!props.user && (
-            <>
+            <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
                   <RouterLink innerRef={ref} to="/login" {...props} />
@@ -93,10 +96,10 @@ export default function Header(props) {
                   ? "註冊"
                   : "Signup"}
               </Button>
-            </>
+            </Hidden>
           )}
           {props.user && (
-            <>
+            <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
                   <RouterLink innerRef={ref} to="/" {...props} />
@@ -227,7 +230,7 @@ export default function Header(props) {
                   ? "登出"
                   : "Logout"}
               </Button>
-            </>
+            </Hidden>
           )}
         </Toolbar>
       </AppBar>
