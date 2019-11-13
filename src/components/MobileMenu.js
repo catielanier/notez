@@ -7,7 +7,15 @@ import {
   ListItemText
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import { ExitToApp, PersonAdd, Face, Gamepad } from "@material-ui/icons";
+import {
+  ExitToApp,
+  PersonAdd,
+  Face,
+  Gamepad,
+  Add,
+  Link as LinkIcon,
+  Settings
+} from "@material-ui/icons";
 
 export default function MobileMenu(props) {
   return (
@@ -111,6 +119,9 @@ export default function MobileMenu(props) {
                     <RouterLink innerRef={ref} to="/add-game" {...props} />
                   ))}
                 >
+                  <ListItemIcon>
+                    <Add />
+                  </ListItemIcon>
                   <ListItemText>Add Game</ListItemText>
                 </ListItem>
                 <ListItem
@@ -119,6 +130,9 @@ export default function MobileMenu(props) {
                     <RouterLink innerRef={ref} to="/add-character" {...props} />
                   ))}
                 >
+                  <ListItemIcon>
+                    <Add />
+                  </ListItemIcon>
                   <ListItemText>Add Character</ListItemText>
                 </ListItem>
                 <ListItem
@@ -127,6 +141,9 @@ export default function MobileMenu(props) {
                     <RouterLink innerRef={ref} to="/add-filter" {...props} />
                   ))}
                 >
+                  <ListItemIcon>
+                    <Add />
+                  </ListItemIcon>
                   <ListItemText>Add Filter</ListItemText>
                 </ListItem>
                 <ListItem
@@ -139,6 +156,9 @@ export default function MobileMenu(props) {
                     />
                   ))}
                 >
+                  <ListItemIcon>
+                    <LinkIcon />
+                  </ListItemIcon>
                   <ListItemText>Link Characters</ListItemText>
                 </ListItem>
                 <ListItem
@@ -147,6 +167,9 @@ export default function MobileMenu(props) {
                     <RouterLink innerRef={ref} to="/link-filter" {...props} />
                   ))}
                 >
+                  <ListItemIcon>
+                    <LinkIcon />
+                  </ListItemIcon>
                   <ListItemText>Link Filters</ListItemText>
                 </ListItem>
                 <ListItem
@@ -155,6 +178,9 @@ export default function MobileMenu(props) {
                     <RouterLink innerRef={ref} to="/user-settings" {...props} />
                   ))}
                 >
+                  <ListItemIcon>
+                    <Settings />
+                  </ListItemIcon>
                   <ListItemText>User Settings</ListItemText>
                 </ListItem>
               </>
