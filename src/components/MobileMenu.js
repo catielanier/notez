@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import { ExitToApp, PersonAdd, Face, Gamepad } from "@material-ui/icons";
 
 export default function MobileMenu(props) {
@@ -14,7 +15,12 @@ export default function MobileMenu(props) {
       <List>
         {!props.user && (
           <>
-            <ListItem button>
+            <ListItem
+              button
+              component={React.forwardRef((props, ref) => (
+                <RouterLink innerRef={ref} to="/login" {...props} />
+              ))}
+            >
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
@@ -30,7 +36,12 @@ export default function MobileMenu(props) {
                   : "Login"}
               </ListItemText>
             </ListItem>
-            <ListItem button>
+            <ListItem
+              button
+              component={React.forwardRef((props, ref) => (
+                <RouterLink innerRef={ref} to="/signup" {...props} />
+              ))}
+            >
               <ListItemIcon>
                 <PersonAdd />
               </ListItemIcon>
@@ -50,7 +61,12 @@ export default function MobileMenu(props) {
         )}
         {props.user && (
           <>
-            <ListItem button>
+            <ListItem
+              button
+              component={React.forwardRef((props, ref) => (
+                <RouterLink innerRef={ref} to="/" {...props} />
+              ))}
+            >
               <ListItemIcon>
                 <Gamepad />
               </ListItemIcon>
@@ -66,7 +82,12 @@ export default function MobileMenu(props) {
                   : "Game Notes"}
               </ListItemText>
             </ListItem>
-            <ListItem button>
+            <ListItem
+              button
+              component={React.forwardRef((props, ref) => (
+                <RouterLink innerRef={ref} to="/player" {...props} />
+              ))}
+            >
               <ListItemIcon>
                 <Face />
               </ListItemIcon>
@@ -84,27 +105,61 @@ export default function MobileMenu(props) {
             </ListItem>
             {props.role === "Admin" && (
               <>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/add-game" {...props} />
+                  ))}
+                >
                   <ListItemText>Add Game</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/add-character" {...props} />
+                  ))}
+                >
                   <ListItemText>Add Character</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/add-filter" {...props} />
+                  ))}
+                >
                   <ListItemText>Add Filter</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink
+                      innerRef={ref}
+                      to="/link-character"
+                      {...props}
+                    />
+                  ))}
+                >
                   <ListItemText>Link Characters</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/link-filter" {...props} />
+                  ))}
+                >
                   <ListItemText>Link Filters</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/user-settings" {...props} />
+                  ))}
+                >
                   <ListItemText>User Settings</ListItemText>
                 </ListItem>
               </>
             )}
-            <ListItem button>
+            <ListItem button onClick={props.logout}>
               <ListItemText>
                 {props.language === "ja"
                   ? "ログアウト"
