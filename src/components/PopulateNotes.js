@@ -22,7 +22,7 @@ function PopulateNotes(props) {
   const classes = useStyles();
   return (
     <>
-      <Grid item md={3} className={classes.padding}>
+      <Grid item md={3} xs={4} className={classes.padding}>
         <Typography
           variant="span"
           color="secondary"
@@ -44,10 +44,10 @@ function PopulateNotes(props) {
       </Grid>
       {props.filter !== "Notice" ? (
         <>
-          <Grid item md={7} className={classes.padding}>
+          <Grid item md={7} xs={5} className={classes.padding}>
             {props.note}
           </Grid>
-          <Grid item md={2} className={classes.border}>
+          <Grid item md={2} xs={3} className={classes.border}>
             <Grid container>
               <Grid item md={6}>
                 <IconButton
