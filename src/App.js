@@ -112,7 +112,7 @@ export default class App extends React.Component {
               : "NoteZ"}
           </title>
         </Helmet>
-        <div className="App">
+        <div className={!this.state.user ? "App attract-main" : "App"}>
           <Router>
             <MobileMenu
               user={this.state.user}
