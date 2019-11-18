@@ -38,7 +38,7 @@ export default function Header(props) {
     setAnchorEl(null);
   };
   return (
-    <div className={classes.root}>
+    <div className={(classes.root, "header")}>
       <AppBar position="static">
         <Toolbar>
           <Hidden smUp>

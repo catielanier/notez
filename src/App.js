@@ -5,6 +5,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { blue, orange } from "@material-ui/core/colors";
 import axios from "axios";
 import Helmet from "react-helmet";
+import Particles from "react-particles-js";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -128,6 +129,29 @@ export default class App extends React.Component {
               logout={this.logout}
               showMenu={this.showMenu}
             />
+            {!this.state.user && (
+              <Particles
+                params={{
+                  particles: {
+                    number: {
+                      value: 90
+                    },
+                    size: {
+                      value: 5
+                    }
+                  },
+                  interactivity: {
+                    events: {
+                      onhover: {
+                        enable: true,
+                        mode: "repulse"
+                      }
+                    }
+                  }
+                }}
+                className="particle"
+              />
+            )}
             <main>
               {this.state.user ? (
                 <Route

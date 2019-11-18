@@ -4,13 +4,15 @@ import logo from "../assets/logo.png";
 
 function Attract() {
   return (
-    <Container>
+    <Container className="attract">
       <Grid container spacing={2}>
         <Grid item md={5} xs={12}>
           <img className="main-logo" src={logo} alt="NoteZ" />
         </Grid>
         <Grid item md={7} xs={12}>
-          <Typography variant="h3">Welcome to NoteZ</Typography>
+          <Typography variant="h3" gutterBottom>
+            Welcome to NoteZ
+          </Typography>
           <Typography variant="h5">
             Your premiere fighting game note app!
           </Typography>
