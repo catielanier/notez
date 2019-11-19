@@ -18,6 +18,7 @@ import GameNotes from "./components/GameNotes";
 import PlayerNotes from "./components/PlayerNotes";
 import Attract from "./components/Attract";
 import MobileMenu from "./components/MobileMenu";
+import UserSettings from "./components/UserSettings";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -234,6 +235,15 @@ export default class App extends React.Component {
                 path="/link-filter"
                 component={() => (
                   <LinkFilter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
+              />
+              <Route
+                path="/user-settings"
+                component={() => (
+                  <UserSettings
                     user={this.state.user}
                     language={this.state.language}
                   />
