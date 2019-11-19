@@ -220,6 +220,22 @@ export default function Header(props) {
                   </Menu>
                 </>
               )}
+              <Button
+                color="inherit"
+                component={React.forwardRef((props, ref) => (
+                  <RouterLink innerRef={ref} to="/profile" {...props} />
+                ))}
+              >
+                {props.language === "ja"
+                  ? "プロフィール"
+                  : props.language === "ko"
+                  ? "프로필"
+                  : props.language === "zh-CN"
+                  ? "个人资料"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "個人資料"
+                  : "Profile"}
+              </Button>
               <Button color="inherit" onClick={props.logout}>
                 {props.language === "ja"
                   ? "ログアウト"
