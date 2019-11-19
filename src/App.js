@@ -19,6 +19,7 @@ import PlayerNotes from "./components/PlayerNotes";
 import Attract from "./components/Attract";
 import MobileMenu from "./components/MobileMenu";
 import UserSettings from "./components/UserSettings";
+import Profile from "./components/Profile";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -244,6 +245,15 @@ export default class App extends React.Component {
                 path="/user-settings"
                 component={() => (
                   <UserSettings
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
+              />
+              <Route
+                path="/profile"
+                component={() => (
+                  <Profile
                     user={this.state.user}
                     language={this.state.language}
                   />
