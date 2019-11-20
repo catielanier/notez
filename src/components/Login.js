@@ -71,11 +71,11 @@ class Login extends React.Component {
         const { token, id } = res.data.data;
         await setToken(token);
         await localStorage.setItem("notezId", id);
-        await this.props.setUser(id);
-        this.setState({
-          loading: false,
-          success: true
+        await this.setState({
+          success: true,
+          loading: false
         });
+        await this.props.setUser(id);
       }
     } catch (e) {
       this.setState({
@@ -134,7 +134,7 @@ class Login extends React.Component {
                   value={this.state.email}
                   name="email"
                   onChange={this.changeState}
-                  fullWidth="true"
+                  fullWidth
                 />
               </Container>
               <Container maxWidth="xs">
@@ -156,7 +156,7 @@ class Login extends React.Component {
                   type="password"
                   name="password"
                   onChange={this.changeState}
-                  fullWidth="true"
+                  fullWidth
                 />
               </Container>
               <Container className={classes.buttonRow}>
@@ -197,9 +197,8 @@ class Login extends React.Component {
                       ? "戻る"
                       : this.props.language === "ko"
                       ? "돌아가다"
-                      : this.props.language === "zh-CN"
-                      ? "回去"
-                      : this.props.language === "zh-TW" ||
+                      : this.props.language === "zh-CN" ||
+                        this.props.language === "zh-TW" ||
                         this.props.language === "zh-HK"
                       ? "回去"
                       : "Go Back"}
