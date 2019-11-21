@@ -77,3 +77,11 @@ exports.updateUser = async (id, realName, username, country, email) => {
     throw e;
   }
 };
+
+exports.getAllUsers = async () => {
+  try {
+    return await User.find({});
+  } catch (e) {
+    throw e;
+  }
+};

@@ -108,4 +108,24 @@ router.route("/:id").put(async (req, res) => {
   }
 });
 
+router.route("/").get(async (req, res) => {
+  const { token, user: id } = req.body;
+  const loggedIn = await tokenService.verifyToken(token);
+  if (loggedIn) {
+    const user = await userService.getUserById(id);
+    if (user.role === "Admin") {
+      const users = await userService.getAllUsers();
+      if (users) {
+        res.status(200).json({
+          data: users
+        });
+      }
+    } else {
+      res.status(503).statusMessage("You are not authorized to view all users");
+    }
+  } else {
+    res.status(400).statusMessage("You are not logged in.");
+  }
+});
+
 exports.router = router;
