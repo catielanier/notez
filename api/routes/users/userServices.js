@@ -35,3 +35,17 @@ exports.getUserById = async id => {
     throw e;
   }
 };
+
+exports.verifyOldPassword = async (id, password) => {
+  try {
+    const user = await User.findById({ _id: id });
+    if (user) {
+      const match = await user.comparePassword(password);
+      if (match) {
+        return user;
+      }
+    }
+  } catch (e) {
+    throw e;
+  }
+};

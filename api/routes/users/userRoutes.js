@@ -45,4 +45,67 @@ router.route("/:id").get(async (req, res, next) => {
   }
 });
 
+router.route("/:id").put(async (req, res) => {
+  const { id: user } = req.params;
+  const {
+    username,
+    realName,
+    newPassword,
+    oldPassword,
+    country,
+    email,
+    token
+  } = req.body;
+  const loggedIn = await tokenService.verifyToken(token);
+  if (loggedIn) {
+    if (oldPassword) {
+      const validPassword = await userService.verifyOldPassword(
+        user,
+        oldPassword
+      );
+      if (validPassword) {
+        const passwordChange = await userService.updatePassword(
+          user,
+          newPassword
+        );
+        const userUpdate = await userService.updateUser(
+          user,
+          realName,
+          username,
+          country,
+          email
+        );
+        if (userUpdate && passwordChange) {
+          res.status(201).json({
+            data: userUpdate
+          });
+        } else {
+          res.status(401).statusMessage("User did not update.");
+        }
+      } else {
+        res
+          .status(401)
+          .statusMessage("Invalid password. Please confirm your old password.");
+      }
+    } else {
+      const userUpdate = await userService.updateUser(
+        user,
+        realName,
+        username,
+        country,
+        email
+      );
+      if (userUpdate) {
+        res.status(201).json({
+          data: userUpdate
+        });
+      } else {
+        res.status(401).statusMessage("User did not update.");
+      }
+    }
+  } else {
+    res.status(401).statusMessage("You are not logged in.");
+  }
+});
+
 exports.router = router;

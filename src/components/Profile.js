@@ -9,6 +9,7 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import { getToken } from "../services/tokenService";
 
 const styles = theme => ({
   container: {
@@ -75,6 +76,7 @@ class Profile extends React.Component {
       realName
     } = this.state;
     const { user } = this.props;
+    const token = getToken();
     this.setState({
       loading: true,
       error: null
@@ -89,7 +91,8 @@ class Profile extends React.Component {
               country,
               realName,
               oldPassword,
-              newPassword
+              newPassword,
+              token
             }
           })
           .then(() => {
@@ -117,7 +120,8 @@ class Profile extends React.Component {
             username,
             email,
             country,
-            realName
+            realName,
+            token
           }
         })
         .then(() => {
