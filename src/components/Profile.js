@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import { Link as RouterLink } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -45,7 +44,10 @@ class Profile extends React.Component {
     username: "",
     country: "",
     email: "",
-    realName: ""
+    realName: "",
+    loading: false,
+    success: false,
+    error: null
   };
 
   async componentWillMount() {
@@ -60,6 +62,78 @@ class Profile extends React.Component {
       });
     });
   }
+
+  updateProfile = async e => {
+    e.preventDefault();
+    const {
+      oldPassword,
+      newPassword,
+      verifyNewPassword,
+      username,
+      country,
+      email,
+      realName
+    } = this.state;
+    const { user } = this.props;
+    this.setState({
+      loading: true,
+      error: null
+    });
+    if (oldPassword !== "") {
+      if (newPassword !== "" && newPassword === verifyNewPassword) {
+        await axios
+          .put(`/api/users/${user}`, {
+            data: {
+              username,
+              email,
+              country,
+              realName,
+              oldPassword,
+              newPassword
+            }
+          })
+          .then(() => {
+            this.setState({
+              loading: false,
+              success: true
+            });
+          })
+          .catch(err => {
+            this.setState({
+              loading: false,
+              error: err
+            });
+          });
+      } else {
+        this.setState({
+          loading: false,
+          error: `Your new password is either invalid or doesn't match your password verification. (Note: If you don't want to change your password, leave the "Old Password" field blank.)`
+        });
+      }
+    } else {
+      await axios
+        .put(`/api/users/${user}`, {
+          data: {
+            username,
+            email,
+            country,
+            realName
+          }
+        })
+        .then(() => {
+          this.setState({
+            loading: false,
+            success: true
+          });
+        })
+        .catch(err => {
+          this.setState({
+            loading: false,
+            error: err
+          });
+        });
+    }
+  };
 
   render() {
     const { classes } = this.props;
@@ -225,15 +299,15 @@ class Profile extends React.Component {
               <div className={classes.wrapper}>
                 <Button color="primary" variant="contained" type="submit">
                   {this.props.language === "ja"
-                    ? "サインアップ"
+                    ? "プロファイル編集"
                     : this.props.language === "ko"
-                    ? "가입하기"
+                    ? "프로필 편집"
                     : this.props.language === "zh-CN"
-                    ? "注册"
+                    ? "编辑个人资料"
                     : this.props.language === "zh-TW" ||
                       this.props.language === "zh-HK"
-                    ? "註冊"
-                    : "Signup"}
+                    ? "編輯個人資料"
+                    : "Edit Profile"}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
@@ -242,24 +316,6 @@ class Profile extends React.Component {
                     className={classes.buttonProgress}
                   />
                 )}
-              </div>
-              <div className={classes.wrapper}>
-                <Button
-                  component={React.forwardRef((props, ref) => (
-                    <RouterLink innerRef={ref} to="/" {...props} />
-                  ))}
-                >
-                  {this.props.language === "ja"
-                    ? "戻る"
-                    : this.props.language === "ko"
-                    ? "돌아가다"
-                    : this.props.language === "zh-CN"
-                    ? "回去"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "回去"
-                    : "Go Back"}
-                </Button>
               </div>
             </Container>
           </form>
