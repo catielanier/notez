@@ -1,7 +1,15 @@
 import React from "react";
 import axios from "axios";
 import Select from "react-select";
-import { Container, Button, Typography } from "@material-ui/core";
+import {
+  Container,
+  Button,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormLabel,
+  FormControlLabel
+} from "@material-ui/core";
 import { getToken } from "../services/tokenService";
 
 class UserSettings extends React.Component {
@@ -42,11 +50,18 @@ class UserSettings extends React.Component {
     });
   };
 
+  updateRole = async e => {
+    e.preventDefault();
+  };
+
   render() {
     return (
       <section>
         <Container maxWidth="sm">
-          <Typography variant="h5">Edit User Roles</Typography>
+          <Typography variant="h5" gutterBottom>
+            Edit User Roles
+          </Typography>
+          <Typography variant="h6">Select User:</Typography>
           <Select
             options={this.state.users.map(user => {
               return {
@@ -56,6 +71,39 @@ class UserSettings extends React.Component {
             })}
             onChange={this.setUser}
           />
+          {this.state.id !== "" && this.state.role !== "" && (
+            <>
+              <Typography variant="h6">Select Role:</Typography>
+              <RadioGroup
+                name="role"
+                onChange={this.setRole}
+                value={this.state.role}
+              >
+                <FormControlLabel
+                  value="User"
+                  control={<Radio color="primary" />}
+                  label="User"
+                />
+                <FormControlLabel
+                  value="Admin"
+                  control={<Radio color="primary" />}
+                  label="Admin"
+                />
+                <FormControlLabel
+                  value="Banned"
+                  control={<Radio color="primary" />}
+                  label="Banned"
+                />
+              </RadioGroup>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={this.updateRole}
+              >
+                Update User
+              </Button>
+            </>
+          )}
         </Container>
       </section>
     );
