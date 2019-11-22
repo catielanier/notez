@@ -7,7 +7,6 @@ import {
   Typography,
   Radio,
   RadioGroup,
-  FormLabel,
   FormControlLabel
 } from "@material-ui/core";
 import { getToken } from "../services/tokenService";
@@ -52,6 +51,33 @@ class UserSettings extends React.Component {
 
   updateRole = async e => {
     e.preventDefault();
+    const { id, role } = this.state;
+    const { user } = this.props;
+    const token = await getToken();
+    this.setState({
+      loading: true
+    });
+    await axios
+      .put("/api/users/role", {
+        data: {
+          id,
+          role,
+          user,
+          token
+        }
+      })
+      .then(() => {
+        this.setState({
+          loading: false,
+          success: true
+        });
+      })
+      .catch(err => {
+        this.setState({
+          loading: false,
+          error: err
+        });
+      });
   };
 
   render() {
