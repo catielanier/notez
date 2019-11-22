@@ -160,7 +160,18 @@ export default function Header(props) {
                         <RouterLink innerRef={ref} to="/add-game" {...props} />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>Add Games</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "ゲームを追加"
+                          : props.language === "ko"
+                          ? "게임 추가"
+                          : props.language === "zh-CN"
+                          ? "新增游戏"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "新增遊戲"
+                          : "Add Game"}
+                      </MenuItem>
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
@@ -171,7 +182,18 @@ export default function Header(props) {
                         />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>Add Characters</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "キャラクターを追加"
+                          : props.language === "ko"
+                          ? "캐릭터 추가"
+                          : props.language === "zh-CN"
+                          ? "新增角色"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "新增角色"
+                          : "Add Character"}
+                      </MenuItem>
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
@@ -182,7 +204,18 @@ export default function Header(props) {
                         />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>Add Filters</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "フィルターを追加"
+                          : props.language === "ko"
+                          ? "필터 추가"
+                          : props.language === "zh-CN"
+                          ? "新增过滤器"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "新增過濾器"
+                          : "Add Filter"}
+                      </MenuItem>
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
@@ -193,7 +226,18 @@ export default function Header(props) {
                         />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>Link Characters</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "キャラクターを接続"
+                          : props.language === "ko"
+                          ? "캐릭터를 연결"
+                          : props.language === "zh-CN"
+                          ? "连接角色"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "連接角色"
+                          : "Link Characters"}
+                      </MenuItem>
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
@@ -204,7 +248,18 @@ export default function Header(props) {
                         />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>Link Filters</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "フィルターを接続"
+                          : props.language === "ko"
+                          ? "필터를 연결"
+                          : props.language === "zh-CN"
+                          ? "连接过滤器"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "連接過濾器"
+                          : "Link Filters"}
+                      </MenuItem>
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
@@ -215,7 +270,18 @@ export default function Header(props) {
                         />
                       ))}
                     >
-                      <MenuItem onClick={handleClose}>User Settings</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "ユーザー設定"
+                          : props.language === "ko"
+                          ? "사용자 설정"
+                          : props.language === "zh-CN"
+                          ? "用户设置"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "用戶設置"
+                          : "User Settings"}
+                      </MenuItem>
                     </Link>
                   </Menu>
                 </>
