@@ -99,7 +99,7 @@ class UserSettings extends React.Component {
           />
           {this.state.id !== "" && this.state.role !== "" && (
             <>
-              <Typography variant="h6">Select Role:</Typography>
+              <Typography variant="h6">Assign Role:</Typography>
               <RadioGroup
                 name="role"
                 onChange={this.setRole}

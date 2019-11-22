@@ -128,4 +128,26 @@ router.route("/").get(async (req, res) => {
   }
 });
 
+router.route("/role").put(async (req, res) => {
+  const { token, user: userId, id, role } = req.body;
+  const loggedIn = await tokenService.verifyToken(token);
+  if (loggedIn) {
+    const user = await userService.getUserById(userId);
+    if (user.role === admin) {
+      const updatedUser = await userService.updateRole(id, role);
+      if (updatedUser) {
+        res.status(201).json({
+          data: updatedUser
+        });
+      }
+    } else {
+      res
+        .status(503)
+        .statusMessage("You are not authorized to update user roles.");
+    }
+  } else {
+    res.status(401).statusMessage("You are not logged in.");
+  }
+});
+
 exports.router = router;

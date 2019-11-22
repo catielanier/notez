@@ -85,3 +85,11 @@ exports.getAllUsers = async () => {
     throw e;
   }
 };
+
+exports.updateRole = async (id, role) => {
+  try {
+    return await User.findByIdAndUpdate({ _id: id }, { $set: { role } });
+  } catch (e) {
+    throw e;
+  }
+};
