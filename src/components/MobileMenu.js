@@ -14,7 +14,8 @@ import {
   Gamepad,
   Add,
   Link as LinkIcon,
-  Settings
+  Settings,
+  Person
 } from "@material-ui/icons";
 
 export default function MobileMenu(props) {
@@ -185,6 +186,27 @@ export default function MobileMenu(props) {
                 </ListItem>
               </>
             )}
+            <ListItem
+              button
+              component={React.forwardRef((props, ref) => (
+                <RouterLink innerRef={ref} to="/profile" {...props} />
+              ))}
+            >
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText>
+                {props.language === "ja"
+                  ? "プロフィール"
+                  : props.language === "ko"
+                  ? "프로필"
+                  : props.language === "zh-CN"
+                  ? "个人资料"
+                  : props.language === "zh-TW" || props.language === "zh-HK"
+                  ? "個人資料"
+                  : "Profile"}
+              </ListItemText>
+            </ListItem>
             <ListItem button onClick={props.logout}>
               <ListItemText>
                 {props.language === "ja"

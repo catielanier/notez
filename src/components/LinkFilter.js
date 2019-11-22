@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import {
   Container,
   Typography,
@@ -10,6 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import Select from "react-select";
 import { getToken } from "../services/tokenService";
 
@@ -98,6 +97,9 @@ class LinkFilter extends React.Component {
   };
 
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="link-filter">
         <Container maxWidth="sm">

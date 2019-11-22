@@ -11,6 +11,7 @@ import {
   TextField
 } from "@material-ui/core";
 import Select from "react-select";
+import { Redirect } from "react-router-dom";
 import Creatable from "react-select/creatable";
 import QuickAddPlayerNote from "./QuickAddPlayerNote";
 import PopulateNotes from "./PopulateNotes";
@@ -303,6 +304,9 @@ class PlayerNotes extends React.Component {
 
   render() {
     const { classes } = this.props;
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="player-notes">
         <Container>

@@ -9,6 +9,7 @@ import {
   RadioGroup,
   FormControlLabel
 } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
 
 class UserSettings extends React.Component {
@@ -81,6 +82,9 @@ class UserSettings extends React.Component {
   };
 
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <section>
         <Container maxWidth="sm">

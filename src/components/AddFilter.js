@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   Checkbox
 } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
 
@@ -127,6 +128,9 @@ class AddFilter extends React.Component {
 
   render() {
     const { classes } = this.props;
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="add-character">
         <Typography className={classes.header} variant="h5">
