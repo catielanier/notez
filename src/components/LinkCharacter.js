@@ -99,14 +99,53 @@ class LinkCharacter extends React.Component {
     return (
       <section className="link-character">
         <Container maxWidth="sm">
-          <Typography variant="h5">Link Characters to Game</Typography>
+          <Typography variant="h5">
+            {this.props.language === "ja"
+              ? "キャラクターをゲームに接続"
+              : this.props.language === "ko"
+              ? "캐릭터를 게임에 연결"
+              : this.props.language === "zh-CN"
+              ? "角色连接到游戏"
+              : this.props.language === "zh-TW" ||
+                this.props.language === "zh-HK"
+              ? "角色連接到遊戲"
+              : "Link Characters to Game"}
+          </Typography>
           <Select
-            options={this.state.games.map(game => {
-              return {
-                value: game._id,
-                label: game.name
-              };
-            })}
+            options={
+              this.props.language === "ja"
+                ? this.state.games.map(game => {
+                    return { label: game.name_ja, value: game._id };
+                  })
+                : this.props.language === "ko"
+                ? this.state.games.map(game => {
+                    return { label: game.name_ko, value: game._id };
+                  })
+                : this.props.language === "zh-CN"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-cn"],
+                      value: game._id
+                    };
+                  })
+                : this.props.language === "zh-TW"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-tw"],
+                      value: game._id
+                    };
+                  })
+                : this.props.language === "zh-HK"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-hk"],
+                      value: game._id
+                    };
+                  })
+                : this.state.games.map(game => {
+                    return { label: game.name, value: game._id };
+                  })
+            }
             onChange={this.pickGame}
           />
         </Container>
@@ -128,7 +167,19 @@ class LinkCharacter extends React.Component {
                             }
                           />
                         }
-                        label={character.name}
+                        label={
+                          this.props.language === "ja"
+                            ? character.name_ja
+                            : this.props.language === "ko"
+                            ? character.name_ko
+                            : this.props.language === "zh-CN"
+                            ? character["name_zh-cn"]
+                            : this.props.language === "zh-TW"
+                            ? character["name_zh-tw"]
+                            : this.props.language === "zh-HK"
+                            ? character["name_zh-tw"]
+                            : character.name
+                        }
                       />
                     </Grid>
                   );
@@ -139,7 +190,16 @@ class LinkCharacter extends React.Component {
                 color="primary"
                 onClick={this.linkCharacters}
               >
-                Link Characters
+                {this.props.language === "ja"
+                  ? "キャラクターを接続"
+                  : this.props.language === "ko"
+                  ? "캐릭터를 연결"
+                  : this.props.language === "zh-CN"
+                  ? "连接角色"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "連接角色"
+                  : "Link Characters"}
               </Button>
             </>
           )}

@@ -190,7 +190,7 @@ class AddCharacter extends React.Component {
                   ? "朝鲜语角色名字"
                   : this.props.language === "zh-TW" ||
                     this.props.language === "zh-HK"
-                  ? "朝鮮語色名字"
+                  ? "朝鮮語角色名字"
                   : "Korean Character Name"
               }
               value={this.state.name_ko}
@@ -244,7 +244,7 @@ class AddCharacter extends React.Component {
                   : this.props.language === "ko"
                   ? "광동어 캐릭터 이름"
                   : this.props.language === "zh-CN"
-                  ? "广东话语角色名字"
+                  ? "广东话角色名字"
                   : this.props.language === "zh-TW" ||
                     this.props.language === "zh-HK"
                   ? "廣東話角色名字"

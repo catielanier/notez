@@ -103,14 +103,53 @@ class LinkFilter extends React.Component {
     return (
       <section className="link-filter">
         <Container maxWidth="sm">
-          <Typography variant="h5">Link Filters to Game</Typography>
+          <Typography variant="h5">
+            {this.props.language === "ja"
+              ? "フィルターをゲームに接続"
+              : this.props.language === "ko"
+              ? "필터를 게임에 연결"
+              : this.props.language === "zh-CN"
+              ? "过滤器类型连接到游戏"
+              : this.props.language === "zh-TW" ||
+                this.props.language === "zh-HK"
+              ? "過濾器類型連接到遊戲"
+              : "Link Characters to Game"}
+          </Typography>
           <Select
-            options={this.state.games.map(game => {
-              return {
-                value: game._id,
-                label: game.name
-              };
-            })}
+            options={
+              this.props.language === "ja"
+                ? this.state.games.map(game => {
+                    return { label: game.name_ja, value: game._id };
+                  })
+                : this.props.language === "ko"
+                ? this.state.games.map(game => {
+                    return { label: game.name_ko, value: game._id };
+                  })
+                : this.props.language === "zh-CN"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-cn"],
+                      value: game._id
+                    };
+                  })
+                : this.props.language === "zh-TW"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-tw"],
+                      value: game._id
+                    };
+                  })
+                : this.props.language === "zh-HK"
+                ? this.state.games.map(game => {
+                    return {
+                      label: game["name_zh-hk"],
+                      value: game._id
+                    };
+                  })
+                : this.state.games.map(game => {
+                    return { label: game.name, value: game._id };
+                  })
+            }
             onChange={this.pickGame}
           />
         </Container>
@@ -132,7 +171,19 @@ class LinkFilter extends React.Component {
                             }
                           />
                         }
-                        label={filter.name}
+                        label={
+                          this.props.language === "ja"
+                            ? filter.name_ja
+                            : this.props.language === "ko"
+                            ? filter.name_ko
+                            : this.props.language === "zh-CN"
+                            ? filter["name_zh-cn"]
+                            : this.props.language === "zh-TW"
+                            ? filter["name_zh-tw"]
+                            : this.props.language === "zh-HK"
+                            ? filter["name_zh-tw"]
+                            : filter.name
+                        }
                       />
                     </Grid>
                   );
@@ -143,7 +194,16 @@ class LinkFilter extends React.Component {
                 color="primary"
                 onClick={this.linkFilters}
               >
-                Link Filters
+                {this.props.language === "ja"
+                  ? "フィルターを接続"
+                  : this.props.language === "ko"
+                  ? "필터를 연결"
+                  : this.props.language === "zh-CN"
+                  ? "连接过滤器"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "連接過濾器"
+                  : "Link Filters"}
               </Button>
             </>
           )}
