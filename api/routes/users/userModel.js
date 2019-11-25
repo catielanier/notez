@@ -41,6 +41,9 @@ const userSchema = new Schema({
   verification: {
     type: String
   },
+  forgotPassword: {
+    type: String
+  },
   premium: {
     type: Boolean,
     default: false,

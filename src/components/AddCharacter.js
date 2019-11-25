@@ -123,18 +123,36 @@ class AddCharacter extends React.Component {
     return (
       <section className="add-character">
         <Typography className={classes.header} variant="h5">
-          Add Character
+          {this.props.language === "ja"
+            ? "キャラクターを追加"
+            : this.props.language === "ko"
+            ? "캐릭터 추가"
+            : this.props.language === "zh-CN"
+            ? "新增角色"
+            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
+            ? "新增角色"
+            : "Add Character"}
         </Typography>
         <form onSubmit={this.addCharacter} disabled={this.state.loading}>
           <Container maxWidth="sm">
-            {this.state.success && <p>Characters created successfully.</p>}
+            {this.state.success && <p>Character created successfully.</p>}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
               </p>
             )}
             <TextField
-              label="English Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "英語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "영어 캐릭터 이름"
+                  : this.props.language === "zh-CN" ||
+                    this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "英文角色名字"
+                  : "English Character Name"
+              }
               id="standard-name-required"
               value={this.state.name}
               name="name"
@@ -144,7 +162,18 @@ class AddCharacter extends React.Component {
               required
             />
             <TextField
-              label="Japanese Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "日本語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "일본어 캐릭터 이름"
+                  : this.props.language === "zh-CN"
+                  ? "日语角色名字"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "日語角色名字"
+                  : "Japanese Character Name"
+              }
               value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
@@ -152,7 +181,18 @@ class AddCharacter extends React.Component {
               placeholder="キャラクター名"
             />
             <TextField
-              label="Korean Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "韓国語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "한국어 캐릭터 이름"
+                  : this.props.language === "zh-CN"
+                  ? "朝鲜语角色名字"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "朝鮮語色名字"
+                  : "Korean Character Name"
+              }
               value={this.state.name_ko}
               name="name_ko"
               onChange={this.changeState}
@@ -160,7 +200,18 @@ class AddCharacter extends React.Component {
               placeholder="캐릭터 이름"
             />
             <TextField
-              label="Mandarin (Simplified) Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "簡体字中国語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "중국어 간체 캐릭터 이름"
+                  : this.props.language === "zh-CN"
+                  ? "简体中文角色名字"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "簡體中文角色名字"
+                  : "Mandarin (Simplified) Character Name"
+              }
               value={this.state["name_zh-cn"]}
               name="name_zh-cn"
               onChange={this.changeState}
@@ -168,7 +219,18 @@ class AddCharacter extends React.Component {
               placeholder="角色名字"
             />
             <TextField
-              label="Mandarin (Traditional) Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "繁体字中国語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "중국어 번체 캐릭터 이름"
+                  : this.props.language === "zh-CN"
+                  ? "繁体中文角色名字"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "繁體中文角色名字"
+                  : "Mandarin (Traditional) Character Name"
+              }
               value={this.state["name_zh-tw"]}
               name="name_zh-tw"
               onChange={this.changeState}
@@ -176,7 +238,18 @@ class AddCharacter extends React.Component {
               placeholder="角色名字"
             />
             <TextField
-              label="Cantonese Character Name"
+              label={
+                this.props.language === "ja"
+                  ? "広東語のキャラクター名"
+                  : this.props.language === "ko"
+                  ? "광동어 캐릭터 이름"
+                  : this.props.language === "zh-CN"
+                  ? "广东话语角色名字"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "廣東話角色名字"
+                  : "Cantonese Character Name"
+              }
               value={this.state["name_zh-hk"]}
               name="name_zh-hk"
               onChange={this.changeState}
@@ -192,7 +265,16 @@ class AddCharacter extends React.Component {
                   onClick={this.addCharacter}
                   disabled={this.state.loading}
                 >
-                  Add Character
+                  {this.props.language === "ja"
+                    ? "キャラクターを追加"
+                    : this.props.language === "ko"
+                    ? "캐릭터 추가"
+                    : this.props.language === "zh-CN"
+                    ? "新增角色"
+                    : this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "新增角色"
+                    : "Add Character"}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
@@ -203,7 +285,17 @@ class AddCharacter extends React.Component {
                 )}
               </div>
               <div className={classes.wrapper}>
-                <Button onClick={this.clearForm}>Clear Form</Button>
+                <Button onClick={this.clearForm}>
+                  {this.props.language === "ja"
+                    ? "明確な形"
+                    : this.props.language === "ko"
+                    ? "명확한 형태"
+                    : this.props.language === "zh-CN" ||
+                      this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "清除表格"
+                    : "Clear Form"}
+                </Button>
               </div>
             </Container>
           </Container>

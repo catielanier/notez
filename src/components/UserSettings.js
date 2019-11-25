@@ -91,7 +91,18 @@ class UserSettings extends React.Component {
           <Typography variant="h5" gutterBottom>
             Edit User Roles
           </Typography>
-          <Typography variant="h6">Select User:</Typography>
+          <Typography variant="h6">
+            {this.props.language === "ja"
+              ? "ユーザーを選択："
+              : this.props.language === "ko"
+              ? "사용자를 선택하십시오:"
+              : this.props.language === "zh-CN"
+              ? "选择用户："
+              : this.props.language === "zh-TW" ||
+                this.props.language === "zh-HK"
+              ? "選擇用戶："
+              : "Select User:"}
+          </Typography>
           <Select
             options={this.state.users.map(user => {
               return {
@@ -103,7 +114,17 @@ class UserSettings extends React.Component {
           />
           {this.state.id !== "" && this.state.role !== "" && (
             <>
-              <Typography variant="h6">Assign Role:</Typography>
+              <Typography variant="h6">
+                {this.props.language === "ja"
+                  ? "役割の割り当て："
+                  : this.props.language === "ko"
+                  ? "역할 할당:"
+                  : this.props.language === "zh-CN" ||
+                    this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "分配角色："
+                  : "Assign Role:"}
+              </Typography>
               <RadioGroup
                 name="role"
                 onChange={this.setRole}
@@ -130,7 +151,16 @@ class UserSettings extends React.Component {
                 variant="contained"
                 onClick={this.updateRole}
               >
-                Update User
+                {this.props.language === "ja"
+                  ? "ユーザーを更新"
+                  : this.props.language === "ko"
+                  ? "사용자 업데이트"
+                  : this.props.language === "zh-CN"
+                  ? "更新用户"
+                  : this.props.language === "zh-TW" ||
+                    this.props.language === "zh-HK"
+                  ? "更新用戶"
+                  : "Update User"}
               </Button>
             </>
           )}
