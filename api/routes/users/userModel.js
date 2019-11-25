@@ -38,6 +38,14 @@ const userSchema = new Schema({
   realName: {
     type: String
   },
+  verification: {
+    type: String
+  },
+  premium: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
   gameNotes: [
     {
       type: mongoose.Schema.Types.ObjectId,
