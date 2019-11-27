@@ -20,6 +20,8 @@ import MobileMenu from "./components/MobileMenu";
 import UserSettings from "./components/UserSettings";
 import Profile from "./components/Profile";
 import EditCharacter from "./components/EditCharacter";
+import EditGame from "./components/EditGame";
+import EditFilter from "./components/EditFilter";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -240,6 +242,24 @@ export default class App extends React.Component {
                 path="/edit-character"
                 component={() => (
                   <EditCharacter
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
+              />
+              <Route
+                path="/edit-game"
+                component={() => (
+                  <EditGame
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
+              />
+              <Route
+                path="/edit-filter"
+                component={() => (
+                  <EditFilter
                     user={this.state.user}
                     language={this.state.language}
                   />

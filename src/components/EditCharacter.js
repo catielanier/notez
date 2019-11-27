@@ -286,14 +286,14 @@ class EditCharacter extends React.Component {
                     disabled={this.state.loading}
                   >
                     {this.props.language === "ja"
-                      ? "キャラクターを追加"
+                      ? "キャラクターを編集"
                       : this.props.language === "ko"
-                      ? "캐릭터 추가"
+                      ? "캐릭터 편집"
                       : this.props.language === "zh-CN"
-                      ? "新增角色"
+                      ? "编辑角色"
                       : this.props.language === "zh-TW" ||
                         this.props.language === "zh-HK"
-                      ? "新增角色"
+                      ? "編輯角色"
                       : "Edit Character"}
                   </Button>
                   {this.state.loading && (

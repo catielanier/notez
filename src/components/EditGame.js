@@ -106,7 +106,7 @@ class EditGame extends React.Component {
     const { user } = this.props;
     const token = await getToken();
     try {
-      const res = await axios.put(`/api/characters/${game}`, {
+      const res = await axios.put(`/api/games/${game}`, {
         data: {
           token,
           user,
@@ -141,13 +141,13 @@ class EditGame extends React.Component {
       <section>
         <Typography variant="h5" className={classes.header}>
           {this.props.language === "ja"
-            ? "キャラクターを編集"
+            ? "ゲームを編集"
             : this.props.language === "ko"
-            ? "캐릭터 편집"
+            ? "게임 편집"
             : this.props.language === "zh-CN"
-            ? "编辑角色"
+            ? "编辑游戏"
             : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "編輯角色"
+            ? "編輯遊戲"
             : "Edit Game"}
         </Typography>
         <Container maxWidth="sm">
@@ -287,14 +287,14 @@ class EditGame extends React.Component {
                     disabled={this.state.loading}
                   >
                     {this.props.language === "ja"
-                      ? "キャラクターを追加"
+                      ? "ゲームを編集"
                       : this.props.language === "ko"
-                      ? "캐릭터 추가"
+                      ? "게임 편집"
                       : this.props.language === "zh-CN"
-                      ? "新增角色"
+                      ? "编辑游戏"
                       : this.props.language === "zh-TW" ||
                         this.props.language === "zh-HK"
-                      ? "新增角色"
+                      ? "編輯遊戲"
                       : "Edit Game"}
                   </Button>
                   {this.state.loading && (
