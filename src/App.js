@@ -19,6 +19,7 @@ import Attract from "./components/Attract";
 import MobileMenu from "./components/MobileMenu";
 import UserSettings from "./components/UserSettings";
 import Profile from "./components/Profile";
+import EditCharacter from "./components/EditCharacter";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -230,6 +231,15 @@ export default class App extends React.Component {
                 path="/profile"
                 component={() => (
                   <Profile
+                    user={this.state.user}
+                    language={this.state.language}
+                  />
+                )}
+              />
+              <Route
+                path="/edit-character"
+                component={() => (
+                  <EditCharacter
                     user={this.state.user}
                     language={this.state.language}
                   />
