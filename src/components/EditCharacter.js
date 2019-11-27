@@ -16,6 +16,15 @@ class EditCharacter extends React.Component {
     error: null
   };
 
+  async componentDidMount() {
+    await axios.get("/api/characters").then(res => {
+      const characters = res.data.data;
+      this.setState({
+        characters
+      });
+    });
+  }
+
   render() {
     return <h1>Edit Character</h1>;
   }

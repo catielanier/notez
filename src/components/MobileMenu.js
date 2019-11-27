@@ -15,7 +15,8 @@ import {
   Add,
   Link as LinkIcon,
   Settings,
-  Person
+  Person,
+  Edit
 } from "@material-ui/icons";
 
 export default function MobileMenu(props) {
@@ -175,6 +176,73 @@ export default function MobileMenu(props) {
                       : props.language === "zh-TW" || props.language === "zh-HK"
                       ? "新增過濾器"
                       : "Add Filter"}
+                  </ListItemText>
+                </ListItem>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/edit-game" {...props} />
+                  ))}
+                >
+                  <ListItemIcon>
+                    <Edit />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {props.language === "ja"
+                      ? "ゲームを編集"
+                      : props.language === "ko"
+                      ? "게임 편집"
+                      : props.language === "zh-CN"
+                      ? "编辑游戏"
+                      : props.language === "zh-TW" || props.language === "zh-HK"
+                      ? "編輯遊戲"
+                      : "Edit Game"}
+                  </ListItemText>
+                </ListItem>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink
+                      innerRef={ref}
+                      to="/edit-character"
+                      {...props}
+                    />
+                  ))}
+                >
+                  <ListItemIcon>
+                    <Edit />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {props.language === "ja"
+                      ? "キャラクターを編集"
+                      : props.language === "ko"
+                      ? "캐릭터 편집"
+                      : props.language === "zh-CN"
+                      ? "编辑角色"
+                      : props.language === "zh-TW" || props.language === "zh-HK"
+                      ? "編輯角色"
+                      : "Edit Character"}
+                  </ListItemText>
+                </ListItem>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/edit-filter" {...props} />
+                  ))}
+                >
+                  <ListItemIcon>
+                    <Edit />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {props.language === "ja"
+                      ? "フィルターを編集"
+                      : props.language === "ko"
+                      ? "필터 편집"
+                      : props.language === "zh-CN"
+                      ? "编辑过滤器"
+                      : props.language === "zh-TW" || props.language === "zh-HK"
+                      ? "編輯過濾器"
+                      : "Edit Filter"}
                   </ListItemText>
                 </ListItem>
                 <ListItem

@@ -219,6 +219,68 @@ export default function Header(props) {
                     </Link>
                     <Link
                       component={React.forwardRef((props, ref) => (
+                        <RouterLink innerRef={ref} to="/edit-game" {...props} />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "ゲームを編集"
+                          : props.language === "ko"
+                          ? "게임 편집"
+                          : props.language === "zh-CN"
+                          ? "编辑游戏"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "編輯遊戲"
+                          : "Edit Game"}
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/edit-character"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "キャラクターを編集"
+                          : props.language === "ko"
+                          ? "캐릭터 편집"
+                          : props.language === "zh-CN"
+                          ? "编辑角色"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "編輯角色"
+                          : "Edit Character"}
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink
+                          innerRef={ref}
+                          to="/edit-filter"
+                          {...props}
+                        />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        {props.language === "ja"
+                          ? "フィルターを編集"
+                          : props.language === "ko"
+                          ? "필터 편집"
+                          : props.language === "zh-CN"
+                          ? "编辑过滤器"
+                          : props.language === "zh-TW" ||
+                            props.language === "zh-HK"
+                          ? "編輯過濾器"
+                          : "Edit Filter"}
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
                         <RouterLink
                           innerRef={ref}
                           to="/link-character"
