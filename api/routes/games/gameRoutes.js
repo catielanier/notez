@@ -99,4 +99,42 @@ router.route("/:id/filter").put(async (req, res) => {
   }
 });
 
+router.route("/:game").put(async (req, res) => {
+  const { game } = req.params;
+  const {
+    user: id,
+    token,
+    name_ja,
+    name_ko,
+    name,
+    "name_zh-cn": name_cn,
+    "name_zh-tw": name_tw,
+    "name_zh-hk": name_hk
+  } = req.body;
+
+  const loggedIn = await tokenService.verifyToken(token);
+  if (!loggedIn) {
+    res.status(503).statusMessage("You are not logged in.");
+  }
+  // Query the user and check for admin privileges.
+  const user = await userServices.getUserById(id);
+  if (user.role !== "Admin") {
+    res.status(503).statusMessage("Only admins can create characters.");
+  }
+
+  const result = await gameServices.updateCharacter(
+    game,
+    name,
+    name_ja,
+    name_ko,
+    name_cn,
+    name_tw,
+    name_hk
+  );
+
+  res.status(201).json({
+    data: result
+  });
+});
+
 exports.router = router;
