@@ -65,7 +65,6 @@ class LinkFilter extends React.Component {
         filters,
         game
       });
-      console.log(res);
       this.setState({
         loading: false,
         success: true

@@ -19,7 +19,8 @@ class UserSettings extends React.Component {
     role: "",
     loading: false,
     success: false,
-    error: null
+    error: null,
+    premium: false
   };
 
   async componentWillMount() {
