@@ -22,6 +22,9 @@ import Profile from "./components/Profile";
 import EditCharacter from "./components/EditCharacter";
 import EditGame from "./components/EditGame";
 import EditFilter from "./components/EditFilter";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+import VerifyUser from "./components/VerifyUser";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
 
@@ -264,6 +267,22 @@ export default class App extends React.Component {
                     language={this.state.language}
                   />
                 )}
+              />
+              <Route
+                path="/forgot"
+                component={() => (
+                  <ForgotPassword language={this.state.language} />
+                )}
+              />
+              <Route
+                path="/forgot/:key"
+                component={() => (
+                  <ResetPassword language={this.state.language} />
+                )}
+              />
+              <Route
+                path="/verify/:key"
+                component={() => <VerifyUser language={this.state.language} />}
               />
             </main>
           </Router>
