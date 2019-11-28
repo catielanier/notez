@@ -1,5 +1,7 @@
 const { model: User } = require("./userModel");
 const bcrypt = require("bcryptjs");
+const { promisify } = require("util");
+const { randomBytes } = require("crypto");
 
 exports.createUser = async userData => {
   try {
@@ -8,6 +10,11 @@ exports.createUser = async userData => {
   } catch (e) {
     throw e;
   }
+};
+
+exports.addValidation = async () => {
+  const randomBytesPromisified = promisify(randomBytes);
+  return (await randomBytesPromisified(20)).toString("hex");
 };
 
 exports.isUser = async ({ email, password }) => {
