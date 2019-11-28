@@ -16,6 +16,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  active: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   username: {
     type: String,
     unique: true,

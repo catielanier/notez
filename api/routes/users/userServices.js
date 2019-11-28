@@ -100,3 +100,28 @@ exports.updateRole = async (id, role) => {
     throw e;
   }
 };
+
+exports.findUser = async email => {
+  try {
+    return await User.find({ email });
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.setForgotToken = async email => {
+  try {
+    const randomBytesPromisified = promisify(randomBytes);
+    const token = (await randomBytesPromisified(20)).toString("hex");
+    User.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          forgotPassword: token
+        }
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

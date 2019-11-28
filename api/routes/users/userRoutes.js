@@ -152,4 +152,19 @@ router.route("/role").put(async (req, res) => {
   }
 });
 
+router.route("/forgot").post(async (req, res) => {
+  const { email } = req.body;
+  const checkUser = await userService.findUser(email);
+  if (checkUser) {
+    const user = await userService.setForgotToken(email);
+    res.status(201).json({
+      data: user
+    });
+  } else {
+    res
+      .status(401)
+      .statusMessage("No user is associated with this email address.");
+  }
+});
+
 exports.router = router;
