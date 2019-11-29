@@ -205,6 +205,24 @@ class Login extends React.Component {
                   </Button>
                 </div>
               </Container>
+              <Container className={classes.buttonRow}>
+                <Button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/forgot" {...props} />
+                  ))}
+                >
+                  {this.props.language === "ja"
+                    ? "パスワードを忘れた？"
+                    : this.props.language === "ko"
+                    ? "비밀번호를 잊었습니까?"
+                    : this.props.language === "zh-CN"
+                    ? "你忘记密码了吗？"
+                    : this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "你忘記密碼了嗎？"
+                    : "Forgot your password?"}
+                </Button>
+              </Container>
             </Container>
           </form>
         </Container>

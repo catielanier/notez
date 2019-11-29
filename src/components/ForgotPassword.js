@@ -52,11 +52,15 @@ class ForgotPassword extends React.Component {
     });
   };
 
+  requestReset = e => {
+    e.preventDefault();
+  };
+
   render() {
     const { classes } = this.props;
     return (
       <section>
-        <Container maxWidth="xs">
+        <Container maxWidth="sm">
           <Typography className={classes.header} variant="h5">
             {this.props.language === "ja"
               ? "パスワードをお忘れです"
@@ -71,19 +75,30 @@ class ForgotPassword extends React.Component {
           </Typography>
           <form
             disabled={this.state.loading}
-            onSubmit={this.login}
+            onSubmit={this.requestReset}
             className={classes.container}
           >
-            <Container maxWidth="xs">
+            <Container maxWidth="sm">
               {this.state.success && (
-                <p>Please check your email for your reset link.</p>
+                <p>
+                  {this.props.language === "ja"
+                    ? "リセットリンクのメールを確認してください。"
+                    : this.props.language === "ko"
+                    ? "이메일에서 재설정 링크를 확인하십시오."
+                    : this.props.language === "zh-CN"
+                    ? "请检查您的电子邮件以获取重置链接。"
+                    : this.props.language === "zh-TW" ||
+                      this.props.language === "zh-HK"
+                    ? "請檢查您的電子郵件以獲取重置鏈接。"
+                    : "Please check your email for your reset link."}
+                </p>
               )}
               {this.state.error && (
                 <p className="error">
                   <span>Error:</span> {this.state.error}
                 </p>
               )}
-              <Container maxWidth="xs">
+              <Container maxWidth="sm">
                 <TextField
                   label={
                     this.props.language === "ja"
