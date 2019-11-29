@@ -175,4 +175,16 @@ router.route("/forgot").post(async (req, res) => {
   }
 });
 
+router.route("/verify").post(async (req, res) => {
+  const { key } = req.body;
+  const user = await userService.verifyUser(key);
+  if (user) {
+    res.status(201).json({
+      data: user
+    });
+  } else {
+    res.status(401).statusMessage("There was no such token.");
+  }
+});
+
 exports.router = router;

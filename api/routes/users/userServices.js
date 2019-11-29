@@ -125,3 +125,14 @@ exports.setForgotToken = async email => {
     throw e;
   }
 };
+
+exports.verifyUser = async key => {
+  try {
+    return await User.findOneAndUpdate(
+      { verification: key },
+      { $set: { verification: "", active: true } }
+    );
+  } catch (e) {
+    throw e;
+  }
+};
