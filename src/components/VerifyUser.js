@@ -1,13 +1,35 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class VerifyUser extends React.Component {
+  state = {
+    success: false,
+    error: null
+  };
   async componentWillMount() {
     const key = window.location.pathname.replace("/verify/", "");
-    console.log(key);
+    await axios
+      .post("/api/users/verify", { key })
+      .then(_ => {
+        this.setState({
+          success: true
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error
+        });
+      });
   }
   render() {
-    return <h1>Reset Password</h1>;
+    if (this.state.success) {
+      if (this.state.success) {
+        return <Redirect to="/login" />;
+      }
+    } else {
+      return <section>Error: No Valid token.</section>;
+    }
   }
 }
 
