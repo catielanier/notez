@@ -20,13 +20,21 @@ router.route("/login").post(async (req, res, next) => {
   try {
     const user = await userService.isUser(req.body.data);
     if (user) {
-      const token = await tokenService.issueToken(user);
-      res.status(200).json({
-        data: {
-          token,
-          id: user._id
-        }
-      });
+      if (user.active) {
+        const token = await tokenService.issueToken(user);
+        res.status(200).json({
+          data: {
+            token,
+            id: user._id
+          }
+        });
+      } else {
+        res
+          .status(400)
+          .statusMessage(
+            "You have not activated your account yet. Please check your email to do so."
+          );
+      }
     } else {
       next();
     }
