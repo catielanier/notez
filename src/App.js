@@ -269,6 +269,7 @@ export default class App extends React.Component {
                 )}
               />
               <Route
+                exact
                 path="/forgot"
                 component={() => (
                   <ForgotPassword language={this.state.language} />

@@ -113,7 +113,7 @@ exports.setForgotToken = async email => {
   try {
     const randomBytesPromisified = promisify(randomBytes);
     const token = (await randomBytesPromisified(20)).toString("hex");
-    User.findOneAndUpdate(
+    return await User.findOneAndUpdate(
       { email },
       {
         $set: {

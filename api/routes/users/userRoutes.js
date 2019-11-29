@@ -169,24 +169,24 @@ router.route("/forgot").post(async (req, res) => {
   const checkUser = await userService.findUser(email);
   if (checkUser) {
     const user = await userService.setForgotToken(email);
-    // const messageBody = `
-    //   <h3>NoteZ</h3>
-    //   <h5>Hello ${user.username}:</h5>
-    //   <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${user.forgotPassword}">here</a> to go in to reset it.</p>
-    //   <p>Regards,<br />The NoteZ Team</p>
-    // `;
-    // const mailOptions = {
-    //   from: '"NoteZ" <no-reply@notezapp.com>',
-    //   to: email,
-    //   subject: "Password reset link",
-    //   html: messageBody
-    // };
-    // transport.sendMail(mailOptions, (error, info) => {
-    //   if (error) {
-    //     return console.log(error);
-    //   }
-    //   console.log(`Message sent: ${info.messageId}`);
-    // });
+    const messageBody = `
+      <h3>NoteZ</h3>
+      <h5>Hello ${user.username}:</h5>
+      <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${user.forgotPassword}">here</a> to go in to reset it.</p>
+      <p>Regards,<br />The NoteZ Team</p>
+    `;
+    const mailOptions = {
+      from: '"NoteZ" <no-reply@notezapp.com>',
+      to: email,
+      subject: "Password reset link",
+      html: messageBody
+    };
+    await transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(`Message sent: ${info.messageId}`);
+    });
     res.status(201).json({
       data: user
     });
