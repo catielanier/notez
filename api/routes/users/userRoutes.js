@@ -12,6 +12,24 @@ router.route("/signup").post(async (req, res, next) => {
     const newUser = req.body.data;
     newUser.verification = await userService.addValidation();
     const user = await userService.createUser(newUser);
+    const messageBody = `
+          <h3>NoteZ</h3>
+          <h5>Welcome to NoteZ, ${newUser.username}!</h5>
+          <p>We're happy to have you. Please click <a href="http://localhost:3000/verify/${newUser.verification}">here</a> to get underway.</p>
+          <p>Regards,<br />The NoteZ Team</p>
+        `;
+    const mailOptions = {
+      from: '"NoteZ" <no-reply@notezapp.com>',
+      to: newUser.email,
+      subject: "Welcome to NoteZ!",
+      html: messageBody
+    };
+    await transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(`Message sent: ${info.messageId}`);
+    });
     res.status(201).json({
       data: [user]
     });
