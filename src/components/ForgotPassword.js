@@ -52,8 +52,26 @@ class ForgotPassword extends React.Component {
     });
   };
 
-  requestReset = e => {
+  requestReset = async e => {
     e.preventDefault();
+    const { email } = this.state;
+    this.setState({
+      loading: true
+    });
+    await axios
+      .post("/api/users/forgot", { email })
+      .then(_ => {
+        this.setState({
+          loading: false,
+          success: true
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error
+        });
+      });
   };
 
   render() {
