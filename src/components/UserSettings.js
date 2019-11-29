@@ -57,7 +57,8 @@ class UserSettings extends React.Component {
     const { user } = this.props;
     const token = await getToken();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     await axios
       .put("/api/users/role", {
@@ -77,7 +78,7 @@ class UserSettings extends React.Component {
       .catch(err => {
         this.setState({
           loading: false,
-          error: err
+          error: err.message
         });
       });
   };

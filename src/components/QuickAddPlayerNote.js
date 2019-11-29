@@ -39,7 +39,8 @@ class QuickAddPlayerNote extends React.Component {
   postNote = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const { filter, note: noteBody } = this.state;
     const { player, game, user } = this.props;
@@ -66,7 +67,7 @@ class QuickAddPlayerNote extends React.Component {
     } catch (e) {
       this.setState({
         loading: false,
-        error: e
+        error: e.message
       });
     }
   };

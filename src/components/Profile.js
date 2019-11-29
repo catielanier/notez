@@ -133,7 +133,7 @@ class Profile extends React.Component {
         .catch(err => {
           this.setState({
             loading: false,
-            error: err
+            error: err.message
           });
         });
     }

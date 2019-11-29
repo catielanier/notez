@@ -56,7 +56,8 @@ class ForgotPassword extends React.Component {
     e.preventDefault();
     const { email } = this.state;
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     await axios
       .post("/api/users/forgot", { email })
@@ -66,10 +67,10 @@ class ForgotPassword extends React.Component {
           success: true
         });
       })
-      .catch(error => {
+      .catch(err => {
         this.setState({
           loading: false,
-          error
+          error: err.message
         });
       });
   };

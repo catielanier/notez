@@ -60,7 +60,8 @@ class Signup extends React.Component {
   signup = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const {
       email,
@@ -88,7 +89,8 @@ class Signup extends React.Component {
         });
       } catch (e) {
         this.setState({
-          error: e
+          loading: false,
+          error: e.message
         });
       }
     } else {

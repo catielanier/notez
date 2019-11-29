@@ -53,7 +53,9 @@ class PlayerNotes extends React.Component {
     noteEditor: false,
     noteId: null,
     noteFilter: "",
-    noteBody: ""
+    noteBody: "",
+    loading: false,
+    error: null
   };
 
   async componentDidMount() {
@@ -270,7 +272,8 @@ class PlayerNotes extends React.Component {
   editNote = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const {
       noteId: id,
@@ -297,7 +300,8 @@ class PlayerNotes extends React.Component {
       });
     } catch (e) {
       this.setState({
-        loading: false
+        loading: false,
+        error: e.message
       });
     }
   };

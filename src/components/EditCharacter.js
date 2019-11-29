@@ -92,7 +92,8 @@ class EditCharacter extends React.Component {
   updateCharacter = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const {
       name,
@@ -126,7 +127,7 @@ class EditCharacter extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: e,
+        error: e.message,
         loading: false
       });
     }

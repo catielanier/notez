@@ -45,7 +45,10 @@ class AddCharacter extends React.Component {
     name_ko: "",
     "name_zh-cn": "",
     "name_zh-tw": "",
-    "name_zh-hk": ""
+    "name_zh-hk": "",
+    loading: false,
+    success: false,
+    error: null
   };
 
   changeState = e => {
@@ -70,7 +73,8 @@ class AddCharacter extends React.Component {
   addCharacter = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const {
       name,
@@ -109,7 +113,7 @@ class AddCharacter extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: e,
+        error: e.message,
         loading: false
       });
     }

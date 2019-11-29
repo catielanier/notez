@@ -52,7 +52,8 @@ class LinkCharacter extends React.Component {
   linkCharacters = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const token = await getToken();
     const { user } = this.props;
@@ -72,7 +73,7 @@ class LinkCharacter extends React.Component {
     } catch (e) {
       this.setState({
         loading: false,
-        error: e
+        error: e.message
       });
     }
   };

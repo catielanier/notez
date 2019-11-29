@@ -48,7 +48,10 @@ class AddFilter extends React.Component {
     "name_zh-cn": "",
     "name_zh-tw": "",
     "name_zh-hk": "",
-    playerFilter: false
+    playerFilter: false,
+    loading: false,
+    success: false,
+    error: null
   };
 
   changeState = e => {
@@ -79,7 +82,8 @@ class AddFilter extends React.Component {
   addFilter = async e => {
     e.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     const {
       name,
@@ -120,7 +124,7 @@ class AddFilter extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: e,
+        error: e.message,
         loading: false
       });
     }
