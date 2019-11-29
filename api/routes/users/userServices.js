@@ -136,3 +136,15 @@ exports.verifyUser = async key => {
     throw e;
   }
 };
+
+exports.resetPassword = async (key, password) => {
+  try {
+    const hash = await bcrypt.hash(password, 10);
+    return await User.findOneAndUpdate(
+      { forgotPassword: key },
+      { $set: { password: hash, forgotPassword: "" } }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

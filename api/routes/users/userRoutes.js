@@ -187,4 +187,16 @@ router.route("/verify").post(async (req, res) => {
   }
 });
 
+router.route("/reset").post(async (req, res) => {
+  const { key, password } = req.body;
+  const user = await userService.resetPassword(key, password);
+  if (user) {
+    res.status(201).json({
+      data: user
+    });
+  } else {
+    res.status(401).statusMessage("There was no such reset token.");
+  }
+});
+
 exports.router = router;
