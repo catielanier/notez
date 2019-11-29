@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const userService = require("./userServices");
 const tokenService = require("../../utils/tokenService");
+const nodemailer = require("nodemailer");
+const { MAILSERVER } = require("../../utils/constants");
+
+nodemailer.createTransport(MAILSERVER);
 
 router.route("/signup").post(async (req, res, next) => {
   try {

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link as RouterLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {
@@ -10,7 +10,6 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
-import { verify } from "crypto";
 
 const styles = theme => ({
   container: {
