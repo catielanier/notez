@@ -168,7 +168,7 @@ class ForgotPassword extends React.Component {
                 <div className={classes.wrapper}>
                   <Button
                     component={React.forwardRef((props, ref) => (
-                      <RouterLink innerRef={ref} to="/" {...props} />
+                      <RouterLink innerRef={ref} to="/login" {...props} />
                     ))}
                   >
                     {this.props.language === "ja"

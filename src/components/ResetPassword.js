@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {
@@ -10,6 +10,7 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import { verify } from "crypto";
 
 const styles = theme => ({
   container: {
@@ -41,8 +42,18 @@ class ResetPassword extends React.Component {
   state = {
     key: null,
     password: "",
-    verifyPassword: ""
+    verifyPassword: "",
+    loading: false,
+    success: false,
+    error: null
   };
+
+  componentWillMount() {
+    const key = window.location.pathname.replace("/forgot/", "");
+    this.setState({
+      key
+    });
+  }
 
   changeState = e => {
     const { name, value } = e.target;
@@ -51,8 +62,32 @@ class ResetPassword extends React.Component {
     });
   };
 
+  resetPassword = async e => {
+    e.preventDefault();
+    this.setState({ loading: true });
+    const { password, verifyPassword, key } = this.state;
+    if (password === verifyPassword) {
+      await axios
+        .post("/api/users/reset", { key, password })
+        .then(_ => {
+          this.setState({ loading: false, success: true });
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+    } else {
+      this.setState({
+        loading: false,
+        error: `Your passwords do not match.`
+      });
+    }
+  };
+
   render() {
     const { classes } = this.props;
+    if (this.state.success) {
+      return <Redirect to="/login" />;
+    }
     return (
       <section className="signup">
         <Container maxWidth="sm">
@@ -69,9 +104,6 @@ class ResetPassword extends React.Component {
               : "Reset Password"}
           </Typography>
           <form disabled={this.state.loading} onSubmit={this.resetPassword}>
-            {this.state.success && (
-              <p>Registration success! Please check your email.</p>
-            )}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
@@ -138,24 +170,6 @@ class ResetPassword extends React.Component {
                     className={classes.buttonProgress}
                   />
                 )}
-              </div>
-              <div className={classes.wrapper}>
-                <Button
-                  component={React.forwardRef((props, ref) => (
-                    <RouterLink innerRef={ref} to="/" {...props} />
-                  ))}
-                >
-                  {this.props.language === "ja"
-                    ? "戻る"
-                    : this.props.language === "ko"
-                    ? "돌아가다"
-                    : this.props.language === "zh-CN"
-                    ? "回去"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "回去"
-                    : "Go Back"}
-                </Button>
               </div>
             </Container>
           </form>
