@@ -166,31 +166,34 @@ router.route("/role").put(async (req, res) => {
 
 router.route("/forgot").post(async (req, res) => {
   const { email } = req.body;
-  const checkUser = await userService.findUser(email);
-  if (checkUser) {
-    const user = await userService.setForgotToken(email);
-    const messageBody = `
-      <h3>NoteZ</h3>
-      <h5>Hello ${user.username}:</h5>
-      <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${user.forgotPassword}">here</a> to go in to reset it.</p>
-      <p>Regards,<br />The NoteZ Team</p>
-    `;
-    const mailOptions = {
-      from: '"NoteZ" <no-reply@notezapp.com>',
-      to: email,
-      subject: "Password reset link",
-      html: messageBody
-    };
-    await transport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log(`Message sent: ${info.messageId}`);
-    });
-    res.status(201).json({
-      data: user
-    });
-  } else {
+  try {
+    const checkUser = await userService.findUser(email);
+    if (checkUser) {
+      const token = await userService.addValidation();
+      const updated = await userService.setForgotToken(checkUser._id, token);
+      const messageBody = `
+          <h3>NoteZ</h3>
+          <h5>Hello ${checkUser.username}:</h5>
+          <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${token}">here</a> to go in to reset it.</p>
+          <p>Regards,<br />The NoteZ Team</p>
+        `;
+      const mailOptions = {
+        from: '"NoteZ" <no-reply@notezapp.com>',
+        to: email,
+        subject: "Password reset link",
+        html: messageBody
+      };
+      await transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log(`Message sent: ${info.messageId}`);
+      });
+      res.status(201).json({
+        data: updated
+      });
+    }
+  } catch (e) {
     res
       .status(401)
       .statusMessage("No user is associated with this email address.");
@@ -211,13 +214,21 @@ router.route("/verify").post(async (req, res) => {
 
 router.route("/reset").post(async (req, res) => {
   const { key, password } = req.body;
-  const user = await userService.resetPassword(key, password);
-  if (user) {
-    res.status(201).json({
-      data: user
-    });
-  } else {
-    res.status(401).statusMessage("There was no such reset token.");
+  try {
+    const user = await userService.findUserByResetToken(key);
+    if (user) {
+      console.log(user._id);
+      const updatedUser = await userService.updatePassword(user._id, password);
+      if (updatedUser) {
+        res.status(201).json({
+          data: updatedUser
+        });
+      }
+    }
+  } catch (e) {
+    res
+      .status(401)
+      .statusMessage("Unable to reset password due to invalid token.");
   }
 });
 

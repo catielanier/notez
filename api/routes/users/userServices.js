@@ -65,7 +65,8 @@ exports.updatePassword = async (id, password) => {
       { _id: id },
       {
         $set: {
-          password: hash
+          password: hash,
+          forgotPassword: ""
         }
       }
     );
@@ -103,18 +104,18 @@ exports.updateRole = async (id, role) => {
 
 exports.findUser = async email => {
   try {
-    return await User.find({ email });
+    return await User.findOne({ email });
   } catch (e) {
     throw e;
   }
 };
 
-exports.setForgotToken = async email => {
+exports.setForgotToken = async (id, token) => {
   try {
-    const randomBytesPromisified = promisify(randomBytes);
-    const token = (await randomBytesPromisified(20)).toString("hex");
-    return await User.findOneAndUpdate(
-      { email },
+    console.log("running update");
+    console.log(token);
+    return await User.findByIdAndUpdate(
+      { _id: id },
       {
         $set: {
           forgotPassword: token
@@ -137,13 +138,9 @@ exports.verifyUser = async key => {
   }
 };
 
-exports.resetPassword = async (key, password) => {
+exports.findUserByResetToken = async key => {
   try {
-    const hash = await bcrypt.hash(password, 10);
-    return await User.findOneAndUpdate(
-      { forgotPassword: key },
-      { $set: { password: hash, forgotPassword: "" } }
-    );
+    return await User.findOne({ forgotPassword: key });
   } catch (e) {
     throw e;
   }
