@@ -5,7 +5,7 @@ const tokenService = require("../../utils/tokenService");
 const nodemailer = require("nodemailer");
 const { MAILSERVER } = require("../../utils/constants");
 
-nodemailer.createTransport(MAILSERVER);
+const transport = nodemailer.createTransport(MAILSERVER);
 
 router.route("/signup").post(async (req, res, next) => {
   try {
@@ -147,7 +147,7 @@ router.route("/role").put(async (req, res) => {
   const loggedIn = await tokenService.verifyToken(token);
   if (loggedIn) {
     const user = await userService.getUserById(userId);
-    if (user.role === admin) {
+    if (user.role === "Admin") {
       const updatedUser = await userService.updateRole(id, role);
       if (updatedUser) {
         res.status(201).json({
@@ -169,6 +169,24 @@ router.route("/forgot").post(async (req, res) => {
   const checkUser = await userService.findUser(email);
   if (checkUser) {
     const user = await userService.setForgotToken(email);
+    const messageBody = `
+      <h3>NoteZ</h3>
+      <h5>Hello ${user.username}:</h5>
+      <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${user.forgotPassword}">here</a> to go in to reset it.</p>
+      <p>Regards,<br />The NoteZ Team</p>
+    `;
+    const mailOptions = {
+      from: '"NoteZ" <no-reply@notezapp.com>',
+      to: email,
+      subject: "Password reset link",
+      html: messageBody
+    };
+    transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(`Message sent: ${info.messageId}`);
+    });
     res.status(201).json({
       data: user
     });
