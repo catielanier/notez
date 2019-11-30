@@ -80,6 +80,9 @@ class Signup extends React.Component {
             password,
             realName,
             country
+          },
+          params: {
+            language: this.props.language
           }
         });
         console.log(res);
