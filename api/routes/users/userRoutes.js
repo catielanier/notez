@@ -13,17 +13,17 @@ router.route("/signup").post(async (req, res, next) => {
     const { language } = req.params;
     newUser.verification = await userService.addValidation();
     const user = await userService.createUser(newUser);
-    const messageBody = `
-          <h3>NoteZ</h3>
-          <h5>Welcome to NoteZ, ${newUser.username}!</h5>
-          <p>We're happy to have you. Please click <a href="http://localhost:3000/verify/${newUser.verification}">here</a> to get underway.</p>
-          <p>Regards,<br />The NoteZ Team</p>
-        `;
+    const messageBody_en = `
+      <h3>NoteZ</h3>
+      <h5>Welcome to NoteZ, ${newUser.username}!</h5>
+      <p>We're happy to have you. Please click <a href="http://localhost:3000/verify/${newUser.verification}">here</a> to get underway.</p>
+      <p>Regards,<br />The NoteZ Team</p>
+    `;
     const mailOptions_en = {
       from: '"NoteZ" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "Welcome to NoteZ!",
-      html: messageBody
+      html: messageBody_en
     };
     const messageBody_ja = `
       <h3>ノートZ</h3>
@@ -41,7 +41,7 @@ router.route("/signup").post(async (req, res, next) => {
       <h3>노트Z</h3>
       <h5>노트Z 오신 것을 환영합니다, ${newUser.username}!</h5>
       <p>기꺼이 맞이합니다. <a href="http://localhost:3000/verify/${newUser.verification}">여기를</a> 클릭하여 시작하십시오.</p>
-      <p> 감사합니다,<br />노트Z 팀</p>
+      <p>감사합니다,<br />노트Z 팀</p>
     `;
     const mailOptions_ko = {
       from: '"노트Z" <no-reply@notezapp.com>',
@@ -85,6 +85,20 @@ router.route("/signup").post(async (req, res, next) => {
       subject: "欢迎使用笔记Z！",
       html: messageBody_hk
     };
+    let mailOptions = {};
+    if (language === "ja") {
+      mailOptions = mailOptions_ja;
+    } else if (language === "ko") {
+      mailOptions = mailOptions_ko;
+    } else if (language === "zh-CN") {
+      mailOptions = mailOptions_cn;
+    } else if (language === "zh-TW") {
+      mailOptions = mailOptions_tw;
+    } else if (language === "zh-HK") {
+      mailOptions = mailOptions_hk;
+    } else {
+      mailOptions = mailOptions_en;
+    }
     await transport.sendMail(mailOptions, (error, info) => {
       if (error) {
         return console.log(error);
@@ -244,24 +258,98 @@ router.route("/role").put(async (req, res) => {
 });
 
 router.route("/forgot").post(async (req, res) => {
-  const { email } = req.body;
+  const { email, language } = req.body;
   try {
     const checkUser = await userService.findUser(email);
     if (checkUser) {
       const token = await userService.addValidation();
       const updated = await userService.setForgotToken(checkUser._id, token);
-      const messageBody = `
-          <h3>NoteZ</h3>
-          <h5>Hello ${checkUser.username}:</h5>
-          <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${token}">here</a> to go in to reset it.</p>
-          <p>Regards,<br />The NoteZ Team</p>
-        `;
-      const mailOptions = {
+      const messageBody_en = `
+        <h3>NoteZ</h3>
+        <h5>Hello ${checkUser.username}:</h5>
+        <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${token}">here</a> to go in to reset it.</p>
+        <p>Regards,<br />The NoteZ Team</p>
+      `;
+      const mailOptions_en = {
         from: '"NoteZ" <no-reply@notezapp.com>',
         to: email,
         subject: "Password reset link",
-        html: messageBody
+        html: messageBody_en
       };
+      const messageBody_ja = `
+        <h3>ノートZ</h3>
+        <h5>こんにちは${checkUser.username}:</h5>
+        <p>パスワードを忘れたようです。<a href="http://localhost:3000/forgot/${token}">ここを</a>クリックしてリセットしてください。</p>
+        <p>よろしく、<br />ノートZチーム</p>
+      `;
+      const mailOptions_ja = {
+        from: '"ノートZ" <no-reply@notezapp.com>',
+        to: email,
+        subject: "パスワードリセットリンク",
+        html: messageBody_ja
+      };
+      const messageBody_ko = `
+        <h3>노트Z</h3>
+        <h5>안녕하세요 ${checkUser.username}:</h5>
+        <p>비밀번호를 잊어 같습니다. <a href="http://localhost:3000/forgot/${token}">여기를</a> 클릭하여 재설정하십시오.</p>
+        <p>감사합니다,<br />노트Z 팀</p>
+      `;
+      const mailOptions_ko = {
+        from: '"노트Z" <no-reply@notezapp.com>',
+        to: email,
+        subject: "암호 재설정 링크",
+        html: messageBody_ko
+      };
+      const messageBody_cn = `
+        <h3>笔记Z</h3>
+        <h5>你好${checkUser.username}:</h5>
+        <p>你好像忘记了密码。 单击<a href="http://localhost:3000/forgot/${token}">此处</a>重置。</p>
+        <p>我们的问候，<br />笔记Z团队</p>
+      `;
+      const mailOptions_cn = {
+        from: '"笔记Z" <no-reply@notezapp.com>',
+        to: email,
+        subject: "密码重置链接",
+        html: messageBody_cn
+      };
+      const messageBody_tw = `
+        <h3>筆記Z</h3>
+        <h5>你好${checkUser.username}:</h5>
+        <p>你好像忘記了密碼。 單擊<a href="http://localhost:3000/forgot/${token}">此處</a>重置。</p>
+        <p>我們的問候，<br />筆記Z團隊</p>
+      `;
+      const mailOptions_tw = {
+        from: '"筆記Z" <no-reply@notezapp.com>',
+        to: email,
+        subject: "密码重置链接",
+        html: messageBody_tw
+      };
+      const messageBody_hk = `
+        <h3>筆記Z</h3>
+        <h5>你好${checkUser.username}:</h5>
+        <p>你好似唔記得咗密碼。 單擊<a href="http://localhost:3000/forgot/${token}">此處</a>重置。</p>
+        <p>我哋嘅打招呼，<br />筆記Z團隊</p>
+      `;
+      const mailOptions_hk = {
+        from: '"筆記Z" <no-reply@notezapp.com>',
+        to: email,
+        subject: "密码重置链接",
+        html: messageBody_hk
+      };
+      let mailOptions = {};
+      if (language === "ja") {
+        mailOptions = mailOptions_ja;
+      } else if (language === "ko") {
+        mailOptions = mailOptions_ko;
+      } else if (language === "zh-CN") {
+        mailOptions = mailOptions_cn;
+      } else if (language === "zh-TW") {
+        mailOptions = mailOptions_tw;
+      } else if (language === "zh-HK") {
+        mailOptions = mailOptions_hk;
+      } else {
+        mailOptions = mailOptions_en;
+      }
       await transport.sendMail(mailOptions, (error, info) => {
         if (error) {
           return console.log(error);
