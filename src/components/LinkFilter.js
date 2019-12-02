@@ -66,10 +66,12 @@ class LinkFilter extends React.Component {
         filters,
         game
       });
-      this.setState({
-        loading: false,
-        success: true
-      });
+      if (res) {
+        this.setState({
+          loading: false,
+          success: true
+        });
+      }
     } catch (e) {
       this.setState({
         loading: false,
@@ -115,6 +117,7 @@ class LinkFilter extends React.Component {
               ? "過濾器類型連接到遊戲"
               : "Link Characters to Game"}
           </Typography>
+          {this.state.success && <p>Characters successfully linked.</p>}
           <Select
             options={
               this.props.language === "ja"

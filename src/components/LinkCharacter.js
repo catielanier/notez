@@ -112,6 +112,7 @@ class LinkCharacter extends React.Component {
               ? "角色連接到遊戲"
               : "Link Characters to Game"}
           </Typography>
+          {this.state.success && <p>Characters successfully linked.</p>}
           <Select
             options={
               this.props.language === "ja"
