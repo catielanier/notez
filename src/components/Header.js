@@ -12,6 +12,8 @@ import {
   Link,
   Hidden
 } from "@material-ui/core";
+import { title } from "../data/locales";
+import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(theme => ({
@@ -53,15 +55,7 @@ export default function Header(props) {
             </IconButton>
           </Hidden>
           <Typography variant="h6" className={classes.title}>
-            {props.language === "ja"
-              ? "ノートZ"
-              : props.language === "ko"
-              ? "노트Z"
-              : props.language === "zh-CN"
-              ? "笔记Z"
-              : props.language === "zh-TW" || props.language === "zh-HK"
-              ? "筆記Z"
-              : "NoteZ"}
+            {localeSelect(props.language, title)}
           </Typography>
           {!props.user && (
             <Hidden xsDown>
