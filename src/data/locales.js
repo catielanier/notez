@@ -409,7 +409,7 @@ export const clearForm = {
 };
 
 export const filterCreated = {
-  en: "Character created successfully.",
+  en: "Filter created successfully.",
   ja: "フィルターが作成されました。",
   ko: "필터가 성공적으로 생성되었습니다.",
   cn: "过滤器创建成功。",
@@ -476,4 +476,74 @@ export const cantoneseFilter = {
   tw: "廣東話過濾器類型",
   sg: "廣東話過濾器類型",
   hk: "廣東話過濾器類型"
+};
+
+export const gameCreated = {
+  en: "Game created successfully.",
+  ja: "ゲームが作成されました。",
+  ko: "게임이 성공적으로 생성되었습니다.",
+  cn: "游戏创建成功。",
+  tw: "遊戲創建成功。",
+  sg: "遊戲創建成功。",
+  hk: "遊戲創建成功。"
+};
+
+export const englishGame = {
+  en: "English Game Title",
+  ja: "英語のゲームタイトル",
+  ko: "영어 게임 제목",
+  cn: "英文电子游戏标题",
+  tw: "英文電子遊戲標題",
+  sg: "英文電子遊戲標題",
+  hk: "英文電子遊戲標題"
+};
+
+export const japaneseGame = {
+  en: "Japanese Game Title",
+  ja: "日本語のゲームタイトル",
+  ko: "일본어 게임 제목",
+  cn: "日语电子游戏标题",
+  tw: "日語電子遊戲標題",
+  sg: "日語電子遊戲標題",
+  hk: "日語電子遊戲標題"
+};
+
+export const koreanGame = {
+  en: "Korean Game Title",
+  ja: "韓国語のゲームタイトル",
+  ko: "한국어 게임 제목",
+  cn: "朝鲜语电子游戏标题",
+  tw: "朝鮮語電子遊戲標題",
+  sg: "朝鮮語電子遊戲標題",
+  hk: "朝鮮語電子遊戲標題"
+};
+
+export const simplifiedGame = {
+  en: "Chinese (Simplified) Game Title",
+  ja: "韓国語のゲームタイトル",
+  ko: "중국어 간체 게임 제목",
+  cn: "简体中文电子游戏标题",
+  tw: "簡體中文電子遊戲標題",
+  sg: "簡體中文電子遊戲標題",
+  hk: "簡體中文電子遊戲標題"
+};
+
+export const traditionalGame = {
+  en: "Chinese (Simplified) Game Title",
+  ja: "簡体字中国語のゲームタイトル",
+  ko: "중국어 번체 게임 제목",
+  cn: "繁体中文电子游戏标题",
+  tw: "繁體中文電子遊戲標題",
+  sg: "繁體中文電子遊戲標題",
+  hk: "繁體中文電子遊戲標題"
+};
+
+export const cantoneseGame = {
+  en: "Cantonese Game Title",
+  ja: "広東語のゲームタイトル",
+  ko: "광동어 게임 제목",
+  cn: "广东话电子游戏标题",
+  tw: "廣東話電子遊戲標題",
+  sg: "廣東話電子遊戲標題",
+  hk: "廣東話電子遊戲標題"
 };
