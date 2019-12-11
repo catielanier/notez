@@ -12,6 +12,17 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  editCharacter,
+  englishCharacter,
+  japaneseCharacter,
+  koreanCharacter,
+  simplifiedCharacter,
+  traditionalCharacter,
+  cantoneseCharacter
+} from "../data/locales";
+import dbLocale from "../services/dbLocale";
 
 const styles = theme => ({
   container: {
@@ -141,21 +152,13 @@ class EditCharacter extends React.Component {
     return (
       <section>
         <Typography variant="h5" className={classes.header}>
-          {this.props.language === "ja"
-            ? "キャラクターを編集"
-            : this.props.language === "ko"
-            ? "캐릭터 편집"
-            : this.props.language === "zh-CN"
-            ? "编辑角色"
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "編輯角色"
-            : "Edit Character"}
+          {localeSelect(this.props.language, editCharacter)}
         </Typography>
         <Container maxWidth="sm">
           <Select
             options={this.state.characters.map(character => {
               return {
-                label: character.name,
+                label: dbLocale(this.props.language, character),
                 value: character._id
               };
             })}
@@ -164,17 +167,7 @@ class EditCharacter extends React.Component {
           {this.state.character !== "" && (
             <form onSubmit={this.updateCharacter}>
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "英語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "영어 캐릭터 이름"
-                    : this.props.language === "zh-CN" ||
-                      this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "英文角色名字"
-                    : "English Character Name"
-                }
+                label={localeSelect(this.props.language, englishCharacter)}
                 id="standard-name-required"
                 value={this.state.name}
                 name="name"
@@ -184,18 +177,7 @@ class EditCharacter extends React.Component {
                 required
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "日本語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "일본어 캐릭터 이름"
-                    : this.props.language === "zh-CN"
-                    ? "日语角色名字"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "日語角色名字"
-                    : "Japanese Character Name"
-                }
+                label={localeSelect(this.props.language, japaneseCharacter)}
                 value={this.state.name_ja}
                 name="name_ja"
                 onChange={this.changeState}
@@ -203,18 +185,7 @@ class EditCharacter extends React.Component {
                 placeholder="キャラクター名"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "韓国語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "한국어 캐릭터 이름"
-                    : this.props.language === "zh-CN"
-                    ? "朝鲜语角色名字"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "朝鮮語角色名字"
-                    : "Korean Character Name"
-                }
+                label={localeSelect(this.props.language, koreanCharacter)}
                 value={this.state.name_ko}
                 name="name_ko"
                 onChange={this.changeState}
@@ -222,18 +193,7 @@ class EditCharacter extends React.Component {
                 placeholder="캐릭터 이름"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "簡体字中国語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "중국어 간체 캐릭터 이름"
-                    : this.props.language === "zh-CN"
-                    ? "简体中文角色名字"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "簡體中文角色名字"
-                    : "Mandarin (Simplified) Character Name"
-                }
+                label={localeSelect(this.props.language, simplifiedCharacter)}
                 value={this.state["name_zh-cn"]}
                 name="name_zh-cn"
                 onChange={this.changeState}
@@ -241,18 +201,7 @@ class EditCharacter extends React.Component {
                 placeholder="角色名字"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "繁体字中国語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "중국어 번체 캐릭터 이름"
-                    : this.props.language === "zh-CN"
-                    ? "繁体中文角色名字"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "繁體中文角色名字"
-                    : "Mandarin (Traditional) Character Name"
-                }
+                label={localeSelect(this.props.language, traditionalCharacter)}
                 value={this.state["name_zh-tw"]}
                 name="name_zh-tw"
                 onChange={this.changeState}
@@ -260,18 +209,7 @@ class EditCharacter extends React.Component {
                 placeholder="角色名字"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "広東語のキャラクター名"
-                    : this.props.language === "ko"
-                    ? "광동어 캐릭터 이름"
-                    : this.props.language === "zh-CN"
-                    ? "广东话角色名字"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "廣東話角色名字"
-                    : "Cantonese Character Name"
-                }
+                label={localeSelect(this.props.language, cantoneseCharacter)}
                 value={this.state["name_zh-hk"]}
                 name="name_zh-hk"
                 onChange={this.changeState}
@@ -286,16 +224,7 @@ class EditCharacter extends React.Component {
                     color="primary"
                     disabled={this.state.loading}
                   >
-                    {this.props.language === "ja"
-                      ? "キャラクターを編集"
-                      : this.props.language === "ko"
-                      ? "캐릭터 편집"
-                      : this.props.language === "zh-CN"
-                      ? "编辑角色"
-                      : this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "編輯角色"
-                      : "Edit Character"}
+                    {localeSelect(this.props.language, editCharacter)}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
