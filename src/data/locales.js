@@ -207,3 +207,53 @@ export const forgotYourPassword = {
   sg: "你忘記密碼了嗎？",
   hk: "你忘記密碼了嗎？"
 };
+
+export const registerSuccess = {
+  en: "Registration success! Please check your email.",
+  ja: "登録完了！ メールを確認してください。",
+  ko: "등록 성공! 이메일을 확인하십시오.",
+  cn: "注册成功！ 请检查您的电子邮件。",
+  tw: "註冊成功！ 請檢查您的電子郵件。",
+  sg: "註冊成功！ 請檢查您的電子郵件。",
+  hk: "註冊成功！ 唔該檢查你嘅電子郵件。"
+};
+
+export const verifyPassword = {
+  en: "Verify Password",
+  ja: "パスワードを照合します",
+  ko: "비밀번호 확인",
+  cn: "验证密码",
+  tw: "驗證密碼",
+  sg: "驗證密碼",
+  hk: "驗證密碼"
+};
+
+export const username = {
+  en: "Username",
+  ja: "ユーザー名",
+  ko: "사용자 이름",
+  cn: "用户名",
+  tw: "用戶名",
+  sg: "用戶名",
+  hk: "用戶名"
+};
+
+export const realName = {
+  en: "Real Name",
+  ja: "本名",
+  ko: "실제 이름",
+  cn: "真正的名字",
+  tw: "真正的名字",
+  sg: "真正的名字",
+  hk: "真正的名字"
+};
+
+export const country = {
+  en: "Country",
+  ja: "国",
+  ko: "국가",
+  cn: "国家",
+  tw: "國家",
+  sg: "國家",
+  hk: "國家"
+};
