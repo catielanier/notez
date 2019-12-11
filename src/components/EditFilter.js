@@ -12,6 +12,17 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  editFilter,
+  englishFilter,
+  japaneseFilter,
+  koreanFilter,
+  simplifiedFilter,
+  traditionalFilter,
+  cantoneseFilter
+} from "../data/locales";
+import dbLocale from "../services/dbLocale";
 
 const styles = theme => ({
   container: {
@@ -141,21 +152,13 @@ class EditFilter extends React.Component {
     return (
       <section>
         <Typography variant="h5" className={classes.header}>
-          {this.props.language === "ja"
-            ? "フィルターを編集"
-            : this.props.language === "ko"
-            ? "필터 편집"
-            : this.props.language === "zh-CN"
-            ? "编辑过滤器"
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "編輯過濾器"
-            : "Edit Filter"}
+          {localeSelect(this.props.language, editFilter)}
         </Typography>
         <Container maxWidth="sm">
           <Select
             options={this.state.filters.map(filter => {
               return {
-                label: filter.name,
+                label: dbLocale(this.props.language, filter),
                 value: filter._id
               };
             })}
@@ -164,18 +167,7 @@ class EditFilter extends React.Component {
           {this.state.filter !== "" && (
             <form onSubmit={this.updateFilter}>
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "英語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "영어 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "英文过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "英文過濾器類型"
-                    : "English Filter Type"
-                }
+                label={localeSelect(this.props.language, englishFilter)}
                 id="standard-name-required"
                 value={this.state.name}
                 name="name"
@@ -185,18 +177,7 @@ class EditFilter extends React.Component {
                 required
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "日本語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "일본어 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "日语过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "日語過濾器類型"
-                    : "Japanese Filter Type"
-                }
+                label={localeSelect(this.props.language, japaneseFilter)}
                 value={this.state.name_ja}
                 name="name_ja"
                 onChange={this.changeState}
@@ -204,18 +185,7 @@ class EditFilter extends React.Component {
                 placeholder="フィルタータイプ"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "韓国語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "한국어 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "朝鲜语过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "朝鮮語過濾器類型"
-                    : "Korean Filter Type"
-                }
+                label={localeSelect(this.props.language, koreanFilter)}
                 value={this.state.name_ko}
                 name="name_ko"
                 onChange={this.changeState}
@@ -223,18 +193,7 @@ class EditFilter extends React.Component {
                 placeholder="필터 타입"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "簡体字中国語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "중국어 간체 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "简体中文过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "簡體中文過濾器類型"
-                    : "Mandarin (Simplified) Filter Type"
-                }
+                label={localeSelect(this.props.language, simplifiedFilter)}
                 value={this.state["name_zh-cn"]}
                 name="name_zh-cn"
                 onChange={this.changeState}
@@ -242,18 +201,7 @@ class EditFilter extends React.Component {
                 placeholder="过滤器类型"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "繁体字中国語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "중국어 번체 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "繁体中文过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "繁體中文過濾器類型"
-                    : "Mandarin (Traditional) Filter Type"
-                }
+                label={localeSelect(this.props.language, traditionalFilter)}
                 value={this.state["name_zh-tw"]}
                 name="name_zh-tw"
                 onChange={this.changeState}
@@ -261,18 +209,7 @@ class EditFilter extends React.Component {
                 placeholder="過濾器類型"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "広東語のフィルタータイプ"
-                    : this.props.language === "ko"
-                    ? "광동어 필터 타입"
-                    : this.props.language === "zh-CN"
-                    ? "广东话过滤器类型"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "廣東話過濾器類型"
-                    : "Cantonese Filter Type"
-                }
+                label={localeSelect(this.props.language, cantoneseFilter)}
                 value={this.state["name_zh-hk"]}
                 name="name_zh-hk"
                 onChange={this.changeState}
@@ -287,16 +224,7 @@ class EditFilter extends React.Component {
                     color="primary"
                     disabled={this.state.loading}
                   >
-                    {this.props.language === "ja"
-                      ? "フィルターを編集"
-                      : this.props.language === "ko"
-                      ? "필터 편집"
-                      : this.props.language === "zh-CN"
-                      ? "编辑过滤器"
-                      : this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "編輯過濾器"
-                      : "Edit Filter"}
+                    {localeSelect(this.props.language, editFilter)}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
