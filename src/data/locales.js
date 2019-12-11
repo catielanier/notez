@@ -327,3 +327,83 @@ export const resetPassword = {
   sg: "重設密碼",
   hk: "重設密碼"
 };
+
+export const characterCreated = {
+  en: "Character created successfully.",
+  ja: "キャラクターが作成されました。",
+  ko: "캐릭터가 성공적으로 생성되었습니다.",
+  cn: "角色创建成功。",
+  tw: "角色創建成功。",
+  sg: "角色創建成功。",
+  hk: "角色創建成功。"
+};
+
+export const englishCharacter = {
+  en: "English Character Name",
+  ja: "英語のキャラクター名",
+  ko: "영어 캐릭터 이름",
+  cn: "英文角色名字",
+  tw: "英文角色名字",
+  sg: "英文角色名字",
+  hk: "英文角色名字"
+};
+
+export const japaneseCharacter = {
+  en: "Japanese Character Name",
+  ja: "日本語のキャラクター名",
+  ko: "일본어 캐릭터 이름",
+  cn: "日语角色名字",
+  tw: "日語角色名字",
+  sg: "日語角色名字",
+  hk: "日語角色名字"
+};
+
+export const koreanCharacter = {
+  en: "Korean Character Name",
+  ja: "韓国語のキャラクター名",
+  ko: "한국어 캐릭터 이름",
+  cn: "朝鲜语角色名字",
+  tw: "朝鮮語角色名字",
+  sg: "朝鮮語角色名字",
+  hk: "朝鮮語角色名字"
+};
+
+export const simplifiedCharacter = {
+  en: "Mandarin (Simplified) Character Name",
+  ja: "簡体字中国語のキャラクター名",
+  ko: "중국어 간체 캐릭터 이름",
+  cn: "简体中文角色名字",
+  tw: "簡體中文角色名字",
+  sg: "簡體中文角色名字",
+  hk: "簡體中文角色名字"
+};
+
+export const traditionalCharacter = {
+  en: "Mandarin (Traditional) Character Name",
+  ja: "繁体字中国語のキャラクター名",
+  ko: "중국어 번체 캐릭터 이름",
+  cn: "繁体中文角色名字",
+  tw: "繁體中文角色名字",
+  sg: "繁體中文角色名字",
+  hk: "繁體中文角色名字"
+};
+
+export const cantoneseCharacter = {
+  en: "Cantonese Character Name",
+  ja: "広東語のキャラクター名",
+  ko: "광동어 번체 캐릭터 이름",
+  cn: "广东话角色名字",
+  tw: "廣東話角色名字",
+  sg: "廣東話角色名字",
+  hk: "廣東話角色名字"
+};
+
+export const clearForm = {
+  en: "Clear Form",
+  ja: "明確な形",
+  ko: "명확한 형태",
+  cn: "清除表格",
+  tw: "清除表格",
+  sg: "清除表格",
+  hk: "清除表格"
+};
