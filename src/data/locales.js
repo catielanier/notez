@@ -587,3 +587,13 @@ export const filterLinked = {
   sg: "過濾器成功鏈接。",
   hk: "過濾器成功鏈接。"
 };
+
+export const playerFilter = {
+  en: "Player Filter",
+  ja: "プレーヤーフィルター",
+  ko: "선수 필터",
+  cn: "玩家过滤器",
+  tw: "玩家過濾器",
+  sg: "玩家過濾器",
+  hk: "玩家過濾器"
+};

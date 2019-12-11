@@ -23,7 +23,8 @@ import {
   koreanFilter,
   simplifiedFilter,
   traditionalFilter,
-  cantoneseFilter
+  cantoneseFilter,
+  playerFilter
 } from "../data/locales";
 
 const styles = theme => ({
@@ -171,7 +172,7 @@ class AddFilter extends React.Component {
                   color="primary"
                 />
               }
-              label="Player Filter"
+              label={localeSelect(this.props.language, playerFilter)}
             />
             <TextField
               label={localeSelect(this.props.language, englishFilter)}
