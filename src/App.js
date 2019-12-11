@@ -5,6 +5,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { blue, orange } from "@material-ui/core/colors";
 import axios from "axios";
 import Helmet from "react-helmet";
+import { title } from "./data/locales";
+import localeSelect from "./services/localeSelect";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -106,18 +108,7 @@ export default class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Helmet>
-          <title>
-            {this.state.language === "ja"
-              ? "ノートZ"
-              : this.state.language === "ko"
-              ? "노트Z"
-              : this.state.language === "zh-CN"
-              ? "笔记Z"
-              : this.state.language === "zh-TW" ||
-                this.state.language === "zh-HK"
-              ? "筆記Z"
-              : "NoteZ"}
-          </title>
+          <title>{localeSelect(this.state.language, title)}</title>
         </Helmet>
         <div className={!this.state.user ? "App attract-main" : "App"}>
           <Router>
