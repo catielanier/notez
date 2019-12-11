@@ -562,8 +562,28 @@ export const characterLinked = {
   en: "Characters successfully linked.",
   ja: "キャラクターが正常にリンクされました。",
   ko: "캐릭터가 성공적으로 연결되었습니다.",
-  cn: "字符成功链接。",
-  tw: "字符成功鏈接。",
-  sg: "字符成功鏈接。",
-  hk: "字符成功鏈接。"
+  cn: "角色成功链接。",
+  tw: "角色成功鏈接。",
+  sg: "角色成功鏈接。",
+  hk: "角色成功鏈接。"
+};
+
+export const linkFiltersToGame = {
+  en: "Link Filters to Game",
+  ja: "フィルターをゲームに接続",
+  ko: "필터를 게임에 연결",
+  cn: "过滤器连接到游戏",
+  tw: "過濾器連接到遊戲",
+  sg: "過濾器連接到遊戲",
+  hk: "過濾器連接到遊戲"
+};
+
+export const filterLinked = {
+  en: "Characters successfully linked.",
+  ja: "フィルターが正常にリンクされました。",
+  ko: "필터를가 성공적으로 연결되었습니다.",
+  cn: "过滤器成功链接。",
+  tw: "過濾器成功鏈接。",
+  sg: "過濾器成功鏈接。",
+  hk: "過濾器成功鏈接。"
 };
