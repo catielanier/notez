@@ -10,6 +10,8 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import localeSelect from "../services/localeSelect";
+import { resetPassword, password, verifyPassword } from "../data/locales";
 
 const styles = theme => ({
   container: {
@@ -91,16 +93,7 @@ class ResetPassword extends React.Component {
       <section className="signup">
         <Container maxWidth="sm">
           <Typography className={classes.header} variant="h5">
-            {this.props.language === "ja"
-              ? "パスワードを再設定する"
-              : this.props.language === "ko"
-              ? "암호를 다시 설정"
-              : this.props.language === "zh-CN"
-              ? "重设密码"
-              : this.props.language === "zh-TW" ||
-                this.props.language === "zh-HK"
-              ? "重設密碼"
-              : "Reset Password"}
+            {localeSelect(this.props.language, resetPassword)}
           </Typography>
           <form disabled={this.state.loading} onSubmit={this.resetPassword}>
             {this.state.error && (
@@ -109,18 +102,7 @@ class ResetPassword extends React.Component {
               </p>
             )}
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "パスワード"
-                  : this.props.language === "ko"
-                  ? "비밀번호"
-                  : this.props.language === "zh-CN"
-                  ? "密码"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "密碼"
-                  : "Password"
-              }
+              label={localeSelect(this.props.language, password)}
               required
               name="password"
               onChange={this.changeState}
@@ -129,18 +111,7 @@ class ResetPassword extends React.Component {
               type="password"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "パスワードを照合します"
-                  : this.props.language === "ko"
-                  ? "비밀번호 확인"
-                  : this.props.language === "zh-CN"
-                  ? "验证密码"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "驗證密碼"
-                  : "Verify Password"
-              }
+              label={localeSelect(this.props.language, verifyPassword)}
               required
               name="verifyPassword"
               onChange={this.changeState}
@@ -151,16 +122,7 @@ class ResetPassword extends React.Component {
             <Container className={classes.buttonRow}>
               <div className={classes.wrapper}>
                 <Button color="primary" variant="contained" type="submit">
-                  {this.props.language === "ja"
-                    ? "パスワードを再設定する"
-                    : this.props.language === "ko"
-                    ? "암호를 다시 설정"
-                    : this.props.language === "zh-CN"
-                    ? "重设密码"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "重設密碼"
-                    : "Reset Password"}
+                  {localeSelect(this.props.language, resetPassword)}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress

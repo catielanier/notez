@@ -317,3 +317,13 @@ export const editProfile = {
   sg: "編輯個人資料",
   hk: "編輯個人資料"
 };
+
+export const resetPassword = {
+  en: "Reset Password",
+  ja: "パスワードを再設定する",
+  ko: "비밀번호 다시 설정",
+  cn: "重设密码",
+  tw: "重設密碼",
+  sg: "重設密碼",
+  hk: "重設密碼"
+};
