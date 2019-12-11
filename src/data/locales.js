@@ -267,3 +267,53 @@ export const noMatch = {
   sg: "你的密碼不匹配。",
   hk: "你個密碼唔匹配。"
 };
+
+export const profileUpdated = {
+  en: "Profile successfully updated.",
+  ja: "プロファイルが正常に更新されました。",
+  ko: "프로필이 성공적으로 업데이트되었습니다.",
+  cn: "个人资料已成功更新。",
+  tw: "個人資料已成功更新。",
+  sg: "個人資料已成功更新。",
+  hk: "個人資料已成更新。"
+};
+
+export const oldPassword = {
+  en: "Old Password",
+  ja: "以前のパスワード",
+  ko: "기존 비밀번호",
+  cn: "旧密码",
+  tw: "舊密碼",
+  sg: "舊密碼",
+  hk: "舊密碼"
+};
+
+export const newPassword = {
+  en: "New Password",
+  ja: "新しいパスワード",
+  ko: "새 비밀번호",
+  cn: "新密码",
+  tw: "新密碼",
+  sg: "新密碼",
+  hk: "新密碼"
+};
+
+export const verifyNewPassword = {
+  en: "Verify New Password",
+  ja: "新しいパスワードを照合します",
+  ko: "새 비밀번호 확인",
+  cn: "验证新密码",
+  tw: "驗證新密碼",
+  sg: "驗證新密碼",
+  hk: "驗證新密碼"
+};
+
+export const editProfile = {
+  en: "Edit Profile",
+  ja: "プロフィール編集",
+  ko: "프로필 편집",
+  cn: "编辑个人资料",
+  tw: "編輯個人資料",
+  sg: "編輯個人資料",
+  hk: "編輯個人資料"
+};

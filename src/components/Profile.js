@@ -10,6 +10,19 @@ import {
   CircularProgress
 } from "@material-ui/core";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  profile,
+  email,
+  username,
+  realName,
+  country,
+  profileUpdated,
+  oldPassword,
+  newPassword,
+  verifyNewPassword,
+  editProfile
+} from "../data/locales";
 
 const styles = theme => ({
   container: {
@@ -145,20 +158,11 @@ class Profile extends React.Component {
       <section>
         <Container maxWidth="xs">
           <Typography className={classes.header} variant="h5">
-            {this.props.language === "ja"
-              ? "プロフィール"
-              : this.props.language === "ko"
-              ? "프로필"
-              : this.props.language === "zh-CN"
-              ? "个人资料"
-              : this.props.language === "zh-TW" ||
-                this.props.language === "zh-HK"
-              ? "個人資料"
-              : "Profile"}
+            {localeSelect(this.props.language, profile)}
           </Typography>
           <form disabled={this.state.loading} onSubmit={this.updateProfile}>
             {this.state.success && (
-              <p>Registration success! Please check your email.</p>
+              <p>{localeSelect(this.props.language, profileUpdated)}</p>
             )}
             {this.state.error && (
               <p className="error">
@@ -166,18 +170,7 @@ class Profile extends React.Component {
               </p>
             )}
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "Eメールアドレス"
-                  : this.props.language === "ko"
-                  ? "이메일 주소"
-                  : this.props.language === "zh-CN"
-                  ? "电邮地址"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "電郵地址"
-                  : "Email Address"
-              }
+              label={localeSelect(this.props.language, email)}
               required
               name="email"
               onChange={this.changeState}
@@ -185,18 +178,7 @@ class Profile extends React.Component {
               value={this.state.email}
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "以前のパスワード"
-                  : this.props.language === "ko"
-                  ? "기존 비밀번호"
-                  : this.props.language === "zh-CN"
-                  ? "旧密码"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "舊密碼"
-                  : "Old Password"
-              }
+              label={localeSelect(this.props.language, oldPassword)}
               required
               name="oldPassword"
               onChange={this.changeState}
@@ -205,18 +187,7 @@ class Profile extends React.Component {
               type="password"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "新しいパスワード"
-                  : this.props.language === "ko"
-                  ? "새 비밀번호"
-                  : this.props.language === "zh-CN"
-                  ? "新密码"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "新密碼"
-                  : "New Password"
-              }
+              label={localeSelect(this.props.language, newPassword)}
               required
               name="newPassword"
               onChange={this.changeState}
@@ -225,18 +196,7 @@ class Profile extends React.Component {
               type="password"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "新しいパスワードを照合します"
-                  : this.props.language === "ko"
-                  ? "새 비밀번호 확인"
-                  : this.props.language === "zh-CN"
-                  ? "验证新密码"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "驗證新密碼"
-                  : "Verify New Password"
-              }
+              label={localeSelect(this.props.language, verifyNewPassword)}
               required
               name="verifyNewPassword"
               onChange={this.changeState}
@@ -245,18 +205,7 @@ class Profile extends React.Component {
               type="password"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "ユーザー名"
-                  : this.props.language === "ko"
-                  ? "사용자 이름"
-                  : this.props.language === "zh-CN"
-                  ? "用户名"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "用户名"
-                  : "Username"
-              }
+              label={localeSelect(this.props.language, username)}
               required
               name="username"
               onChange={this.changeState}
@@ -264,36 +213,14 @@ class Profile extends React.Component {
               value={this.state.username}
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "本名"
-                  : this.props.language === "ko"
-                  ? "실제 이름"
-                  : this.props.language === "zh-CN"
-                  ? "真正的名字"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "真正的名字"
-                  : "Real Name"
-              }
+              label={localeSelect(this.props.language, realName)}
               name="realName"
               onChange={this.changeState}
               fullWidth
               value={this.state.realName}
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "国"
-                  : this.props.language === "ko"
-                  ? "국가"
-                  : this.props.language === "zh-CN"
-                  ? "国家"
-                  : this.props.language === "zh-HK" ||
-                    this.props.language === "zh-TW"
-                  ? "國家"
-                  : "Country"
-              }
+              label={localeSelect(this.props.language, country)}
               name="country"
               onChange={this.changeState}
               fullWidth
@@ -302,16 +229,7 @@ class Profile extends React.Component {
             <Container className={classes.buttonRow}>
               <div className={classes.wrapper}>
                 <Button color="primary" variant="contained" type="submit">
-                  {this.props.language === "ja"
-                    ? "プロファイル編集"
-                    : this.props.language === "ko"
-                    ? "프로필 편집"
-                    : this.props.language === "zh-CN"
-                    ? "编辑个人资料"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "編輯個人資料"
-                    : "Edit Profile"}
+                  {localeSelect(this.props.language, editProfile)}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
