@@ -10,6 +10,14 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import {
+  login,
+  goBack,
+  email,
+  password,
+  forgotYourPassword
+} from "../data/locales";
+import localeSelect from "../services/localeSelect";
 import { setToken } from "../services/tokenService";
 
 const styles = theme => ({
@@ -95,16 +103,7 @@ class Login extends React.Component {
       <section>
         <Container maxWidth="xs">
           <Typography className={classes.header} variant="h5">
-            {this.props.language === "ja"
-              ? "ログイン"
-              : this.props.language === "ko"
-              ? "로그인"
-              : this.props.language === "zh-CN"
-              ? "登录"
-              : this.props.language === "zh-TW" ||
-                this.props.language === "zh-HK"
-              ? "登錄"
-              : "Login"}
+            {localeSelect(this.props.language, login)}
           </Typography>
           <form
             disabled={this.state.loading}
@@ -119,18 +118,7 @@ class Login extends React.Component {
               )}
               <Container maxWidth="xs">
                 <TextField
-                  label={
-                    this.props.language === "ja"
-                      ? "Eメールアドレス"
-                      : this.props.language === "ko"
-                      ? "이메일 주소"
-                      : this.props.language === "zh-CN"
-                      ? "电邮地址"
-                      : this.props.language === "zh-HK" ||
-                        this.props.language === "zh-TW"
-                      ? "電郵地址"
-                      : "Email Address"
-                  }
+                  label={localeSelect(this.props.language, email)}
                   id="standard-name"
                   value={this.state.email}
                   name="email"
@@ -140,18 +128,7 @@ class Login extends React.Component {
               </Container>
               <Container maxWidth="xs">
                 <TextField
-                  label={
-                    this.props.language === "ja"
-                      ? "パスワード"
-                      : this.props.language === "ko"
-                      ? "비밀번호"
-                      : this.props.language === "zh-CN"
-                      ? "密码"
-                      : this.props.language === "zh-HK" ||
-                        this.props.language === "zh-TW"
-                      ? "密碼"
-                      : "Password"
-                  }
+                  label={localeSelect(this.props.language, password)}
                   value={this.state.password}
                   id="standard-password-input"
                   type="password"
@@ -169,16 +146,7 @@ class Login extends React.Component {
                     onClick={this.login}
                     disabled={this.state.loading}
                   >
-                    {this.props.language === "ja"
-                      ? "ログイン"
-                      : this.props.language === "ko"
-                      ? "로그인"
-                      : this.props.language === "zh-CN"
-                      ? "登录"
-                      : this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "登錄"
-                      : "Login"}
+                    {localeSelect(this.props.language, login)}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
@@ -194,15 +162,7 @@ class Login extends React.Component {
                       <RouterLink innerRef={ref} to="/" {...props} />
                     ))}
                   >
-                    {this.props.language === "ja"
-                      ? "戻る"
-                      : this.props.language === "ko"
-                      ? "돌아가다"
-                      : this.props.language === "zh-CN" ||
-                        this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "回去"
-                      : "Go Back"}
+                    {localeSelect(this.props.language, goBack)}
                   </Button>
                 </div>
               </Container>
@@ -212,16 +172,7 @@ class Login extends React.Component {
                     <RouterLink innerRef={ref} to="/forgot" {...props} />
                   ))}
                 >
-                  {this.props.language === "ja"
-                    ? "パスワードを忘れた？"
-                    : this.props.language === "ko"
-                    ? "비밀번호를 잊었습니까?"
-                    : this.props.language === "zh-CN"
-                    ? "你忘记密码了吗？"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "你忘記密碼了嗎？"
-                    : "Forgot your password?"}
+                  {localeSelect(this.props.language, forgotYourPassword)}
                 </Button>
               </Container>
             </Container>

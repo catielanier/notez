@@ -167,3 +167,43 @@ export const logout = {
   sg: "登出",
   hk: "登出"
 };
+
+export const goBack = {
+  en: "Go Back",
+  ja: "戻る",
+  ko: "돌아가다",
+  cn: "回去",
+  tw: "回去",
+  sg: "回去",
+  hk: "回去"
+};
+
+export const email = {
+  en: "Email Address",
+  ja: "Eメールアドレス",
+  ko: "이메일 주소",
+  cn: "电邮地址",
+  tw: "電郵地址",
+  sg: "電郵地址",
+  hk: "電郵地址"
+};
+
+export const password = {
+  en: "Password",
+  ja: "パスワード",
+  ko: "비밀번호",
+  cn: "密码",
+  tw: "密碼",
+  sg: "密碼",
+  hk: "密碼"
+};
+
+export const forgotYourPassword = {
+  en: "Forgot your password?",
+  ja: "パスワードを忘れた？",
+  ko: "비밀번호를 잊었습니까?",
+  cn: "你忘记密码了吗",
+  tw: "你忘記密碼了嗎？",
+  sg: "你忘記密碼了嗎？",
+  hk: "你忘記密碼了嗎？"
+};
