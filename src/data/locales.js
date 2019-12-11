@@ -407,3 +407,73 @@ export const clearForm = {
   sg: "清除表格",
   hk: "清除表格"
 };
+
+export const filterCreated = {
+  en: "Character created successfully.",
+  ja: "フィルターが作成されました。",
+  ko: "필터가 성공적으로 생성되었습니다.",
+  cn: "过滤器创建成功。",
+  tw: "過濾器創建成功。",
+  sg: "過濾器創建成功。",
+  hk: "過濾器創建成功。"
+};
+
+export const englishFilter = {
+  en: "English Filter Type",
+  ja: "英語のフィルタータイプ",
+  ko: "영어 필터 타입",
+  cn: "英文过滤器类型",
+  tw: "英文過濾器類型",
+  sg: "英文過濾器類型",
+  hk: "英文過濾器類型"
+};
+
+export const japaneseFilter = {
+  en: "Japanese Filter Type",
+  ja: "日本語のフィルタータイプ",
+  ko: "일본어 필터 타입",
+  cn: "日语过滤器类型",
+  tw: "日語過濾器類型",
+  sg: "日語過濾器類型",
+  hk: "日語過濾器類型"
+};
+
+export const koreanFilter = {
+  en: "Korean Filter Type",
+  ja: "韓国語のフィルタータイプ",
+  ko: "한국어 필터 타입",
+  cn: "朝鲜语过滤器类型",
+  tw: "朝鮮語過濾器類型",
+  sg: "朝鮮語過濾器類型",
+  hk: "朝鮮語過濾器類型"
+};
+
+export const simplifiedFilter = {
+  en: "Mandarin (Simplified) Filter Type",
+  ja: "簡体字中国語のフィルタータイプ",
+  ko: "중국어 간체 필터 타입",
+  cn: "简体中文过滤器类型",
+  tw: "簡體中文過濾器類型",
+  sg: "簡體中文過濾器類型",
+  hk: "簡體中文過濾器類型"
+};
+
+export const traditionalFilter = {
+  en: "Mandarin (Traditional) Filter Type",
+  ja: "繁体字中国語のフィルタータイプ",
+  ko: "중국어 번체 필터 타입",
+  cn: "繁体中文过滤器类型",
+  tw: "繁體中文過濾器類型",
+  sg: "繁體中文過濾器類型",
+  hk: "繁體中文過濾器類型"
+};
+
+export const cantoneseFilter = {
+  en: "Cantonese Filter Type",
+  ja: "広東語のフィルタータイプ",
+  ko: "광동어 필터 타입",
+  cn: "广东话过滤器类型",
+  tw: "廣東話過濾器類型",
+  sg: "廣東話過濾器類型",
+  hk: "廣東話過濾器類型"
+};

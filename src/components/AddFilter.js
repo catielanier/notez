@@ -13,6 +13,18 @@ import {
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  addFilter,
+  clearForm,
+  filterCreated,
+  englishFilter,
+  japaneseFilter,
+  koreanFilter,
+  simplifiedFilter,
+  traditionalFilter,
+  cantoneseFilter
+} from "../data/locales";
 
 const styles = theme => ({
   container: {
@@ -138,19 +150,13 @@ class AddFilter extends React.Component {
     return (
       <section className="add-character">
         <Typography className={classes.header} variant="h5">
-          {this.props.language === "ja"
-            ? "フィルターを追加"
-            : this.props.language === "ko"
-            ? "필터 추가"
-            : this.props.language === "zh-CN"
-            ? "新增过滤器"
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "新增過濾器"
-            : "Add Filter"}
+          {localeSelect(this.props.language, addFilter)}
         </Typography>
         <form onSubmit={this.addCharacter} disabled={this.state.loading}>
           <Container maxWidth="sm">
-            {this.state.success && <p>Filter created successfully.</p>}
+            {this.state.success && (
+              <p>{localeSelect(this.props.language, filterCreated)}</p>
+            )}
             {this.state.error && (
               <p className="error">
                 <span>Error:</span> {this.state.error}
@@ -168,18 +174,7 @@ class AddFilter extends React.Component {
               label="Player Filter"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "英語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "영어 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "英文过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "英文過濾器類型"
-                  : "English Filter Type"
-              }
+              label={localeSelect(this.props.language, englishFilter)}
               id="standard-name-required"
               value={this.state.name}
               name="name"
@@ -189,18 +184,7 @@ class AddFilter extends React.Component {
               required
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "日本語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "일본어 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "日语过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "日語過濾器類型"
-                  : "Japanese Filter Type"
-              }
+              label={localeSelect(this.props.language, japaneseFilter)}
               value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
@@ -208,18 +192,7 @@ class AddFilter extends React.Component {
               placeholder="フィルタータイプ"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "韓国語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "한국어 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "朝鲜语过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "朝鮮語過濾器類型"
-                  : "Korean Filter Type"
-              }
+              label={localeSelect(this.props.language, koreanFilter)}
               value={this.state.name_ko}
               name="name_ko"
               onChange={this.changeState}
@@ -227,18 +200,7 @@ class AddFilter extends React.Component {
               placeholder="필터 타입"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "簡体字中国語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "중국어 간체 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "简体中文过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "簡體中文過濾器類型"
-                  : "Mandarin (Simplified) Filter Type"
-              }
+              label={localeSelect(this.props.language, simplifiedFilter)}
               value={this.state["name_zh-cn"]}
               name="name_zh-cn"
               onChange={this.changeState}
@@ -246,18 +208,7 @@ class AddFilter extends React.Component {
               placeholder="过滤器类型"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "繁体字中国語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "중국어 번체 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "繁体中文过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "繁體中文過濾器類型"
-                  : "Mandarin (Traditional) Filter Type"
-              }
+              label={localeSelect(this.props.language, traditionalFilter)}
               value={this.state["name_zh-tw"]}
               name="name_zh-tw"
               onChange={this.changeState}
@@ -265,18 +216,7 @@ class AddFilter extends React.Component {
               placeholder="過濾器類型"
             />
             <TextField
-              label={
-                this.props.language === "ja"
-                  ? "広東語のフィルタータイプ"
-                  : this.props.language === "ko"
-                  ? "광동어 필터 타입"
-                  : this.props.language === "zh-CN"
-                  ? "广东话过滤器类型"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "廣東話過濾器類型"
-                  : "Cantonese Filter Type"
-              }
+              label={localeSelect(this.props.language, cantoneseFilter)}
               value={this.state["name_zh-hk"]}
               name="name_zh-hk"
               onChange={this.changeState}
@@ -292,16 +232,7 @@ class AddFilter extends React.Component {
                   onClick={this.addFilter}
                   disabled={this.state.loading}
                 >
-                  {this.props.language === "ja"
-                    ? "フィルターを追加"
-                    : this.props.language === "ko"
-                    ? "필터 추가"
-                    : this.props.language === "zh-CN"
-                    ? "新增过滤器"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "新增過濾器"
-                    : "Add Filter"}
+                  {localeSelect(this.props.language, addFilter)}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
@@ -313,15 +244,7 @@ class AddFilter extends React.Component {
               </div>
               <div className={classes.wrapper}>
                 <Button onClick={this.clearForm}>
-                  {this.props.language === "ja"
-                    ? "明確な形"
-                    : this.props.language === "ko"
-                    ? "명확한 형태"
-                    : this.props.language === "zh-CN" ||
-                      this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "清除表格"
-                    : "Clear Form"}
+                  {localeSelect(this.props.language, clearForm)}
                 </Button>
               </div>
             </Container>
