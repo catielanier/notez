@@ -11,7 +11,12 @@ import {
   CircularProgress
 } from "@material-ui/core";
 import localeSelect from "../services/localeSelect";
-import { resetPassword, password, verifyPassword } from "../data/locales";
+import {
+  resetPassword,
+  password,
+  verifyPassword,
+  noMatch
+} from "../data/locales";
 
 const styles = theme => ({
   container: {
@@ -79,7 +84,7 @@ class ResetPassword extends React.Component {
     } else {
       this.setState({
         loading: false,
-        error: `Your passwords do not match.`
+        error: localeSelect(this.props.language, noMatch)
       });
     }
   };
