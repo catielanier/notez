@@ -12,6 +12,17 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  editGame,
+  englishGame,
+  japaneseGame,
+  koreanGame,
+  simplifiedGame,
+  traditionalGame,
+  cantoneseGame
+} from "../data/locales";
+import dbLocale from "../services/dbLocale";
 
 const styles = theme => ({
   container: {
@@ -141,21 +152,13 @@ class EditGame extends React.Component {
     return (
       <section>
         <Typography variant="h5" className={classes.header}>
-          {this.props.language === "ja"
-            ? "ゲームを編集"
-            : this.props.language === "ko"
-            ? "게임 편집"
-            : this.props.language === "zh-CN"
-            ? "编辑游戏"
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "編輯遊戲"
-            : "Edit Game"}
+          {localeSelect(this.props.language, editGame)}
         </Typography>
         <Container maxWidth="sm">
           <Select
             options={this.state.games.map(game => {
               return {
-                label: game.name,
+                label: dbLocale(this.props.language, game),
                 value: game._id
               };
             })}
@@ -164,18 +167,7 @@ class EditGame extends React.Component {
           {this.state.game !== "" && (
             <form onSubmit={this.updateGame}>
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "英語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "영어 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "英文电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "英文電子遊戲標題"
-                    : "English Game Title"
-                }
+                label={localeSelect(this.props.language, englishGame)}
                 id="standard-name-required"
                 value={this.state.name}
                 name="name"
@@ -185,18 +177,7 @@ class EditGame extends React.Component {
                 required
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "日本語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "일본어 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "日语电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "日語電子遊戲標題"
-                    : "Japanese Game Title"
-                }
+                label={localeSelect(this.props.language, japaneseGame)}
                 value={this.state.name_ja}
                 name="name_ja"
                 onChange={this.changeState}
@@ -204,18 +185,7 @@ class EditGame extends React.Component {
                 placeholder="ゲームタイトル"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "韓国語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "한국어 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "朝鲜语电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "朝鮮語電子遊戲標題"
-                    : "Korean Game Title"
-                }
+                label={localeSelect(this.props.language, koreanGame)}
                 value={this.state.name_ko}
                 name="name_ko"
                 onChange={this.changeState}
@@ -223,18 +193,7 @@ class EditGame extends React.Component {
                 placeholder="게임 제목"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "簡体字中国語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "중국어 간체 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "简体中文电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "簡體中文電子遊戲標題"
-                    : "Mandarin (Simplified) Game Title"
-                }
+                label={localeSelect(this.props.language, simplifiedGame)}
                 value={this.state["name_zh-cn"]}
                 name="name_zh-cn"
                 onChange={this.changeState}
@@ -242,18 +201,7 @@ class EditGame extends React.Component {
                 placeholder="电子游戏标题"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "繁体字中国語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "중국어 번체 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "繁体中文电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "繁體中文電子遊戲標題"
-                    : "Mandarin (Traditional) Game Title"
-                }
+                label={localeSelect(this.props.language, traditionalGame)}
                 value={this.state["name_zh-tw"]}
                 name="name_zh-tw"
                 onChange={this.changeState}
@@ -261,18 +209,7 @@ class EditGame extends React.Component {
                 placeholder="電子遊戲標題"
               />
               <TextField
-                label={
-                  this.props.language === "ja"
-                    ? "広東語のゲームタイトル"
-                    : this.props.language === "ko"
-                    ? "광동어 게임 제목"
-                    : this.props.language === "zh-CN"
-                    ? "广东话电子游戏标题"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "廣東話電子遊戲標題"
-                    : "Cantonese Character Name"
-                }
+                label={localeSelect(this.props.language, cantoneseGame)}
                 value={this.state["name_zh-hk"]}
                 name="name_zh-hk"
                 onChange={this.changeState}
@@ -287,16 +224,7 @@ class EditGame extends React.Component {
                     color="primary"
                     disabled={this.state.loading}
                   >
-                    {this.props.language === "ja"
-                      ? "ゲームを編集"
-                      : this.props.language === "ko"
-                      ? "게임 편집"
-                      : this.props.language === "zh-CN"
-                      ? "编辑游戏"
-                      : this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "編輯遊戲"
-                      : "Edit Game"}
+                    {localeSelect(this.props.language, editGame)}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
