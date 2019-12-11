@@ -547,3 +547,23 @@ export const cantoneseGame = {
   sg: "廣東話電子遊戲標題",
   hk: "廣東話電子遊戲標題"
 };
+
+export const linkCharactersToGame = {
+  en: "Link Characters to Game",
+  ja: "キャラクターをゲームに接続",
+  ko: "캐릭터를 게임에 연결",
+  cn: "角色连接到游戏",
+  tw: "角色連接到遊戲",
+  sg: "角色連接到遊戲",
+  hk: "角色連接到遊戲"
+};
+
+export const characterLinked = {
+  en: "Characters successfully linked.",
+  ja: "キャラクターが正常にリンクされました。",
+  ko: "캐릭터가 성공적으로 연결되었습니다.",
+  cn: "字符成功链接。",
+  tw: "字符成功鏈接。",
+  sg: "字符成功鏈接。",
+  hk: "字符成功鏈接。"
+};
