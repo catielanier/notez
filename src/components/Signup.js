@@ -19,7 +19,8 @@ import {
   verifyPassword,
   username,
   realName,
-  country
+  country,
+  noMatch
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 
@@ -111,7 +112,7 @@ class Signup extends React.Component {
     } else {
       this.setState({
         loading: false,
-        error: "Your passwords do not match."
+        error: localeSelect(this.props.language, noMatch)
       });
     }
   };

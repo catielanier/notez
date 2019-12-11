@@ -257,3 +257,13 @@ export const country = {
   sg: "國家",
   hk: "國家"
 };
+
+export const noMatch = {
+  en: "Your passwords do not match.",
+  ja: "パスワードが一致しません。",
+  ko: "비밀번호가 일치하지 않습니다.",
+  cn: "你的密码不匹配。",
+  tw: "你的密碼不匹配。",
+  sg: "你的密碼不匹配。",
+  hk: "你個密碼唔匹配。"
+};
