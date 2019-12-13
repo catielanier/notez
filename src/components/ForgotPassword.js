@@ -10,6 +10,14 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import localeSelect from "../services/localeSelect";
+import {
+  email,
+  goBack,
+  forgotPassword,
+  checkEmailPassword,
+  requestReset
+} from "../data/locales";
 
 const styles = theme => ({
   container: {
@@ -81,16 +89,7 @@ class ForgotPassword extends React.Component {
       <section>
         <Container maxWidth="sm">
           <Typography className={classes.header} variant="h5">
-            {this.props.language === "ja"
-              ? "パスワードをお忘れです"
-              : this.props.language === "ko"
-              ? "비밀 번호를 잊으입니다"
-              : this.props.language === "zh-CN"
-              ? "忘记密码"
-              : this.props.language === "zh-TW" ||
-                this.props.language === "zh-HK"
-              ? "忘記密碼"
-              : "Forgot Password"}
+            {localeSelect(this.props.language, forgotPassword)}
           </Typography>
           <form
             disabled={this.state.loading}
@@ -99,18 +98,7 @@ class ForgotPassword extends React.Component {
           >
             <Container maxWidth="sm">
               {this.state.success && (
-                <p>
-                  {this.props.language === "ja"
-                    ? "リセットリンクのメールを確認してください。"
-                    : this.props.language === "ko"
-                    ? "이메일에서 재설정 링크를 확인하십시오."
-                    : this.props.language === "zh-CN"
-                    ? "请检查您的电子邮件以获取重置链接。"
-                    : this.props.language === "zh-TW" ||
-                      this.props.language === "zh-HK"
-                    ? "請檢查您的電子郵件以獲取重置鏈接。"
-                    : "Please check your email for your reset link."}
-                </p>
+                <p>{localeSelect(this.props.language, checkEmailPassword)}</p>
               )}
               {this.state.error && (
                 <p className="error">
@@ -119,18 +107,7 @@ class ForgotPassword extends React.Component {
               )}
               <Container maxWidth="sm">
                 <TextField
-                  label={
-                    this.props.language === "ja"
-                      ? "Eメールアドレス"
-                      : this.props.language === "ko"
-                      ? "이메일 주소"
-                      : this.props.language === "zh-CN"
-                      ? "电邮地址"
-                      : this.props.language === "zh-HK" ||
-                        this.props.language === "zh-TW"
-                      ? "電郵地址"
-                      : "Email Address"
-                  }
+                  label={localeSelect(this.props.language, email)}
                   id="standard-name"
                   value={this.state.email}
                   name="email"
@@ -147,16 +124,7 @@ class ForgotPassword extends React.Component {
                     onClick={this.login}
                     disabled={this.state.loading}
                   >
-                    {this.props.language === "ja"
-                      ? "リセットをリクエスト"
-                      : this.props.language === "ko"
-                      ? "요청 재설정"
-                      : this.props.language === "zh-CN"
-                      ? "要求重设"
-                      : this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "要求重設"
-                      : "Request Reset"}
+                    {localeSelect(this.props.language, requestReset)}
                   </Button>
                   {this.state.loading && (
                     <CircularProgress
@@ -172,15 +140,7 @@ class ForgotPassword extends React.Component {
                       <RouterLink innerRef={ref} to="/login" {...props} />
                     ))}
                   >
-                    {this.props.language === "ja"
-                      ? "戻る"
-                      : this.props.language === "ko"
-                      ? "돌아가다"
-                      : this.props.language === "zh-CN" ||
-                        this.props.language === "zh-TW" ||
-                        this.props.language === "zh-HK"
-                      ? "回去"
-                      : "Go Back"}
+                    {localeSelect(this.props.language, goBack)}
                   </Button>
                 </div>
               </Container>

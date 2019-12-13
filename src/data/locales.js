@@ -777,3 +777,33 @@ export const createNote = {
   sg: "加筆記",
   hk: "加筆記"
 };
+
+export const forgotPassword = {
+  en: "Forgot Password",
+  ja: "パスワードをお忘れです",
+  ko: "비밀번호를 잊으입니다",
+  cn: "忘记密码",
+  tw: "忘記密碼",
+  sg: "忘記密碼",
+  hk: "忘記密碼"
+};
+
+export const checkEmailPassword = {
+  en: "Please check your email for your reset link.",
+  ja: "リセットリンクのメールを確認してください。",
+  ko: "이메일에서 재설정 링크를 확인하십시오.",
+  cn: "请检查您的电子邮件以获取重置链接。",
+  tw: "請檢查您的電子郵件以獲取重置鏈接。",
+  sg: "請檢查您的電子郵件以獲取重置鏈接。",
+  hk: "請檢查您的電子郵件以獲取重置鏈接。"
+};
+
+export const requestReset = {
+  en: "Request Reset",
+  ja: "リセットをリクエスト",
+  ko: "요청 재설정",
+  cn: "要求重设",
+  tw: "要求重設",
+  sg: "要求重設",
+  hk: "要求重設"
+};
