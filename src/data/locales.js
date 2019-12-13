@@ -597,3 +597,123 @@ export const playerFilter = {
   sg: "玩家過濾器",
   hk: "玩家過濾器"
 };
+
+export const chooseGame = {
+  en: "Choose a game:",
+  ja: "ゲームを選択してください：",
+  ko: "게임을 선택하십시오:",
+  cn: "选择一个游戏：",
+  tw: "選擇一個遊戲：",
+  sg: "選擇一個遊戲：",
+  hk: "選擇一個遊戲："
+};
+
+export const yourCharacter = {
+  en: "Choose your character:",
+  ja: "キャラクターを選択してください：",
+  ko: "당신의 개릭터을 선택하십시오:",
+  cn: "选择你的角色：",
+  tw: "選擇你的角色：",
+  sg: "選擇你的角色：",
+  hk: "選擇你的角色："
+};
+
+export const opponentCharacter = {
+  en: "Choose your opponent's character:",
+  ja: "対戦相手のキャラクターを選択してください：",
+  ko: "상당의 개릭터을 선택하십시오:",
+  cn: "选择对手的角色：",
+  tw: "選擇對手的角色：",
+  sg: "選擇對手的角色：",
+  hk: "選擇對手的角色："
+};
+
+export const chooseFilter = {
+  en: "Choose your filter (optional):",
+  ja: "（オプション）フィルターを選択します：",
+  ko: "(선택 사항) 필터를 선택하십시오:",
+  cn: "（可选）选择您的过滤器：",
+  tw: "（可選）選擇您的過濾器：",
+  sg: "（可選）選擇您的過濾器：",
+  hk: "（可選）選擇您的過濾器："
+};
+
+export const clearFilter = {
+  en: "Clear Filter",
+  ja: "フィルターをクリア",
+  ko: "필터 지우기",
+  cn: "清除筛选",
+  tw: "清除篩選",
+  sg: "清除篩選",
+  hk: "清除篩選"
+};
+
+export const notes = {
+  en: "Notes:",
+  ja: "ノート:",
+  ko: "노트:",
+  cn: "笔记：",
+  tw: "筆記：",
+  sg: "筆記：",
+  hk: "筆記："
+};
+
+export const notice = {
+  en: "Notice",
+  ja: "通知",
+  ko: "주의",
+  cn: "注意",
+  tw: "注意",
+  sg: "注意",
+  hk: "注意"
+};
+
+export const noNotes = {
+  en: "You do not have any notes for this matchup. Add some below!",
+  ja: "この対戦についてのメモはありません。 以下を追加してください！",
+  ko: "이 경기에 대한 메모가 없습니다. 아래에 몇 가지를 추가하십시오!",
+  cn: "你没有关于这场比赛的任何笔记。 在下面添加一些！",
+  tw: "你沒有關於這場比賽的任何筆記。 在下面添加一些！",
+  sg: "你沒有關於這場比賽的任何筆記。 在下面添加一些！",
+  hk: "你冇关於呢场比赛嘅任何碌士。喺下面添加啲！"
+};
+
+export const editingNote = {
+  en: "Editing Note",
+  ja: "編集ノート",
+  ko: "편집 노트",
+  cn: "编辑笔记",
+  tw: "編輯筆記",
+  sg: "編輯筆記",
+  hk: "編輯筆記"
+};
+
+export const filter = {
+  en: "Filter",
+  ja: "フィルター",
+  ko: "필터",
+  cn: "过滤器",
+  tw: "過濾器",
+  sg: "過濾器",
+  hk: "過濾器"
+};
+
+export const editNote = {
+  en: "Edit Note",
+  ja: "ノートを編集",
+  ko: "노트 수정",
+  cn: "编辑笔记",
+  tw: "編輯筆記",
+  sg: "編輯筆記",
+  hk: "編輯筆記"
+};
+
+export const cancel = {
+  en: "Cancel",
+  ja: "キャンセル",
+  ko: "취소",
+  cn: "取消",
+  tw: "取消",
+  sg: "取消",
+  hk: "取消"
+};

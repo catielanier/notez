@@ -28,18 +28,7 @@ function PopulateNotes(props) {
           color="secondary"
           className={classes.filterName}
         >
-          {props.language === "ja"
-            ? props.filter_ja
-            : props.language === "ko"
-            ? props.filter_ko
-            : props.language === "zh-CN"
-            ? props["filter_zh-cn"]
-            : props.language === "zh-HK"
-            ? props["filter_zh-hk"]
-            : props.language === "zh-TW"
-            ? props["filter_zh-tw"]
-            : props.filter}
-          :
+          {props.filter}:
         </Typography>
       </Grid>
       {props.filter !== "Notice" ? (
