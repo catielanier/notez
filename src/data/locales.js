@@ -807,3 +807,73 @@ export const requestReset = {
   sg: "要求重設",
   hk: "要求重設"
 };
+
+export const editUserRoles = {
+  en: "Edit User Roles",
+  ja: "ユーザー役割の編集",
+  ko: "사용자 역할 편집",
+  cn: "编辑用户角色",
+  tw: "編輯用戶角色",
+  sg: "編輯用戶角色",
+  hk: "編輯用戶角色"
+};
+
+export const selectUser = {
+  en: "Select User:",
+  ja: "ユーザーを選択：",
+  ko: "사용자를 선택하십시오:",
+  cn: "选择用户：",
+  tw: "選擇用戶：",
+  sg: "選擇用戶：",
+  hk: "選擇用戶："
+};
+
+export const assignRole = {
+  en: "Assign Role:",
+  ja: "役割の割り当て：",
+  ko: "역할 할당:",
+  cn: "分配角色：",
+  tw: "分配角色：",
+  sg: "分配角色：",
+  hk: "分配角色："
+};
+
+export const user = {
+  en: "User",
+  ja: "ユーザー",
+  ko: "사용자",
+  cn: "用户",
+  tw: "用戶",
+  sg: "用戶",
+  hk: "用戶"
+};
+
+export const admin = {
+  en: "Admin",
+  ja: "管理者",
+  ko: "관리자",
+  cn: "管理员",
+  tw: "管理員",
+  sg: "管理員",
+  hk: "管理員"
+};
+
+export const banned = {
+  en: "Banned",
+  ja: "追放",
+  ko: "추방",
+  cn: "被放逐",
+  tw: "被放逐",
+  sg: "被放逐",
+  hk: "被放逐"
+};
+
+export const updateUser = {
+  en: "Update User",
+  ja: "ユーザーを更新",
+  ko: "사용자 업데이트",
+  cn: "更新用户",
+  tw: "更新用戶",
+  sg: "更新用戶",
+  hk: "更新用戶"
+};

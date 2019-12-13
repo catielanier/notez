@@ -11,6 +11,16 @@ import {
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import {
+  editUserRoles,
+  selectUser,
+  assignRole,
+  user,
+  admin,
+  banned,
+  updateUser
+} from "../data/locales";
 
 class UserSettings extends React.Component {
   state = {
@@ -91,19 +101,10 @@ class UserSettings extends React.Component {
       <section>
         <Container maxWidth="sm">
           <Typography variant="h5" gutterBottom>
-            Edit User Roles
+            {localeSelect(this.props.language, editUserRoles)}
           </Typography>
           <Typography variant="h6">
-            {this.props.language === "ja"
-              ? "ユーザーを選択："
-              : this.props.language === "ko"
-              ? "사용자를 선택하십시오:"
-              : this.props.language === "zh-CN"
-              ? "选择用户："
-              : this.props.language === "zh-TW" ||
-                this.props.language === "zh-HK"
-              ? "選擇用戶："
-              : "Select User:"}
+            {localeSelect(this.props.language, selectUser)}
           </Typography>
           <Select
             options={this.state.users.map(user => {
@@ -117,15 +118,7 @@ class UserSettings extends React.Component {
           {this.state.id !== "" && this.state.role !== "" && (
             <>
               <Typography variant="h6">
-                {this.props.language === "ja"
-                  ? "役割の割り当て："
-                  : this.props.language === "ko"
-                  ? "역할 할당:"
-                  : this.props.language === "zh-CN" ||
-                    this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "分配角色："
-                  : "Assign Role:"}
+                {localeSelect(this.props.language, assignRole)}
               </Typography>
               <RadioGroup
                 name="role"
@@ -135,17 +128,17 @@ class UserSettings extends React.Component {
                 <FormControlLabel
                   value="User"
                   control={<Radio color="primary" />}
-                  label="User"
+                  label={localeSelect(this.props.language, user)}
                 />
                 <FormControlLabel
                   value="Admin"
                   control={<Radio color="primary" />}
-                  label="Admin"
+                  label={localeSelect(this.props.language, admin)}
                 />
                 <FormControlLabel
                   value="Banned"
                   control={<Radio color="primary" />}
-                  label="Banned"
+                  label={localeSelect(this.props.language, banned)}
                 />
               </RadioGroup>
               <Button
@@ -153,16 +146,7 @@ class UserSettings extends React.Component {
                 variant="contained"
                 onClick={this.updateRole}
               >
-                {this.props.language === "ja"
-                  ? "ユーザーを更新"
-                  : this.props.language === "ko"
-                  ? "사용자 업데이트"
-                  : this.props.language === "zh-CN"
-                  ? "更新用户"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "更新用戶"
-                  : "Update User"}
+                {localeSelect(this.props.language, updateUser)}
               </Button>
             </>
           )}
