@@ -118,7 +118,7 @@ class EditFilter extends React.Component {
     const { user } = this.props;
     const token = await getToken();
     try {
-      const res = await axios.put(`/api/filters/${filter}`, {
+      const res = await axios.put(`/api/filters/`, {
         data: {
           token,
           user,
@@ -127,7 +127,8 @@ class EditFilter extends React.Component {
           name_ko,
           name_cn,
           name_tw,
-          name_hk
+          name_hk,
+          filter
         }
       });
       if (res) {

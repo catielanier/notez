@@ -67,17 +67,17 @@ router.route("/").get(async (_, res) => {
   }
 });
 
-router.route("/:filter").put(async (req, res) => {
-  const { filter } = req.params;
+router.route("/").put(async (req, res) => {
   const {
     user: id,
     token,
     name_ja,
     name_ko,
     name,
-    "name_zh-cn": name_cn,
-    "name_zh-tw": name_tw,
-    "name_zh-hk": name_hk
+    name_cn,
+    name_tw,
+    name_hk,
+    filter
   } = req.body;
 
   const loggedIn = await tokenService.verifyToken(token);
