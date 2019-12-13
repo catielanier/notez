@@ -717,3 +717,13 @@ export const cancel = {
   sg: "取消",
   hk: "取消"
 };
+
+export const chooseOpponent = {
+  en: "Choose your opponent:",
+  ja: "対戦相手を選択してください：",
+  ko: "상대를 선택하십시오:",
+  cn: "选择你的对手：",
+  tw: "選擇你的對手：",
+  sg: "選擇你的對手：",
+  hk: "拣你嘅對手："
+};
