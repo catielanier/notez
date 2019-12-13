@@ -520,7 +520,7 @@ export const koreanGame = {
 
 export const simplifiedGame = {
   en: "Chinese (Simplified) Game Title",
-  ja: "韓国語のゲームタイトル",
+  ja: "簡体字中国語のゲームタイトル",
   ko: "중국어 간체 게임 제목",
   cn: "简体中文电子游戏标题",
   tw: "簡體中文電子遊戲標題",
@@ -529,8 +529,8 @@ export const simplifiedGame = {
 };
 
 export const traditionalGame = {
-  en: "Chinese (Simplified) Game Title",
-  ja: "簡体字中国語のゲームタイトル",
+  en: "Chinese (Traditional) Game Title",
+  ja: "繁体字中国語のゲームタイトル",
   ko: "중국어 번체 게임 제목",
   cn: "繁体中文电子游戏标题",
   tw: "繁體中文電子遊戲標題",
