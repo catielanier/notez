@@ -727,3 +727,53 @@ export const chooseOpponent = {
   sg: "選擇你的對手：",
   hk: "拣你嘅對手："
 };
+
+export const quickAdd = {
+  en: "Quick Add:",
+  ja: "クイック追加：",
+  ko: "빠른 추가:",
+  cn: "快速添加：",
+  tw: "快速添加：",
+  sg: "快速添加：",
+  hk: "赶添加："
+};
+
+export const universalNote = {
+  en: "This note should be displayed across all opponents.",
+  ja: "このノートは、すべての対戦相手に表示する必要があります。",
+  ko: "이 노트는 모든 상대에게 표시되어야합니다.",
+  cn: "此笔记应在所有对手中显示。",
+  tw: "此筆記應在所有對手中顯示。",
+  sg: "此筆記應在所有對手中顯示。",
+  hk: "此碌士應喺所有對手中顯示。"
+};
+
+export const newNoteFilter = {
+  en: "New note filter:",
+  ja: "新しいノートフィルター：",
+  ko: "새로운 노트 필터:",
+  cn: "新笔记过滤器：",
+  tw: "新筆記過濾器：",
+  sg: "新筆記過濾器：",
+  hk: "新筆記過濾器："
+};
+
+export const newNote = {
+  en: "New note:",
+  ja: "新しいノート：",
+  ko: "새로운 노트:",
+  cn: "新笔记：",
+  tw: "新筆記：",
+  sg: "新筆記：",
+  hk: "新筆記："
+};
+
+export const createNote = {
+  en: "Create Note",
+  ja: "ノートを追加",
+  ko: "노트를 추가",
+  cn: "加笔记",
+  tw: "加筆記",
+  sg: "加筆記",
+  hk: "加筆記"
+};

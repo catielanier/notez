@@ -5,6 +5,9 @@ import { Typography, TextField, Button } from "@material-ui/core";
 import Select from "react-select";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import { quickAdd, newNoteFilter, newNote, createNote } from "../data/locales";
+import dbLocale from "../services/dbLocale";
 
 const styles = theme => ({
   spaced: {
@@ -77,77 +80,23 @@ class QuickAddPlayerNote extends React.Component {
     return (
       <div className="quick-add">
         <Typography variant="h5" className={classes.spaced}>
-          {this.props.language === "ja"
-            ? "クイック追加："
-            : this.props.language === "ko"
-            ? "빠른 추가:"
-            : this.props.language === "zh-CN"
-            ? "快速添加："
-            : this.props.language === "zh-TW"
-            ? "快速添加："
-            : this.props.language === "zh-HK"
-            ? "赶添加："
-            : "Quick Add:"}
+          {localeSelect(this.props.language, quickAdd)}
         </Typography>
         <Typography variant="h6">
-          {this.props.language === "ja"
-            ? "新しいノートフィルター："
-            : this.props.language === "ko"
-            ? "새로운 노트 필터:"
-            : this.props.language === "zh-CN"
-            ? "新笔记过滤器："
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "新筆記過濾器："
-            : "New note filter:"}
+          {localeSelect(this.props.language, newNoteFilter)}
         </Typography>
         <Select
-          options={
-            this.props.language === "ja"
-              ? this.props.filters.map(filter => {
-                  return { label: filter.name_ja, value: filter._id };
-                })
-              : this.props.language === "ko"
-              ? this.props.filters.map(filter => {
-                  return { label: filter.name_ko, value: filter._id };
-                })
-              : this.props.language === "zh-CN"
-              ? this.props.filters.map(filter => {
-                  return {
-                    label: filter["name_zh-cn"],
-                    value: filter._id
-                  };
-                })
-              : this.props.language === "zh-TW"
-              ? this.props.filters.map(filter => {
-                  return {
-                    label: filter["name_zh-tw"],
-                    value: filter._id
-                  };
-                })
-              : this.props.language === "zh-HK"
-              ? this.props.filters.map(filter => {
-                  return {
-                    label: filter["name_zh-hk"],
-                    value: filter._id
-                  };
-                })
-              : this.props.filters.map(filter => {
-                  return { label: filter.name, value: filter._id };
-                })
-          }
+          options={this.props.filters.map(filter => {
+            return {
+              label: dbLocale(this.props.language, filter),
+              value: filter._id
+            };
+          })}
           onChange={this.setFilter}
           className={classes.spaced}
         />
         <Typography variant="h6">
-          {this.props.language === "ja"
-            ? "新しいノート："
-            : this.props.language === "ko"
-            ? "새로운 노트:"
-            : this.props.language === "zh-CN"
-            ? "新笔记："
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "新筆記："
-            : "Note:"}
+          {localeSelect(this.props.language, newNote)}
         </Typography>
         <TextField
           multiline
@@ -158,15 +107,7 @@ class QuickAddPlayerNote extends React.Component {
           className={classes.spaced}
         />
         <Button onClick={this.postNote} variant="contained" color="primary">
-          {this.props.language === "ja"
-            ? "ノートを追加"
-            : this.props.language === "ko"
-            ? "노트를 추가"
-            : this.props.language === "zh-CN"
-            ? "加笔记"
-            : this.props.language === "zh-TW" || this.props.language === "zh-HK"
-            ? "加筆記"
-            : "Create Note"}
+          {localeSelect(this.props.language, createNote)}
         </Button>
       </div>
     );
