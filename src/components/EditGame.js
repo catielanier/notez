@@ -118,7 +118,7 @@ class EditGame extends React.Component {
     const { user } = this.props;
     const token = await getToken();
     try {
-      const res = await axios.put(`/api/games/${game}`, {
+      const res = await axios.put(`/api/games/`, {
         data: {
           token,
           user,
@@ -127,7 +127,8 @@ class EditGame extends React.Component {
           name_ko,
           name_cn,
           name_tw,
-          name_hk
+          name_hk,
+          game
         }
       });
       if (res) {
