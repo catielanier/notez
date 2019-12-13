@@ -21,6 +21,7 @@ import {
   traditionalCharacter,
   clearForm
 } from "../data/locales";
+import localeSelect from "../services/localeSelect";
 
 const styles = theme => ({
   container: {
@@ -137,12 +138,12 @@ class AddCharacter extends React.Component {
     return (
       <section className="add-character">
         <Typography className={classes.header} variant="h5">
-          {localStorage(this.props.language, addCharacter)}
+          {localeSelect(this.props.language, addCharacter)}
         </Typography>
         <form onSubmit={this.addCharacter} disabled={this.state.loading}>
           <Container maxWidth="sm">
             {this.state.success && (
-              <p>{localStorage(this.props.language, characterCreated)}</p>
+              <p>{localeSelect(this.props.language, characterCreated)}</p>
             )}
             {this.state.error && (
               <p className="error">
@@ -150,7 +151,7 @@ class AddCharacter extends React.Component {
               </p>
             )}
             <TextField
-              label={localStorage(this.props.language, englishCharacter)}
+              label={localeSelect(this.props.language, englishCharacter)}
               id="standard-name-required"
               value={this.state.name}
               name="name"
@@ -160,7 +161,7 @@ class AddCharacter extends React.Component {
               required
             />
             <TextField
-              label={localStorage(this.props.language, japaneseCharacter)}
+              label={localeSelect(this.props.language, japaneseCharacter)}
               value={this.state.name_ja}
               name="name_ja"
               onChange={this.changeState}
@@ -168,7 +169,7 @@ class AddCharacter extends React.Component {
               placeholder="キャラクター名"
             />
             <TextField
-              label={localStorage(this.props.language, koreanCharacter)}
+              label={localeSelect(this.props.language, koreanCharacter)}
               value={this.state.name_ko}
               name="name_ko"
               onChange={this.changeState}
@@ -176,7 +177,7 @@ class AddCharacter extends React.Component {
               placeholder="캐릭터 이름"
             />
             <TextField
-              label={localStorage(this.props.language, simplifiedCharacter)}
+              label={localeSelect(this.props.language, simplifiedCharacter)}
               value={this.state["name_zh-cn"]}
               name="name_zh-cn"
               onChange={this.changeState}
@@ -184,7 +185,7 @@ class AddCharacter extends React.Component {
               placeholder="角色名字"
             />
             <TextField
-              label={localStorage(this.props.language, traditionalCharacter)}
+              label={localeSelect(this.props.language, traditionalCharacter)}
               value={this.state["name_zh-tw"]}
               name="name_zh-tw"
               onChange={this.changeState}
@@ -219,7 +220,7 @@ class AddCharacter extends React.Component {
                   onClick={this.addCharacter}
                   disabled={this.state.loading}
                 >
-                  {localStorage(this.props.language, addCharacter)}
+                  {localeSelect(this.props.language, addCharacter)}
                 </Button>
                 {this.state.loading && (
                   <CircularProgress
@@ -231,7 +232,7 @@ class AddCharacter extends React.Component {
               </div>
               <div className={classes.wrapper}>
                 <Button onClick={this.clearForm}>
-                  {localStorage(this.props.language, clearForm)}
+                  {localeSelect(this.props.language, clearForm)}
                 </Button>
               </div>
             </Container>

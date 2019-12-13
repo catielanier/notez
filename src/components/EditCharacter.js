@@ -68,7 +68,6 @@ class EditCharacter extends React.Component {
   async componentDidMount() {
     await axios.get("/api/characters").then(res => {
       const characters = res.data.data;
-
       if (this.props.language === "ja") {
         characters.sort((x, y) => {
           return x.name_ja.localeCompare(y.name_ja);
