@@ -68,6 +68,27 @@ class EditFilter extends React.Component {
   async componentDidMount() {
     await axios.get("/api/filters").then(res => {
       const filters = res.data.data;
+      if (this.props.language === "ja") {
+        filters.sort((x, y) => {
+          return x.name_ja.localeCompare(y.name_ja);
+        });
+      } else if (this.props.language === "ko") {
+        filters.sort((x, y) => {
+          return x.name_ko.localeCompare(y.name_ko);
+        });
+      } else if (
+        this.props.language === "zh-CN" ||
+        this.props.language === "zh-TW" ||
+        this.props.language === "zh-HK"
+      ) {
+        filters.sort((x, y) => {
+          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+        });
+      } else {
+        filters.sort((x, y) => {
+          return x.name.localeCompare(y.name);
+        });
+      }
       this.setState({
         filters
       });

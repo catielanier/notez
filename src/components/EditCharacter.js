@@ -68,6 +68,28 @@ class EditCharacter extends React.Component {
   async componentDidMount() {
     await axios.get("/api/characters").then(res => {
       const characters = res.data.data;
+
+      if (this.props.language === "ja") {
+        characters.sort((x, y) => {
+          return x.name_ja.localeCompare(y.name_ja);
+        });
+      } else if (this.props.language === "ko") {
+        characters.sort((x, y) => {
+          return x.name_ko.localeCompare(y.name_ko);
+        });
+      } else if (
+        this.props.language === "zh-CN" ||
+        this.props.language === "zh-TW" ||
+        this.props.language === "zh-HK"
+      ) {
+        characters.sort((x, y) => {
+          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+        });
+      } else {
+        characters.sort((x, y) => {
+          return x.name.localeCompare(y.name);
+        });
+      }
       this.setState({
         characters
       });
