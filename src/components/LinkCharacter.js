@@ -32,7 +32,11 @@ class LinkCharacter extends React.Component {
   pickGame = e => {
     const game = e.value;
     const index = this.state.games.findIndex(oneGame => oneGame._id === game);
-    const { characters: selected } = this.state.games[index];
+    const { characters } = this.state.games[index];
+    const selected = [];
+    characters.forEach(character => {
+      selected.push(character._id);
+    });
     this.setState({
       game,
       selected
