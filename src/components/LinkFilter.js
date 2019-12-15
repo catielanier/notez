@@ -46,7 +46,7 @@ class LinkFilter extends React.Component {
         selected
       });
     } else {
-      selected.splice(filter, 1);
+      selected.splice(index, 1);
       this.setState({
         selected
       });
