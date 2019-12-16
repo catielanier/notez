@@ -78,7 +78,7 @@ router.route("/").put(async (req, res) => {
     name_tw,
     name_hk,
     filter
-  } = req.body;
+  } = req.body.data;
 
   const loggedIn = await tokenService.verifyToken(token);
   if (!loggedIn) {
