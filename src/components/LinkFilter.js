@@ -29,7 +29,11 @@ class LinkFilter extends React.Component {
   pickGame = e => {
     const game = e.value;
     const index = this.state.games.findIndex(oneGame => oneGame._id === game);
-    const { filters: selected } = this.state.games[index];
+    const { filters } = this.state.games[index];
+    const selected = [];
+    filters.forEach(filter => {
+      selected.push(filter._id);
+    });
     this.setState({
       game,
       selected
@@ -87,11 +91,50 @@ class LinkFilter extends React.Component {
     try {
       const res = await axios.get("/api/games");
       const games = res.data.data;
+      if (this.props.language === "ja") {
+        games.sort((x, y) => {
+          return x.name_ja.localeCompare(y.name_ja);
+        });
+      } else if (this.props.language === "ko") {
+        games.sort((x, y) => {
+          return x.name_ko.localeCompare(y.name_ko);
+        });
+      } else if (
+        this.props.language === "zh-CN" ||
+        this.props.language === "zh-TW" ||
+        this.props.language === "zh-HK"
+      ) {
+        games.sort((x, y) => {
+          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+        });
+      } else {
+        games.sort((x, y) => {
+          return x.name.localeCompare(y.name);
+        });
+      }
       const res2 = await axios.get("/api/filters/game");
       const filters = res2.data.data;
-      filters.sort(function(x, y) {
-        return x.name.localeCompare(y.name);
-      });
+      if (this.props.language === "ja") {
+        filters.sort((x, y) => {
+          return x.name_ja.localeCompare(y.name_ja);
+        });
+      } else if (this.props.language === "ko") {
+        filters.sort((x, y) => {
+          return x.name_ko.localeCompare(y.name_ko);
+        });
+      } else if (
+        this.props.language === "zh-CN" ||
+        this.props.language === "zh-TW" ||
+        this.props.language === "zh-HK"
+      ) {
+        filters.sort((x, y) => {
+          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
+        });
+      } else {
+        filters.sort((x, y) => {
+          return x.name.localeCompare(y.name);
+        });
+      }
       this.setState({
         games,
         filters
