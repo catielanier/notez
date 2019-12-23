@@ -877,3 +877,13 @@ export const updateUser = {
   sg: "更新用戶",
   hk: "更新用戶"
 };
+
+export const specifyFilter = {
+  en: "Please specify a filter.",
+  ja: "フィルターを指定してください。",
+  ko: "필터를 지정하십시오.",
+  cn: "请指定一个过滤器。",
+  tw: "請指定一個過濾器。",
+  sg: "請指定一個過濾器。",
+  hk: "請指定一個過濾器。"
+};

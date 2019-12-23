@@ -6,7 +6,13 @@ import Select from "react-select";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
-import { quickAdd, newNoteFilter, newNote, createNote } from "../data/locales";
+import {
+  quickAdd,
+  newNoteFilter,
+  newNote,
+  createNote,
+  specifyFilter
+} from "../data/locales";
 import dbLocale from "../services/dbLocale";
 
 const styles = theme => ({
@@ -54,23 +60,30 @@ class QuickAddPlayerNote extends React.Component {
       game
     };
     const token = await getToken();
-    try {
-      const res = await axios.post("/api/notes/player", {
-        token,
-        user,
-        note
-      });
-      await this.props.addToNotes(res.data.data);
-      if (res) {
+    if (filter !== "") {
+      try {
+        const res = await axios.post("/api/notes/player", {
+          token,
+          user,
+          note
+        });
+        await this.props.addToNotes(res.data.data);
+        if (res) {
+          this.setState({
+            loading: false,
+            success: true
+          });
+        }
+      } catch (e) {
         this.setState({
           loading: false,
-          success: true
+          error: e.message
         });
       }
-    } catch (e) {
+    } else {
       this.setState({
         loading: false,
-        error: e.message
+        error: localeSelect(this.props.language, specifyFilter)
       });
     }
   };
@@ -82,6 +95,11 @@ class QuickAddPlayerNote extends React.Component {
         <Typography variant="h5" className={classes.spaced}>
           {localeSelect(this.props.language, quickAdd)}
         </Typography>
+        {this.state.error && (
+          <p>
+            <span>Error:</span> {this.state.error}
+          </p>
+        )}
         <Typography variant="h6">
           {localeSelect(this.props.language, newNoteFilter)}
         </Typography>

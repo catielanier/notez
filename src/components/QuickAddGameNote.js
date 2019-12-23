@@ -17,7 +17,8 @@ import {
   universalNote,
   newNoteFilter,
   newNote,
-  createNote
+  createNote,
+  specifyFilter
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 
@@ -85,23 +86,30 @@ class QuickAddGameNote extends React.Component {
       };
     }
     const token = await getToken();
-    try {
-      const res = await axios.post("/api/notes/game", {
-        token,
-        user,
-        note
-      });
-      await this.props.addToNotes(res.data.data);
-      if (res) {
+    if (filter !== "") {
+      try {
+        const res = await axios.post("/api/notes/game", {
+          token,
+          user,
+          note
+        });
+        await this.props.addToNotes(res.data.data);
+        if (res) {
+          this.setState({
+            loading: false,
+            success: true
+          });
+        }
+      } catch (e) {
         this.setState({
           loading: false,
-          success: true
+          error: e.message
         });
       }
-    } catch (e) {
+    } else {
       this.setState({
         loading: false,
-        error: e.message
+        error: localeSelect(this.props.language, specifyFilter)
       });
     }
   };
@@ -113,6 +121,11 @@ class QuickAddGameNote extends React.Component {
         <Typography variant="h5" className={classes.spaced}>
           {localeSelect(this.props.language, quickAdd)}
         </Typography>
+        {this.state.error && (
+          <p>
+            <span>Error:</span> {this.state.error}
+          </p>
+        )}
         <FormControlLabel
           control={
             <Checkbox
