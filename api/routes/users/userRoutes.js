@@ -4,6 +4,10 @@ const userService = require("./userServices");
 const tokenService = require("../../utils/tokenService");
 const nodemailer = require("nodemailer");
 const { MAILSERVER } = require("../../utils/constants");
+const middleWare = require("../../middleware");
+const { applyMiddleware } = require("../../utils");
+
+applyMiddleware(middleWare, router);
 
 const transport = nodemailer.createTransport(MAILSERVER);
 

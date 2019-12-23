@@ -3,6 +3,10 @@ const router = express.Router();
 const userServices = require("../users/userServices");
 const tokenService = require("../../utils/tokenService");
 const gameServices = require("./gameServices");
+const middleWare = require("../../middleware");
+const { applyMiddleware } = require("../../utils");
+
+applyMiddleware(middleWare, router);
 
 router.route("/new").post(async (req, res) => {
   // Grab the token, user id, and game from frontend.

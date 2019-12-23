@@ -3,6 +3,10 @@ const router = express.Router();
 const tokenService = require("../../../utils/tokenService");
 const userServices = require("../../users/userServices");
 const gameNoteServices = require("./gameNoteServices");
+const middleWare = require("../../middleware");
+const { applyMiddleware } = require("../../utils");
+
+applyMiddleware(middleWare, router);
 
 router.route("/").post(async (req, res) => {
   const { note, token, user: id } = req.body;
