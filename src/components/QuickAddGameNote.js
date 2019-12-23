@@ -97,7 +97,8 @@ class QuickAddGameNote extends React.Component {
         if (res) {
           this.setState({
             loading: false,
-            success: true
+            success: true,
+            note: ""
           });
         }
       } catch (e) {
