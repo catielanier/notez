@@ -252,10 +252,8 @@ class PlayerNotes extends React.Component {
       if (res) {
         const index1 = allPlayerNotes.findIndex(note => note._id === id);
         const index2 = fullPlayerNotes.findIndex(note => note._id === id);
-        const index3 = playerNotes.findIndex(note => note._id === id);
         allPlayerNotes.splice(index1, 1);
         fullPlayerNotes.splice(index2, 1);
-        playerNotes.splice(index3, 1);
         this.setState({
           allPlayerNotes,
           fullPlayerNotes,
