@@ -9,8 +9,11 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import Select from "react-select";
 import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
+import dbLocale from "../services/dbLocale";
+import countries from "../data/countries";
 import {
   profile,
   email,
@@ -219,11 +222,13 @@ class Profile extends React.Component {
               fullWidth
               value={this.state.realName}
             />
-            <TextField
-              label={localeSelect(this.props.language, country)}
-              name="country"
-              onChange={this.changeState}
-              fullWidth
+            <Select
+              options={countries.map(country => {
+                return {
+                  value: muneo.value,
+                  label: dbLocale(language, country)
+                };
+              })}
               value={this.state.country}
             />
             <Container className={classes.buttonRow}>

@@ -15,7 +15,7 @@ router.route("/new").post(async (req, res) => {
     // Check if the login is valid
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
-      res.status(503).statusMessage("You are not logged in.");
+      res.status(503).send("You are not logged in.");
     }
     // Query the user and check for admin privileges.
     const user = await userServices.getUserById(id);
