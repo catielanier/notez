@@ -3,8 +3,8 @@ const router = express.Router();
 const tokenService = require("../../../utils/tokenService");
 const userServices = require("../../users/userServices");
 const gameNoteServices = require("./gameNoteServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const middleWare = require("../../../middleware");
+const { applyMiddleware } = require("../../../utils");
 
 applyMiddleware(middleWare, router);
 

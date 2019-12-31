@@ -19,12 +19,12 @@ import {
   email,
   username,
   realName,
-  country,
   profileUpdated,
   oldPassword,
   newPassword,
   verifyNewPassword,
-  editProfile
+  editProfile,
+  country
 } from "../data/locales";
 
 const styles = theme => ({
@@ -50,6 +50,9 @@ const styles = theme => ({
     left: "50%",
     marginTop: -12,
     marginLeft: -12
+  },
+  input: {
+    marginTop: "10px"
   }
 });
 
@@ -60,6 +63,7 @@ class Profile extends React.Component {
     verifyNewPassword: "",
     username: "",
     country: "",
+    countryLong: "",
     email: "",
     realName: "",
     loading: false,
@@ -71,14 +75,26 @@ class Profile extends React.Component {
     const { user } = this.props;
     await axios.get(`/api/users/${user}`).then(res => {
       const { username, country, email, realName } = res.data.data;
+      const index = countries.findIndex(guo => guo.value === country);
+      const countryLong = dbLocale(this.props.language, countries[index]);
       this.setState({
         username,
         country,
         email,
-        realName
+        realName,
+        countryLong
       });
     });
   }
+
+  changeCountry = e => {
+    const country = e.value;
+    const countryLong = e.label;
+    this.setState({
+      country,
+      countryLong
+    });
+  };
 
   updateProfile = async e => {
     e.preventDefault();
@@ -179,6 +195,7 @@ class Profile extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.email}
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, oldPassword)}
@@ -188,6 +205,7 @@ class Profile extends React.Component {
               fullWidth
               value={this.state.oldPassword}
               type="password"
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, newPassword)}
@@ -197,6 +215,7 @@ class Profile extends React.Component {
               fullWidth
               value={this.state.newPassword}
               type="password"
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, verifyNewPassword)}
@@ -206,6 +225,7 @@ class Profile extends React.Component {
               fullWidth
               value={this.state.verifyNewPassword}
               type="password"
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, username)}
@@ -214,6 +234,7 @@ class Profile extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.username}
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, realName)}
@@ -221,15 +242,22 @@ class Profile extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.realName}
+              className={classes.input}
             />
             <Select
-              options={countries.map(country => {
+              options={countries.map(guo => {
                 return {
-                  value: muneo.value,
-                  label: dbLocale(language, country)
+                  value: guo.value,
+                  label: dbLocale(this.props.language, guo)
                 };
               })}
-              value={this.state.country}
+              value={{
+                value: this.state.country,
+                label: this.state.countryLong
+              }}
+              onChange={this.changeCountry}
+              placeholder={localeSelect(this.props.language, country)}
+              className="country-select"
             />
             <Container className={classes.buttonRow}>
               <div className={classes.wrapper}>

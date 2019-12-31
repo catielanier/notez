@@ -10,7 +10,7 @@ const dbLocale = (language, element) => {
   } else if (language === "zh-HK") {
     return element["name_zh-hk"] || element.name_hk;
   } else {
-    return element.name;
+    return element.name || element.name_en;
   }
 };
 

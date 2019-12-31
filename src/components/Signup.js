@@ -10,6 +10,7 @@ import {
   Container,
   CircularProgress
 } from "@material-ui/core";
+import Select from "react-select";
 import {
   signup,
   email,
@@ -22,6 +23,8 @@ import {
   country,
   noMatch
 } from "../data/locales";
+import dbLocale from "../services/dbLocale";
+import countries from "../data/countries";
 import localeSelect from "../services/localeSelect";
 
 const styles = theme => ({
@@ -47,6 +50,9 @@ const styles = theme => ({
     left: "50%",
     marginTop: -12,
     marginLeft: -12
+  },
+  input: {
+    marginTop: "10px"
   }
 });
 
@@ -67,6 +73,13 @@ class Signup extends React.Component {
     const { name, value } = e.target;
     this.setState({
       [name]: value
+    });
+  };
+
+  changeCountry = e => {
+    const country = e.value;
+    this.setState({
+      country
     });
   };
 
@@ -141,6 +154,7 @@ class Signup extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.email}
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, password)}
@@ -150,6 +164,7 @@ class Signup extends React.Component {
               fullWidth
               value={this.state.password}
               type="password"
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, verifyPassword)}
@@ -159,6 +174,7 @@ class Signup extends React.Component {
               fullWidth
               value={this.state.verifyPassword}
               type="password"
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, username)}
@@ -167,6 +183,7 @@ class Signup extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.username}
+              className={classes.input}
             />
             <TextField
               label={localeSelect(this.props.language, realName)}
@@ -174,13 +191,19 @@ class Signup extends React.Component {
               onChange={this.changeState}
               fullWidth
               value={this.state.realName}
+              className={classes.input}
             />
-            <TextField
-              label={localeSelect(this.props.language, country)}
-              name="country"
-              onChange={this.changeState}
-              fullWidth
+            <Select
+              options={countries.map(country => {
+                return {
+                  value: country.value,
+                  label: dbLocale(this.props.language, country)
+                };
+              })}
               value={this.state.country}
+              placeholder={localeSelect(this.props.language, country)}
+              onChange={this.changeCountry}
+              className="country-select"
             />
             <Container className={classes.buttonRow}>
               <div className={classes.wrapper}>
