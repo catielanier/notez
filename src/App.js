@@ -32,6 +32,7 @@ import "./App.css";
 import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
 import MenuContextProvider from "./contexts/MenuContext";
+import NoteContextProvider from "./contexts/NoteContext";
 
 const theme = createMuiTheme({
   palette: {
@@ -114,29 +115,31 @@ export default class App extends React.Component {
                   <Header />
                 </MenuContextProvider>
                 <main>
-                  {this.state.user ? (
+                  <NoteContextProvider>
+                    {this.state.user ? (
+                      <Route
+                        exact
+                        path="/"
+                        component={() => (
+                          <GameNotes
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                    ) : (
+                      <Route exact path="/" component={Attract} />
+                    )}
                     <Route
-                      exact
-                      path="/"
+                      path="/player"
                       component={() => (
-                        <GameNotes
+                        <PlayerNotes
                           user={this.state.user}
                           language={this.state.language}
                         />
                       )}
                     />
-                  ) : (
-                    <Route exact path="/" component={Attract} />
-                  )}
-                  <Route
-                    path="/player"
-                    component={() => (
-                      <PlayerNotes
-                        user={this.state.user}
-                        language={this.state.language}
-                      />
-                    )}
-                  />
+                  </NoteContextProvider>
                   <Route path="/login" component={Login} />
                   <Route path="/signup" component={Signup} />
                   <Route
