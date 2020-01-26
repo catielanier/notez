@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -33,6 +33,7 @@ import {
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
+import { UserContext } from "../contexts/UserContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,6 +58,7 @@ export default function Header(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const { user, role, logout: doLogout } = useContext(UserContext);
   return (
     <div className={(classes.root, "header")}>
       <AppBar position="static">
@@ -75,7 +77,7 @@ export default function Header(props) {
           <Typography variant="h6" className={classes.title}>
             {localeSelect(props.language, title)}
           </Typography>
-          {!props.user && (
+          {user && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -95,7 +97,7 @@ export default function Header(props) {
               </Button>
             </Hidden>
           )}
-          {props.user && (
+          {user && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -113,7 +115,7 @@ export default function Header(props) {
               >
                 {localeSelect(props.language, playerNotes)}
               </Button>
-              {props.role === "Admin" && (
+              {role === "Admin" && (
                 <>
                   <Button onClick={handleClick} color="inherit">
                     {localeSelect(props.language, settings)}
@@ -245,7 +247,7 @@ export default function Header(props) {
               >
                 {localeSelect(props.language, profile)}
               </Button>
-              <Button color="inherit" onClick={props.logout}>
+              <Button color="inherit" onClick={doLogout}>
                 {localeSelect(props.language, logout)}
               </Button>
             </Hidden>
