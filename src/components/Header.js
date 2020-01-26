@@ -34,6 +34,7 @@ import {
 import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
 import { UserContext } from "../contexts/UserContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,6 +60,7 @@ export default function Header(props) {
     setAnchorEl(null);
   };
   const { user, role, logout: doLogout } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
   return (
     <div className={(classes.root, "header")}>
       <AppBar position="static">
@@ -75,7 +77,7 @@ export default function Header(props) {
             </IconButton>
           </Hidden>
           <Typography variant="h6" className={classes.title}>
-            {localeSelect(props.language, title)}
+            {localeSelect(language, title)}
           </Typography>
           {user && (
             <Hidden xsDown>
@@ -85,7 +87,7 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                {localeSelect(props.language, login)}
+                {localeSelect(language, login)}
               </Button>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -93,7 +95,7 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                {localeSelect(props.language, signup)}
+                {localeSelect(language, signup)}
               </Button>
             </Hidden>
           )}
@@ -105,7 +107,7 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                {localeSelect(props.language, gameNotes)}
+                {localeSelect(language, gameNotes)}
               </Button>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -113,12 +115,12 @@ export default function Header(props) {
                 ))}
                 color="inherit"
               >
-                {localeSelect(props.language, playerNotes)}
+                {localeSelect(language, playerNotes)}
               </Button>
               {role === "Admin" && (
                 <>
                   <Button onClick={handleClick} color="inherit">
-                    {localeSelect(props.language, settings)}
+                    {localeSelect(language, settings)}
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -133,7 +135,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, addGame)}
+                        {localeSelect(language, addGame)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -146,7 +148,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, addCharacter)}
+                        {localeSelect(language, addCharacter)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -159,7 +161,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, addFilter)}
+                        {localeSelect(language, addFilter)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -168,7 +170,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, editGame)}
+                        {localeSelect(language, editGame)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -181,7 +183,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, editCharacter)}
+                        {localeSelect(language, editCharacter)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -194,7 +196,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, editFilter)}
+                        {localeSelect(language, editFilter)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -207,7 +209,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, linkCharacters)}
+                        {localeSelect(language, linkCharacters)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -220,7 +222,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, linkFilters)}
+                        {localeSelect(language, linkFilters)}
                       </MenuItem>
                     </Link>
                     <Link
@@ -233,7 +235,7 @@ export default function Header(props) {
                       ))}
                     >
                       <MenuItem onClick={handleClose}>
-                        {localeSelect(props.language, userSettings)}
+                        {localeSelect(language, userSettings)}
                       </MenuItem>
                     </Link>
                   </Menu>
@@ -245,10 +247,10 @@ export default function Header(props) {
                   <RouterLink innerRef={ref} to="/profile" {...props} />
                 ))}
               >
-                {localeSelect(props.language, profile)}
+                {localeSelect(language, profile)}
               </Button>
               <Button color="inherit" onClick={doLogout}>
-                {localeSelect(props.language, logout)}
+                {localeSelect(language, logout)}
               </Button>
             </Hidden>
           )}

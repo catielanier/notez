@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Drawer,
   List,
@@ -36,12 +36,16 @@ import {
   logout
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
+import { UserContext } from "../contexts/UserContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 export default function MobileMenu(props) {
+  const { user, role, logout: doLogout } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
   return (
     <Drawer open={props.menu} onClose={props.showMenu}>
       <List>
-        {!props.user && (
+        {!user && (
           <>
             <ListItem
               button
@@ -52,7 +56,7 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
-              <ListItemText>{localeSelect(props.language, login)}</ListItemText>
+              <ListItemText>{localeSelect(language, login)}</ListItemText>
             </ListItem>
             <ListItem
               button
@@ -63,13 +67,11 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <PersonAdd />
               </ListItemIcon>
-              <ListItemText>
-                {localeSelect(props.language, signup)}
-              </ListItemText>
+              <ListItemText>{localeSelect(language, signup)}</ListItemText>
             </ListItem>
           </>
         )}
-        {props.user && (
+        {user && (
           <>
             <ListItem
               button
@@ -80,9 +82,7 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <Gamepad />
               </ListItemIcon>
-              <ListItemText>
-                {localeSelect(props.language, gameNotes)}
-              </ListItemText>
+              <ListItemText>{localeSelect(language, gameNotes)}</ListItemText>
             </ListItem>
             <ListItem
               button
@@ -93,11 +93,9 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <Face />
               </ListItemIcon>
-              <ListItemText>
-                {localeSelect(props.language, playerNotes)}
-              </ListItemText>
+              <ListItemText>{localeSelect(language, playerNotes)}</ListItemText>
             </ListItem>
-            {props.role === "Admin" && (
+            {role === "Admin" && (
               <>
                 <ListItem
                   button
@@ -108,9 +106,7 @@ export default function MobileMenu(props) {
                   <ListItemIcon>
                     <Add />
                   </ListItemIcon>
-                  <ListItemText>
-                    {localeSelect(props.language, addGame)}
-                  </ListItemText>
+                  <ListItemText>{localeSelect(language, addGame)}</ListItemText>
                 </ListItem>
                 <ListItem
                   button
@@ -122,7 +118,7 @@ export default function MobileMenu(props) {
                     <Add />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, addCharacter)}
+                    {localeSelect(language, addCharacter)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -135,7 +131,7 @@ export default function MobileMenu(props) {
                     <Add />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, addFilter)}
+                    {localeSelect(language, addFilter)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -148,7 +144,7 @@ export default function MobileMenu(props) {
                     <Edit />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, editGame)}
+                    {localeSelect(language, editGame)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -165,7 +161,7 @@ export default function MobileMenu(props) {
                     <Edit />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, editCharacter)}
+                    {localeSelect(language, editCharacter)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -178,7 +174,7 @@ export default function MobileMenu(props) {
                     <Edit />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, editFilter)}
+                    {localeSelect(language, editFilter)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -195,7 +191,7 @@ export default function MobileMenu(props) {
                     <LinkIcon />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, linkCharacters)}
+                    {localeSelect(language, linkCharacters)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -208,7 +204,7 @@ export default function MobileMenu(props) {
                     <LinkIcon />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, linkFilters)}
+                    {localeSelect(language, linkFilters)}
                   </ListItemText>
                 </ListItem>
                 <ListItem
@@ -221,7 +217,7 @@ export default function MobileMenu(props) {
                     <Settings />
                   </ListItemIcon>
                   <ListItemText>
-                    {localeSelect(props.language, userSettings)}
+                    {localeSelect(language, userSettings)}
                   </ListItemText>
                 </ListItem>
               </>
@@ -235,14 +231,10 @@ export default function MobileMenu(props) {
               <ListItemIcon>
                 <Person />
               </ListItemIcon>
-              <ListItemText>
-                {localeSelect(props.language, profile)}
-              </ListItemText>
+              <ListItemText>{localeSelect(language, profile)}</ListItemText>
             </ListItem>
             <ListItem button onClick={props.logout}>
-              <ListItemText>
-                {localeSelect(props.language, logout)}
-              </ListItemText>
+              <ListItemText>{localeSelect(language, logout)}</ListItemText>
             </ListItem>
           </>
         )}
