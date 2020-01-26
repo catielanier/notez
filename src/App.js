@@ -126,13 +126,7 @@ export default class App extends React.Component {
                       )}
                     />
                   ) : (
-                    <Route
-                      exact
-                      path="/"
-                      component={() => (
-                        <Attract language={this.state.language} />
-                      )}
-                    />
+                    <Route exact path="/" component={Attract} />
                   )}
                   <Route
                     path="/player"
