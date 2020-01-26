@@ -29,6 +29,7 @@ import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
 import { removeToken } from "./services/tokenService";
 import "./App.css";
+import UserContextProvider from "./contexts/UserContext";
 
 const theme = createMuiTheme({
   palette: {
@@ -110,175 +111,173 @@ export default class App extends React.Component {
         <Helmet>
           <title>{localeSelect(this.state.language, title)}</title>
         </Helmet>
-        <div className={!this.state.user ? "App attract-main" : "App"}>
-          <Router>
-            <MobileMenu
-              user={this.state.user}
-              role={this.state.role}
-              language={this.state.language}
-              logout={this.logout}
-              showMenu={this.showMenu}
-              menu={this.state.menu}
-            />
-            <Header
-              user={this.state.user}
-              role={this.state.role}
-              language={this.state.language}
-              logout={this.logout}
-              showMenu={this.showMenu}
-            />
-            <main>
-              {this.state.user ? (
+        <UserContextProvider>
+          <div className={!this.state.user ? "App attract-main" : "App"}>
+            <Router>
+              <MobileMenu
+                user={this.state.user}
+                role={this.state.role}
+                language={this.state.language}
+                logout={this.logout}
+                showMenu={this.showMenu}
+                menu={this.state.menu}
+              />
+              <Header language={this.state.language} showMenu={this.showMenu} />
+              <main>
+                {this.state.user ? (
+                  <Route
+                    exact
+                    path="/"
+                    component={() => (
+                      <GameNotes
+                        user={this.state.user}
+                        language={this.state.language}
+                      />
+                    )}
+                  />
+                ) : (
+                  <Route
+                    exact
+                    path="/"
+                    component={() => <Attract language={this.state.language} />}
+                  />
+                )}
                 <Route
                   exact
-                  path="/"
+                  path="/player"
                   component={() => (
-                    <GameNotes
+                    <PlayerNotes
                       user={this.state.user}
                       language={this.state.language}
                     />
                   )}
                 />
-              ) : (
+                <Route
+                  path="/login"
+                  component={() => (
+                    <Login
+                      setUser={this.setUser}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/signup"
+                  component={() => <Signup language={this.state.language} />}
+                />
+                <Route
+                  path="/add-game"
+                  component={() => (
+                    <AddGame
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/add-character"
+                  component={() => (
+                    <AddCharacter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/add-filter"
+                  component={() => (
+                    <AddFilter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/link-character"
+                  component={() => (
+                    <LinkCharacter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/link-filter"
+                  component={() => (
+                    <LinkFilter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/user-settings"
+                  component={() => (
+                    <UserSettings
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/profile"
+                  component={() => (
+                    <Profile
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/edit-character"
+                  component={() => (
+                    <EditCharacter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/edit-game"
+                  component={() => (
+                    <EditGame
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
+                <Route
+                  path="/edit-filter"
+                  component={() => (
+                    <EditFilter
+                      user={this.state.user}
+                      language={this.state.language}
+                    />
+                  )}
+                />
                 <Route
                   exact
-                  path="/"
-                  component={() => <Attract language={this.state.language} />}
+                  path="/forgot"
+                  component={() => (
+                    <ForgotPassword language={this.state.language} />
+                  )}
                 />
-              )}
-              <Route
-                exact
-                path="/player"
-                component={() => (
-                  <PlayerNotes
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/login"
-                component={() => (
-                  <Login
-                    setUser={this.setUser}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/signup"
-                component={() => <Signup language={this.state.language} />}
-              />
-              <Route
-                path="/add-game"
-                component={() => (
-                  <AddGame
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/add-character"
-                component={() => (
-                  <AddCharacter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/add-filter"
-                component={() => (
-                  <AddFilter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/link-character"
-                component={() => (
-                  <LinkCharacter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/link-filter"
-                component={() => (
-                  <LinkFilter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/user-settings"
-                component={() => (
-                  <UserSettings
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/profile"
-                component={() => (
-                  <Profile
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/edit-character"
-                component={() => (
-                  <EditCharacter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/edit-game"
-                component={() => (
-                  <EditGame
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                path="/edit-filter"
-                component={() => (
-                  <EditFilter
-                    user={this.state.user}
-                    language={this.state.language}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/forgot"
-                component={() => (
-                  <ForgotPassword language={this.state.language} />
-                )}
-              />
-              <Route
-                path="/forgot/:key"
-                component={() => (
-                  <ResetPassword language={this.state.language} />
-                )}
-              />
-              <Route
-                path="/verify/:key"
-                component={() => <VerifyUser language={this.state.language} />}
-              />
-            </main>
-          </Router>
-        </div>
+                <Route
+                  path="/forgot/:key"
+                  component={() => (
+                    <ResetPassword language={this.state.language} />
+                  )}
+                />
+                <Route
+                  path="/verify/:key"
+                  component={() => (
+                    <VerifyUser language={this.state.language} />
+                  )}
+                />
+              </main>
+            </Router>
+          </div>
+        </UserContextProvider>
       </ThemeProvider>
     );
   }
