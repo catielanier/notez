@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Header(props) {
+export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -81,7 +81,7 @@ export default function Header(props) {
           <Typography variant="h6" className={classes.title}>
             {localeSelect(language, title)}
           </Typography>
-          {user && (
+          {user === undefined && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -101,7 +101,7 @@ export default function Header(props) {
               </Button>
             </Hidden>
           )}
-          {user && (
+          {user !== undefined && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (

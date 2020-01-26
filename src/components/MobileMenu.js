@@ -40,14 +40,14 @@ import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { MenuContext } from "../contexts/MenuContext";
 
-export default function MobileMenu(props) {
+export default function MobileMenu() {
   const { user, role, logout: doLogout } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const { menu, showMenu } = useContext(MenuContext);
   return (
     <Drawer open={menu} onClose={showMenu}>
       <List>
-        {!user && (
+        {user === undefined && (
           <>
             <ListItem
               button
@@ -73,7 +73,7 @@ export default function MobileMenu(props) {
             </ListItem>
           </>
         )}
-        {user && (
+        {user !== undefined && (
           <>
             <ListItem
               button
