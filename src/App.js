@@ -135,7 +135,6 @@ export default class App extends React.Component {
                     />
                   )}
                   <Route
-                    exact
                     path="/player"
                     component={() => (
                       <PlayerNotes
@@ -144,15 +143,7 @@ export default class App extends React.Component {
                       />
                     )}
                   />
-                  <Route
-                    path="/login"
-                    component={() => (
-                      <Login
-                        setUser={this.setUser}
-                        language={this.state.language}
-                      />
-                    )}
-                  />
+                  <Route path="/login" component={Login} />
                   <Route
                     path="/signup"
                     component={() => <Signup language={this.state.language} />}
