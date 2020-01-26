@@ -11,10 +11,6 @@ const UserContextProvider = props => {
   useEffect(() => {
     const userId = localStorage.getItem("notezId") || null;
     setUser(userId);
-    checkRole();
-  }, [user]);
-
-  const checkRole = () => {
     if (user) {
       axios.get(`/api/users/${user}`).then(res => {
         const { role: userRole } = res.data.data;
@@ -23,7 +19,7 @@ const UserContextProvider = props => {
     } else {
       setRole(null);
     }
-  };
+  }, [user]);
 
   const logout = () => {
     removeToken();
