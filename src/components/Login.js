@@ -16,7 +16,7 @@ import {
   forgotYourPassword
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
-import { language } from "../contexts/LanguageContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
 
 const useStyles = makeStyles(theme => ({
@@ -50,6 +50,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { doLogin, loading, error, success } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
   if (success) {
     return <Redirect to="/" />;
   }

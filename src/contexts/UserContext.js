@@ -1,6 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { removeToken, setToken } from "../services/tokenService";
+import { useContext } from "react";
+import { LanguageContext } from "./LanguageContext";
+import localeSelect from "../services/localeSelect";
+import { noMatch } from "../data/locales";
 
 export const UserContext = createContext();
 
@@ -10,6 +14,7 @@ const UserContextProvider = props => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(true);
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     const userId = localStorage.getItem("notezId") || null;
@@ -55,9 +60,45 @@ const UserContextProvider = props => {
     }
   };
 
+  const signup = async (
+    email,
+    password,
+    verifyPassword,
+    username,
+    realName,
+    country
+  ) => {
+    setLoading(true);
+    setError(null);
+    if (password === verifyPassword) {
+      try {
+        const res = await axios.post("/api/users/signup", {
+          data: {
+            email,
+            username,
+            password,
+            realName,
+            country
+          },
+          params: {
+            language
+          }
+        });
+        setLoading(false);
+        setSuccess(true);
+      } catch (e) {
+        setLoading(false);
+        setError(e.message);
+      }
+    } else {
+      setLoading(false);
+      setError(localeSelect(language, noMatch));
+    }
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, role, logout, doLogin, error, success, loading }}
+      value={{ user, role, logout, doLogin, error, success, loading, signup }}
     >
       {props.children}
     </UserContext.Provider>

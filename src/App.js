@@ -105,9 +105,9 @@ export default class App extends React.Component {
         <Helmet>
           <title>{localeSelect(this.state.language, title)}</title>
         </Helmet>
-        <UserContextProvider>
-          <div className={!this.state.user ? "App attract-main" : "App"}>
-            <LanguageContextProvider>
+        <LanguageContextProvider>
+          <UserContextProvider>
+            <div className={!this.state.user ? "App attract-main" : "App"}>
               <Router>
                 <MenuContextProvider>
                   <MobileMenu />
@@ -144,10 +144,7 @@ export default class App extends React.Component {
                     )}
                   />
                   <Route path="/login" component={Login} />
-                  <Route
-                    path="/signup"
-                    component={() => <Signup language={this.state.language} />}
-                  />
+                  <Route path="/signup" component={Signup} />
                   <Route
                     path="/add-game"
                     component={() => (
@@ -259,9 +256,9 @@ export default class App extends React.Component {
                   />
                 </main>
               </Router>
-            </LanguageContextProvider>
-          </div>
-        </UserContextProvider>
+            </div>
+          </UserContextProvider>
+        </LanguageContextProvider>
       </ThemeProvider>
     );
   }
