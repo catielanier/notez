@@ -31,6 +31,7 @@ import { removeToken } from "./services/tokenService";
 import "./App.css";
 import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
+import MenuContextProvider from "./contexts/MenuContext";
 
 const theme = createMuiTheme({
   palette: {
@@ -43,8 +44,7 @@ export default class App extends React.Component {
   state = {
     user: null,
     role: null,
-    language: "",
-    menu: false
+    language: ""
   };
 
   componentWillMount = () => {
@@ -78,13 +78,6 @@ export default class App extends React.Component {
     this.checkRole();
   };
 
-  showMenu = () => {
-    const menu = !this.state.menu;
-    this.setState({
-      menu
-    });
-  };
-
   checkRole = async () => {
     const { user } = this.state;
     if (user) {
@@ -116,8 +109,10 @@ export default class App extends React.Component {
           <div className={!this.state.user ? "App attract-main" : "App"}>
             <LanguageContextProvider>
               <Router>
-                <MobileMenu showMenu={this.showMenu} menu={this.state.menu} />
-                <Header showMenu={this.showMenu} />
+                <MenuContextProvider>
+                  <MobileMenu />
+                  <Header />
+                </MenuContextProvider>
                 <main>
                   {this.state.user ? (
                     <Route

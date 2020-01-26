@@ -35,6 +35,7 @@ import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
 import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { MenuContext } from "../contexts/MenuContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,6 +62,7 @@ export default function Header(props) {
   };
   const { user, role, logout: doLogout } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
+  const { showMenu } = useContext(MenuContext);
   return (
     <div className={(classes.root, "header")}>
       <AppBar position="static">
@@ -71,7 +73,7 @@ export default function Header(props) {
               color="inherit"
               aria-label="menu"
               className={classes.menuButton}
-              onClick={props.showMenu}
+              onClick={showMenu}
             >
               <MenuIcon />
             </IconButton>

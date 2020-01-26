@@ -38,12 +38,14 @@ import {
 import localeSelect from "../services/localeSelect";
 import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { MenuContext } from "../contexts/MenuContext";
 
 export default function MobileMenu(props) {
   const { user, role, logout: doLogout } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
+  const { menu, showMenu } = useContext(MenuContext);
   return (
-    <Drawer open={props.menu} onClose={props.showMenu}>
+    <Drawer open={menu} onClose={showMenu}>
       <List>
         {!user && (
           <>
@@ -233,7 +235,7 @@ export default function MobileMenu(props) {
               </ListItemIcon>
               <ListItemText>{localeSelect(language, profile)}</ListItemText>
             </ListItem>
-            <ListItem button onClick={props.logout}>
+            <ListItem button onClick={doLogout}>
               <ListItemText>{localeSelect(language, logout)}</ListItemText>
             </ListItem>
           </>
