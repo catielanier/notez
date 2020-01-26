@@ -1,7 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import axios from "axios";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import {
   Container,
   Typography,
@@ -14,7 +11,6 @@ import {
 import Select from "react-select";
 import QuickAddGameNote from "./QuickAddGameNote";
 import PopulateNotes from "./PopulateNotes";
-import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
 import {
   gameNotes as gameNotesLocale,
@@ -28,34 +24,13 @@ import {
   noNotes,
   editingNote,
   filter as filterLocale,
-  editNote,
+  editNote as editNoteLocale,
   cancel
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
-import { NoteContext } from '../contexts/NoteContext';
-import { GameContext } from '../contexts/GameContext';
-import { LanguageContext } from '../contexts/LanguageContext';
-
-const styles = theme => ({
-  paper: {
-    position: "absolute",
-    width: "50%",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
-  },
-  button: {
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2)
-  },
-  spaced: {
-    marginBottom: theme.spacing(2)
-  }
-});
+import { NoteContext } from "../contexts/NoteContext";
+import { GameContext } from "../contexts/GameContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -80,16 +55,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function GameNotes() {
   const classes = useStyles();
-  const { gameNotes, loading, error } = useContext(NoteContext);
+  const {
+    gameNotes,
+    loading,
+    error,
+    noteEditor,
+    toggleNoteEditor,
+    editNote
+  } = useContext(NoteContext);
   const { games } = useContext(GameContext);
   const { language } = useContext(LanguageContext);
-  const [game, setGame] = useState('');
-  const [myCharacter, setMyCharacter] = useState('');
-  const [opponentCharacter, setOpponentCharacter] = useState('');
-  const [filter, setFilter] = useState('');
+  const [game, setGame] = useState("");
+  const [myCharacter, setMyCharacter] = useState("");
+  const [opponentCharacter, setOpponentCharacter] = useState("");
+  const [filter, setFilter] = useState("");
   const [displayedNotes, setDisplayedNotes] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [editFilter, setEditFilter] = useState("");
+  const [noteBody, setNoteBody] = useState("");
   return (
     <section className="game-notes">
       <Container>
@@ -108,7 +92,9 @@ export default function GameNotes() {
                   value: game._id
                 };
               })}
-              onChange={this.setGame}
+              onChange={e => {
+                setGame(e.value);
+              }}
               className={classes.spaced}
             />
             <Typography variant="h6">
@@ -121,7 +107,9 @@ export default function GameNotes() {
                   value: character._id
                 };
               })}
-              onChange={this.setMyCharacter}
+              onChange={e => {
+                setMyCharacter(e.value);
+              }}
               className={classes.spaced}
             />
             <Typography variant="h6">
@@ -134,7 +122,9 @@ export default function GameNotes() {
                   value: character._id
                 };
               })}
-              onChange={this.setOpponentCharacter}
+              onChange={e => {
+                setOpponentCharacter(e.value);
+              }}
               className={classes.spaced}
             />
             <Typography variant="h6">
@@ -147,115 +137,112 @@ export default function GameNotes() {
                   value: filter._id
                 };
               })}
-              onChange={this.setFilter}
+              onChange={e => {
+                setFilter(e.value);
+              }}
               className={classes.spaced}
             />
             {filter !== "" && (
               <Button
                 variant="outlined"
                 color="secondary"
-                onClick={this.clearFilter}
+                onClick={setFilter("")}
               >
                 {localeSelect(language, clearFilter)}
               </Button>
             )}
           </Grid>
           <Grid item md={6} xs={12}>
-            {game !== "" &&
-              myCharacter !== "" &&
-              opponentCharacter !== "" && (
-                <Container>
-                  <Typography variant="h5" className={classes.spaced}>
-                    {localeSelect(language, notes)}
-                  </Typography>
-                  <Grid container className={classes.spaced}>
-                    {this.state.gameNotes.length > 0 ? (
-                      this.state.gameNotes.map(note => {
-                        return (
-                          <PopulateNotes
-                            key={note._id}
-                            id={note._id}
-                            note={note.note}
-                            filter={dbLocale(
-                              language,
-                              note.filter
-                            )}
-                            filterId={note.filter._id}
-                            deleteNote={this.deleteNote}
-                            showEditor={this.showEditor}
-                          />
-                        );
-                      })
-                    ) : (
-                      <PopulateNotes
-                        filter={localeSelect(language, notice)}
-                        note={localeSelect(language, noNotes)}
-                      />
-                    )}
-                  </Grid>
-                  <QuickAddGameNote
-                    user={this.props.user}
-                    game={this.state.game}
-                    myCharacter={this.state.myCharacter}
-                    opponentCharacter={this.state.opponentCharacter}
-                    filters={this.state.filters}
-                    addToNotes={this.addToNotes}
-                    language={language}
-                  />
-                </Container>
-              )}
+            {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
+              <Container>
+                <Typography variant="h5" className={classes.spaced}>
+                  {localeSelect(language, notes)}
+                </Typography>
+                <Grid container className={classes.spaced}>
+                  {this.state.gameNotes.length > 0 ? (
+                    this.state.gameNotes.map(note => {
+                      return (
+                        <PopulateNotes
+                          key={note._id}
+                          id={note._id}
+                          note={note.note}
+                          filter={dbLocale(language, note.filter)}
+                          filterId={note.filter._id}
+                          deleteNote={this.deleteNote}
+                          showEditor={this.showEditor}
+                        />
+                      );
+                    })
+                  ) : (
+                    <PopulateNotes
+                      filter={localeSelect(language, notice)}
+                      note={localeSelect(language, noNotes)}
+                    />
+                  )}
+                </Grid>
+                <QuickAddGameNote
+                  user={this.props.user}
+                  game={this.state.game}
+                  myCharacter={this.state.myCharacter}
+                  opponentCharacter={this.state.opponentCharacter}
+                  filters={this.state.filters}
+                  addToNotes={this.addToNotes}
+                  language={language}
+                />
+              </Container>
+            )}
           </Grid>
         </Grid>
       </Container>
       <Modal
         aria-labelledby="editor-title"
-        open={this.state.noteEditor}
-        onClose={this.hideEditor}
+        open={noteEditor}
+        onClose={toggleNoteEditor}
       >
         <Container className={classes.paper}>
-          <Typography
-            variant="h5"
-            id="editor-title"
-            className={classes.spaced}
-          >
+          <Typography variant="h5" id="editor-title" className={classes.spaced}>
             {localeSelect(language, editingNote)}
           </Typography>
           <Typography variant="h6">
             {localeSelect(language, filterLocale)}
           </Typography>
           <Select
-            options={this.state.filters.map(filter => {
+            options={filters.map(filter => {
               return {
                 label: dbLocale(language, filter),
                 value: filter._id
               };
             })}
-            onChange={this.setEditFilter}
-            defaultValue={this.state.noteFilter}
+            onChange={e => {
+              setEditFilter(e.value);
+            }}
+            defaultValue={editFilter}
             className={classes.spaced}
           />
           <TextField
             multiline
             name="note"
-            value={this.state.noteBody}
-            onChange={this.setEditNote}
+            value={noteBody}
+            onChange={e => {
+              setNoteBody(e.target.value);
+            }}
             fullWidth
           />
           <Button
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={this.editNote}
+            onClick={editNote}
           >
-            {localeSelect(language, editNote)}
+            {localeSelect(language, editNoteLocale)}
           </Button>
-          <Button className={classes.button} onClick={this.hideEditor}>
+          <Button className={classes.button} onClick={toggleNoteEditor}>
             {localeSelect(language, cancel)}
           </Button>
         </Container>
       </Modal>
     </section>
-  )
+  );
 }
 
 // class GameNotes extends React.Component {

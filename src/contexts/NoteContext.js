@@ -6,8 +6,14 @@ import axios from "axios";
 export const NoteContext = createContext();
 
 const NoteContextProvider = props => {
-  const [gameNotes, setGameNotes] = useState(null);
-  const [playerNotes, setPlayerNotes] = useState(null);
+  const [gameNotes, setGameNotes] = useState([]);
+  const [playerNotes, setPlayerNotes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [noteEditor, setNoteEditor] = useState(false);
+  const toggleNoteEditor = () => {
+    setNoteEditor(!noteEditor);
+  };
   const { user } = useContext(UserContext);
   useEffect(() => {
     const fetchData = async function() {
@@ -18,7 +24,16 @@ const NoteContextProvider = props => {
     fetchData();
   }, [gameNotes, playerNotes, user]);
   return (
-    <NoteContext.Provider value={{ gameNotes, playerNotes }}>
+    <NoteContext.Provider
+      value={{
+        gameNotes,
+        playerNotes,
+        loading,
+        error,
+        toggleNoteEditor,
+        noteEditor
+      }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
