@@ -22,7 +22,7 @@ const NoteContextProvider = props => {
       setPlayerNotes(resUser.data.data.playerNotes);
     };
     fetchData();
-  }, [gameNotes, playerNotes, user]);
+  }, [user]);
   return (
     <NoteContext.Provider
       value={{

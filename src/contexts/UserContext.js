@@ -9,7 +9,7 @@ import { noMatch } from "../data/locales";
 export const UserContext = createContext();
 
 const UserContextProvider = props => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("notezId") || null);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,8 +17,8 @@ const UserContextProvider = props => {
   const { language } = useContext(LanguageContext);
 
   useEffect(() => {
-    const userId = localStorage.getItem("notezId") || null;
-    setUser(userId);
+    // const userId = localStorage.getItem("notezId") || null;
+    // setUser(userId);
     if (user) {
       axios.get(`/api/users/${user}`).then(res => {
         const { role: userRole } = res.data.data;

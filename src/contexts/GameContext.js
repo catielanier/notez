@@ -12,7 +12,7 @@ const GameContextProvider = props => {
       });
     };
     fetchData();
-  }, [games]);
+  }, []);
   return (
     <GameContext.Provider value={{ games }}>
       {props.children}
