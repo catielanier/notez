@@ -74,11 +74,14 @@ export default function GameNotes() {
   const [filters, setFilters] = useState([]);
   const [editFilter, setEditFilter] = useState("");
   const [noteBody, setNoteBody] = useState("");
+
+  // Effect called to grab characters and filters from chosen game, and set them to state.
   useEffect(() => {
     if (game !== "") {
       setMyCharacter("");
       setFilter("");
       setOpponentCharacter("");
+      setDisplayedNotes([]);
       const index = games.findIndex(x => x._id === game);
       const { characters: allCharacters, filters: allFilters } = games[index];
       if (language === "ja") {
@@ -117,7 +120,37 @@ export default function GameNotes() {
       setCharacters(allCharacters);
       setFilters(allFilters);
     }
-  }, [game]);
+  }, [game, games, language]);
+
+  // Effect to check if you already have an opponent selected, then display notes for that matchup.
+  useEffect(() => {
+    setFilter("");
+    if (myCharacter !== "" && opponentCharacter !== "") {
+      const notes = [];
+      gameNotes.forEach(note => {
+        if (
+          game === note.game &&
+          myCharacter === note.myCharacter &&
+          opponentCharacter === note.opponentCharacter
+        ) {
+          notes.push(note);
+        }
+        if (
+          game === note.game &&
+          myCharacter === note.myCharacter &&
+          note.universal === true
+        ) {
+          notes.push(note);
+        }
+      });
+      setDisplayedNotes(notes);
+    }
+  }, [game, myCharacter, opponentCharacter, gameNotes]);
+
+  // Effect to check if you already have your character selected, then display notes for that matchup.
+
+  // Effect to filter the notes down for given filter if selected, or return back to all notes for that matchup if cleared.
+
   return (
     <section className="game-notes">
       <Container>
@@ -203,8 +236,8 @@ export default function GameNotes() {
                   {localeSelect(language, notes)}
                 </Typography>
                 <Grid container className={classes.spaced}>
-                  {this.state.gameNotes.length > 0 ? (
-                    this.state.gameNotes.map(note => {
+                  {displayedNotes.length > 0 ? (
+                    displayedNotes.map(note => {
                       return (
                         <PopulateNotes
                           key={note._id}
@@ -212,8 +245,6 @@ export default function GameNotes() {
                           note={note.note}
                           filter={dbLocale(language, note.filter)}
                           filterId={note.filter._id}
-                          deleteNote={this.deleteNote}
-                          showEditor={this.showEditor}
                         />
                       );
                     })
@@ -225,12 +256,10 @@ export default function GameNotes() {
                   )}
                 </Grid>
                 <QuickAddGameNote
-                  user={this.props.user}
-                  game={this.state.game}
-                  myCharacter={this.state.myCharacter}
-                  opponentCharacter={this.state.opponentCharacter}
-                  filters={this.state.filters}
-                  addToNotes={this.addToNotes}
+                  game={game}
+                  myCharacter={myCharacter}
+                  opponentCharacter={opponentCharacter}
+                  filters={filters}
                   language={language}
                 />
               </Container>
