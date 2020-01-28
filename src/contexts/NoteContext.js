@@ -31,7 +31,7 @@ const NoteContextProvider = props => {
     if (type === "Game Note") {
       try {
         const res = await axios.put(`/api/notes/game/${id}`, {
-          filter: filter.value,
+          filter,
           token,
           note
         });
