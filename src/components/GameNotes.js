@@ -72,7 +72,8 @@ export default function GameNotes() {
   const [displayedNotes, setDisplayedNotes] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [filters, setFilters] = useState([]);
-  const [editFilter, setEditFilter] = useState("");
+  const [noteId, setNoteId] = useState("");
+  const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
 
   // Effect called to grab characters and filters from chosen game, and set them to state.
@@ -124,7 +125,6 @@ export default function GameNotes() {
 
   useEffect(() => {
     if (myCharacter !== "" && opponentCharacter !== "" && myFilter !== "") {
-      console.log("running");
       const notes = [];
       gameNotes.forEach(note => {
         if (
@@ -267,6 +267,9 @@ export default function GameNotes() {
                           note={note.note}
                           filter={dbLocale(language, note.filter)}
                           filterId={note.filter._id}
+                          setEditFilter={setEditFilter}
+                          setNoteBody={setNoteBody}
+                          setNoteId={setNoteId}
                         />
                       );
                     })

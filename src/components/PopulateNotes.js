@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, IconButton, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles(theme => ({
   border: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 function PopulateNotes(props) {
   const classes = useStyles();
+  const { toggleNoteEditor } = useContext(NoteContext);
   return (
     <>
       <Grid item md={3} xs={4} className={classes.padding}>
@@ -42,9 +44,15 @@ function PopulateNotes(props) {
                 <IconButton
                   color="secondary"
                   size="small"
-                  onClick={() =>
-                    props.showEditor(props.id, props.filterId, props.note)
-                  }
+                  onClick={() => {
+                    props.setEditFilter({
+                      label: props.filter,
+                      value: props.filterId
+                    });
+                    props.setNoteBody(props.note);
+                    props.setNoteId(props.id);
+                    toggleNoteEditor();
+                  }}
                 >
                   <EditIcon />
                 </IconButton>
