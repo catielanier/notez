@@ -13,7 +13,7 @@ import {
 import Select from "react-select";
 import { Redirect } from "react-router-dom";
 import Creatable from "react-select/creatable";
-import QuickAddPlayerNote from "./QuickAddPlayerNote";
+import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
 import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
@@ -416,13 +416,14 @@ class PlayerNotes extends React.Component {
                         />
                       )}
                     </Grid>
-                    <QuickAddPlayerNote
+                    <QuickAddNote
                       user={this.props.user}
                       game={this.state.game}
                       player={this.state.player}
                       filters={this.state.filters}
                       addToNotes={this.addToNotes}
                       language={this.props.language}
+                      type="Player Note"
                     />
                   </Container>
                 )}

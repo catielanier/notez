@@ -3,6 +3,9 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
+import localeSelect from "../services/localeSelect";
+import { LanguageContext } from "./LanguageContext";
+import { specifyFilter } from "../data/locales";
 
 export const NoteContext = createContext();
 
@@ -12,10 +15,11 @@ const NoteContextProvider = props => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [noteEditor, setNoteEditor] = useState(false);
+  const { user } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
   const toggleNoteEditor = () => {
     setNoteEditor(!noteEditor);
   };
-  const { user } = useContext(UserContext);
   useEffect(() => {
     const fetchData = async function() {
       const resUser = await axios.get(`/api/users/${user}`);
@@ -61,6 +65,79 @@ const NoteContextProvider = props => {
         setError(e.message);
         return false;
       }
+    }
+  };
+  const postNote = async (
+    type,
+    game,
+    opponent,
+    filter,
+    body,
+    me,
+    universal
+  ) => {
+    setLoading(true);
+    setError(null);
+    const token = await getToken();
+    let note;
+    if (filter !== "" && body !== "") {
+      if (type === "Game Note") {
+        if (universal) {
+          note = {
+            filter,
+            note: body,
+            myCharacter: me,
+            game,
+            universal
+          };
+        } else {
+          note = {
+            filter,
+            note: body,
+            myCharacter: me,
+            opponentCharacter: opponent,
+            game
+          };
+        }
+        try {
+          const res = await axios.post("/api/notes/game", {
+            token,
+            user,
+            note
+          });
+          gameNotes.push(res.data.data);
+          setLoading(false);
+          return true;
+        } catch (e) {
+          setError(e.message);
+          setLoading(false);
+          return false;
+        }
+      } else if (type === "Player Note") {
+        note = {
+          filter,
+          note: body,
+          player: opponent,
+          game
+        };
+        try {
+          const res = await axios.post("/api/notes/player", {
+            token,
+            user,
+            note
+          });
+          playerNotes.push(res.data.data);
+          setLoading(false);
+          return true;
+        } catch (e) {
+          setLoading(false);
+          setError(e.message);
+          return false;
+        }
+      }
+    } else {
+      setLoading(false);
+      setError(localeSelect(language, specifyFilter));
     }
   };
   return (
