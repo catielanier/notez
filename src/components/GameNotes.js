@@ -68,7 +68,7 @@ export default function GameNotes() {
   const [game, setGame] = useState("");
   const [myCharacter, setMyCharacter] = useState("");
   const [opponentCharacter, setOpponentCharacter] = useState("");
-  const [filter, setFilter] = useState("");
+  const [myFilter, setMyFilter] = useState("");
   const [displayedNotes, setDisplayedNotes] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -79,7 +79,7 @@ export default function GameNotes() {
   useEffect(() => {
     if (game !== "") {
       setMyCharacter("");
-      setFilter("");
+      setMyFilter("");
       setOpponentCharacter("");
       setDisplayedNotes([]);
       const index = games.findIndex(x => x._id === game);
@@ -122,10 +122,34 @@ export default function GameNotes() {
     }
   }, [game, games, language]);
 
-  // Effect to check if you already have an opponent selected, then display notes for that matchup.
   useEffect(() => {
-    setFilter("");
-    if (myCharacter !== "" && opponentCharacter !== "") {
+    if (myCharacter !== "" && opponentCharacter !== "" && myFilter !== "") {
+      console.log("running");
+      const notes = [];
+      gameNotes.forEach(note => {
+        if (
+          game === note.game &&
+          myCharacter === note.myCharacter &&
+          opponentCharacter === note.opponentCharacter &&
+          myFilter === note.filter._id
+        ) {
+          notes.push(note);
+        }
+        if (
+          game === note.game &&
+          myCharacter === note.myCharacter &&
+          note.universal === true &&
+          myFilter === note.filter._id
+        ) {
+          notes.push(note);
+        }
+      });
+      setDisplayedNotes(notes);
+    } else if (
+      myCharacter !== "" &&
+      opponentCharacter !== "" &&
+      myFilter === ""
+    ) {
       const notes = [];
       gameNotes.forEach(note => {
         if (
@@ -145,11 +169,7 @@ export default function GameNotes() {
       });
       setDisplayedNotes(notes);
     }
-  }, [game, myCharacter, opponentCharacter, gameNotes]);
-
-  // Effect to check if you already have your character selected, then display notes for that matchup.
-
-  // Effect to filter the notes down for given filter if selected, or return back to all notes for that matchup if cleared.
+  }, [myFilter, myCharacter, opponentCharacter, gameNotes, game]);
 
   return (
     <section className="game-notes">
@@ -208,22 +228,24 @@ export default function GameNotes() {
               {localeSelect(language, chooseFilter)}
             </Typography>
             <Select
-              options={filters.map(filter => {
+              options={filters.map(x => {
                 return {
-                  label: dbLocale(language, filter),
-                  value: filter._id
+                  label: dbLocale(language, x),
+                  value: x._id
                 };
               })}
               onChange={e => {
-                setFilter(e.value);
+                setMyFilter(e.value);
               }}
               className={classes.spaced}
             />
-            {filter !== "" && (
+            {myFilter !== "" && (
               <Button
                 variant="outlined"
                 color="secondary"
-                onClick={setFilter("")}
+                onClick={() => {
+                  setMyFilter("");
+                }}
               >
                 {localeSelect(language, clearFilter)}
               </Button>
