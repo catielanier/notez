@@ -31,6 +31,7 @@ import dbLocale from "../services/dbLocale";
 import { NoteContext } from "../contexts/NoteContext";
 import { GameContext } from "../contexts/GameContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import sort from "../services/sort";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -85,39 +86,8 @@ export default function GameNotes() {
       setDisplayedNotes([]);
       const index = games.findIndex(x => x._id === game);
       const { characters: allCharacters, filters: allFilters } = games[index];
-      if (language === "ja") {
-        allCharacters.sort((x, y) => {
-          return x.name_ja.localeCompare(y.name_ja);
-        });
-        allFilters.sort((x, y) => {
-          return x.name_ja.localeCompare(y.name_ja);
-        });
-      } else if (language === "ko") {
-        allCharacters.sort((x, y) => {
-          return x.name_ko.localeCompare(y.name_ko);
-        });
-        allFilters.sort((x, y) => {
-          return x.name_ko.localeCompare(y.name_ko);
-        });
-      } else if (
-        language === "zh-CN" ||
-        language === "zh-TW" ||
-        language === "zh-HK"
-      ) {
-        allCharacters.sort((x, y) => {
-          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
-        });
-        allFilters.sort((x, y) => {
-          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
-        });
-      } else {
-        allCharacters.sort((x, y) => {
-          return x.name.localeCompare(y.name);
-        });
-        allFilters.sort((x, y) => {
-          return x.name.localeCompare(y.name);
-        });
-      }
+      sort(allCharacters, language);
+      sort(allFilters, language);
       setCharacters(allCharacters);
       setFilters(allFilters);
     }
