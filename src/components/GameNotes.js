@@ -265,7 +265,12 @@ export default function GameNotes() {
       <Modal
         aria-labelledby="editor-title"
         open={noteEditor}
-        onClose={toggleNoteEditor}
+        onClose={() => {
+          setNoteId("");
+          setEditFilter({});
+          setNoteBody("");
+          toggleNoteEditor();
+        }}
       >
         <Container className={classes.paper}>
           <Typography variant="h5" id="editor-title" className={classes.spaced}>
@@ -282,7 +287,7 @@ export default function GameNotes() {
               };
             })}
             onChange={e => {
-              setEditFilter(e.value);
+              setEditFilter({label: e.label, value: e.value});
             }}
             defaultValue={editFilter}
             className={classes.spaced}
@@ -300,7 +305,10 @@ export default function GameNotes() {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={editNote}
+            onClick={() => {
+              const result = editNote("Game Note", noteId, editFilter, noteBody);
+              if (result)
+            }}
           >
             {localeSelect(language, editNoteLocale)}
           </Button>
