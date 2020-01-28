@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function QuickAddGameNote(props) {
+export default function QuickAddNote(props) {
   const classes = useStyles();
   const { language } = useContext(LanguageContext);
   const { postNote, loading, error } = useContext(NoteContext);
@@ -48,18 +48,20 @@ export default function QuickAddGameNote(props) {
           <span>Error:</span> {error}
         </p>
       )}
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={universal}
-            onChange={toggleUniversal}
-            value={universal}
-            color="primary"
-          />
-        }
-        label={localeSelect(language, universalNote)}
-        className={classes.spaced}
-      />
+      {props.type === "Game Note" && (
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={universal}
+              onChange={toggleUniversal}
+              value={universal}
+              color="primary"
+            />
+          }
+          label={localeSelect(language, universalNote)}
+          className={classes.spaced}
+        />
+      )}
       <Typography variant="h6">
         {localeSelect(language, newNoteFilter)}
       </Typography>
@@ -85,7 +87,25 @@ export default function QuickAddGameNote(props) {
         fullWidth
         className={classes.spaced}
       />
-      <Button onClick={postNote} variant="contained" color="primary">
+      <Button
+        onClick={() => {
+          if (props.type === "Game Note") {
+            postNote(
+              props.type,
+              props.game,
+              props.opponentCharacter,
+              filter,
+              note,
+              props.myCharacter,
+              universal
+            );
+          } else if (props.type === "Player Note") {
+            postNote(props.type, props.game, props.player, filter, note);
+          }
+        }}
+        variant="contained"
+        color="primary"
+      >
         {localeSelect(language, createNote)}
       </Button>
     </div>

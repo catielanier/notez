@@ -9,7 +9,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import Select from "react-select";
-import QuickAddGameNote from "./QuickAddGameNote";
+import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
 import localeSelect from "../services/localeSelect";
 import {
@@ -250,7 +250,7 @@ export default function GameNotes() {
                     />
                   )}
                 </Grid>
-                <QuickAddGameNote
+                <QuickAddNote
                   game={game}
                   myCharacter={myCharacter}
                   opponentCharacter={opponentCharacter}
