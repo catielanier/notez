@@ -255,7 +255,7 @@ export default function GameNotes() {
                   myCharacter={myCharacter}
                   opponentCharacter={opponentCharacter}
                   filters={filters}
-                  language={language}
+                  type="Game Note"
                 />
               </Container>
             )}
@@ -313,7 +313,11 @@ export default function GameNotes() {
                 editFilter.value,
                 noteBody
               );
-              if (result) {
+              if (result === true) {
+                setNoteId("");
+                setEditFilter({});
+                setNoteBody("");
+                toggleNoteEditor();
               }
             }}
           >

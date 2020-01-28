@@ -38,7 +38,6 @@ const NoteContextProvider = props => {
         const index = gameNotes.findIndex(x => x._id === id);
         gameNotes[index] = res.data.data;
         setLoading(false);
-        toggleNoteEditor();
         return true;
       } catch (e) {
         setLoading(false);
