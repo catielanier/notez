@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext, useEffect } from "react";
 import axios from "axios";
 import { LanguageContext } from "./LanguageContext";
 import { UserContext } from "./UserContext";
-import getToken from "../services/tokenService";
+import { getToken } from "../services/tokenService";
 import sort from "../services/sort";
 
 export const CharacterContext = createContext();

@@ -34,6 +34,7 @@ import MenuContextProvider from "./contexts/MenuContext";
 import NoteContextProvider from "./contexts/NoteContext";
 import GameContextProvider from "./contexts/GameContext";
 import CharacterContextProvider from "./contexts/CharacterContext";
+import FilterContextProvider from "./contexts/FilterContext";
 
 const theme = createMuiTheme({
   palette: {
@@ -112,15 +113,7 @@ export default class App extends React.Component {
                     <Route path="/signup" component={Signup} />
                     <Route path="/add-game" component={AddGame} />
                     <CharacterContextProvider>
-                      <Route
-                        path="/add-character"
-                        component={() => (
-                          <AddCharacter
-                            user={this.state.user}
-                            language={this.state.language}
-                          />
-                        )}
-                      />
+                      <Route path="/add-character" component={AddCharacter} />
                       <Route
                         path="/link-character"
                         component={() => (
@@ -140,33 +133,35 @@ export default class App extends React.Component {
                         )}
                       />
                     </CharacterContextProvider>
-                    <Route
-                      path="/add-filter"
-                      component={() => (
-                        <AddFilter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/link-filter"
-                      component={() => (
-                        <LinkFilter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/edit-filter"
-                      component={() => (
-                        <EditFilter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
+                    <FilterContextProvider>
+                      <Route
+                        path="/add-filter"
+                        component={() => (
+                          <AddFilter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                      <Route
+                        path="/link-filter"
+                        component={() => (
+                          <LinkFilter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                      <Route
+                        path="/edit-filter"
+                        component={() => (
+                          <EditFilter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                    </FilterContextProvider>
                     <Route
                       path="/edit-game"
                       component={() => (
