@@ -134,15 +134,7 @@ export default class App extends React.Component {
                       />
                     </CharacterContextProvider>
                     <FilterContextProvider>
-                      <Route
-                        path="/add-filter"
-                        component={() => (
-                          <AddFilter
-                            user={this.state.user}
-                            language={this.state.language}
-                          />
-                        )}
-                      />
+                      <Route path="/add-filter" component={AddFilter} />
                       <Route
                         path="/link-filter"
                         component={() => (
