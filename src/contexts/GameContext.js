@@ -2,12 +2,18 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { LanguageContext } from "./LanguageContext";
 import sort from "../services/sort";
+import { UserContext } from "./UserContext";
+import { getToken } from "../services/tokenService";
 
 export const GameContext = createContext();
 
 const GameContextProvider = props => {
   const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const { language } = useContext(LanguageContext);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     const fetchData = async function() {
       await axios.get("/api/games").then(res => {
@@ -17,8 +23,37 @@ const GameContextProvider = props => {
     };
     fetchData();
   }, [language]);
+  const createGame = async (en, ja, ko, cn, tw, hk) => {
+    setLoading(true);
+    setError(null);
+    const token = getToken();
+    const game = {
+      name: en,
+      name_ja: ja,
+      name_ko: ko,
+      "name_zh-cn": cn,
+      "name_zh-tw": tw,
+      "name_zh-hk": hk
+    };
+    try {
+      const res = await axios.post("/api/games/new", {
+        user,
+        token,
+        game
+      });
+      games.push(res.data.data);
+      sort(games, language);
+      setLoading(false);
+      setSuccess(true);
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   return (
-    <GameContext.Provider value={{ games }}>
+    <GameContext.Provider
+      value={{ games, loading, error, success, createGame }}
+    >
       {props.children}
     </GameContext.Provider>
   );

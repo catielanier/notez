@@ -1,16 +1,13 @@
-import React from "react";
-import axios from "axios";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+import React, { useState, useContext } from "react";
 import {
   TextField,
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  makeStyles
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
 import {
   addGame,
@@ -23,8 +20,11 @@ import {
   traditionalGame,
   cantoneseGame
 } from "../data/locales";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { UserContext } from "../contexts/UserContext";
+import { GameContext } from "../contexts/GameContext";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -48,193 +48,132 @@ const styles = theme => ({
     marginTop: -12,
     marginLeft: -12
   }
-});
+}));
 
-class AddGame extends React.Component {
-  state = {
-    name: "",
-    name_ja: "",
-    name_ko: "",
-    "name_zh-cn": "",
-    "name_zh-tw": "",
-    "name_zh-hk": "",
-    loading: false,
-    success: false,
-    error: null
-  };
-
-  changeState = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  addGame = async e => {
-    e.preventDefault();
-    this.setState({
-      loading: true,
-      error: null
-    });
-    const {
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
-    } = this.state;
-    const { user } = this.props;
-    const token = await getToken();
-    const game = {
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
-    };
-    for (let x in game) {
-      if (game[x].length === 0) {
-        delete game[x];
-      }
-    }
-    try {
-      const res = await axios.post("/api/games/new", {
-        user,
-        token,
-        game
-      });
-      if (res) {
-        this.setState({
-          success: true,
-          loading: false
-        });
-      }
-    } catch (e) {
-      this.setState({
-        error: e.message,
-        loading: false
-      });
-    }
-  };
-
-  clearForm = e => {
-    e.preventDefault();
-    this.setState({
-      name: "",
-      name_ja: "",
-      name_ko: "",
-      "name_zh-cn": "",
-      "name_zh-tw": "",
-      "name_zh-hk": ""
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-    if (!this.props.user) {
-      return <Redirect to="/" />;
-    }
-    return (
-      <section className="add-game">
-        <Typography className={classes.header} variant="h5">
-          {localeSelect(this.props.language, addGame)}
-        </Typography>
-        <form onSubmit={this.addGame} disabled={this.state.loading}>
-          <Container maxWidth="sm">
-            {this.state.success && (
-              <p>{localeSelect(this.props.language, gameCreated)}</p>
-            )}
-            {this.state.error && (
-              <p className="error">
-                <span>Error:</span> {this.state.error}
-              </p>
-            )}
-            <TextField
-              label={localeSelect(this.props.language, englishGame)}
-              id="standard-name-required"
-              value={this.state.name}
-              name="name"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="Game Title"
-              required
-            />
-            <TextField
-              label={localeSelect(this.props.language, japaneseGame)}
-              value={this.state.name_ja}
-              name="name_ja"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="ゲームタイトル"
-            />
-            <TextField
-              label={localeSelect(this.props.language, koreanGame)}
-              value={this.state.name_ko}
-              name="name_ko"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="게임 제목"
-            />
-            <TextField
-              label={localeSelect(this.props.language, simplifiedGame)}
-              value={this.state["name_zh-cn"]}
-              name="name_zh-cn"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="电子游戏标题"
-            />
-            <TextField
-              label={localeSelect(this.props.language, traditionalGame)}
-              value={this.state["name_zh-tw"]}
-              name="name_zh-tw"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="電子遊戲標題"
-            />
-            <TextField
-              label={localeSelect(this.props.language, cantoneseGame)}
-              value={this.state["name_zh-hk"]}
-              name="name_zh-hk"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="電子遊戲標題"
-            />
-            <Container className={classes.buttonRow}>
-              <div className={classes.wrapper}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  onClick={this.addGame}
-                  disabled={this.state.loading}
-                >
-                  {localeSelect(this.props.language, addGame)}
-                </Button>
-                {this.state.loading && (
-                  <CircularProgress
-                    size={20}
-                    color="secondary"
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
-              <div className={classes.wrapper}>
-                <Button onClick={this.clearForm}>
-                  {localeSelect(this.props.language, clearForm)}
-                </Button>
-              </div>
-            </Container>
-          </Container>
-        </form>
-      </section>
-    );
+export default function AddGame() {
+  const classes = useStyles();
+  const { language } = useContext(LanguageContext);
+  const { loading, error, createGame, success } = useContext(GameContext);
+  const { user } = useContext(UserContext);
+  const [name, setName] = useState("");
+  const [nameJa, setNameJa] = useState("");
+  const [nameKo, setNameKo] = useState("");
+  const [nameCn, setNameCn] = useState("");
+  const [nameTw, setNameTw] = useState("");
+  const [nameHk, setNameHk] = useState("");
+  if (!user) {
+    return <Redirect to="/" />;
   }
+  return (
+    <section className="add-game">
+      <Typography className={classes.header} variant="h5">
+        {localeSelect(language, addGame)}
+      </Typography>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          createGame(name, nameJa, nameKo, nameCn, nameTw, nameHk);
+        }}
+        disabled={loading}
+      >
+        <Container maxWidth="sm">
+          {success && <p>{localeSelect(language, gameCreated)}</p>}
+          {error && (
+            <p className="error">
+              <span>Error:</span> {error}
+            </p>
+          )}
+          <TextField
+            label={localeSelect(language, englishGame)}
+            id="standard-name-required"
+            value={name}
+            onChange={e => {
+              setName(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="Game Title"
+            required
+          />
+          <TextField
+            label={localeSelect(language, japaneseGame)}
+            value={nameJa}
+            onChange={e => {
+              setNameJa(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="ゲームタイトル"
+          />
+          <TextField
+            label={localeSelect(language, koreanGame)}
+            value={nameKo}
+            onChange={e => {
+              setNameKo(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="게임 제목"
+          />
+          <TextField
+            label={localeSelect(language, simplifiedGame)}
+            value={nameCn}
+            onChange={e => {
+              setNameCn(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="电子游戏标题"
+          />
+          <TextField
+            label={localeSelect(language, traditionalGame)}
+            value={nameTw}
+            onChange={e => {
+              setNameTw(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="電子遊戲標題"
+          />
+          <TextField
+            label={localeSelect(language, cantoneseGame)}
+            value={nameHk}
+            onChange={e => {
+              setNameHk(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="電子遊戲標題"
+          />
+          <Container className={classes.buttonRow}>
+            <div className={classes.wrapper}>
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                disabled={loading}
+              >
+                {localeSelect(language, addGame)}
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={20}
+                  color="secondary"
+                  className={classes.buttonProgress}
+                />
+              )}
+            </div>
+            <div className={classes.wrapper}>
+              <Button
+                onClick={() => {
+                  setName("");
+                  setNameJa("");
+                  setNameKo("");
+                  setNameCn("");
+                  setNameTw("");
+                  setNameHk("");
+                }}
+              >
+                {localeSelect(language, clearForm)}
+              </Button>
+            </div>
+          </Container>
+        </Container>
+      </form>
+    </section>
+  );
 }
-
-AddGame.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(AddGame);
