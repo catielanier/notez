@@ -12,6 +12,8 @@ export const NoteContext = createContext();
 const NoteContextProvider = props => {
   const [gameNotes, setGameNotes] = useState([]);
   const [playerNotes, setPlayerNotes] = useState([]);
+  const [players, setPlayers] = useState([]);
+  const [playerFilters, setPlayerFilters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [noteEditor, setNoteEditor] = useState(false);
@@ -25,9 +27,26 @@ const NoteContextProvider = props => {
       const resUser = await axios.get(`/api/users/${user}`);
       setGameNotes(resUser.data.data.gameNotes);
       setPlayerNotes(resUser.data.data.playerNotes);
+      const resFilters = await axios.get(`/api/filters/player`);
+      setPlayerFilters(resFilters.data.data);
     };
     fetchData();
   }, [user]);
+  useEffect(() => {
+    const playerList = [];
+    playerNotes.forEach(note => {
+      const index = playerList.indexOf(note.player);
+      if (index === -1) {
+        playerList.push(note.player);
+      }
+    });
+    if (playerList.length > 0) {
+      playerList.sort((x, y) => {
+        return x.localeCompare(y);
+      });
+    }
+    setPlayers(playerList);
+  }, [playerNotes]);
   const editNote = async (type, id, filter, note) => {
     setLoading(true);
     setError(null);
@@ -149,7 +168,10 @@ const NoteContextProvider = props => {
         error,
         toggleNoteEditor,
         noteEditor,
-        editNote
+        editNote,
+        playerFilters,
+        players,
+        postNote
       }}
     >
       {props.children}
