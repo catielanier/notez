@@ -4,9 +4,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { blue, orange } from "@material-ui/core/colors";
 import axios from "axios";
-import Helmet from "react-helmet";
-import { title } from "./data/locales";
-import localeSelect from "./services/localeSelect";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -27,6 +24,7 @@ import EditFilter from "./components/EditFilter";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
+import Title from "./components/Title";
 import "./App.css";
 import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
@@ -46,8 +44,7 @@ const theme = createMuiTheme({
 export default class App extends React.Component {
   state = {
     user: null,
-    role: null,
-    language: ""
+    role: null
   };
 
   componentWillMount = () => {
@@ -88,10 +85,8 @@ export default class App extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Helmet>
-          <title>{localeSelect(this.state.language, title)}</title>
-        </Helmet>
         <LanguageContextProvider>
+          <Title />
           <UserContextProvider>
             <div className={!this.state.user ? "App attract-main" : "App"}>
               <Router>
