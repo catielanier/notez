@@ -34,6 +34,7 @@ import LanguageContextProvider from "./contexts/LanguageContext";
 import MenuContextProvider from "./contexts/MenuContext";
 import NoteContextProvider from "./contexts/NoteContext";
 import GameContextProvider from "./contexts/GameContext";
+import CharacterContextProvider from "./contexts/CharacterContext";
 
 const theme = createMuiTheme({
   palette: {
@@ -73,13 +74,6 @@ export default class App extends React.Component {
     await this.checkRole();
   };
 
-  setUser = user => {
-    this.setState({
-      user
-    });
-    this.checkRole();
-  };
-
   checkRole = async () => {
     const { user } = this.state;
     if (user) {
@@ -89,16 +83,6 @@ export default class App extends React.Component {
         role
       });
     }
-  };
-
-  logout = async e => {
-    e.preventDefault();
-    await removeToken();
-    localStorage.removeItem("notezId");
-    this.setState({
-      user: null,
-      role: null
-    });
   };
 
   render() {
@@ -127,42 +111,36 @@ export default class App extends React.Component {
                     </NoteContextProvider>
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
-                    <Route
-                      path="/add-game"
-                      component={() => (
-                        <AddGame
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/add-character"
-                      component={() => (
-                        <AddCharacter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/link-character"
-                      component={() => (
-                        <LinkCharacter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/edit-character"
-                      component={() => (
-                        <EditCharacter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
+                    <Route path="/add-game" component={AddGame} />
+                    <CharacterContextProvider>
+                      <Route
+                        path="/add-character"
+                        component={() => (
+                          <AddCharacter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                      <Route
+                        path="/link-character"
+                        component={() => (
+                          <LinkCharacter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                      <Route
+                        path="/edit-character"
+                        component={() => (
+                          <EditCharacter
+                            user={this.state.user}
+                            language={this.state.language}
+                          />
+                        )}
+                      />
+                    </CharacterContextProvider>
                     <Route
                       path="/add-filter"
                       component={() => (
