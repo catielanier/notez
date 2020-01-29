@@ -15,12 +15,12 @@ router.route("/new").post(async (req, res) => {
     // Check if the login is valid
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
-      res.status(503).statusMessage("You are not logged in.");
+      res.status(503).send("You are not logged in.");
     }
     // Query the user and check for admin privileges.
     const user = await userServices.getUserById(id);
     if (user.role !== "Admin") {
-      res.status(503).statusMessage("Only admins can create games.");
+      res.status(503).send("Only admins can create games.");
     }
     // Create new filter.
     const newFilter = await filterServices.createFilter(filter);
@@ -28,7 +28,7 @@ router.route("/new").post(async (req, res) => {
       data: newFilter
     });
   } catch (e) {
-    res.status(401).statusMessage(e);
+    res.status(401).send(e);
   }
 });
 
@@ -41,7 +41,7 @@ router.route("/game").get(async (_, res) => {
       });
     }
   } catch (e) {
-    res.status(400).statusMessage(e);
+    res.status(400).send(e);
   }
 });
 
@@ -54,7 +54,7 @@ router.route("/player").get(async (_, res) => {
       });
     }
   } catch (e) {
-    res.status(400).statusMessage(e);
+    res.status(400).send(e);
   }
 });
 
@@ -67,7 +67,7 @@ router.route("/").get(async (_, res) => {
       });
     }
   } catch (e) {
-    res.status(400).statusMessage(e);
+    res.status(400).send(e);
   }
 });
 
@@ -86,12 +86,12 @@ router.route("/").put(async (req, res) => {
 
   const loggedIn = await tokenService.verifyToken(token);
   if (!loggedIn) {
-    res.status(503).statusMessage("You are not logged in.");
+    res.status(503).send("You are not logged in.");
   }
   // Query the user and check for admin privileges.
   const user = await userServices.getUserById(id);
   if (user.role !== "Admin") {
-    res.status(503).statusMessage("Only admins can create characters.");
+    res.status(503).send("Only admins can create characters.");
   }
 
   const result = await filterServices.updateCharacter(

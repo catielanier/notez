@@ -132,7 +132,7 @@ router.route("/login").post(async (req, res, next) => {
       } else {
         res
           .status(400)
-          .statusMessage(
+          .send(
             "You have not activated your account yet. Please check your email to do so."
           );
       }
@@ -191,12 +191,12 @@ router.route("/:id").put(async (req, res) => {
             data: userUpdate
           });
         } else {
-          res.status(401).statusMessage("User did not update.");
+          res.status(401).send("User did not update.");
         }
       } else {
         res
           .status(401)
-          .statusMessage("Invalid password. Please confirm your old password.");
+          .send("Invalid password. Please confirm your old password.");
       }
     } else {
       const userUpdate = await userService.updateUser(
@@ -211,11 +211,11 @@ router.route("/:id").put(async (req, res) => {
           data: userUpdate
         });
       } else {
-        res.status(401).statusMessage("User did not update.");
+        res.status(401).send("User did not update.");
       }
     }
   } else {
-    res.status(401).statusMessage("You are not logged in.");
+    res.status(401).send("You are not logged in.");
   }
 });
 
@@ -232,10 +232,10 @@ router.route("/").get(async (req, res) => {
         });
       }
     } else {
-      res.status(503).statusMessage("You are not authorized to view all users");
+      res.status(503).send("You are not authorized to view all users");
     }
   } else {
-    res.status(400).statusMessage("You are not logged in.");
+    res.status(400).send("You are not logged in.");
   }
 });
 
@@ -252,12 +252,10 @@ router.route("/role").put(async (req, res) => {
         });
       }
     } else {
-      res
-        .status(503)
-        .statusMessage("You are not authorized to update user roles.");
+      res.status(503).send("You are not authorized to update user roles.");
     }
   } else {
-    res.status(401).statusMessage("You are not logged in.");
+    res.status(401).send("You are not logged in.");
   }
 });
 
@@ -365,9 +363,7 @@ router.route("/forgot").post(async (req, res) => {
       });
     }
   } catch (e) {
-    res
-      .status(401)
-      .statusMessage("No user is associated with this email address.");
+    res.status(401).send("No user is associated with this email address.");
   }
 });
 
@@ -379,7 +375,7 @@ router.route("/verify").post(async (req, res) => {
       data: user
     });
   } else {
-    res.status(401).statusMessage("There was no such token.");
+    res.status(401).send("There was no such token.");
   }
 });
 
@@ -397,9 +393,7 @@ router.route("/reset").post(async (req, res) => {
       }
     }
   } catch (e) {
-    res
-      .status(401)
-      .statusMessage("Unable to reset password due to invalid token.");
+    res.status(401).send("Unable to reset password due to invalid token.");
   }
 });
 

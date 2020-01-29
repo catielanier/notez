@@ -13,13 +13,11 @@ router.route("/").post(async (req, res) => {
   try {
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
-      res.status(503).statusMessage("You are not logged in.");
+      res.status(503).send("You are not logged in.");
     }
     const user = await userServices.getUserById(id);
     if (user.role === "Banned") {
-      res
-        .status(503)
-        .statusMessage("You are banned and cannot use our service.");
+      res.status(503).send("You are banned and cannot use our service.");
     }
     const newNote = await playerNoteServices.createNote(note);
     if (newNote) {
@@ -33,7 +31,7 @@ router.route("/").post(async (req, res) => {
       }
     }
   } catch (e) {
-    res.status(401);
+    res.status(401).send(e);
   }
 });
 
@@ -42,7 +40,7 @@ router.route("/").delete(async (req, res) => {
   try {
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
-      res.status(503).statusMessage("You are not logged in.");
+      res.status(503).send("You are not logged in.");
     }
     const user = await userServices.getUserById(userId);
     const relationship = await playerNoteServices.unlinkPlayerNote(
@@ -54,7 +52,7 @@ router.route("/").delete(async (req, res) => {
       data: note
     });
   } catch (e) {
-    res.status(401);
+    res.status(401).send(e);
   }
 });
 
@@ -64,7 +62,7 @@ router.route("/:id").put(async (req, res) => {
   try {
     const loggedIn = await tokenService.verifyToken(token);
     if (!loggedIn) {
-      res.status(503).statusMessage("You are not logged in.");
+      res.status(503).send("You are not logged in.");
     }
     const results = await playerNoteServices.updateNote(noteId, note, filter);
     if (results) {
@@ -74,7 +72,7 @@ router.route("/:id").put(async (req, res) => {
       });
     }
   } catch (e) {
-    res.status(401);
+    res.status(401).send(e);
   }
 });
 
