@@ -109,38 +109,21 @@ export default class App extends React.Component {
         </Helmet>
         <LanguageContextProvider>
           <UserContextProvider>
-            <GameContextProvider>
-              <div className={!this.state.user ? "App attract-main" : "App"}>
-                <Router>
-                  <MenuContextProvider>
-                    <MobileMenu />
-                    <Header />
-                  </MenuContextProvider>
-                  <main>
+            <div className={!this.state.user ? "App attract-main" : "App"}>
+              <Router>
+                <MenuContextProvider>
+                  <MobileMenu />
+                  <Header />
+                </MenuContextProvider>
+                <main>
+                  <GameContextProvider>
                     <NoteContextProvider>
                       {this.state.user ? (
-                        <Route
-                          exact
-                          path="/"
-                          component={() => (
-                            <GameNotes
-                              user={this.state.user}
-                              language={this.state.language}
-                            />
-                          )}
-                        />
+                        <Route exact path="/" component={GameNotes} />
                       ) : (
                         <Route exact path="/" component={Attract} />
                       )}
-                      <Route
-                        path="/player"
-                        component={() => (
-                          <PlayerNotes
-                            user={this.state.user}
-                            language={this.state.language}
-                          />
-                        )}
-                      />
+                      <Route path="/player" component={PlayerNotes} />
                     </NoteContextProvider>
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
@@ -163,45 +146,9 @@ export default class App extends React.Component {
                       )}
                     />
                     <Route
-                      path="/add-filter"
-                      component={() => (
-                        <AddFilter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
                       path="/link-character"
                       component={() => (
                         <LinkCharacter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/link-filter"
-                      component={() => (
-                        <LinkFilter
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/user-settings"
-                      component={() => (
-                        <UserSettings
-                          user={this.state.user}
-                          language={this.state.language}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/profile"
-                      component={() => (
-                        <Profile
                           user={this.state.user}
                           language={this.state.language}
                         />
@@ -217,9 +164,18 @@ export default class App extends React.Component {
                       )}
                     />
                     <Route
-                      path="/edit-game"
+                      path="/add-filter"
                       component={() => (
-                        <EditGame
+                        <AddFilter
+                          user={this.state.user}
+                          language={this.state.language}
+                        />
+                      )}
+                    />
+                    <Route
+                      path="/link-filter"
+                      component={() => (
+                        <LinkFilter
                           user={this.state.user}
                           language={this.state.language}
                         />
@@ -235,28 +191,55 @@ export default class App extends React.Component {
                       )}
                     />
                     <Route
-                      exact
-                      path="/forgot"
+                      path="/edit-game"
                       component={() => (
-                        <ForgotPassword language={this.state.language} />
+                        <EditGame
+                          user={this.state.user}
+                          language={this.state.language}
+                        />
                       )}
                     />
-                    <Route
-                      path="/forgot/:key"
-                      component={() => (
-                        <ResetPassword language={this.state.language} />
-                      )}
-                    />
-                    <Route
-                      path="/verify/:key"
-                      component={() => (
-                        <VerifyUser language={this.state.language} />
-                      )}
-                    />
-                  </main>
-                </Router>
-              </div>
-            </GameContextProvider>
+                  </GameContextProvider>
+                  <Route
+                    path="/user-settings"
+                    component={() => (
+                      <UserSettings
+                        user={this.state.user}
+                        language={this.state.language}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/profile"
+                    component={() => (
+                      <Profile
+                        user={this.state.user}
+                        language={this.state.language}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/forgot"
+                    component={() => (
+                      <ForgotPassword language={this.state.language} />
+                    )}
+                  />
+                  <Route
+                    path="/forgot/:key"
+                    component={() => (
+                      <ResetPassword language={this.state.language} />
+                    )}
+                  />
+                  <Route
+                    path="/verify/:key"
+                    component={() => (
+                      <VerifyUser language={this.state.language} />
+                    )}
+                  />
+                </main>
+              </Router>
+            </div>
           </UserContextProvider>
         </LanguageContextProvider>
       </ThemeProvider>
