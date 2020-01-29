@@ -219,6 +219,7 @@ export default function PlayerNotes() {
           <Typography variant="h5" id="editor-title" className={classes.spaced}>
             {localeSelect(language, editingNote)}
           </Typography>
+          {error && <Typography variant="body1">Error: ${error}</Typography>}
           <Typography variant="h6">
             {localeSelect(language, filterLocale)}
           </Typography>
@@ -248,7 +249,20 @@ export default function PlayerNotes() {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={editNote}
+            onClick={() => {
+              const result = editNote(
+                "Player Note",
+                noteId,
+                editFilter.value,
+                noteBody
+              );
+              if (result === true) {
+                setNoteBody("");
+                setNoteId("");
+                setEditFilter("");
+                toggleNoteEditor();
+              }
+            }}
           >
             {localeSelect(language, editNoteLocale)}
           </Button>
