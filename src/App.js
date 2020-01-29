@@ -67,12 +67,7 @@ export default function App() {
               <Route path="/add-game" component={AddGame} />
               <CharacterContextProvider>
                 <Route path="/add-character" component={AddCharacter} />
-                <Route
-                  path="/link-character"
-                  component={() => (
-                    <LinkCharacter user={user} language={language} />
-                  )}
-                />
+                <Route path="/link-character" component={LinkCharacter} />
                 <Route
                   path="/edit-character"
                   component={() => (

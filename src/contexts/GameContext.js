@@ -68,9 +68,35 @@ const GameContextProvider = props => {
       setError(e.message);
     }
   };
+  const connectFilters = async (game, filters) => {
+    setLoading(true);
+    setError(null);
+    const token = getToken();
+    try {
+      const res = await axios.put(`/api/games/${game}/filter`, {
+        user,
+        token,
+        filters,
+        game
+      });
+      const index = games.findIndex(x => x._id === game);
+      games[index].filters = res.data.data.filters;
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   return (
     <GameContext.Provider
-      value={{ games, loading, error, success, createGame, connectCharacters }}
+      value={{
+        games,
+        loading,
+        error,
+        success,
+        createGame,
+        connectCharacters,
+        connectFilters
+      }}
     >
       {props.children}
     </GameContext.Provider>
