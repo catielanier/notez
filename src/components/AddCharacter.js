@@ -1,16 +1,13 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+import React, { useContext, useState } from "react";
 import {
   TextField,
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  makeStyles
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
-import { getToken } from "../services/tokenService";
 import {
   addCharacter,
   characterCreated,
@@ -19,11 +16,15 @@ import {
   koreanCharacter,
   simplifiedCharacter,
   traditionalCharacter,
+  cantoneseCharacter,
   clearForm
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
+import { UserContext } from "../contexts/UserContext";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { CharacterContext } from "../contexts/CharacterContext";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -47,204 +48,134 @@ const styles = theme => ({
     marginTop: -12,
     marginLeft: -12
   }
-});
+}));
 
-class AddCharacter extends React.Component {
-  state = {
-    name: "",
-    name_ja: "",
-    name_ko: "",
-    "name_zh-cn": "",
-    "name_zh-tw": "",
-    "name_zh-hk": "",
-    loading: false,
-    success: false,
-    error: null
-  };
-
-  changeState = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  clearForm = e => {
-    e.preventDefault();
-    this.setState({
-      name: "",
-      name_ja: "",
-      name_ko: "",
-      "name_zh-cn": "",
-      "name_zh-tw": "",
-      "name_zh-hk": ""
-    });
-  };
-
-  addCharacter = async e => {
-    e.preventDefault();
-    this.setState({
-      loading: true,
-      error: null
-    });
-    const {
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
-    } = this.state;
-    const { user } = this.props;
-    const token = await getToken();
-    const character = {
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
-    };
-    for (let x in character) {
-      if (character[x].length === 0) {
-        delete character[x];
-      }
-    }
-    try {
-      const res = await axios.post("/api/characters/new", {
-        user,
-        token,
-        character
-      });
-      if (res) {
-        this.setState({
-          success: true,
-          loading: false
-        });
-      }
-    } catch (e) {
-      this.setState({
-        error: e.message,
-        loading: false
-      });
-    }
-  };
-
-  render() {
-    const { classes } = this.props;
-    if (!this.props.user) {
-      return <Redirect to="/" />;
-    }
-    return (
-      <section className="add-character">
-        <Typography className={classes.header} variant="h5">
-          {localeSelect(this.props.language, addCharacter)}
-        </Typography>
-        <form onSubmit={this.addCharacter} disabled={this.state.loading}>
-          <Container maxWidth="sm">
-            {this.state.success && (
-              <p>{localeSelect(this.props.language, characterCreated)}</p>
-            )}
-            {this.state.error && (
-              <p className="error">
-                <span>Error:</span> {this.state.error}
-              </p>
-            )}
-            <TextField
-              label={localeSelect(this.props.language, englishCharacter)}
-              id="standard-name-required"
-              value={this.state.name}
-              name="name"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="Character Name"
-              required
-            />
-            <TextField
-              label={localeSelect(this.props.language, japaneseCharacter)}
-              value={this.state.name_ja}
-              name="name_ja"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="キャラクター名"
-            />
-            <TextField
-              label={localeSelect(this.props.language, koreanCharacter)}
-              value={this.state.name_ko}
-              name="name_ko"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="캐릭터 이름"
-            />
-            <TextField
-              label={localeSelect(this.props.language, simplifiedCharacter)}
-              value={this.state["name_zh-cn"]}
-              name="name_zh-cn"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="角色名字"
-            />
-            <TextField
-              label={localeSelect(this.props.language, traditionalCharacter)}
-              value={this.state["name_zh-tw"]}
-              name="name_zh-tw"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="角色名字"
-            />
-            <TextField
-              label={
-                this.props.language === "ja"
-                  ? "広東語のキャラクター名"
-                  : this.props.language === "ko"
-                  ? "광동어 캐릭터 이름"
-                  : this.props.language === "zh-CN"
-                  ? "广东话角色名字"
-                  : this.props.language === "zh-TW" ||
-                    this.props.language === "zh-HK"
-                  ? "廣東話角色名字"
-                  : "Cantonese Character Name"
-              }
-              value={this.state["name_zh-hk"]}
-              name="name_zh-hk"
-              onChange={this.changeState}
-              fullWidth="true"
-              placeholder="角色名字"
-            />
-            <Container className={classes.buttonRow}>
-              <div className={classes.wrapper}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  onClick={this.addCharacter}
-                  disabled={this.state.loading}
-                >
-                  {localeSelect(this.props.language, addCharacter)}
-                </Button>
-                {this.state.loading && (
-                  <CircularProgress
-                    size={20}
-                    color="secondary"
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
-              <div className={classes.wrapper}>
-                <Button onClick={this.clearForm}>
-                  {localeSelect(this.props.language, clearForm)}
-                </Button>
-              </div>
-            </Container>
-          </Container>
-        </form>
-      </section>
-    );
+export default function AddCharacter() {
+  const classes = useStyles();
+  const { user } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
+  const { loading, error, success, createCharacter } = useContext(
+    CharacterContext
+  );
+  const [name, setName] = useState("");
+  const [nameJa, setNameJa] = useState("");
+  const [nameKo, setNameKo] = useState("");
+  const [nameCn, setNameCn] = useState("");
+  const [nameTw, setNameTw] = useState("");
+  const [nameHk, setNameHk] = useState("");
+  if (!user) {
+    return <Redirect to="/" />;
   }
+  return (
+    <section className="add-character">
+      <Typography className={classes.header} variant="h5">
+        {localeSelect(language, addCharacter)}
+      </Typography>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          createCharacter(name, nameJa, nameKo, nameCn, nameTw, nameHk);
+        }}
+        disabled={loading}
+      >
+        <Container maxWidth="sm">
+          {success && <p>{localeSelect(language, characterCreated)}</p>}
+          {error && (
+            <p className="error">
+              <span>Error:</span> {error}
+            </p>
+          )}
+          <TextField
+            label={localeSelect(language, englishCharacter)}
+            id="standard-name-required"
+            value={name}
+            onChange={e => {
+              setName(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="Character Name"
+            required
+          />
+          <TextField
+            label={localeSelect(language, japaneseCharacter)}
+            value={nameJa}
+            onChange={e => {
+              setNameJa(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="キャラクター名"
+          />
+          <TextField
+            label={localeSelect(language, koreanCharacter)}
+            value={nameKo}
+            onChange={e => {
+              setNameKo(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="캐릭터 이름"
+          />
+          <TextField
+            label={localeSelect(language, simplifiedCharacter)}
+            value={nameCn}
+            onChange={e => {
+              setNameCn(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="角色名字"
+          />
+          <TextField
+            label={localeSelect(language, traditionalCharacter)}
+            value={nameTw}
+            onChange={e => {
+              setNameTw(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="角色名字"
+          />
+          <TextField
+            label={localeSelect(language, cantoneseCharacter)}
+            value={nameHk}
+            onChange={e => {
+              setNameHk(e.target.value);
+            }}
+            fullWidth="true"
+            placeholder="角色名字"
+          />
+          <Container className={classes.buttonRow}>
+            <div className={classes.wrapper}>
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                disabled={loading}
+              >
+                {localeSelect(language, addCharacter)}
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={20}
+                  color="secondary"
+                  className={classes.buttonProgress}
+                />
+              )}
+            </div>
+            <div className={classes.wrapper}>
+              <Button
+                onClick={() => {
+                  setName("");
+                  setNameJa("");
+                  setNameKo("");
+                  setNameCn("");
+                  setNameTw("");
+                  setNameHk("");
+                }}
+              >
+                {localeSelect(language, clearForm)}
+              </Button>
+            </div>
+          </Container>
+        </Container>
+      </form>
+    </section>
+  );
 }
-
-AddCharacter.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(AddCharacter);

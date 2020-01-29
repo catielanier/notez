@@ -27,7 +27,6 @@ import EditFilter from "./components/EditFilter";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
-import { removeToken } from "./services/tokenService";
 import "./App.css";
 import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
