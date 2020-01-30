@@ -76,11 +76,7 @@ export default function App() {
               <CharacterContextProvider>
                 <Route path="/add-character" component={AddCharacter} />
                 <Route path="/link-character" component={LinkCharacter} />
-                <Route
-                  path="/edit-character"
-                  component={() => (
-                    <EditCharacter user={user} language={language} />
-                  )}
+                <Route path="/edit-character" component={EditCharacter}
                 />
               </CharacterContextProvider>
               <FilterContextProvider>
