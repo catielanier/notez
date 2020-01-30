@@ -177,9 +177,42 @@ const UserContextProvider = props => {
       });
   }
 
+  const resetPassword = async (password, verifyPassword, key) => {
+    setLoading(true);
+    setError(null);
+    if (password === verifyPassword) {
+      await axios
+        .post("/api/users/reset", { key, password })
+        .then(_ => {
+          setLoading(false);
+          setSuccess(true);
+        })
+        .catch(err => {
+          setLoading(false);
+          setError(err.message);
+        });
+    } else {
+      setLoading(false);
+      setError(localeSelect(language, noMatch));
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole, updateProfile, requestReset }}
+      value={{
+        user,
+        role,
+        logout,
+        doLogin,
+        error,
+        success,
+        loading,
+        signup,
+        updateRole,
+        updateProfile,
+        requestReset,
+        resetPassword
+      }}
     >
       {props.children}
     </UserContext.Provider>

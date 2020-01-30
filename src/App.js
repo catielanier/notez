@@ -35,7 +35,6 @@ import GameContextProvider from "./contexts/GameContext";
 import CharacterContextProvider from "./contexts/CharacterContext";
 import FilterContextProvider from "./contexts/FilterContext";
 import { UserContext } from "./contexts/UserContext";
-import { LanguageContext } from "./contexts/LanguageContext";
 
 // Styles
 import "./App.css";
@@ -49,7 +48,6 @@ const theme = createMuiTheme({
 
 export default function App() {
   const { user } = useContext(UserContext);
-  const { language } = useContext(LanguageContext);
   return (
     <ThemeProvider theme={theme}>
       <Title />
@@ -86,15 +84,8 @@ export default function App() {
             </GameContextProvider>
             <Route path="/user-settings" component={UserSettings} />
             <Route path="/profile" component={Profile} />
-            <Route
-              exact
-              path="/forgot"
-              component={() => <ForgotPassword language={language} />}
-            />
-            <Route
-              path="/forgot/:key"
-              component={() => <ResetPassword language={language} />}
-            />
+            <Route exact path="/forgot" component={ForgotPassword} />
+            <Route path="/forgot/:key" component={ResetPassword} />
             <Route path="/verify/:key" component={VerifyUser} />
           </main>
         </Router>
