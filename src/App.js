@@ -84,10 +84,7 @@ export default function App() {
                 <Route path="/edit-filter" component={EditFilter} />
               </FilterContextProvider>
             </GameContextProvider>
-            <Route
-              path="/user-settings"
-              component={() => <UserSettings user={user} language={language} />}
-            />
+            <Route path="/user-settings" component={UserSettings} />
             <Route
               path="/profile"
               component={() => <Profile user={user} language={language} />}

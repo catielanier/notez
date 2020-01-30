@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import {
@@ -16,27 +16,24 @@ import {
   editUserRoles,
   selectUser,
   assignRole,
-  user,
+  user as userLocale,
   admin,
   banned,
   updateUser
 } from "../data/locales";
+import { UserContext } from '../contexts/UserContext';
+import { LanguageContext } from '../contexts/LanguageContext';
 
-class UserSettings extends React.Component {
-  state = {
-    users: [],
-    id: "",
-    role: "",
-    loading: false,
-    success: false,
-    error: null,
-    premium: false
-  };
-
-  async componentWillMount() {
+export default function UserSettings() {
+  const { user, loading, success, error, updateRole } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
+  const [role, setRole] = useState('');
+  useEffect(() => {
     const token = getToken();
-    const { user } = this.props;
-    await axios
+    async function fetchData() {
+      await axios
       .get("/api/users", {
         params: {
           token,
@@ -44,116 +41,76 @@ class UserSettings extends React.Component {
         }
       })
       .then(res => {
-        this.setState({
-          users: res.data.data
-        });
+        setUsers(res.data.data);
       });
-  }
-
-  setUser = e => {
-    const id = e.value;
-    const { users } = this.state;
-    const index = users.findIndex(user => user._id === id);
-    const { role } = users[index];
-    this.setState({
-      id,
-      role
-    });
-  };
-
-  updateRole = async e => {
-    e.preventDefault();
-    const { id, role } = this.state;
-    const { user } = this.props;
-    const token = await getToken();
-    this.setState({
-      loading: true,
-      error: null
-    });
-    await axios
-      .put("/api/users/role", {
-        data: {
-          id,
-          role,
-          user,
-          token
-        }
-      })
-      .then(() => {
-        this.setState({
-          loading: false,
-          success: true
-        });
-      })
-      .catch(err => {
-        this.setState({
-          loading: false,
-          error: err.message
-        });
-      });
-  };
-
-  render() {
-    if (!this.props.user) {
-      return <Redirect to="/" />;
     }
-    return (
-      <section>
-        <Container maxWidth="sm">
-          <Typography variant="h5" gutterBottom>
-            {localeSelect(this.props.language, editUserRoles)}
-          </Typography>
-          <Typography variant="h6">
-            {localeSelect(this.props.language, selectUser)}
-          </Typography>
-          <Select
-            options={this.state.users.map(user => {
-              return {
-                label: `${user.username} (${user.realName} - ${user.country})`,
-                value: user._id
-              };
-            })}
-            onChange={this.setUser}
-          />
-          {this.state.id !== "" && this.state.role !== "" && (
-            <>
-              <Typography variant="h6">
-                {localeSelect(this.props.language, assignRole)}
-              </Typography>
-              <RadioGroup
-                name="role"
-                onChange={this.setRole}
-                value={this.state.role}
-              >
-                <FormControlLabel
-                  value="User"
-                  control={<Radio color="primary" />}
-                  label={localeSelect(this.props.language, user)}
-                />
-                <FormControlLabel
-                  value="Admin"
-                  control={<Radio color="primary" />}
-                  label={localeSelect(this.props.language, admin)}
-                />
-                <FormControlLabel
-                  value="Banned"
-                  control={<Radio color="primary" />}
-                  label={localeSelect(this.props.language, banned)}
-                />
-              </RadioGroup>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={this.updateRole}
-              >
-                {localeSelect(this.props.language, updateUser)}
-              </Button>
-            </>
-          )}
-        </Container>
-      </section>
-    );
+    fetchData();
+  }, [user])
+  if (!user) {
+    return <Redirect to="/" />
   }
+  return (
+    <section>
+      <Container maxWidth="sm">
+        <Typography variant="h5" gutterBottom>
+          {localeSelect(language, editUserRoles)}
+        </Typography>
+        <Typography variant="h6">
+          {localeSelect(language, selectUser)}
+        </Typography>
+        <Select
+          options={users.map(user => {
+            return {
+              label: `${user.username} (${user.realName} - ${user.country})`,
+              value: user._id
+            };
+          })}
+          onChange={e => {
+            setSelectedUser(e.value);
+            const index = users.findIndex(x => x._id === e.value);
+            setRole(users[index].role);
+          }}
+        />
+      {selectedUser !== "" && role !== "" && (
+          <>
+            <Typography variant="h6">
+              {localeSelect(language, assignRole)}
+            </Typography>
+            <RadioGroup
+              onChange={e => {
+                setRole(e.target.value)
+              }}
+              value={role}
+            >
+              <FormControlLabel
+                value="User"
+                control={<Radio color="primary" />}
+                label={localeSelect(language, userLocale)}
+              />
+              <FormControlLabel
+                value="Admin"
+                control={<Radio color="primary" />}
+                label={localeSelect(language, admin)}
+              />
+              <FormControlLabel
+                value="Banned"
+                control={<Radio color="primary" />}
+                label={localeSelect(language, banned)}
+              />
+            </RadioGroup>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={e => {
+                e.preventDefault();
+                updateRole(selectedUser, role);
+              }}
+            >
+              {localeSelect(language, updateUser)}
+            </Button>
+          </>
+        )}
+      </Container>
+    </section>
+  );
 }
-
-export default UserSettings;

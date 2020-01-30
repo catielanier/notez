@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { removeToken, setToken } from "../services/tokenService";
+import { removeToken, setToken, getToken } from "../services/tokenService";
 import { useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
 import localeSelect from "../services/localeSelect";
@@ -96,9 +96,31 @@ const UserContextProvider = props => {
     }
   };
 
+  const updateRole = async (id, role) => {
+    const token = getToken();
+    setLoading(true);
+    setError(false);
+    try {
+      await axios.put("/api/users/role", {
+        data: {
+          id,
+          role,
+          user,
+          token
+        }
+      }).then(() => {
+        setLoading(false);
+        setSuccess(true);
+      })
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, role, logout, doLogin, error, success, loading, signup }}
+      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole }}
     >
       {props.children}
     </UserContext.Provider>
