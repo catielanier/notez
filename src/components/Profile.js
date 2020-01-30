@@ -1,7 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import {
   TextField,
   Button,
@@ -11,7 +9,6 @@ import {
   makeStyles
 } from "@material-ui/core";
 import Select from "react-select";
-import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
 import dbLocale from "../services/dbLocale";
 import countries from "../data/countries";

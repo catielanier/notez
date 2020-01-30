@@ -162,9 +162,24 @@ const UserContextProvider = props => {
     }
   }
 
+  const requestReset = async (email) => {
+    this.loading(false);
+    this.error(null);
+    await axios
+      .post('/api/users/forgot', { email, language })
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+      })
+      .catch(err => {
+        setLoading(false);
+        setError(err.message);
+      });
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole, updateProfile }}
+      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole, updateProfile, requestReset }}
     >
       {props.children}
     </UserContext.Provider>

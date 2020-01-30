@@ -1,14 +1,12 @@
-import React from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import {
   TextField,
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  makeStyles
 } from "@material-ui/core";
 import localeSelect from "../services/localeSelect";
 import {
@@ -18,8 +16,10 @@ import {
   checkEmailPassword,
   requestReset
 } from "../data/locales";
+import { UserContext } from '../contexts/UserContext';
+import { LanguageContext } from '../contexts/LanguageContext';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -43,117 +43,78 @@ const styles = theme => ({
     marginTop: -12,
     marginLeft: -12
   }
-});
+}));
 
-class ForgotPassword extends React.Component {
-  state = {
-    email: "",
-    loading: false,
-    success: false,
-    error: null
-  };
-
-  changeState = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  requestReset = async e => {
-    e.preventDefault();
-    const { email } = this.state;
-    this.setState({
-      loading: true,
-      error: null
-    });
-    await axios
-      .post("/api/users/forgot", { email })
-      .then(_ => {
-        this.setState({
-          loading: false,
-          success: true
-        });
-      })
-      .catch(err => {
-        this.setState({
-          loading: false,
-          error: err.message
-        });
-      });
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <section>
-        <Container maxWidth="sm">
-          <Typography className={classes.header} variant="h5">
-            {localeSelect(this.props.language, forgotPassword)}
-          </Typography>
-          <form
-            disabled={this.state.loading}
-            onSubmit={this.requestReset}
-            className={classes.container}
-          >
+export default function ForgotPassword() {
+  const classes = useStyles();
+  const { loading, error, success, requestReset } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
+  const [email, setEmail] = useState('');
+  return (
+    <section>
+      <Container maxWidth="sm">
+        <Typography className={classes.header} variant="h5">
+          {localeSelect(language, forgotPassword)}
+        </Typography>
+        <form
+          disabled={loading}
+          onSubmit={e => {
+            e.preventDefault();
+            requestReset(email);
+          }}
+          className={classes.container}
+        >
+          <Container maxWidth="sm">
+            {success && (
+              <p>{localeSelect(language, checkEmailPassword)}</p>
+            )}
+            {error && (
+              <p className="error">
+                <span>Error:</span> {error}
+              </p>
+            )}
             <Container maxWidth="sm">
-              {this.state.success && (
-                <p>{localeSelect(this.props.language, checkEmailPassword)}</p>
-              )}
-              {this.state.error && (
-                <p className="error">
-                  <span>Error:</span> {this.state.error}
-                </p>
-              )}
-              <Container maxWidth="sm">
-                <TextField
-                  label={localeSelect(this.props.language, email)}
-                  id="standard-name"
-                  value={this.state.email}
-                  name="email"
-                  onChange={this.changeState}
-                  fullWidth
-                />
-              </Container>
-              <Container className={classes.buttonRow}>
-                <div className={classes.wrapper}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                    onClick={this.login}
-                    disabled={this.state.loading}
-                  >
-                    {localeSelect(this.props.language, requestReset)}
-                  </Button>
-                  {this.state.loading && (
-                    <CircularProgress
-                      size={20}
-                      color="secondary"
-                      className={classes.buttonProgress}
-                    />
-                  )}
-                </div>
-                <div className={classes.wrapper}>
-                  <Button
-                    component={React.forwardRef((props, ref) => (
-                      <RouterLink innerRef={ref} to="/login" {...props} />
-                    ))}
-                  >
-                    {localeSelect(this.props.language, goBack)}
-                  </Button>
-                </div>
-              </Container>
+              <TextField
+                label={localeSelect(language, email)}
+                id="standard-name"
+                value={email}
+                onChange={e => {
+                  setEmail(e.target.value);
+                }}
+                fullWidth
+              />
             </Container>
-          </form>
-        </Container>
-      </section>
-    );
-  }
+            <Container className={classes.buttonRow}>
+              <div className={classes.wrapper}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  disabled={loading}
+                >
+                  {localeSelect(language, requestReset)}
+                </Button>
+                {loading && (
+                  <CircularProgress
+                    size={20}
+                    color="secondary"
+                    className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+              <div className={classes.wrapper}>
+                <Button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/login" {...props} />
+                  ))}
+                >
+                  {localeSelect(language, goBack)}
+                </Button>
+              </div>
+            </Container>
+          </Container>
+        </form>
+      </Container>
+    </section>
+  )
 }
-
-ForgotPassword.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ForgotPassword);
