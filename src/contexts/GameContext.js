@@ -50,6 +50,41 @@ const GameContextProvider = props => {
       setError(e.message);
     }
   };
+  const editGame = async (
+    game,
+    name,
+    name_ja,
+    name_ko,
+    name_cn,
+    name_tw,
+    name_hk
+  ) => {
+    setLoading(true);
+    setError(null);
+    const token = getToken();
+    try {
+      const res = await axios.put(`/api/games/`, {
+        data: {
+          token,
+          user,
+          name,
+          name_ja,
+          name_ko,
+          name_cn,
+          name_tw,
+          name_hk,
+          game
+        }
+      });
+      const index = games.findIndex(x => x._id === game);
+      games[index] = res.data.data;
+      setLoading(false);
+      setSuccess(true);
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   const connectCharacters = async (game, characters) => {
     setLoading(true);
     setError(null);
@@ -95,7 +130,8 @@ const GameContextProvider = props => {
         success,
         createGame,
         connectCharacters,
-        connectFilters
+        connectFilters,
+        editGame
       }}
     >
       {props.children}

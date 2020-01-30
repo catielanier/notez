@@ -1,8 +1,11 @@
+// Libraries
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { blue, orange } from "@material-ui/core/colors";
+
+// Components
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -24,7 +27,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
 import Title from "./components/Title";
-import "./App.css";
+
+// Contexts
 import MenuContextProvider from "./contexts/MenuContext";
 import NoteContextProvider from "./contexts/NoteContext";
 import GameContextProvider from "./contexts/GameContext";
@@ -32,6 +36,9 @@ import CharacterContextProvider from "./contexts/CharacterContext";
 import FilterContextProvider from "./contexts/FilterContext";
 import { UserContext } from "./contexts/UserContext";
 import { LanguageContext } from "./contexts/LanguageContext";
+
+// Styles
+import "./App.css";
 
 const theme = createMuiTheme({
   palette: {
@@ -65,6 +72,7 @@ export default function App() {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/add-game" component={AddGame} />
+              <Route path="/edit-game" component={EditGame} />
               <CharacterContextProvider>
                 <Route path="/add-character" component={AddCharacter} />
                 <Route path="/link-character" component={LinkCharacter} />
@@ -85,10 +93,6 @@ export default function App() {
                   )}
                 />
               </FilterContextProvider>
-              <Route
-                path="/edit-game"
-                component={() => <EditGame user={user} language={language} />}
-              />
             </GameContextProvider>
             <Route
               path="/user-settings"
@@ -107,10 +111,7 @@ export default function App() {
               path="/forgot/:key"
               component={() => <ResetPassword language={language} />}
             />
-            <Route
-              path="/verify/:key"
-              component={() => <VerifyUser language={language} />}
-            />
+            <Route path="/verify/:key" component={VerifyUser} />
           </main>
         </Router>
       </div>
