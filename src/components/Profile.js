@@ -17,15 +17,15 @@ import dbLocale from "../services/dbLocale";
 import countries from "../data/countries";
 import {
   profile,
-  email,
-  username,
-  realName,
+  email as emailLocale,
+  username as usernameLocale,
+  realName as realNameLocale,
   profileUpdated,
-  oldPassword,
-  newPassword,
-  verifyNewPassword,
+  oldPassword as oldPasswordLocale,
+  newPassword as newPasswordLocale,
+  verifyNewPassword as verifyNewPasswordLocale,
   editProfile,
-  country
+  country as countryLocale
 } from "../data/locales";
 import { UserContext } from '../contexts/UserContext';
 import { LanguageContext } from '../contexts/LanguageContext';
@@ -110,7 +110,7 @@ export default function Profile() {
             </p>
           )}
           <TextField
-            label={localeSelect(language, email)}
+            label={localeSelect(language, emailLocale)}
             required
             onChange={e => {
               setEmail(e.target.value);
@@ -120,7 +120,7 @@ export default function Profile() {
             className={classes.input}
           />
           <TextField
-            label={localeSelect(language, oldPassword)}
+            label={localeSelect(language, oldPasswordLocale)}
             required
             onChange={e => {
               setOldPassword(e.target.value);
@@ -131,7 +131,7 @@ export default function Profile() {
             className={classes.input}
           />
           <TextField
-            label={localeSelect(language, newPassword)}
+            label={localeSelect(language, newPasswordLocale)}
             required
             onChange={e => {
               setNewPassword(e.target.value);
@@ -142,7 +142,7 @@ export default function Profile() {
             className={classes.input}
           />
           <TextField
-            label={localeSelect(language, verifyNewPassword)}
+            label={localeSelect(language, verifyNewPasswordLocale)}
             required
             onChange={e => {
               setVerifyNewPassword(e.target.value);
@@ -153,7 +153,7 @@ export default function Profile() {
             className={classes.input}
           />
           <TextField
-            label={localeSelect(language, username)}
+            label={localeSelect(language, usernameLocale)}
             required
             onChange={e => {
               setUsername(e.target.value);
@@ -163,7 +163,7 @@ export default function Profile() {
             className={classes.input}
           />
           <TextField
-            label={localeSelect(language, realName)}
+            label={localeSelect(language, realNameLocale)}
             onChange={e => {
               setRealName(e.target.value);
             }}
@@ -185,7 +185,7 @@ export default function Profile() {
                 value: e.value
               })
             }}
-            placeholder={localeSelect(language, country)}
+            placeholder={localeSelect(language, countryLocale)}
             className="country-select"
           />
           <Container className={classes.buttonRow}>

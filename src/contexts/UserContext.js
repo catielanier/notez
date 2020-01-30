@@ -17,8 +17,6 @@ const UserContextProvider = props => {
   const { language } = useContext(LanguageContext);
 
   useEffect(() => {
-    // const userId = localStorage.getItem("notezId") || null;
-    // setUser(userId);
     if (user) {
       axios.get(`/api/users/${user}`).then(res => {
         const { role: userRole } = res.data.data;
@@ -154,7 +152,7 @@ const UserContextProvider = props => {
           realName,
           token
         }
-      })then(() => {
+      }).then(() => {
         setLoading(false);
         setSuccess(true);
       }).catch(err => {
