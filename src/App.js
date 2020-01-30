@@ -76,18 +76,12 @@ export default function App() {
               <CharacterContextProvider>
                 <Route path="/add-character" component={AddCharacter} />
                 <Route path="/link-character" component={LinkCharacter} />
-                <Route path="/edit-character" component={EditCharacter}
-                />
+                <Route path="/edit-character" component={EditCharacter} />
               </CharacterContextProvider>
               <FilterContextProvider>
                 <Route path="/add-filter" component={AddFilter} />
                 <Route path="/link-filter" component={LinkFilter} />
-                <Route
-                  path="/edit-filter"
-                  component={() => (
-                    <EditFilter user={user} language={language} />
-                  )}
-                />
+                <Route path="/edit-filter" component={EditFilter} />
               </FilterContextProvider>
             </GameContextProvider>
             <Route

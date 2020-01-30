@@ -62,6 +62,9 @@ export default function EditCharacter() {
   const [nameTw, setNameTw] = useState("");
   const [nameHk, setNameHk] = useState("");
   const [character, setCharacter] = useState("");
+  if (!user) {
+    return <Redirect to="/" />
+  }
   return (
     <section>
       <Typography variant="h5" className={classes.header}>

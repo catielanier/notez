@@ -1,20 +1,17 @@
-import React from "react";
-import axios from "axios";
+import React, {useContext, useState} from "react";
 import Select from "react-select";
 import {
   TextField,
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  makeStyles
 } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import { getToken } from "../services/tokenService";
 import localeSelect from "../services/localeSelect";
 import {
-  editFilter,
+  editFilter as editFilterLocale,
   englishFilter,
   japaneseFilter,
   koreanFilter,
@@ -23,8 +20,11 @@ import {
   cantoneseFilter
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { UserContext } from "../contexts/UserContext";
+import { FilterContext } from "../contexts/FilterContext";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -48,225 +48,130 @@ const styles = theme => ({
     marginTop: -12,
     marginLeft: -12
   }
-});
+}));
 
-class EditFilter extends React.Component {
-  state = {
-    filters: [],
-    filter: "",
-    name: "",
-    name_ja: "",
-    name_ko: "",
-    "name_zh-cn": "",
-    "name_zh-tw": "",
-    "name_zh-hk": "",
-    loading: false,
-    success: false,
-    error: null
-  };
-
-  async componentDidMount() {
-    await axios.get("/api/filters").then(res => {
-      const filters = res.data.data;
-      if (this.props.language === "ja") {
-        filters.sort((x, y) => {
-          return x.name_ja.localeCompare(y.name_ja);
-        });
-      } else if (this.props.language === "ko") {
-        filters.sort((x, y) => {
-          return x.name_ko.localeCompare(y.name_ko);
-        });
-      } else if (
-        this.props.language === "zh-CN" ||
-        this.props.language === "zh-TW" ||
-        this.props.language === "zh-HK"
-      ) {
-        filters.sort((x, y) => {
-          return x["name_zh-cn"].localeCompare(y["name_zh-cn"]);
-        });
-      } else {
-        filters.sort((x, y) => {
-          return x.name.localeCompare(y.name);
-        });
-      }
-      this.setState({
-        filters
-      });
-    });
+export default function EditFilter() {
+  const classes = useStyles();
+  const { language } = useContext(LanguageContext);
+  const { filters, loading, error, editFilter, success } = useContext(FilterContext);
+  const { user } = useContext(UserContext);
+  const [name, setName] = useState("");
+  const [nameJa, setNameJa] = useState("");
+  const [nameKo, setNameKo] = useState("");
+  const [nameCn, setNameCn] = useState("");
+  const [nameTw, setNameTw] = useState("");
+  const [nameHk, setNameHk] = useState("");
+  const [filter, setFilter] = useState("");
+  if (!user) {
+    return <Redirect to="/" />
   }
-
-  setFilter = e => {
-    const filter = e.value;
-    const { filters } = this.state;
-    const index = filters.findIndex(x => x._id === filter);
-    const { name, name_ja, name_ko } = filters[index];
-    const name_cn = filters[index]["name_zh-cn"];
-    const name_tw = filters[index]["name_zh-tw"];
-    const name_hk = filters[index]["name_zh-hk"];
-    this.setState({
-      filter,
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk
-    });
-  };
-
-  changeState = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  updateFilter = async e => {
-    e.preventDefault();
-    this.setState({
-      loading: true,
-      error: null
-    });
-    const {
-      name,
-      name_ja,
-      name_ko,
-      "name_zh-cn": name_cn,
-      "name_zh-tw": name_tw,
-      "name_zh-hk": name_hk,
-      filter
-    } = this.state;
-    const { user } = this.props;
-    const token = await getToken();
-    try {
-      const res = await axios.put(`/api/filters/`, {
-        data: {
-          token,
-          user,
-          name,
-          name_ja,
-          name_ko,
-          name_cn,
-          name_tw,
-          name_hk,
-          filter
-        }
-      });
-      if (res) {
-        this.setState({
-          success: true,
-          loading: false
-        });
-      }
-    } catch (e) {
-      this.setState({
-        error: e.message,
-        loading: false
-      });
-    }
-  };
-
-  render() {
-    const { classes } = this.props;
-    if (!this.props.user) {
-      return <Redirect to="/" />;
-    }
-    return (
-      <section>
-        <Typography variant="h5" className={classes.header}>
-          {localeSelect(this.props.language, editFilter)}
-        </Typography>
-        <Container maxWidth="sm">
-          <Select
-            options={this.state.filters.map(filter => {
-              return {
-                label: dbLocale(this.props.language, filter),
-                value: filter._id
-              };
-            })}
-            onChange={this.setFilter}
-          />
-          {this.state.filter !== "" && (
-            <form onSubmit={this.updateFilter}>
-              <TextField
-                label={localeSelect(this.props.language, englishFilter)}
-                id="standard-name-required"
-                value={this.state.name}
-                name="name"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="Filter Type"
-                required
-              />
-              <TextField
-                label={localeSelect(this.props.language, japaneseFilter)}
-                value={this.state.name_ja}
-                name="name_ja"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="フィルタータイプ"
-              />
-              <TextField
-                label={localeSelect(this.props.language, koreanFilter)}
-                value={this.state.name_ko}
-                name="name_ko"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="필터 타입"
-              />
-              <TextField
-                label={localeSelect(this.props.language, simplifiedFilter)}
-                value={this.state["name_zh-cn"]}
-                name="name_zh-cn"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="过滤器类型"
-              />
-              <TextField
-                label={localeSelect(this.props.language, traditionalFilter)}
-                value={this.state["name_zh-tw"]}
-                name="name_zh-tw"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="過濾器類型"
-              />
-              <TextField
-                label={localeSelect(this.props.language, cantoneseFilter)}
-                value={this.state["name_zh-hk"]}
-                name="name_zh-hk"
-                onChange={this.changeState}
-                fullWidth="true"
-                placeholder="過濾器類型"
-              />
-              <Container className={classes.buttonRow}>
-                <div className={classes.wrapper}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                    disabled={this.state.loading}
-                  >
-                    {localeSelect(this.props.language, editFilter)}
-                  </Button>
-                  {this.state.loading && (
-                    <CircularProgress
-                      size={20}
-                      color="secondary"
-                      className={classes.buttonProgress}
-                    />
-                  )}
-                </div>
-              </Container>
-            </form>
-          )}
-        </Container>
-      </section>
-    );
-  }
+  return (
+    <section>
+      <Typography variant="h5" className={classes.header}>
+        {localeSelect(language, editFilterLocale)}
+      </Typography>
+      <Container maxWidth="sm">
+        <Select
+          options={filters.map(filter => {
+            return {
+              label: dbLocale(language, filter),
+              value: filter._id
+            };
+          })}
+          onChange={e=> {
+            setFilter(e.value);
+            const index = filters.findIndex(x => x._id === e.value);
+            setName(filters[index].name);
+            setNameKo(filters[index].name_ko);
+            setNameJa(filters[index].name_ja);
+            setNameCn(filters[index]["name_zh-cn"]);
+            setNameTw(filters[index]["name_zh-tw"]);
+            setNameHk(filters[index]["name_zh-hk"]);
+          }}
+        />
+        {filter !== "" && (
+          <form onSubmit={e => {
+            e.preventDefault();
+            editFilter(filter, name, nameJa, nameKo, nameCn, nameTw, nameHk);
+          }}>
+            <TextField
+              label={localeSelect(language, englishFilter)}
+              id="standard-name-required"
+              value={name}
+              onChange={e => {
+                setName(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="Filter Type"
+              required
+            />
+            <TextField
+              label={localeSelect(language, japaneseFilter)}
+              value={nameJa}
+              onChange={e => {
+                setNameJa(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="フィルタータイプ"
+            />
+            <TextField
+              label={localeSelect(language, koreanFilter)}
+              value={nameKo}
+              onChange={e => {
+                setNameKo(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="필터 타입"
+            />
+            <TextField
+              label={localeSelect(language, simplifiedFilter)}
+              value={nameCn}
+              onChange={e => {
+                setNameCn(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="过滤器类型"
+            />
+            <TextField
+              label={localeSelect(language, traditionalFilter)}
+              value={nameTw}
+              onChange={e => {
+                setNameTw(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="過濾器類型"
+            />
+            <TextField
+              label={localeSelect(language, cantoneseFilter)}
+              value={nameHk}
+              onChange={e => {
+                setNameHk(e.target.value);
+              }}
+              fullWidth="true"
+              placeholder="過濾器類型"
+            />
+            <Container className={classes.buttonRow}>
+              <div className={classes.wrapper}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  disabled={loading}
+                >
+                  {localeSelect(language, editFilterLocale)}
+                </Button>
+                {loading && (
+                  <CircularProgress
+                    size={20}
+                    color="secondary"
+                    className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+            </Container>
+          </form>
+        )}
+      </Container>
+    </section>
+  )
 }
-
-EditFilter.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(EditFilter);

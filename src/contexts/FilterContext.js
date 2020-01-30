@@ -63,9 +63,44 @@ const FilterContextProvider = props => {
       setError(e.message);
     }
   };
+  const editFilter = async (
+    filter,
+    name,
+    name_ja,
+    name_ko,
+    name_cn,
+    name_tw,
+    name_hk
+  ) => {
+    setLoading(true);
+    setError(null);
+    const token = getToken();
+    try {
+      const res = await axios.put(`/api/filters/`, {
+        data: {
+          token,
+          user,
+          name,
+          name_ja,
+          name_ko,
+          name_cn,
+          name_tw,
+          name_hk,
+          filter
+        }
+      });
+      const index = filters.findIndex(x => x._id === filter);
+      filters[index] = res.data.data;
+      setLoading(false);
+      setSuccess(true);
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   return (
     <FilterContext.Provider
-      value={{ filters, loading, error, success, createFilter, gameFilters }}
+      value={{ filters, loading, error, success, createFilter, gameFilters, editFilter }}
     >
       {props.children}
     </FilterContext.Provider>
