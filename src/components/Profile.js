@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -7,7 +7,8 @@ import {
   Button,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  makeStyles
 } from "@material-ui/core";
 import Select from "react-select";
 import { getToken } from "../services/tokenService";
@@ -26,8 +27,10 @@ import {
   editProfile,
   country
 } from "../data/locales";
+import { UserContext } from '../contexts/UserContext';
+import { LanguageContext } from '../contexts/LanguageContext';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -54,234 +57,153 @@ const styles = theme => ({
   input: {
     marginTop: "10px"
   }
-});
+}));
 
-class Profile extends React.Component {
-  state = {
-    oldPassword: "",
-    newPassword: "",
-    verifyNewPassword: "",
-    username: "",
-    country: "",
-    countryLong: "",
-    email: "",
-    realName: "",
-    loading: false,
-    success: false,
-    error: null
-  };
-
-  async componentWillMount() {
-    const { user } = this.props;
-    await axios.get(`/api/users/${user}`).then(res => {
-      const { username, country, email, realName } = res.data.data;
-      const index = countries.findIndex(guo => guo.value === country);
-      const countryLong = dbLocale(this.props.language, countries[index]);
-      this.setState({
-        username,
-        country,
-        email,
-        realName,
-        countryLong
+export default function Profile() {
+  const classes = useStyles();
+  const { user, loading, error, success, updateProfile } = useContext(UserContext);
+  const { language } = useContext(LanguageContext);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [verifyNewPassword, setVerifyNewPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [country, setCountry] = useState({});
+  const [username, setUsername] = useState('');
+  const [realName, setRealName] = useState('');
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(`/api/users/${user}`);
+      setUsername(res.data.data.username);
+      setEmail(res.data.data.email);
+      setRealName(res.data.data.realName);
+      const index = countries.findIndex(x => x.value === res.data.data.country);
+      setCountry({
+        label: dbLocale(language, countries[index]),
+        value: countries[index].value
       });
-    });
-  }
-
-  changeCountry = e => {
-    const country = e.value;
-    const countryLong = e.label;
-    this.setState({
-      country,
-      countryLong
-    });
-  };
-
-  updateProfile = async e => {
-    e.preventDefault();
-    const {
-      oldPassword,
-      newPassword,
-      verifyNewPassword,
-      username,
-      country,
-      email,
-      realName
-    } = this.state;
-    const { user } = this.props;
-    const token = getToken();
-    this.setState({
-      loading: true,
-      error: null
-    });
-    if (oldPassword !== "") {
-      if (newPassword !== "" && newPassword === verifyNewPassword) {
-        await axios
-          .put(`/api/users/${user}`, {
-            data: {
-              username,
+    }
+    fetchData();
+  }, [user])
+  return (
+    <section>
+      <Container maxWidth="xs">
+        <Typography className={classes.header} variant="h5">
+          {localeSelect(language, profile)}
+        </Typography>
+        <form disabled={loading} onSubmit={e => {
+            e.preventDefault();
+            updateProfile(
               email,
-              country,
-              realName,
               oldPassword,
               newPassword,
-              token
-            }
-          })
-          .then(() => {
-            this.setState({
-              loading: false,
-              success: true
-            });
-          })
-          .catch(err => {
-            this.setState({
-              loading: false,
-              error: err
-            });
-          });
-      } else {
-        this.setState({
-          loading: false,
-          error: `Your new password is either invalid or doesn't match your password verification. (Note: If you don't want to change your password, leave the "Old Password" field blank.)`
-        });
-      }
-    } else {
-      await axios
-        .put(`/api/users/${user}`, {
-          data: {
-            username,
-            email,
-            country,
-            realName,
-            token
-          }
-        })
-        .then(() => {
-          this.setState({
-            loading: false,
-            success: true
-          });
-        })
-        .catch(err => {
-          this.setState({
-            loading: false,
-            error: err.message
-          });
-        });
-    }
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <section>
-        <Container maxWidth="xs">
-          <Typography className={classes.header} variant="h5">
-            {localeSelect(this.props.language, profile)}
-          </Typography>
-          <form disabled={this.state.loading} onSubmit={this.updateProfile}>
-            {this.state.success && (
-              <p>{localeSelect(this.props.language, profileUpdated)}</p>
-            )}
-            {this.state.error && (
-              <p className="error">
-                <span>Error:</span> {this.state.error}
-              </p>
-            )}
-            <TextField
-              label={localeSelect(this.props.language, email)}
-              required
-              name="email"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.email}
-              className={classes.input}
-            />
-            <TextField
-              label={localeSelect(this.props.language, oldPassword)}
-              required
-              name="oldPassword"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.oldPassword}
-              type="password"
-              className={classes.input}
-            />
-            <TextField
-              label={localeSelect(this.props.language, newPassword)}
-              required
-              name="newPassword"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.newPassword}
-              type="password"
-              className={classes.input}
-            />
-            <TextField
-              label={localeSelect(this.props.language, verifyNewPassword)}
-              required
-              name="verifyNewPassword"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.verifyNewPassword}
-              type="password"
-              className={classes.input}
-            />
-            <TextField
-              label={localeSelect(this.props.language, username)}
-              required
-              name="username"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.username}
-              className={classes.input}
-            />
-            <TextField
-              label={localeSelect(this.props.language, realName)}
-              name="realName"
-              onChange={this.changeState}
-              fullWidth
-              value={this.state.realName}
-              className={classes.input}
-            />
-            <Select
-              options={countries.map(guo => {
-                return {
-                  value: guo.value,
-                  label: dbLocale(this.props.language, guo)
-                };
-              })}
-              value={{
-                value: this.state.country,
-                label: this.state.countryLong
-              }}
-              onChange={this.changeCountry}
-              placeholder={localeSelect(this.props.language, country)}
-              className="country-select"
-            />
-            <Container className={classes.buttonRow}>
-              <div className={classes.wrapper}>
-                <Button color="primary" variant="contained" type="submit">
-                  {localeSelect(this.props.language, editProfile)}
-                </Button>
-                {this.state.loading && (
-                  <CircularProgress
-                    size={20}
-                    color="secondary"
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
-            </Container>
-          </form>
-        </Container>
-      </section>
-    );
-  }
+              verifyNewPassword,
+              username,
+              realName,
+              country.value)
+          }}>
+          {success && (
+            <p>{localeSelect(language, profileUpdated)}</p>
+          )}
+          {error && (
+            <p className="error">
+              <span>Error:</span> {error}
+            </p>
+          )}
+          <TextField
+            label={localeSelect(language, email)}
+            required
+            onChange={e => {
+              setEmail(e.target.value);
+            }}
+            fullWidth
+            value={email}
+            className={classes.input}
+          />
+          <TextField
+            label={localeSelect(language, oldPassword)}
+            required
+            onChange={e => {
+              setOldPassword(e.target.value);
+            }}
+            fullWidth
+            value={oldPassword}
+            type="password"
+            className={classes.input}
+          />
+          <TextField
+            label={localeSelect(language, newPassword)}
+            required
+            onChange={e => {
+              setNewPassword(e.target.value);
+            }}
+            fullWidth
+            value={newPassword}
+            type="password"
+            className={classes.input}
+          />
+          <TextField
+            label={localeSelect(language, verifyNewPassword)}
+            required
+            onChange={e => {
+              setVerifyNewPassword(e.target.value);
+            }}
+            fullWidth
+            value={verifyNewPassword}
+            type="password"
+            className={classes.input}
+          />
+          <TextField
+            label={localeSelect(language, username)}
+            required
+            onChange={e => {
+              setUsername(e.target.value);
+            }}
+            fullWidth
+            value={username}
+            className={classes.input}
+          />
+          <TextField
+            label={localeSelect(language, realName)}
+            onChange={e => {
+              setRealName(e.target.value);
+            }}
+            fullWidth
+            value={realName}
+            className={classes.input}
+          />
+          <Select
+            options={countries.map(x => {
+              return {
+                value: x.value,
+                label: dbLocale(language, x)
+              };
+            })}
+            value={country}
+            onChange={e => {
+              setCountry({
+                label: e.label,
+                value: e.value
+              })
+            }}
+            placeholder={localeSelect(language, country)}
+            className="country-select"
+          />
+          <Container className={classes.buttonRow}>
+            <div className={classes.wrapper}>
+              <Button color="primary" variant="contained" type="submit" disabled={loading}>
+                {localeSelect(language, editProfile)}
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={20}
+                  color="secondary"
+                  className={classes.buttonProgress}
+                />
+              )}
+            </div>
+          </Container>
+        </form>
+      </Container>
+    </section>
+  )
 }
-
-Profile.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(Profile);

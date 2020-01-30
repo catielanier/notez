@@ -62,7 +62,7 @@ function Attract(props) {
               {localeSelect(language, paragraphOne)}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              {localeselect(language, paragraphTwo)}
+              {localeSelect(language, paragraphTwo)}
             </Typography>
             <Typography variant="body2" gutterBottom>
               {localeSelect(language, closing)}

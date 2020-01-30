@@ -1,6 +1,6 @@
 const countries = [
   {
-    code: "AFG",
+    value: "AFG",
     name_en: "Afghanistan",
     name_ja: "アフガニスタン",
     name_ko: "아프가니스탄",
@@ -9,7 +9,7 @@ const countries = [
     name_hk: "阿富汗"
   },
   {
-    code: "ALB",
+    value: "ALB",
     name_en: "Albania",
     name_ja: "アルバニア",
     name_ko: "알바니아",

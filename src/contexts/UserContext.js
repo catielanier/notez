@@ -13,7 +13,7 @@ const UserContextProvider = props => {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const { language } = useContext(LanguageContext);
 
   useEffect(() => {
@@ -118,9 +118,55 @@ const UserContextProvider = props => {
     }
   }
 
+  const updateProfile = async (email, oldPassword, newPassword, verifyNewPassword, username, realName, country) => {
+    const token = getToken();
+    setLoading(true);
+    setError(null);
+    if (oldPassword !== '') {
+      if (newPassword !== '' && newPassword === verifyNewPassword) {
+        await axios.put(`/api/users/${user}`, {
+          data: {
+            username,
+            email,
+            country,
+            realName,
+            oldPassword,
+            newPassword,
+            token
+          }
+        }).then(() => {
+          setLoading(false);
+          setSuccess(true);
+        }).catch(err => {
+          setLoading(false);
+          setError(err.message);
+        })
+      } else {
+        setLoading(false);
+        setError(`Your new password is either invalid or doesn't match your password verification. (Note: If you don't want to change your password, leave the "Old Password" field blank.)`);
+      }
+    } else {
+      await axios.put(`/api/users/${user}`, {
+        data: {
+          username,
+          email,
+          country,
+          realName,
+          token
+        }
+      })then(() => {
+        setLoading(false);
+        setSuccess(true);
+      }).catch(err => {
+        setLoading(false);
+        setError(err.message);
+      })
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole }}
+      value={{ user, role, logout, doLogin, error, success, loading, signup, updateRole, updateProfile }}
     >
       {props.children}
     </UserContext.Provider>
