@@ -49,9 +49,44 @@ const CharacterContextProvider = props => {
       setError(e.message);
     }
   };
+  const editCharacter = async (
+    character,
+    name,
+    name_ja,
+    name_ko,
+    name_cn,
+    name_tw,
+    name_hk
+  ) => {
+    setLoading(true);
+    setError(null);
+    const token = getToken();
+    try {
+      const res = await axios.put(`/api/characters/`, {
+        data: {
+          token,
+          user,
+          name,
+          name_ja,
+          name_ko,
+          name_cn,
+          name_tw,
+          name_hk,
+          character
+        }
+      });
+      const index = characters.findIndex(x => x._id === character);
+      characters[index] = res.data.data;
+      setLoading(false);
+      setSuccess(true);
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   return (
     <CharacterContext.Provider
-      value={{ characters, loading, success, error, createCharacter }}
+      value={{ characters, loading, success, error, createCharacter, editCharacter }}
     >
       {props.children}
     </CharacterContext.Provider>
