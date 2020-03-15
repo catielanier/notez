@@ -163,7 +163,7 @@ export default function Signup() {
               <Button color="primary" variant="contained" type="submit">
                 {localeSelect(language, signup)}
               </Button>
-              {this.state.loading && (
+              {loading && (
                 <CircularProgress
                   size={20}
                   color="secondary"
