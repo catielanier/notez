@@ -103,11 +103,11 @@ export default function Login() {
                   variant="contained"
                   type="submit"
                   color="primary"
-                  disabled={this.state.loading}
+                  disabled={loading}
                 >
                   {localeSelect(language, login)}
                 </Button>
-                {this.state.loading && (
+                {loading && (
                   <CircularProgress
                     size={20}
                     color="secondary"
