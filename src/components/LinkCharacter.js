@@ -79,9 +79,16 @@ export default function LinkCharacter() {
                               e.target.value
                             );
                             if (index === -1) {
-                              selectedCharacters.push(e.target.value);
+                              setSelectedCharacters([
+                                ...selectedCharacters,
+                                e.target.value
+                              ]);
                             } else {
-                              selectedCharacters.splice(index, 1);
+                              setSelectedCharacters(
+                                selectedCharacters.filter(
+                                  (char, i) => i !== index
+                                )
+                              );
                             }
                           }}
                           color="primary"

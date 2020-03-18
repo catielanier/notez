@@ -75,9 +75,14 @@ export default function LinkFilter() {
                               e.target.value
                             );
                             if (index === -1) {
-                              selectedFilters.push(e.target.value);
+                              setSelectedFilters([
+                                ...selectedFilters,
+                                e.target.value
+                              ]);
                             } else {
-                              selectedFilters.splice(index, 1);
+                              setSelectedFilters(
+                                selectedFilters.filter((char, i) => i !== index)
+                              );
                             }
                           }}
                           color="primary"
