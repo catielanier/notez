@@ -17,17 +17,13 @@ const NoteContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [noteEditor, setNoteEditor] = useState(false);
-  const [gameNotesValues, setGameNotesValues] = useState({
-    game: "",
-    yourCharacter: "",
-    opponentCharacter: "",
-    filter: "",
-  });
-  const [playerNotesValues, setPlayerNotesValues] = useState({
-    game: "",
-    opponent: "",
-    filter: "",
-  });
+  const [gameNotesGame, setGameNotesGame] = useState("");
+  const [myCharacter, setMyCharacter] = useState("");
+  const [opponentCharacter, setOpponentCharacter] = useState("");
+  const [gameNotesFilter, setGameNotesFilter] = useState("");
+  const [opponent, setOpponent] = useState("");
+  const [playerNotesGame, setPlayerNotesGame] = useState("");
+  const [playerNotesFilter, setPlayerNotesFilter] = useState("");
   const { user } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const toggleNoteEditor = () => {
@@ -183,10 +179,20 @@ const NoteContextProvider = (props) => {
         playerFilters,
         players,
         postNote,
-        gameNotesValues,
-        setGameNotesValues,
-        playerNotesValues,
-        setPlayerNotesValues,
+        setGameNotesGame,
+        gameNotesGame,
+        myCharacter,
+        setMyCharacter,
+        opponentCharacter,
+        setOpponentCharacter,
+        gameNotesFilter,
+        setGameNotesFilter,
+        opponent,
+        setOpponent,
+        playerNotesGame,
+        setPlayerNotesGame,
+        playerNotesFilter,
+        setPlayerNotesFilter,
       }}
     >
       {props.children}

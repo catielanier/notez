@@ -6,7 +6,7 @@ import {
   Button,
   Modal,
   TextField,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
 import QuickAddNote from "./QuickAddNote";
@@ -25,7 +25,7 @@ import {
   editingNote,
   filter as filterLocale,
   editNote as editNoteLocale,
-  cancel
+  cancel,
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import { NoteContext } from "../contexts/NoteContext";
@@ -33,7 +33,7 @@ import { GameContext } from "../contexts/GameContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import sort from "../services/sort";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: "50%",
@@ -43,15 +43,15 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
   },
   button: {
     marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   spaced: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function GameNotes() {
@@ -62,14 +62,18 @@ export default function GameNotes() {
     error,
     noteEditor,
     toggleNoteEditor,
-    editNote
+    editNote,
+    setGameNotesGame: setGame,
+    gameNotesGame: game,
+    myCharacter,
+    setMyCharacter,
+    opponentCharacter,
+    setOpponentCharacter,
+    gameNotesFilter: myFilter,
+    setGameNotesFilter: setMyFilter,
   } = useContext(NoteContext);
   const { games } = useContext(GameContext);
   const { language } = useContext(LanguageContext);
-  const [game, setGame] = useState("");
-  const [myCharacter, setMyCharacter] = useState("");
-  const [opponentCharacter, setOpponentCharacter] = useState("");
-  const [myFilter, setMyFilter] = useState("");
   const [displayedNotes, setDisplayedNotes] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -84,7 +88,7 @@ export default function GameNotes() {
       setMyFilter("");
       setOpponentCharacter("");
       setDisplayedNotes([]);
-      const index = games.findIndex(x => x._id === game);
+      const index = games.findIndex((x) => x._id === game);
       const { characters: allCharacters, filters: allFilters } = games[index];
       sort(allCharacters, language);
       sort(allFilters, language);
@@ -96,7 +100,7 @@ export default function GameNotes() {
   useEffect(() => {
     if (myCharacter !== "" && opponentCharacter !== "" && myFilter !== "") {
       const notes = [];
-      gameNotes.forEach(note => {
+      gameNotes.forEach((note) => {
         if (
           game === note.game &&
           myCharacter === note.myCharacter &&
@@ -121,7 +125,7 @@ export default function GameNotes() {
       myFilter === ""
     ) {
       const notes = [];
-      gameNotes.forEach(note => {
+      gameNotes.forEach((note) => {
         if (
           game === note.game &&
           myCharacter === note.myCharacter &&
@@ -153,13 +157,13 @@ export default function GameNotes() {
               {localeSelect(language, chooseGame)}
             </Typography>
             <Select
-              options={games.map(game => {
+              options={games.map((game) => {
                 return {
                   label: dbLocale(language, game),
-                  value: game._id
+                  value: game._id,
                 };
               })}
-              onChange={e => {
+              onChange={(e) => {
                 setGame(e.value);
               }}
               className={classes.spaced}
@@ -168,13 +172,13 @@ export default function GameNotes() {
               {localeSelect(language, yourCharacterLocale)}
             </Typography>
             <Select
-              options={characters.map(character => {
+              options={characters.map((character) => {
                 return {
                   label: dbLocale(language, character),
-                  value: character._id
+                  value: character._id,
                 };
               })}
-              onChange={e => {
+              onChange={(e) => {
                 setMyCharacter(e.value);
               }}
               className={classes.spaced}
@@ -183,13 +187,13 @@ export default function GameNotes() {
               {localeSelect(language, opponentCharacterLocale)}
             </Typography>
             <Select
-              options={characters.map(character => {
+              options={characters.map((character) => {
                 return {
                   label: dbLocale(language, character),
-                  value: character._id
+                  value: character._id,
                 };
               })}
-              onChange={e => {
+              onChange={(e) => {
                 setOpponentCharacter(e.value);
               }}
               className={classes.spaced}
@@ -198,13 +202,13 @@ export default function GameNotes() {
               {localeSelect(language, chooseFilter)}
             </Typography>
             <Select
-              options={filters.map(x => {
+              options={filters.map((x) => {
                 return {
                   label: dbLocale(language, x),
-                  value: x._id
+                  value: x._id,
                 };
               })}
-              onChange={e => {
+              onChange={(e) => {
                 setMyFilter(e.value);
               }}
               className={classes.spaced}
@@ -229,7 +233,7 @@ export default function GameNotes() {
                 </Typography>
                 <Grid container className={classes.spaced}>
                   {displayedNotes.length > 0 ? (
-                    displayedNotes.map(note => {
+                    displayedNotes.map((note) => {
                       return (
                         <PopulateNotes
                           key={note._id}
@@ -281,13 +285,13 @@ export default function GameNotes() {
             {localeSelect(language, filterLocale)}
           </Typography>
           <Select
-            options={filters.map(filter => {
+            options={filters.map((filter) => {
               return {
                 label: dbLocale(language, filter),
-                value: filter._id
+                value: filter._id,
               };
             })}
-            onChange={e => {
+            onChange={(e) => {
               setEditFilter({ label: e.label, value: e.value });
             }}
             defaultValue={editFilter}
@@ -297,7 +301,7 @@ export default function GameNotes() {
             multiline
             name="note"
             value={noteBody}
-            onChange={e => {
+            onChange={(e) => {
               setNoteBody(e.target.value);
             }}
             fullWidth
