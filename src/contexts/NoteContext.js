@@ -9,7 +9,7 @@ import { specifyFilter } from "../data/locales";
 
 export const NoteContext = createContext();
 
-const NoteContextProvider = props => {
+const NoteContextProvider = (props) => {
   const [gameNotes, setGameNotes] = useState([]);
   const [playerNotes, setPlayerNotes] = useState([]);
   const [players, setPlayers] = useState([]);
@@ -17,13 +17,24 @@ const NoteContextProvider = props => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [noteEditor, setNoteEditor] = useState(false);
+  const [gameNotesValues, setGameNotesValues] = useState({
+    game: "",
+    yourCharacter: "",
+    opponentCharacter: "",
+    filter: "",
+  });
+  const [playerNotesValues, setPlayerNotesValues] = useState({
+    game: "",
+    opponent: "",
+    filter: "",
+  });
   const { user } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const toggleNoteEditor = () => {
     setNoteEditor(!noteEditor);
   };
   useEffect(() => {
-    const fetchData = async function() {
+    const fetchData = async function () {
       const resUser = await axios.get(`/api/users/${user}`);
       setGameNotes(resUser.data.data.gameNotes);
       setPlayerNotes(resUser.data.data.playerNotes);
@@ -34,7 +45,7 @@ const NoteContextProvider = props => {
   }, [user]);
   useEffect(() => {
     const playerList = [];
-    playerNotes.forEach(note => {
+    playerNotes.forEach((note) => {
       const index = playerList.indexOf(note.player);
       if (index === -1) {
         playerList.push(note.player);
@@ -56,9 +67,9 @@ const NoteContextProvider = props => {
         const res = await axios.put(`/api/notes/game/${id}`, {
           filter,
           token,
-          note
+          note,
         });
-        const index = gameNotes.findIndex(x => x._id === id);
+        const index = gameNotes.findIndex((x) => x._id === id);
         gameNotes[index] = res.data.data;
         setLoading(false);
         return true;
@@ -72,9 +83,9 @@ const NoteContextProvider = props => {
         const res = await axios.put(`/api/notes/player/${id}`, {
           filter: filter.value,
           token,
-          note
+          note,
         });
-        const index = playerNotes.findIndex(x => x._id === id);
+        const index = playerNotes.findIndex((x) => x._id === id);
         playerNotes[index] = res.data.data;
         setLoading(false);
         toggleNoteEditor();
@@ -107,7 +118,7 @@ const NoteContextProvider = props => {
             note: body,
             myCharacter: me,
             game,
-            universal
+            universal,
           };
         } else {
           note = {
@@ -115,14 +126,14 @@ const NoteContextProvider = props => {
             note: body,
             myCharacter: me,
             opponentCharacter: opponent,
-            game
+            game,
           };
         }
         try {
           const res = await axios.post("/api/notes/game", {
             token,
             user,
-            note
+            note,
           });
           gameNotes.push(res.data.data);
           setLoading(false);
@@ -137,13 +148,13 @@ const NoteContextProvider = props => {
           filter,
           note: body,
           player: opponent,
-          game
+          game,
         };
         try {
           const res = await axios.post("/api/notes/player", {
             token,
             user,
-            note
+            note,
           });
           playerNotes.push(res.data.data);
           setLoading(false);
@@ -171,7 +182,11 @@ const NoteContextProvider = props => {
         editNote,
         playerFilters,
         players,
-        postNote
+        postNote,
+        gameNotesValues,
+        setGameNotesValues,
+        playerNotesValues,
+        setPlayerNotesValues,
       }}
     >
       {props.children}
