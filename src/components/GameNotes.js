@@ -231,6 +231,15 @@ export default function GameNotes() {
             </Grid>
           </Hidden>
           <Grid item md={6} xs={12}>
+            <Hidden smUp>
+              {game === "" &&
+                myCharacter === "" &&
+                opponentCharacter === "" && (
+                  <Typography variant="h5">
+                    Click the search button to find your notes.
+                  </Typography>
+                )}
+            </Hidden>
             {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
               <Container>
                 <Typography variant="h5" className={classes.spaced}>
