@@ -6,6 +6,7 @@ import {
   Button,
   Modal,
   TextField,
+  Hidden,
   makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
@@ -151,82 +152,84 @@ export default function GameNotes() {
     <section className="game-notes">
       <Container>
         <Grid container spacing={2}>
-          <Grid item md={6} xs={12}>
-            <Typography variant="h5" className={classes.spaced}>
-              {localeSelect(language, gameNotesLocale)}
-            </Typography>
-            <Typography variant="h6">
-              {localeSelect(language, chooseGame)}
-            </Typography>
-            <Select
-              options={games.map((game) => {
-                return {
-                  label: dbLocale(language, game),
-                  value: game._id,
-                };
-              })}
-              onChange={(e) => {
-                setGame(e.value);
-              }}
-              className={classes.spaced}
-            />
-            <Typography variant="h6">
-              {localeSelect(language, yourCharacterLocale)}
-            </Typography>
-            <Select
-              options={characters.map((character) => {
-                return {
-                  label: dbLocale(language, character),
-                  value: character._id,
-                };
-              })}
-              onChange={(e) => {
-                setMyCharacter(e.value);
-              }}
-              className={classes.spaced}
-            />
-            <Typography variant="h6">
-              {localeSelect(language, opponentCharacterLocale)}
-            </Typography>
-            <Select
-              options={characters.map((character) => {
-                return {
-                  label: dbLocale(language, character),
-                  value: character._id,
-                };
-              })}
-              onChange={(e) => {
-                setOpponentCharacter(e.value);
-              }}
-              className={classes.spaced}
-            />
-            <Typography variant="h6">
-              {localeSelect(language, chooseFilter)}
-            </Typography>
-            <Select
-              options={filters.map((x) => {
-                return {
-                  label: dbLocale(language, x),
-                  value: x._id,
-                };
-              })}
-              onChange={(e) => {
-                setMyFilter(e.value);
-              }}
-              className={classes.spaced}
-            />
-            {myFilter !== "" && (
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={() => {
-                  setMyFilter("");
+          <Hidden xsDown>
+            <Grid item md={6} xs={12}>
+              <Typography variant="h5" className={classes.spaced}>
+                {localeSelect(language, gameNotesLocale)}
+              </Typography>
+              <Typography variant="h6">
+                {localeSelect(language, chooseGame)}
+              </Typography>
+              <Select
+                options={games.map((game) => {
+                  return {
+                    label: dbLocale(language, game),
+                    value: game._id,
+                  };
+                })}
+                onChange={(e) => {
+                  setGame(e.value);
                 }}
-              >
-                {localeSelect(language, clearFilter)}
-              </Button>
-            )}
-          </Grid>
+                className={classes.spaced}
+              />
+              <Typography variant="h6">
+                {localeSelect(language, yourCharacterLocale)}
+              </Typography>
+              <Select
+                options={characters.map((character) => {
+                  return {
+                    label: dbLocale(language, character),
+                    value: character._id,
+                  };
+                })}
+                onChange={(e) => {
+                  setMyCharacter(e.value);
+                }}
+                className={classes.spaced}
+              />
+              <Typography variant="h6">
+                {localeSelect(language, opponentCharacterLocale)}
+              </Typography>
+              <Select
+                options={characters.map((character) => {
+                  return {
+                    label: dbLocale(language, character),
+                    value: character._id,
+                  };
+                })}
+                onChange={(e) => {
+                  setOpponentCharacter(e.value);
+                }}
+                className={classes.spaced}
+              />
+              <Typography variant="h6">
+                {localeSelect(language, chooseFilter)}
+              </Typography>
+              <Select
+                options={filters.map((x) => {
+                  return {
+                    label: dbLocale(language, x),
+                    value: x._id,
+                  };
+                })}
+                onChange={(e) => {
+                  setMyFilter(e.value);
+                }}
+                className={classes.spaced}
+              />
+              {myFilter !== "" && (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => {
+                    setMyFilter("");
+                  }}
+                >
+                  {localeSelect(language, clearFilter)}
+                </Button>
+              )}
+            </Grid>
+          </Hidden>
           <Grid item md={6} xs={12}>
             {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
               <Container>
