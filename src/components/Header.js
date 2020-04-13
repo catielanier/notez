@@ -10,7 +10,7 @@ import {
   Menu,
   MenuItem,
   Link,
-  Hidden
+  Hidden,
 } from "@material-ui/core";
 import {
   title,
@@ -29,31 +29,32 @@ import {
   linkFilters,
   userSettings,
   profile,
-  logout
+  logout,
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
 import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { MenuContext } from "../contexts/MenuContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -62,7 +63,7 @@ export default function Header() {
   };
   const { user, role, logout: doLogout } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
-  const { showMenu } = useContext(MenuContext);
+  const { showMenu, showSearchBar } = useContext(MenuContext);
   return (
     <div className={(classes.root, "header")}>
       <AppBar position="static">
@@ -254,6 +255,19 @@ export default function Header() {
               <Button color="inherit" onClick={doLogout}>
                 {localeSelect(language, logout)}
               </Button>
+            </Hidden>
+          )}
+          {user !== undefined && (
+            <Hidden smUp>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                className={classes.menuButton}
+                onClick={showSearchBar}
+              >
+                <SearchIcon />
+              </IconButton>
             </Hidden>
           )}
         </Toolbar>

@@ -32,6 +32,7 @@ import { NoteContext } from "../contexts/NoteContext";
 import { GameContext } from "../contexts/GameContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import sort from "../services/sort";
+import { MenuContext } from "../contexts/MenuContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,6 +75,7 @@ export default function GameNotes() {
   } = useContext(NoteContext);
   const { games } = useContext(GameContext);
   const { language } = useContext(LanguageContext);
+  const { searchBar } = useContext(MenuContext);
   const [displayedNotes, setDisplayedNotes] = useState([]);
   const [characters, setCharacters] = useState([]);
   const [filters, setFilters] = useState([]);
