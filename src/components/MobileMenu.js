@@ -4,7 +4,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -16,7 +16,7 @@ import {
   Link as LinkIcon,
   Settings,
   Person,
-  Edit
+  Edit,
 } from "@material-ui/icons";
 import {
   login,
@@ -33,7 +33,7 @@ import {
   linkFilters,
   userSettings,
   profile,
-  logout
+  logout,
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import { UserContext } from "../contexts/UserContext";
@@ -45,7 +45,7 @@ export default function MobileMenu() {
   const { language } = useContext(LanguageContext);
   const { menu, showMenu } = useContext(MenuContext);
   return (
-    <Drawer open={menu} onClose={showMenu}>
+    <Drawer anchor="right" open={menu} onClose={showMenu}>
       <List>
         {user === undefined && (
           <>

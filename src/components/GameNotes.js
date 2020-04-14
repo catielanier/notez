@@ -33,7 +33,6 @@ import { NoteContext } from "../contexts/NoteContext";
 import { GameContext } from "../contexts/GameContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import sort from "../services/sort";
-import { MenuContext } from "../contexts/MenuContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,12 +73,11 @@ export default function GameNotes() {
     gameNotesFilter: myFilter,
     setGameNotesFilter: setMyFilter,
   } = useContext(NoteContext);
-  const { games } = useContext(GameContext);
+  const { games, updateDropdowns, characters, filters } = useContext(
+    GameContext
+  );
   const { language } = useContext(LanguageContext);
-  const { searchBar } = useContext(MenuContext);
   const [displayedNotes, setDisplayedNotes] = useState([]);
-  const [characters, setCharacters] = useState([]);
-  const [filters, setFilters] = useState([]);
   const [noteId, setNoteId] = useState("");
   const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
@@ -91,12 +89,7 @@ export default function GameNotes() {
       setMyFilter("");
       setOpponentCharacter("");
       setDisplayedNotes([]);
-      const index = games.findIndex((x) => x._id === game);
-      const { characters: allCharacters, filters: allFilters } = games[index];
-      sort(allCharacters, language);
-      sort(allFilters, language);
-      setCharacters(allCharacters);
-      setFilters(allFilters);
+      updateDropdowns(game, "game");
     }
   }, [game, games, language]);
 
@@ -232,10 +225,13 @@ export default function GameNotes() {
           </Hidden>
           <Grid item md={6} xs={12}>
             <Hidden smUp>
+              <Typography variant="h5" className={classes.spaced}>
+                {localeSelect(language, gameNotesLocale)}
+              </Typography>
               {game === "" &&
                 myCharacter === "" &&
                 opponentCharacter === "" && (
-                  <Typography variant="h5">
+                  <Typography variant="subtitle">
                     Click the search button to find your notes.
                   </Typography>
                 )}

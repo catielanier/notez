@@ -7,22 +7,34 @@ import { getToken } from "../services/tokenService";
 
 export const GameContext = createContext();
 
-const GameContextProvider = props => {
+const GameContextProvider = (props) => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [characters, setCharacters] = useState([]);
+  const [filters, setFilters] = useState([]);
   const { language } = useContext(LanguageContext);
   const { user } = useContext(UserContext);
   useEffect(() => {
-    const fetchData = async function() {
-      await axios.get("/api/games").then(res => {
+    const fetchData = async function () {
+      await axios.get("/api/games").then((res) => {
         sort(res.data.data, language);
         setGames(res.data.data);
       });
     };
     fetchData();
   }, [language]);
+  const updateDropdowns = (game, type) => {
+    const index = games.findIndex((x) => x._id === game);
+    if (type === "game") {
+      const { characters: allCharacters, filters: allFilters } = games[index];
+      sort(allCharacters, language);
+      sort(allFilters, language);
+      setCharacters(allCharacters);
+      setFilters(allFilters);
+    }
+  };
   const createGame = async (en, ja, ko, cn, tw, hk) => {
     setLoading(true);
     setError(null);
@@ -33,13 +45,13 @@ const GameContextProvider = props => {
       name_ko: ko,
       "name_zh-cn": cn,
       "name_zh-tw": tw,
-      "name_zh-hk": hk
+      "name_zh-hk": hk,
     };
     try {
       const res = await axios.post("/api/games/new", {
         user,
         token,
-        game
+        game,
       });
       games.push(res.data.data);
       sort(games, language);
@@ -73,10 +85,10 @@ const GameContextProvider = props => {
           name_cn,
           name_tw,
           name_hk,
-          game
-        }
+          game,
+        },
       });
-      const index = games.findIndex(x => x._id === game);
+      const index = games.findIndex((x) => x._id === game);
       games[index] = res.data.data;
       setLoading(false);
       setSuccess(true);
@@ -94,9 +106,9 @@ const GameContextProvider = props => {
         user,
         token,
         characters,
-        game
+        game,
       });
-      const index = games.findIndex(x => x._id === game);
+      const index = games.findIndex((x) => x._id === game);
       games[index].characters = res.data.data.characters;
     } catch (e) {
       setLoading(false);
@@ -112,9 +124,9 @@ const GameContextProvider = props => {
         user,
         token,
         filters,
-        game
+        game,
       });
-      const index = games.findIndex(x => x._id === game);
+      const index = games.findIndex((x) => x._id === game);
       games[index].filters = res.data.data.filters;
     } catch (e) {
       setLoading(false);
@@ -131,7 +143,10 @@ const GameContextProvider = props => {
         createGame,
         connectCharacters,
         connectFilters,
-        editGame
+        editGame,
+        updateDropdowns,
+        characters,
+        filters,
       }}
     >
       {props.children}
