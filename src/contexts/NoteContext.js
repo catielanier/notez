@@ -24,6 +24,7 @@ const NoteContextProvider = (props) => {
   const [opponent, setOpponent] = useState("");
   const [playerNotesGame, setPlayerNotesGame] = useState("");
   const [playerNotesFilter, setPlayerNotesFilter] = useState("");
+  const [displayedGameNotes, setDisplayedGameNotes] = useState([]);
   const { user } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const toggleNoteEditor = () => {
@@ -193,6 +194,8 @@ const NoteContextProvider = (props) => {
         setPlayerNotesGame,
         playerNotesFilter,
         setPlayerNotesFilter,
+        displayedGameNotes,
+        setDisplayedGameNotes,
       }}
     >
       {props.children}

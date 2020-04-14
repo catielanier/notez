@@ -13,6 +13,7 @@ import Select from "react-select";
 import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
 import SearchBar from "./SearchBar";
+import GameNotesSearch from "./GameNotesSearch";
 import localeSelect from "../services/localeSelect";
 import {
   gameNotes as gameNotesLocale,
@@ -72,12 +73,14 @@ export default function GameNotes() {
     setOpponentCharacter,
     gameNotesFilter: myFilter,
     setGameNotesFilter: setMyFilter,
+    displayedGameNotes: displayedNotes,
+    setDisplayedGameNotes: setDisplayedNotes,
   } = useContext(NoteContext);
   const { games, updateDropdowns, characters, filters } = useContext(
     GameContext
   );
   const { language } = useContext(LanguageContext);
-  const [displayedNotes, setDisplayedNotes] = useState([]);
+
   const [noteId, setNoteId] = useState("");
   const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
@@ -151,77 +154,7 @@ export default function GameNotes() {
               <Typography variant="h5" className={classes.spaced}>
                 {localeSelect(language, gameNotesLocale)}
               </Typography>
-              <Typography variant="h6">
-                {localeSelect(language, chooseGame)}
-              </Typography>
-              <Select
-                options={games.map((game) => {
-                  return {
-                    label: dbLocale(language, game),
-                    value: game._id,
-                  };
-                })}
-                onChange={(e) => {
-                  setGame(e.value);
-                }}
-                className={classes.spaced}
-              />
-              <Typography variant="h6">
-                {localeSelect(language, yourCharacterLocale)}
-              </Typography>
-              <Select
-                options={characters.map((character) => {
-                  return {
-                    label: dbLocale(language, character),
-                    value: character._id,
-                  };
-                })}
-                onChange={(e) => {
-                  setMyCharacter(e.value);
-                }}
-                className={classes.spaced}
-              />
-              <Typography variant="h6">
-                {localeSelect(language, opponentCharacterLocale)}
-              </Typography>
-              <Select
-                options={characters.map((character) => {
-                  return {
-                    label: dbLocale(language, character),
-                    value: character._id,
-                  };
-                })}
-                onChange={(e) => {
-                  setOpponentCharacter(e.value);
-                }}
-                className={classes.spaced}
-              />
-              <Typography variant="h6">
-                {localeSelect(language, chooseFilter)}
-              </Typography>
-              <Select
-                options={filters.map((x) => {
-                  return {
-                    label: dbLocale(language, x),
-                    value: x._id,
-                  };
-                })}
-                onChange={(e) => {
-                  setMyFilter(e.value);
-                }}
-                className={classes.spaced}
-              />
-              {myFilter !== "" && (
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => {
-                    setMyFilter("");
-                  }}
-                >
-                  {localeSelect(language, clearFilter)}
-                </Button>
-              )}
+              <GameNotesSearch />
             </Grid>
           </Hidden>
           <Grid item md={6} xs={12}>
