@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const userServices = require("../users/userServices");
-const tokenService = require("../../utils/tokenService");
+const tokenService = require("../../_utils/tokenService");
 const characterServices = require("./characterServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -25,7 +25,7 @@ router.route("/new").post(async (req, res) => {
     // Create new game.
     const newCharacter = await characterServices.createCharacter(character);
     res.status(201).json({
-      data: newCharacter
+      data: newCharacter,
     });
   } catch (e) {
     res.status(401).send(e);
@@ -37,7 +37,7 @@ router.route("/").get(async (_, res) => {
     const characters = await characterServices.getAllCharacters();
     if (characters) {
       res.status(200).json({
-        data: characters
+        data: characters,
       });
     }
   } catch (e) {
@@ -55,7 +55,7 @@ router.route("/").put(async (req, res) => {
     name_cn,
     name_tw,
     name_hk,
-    character
+    character,
   } = req.body.data;
 
   const loggedIn = await tokenService.verifyToken(token);
@@ -79,7 +79,7 @@ router.route("/").put(async (req, res) => {
   );
 
   res.status(201).json({
-    data: result
+    data: result,
   });
 });
 

@@ -32,7 +32,6 @@ import dbLocale from "../services/dbLocale";
 import { NoteContext } from "../contexts/NoteContext";
 import { GameContext } from "../contexts/GameContext";
 import { LanguageContext } from "../contexts/LanguageContext";
-import sort from "../services/sort";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

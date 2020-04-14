@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const {
-  router: gameNoteRouter
-} = require("./routes/notes/games/gameNoteRoutes");
+  router: gameNoteRouter,
+} = require("./_routes/notes/games/gameNoteRoutes");
 const { MONGODB_URI } = process.env; // set up db connection
 
 mongoose.connect(MONGODB_URI);

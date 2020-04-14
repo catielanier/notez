@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const {
-  router: characterNoteRouter
-} = require("./routes/notes/characters/characterNoteRoutes");
+  router: characterNoteRouter,
+} = require("./_routes/notes/characters/characterNoteRoutes");
 const { MONGODB_URI } = process.env; // set up db connection
 
 mongoose.connect(MONGODB_URI);

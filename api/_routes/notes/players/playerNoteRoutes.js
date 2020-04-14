@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const tokenService = require("../../../utils/tokenService");
+const tokenService = require("../../../_utils/tokenService");
 const userServices = require("../../users/userServices");
 const playerNoteServices = require("./playerNoteServices");
-const middleWare = require("../../../middleware");
-const { applyMiddleware } = require("../../../utils");
+const middleWare = require("../../../_middleware");
+const { applyMiddleware } = require("../../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -26,7 +26,7 @@ router.route("/").post(async (req, res) => {
       if (relationship) {
         const fullNote = await playerNoteServices.getNoteById(noteId);
         res.status(201).json({
-          data: fullNote
+          data: fullNote,
         });
       }
     }
@@ -49,7 +49,7 @@ router.route("/").delete(async (req, res) => {
     );
     const note = await playerNoteServices.deleteNote(noteId);
     res.status(200).json({
-      data: note
+      data: note,
     });
   } catch (e) {
     res.status(401).send(e);
@@ -68,7 +68,7 @@ router.route("/:id").put(async (req, res) => {
     if (results) {
       const updatedNote = await playerNoteServices.getNoteById(noteId);
       res.status(201).json({
-        data: updatedNote
+        data: updatedNote,
       });
     }
   } catch (e) {

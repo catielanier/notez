@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const userService = require("./userServices");
-const tokenService = require("../../utils/tokenService");
+const tokenService = require("../../_utils/tokenService");
 const nodemailer = require("nodemailer");
-const { MAILSERVER } = require("../../utils/constants");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const { MAILSERVER } = require("../../_utils/constants");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -27,7 +27,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"NoteZ" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "Welcome to NoteZ!",
-      html: messageBody_en
+      html: messageBody_en,
     };
     const messageBody_ja = `
       <h3>ノートZ</h3>
@@ -39,7 +39,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"ノートZ" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "ノートZへようこそ！",
-      html: messageBody_ja
+      html: messageBody_ja,
     };
     const messageBody_ko = `
       <h3>노트Z</h3>
@@ -51,7 +51,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"노트Z" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "노트Z 오신 것을 환영합니다!",
-      html: messageBody_ko
+      html: messageBody_ko,
     };
     const messageBody_cn = `
       <h3>笔记Z</h3>
@@ -63,7 +63,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"笔记Z" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
-      html: messageBody_cn
+      html: messageBody_cn,
     };
     const messageBody_tw = `
       <h3>筆記Z</h3>
@@ -75,7 +75,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"笔记Z" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
-      html: messageBody_tw
+      html: messageBody_tw,
     };
     const messageBody_hk = `
       <h3>筆記Z</h3>
@@ -87,7 +87,7 @@ router.route("/signup").post(async (req, res, next) => {
       from: '"笔记Z" <no-reply@notezapp.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
-      html: messageBody_hk
+      html: messageBody_hk,
     };
     let mailOptions = {};
     if (language === "ja") {
@@ -110,7 +110,7 @@ router.route("/signup").post(async (req, res, next) => {
       console.log(`Message sent: ${info.messageId}`);
     });
     res.status(201).json({
-      data: [user]
+      data: [user],
     });
   } catch (e) {
     next(e);
@@ -126,8 +126,8 @@ router.route("/login").post(async (req, res, next) => {
         res.status(200).json({
           data: {
             token,
-            id: user._id
-          }
+            id: user._id,
+          },
         });
       } else {
         res
@@ -149,7 +149,7 @@ router.route("/:id").get(async (req, res, next) => {
   try {
     const user = await userService.getUserById(id);
     res.status(200).json({
-      data: user
+      data: user,
     });
   } catch (e) {
     next(e);
@@ -165,7 +165,7 @@ router.route("/:id").put(async (req, res) => {
     oldPassword,
     country,
     email,
-    token
+    token,
   } = req.body;
   const loggedIn = await tokenService.verifyToken(token);
   if (loggedIn) {
@@ -188,7 +188,7 @@ router.route("/:id").put(async (req, res) => {
         );
         if (userUpdate && passwordChange) {
           res.status(201).json({
-            data: userUpdate
+            data: userUpdate,
           });
         } else {
           res.status(401).send("User did not update.");
@@ -208,7 +208,7 @@ router.route("/:id").put(async (req, res) => {
       );
       if (userUpdate) {
         res.status(201).json({
-          data: userUpdate
+          data: userUpdate,
         });
       } else {
         res.status(401).send("User did not update.");
@@ -228,7 +228,7 @@ router.route("/").get(async (req, res) => {
       const users = await userService.getAllUsers();
       if (users) {
         res.status(200).json({
-          data: users
+          data: users,
         });
       }
     } else {
@@ -248,7 +248,7 @@ router.route("/role").put(async (req, res) => {
       const updatedUser = await userService.updateRole(id, role);
       if (updatedUser) {
         res.status(201).json({
-          data: updatedUser
+          data: updatedUser,
         });
       }
     } else {
@@ -276,7 +276,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"NoteZ" <no-reply@notezapp.com>',
         to: email,
         subject: "Password reset link",
-        html: messageBody_en
+        html: messageBody_en,
       };
       const messageBody_ja = `
         <h3>ノートZ</h3>
@@ -288,7 +288,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"ノートZ" <no-reply@notezapp.com>',
         to: email,
         subject: "パスワードリセットリンク",
-        html: messageBody_ja
+        html: messageBody_ja,
       };
       const messageBody_ko = `
         <h3>노트Z</h3>
@@ -300,7 +300,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"노트Z" <no-reply@notezapp.com>',
         to: email,
         subject: "암호 재설정 링크",
-        html: messageBody_ko
+        html: messageBody_ko,
       };
       const messageBody_cn = `
         <h3>笔记Z</h3>
@@ -312,7 +312,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"笔记Z" <no-reply@notezapp.com>',
         to: email,
         subject: "密码重置链接",
-        html: messageBody_cn
+        html: messageBody_cn,
       };
       const messageBody_tw = `
         <h3>筆記Z</h3>
@@ -324,7 +324,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"筆記Z" <no-reply@notezapp.com>',
         to: email,
         subject: "密码重置链接",
-        html: messageBody_tw
+        html: messageBody_tw,
       };
       const messageBody_hk = `
         <h3>筆記Z</h3>
@@ -336,7 +336,7 @@ router.route("/forgot").post(async (req, res) => {
         from: '"筆記Z" <no-reply@notezapp.com>',
         to: email,
         subject: "密码重置链接",
-        html: messageBody_hk
+        html: messageBody_hk,
       };
       let mailOptions = {};
       if (language === "ja") {
@@ -359,7 +359,7 @@ router.route("/forgot").post(async (req, res) => {
         console.log(`Message sent: ${info.messageId}`);
       });
       res.status(201).json({
-        data: updated
+        data: updated,
       });
     }
   } catch (e) {
@@ -372,7 +372,7 @@ router.route("/verify").post(async (req, res) => {
   const user = await userService.verifyUser(key);
   if (user) {
     res.status(201).json({
-      data: user
+      data: user,
     });
   } else {
     res.status(401).send("There was no such token.");
@@ -388,7 +388,7 @@ router.route("/reset").post(async (req, res) => {
       const updatedUser = await userService.updatePassword(user._id, password);
       if (updatedUser) {
         res.status(201).json({
-          data: updatedUser
+          data: updatedUser,
         });
       }
     }

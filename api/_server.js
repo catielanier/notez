@@ -7,25 +7,25 @@ const http = require("http");
 const router = express();
 
 // Middleware
-const { URL, PORT } = require("./utils/constants");
-const middleWare = require("./middleware");
-const { applyMiddleware } = require("./utils");
+const { URL, PORT } = require("./_utils/constants");
+const middleWare = require("./_middleware");
+const { applyMiddleware } = require("./_utils");
 
 applyMiddleware(middleWare, router);
 
 // Routes
-const { router: userRouter } = require("./routes/users/userRoutes");
-const { router: gameRouter } = require("./routes/games/gameRoutes");
+const { router: userRouter } = require("./_routes/users/userRoutes");
+const { router: gameRouter } = require("./_routes/games/gameRoutes");
 const {
-  router: characterRouter
-} = require("./routes/characters/characterRoutes");
-const { router: filterRouter } = require("./routes/filters/filterRoutes");
+  router: characterRouter,
+} = require("./_routes/characters/characterRoutes");
+const { router: filterRouter } = require("./_routes/filters/filterRoutes");
 const {
-  router: gameNoteRouter
-} = require("./routes/notes/games/gameNoteRoutes");
+  router: gameNoteRouter,
+} = require("./_routes/notes/games/gameNoteRoutes");
 const {
-  router: playerNoteRouter
-} = require("./routes/notes/players/playerNoteRoutes");
+  router: playerNoteRouter,
+} = require("./_routes/notes/players/playerNoteRoutes");
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
@@ -45,6 +45,6 @@ mongoose
       console.log(`server running on port ${PORT}`);
     });
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });

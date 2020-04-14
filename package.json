@@ -28,9 +28,9 @@
     "util": "^0.12.1"
   },
   "scripts": {
-    "start:server": "nodemon api/server.js",
+    "start:server": "nodemon api/_server.js",
     "start:client": "react-scripts start",
-    "all": "concurrently --kill-others \"nodemon api/server.js\" \"react-scripts start\"",
+    "all": "concurrently --kill-others \"nodemon api/_server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
