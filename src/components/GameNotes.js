@@ -17,11 +17,6 @@ import GameNotesSearch from "./GameNotesSearch";
 import localeSelect from "../services/localeSelect";
 import {
   gameNotes as gameNotesLocale,
-  chooseGame,
-  yourCharacter as yourCharacterLocale,
-  opponentCharacter as opponentCharacterLocale,
-  chooseFilter,
-  clearFilter,
   notes,
   notice,
   noNotes,
@@ -65,36 +60,19 @@ export default function GameNotes() {
     noteEditor,
     toggleNoteEditor,
     editNote,
-    setGameNotesGame: setGame,
     gameNotesGame: game,
     myCharacter,
-    setMyCharacter,
     opponentCharacter,
-    setOpponentCharacter,
     gameNotesFilter: myFilter,
-    setGameNotesFilter: setMyFilter,
     displayedGameNotes: displayedNotes,
     setDisplayedGameNotes: setDisplayedNotes,
   } = useContext(NoteContext);
-  const { games, updateDropdowns, characters, filters } = useContext(
-    GameContext
-  );
+  const { filters } = useContext(GameContext);
   const { language } = useContext(LanguageContext);
 
   const [noteId, setNoteId] = useState("");
   const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
-
-  // Effect called to grab characters and filters from chosen game, and set them to state.
-  useEffect(() => {
-    if (game !== "") {
-      setMyCharacter("");
-      setMyFilter("");
-      setOpponentCharacter("");
-      setDisplayedNotes([]);
-      updateDropdowns(game, "game");
-    }
-  }, [game, games, language]);
 
   useEffect(() => {
     if (myCharacter !== "" && opponentCharacter !== "" && myFilter !== "") {
