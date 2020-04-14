@@ -6,19 +6,18 @@ import {
   Button,
   Modal,
   TextField,
-  makeStyles
+  Hidden,
+  makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
 import { Redirect } from "react-router-dom";
-import Creatable from "react-select/creatable";
 import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
+import PlayerNoteSearch from "./PlayerNoteSearch";
+import SearchBar from "./SearchBar";
 import localeSelect from "../services/localeSelect";
 import {
   playerNotes as playerNotesLocale,
-  chooseGame,
-  chooseFilter,
-  clearFilter,
   notes,
   notice,
   noNotes,
@@ -26,15 +25,13 @@ import {
   filter as filterLocale,
   editNote as editNoteLocale,
   cancel,
-  chooseOpponent
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
-import { GameContext } from "../contexts/GameContext";
 import { NoteContext } from "../contexts/NoteContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: "50%",
@@ -44,35 +41,33 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
   },
   button: {
     marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   spaced: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function PlayerNotes() {
   const classes = useStyles();
   const { user } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
-  const { games } = useContext(GameContext);
   const {
     playerNotes,
-    players,
     loading,
     error,
     editNote,
     toggleNoteEditor,
     noteEditor,
-    playerFilters: filters
+    player,
+    playerNotesFilter: filter,
+    playerNotesGame: game,
+    playerFilters: filters,
   } = useContext(NoteContext);
-  const [game, setGame] = useState("");
-  const [filter, setFilter] = useState("");
-  const [player, setPlayer] = useState("");
   const [editFilter, setEditFilter] = useState("");
   const [noteBody, setNoteBody] = useState("");
   const [noteId, setNoteId] = useState("");
@@ -80,7 +75,7 @@ export default function PlayerNotes() {
   useEffect(() => {
     if (game !== "" && player !== "" && filter !== "") {
       const notes = [];
-      playerNotes.forEach(note => {
+      playerNotes.forEach((note) => {
         if (
           game === note.game &&
           player === note.player &&
@@ -92,7 +87,7 @@ export default function PlayerNotes() {
       setDisplayedNotes(notes);
     } else if (game !== "" && player !== "" && filter === "") {
       const notes = [];
-      playerNotes.forEach(note => {
+      playerNotes.forEach((note) => {
         if (game === note.game && player === note.player) {
           notes.push(note);
         }
@@ -105,75 +100,38 @@ export default function PlayerNotes() {
   }
   return (
     <section className="player-notes">
+      <SearchBar noteType="player" />
       <Container>
         <Grid container spacing={2}>
+          <Hidden xsDown>
+            <Grid item md={6} xs={12}>
+              <Typography variant="h5" className={classes.spaced}>
+                {localeSelect(language, playerNotesLocale)}
+              </Typography>
+              <PlayerNoteSearch />
+            </Grid>
+          </Hidden>
           <Grid item md={6} xs={12}>
-            <Typography variant="h5" className={classes.spaced}>
-              {localeSelect(language, playerNotesLocale)}
-            </Typography>
-            <Typography variant="h6">
-              {localeSelect(language, chooseOpponent)}
-            </Typography>
-            <Creatable
-              options={players.map(player => {
-                return { label: player, value: player };
-              })}
-              onChange={e => {
-                setPlayer(e.value);
-              }}
-              className={classes.spaced}
-            />
-            <Typography variant="h6">
-              {localeSelect(language, chooseGame)}
-            </Typography>
-            <Select
-              options={games.map(game => {
-                return {
-                  label: dbLocale(language, game),
-                  value: game._id
-                };
-              })}
-              onChange={e => {
-                setGame(e.value);
-              }}
-              className={classes.spaced}
-            />
-            <Typography variant="h6">
-              {localeSelect(language, chooseFilter)}
-            </Typography>
-            <Select
-              options={filters.map(filter => {
-                return {
-                  label: dbLocale(language, filter),
-                  value: filter._id
-                };
-              })}
-              onChange={e => {
-                setFilter(e.value);
-              }}
-              className={classes.spaced}
-            />
-            {filter !== "" && (
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={() => {
-                  setFilter("");
-                }}
-              >
-                {localeSelect(language, clearFilter)}
-              </Button>
-            )}
-          </Grid>
-          <Grid item md={6} xs={12}>
+            <Hidden smUp>
+              <Typography variant="h5" className={classes.spaced}>
+                {localeSelect(language, playerNotesLocale)}
+              </Typography>
+              {game === "" && player === "" && (
+                <Typography variant="subtitle">
+                  Click the search button to find your notes.
+                </Typography>
+              )}
+            </Hidden>
             {game !== "" && player !== "" && (
               <Container>
-                <Typography variant="h5" className={classes.spaced}>
-                  {localeSelect(language, notes)}
-                </Typography>
+                <Hidden xsDown>
+                  <Typography variant="h5" className={classes.spaced}>
+                    {localeSelect(language, notes)}
+                  </Typography>
+                </Hidden>
                 <Grid container className={classes.spaced}>
                   {displayedNotes.length > 0 ? (
-                    displayedNotes.map(note => {
+                    displayedNotes.map((note) => {
                       return (
                         <PopulateNotes
                           key={note._id}
@@ -224,13 +182,13 @@ export default function PlayerNotes() {
             {localeSelect(language, filterLocale)}
           </Typography>
           <Select
-            options={filters.map(filter => {
+            options={filters.map((filter) => {
               return {
                 label: dbLocale(language, filter),
-                value: filter._id
+                value: filter._id,
               };
             })}
-            onChange={e => {
+            onChange={(e) => {
               setEditFilter({ label: e.label, value: e.value });
             }}
             defaultValue={editFilter}
@@ -240,7 +198,7 @@ export default function PlayerNotes() {
             multiline
             name="note"
             value={noteBody}
-            onChange={e => {
+            onChange={(e) => {
               setNoteBody(e.target.value);
             }}
             fullWidth

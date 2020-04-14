@@ -150,9 +150,11 @@ export default function GameNotes() {
             </Hidden>
             {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
               <Container>
-                <Typography variant="h5" className={classes.spaced}>
-                  {localeSelect(language, notes)}
-                </Typography>
+                <Hidden xsDown>
+                  <Typography variant="h5" className={classes.spaced}>
+                    {localeSelect(language, notes)}
+                  </Typography>
+                </Hidden>
                 <Grid container className={classes.spaced}>
                   {displayedNotes.length > 0 ? (
                     displayedNotes.map((note) => {

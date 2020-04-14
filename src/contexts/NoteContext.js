@@ -21,10 +21,11 @@ const NoteContextProvider = (props) => {
   const [myCharacter, setMyCharacter] = useState("");
   const [opponentCharacter, setOpponentCharacter] = useState("");
   const [gameNotesFilter, setGameNotesFilter] = useState("");
-  const [opponent, setOpponent] = useState("");
+  const [player, setPlayer] = useState("");
   const [playerNotesGame, setPlayerNotesGame] = useState("");
   const [playerNotesFilter, setPlayerNotesFilter] = useState("");
   const [displayedGameNotes, setDisplayedGameNotes] = useState([]);
+  const [displayedPlayerNotes, setDisplayedPlayerNotes] = useState([]);
   const { user } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const toggleNoteEditor = () => {
@@ -188,14 +189,16 @@ const NoteContextProvider = (props) => {
         setOpponentCharacter,
         gameNotesFilter,
         setGameNotesFilter,
-        opponent,
-        setOpponent,
+        player,
+        setPlayer,
         playerNotesGame,
         setPlayerNotesGame,
         playerNotesFilter,
         setPlayerNotesFilter,
         displayedGameNotes,
         setDisplayedGameNotes,
+        displayedPlayerNotes,
+        setDisplayedPlayerNotes,
       }}
     >
       {props.children}
