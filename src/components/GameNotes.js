@@ -12,6 +12,7 @@ import {
 import Select from "react-select";
 import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
+import SearchBar from "./SearchBar";
 import localeSelect from "../services/localeSelect";
 import {
   gameNotes as gameNotesLocale,
@@ -143,6 +144,7 @@ export default function GameNotes() {
   return (
     <section className="game-notes">
       <Container>
+        <SearchBar noteType="game" />
         <Grid container spacing={2}>
           <Hidden xsDown>
             <Grid item md={6} xs={12}>
