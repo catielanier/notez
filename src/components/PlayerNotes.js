@@ -67,11 +67,12 @@ export default function PlayerNotes() {
     playerNotesFilter: filter,
     playerNotesGame: game,
     playerFilters: filters,
+    displayedPlayerNotes: displayedNotes,
+    setDisplayedPlayerNotes: setDisplayedNotes,
   } = useContext(NoteContext);
   const [editFilter, setEditFilter] = useState("");
   const [noteBody, setNoteBody] = useState("");
   const [noteId, setNoteId] = useState("");
-  const [displayedNotes, setDisplayedNotes] = useState([]);
   useEffect(() => {
     if (game !== "" && player !== "" && filter !== "") {
       const notes = [];
