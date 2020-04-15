@@ -26,6 +26,7 @@ const {
 const {
   router: playerNoteRouter,
 } = require("./_routes/notes/players/playerNoteRoutes");
+const { router: inviteRouter } = require("./_routes/invites/inviteRoutes");
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
@@ -33,6 +34,7 @@ router.use("/api/characters", characterRouter);
 router.use("/api/filters", filterRouter);
 router.use("/api/notes/game", gameNoteRouter);
 router.use("/api/notes/player", playerNoteRouter);
+router.use("/api/invites", inviteRouter);
 
 // Setup server
 const server = http.createServer(router);
