@@ -38,15 +38,17 @@ router.route("/").post(async (req, res) => {
 router.route("/").delete(async (req, res) => {
   const { user: userId, token, noteId } = req.body;
   try {
-    const loggedIn = await tokenService.verifyToken(token);
-    if (!loggedIn) {
-      res.status(503).send("You are not logged in.");
-    }
-    const user = await userServices.getUserById(userId);
-    const relationship = await playerNoteServices.unlinkPlayerNote(
-      userId,
-      noteId
-    );
+    Promise.all(async () => {
+      const loggedIn = await tokenService.verifyToken(token);
+      if (!loggedIn) {
+        res.status(503).send("You are not logged in.");
+      }
+      const user = await userServices.getUserById(userId);
+      const relationship = await playerNoteServices.unlinkPlayerNote(
+        userId,
+        noteId
+      );
+    });
     const note = await playerNoteServices.deleteNote(noteId);
     res.status(200).json({
       data: note,
