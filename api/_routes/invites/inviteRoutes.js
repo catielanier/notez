@@ -28,3 +28,18 @@ router.route("/").post(async (req, res) => {
     res.status(401).send(e);
   }
 });
+
+router.route("/:id").get(async (req, res) => {
+  const { id } = req.query;
+  // get invite
+  try {
+    const invite = await inviteService.getInvite(id);
+    res.status(200).json({
+      data: {
+        ...invite,
+      },
+    });
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});

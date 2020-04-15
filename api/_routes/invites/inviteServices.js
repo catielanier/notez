@@ -8,3 +8,11 @@ exports.createInvite = async (newInvite) => {
     throw e;
   }
 };
+
+exports.getInvite = async (id) => {
+  try {
+    return await Invite.findById({ _id: id });
+  } catch (e) {
+    throw e;
+  }
+};
