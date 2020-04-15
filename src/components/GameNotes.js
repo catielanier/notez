@@ -140,13 +140,13 @@ export default function GameNotes() {
               <Typography variant="h5" className={classes.spaced}>
                 {localeSelect(language, gameNotesLocale)}
               </Typography>
-              {game === "" &&
-                myCharacter === "" &&
-                opponentCharacter === "" && (
-                  <Typography variant="subtitle">
-                    Click the search button to find your notes.
-                  </Typography>
-                )}
+              {(game === "" ||
+                myCharacter === "" ||
+                opponentCharacter === "") && (
+                <Typography variant="subtitle">
+                  Click the search button to find your notes.
+                </Typography>
+              )}
             </Hidden>
             {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
               <Container>

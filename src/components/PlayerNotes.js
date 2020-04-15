@@ -7,8 +7,11 @@ import {
   Modal,
   TextField,
   Hidden,
+  Fab,
+  Drawer,
   makeStyles,
 } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 import Select from "react-select";
 import { Redirect } from "react-router-dom";
 import QuickAddNote from "./QuickAddNote";
@@ -25,6 +28,7 @@ import {
   filter as filterLocale,
   editNote as editNoteLocale,
   cancel,
+  quickAdd,
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import { UserContext } from "../contexts/UserContext";
@@ -50,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
   spaced: {
     marginBottom: theme.spacing(2),
   },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  wrapper: {
+    padding: theme.spacing(3),
+  },
 }));
 
 export default function PlayerNotes() {
@@ -73,6 +85,10 @@ export default function PlayerNotes() {
   const [editFilter, setEditFilter] = useState("");
   const [noteBody, setNoteBody] = useState("");
   const [noteId, setNoteId] = useState("");
+  const [noteDrawer, setNoteDrawer] = useState(false);
+  const showNoteDrawer = () => {
+    setNoteDrawer(!noteDrawer);
+  };
   useEffect(() => {
     if (game !== "" && player !== "" && filter !== "") {
       const notes = [];
@@ -101,6 +117,29 @@ export default function PlayerNotes() {
   }
   return (
     <section className="player-notes">
+      {game !== "" && player !== "" && (
+        <Hidden smUp>
+          <Fab
+            className={classes.fab}
+            color="secondary"
+            dark
+            aria-label={localeSelect(language, quickAdd)}
+            onClick={showNoteDrawer}
+          >
+            <AddIcon />
+          </Fab>
+          <Drawer anchor="bottom" open={noteDrawer} onClose={showNoteDrawer}>
+            <Container className={classes.wrapper}>
+              <QuickAddNote
+                game={game}
+                player={player}
+                filters={filters}
+                type="Player Note"
+              />
+            </Container>
+          </Drawer>
+        </Hidden>
+      )}
       <SearchBar noteType="player" />
       <Container>
         <Grid container spacing={2}>
@@ -117,7 +156,7 @@ export default function PlayerNotes() {
               <Typography variant="h5" className={classes.spaced}>
                 {localeSelect(language, playerNotesLocale)}
               </Typography>
-              {game === "" && player === "" && (
+              {(game === "" || player === "") && (
                 <Typography variant="subtitle">
                   Click the search button to find your notes.
                 </Typography>
@@ -153,12 +192,14 @@ export default function PlayerNotes() {
                     />
                   )}
                 </Grid>
-                <QuickAddNote
-                  game={game}
-                  player={player}
-                  filters={filters}
-                  type="Player Note"
-                />
+                <Hidden xsDown>
+                  <QuickAddNote
+                    game={game}
+                    player={player}
+                    filters={filters}
+                    type="Player Note"
+                  />
+                </Hidden>
               </Container>
             )}
           </Grid>
