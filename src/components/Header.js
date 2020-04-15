@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  searchButton: {
+    marginRight: `-${theme.spacing(2)}px`,
+  },
 }));
 
 export default function Header() {
@@ -264,7 +267,7 @@ export default function Header() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                className={classes.menuButton}
+                className={classes.searchButton}
                 onClick={showSearchBar}
               >
                 <SearchIcon />
