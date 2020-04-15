@@ -62,6 +62,7 @@ export default function Header() {
     setAnchorEl(null);
   };
   const { user, role, logout: doLogout } = useContext(UserContext);
+  console.log(user);
   const { language } = useContext(LanguageContext);
   const { showMenu, showSearchBar } = useContext(MenuContext);
   return (
@@ -82,7 +83,7 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             {localeSelect(language, title)}
           </Typography>
-          {user === undefined && (
+          {user === null && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -102,7 +103,7 @@ export default function Header() {
               </Button>
             </Hidden>
           )}
-          {user !== undefined && (
+          {user !== null && (
             <Hidden xsDown>
               <Button
                 component={React.forwardRef((props, ref) => (
@@ -257,7 +258,7 @@ export default function Header() {
               </Button>
             </Hidden>
           )}
-          {user !== undefined && (
+          {user !== null && (
             <Hidden smUp>
               <IconButton
                 edge="start"

@@ -1,23 +1,31 @@
 import React, { useContext } from "react";
 import Particles from "react-particles-js";
-import { Container, Typography, Grid, Button } from "@material-ui/core";
+import { Container, Typography, Grid, Button, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
 import { LanguageContext } from "../contexts/LanguageContext";
-import localeSelect from '../services/localeSelect';
-import { welcome, subtitle, paragraphOne, paragraphTwo, closing, existingUsers, newUsers } from '../data/locales';
+import localeSelect from "../services/localeSelect";
+import {
+  welcome,
+  subtitle,
+  paragraphOne,
+  paragraphTwo,
+  closing,
+  existingUsers,
+  newUsers,
+} from "../data/locales";
 import logo from "../assets/logo.png";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   buttonRow: {
     display: "flex",
     alignItems: "center",
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: "relative"
-  }
+    position: "relative",
+  },
 }));
 
 function Attract(props) {
@@ -29,20 +37,20 @@ function Attract(props) {
         params={{
           particles: {
             number: {
-              value: 90
+              value: 90,
             },
             size: {
-              value: 5
-            }
+              value: 5,
+            },
           },
           interactivity: {
             events: {
               onhover: {
                 enable: true,
-                mode: "repulse"
-              }
-            }
-          }
+                mode: "repulse",
+              },
+            },
+          },
         }}
         className="particle"
       />
@@ -58,15 +66,17 @@ function Attract(props) {
             <Typography variant="h5" gutterBottom>
               {localeSelect(language, subtitle)}
             </Typography>
-            <Typography variant="body2" gutterBottom>
-              {localeSelect(language, paragraphOne)}
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              {localeSelect(language, paragraphTwo)}
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              {localeSelect(language, closing)}
-            </Typography>
+            <Hidden xsDown>
+              <Typography variant="body2" gutterBottom>
+                {localeSelect(language, paragraphOne)}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {localeSelect(language, paragraphTwo)}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {localeSelect(language, closing)}
+              </Typography>
+            </Hidden>
             <Container className={classes.buttonRow}>
               <Button
                 variant="contained"
