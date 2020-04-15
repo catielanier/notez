@@ -147,7 +147,7 @@ export default function GameNotes() {
         <Hidden smUp>
           <Fab
             className={classes.fab}
-            color="secondary"
+            color="primary"
             dark
             aria-label={localeSelect(language, quickAdd)}
             onClick={showNoteDrawer}
