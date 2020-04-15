@@ -6,7 +6,7 @@ import {
   Typography,
   Container,
   CircularProgress,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
 import {
@@ -18,7 +18,7 @@ import {
   verifyPassword as verifyPasswordLocale,
   username as usernameLocale,
   realName as realNameLocale,
-  country as countryLocale
+  country as countryLocale,
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import countries from "../data/countries";
@@ -26,33 +26,33 @@ import localeSelect from "../services/localeSelect";
 import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   header: {
-    textAlign: "center"
+    textAlign: "center",
   },
   buttonRow: {
     display: "flex",
     alignItems: "center",
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: "relative"
+    position: "relative",
   },
   buttonProgress: {
     position: "absolute",
     top: "50%",
     left: "50%",
     marginTop: -12,
-    marginLeft: -12
+    marginLeft: -12,
   },
   input: {
-    marginTop: "10px"
-  }
+    marginTop: "10px",
+  },
 }));
 
 export default function Signup() {
@@ -73,8 +73,9 @@ export default function Signup() {
         </Typography>
         <form
           disabled={loading}
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
+            setEmail(email.toLowerCase);
             doSignup(
               email,
               password,
@@ -94,7 +95,7 @@ export default function Signup() {
           <TextField
             label={localeSelect(language, emailLocale)}
             required
-            onChange={e => {
+            onChange={(e) => {
               setEmail(e.target.value);
             }}
             fullWidth
@@ -104,7 +105,7 @@ export default function Signup() {
           <TextField
             label={localeSelect(language, passwordLocale)}
             required
-            onChange={e => {
+            onChange={(e) => {
               setPassword(e.target.value);
             }}
             fullWidth
@@ -115,7 +116,7 @@ export default function Signup() {
           <TextField
             label={localeSelect(language, verifyPasswordLocale)}
             required
-            onChange={e => {
+            onChange={(e) => {
               setVerifyPassword(e.target.value);
             }}
             fullWidth
@@ -127,7 +128,7 @@ export default function Signup() {
             label={localeSelect(language, usernameLocale)}
             required
             name="username"
-            onChange={e => {
+            onChange={(e) => {
               setUsername(e.target.value);
             }}
             fullWidth
@@ -137,7 +138,7 @@ export default function Signup() {
           <TextField
             label={localeSelect(language, realNameLocale)}
             name="realName"
-            onChange={e => {
+            onChange={(e) => {
               setRealName(e.target.value);
             }}
             fullWidth
@@ -145,15 +146,15 @@ export default function Signup() {
             className={classes.input}
           />
           <Select
-            options={countries.map(item => {
+            options={countries.map((item) => {
               return {
                 value: item.value,
-                label: dbLocale(language, item)
+                label: dbLocale(language, item),
               };
             })}
             value={country}
             placeholder={localeSelect(language, countryLocale)}
-            onChange={e => {
+            onChange={(e) => {
               setCountry(e.value);
             }}
             className="country-select"

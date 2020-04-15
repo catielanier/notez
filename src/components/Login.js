@@ -6,43 +6,43 @@ import {
   Typography,
   Container,
   CircularProgress,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import {
   login,
   goBack,
   email as emailLocale,
   password as passwordLocale,
-  forgotYourPassword
+  forgotYourPassword,
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   header: {
-    textAlign: "center"
+    textAlign: "center",
   },
   buttonRow: {
     display: "flex",
     alignItems: "center",
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: "relative"
+    position: "relative",
   },
   buttonProgress: {
     position: "absolute",
     top: "50%",
     left: "50%",
     marginTop: -12,
-    marginLeft: -12
-  }
+    marginLeft: -12,
+  },
 }));
 
 export default function Login() {
@@ -62,8 +62,9 @@ export default function Login() {
         </Typography>
         <form
           disabled={loading}
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
+            setEmail(email.toLowerCase);
             doLogin(email, password);
           }}
           className={classes.container}
@@ -79,7 +80,7 @@ export default function Login() {
                 label={localeSelect(language, emailLocale)}
                 id="standard-name"
                 value={email}
-                onChange={e => {
+                onChange={(e) => {
                   setEmail(e.target.value);
                 }}
                 fullWidth
@@ -91,7 +92,7 @@ export default function Login() {
                 value={password}
                 id="standard-password-input"
                 type="password"
-                onChange={e => {
+                onChange={(e) => {
                   setPassword(e.target.value);
                 }}
                 fullWidth
