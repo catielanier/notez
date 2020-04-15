@@ -7,8 +7,11 @@ import {
   Modal,
   TextField,
   Hidden,
+  Fab,
+  Drawer,
   makeStyles,
 } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 import Select from "react-select";
 import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
@@ -24,6 +27,7 @@ import {
   filter as filterLocale,
   editNote as editNoteLocale,
   cancel,
+  quickAdd,
 } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import { NoteContext } from "../contexts/NoteContext";
@@ -49,6 +53,14 @@ const useStyles = makeStyles((theme) => ({
   spaced: {
     marginBottom: theme.spacing(2),
   },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  wrapper: {
+    padding: theme.spacing(3),
+  },
 }));
 
 export default function GameNotes() {
@@ -69,10 +81,13 @@ export default function GameNotes() {
   } = useContext(NoteContext);
   const { filters } = useContext(GameContext);
   const { language } = useContext(LanguageContext);
-
   const [noteId, setNoteId] = useState("");
   const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
+  const [noteDrawer, setNoteDrawer] = useState(false);
+  const showNoteDrawer = () => {
+    setNoteDrawer(!noteDrawer);
+  };
 
   useEffect(() => {
     if (myCharacter !== "" && opponentCharacter !== "" && myFilter !== "") {
@@ -124,8 +139,32 @@ export default function GameNotes() {
 
   return (
     <section className="game-notes">
+      {game !== "" && myCharacter !== "" && opponentCharacter !== "" && (
+        <Hidden smUp>
+          <Fab
+            className={classes.fab}
+            color="secondary"
+            dark
+            aria-label={localeSelect(language, quickAdd)}
+            onClick={showNoteDrawer}
+          >
+            <AddIcon />
+          </Fab>
+          <Drawer anchor="bottom" open={noteDrawer} onClose={showNoteDrawer}>
+            <Container className={classes.wrapper}>
+              <QuickAddNote
+                game={game}
+                myCharacter={myCharacter}
+                opponentCharacter={opponentCharacter}
+                filters={filters}
+                type="Game Note"
+              />
+            </Container>
+          </Drawer>
+        </Hidden>
+      )}
+      <SearchBar noteType="game" />
       <Container>
-        <SearchBar noteType="game" />
         <Grid container spacing={2}>
           <Hidden xsDown>
             <Grid item md={6} xs={12}>
@@ -178,13 +217,15 @@ export default function GameNotes() {
                     />
                   )}
                 </Grid>
-                <QuickAddNote
-                  game={game}
-                  myCharacter={myCharacter}
-                  opponentCharacter={opponentCharacter}
-                  filters={filters}
-                  type="Game Note"
-                />
+                <Hidden xsDown>
+                  <QuickAddNote
+                    game={game}
+                    myCharacter={myCharacter}
+                    opponentCharacter={opponentCharacter}
+                    filters={filters}
+                    type="Game Note"
+                  />
+                </Hidden>
               </Container>
             )}
           </Grid>
