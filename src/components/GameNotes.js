@@ -54,12 +54,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   fab: {
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
   wrapper: {
     padding: theme.spacing(3),
+  },
+  noteList: {
+    marginLeft: `-${theme.spacing(2)}px`,
+    marginBottom: theme.spacing() * 8,
   },
 }));
 
@@ -194,7 +198,7 @@ export default function GameNotes() {
                     {localeSelect(language, notes)}
                   </Typography>
                 </Hidden>
-                <Grid container className={classes.spaced}>
+                <Grid container className={classes.noteList}>
                   {displayedNotes.length > 0 ? (
                     displayedNotes.map((note) => {
                       return (
