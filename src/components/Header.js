@@ -65,7 +65,6 @@ export default function Header() {
     setAnchorEl(null);
   };
   const { user, role, logout: doLogout } = useContext(UserContext);
-  console.log(user);
   const { language } = useContext(LanguageContext);
   const { showMenu, showSearchBar } = useContext(MenuContext);
   return (
