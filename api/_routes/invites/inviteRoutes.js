@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const userService = require("../users/userServices");
 const inviteService = require("./inviteServices");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
+
+applyMiddleware(middleWare, router);
 
 router.route("/").post(async (req, res) => {
   const { email } = req.body.data;
@@ -43,3 +47,5 @@ router.route("/:id").get(async (req, res) => {
     res.status(400).send(e);
   }
 });
+
+exports.router = router;

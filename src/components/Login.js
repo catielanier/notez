@@ -64,7 +64,7 @@ export default function Login() {
           disabled={loading}
           onSubmit={(e) => {
             e.preventDefault();
-            setEmail(email.toLowerCase);
+            setEmail(email.toLowerCase());
             doLogin(email, password);
           }}
           className={classes.container}

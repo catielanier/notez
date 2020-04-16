@@ -63,7 +63,7 @@ export default function Signup() {
   const [realName, setRealName] = useState("");
   const [country, setCountry] = useState("");
   const [username, setUsername] = useState("");
-  const { loading, success, error, doSignup } = useContext(UserContext);
+  const { loading, success, error, signup: doSignup } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   return (
     <section className="signup">
@@ -75,7 +75,7 @@ export default function Signup() {
           disabled={loading}
           onSubmit={(e) => {
             e.preventDefault();
-            setEmail(email.toLowerCase);
+            setEmail(email.toLowerCase());
             doSignup(
               email,
               password,
