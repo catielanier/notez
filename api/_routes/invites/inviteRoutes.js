@@ -33,9 +33,7 @@ router.route("/:id").get(async (req, res) => {
   try {
     const invite = await inviteService.getInvite(id);
     res.status(200).json({
-      data: {
-        ...invite,
-      },
+      data: invite,
     });
   } catch (e) {
     res.status(400).send(e);

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import {
   Container,
@@ -67,9 +67,11 @@ export default function InviteSignup() {
   const [success, setSuccess] = useState(false);
   const { language } = useContext(LanguageContext);
   const id = window.location.pathname.replace("/invite/", "");
-  axios.get(`/api/invites/${id}`).then((res) => {
-    setEmail(res.data.data._doc.email);
-  });
+  useEffect(() => {
+    axios.get(`/api/invites/${id}`).then((res) => {
+      setEmail(res.data.data.email);
+    });
+  }, [id]);
   return (
     <section className="signup">
       <Container maxWidth="xs">
