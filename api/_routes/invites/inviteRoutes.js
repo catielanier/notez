@@ -28,7 +28,7 @@ router.route("/").post(async (req, res) => {
 });
 
 router.route("/:id").get(async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   // get invite
   try {
     const invite = await inviteService.getInvite(id);
@@ -41,5 +41,7 @@ router.route("/:id").get(async (req, res) => {
     res.status(400).send(e);
   }
 });
+
+router.route("/signup").post(async (req, res) => {});
 
 exports.router = router;

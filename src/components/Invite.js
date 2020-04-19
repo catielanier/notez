@@ -61,6 +61,7 @@ export default function Invite() {
           className={classes.container}
           onSubmit={async (e) => {
             e.preventDefault();
+            setError(null);
             setLoading(true);
             await axios
               .post("/api/invites", {
