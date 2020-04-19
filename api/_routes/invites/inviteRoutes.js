@@ -4,8 +4,12 @@ const userService = require("../users/userServices");
 const inviteService = require("./inviteServices");
 const middleWare = require("../../_middleware");
 const { applyMiddleware } = require("../../_utils");
+const nodemailer = require("nodemailer");
+const { MAILSERVER } = require("../../_utils/constants");
 
 applyMiddleware(middleWare, router);
+
+const transport = nodemailer.createTransport(MAILSERVER);
 
 router.route("/").post(async (req, res) => {
   const { email } = req.body.data;
@@ -18,6 +22,26 @@ router.route("/").post(async (req, res) => {
         email,
       };
       const finished = await inviteService.createInvite(newInvite);
+      // write email for sending invites
+      const messageBody = `
+        <h3>NoteZ</h3>
+        <h5>Hello!</h5>
+        <p>You've been invited to our service! Come join everyone in taking notes to help improve your game!</p>
+        <p>Please click <a href="http://localhost:3000/invite/${finished._id}">here</a> to get started.</p>
+        <p>Regards,<br />The NoteZ Team</p>
+      `;
+      const mailOptions = {
+        from: '"NoteZ" <admin@checkthenotez.com>',
+        to: email,
+        subject: "You've been invited to NoteZ!",
+        html: messageBody,
+      };
+      await transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log(`Message sent: ${info.messageId}`);
+      });
       res.status(201).json({
         data: finished,
       });
