@@ -62,15 +62,12 @@ export default function Invite() {
           onSubmit={async (e) => {
             e.preventDefault();
             setLoading(true);
-            await axios({
-              method: "POST",
-              url: "/api/invites",
-              body: {
+            await axios
+              .post("/api/invites", {
                 data: {
                   email,
                 },
-              },
-            })
+              })
               .then((res) => {
                 setLoading(false);
                 setSuccess(true);
