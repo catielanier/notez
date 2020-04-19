@@ -24,7 +24,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>Regards,<br />The NoteZ Team</p>
     `;
     const mailOptions_en = {
-      from: '"NoteZ" <no-reply@notezapp.com>',
+      from: '"NoteZ" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "Welcome to NoteZ!",
       html: messageBody_en,
@@ -36,7 +36,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>よろしく、<br />ノートZチーム</p>
     `;
     const mailOptions_ja = {
-      from: '"ノートZ" <no-reply@notezapp.com>',
+      from: '"ノートZ" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "ノートZへようこそ！",
       html: messageBody_ja,
@@ -48,7 +48,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>감사합니다,<br />노트Z 팀</p>
     `;
     const mailOptions_ko = {
-      from: '"노트Z" <no-reply@notezapp.com>',
+      from: '"노트Z" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "노트Z 오신 것을 환영합니다!",
       html: messageBody_ko,
@@ -60,7 +60,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>我们的问候，<br />笔记Z团队</p>
     `;
     const mailOptions_cn = {
-      from: '"笔记Z" <no-reply@notezapp.com>',
+      from: '"笔记Z" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
       html: messageBody_cn,
@@ -72,7 +72,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>我們的問候，<br />筆記Z團隊</p>
     `;
     const mailOptions_tw = {
-      from: '"笔记Z" <no-reply@notezapp.com>',
+      from: '"笔记Z" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
       html: messageBody_tw,
@@ -84,7 +84,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>我哋嘅打招呼，<br />筆記Z團隊</p>
     `;
     const mailOptions_hk = {
-      from: '"笔记Z" <no-reply@notezapp.com>',
+      from: '"笔记Z" <admin@checkthenotez.com>',
       to: newUser.email,
       subject: "欢迎使用笔记Z！",
       html: messageBody_hk,
@@ -273,7 +273,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>Regards,<br />The NoteZ Team</p>
       `;
       const mailOptions_en = {
-        from: '"NoteZ" <no-reply@notezapp.com>',
+        from: '"NoteZ" <admin@checkthenotez.com>',
         to: email,
         subject: "Password reset link",
         html: messageBody_en,
@@ -285,7 +285,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>よろしく、<br />ノートZチーム</p>
       `;
       const mailOptions_ja = {
-        from: '"ノートZ" <no-reply@notezapp.com>',
+        from: '"ノートZ" <admin@checkthenotez.com>',
         to: email,
         subject: "パスワードリセットリンク",
         html: messageBody_ja,
@@ -297,7 +297,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>감사합니다,<br />노트Z 팀</p>
       `;
       const mailOptions_ko = {
-        from: '"노트Z" <no-reply@notezapp.com>',
+        from: '"노트Z" <admin@checkthenotez.com>',
         to: email,
         subject: "암호 재설정 링크",
         html: messageBody_ko,
@@ -309,7 +309,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>我们的问候，<br />笔记Z团队</p>
       `;
       const mailOptions_cn = {
-        from: '"笔记Z" <no-reply@notezapp.com>',
+        from: '"笔记Z" <admin@checkthenotez.com>',
         to: email,
         subject: "密码重置链接",
         html: messageBody_cn,
@@ -321,7 +321,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>我們的問候，<br />筆記Z團隊</p>
       `;
       const mailOptions_tw = {
-        from: '"筆記Z" <no-reply@notezapp.com>',
+        from: '"筆記Z" <admin@checkthenotez.com>',
         to: email,
         subject: "密码重置链接",
         html: messageBody_tw,
@@ -333,7 +333,7 @@ router.route("/forgot").post(async (req, res) => {
         <p>我哋嘅打招呼，<br />筆記Z團隊</p>
       `;
       const mailOptions_hk = {
-        from: '"筆記Z" <no-reply@notezapp.com>',
+        from: '"筆記Z" <admin@checkthenotez.com>',
         to: email,
         subject: "密码重置链接",
         html: messageBody_hk,
