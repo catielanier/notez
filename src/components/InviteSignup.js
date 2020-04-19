@@ -8,7 +8,7 @@ import {
   makeStyles,
   CircularProgress,
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import Select from "react-select";
 import { LanguageContext } from "../contexts/LanguageContext";
 import localeSelect from "../services/localeSelect";
@@ -72,6 +72,9 @@ export default function InviteSignup() {
       setEmail(res.data.data.email);
     });
   }, [id]);
+  if (success) {
+    return <Redirect to="/login" />;
+  }
   return (
     <section className="signup">
       <Container maxWidth="xs">
@@ -107,7 +110,6 @@ export default function InviteSignup() {
             }
           }}
         >
-          {success && <p>{localeSelect(language, registerSuccess)}</p>}
           {error && (
             <p className="error">
               <span>Error:</span> {error}
