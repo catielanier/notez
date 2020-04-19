@@ -45,6 +45,7 @@ router.route("/signup").post(async (req, res) => {
   const { token } = newUser;
   delete newUser.token;
   newUser.premium = true;
+  newUser.active = true;
   try {
     const invite = await inviteService.getInvite(token);
     if (invite) {
