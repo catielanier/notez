@@ -53,9 +53,11 @@ router.route("/signup").post(async (req, res) => {
       const user = await userService.createUser(newUser);
       if (user) {
         const finished = await inviteService.deleteInvite(token);
-        res.status(201).json({
-          data: user,
-        });
+        if (finished) {
+          res.status(201).json({
+            data: user,
+          });
+        }
       }
     }
   } catch (e) {
