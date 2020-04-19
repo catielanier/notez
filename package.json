@@ -53,5 +53,48 @@
   "proxy": "http://localhost:4000",
   "devDependencies": {
     "concurrently": "^5.0.0"
+  },
+  "now": {
+    "alias": "notez",
+    "name": "notez",
+    "env": {
+      "PORT": "4000",
+      "SECRET": "@secret_notez",
+      "MONGODB_URI": "@mongodb_uri_notez"
+    },
+    "routes": [
+      {
+        "src": "/",
+        "dest": "index.html"
+      },
+      {
+        "src": "/api/games/(.+)",
+        "dest": "/api/games.js"
+      },
+      {
+        "src": "/api/users/(.+)",
+        "dest": "/api/users.js"
+      },
+      {
+        "src": "/api/characters/(.+)",
+        "dest": "/api/characters.js"
+      },
+      {
+        "src": "/api/filters/(.+)",
+        "dest": "/api/filters.js"
+      },
+      {
+        "src": "/api/gameNotes/(.+)",
+        "dest": "/api/gameNotes.js"
+      },
+      {
+        "src": "/api/invites/(.+)",
+        "dest": "/api/invites.js"
+      },
+      {
+        "src": "/api/playerNotes/(.+)",
+        "dest": "/api/playerNotes.js"
+      }
+    ]
   }
 }
