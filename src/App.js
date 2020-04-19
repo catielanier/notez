@@ -27,6 +27,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
 import Title from "./components/Title";
+import Invite from "./components/Invite";
 
 // Contexts
 import MenuContextProvider from "./contexts/MenuContext";
@@ -86,6 +87,7 @@ export default function App() {
               <Route exact path="/forgot" component={ForgotPassword} />
               <Route path="/forgot/:key" component={ResetPassword} />
               <Route path="/verify/:key" component={VerifyUser} />
+              <Route exact path="/invite" component={Invite} />
             </main>
           </Router>
         </MenuContextProvider>

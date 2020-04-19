@@ -30,6 +30,7 @@ import {
   userSettings,
   profile,
   logout,
+  inviteUser,
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -242,6 +243,15 @@ export default function Header() {
                     >
                       <MenuItem onClick={handleClose}>
                         {localeSelect(language, userSettings)}
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      component={React.forwardRef((props, ref) => (
+                        <RouterLink innerRef={ref} to="/invite" {...props} />
+                      ))}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        {localeSelect(language, inviteUser)}
                       </MenuItem>
                     </Link>
                   </Menu>

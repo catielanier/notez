@@ -5,7 +5,7 @@ export const title = {
   cn: "笔记Z",
   tw: "筆記Z",
   sg: "筆記Z",
-  hk: "筆記Z"
+  hk: "筆記Z",
 };
 
 export const login = {
@@ -15,7 +15,7 @@ export const login = {
   cn: "登录",
   tw: "登錄",
   sg: "登錄",
-  hk: "登錄"
+  hk: "登錄",
 };
 
 export const signup = {
@@ -25,7 +25,7 @@ export const signup = {
   cn: "注册",
   tw: "註冊",
   sg: "註冊",
-  hk: "註冊"
+  hk: "註冊",
 };
 
 export const gameNotes = {
@@ -35,7 +35,7 @@ export const gameNotes = {
   cn: "游戏笔记",
   tw: "遊戲筆記",
   sg: "遊戲筆記",
-  hk: "遊戲筆記"
+  hk: "遊戲筆記",
 };
 
 export const playerNotes = {
@@ -45,7 +45,7 @@ export const playerNotes = {
   cn: "玩家笔记",
   tw: "玩家筆記",
   sg: "玩家筆記",
-  hk: "玩家筆記"
+  hk: "玩家筆記",
 };
 
 export const settings = {
@@ -55,7 +55,7 @@ export const settings = {
   cn: "设定值",
   tw: "設定值",
   sg: "設定值",
-  hk: "設定值"
+  hk: "設定值",
 };
 
 export const addGame = {
@@ -65,7 +65,7 @@ export const addGame = {
   cn: "新增游戏",
   tw: "新增遊戲",
   sg: "新增遊戲",
-  hk: "新增遊戲"
+  hk: "新增遊戲",
 };
 
 export const addCharacter = {
@@ -75,7 +75,7 @@ export const addCharacter = {
   cn: "新增角色",
   tw: "新增角色",
   sg: "新增角色",
-  hk: "新增角色"
+  hk: "新增角色",
 };
 
 export const addFilter = {
@@ -85,7 +85,7 @@ export const addFilter = {
   cn: "新增过滤器",
   tw: "新增過濾器",
   sg: "新增過濾器",
-  hk: "新增過濾器"
+  hk: "新增過濾器",
 };
 
 export const editGame = {
@@ -95,7 +95,7 @@ export const editGame = {
   cn: "编辑游戏",
   tw: "編輯遊戲",
   sg: "編輯遊戲",
-  hk: "編輯遊戲"
+  hk: "編輯遊戲",
 };
 
 export const editCharacter = {
@@ -105,7 +105,7 @@ export const editCharacter = {
   cn: "编辑角色",
   tw: "編輯角色",
   sg: "編輯角色",
-  hk: "編輯角色"
+  hk: "編輯角色",
 };
 
 export const editFilter = {
@@ -115,7 +115,7 @@ export const editFilter = {
   cn: "编辑过滤器",
   tw: "編輯過濾器",
   sg: "編輯過濾器",
-  hk: "編輯過濾器"
+  hk: "編輯過濾器",
 };
 
 export const linkCharacters = {
@@ -125,7 +125,7 @@ export const linkCharacters = {
   cn: "连接角色",
   tw: "連接角色",
   sg: "連接角色",
-  hk: "連接角色"
+  hk: "連接角色",
 };
 
 export const linkFilters = {
@@ -135,7 +135,7 @@ export const linkFilters = {
   cn: "连接过滤器",
   tw: "連接過濾器",
   sg: "連接過濾器",
-  hk: "連接過濾器"
+  hk: "連接過濾器",
 };
 
 export const userSettings = {
@@ -145,7 +145,7 @@ export const userSettings = {
   cn: "用户设置",
   tw: "用戶設置",
   sg: "用戶設置",
-  hk: "用戶設置"
+  hk: "用戶設置",
 };
 
 export const profile = {
@@ -155,7 +155,7 @@ export const profile = {
   cn: "个人资料",
   tw: "個人資料",
   sg: "個人資料",
-  hk: "個人資料"
+  hk: "個人資料",
 };
 
 export const logout = {
@@ -165,7 +165,7 @@ export const logout = {
   cn: "登出",
   tw: "登出",
   sg: "登出",
-  hk: "登出"
+  hk: "登出",
 };
 
 export const goBack = {
@@ -175,7 +175,7 @@ export const goBack = {
   cn: "回去",
   tw: "回去",
   sg: "回去",
-  hk: "回去"
+  hk: "回去",
 };
 
 export const email = {
@@ -185,7 +185,7 @@ export const email = {
   cn: "电邮地址",
   tw: "電郵地址",
   sg: "電郵地址",
-  hk: "電郵地址"
+  hk: "電郵地址",
 };
 
 export const password = {
@@ -195,7 +195,7 @@ export const password = {
   cn: "密码",
   tw: "密碼",
   sg: "密碼",
-  hk: "密碼"
+  hk: "密碼",
 };
 
 export const forgotYourPassword = {
@@ -205,7 +205,7 @@ export const forgotYourPassword = {
   cn: "你忘记密码了吗",
   tw: "你忘記密碼了嗎？",
   sg: "你忘記密碼了嗎？",
-  hk: "你忘記密碼了嗎？"
+  hk: "你忘記密碼了嗎？",
 };
 
 export const registerSuccess = {
@@ -215,7 +215,7 @@ export const registerSuccess = {
   cn: "注册成功！ 请检查您的电子邮件。",
   tw: "註冊成功！ 請檢查您的電子郵件。",
   sg: "註冊成功！ 請檢查您的電子郵件。",
-  hk: "註冊成功！ 唔該檢查你嘅電子郵件。"
+  hk: "註冊成功！ 唔該檢查你嘅電子郵件。",
 };
 
 export const verifyPassword = {
@@ -225,7 +225,7 @@ export const verifyPassword = {
   cn: "验证密码",
   tw: "驗證密碼",
   sg: "驗證密碼",
-  hk: "驗證密碼"
+  hk: "驗證密碼",
 };
 
 export const username = {
@@ -235,7 +235,7 @@ export const username = {
   cn: "用户名",
   tw: "用戶名",
   sg: "用戶名",
-  hk: "用戶名"
+  hk: "用戶名",
 };
 
 export const realName = {
@@ -245,7 +245,7 @@ export const realName = {
   cn: "真正的名字",
   tw: "真正的名字",
   sg: "真正的名字",
-  hk: "真正的名字"
+  hk: "真正的名字",
 };
 
 export const country = {
@@ -255,7 +255,7 @@ export const country = {
   cn: "国家",
   tw: "國家",
   sg: "國家",
-  hk: "國家"
+  hk: "國家",
 };
 
 export const noMatch = {
@@ -265,7 +265,7 @@ export const noMatch = {
   cn: "你的密码不匹配。",
   tw: "你的密碼不匹配。",
   sg: "你的密碼不匹配。",
-  hk: "你個密碼唔匹配。"
+  hk: "你個密碼唔匹配。",
 };
 
 export const profileUpdated = {
@@ -275,7 +275,7 @@ export const profileUpdated = {
   cn: "个人资料已成功更新。",
   tw: "個人資料已成功更新。",
   sg: "個人資料已成功更新。",
-  hk: "個人資料已成更新。"
+  hk: "個人資料已成更新。",
 };
 
 export const oldPassword = {
@@ -285,7 +285,7 @@ export const oldPassword = {
   cn: "旧密码",
   tw: "舊密碼",
   sg: "舊密碼",
-  hk: "舊密碼"
+  hk: "舊密碼",
 };
 
 export const newPassword = {
@@ -295,7 +295,7 @@ export const newPassword = {
   cn: "新密码",
   tw: "新密碼",
   sg: "新密碼",
-  hk: "新密碼"
+  hk: "新密碼",
 };
 
 export const verifyNewPassword = {
@@ -305,7 +305,7 @@ export const verifyNewPassword = {
   cn: "验证新密码",
   tw: "驗證新密碼",
   sg: "驗證新密碼",
-  hk: "驗證新密碼"
+  hk: "驗證新密碼",
 };
 
 export const editProfile = {
@@ -315,7 +315,7 @@ export const editProfile = {
   cn: "编辑个人资料",
   tw: "編輯個人資料",
   sg: "編輯個人資料",
-  hk: "編輯個人資料"
+  hk: "編輯個人資料",
 };
 
 export const resetPassword = {
@@ -325,7 +325,7 @@ export const resetPassword = {
   cn: "重设密码",
   tw: "重設密碼",
   sg: "重設密碼",
-  hk: "重設密碼"
+  hk: "重設密碼",
 };
 
 export const characterCreated = {
@@ -335,7 +335,7 @@ export const characterCreated = {
   cn: "角色创建成功。",
   tw: "角色創建成功。",
   sg: "角色創建成功。",
-  hk: "角色創建成功。"
+  hk: "角色創建成功。",
 };
 
 export const englishCharacter = {
@@ -345,7 +345,7 @@ export const englishCharacter = {
   cn: "英文角色名字",
   tw: "英文角色名字",
   sg: "英文角色名字",
-  hk: "英文角色名字"
+  hk: "英文角色名字",
 };
 
 export const japaneseCharacter = {
@@ -355,7 +355,7 @@ export const japaneseCharacter = {
   cn: "日语角色名字",
   tw: "日語角色名字",
   sg: "日語角色名字",
-  hk: "日語角色名字"
+  hk: "日語角色名字",
 };
 
 export const koreanCharacter = {
@@ -365,7 +365,7 @@ export const koreanCharacter = {
   cn: "朝鲜语角色名字",
   tw: "朝鮮語角色名字",
   sg: "朝鮮語角色名字",
-  hk: "朝鮮語角色名字"
+  hk: "朝鮮語角色名字",
 };
 
 export const simplifiedCharacter = {
@@ -375,7 +375,7 @@ export const simplifiedCharacter = {
   cn: "简体中文角色名字",
   tw: "簡體中文角色名字",
   sg: "簡體中文角色名字",
-  hk: "簡體中文角色名字"
+  hk: "簡體中文角色名字",
 };
 
 export const traditionalCharacter = {
@@ -385,7 +385,7 @@ export const traditionalCharacter = {
   cn: "繁体中文角色名字",
   tw: "繁體中文角色名字",
   sg: "繁體中文角色名字",
-  hk: "繁體中文角色名字"
+  hk: "繁體中文角色名字",
 };
 
 export const cantoneseCharacter = {
@@ -395,7 +395,7 @@ export const cantoneseCharacter = {
   cn: "广东话角色名字",
   tw: "廣東話角色名字",
   sg: "廣東話角色名字",
-  hk: "廣東話角色名字"
+  hk: "廣東話角色名字",
 };
 
 export const clearForm = {
@@ -405,7 +405,7 @@ export const clearForm = {
   cn: "清除表格",
   tw: "清除表格",
   sg: "清除表格",
-  hk: "清除表格"
+  hk: "清除表格",
 };
 
 export const filterCreated = {
@@ -415,7 +415,7 @@ export const filterCreated = {
   cn: "过滤器创建成功。",
   tw: "過濾器創建成功。",
   sg: "過濾器創建成功。",
-  hk: "過濾器創建成功。"
+  hk: "過濾器創建成功。",
 };
 
 export const englishFilter = {
@@ -425,7 +425,7 @@ export const englishFilter = {
   cn: "英文过滤器类型",
   tw: "英文過濾器類型",
   sg: "英文過濾器類型",
-  hk: "英文過濾器類型"
+  hk: "英文過濾器類型",
 };
 
 export const japaneseFilter = {
@@ -435,7 +435,7 @@ export const japaneseFilter = {
   cn: "日语过滤器类型",
   tw: "日語過濾器類型",
   sg: "日語過濾器類型",
-  hk: "日語過濾器類型"
+  hk: "日語過濾器類型",
 };
 
 export const koreanFilter = {
@@ -445,7 +445,7 @@ export const koreanFilter = {
   cn: "朝鲜语过滤器类型",
   tw: "朝鮮語過濾器類型",
   sg: "朝鮮語過濾器類型",
-  hk: "朝鮮語過濾器類型"
+  hk: "朝鮮語過濾器類型",
 };
 
 export const simplifiedFilter = {
@@ -455,7 +455,7 @@ export const simplifiedFilter = {
   cn: "简体中文过滤器类型",
   tw: "簡體中文過濾器類型",
   sg: "簡體中文過濾器類型",
-  hk: "簡體中文過濾器類型"
+  hk: "簡體中文過濾器類型",
 };
 
 export const traditionalFilter = {
@@ -465,7 +465,7 @@ export const traditionalFilter = {
   cn: "繁体中文过滤器类型",
   tw: "繁體中文過濾器類型",
   sg: "繁體中文過濾器類型",
-  hk: "繁體中文過濾器類型"
+  hk: "繁體中文過濾器類型",
 };
 
 export const cantoneseFilter = {
@@ -475,7 +475,7 @@ export const cantoneseFilter = {
   cn: "广东话过滤器类型",
   tw: "廣東話過濾器類型",
   sg: "廣東話過濾器類型",
-  hk: "廣東話過濾器類型"
+  hk: "廣東話過濾器類型",
 };
 
 export const gameCreated = {
@@ -485,7 +485,7 @@ export const gameCreated = {
   cn: "游戏创建成功。",
   tw: "遊戲創建成功。",
   sg: "遊戲創建成功。",
-  hk: "遊戲創建成功。"
+  hk: "遊戲創建成功。",
 };
 
 export const englishGame = {
@@ -495,7 +495,7 @@ export const englishGame = {
   cn: "英文电子游戏标题",
   tw: "英文電子遊戲標題",
   sg: "英文電子遊戲標題",
-  hk: "英文電子遊戲標題"
+  hk: "英文電子遊戲標題",
 };
 
 export const japaneseGame = {
@@ -505,7 +505,7 @@ export const japaneseGame = {
   cn: "日语电子游戏标题",
   tw: "日語電子遊戲標題",
   sg: "日語電子遊戲標題",
-  hk: "日語電子遊戲標題"
+  hk: "日語電子遊戲標題",
 };
 
 export const koreanGame = {
@@ -515,7 +515,7 @@ export const koreanGame = {
   cn: "朝鲜语电子游戏标题",
   tw: "朝鮮語電子遊戲標題",
   sg: "朝鮮語電子遊戲標題",
-  hk: "朝鮮語電子遊戲標題"
+  hk: "朝鮮語電子遊戲標題",
 };
 
 export const simplifiedGame = {
@@ -525,7 +525,7 @@ export const simplifiedGame = {
   cn: "简体中文电子游戏标题",
   tw: "簡體中文電子遊戲標題",
   sg: "簡體中文電子遊戲標題",
-  hk: "簡體中文電子遊戲標題"
+  hk: "簡體中文電子遊戲標題",
 };
 
 export const traditionalGame = {
@@ -535,7 +535,7 @@ export const traditionalGame = {
   cn: "繁体中文电子游戏标题",
   tw: "繁體中文電子遊戲標題",
   sg: "繁體中文電子遊戲標題",
-  hk: "繁體中文電子遊戲標題"
+  hk: "繁體中文電子遊戲標題",
 };
 
 export const cantoneseGame = {
@@ -545,7 +545,7 @@ export const cantoneseGame = {
   cn: "广东话电子游戏标题",
   tw: "廣東話電子遊戲標題",
   sg: "廣東話電子遊戲標題",
-  hk: "廣東話電子遊戲標題"
+  hk: "廣東話電子遊戲標題",
 };
 
 export const linkCharactersToGame = {
@@ -555,7 +555,7 @@ export const linkCharactersToGame = {
   cn: "角色连接到游戏",
   tw: "角色連接到遊戲",
   sg: "角色連接到遊戲",
-  hk: "角色連接到遊戲"
+  hk: "角色連接到遊戲",
 };
 
 export const characterLinked = {
@@ -565,7 +565,7 @@ export const characterLinked = {
   cn: "角色成功链接。",
   tw: "角色成功鏈接。",
   sg: "角色成功鏈接。",
-  hk: "角色成功鏈接。"
+  hk: "角色成功鏈接。",
 };
 
 export const linkFiltersToGame = {
@@ -575,7 +575,7 @@ export const linkFiltersToGame = {
   cn: "过滤器连接到游戏",
   tw: "過濾器連接到遊戲",
   sg: "過濾器連接到遊戲",
-  hk: "過濾器連接到遊戲"
+  hk: "過濾器連接到遊戲",
 };
 
 export const filterLinked = {
@@ -585,7 +585,7 @@ export const filterLinked = {
   cn: "过滤器成功链接。",
   tw: "過濾器成功鏈接。",
   sg: "過濾器成功鏈接。",
-  hk: "過濾器成功鏈接。"
+  hk: "過濾器成功鏈接。",
 };
 
 export const playerFilter = {
@@ -595,7 +595,7 @@ export const playerFilter = {
   cn: "玩家过滤器",
   tw: "玩家過濾器",
   sg: "玩家過濾器",
-  hk: "玩家過濾器"
+  hk: "玩家過濾器",
 };
 
 export const chooseGame = {
@@ -605,7 +605,7 @@ export const chooseGame = {
   cn: "选择一个游戏：",
   tw: "選擇一個遊戲：",
   sg: "選擇一個遊戲：",
-  hk: "選擇一個遊戲："
+  hk: "選擇一個遊戲：",
 };
 
 export const yourCharacter = {
@@ -615,7 +615,7 @@ export const yourCharacter = {
   cn: "选择你的角色：",
   tw: "選擇你的角色：",
   sg: "選擇你的角色：",
-  hk: "選擇你的角色："
+  hk: "選擇你的角色：",
 };
 
 export const opponentCharacter = {
@@ -625,7 +625,7 @@ export const opponentCharacter = {
   cn: "选择对手的角色：",
   tw: "選擇對手的角色：",
   sg: "選擇對手的角色：",
-  hk: "選擇對手的角色："
+  hk: "選擇對手的角色：",
 };
 
 export const chooseFilter = {
@@ -635,7 +635,7 @@ export const chooseFilter = {
   cn: "（可选）选择您的过滤器：",
   tw: "（可選）選擇您的過濾器：",
   sg: "（可選）選擇您的過濾器：",
-  hk: "（可選）選擇您的過濾器："
+  hk: "（可選）選擇您的過濾器：",
 };
 
 export const clearFilter = {
@@ -645,7 +645,7 @@ export const clearFilter = {
   cn: "清除筛选",
   tw: "清除篩選",
   sg: "清除篩選",
-  hk: "清除篩選"
+  hk: "清除篩選",
 };
 
 export const notes = {
@@ -655,7 +655,7 @@ export const notes = {
   cn: "笔记：",
   tw: "筆記：",
   sg: "筆記：",
-  hk: "筆記："
+  hk: "筆記：",
 };
 
 export const notice = {
@@ -665,7 +665,7 @@ export const notice = {
   cn: "注意",
   tw: "注意",
   sg: "注意",
-  hk: "注意"
+  hk: "注意",
 };
 
 export const noNotes = {
@@ -675,7 +675,7 @@ export const noNotes = {
   cn: "你没有关于这场比赛的任何笔记。 在下面添加一些！",
   tw: "你沒有關於這場比賽的任何筆記。 在下面添加一些！",
   sg: "你沒有關於這場比賽的任何筆記。 在下面添加一些！",
-  hk: "你冇关於呢场比赛嘅任何碌士。喺下面添加啲！"
+  hk: "你冇关於呢场比赛嘅任何碌士。喺下面添加啲！",
 };
 
 export const editingNote = {
@@ -685,7 +685,7 @@ export const editingNote = {
   cn: "编辑笔记",
   tw: "編輯筆記",
   sg: "編輯筆記",
-  hk: "編輯筆記"
+  hk: "編輯筆記",
 };
 
 export const filter = {
@@ -695,7 +695,7 @@ export const filter = {
   cn: "过滤器",
   tw: "過濾器",
   sg: "過濾器",
-  hk: "過濾器"
+  hk: "過濾器",
 };
 
 export const editNote = {
@@ -705,7 +705,7 @@ export const editNote = {
   cn: "编辑笔记",
   tw: "編輯筆記",
   sg: "編輯筆記",
-  hk: "編輯筆記"
+  hk: "編輯筆記",
 };
 
 export const cancel = {
@@ -715,7 +715,7 @@ export const cancel = {
   cn: "取消",
   tw: "取消",
   sg: "取消",
-  hk: "取消"
+  hk: "取消",
 };
 
 export const chooseOpponent = {
@@ -725,7 +725,7 @@ export const chooseOpponent = {
   cn: "选择你的对手：",
   tw: "選擇你的對手：",
   sg: "選擇你的對手：",
-  hk: "拣你嘅對手："
+  hk: "拣你嘅對手：",
 };
 
 export const quickAdd = {
@@ -735,7 +735,7 @@ export const quickAdd = {
   cn: "快速添加：",
   tw: "快速添加：",
   sg: "快速添加：",
-  hk: "赶添加："
+  hk: "赶添加：",
 };
 
 export const universalNote = {
@@ -745,7 +745,7 @@ export const universalNote = {
   cn: "此笔记应在所有对手中显示。",
   tw: "此筆記應在所有對手中顯示。",
   sg: "此筆記應在所有對手中顯示。",
-  hk: "此碌士應喺所有對手中顯示。"
+  hk: "此碌士應喺所有對手中顯示。",
 };
 
 export const newNoteFilter = {
@@ -755,7 +755,7 @@ export const newNoteFilter = {
   cn: "新笔记过滤器：",
   tw: "新筆記過濾器：",
   sg: "新筆記過濾器：",
-  hk: "新筆記過濾器："
+  hk: "新筆記過濾器：",
 };
 
 export const newNote = {
@@ -765,7 +765,7 @@ export const newNote = {
   cn: "新笔记：",
   tw: "新筆記：",
   sg: "新筆記：",
-  hk: "新筆記："
+  hk: "新筆記：",
 };
 
 export const createNote = {
@@ -775,7 +775,7 @@ export const createNote = {
   cn: "加笔记",
   tw: "加筆記",
   sg: "加筆記",
-  hk: "加筆記"
+  hk: "加筆記",
 };
 
 export const forgotPassword = {
@@ -785,7 +785,7 @@ export const forgotPassword = {
   cn: "忘记密码",
   tw: "忘記密碼",
   sg: "忘記密碼",
-  hk: "忘記密碼"
+  hk: "忘記密碼",
 };
 
 export const checkEmailPassword = {
@@ -795,7 +795,7 @@ export const checkEmailPassword = {
   cn: "请检查您的电子邮件以获取重置链接。",
   tw: "請檢查您的電子郵件以獲取重置鏈接。",
   sg: "請檢查您的電子郵件以獲取重置鏈接。",
-  hk: "請檢查您的電子郵件以獲取重置鏈接。"
+  hk: "請檢查您的電子郵件以獲取重置鏈接。",
 };
 
 export const requestReset = {
@@ -805,7 +805,7 @@ export const requestReset = {
   cn: "要求重设",
   tw: "要求重設",
   sg: "要求重設",
-  hk: "要求重設"
+  hk: "要求重設",
 };
 
 export const editUserRoles = {
@@ -815,7 +815,7 @@ export const editUserRoles = {
   cn: "编辑用户角色",
   tw: "編輯用戶角色",
   sg: "編輯用戶角色",
-  hk: "編輯用戶角色"
+  hk: "編輯用戶角色",
 };
 
 export const selectUser = {
@@ -825,7 +825,7 @@ export const selectUser = {
   cn: "选择用户：",
   tw: "選擇用戶：",
   sg: "選擇用戶：",
-  hk: "選擇用戶："
+  hk: "選擇用戶：",
 };
 
 export const assignRole = {
@@ -835,7 +835,7 @@ export const assignRole = {
   cn: "分配角色：",
   tw: "分配角色：",
   sg: "分配角色：",
-  hk: "分配角色："
+  hk: "分配角色：",
 };
 
 export const user = {
@@ -845,7 +845,7 @@ export const user = {
   cn: "用户",
   tw: "用戶",
   sg: "用戶",
-  hk: "用戶"
+  hk: "用戶",
 };
 
 export const admin = {
@@ -855,7 +855,7 @@ export const admin = {
   cn: "管理员",
   tw: "管理員",
   sg: "管理員",
-  hk: "管理員"
+  hk: "管理員",
 };
 
 export const banned = {
@@ -865,7 +865,7 @@ export const banned = {
   cn: "被放逐",
   tw: "被放逐",
   sg: "被放逐",
-  hk: "被放逐"
+  hk: "被放逐",
 };
 
 export const updateUser = {
@@ -875,7 +875,7 @@ export const updateUser = {
   cn: "更新用户",
   tw: "更新用戶",
   sg: "更新用戶",
-  hk: "更新用戶"
+  hk: "更新用戶",
 };
 
 export const specifyFilter = {
@@ -885,7 +885,7 @@ export const specifyFilter = {
   cn: "请指定一个过滤器。",
   tw: "請指定一個過濾器。",
   sg: "請指定一個過濾器。",
-  hk: "請指定一個過濾器。"
+  hk: "請指定一個過濾器。",
 };
 
 export const welcome = {
@@ -895,8 +895,8 @@ export const welcome = {
   cn: "欢迎到笔记Z",
   tw: "歡迎到筆記Z",
   sg: "歡迎到筆記Z",
-  hk: "歡迎到筆記Z"
-}
+  hk: "歡迎到筆記Z",
+};
 
 export const subtitle = {
   en: "Your premiere fighting game note app!",
@@ -905,28 +905,41 @@ export const subtitle = {
   cn: "你的首映格斗游戏笔记应用！",
   tw: "你的首映格鬥遊戲筆記應用！",
   sg: "你的首映格鬥遊戲筆記應用！",
-  hk: "你要首映格鬥遊戲碌士應用！"
-}
+  hk: "你要首映格鬥遊戲碌士應用！",
+};
 
 export const paragraphOne = {
-  en: "Elevate your game like the pros! With comprehensive matchup notes, you'll always be on top of your knowledge! And no app on the planet is tailored to fighting game notes like NoteZ.",
-  ja: "プロのようにゲームを高めましょう！ 包括的な対戦メモを使用すると、常に知識を最大限に活用できます！ また、ノートZのような格闘ゲームノートに合わせて調整されたアプリはありません。",
-  ko: "프로처럼 게임을 높입시다! 종합 대전 메모를 사용하면 항상 지식을 최대한 활용할 수 있습니다! 또한 노트Z와 같은 격투 게임 노트에 맞게 조정 된 응용 프로그램이 없습니다.",
-  cn: "像专业人士一样增强你的游戏！ 借助全面的比赛记录，你始终可以充分利用自己的知识！ 此外，没有专门针对战斗笔记Z的应用。",
-  tw: "像專業人士一樣增強你的遊戲！借助全面的比賽記錄，你始終可以充分利用自己的知識！此外，沒有專門針對戰鬥筆記Z的應用。",
-  sg: "像專業人士一樣增強你的遊戲！借助全面的比賽記錄，你始終可以充分利用自己的知識！此外，沒有專門針對戰鬥筆記Z的應用。",
-  hk: "好似专业人士一样增强你嘅游戏！借助全面嘅比赛纪录，你始终可以充分利用自己嘅知识！此外，冇专门针对战斗筆記Z嘅应用。"
-}
+  en:
+    "Elevate your game like the pros! With comprehensive matchup notes, you'll always be on top of your knowledge! And no app on the planet is tailored to fighting game notes like NoteZ.",
+  ja:
+    "プロのようにゲームを高めましょう！ 包括的な対戦メモを使用すると、常に知識を最大限に活用できます！ また、ノートZのような格闘ゲームノートに合わせて調整されたアプリはありません。",
+  ko:
+    "프로처럼 게임을 높입시다! 종합 대전 메모를 사용하면 항상 지식을 최대한 활용할 수 있습니다! 또한 노트Z와 같은 격투 게임 노트에 맞게 조정 된 응용 프로그램이 없습니다.",
+  cn:
+    "像专业人士一样增强你的游戏！ 借助全面的比赛记录，你始终可以充分利用自己的知识！ 此外，没有专门针对战斗笔记Z的应用。",
+  tw:
+    "像專業人士一樣增強你的遊戲！借助全面的比賽記錄，你始終可以充分利用自己的知識！此外，沒有專門針對戰鬥筆記Z的應用。",
+  sg:
+    "像專業人士一樣增強你的遊戲！借助全面的比賽記錄，你始終可以充分利用自己的知識！此外，沒有專門針對戰鬥筆記Z的應用。",
+  hk:
+    "好似专业人士一样增强你嘅游戏！借助全面嘅比赛纪录，你始终可以充分利用自己嘅知识！此外，冇专门针对战斗筆記Z嘅应用。",
+};
 
 export const paragraphTwo = {
   en: `Write notes for both character and player matchups on your computer, tablet, or mobile phone, then have access to them wherever you are. No need to worry about restoring your notes on a new phone, as NoteZ will do it for you! In match, be able to filter down your notes to more specific circumstances than just your opponent, so that you'll always remember what to do as you play.`,
-  ja: "コンピューター、タブレット、または携帯電話でキャラクターとプレイヤーの両方の対戦相手についてメモを書き、どこにいてもアクセスできるようにします。 ノートZが自動的に行うので、新しい電話でメモを復元することを心配する必要はありません！ 一致して、対戦相手だけでなく、より特定の状況に合わせてノートをフィルターできるので、プレイ中に何をすべきかを常に思い出すことができます。",
-  ko: "컴퓨터, 태블릿 또는 휴대 전화에서 캐릭터와 플레이어 모두 상대에 대해 메모를 쓰고 어디에서나 액세스 할 수 있도록합니다. 노트Z가 자동으로하기 때문에 새로운 전화 메모를 복원하는 것을 걱정할 필요가 없습니다! 일치하여 상대뿐만 아니라보다 구체적인 상황에 맞게 노트를 필터링 할 수 있으므로, 플레이 중에 무엇을해야 하는가를 항상 기억할 수 있습니다.",
-  cn: "在计算机，平板电脑或手机上写下有关角色对手和玩家对手的注释，以便您随时随地都可以访问它们。 笔记Z自动执行此操作，因此您不必担心在新手机上恢复笔记！ 匹配并过滤音符以适应更具体的情况，而不仅仅是对手，因此您始终可以记住比赛中该做什么。",
-  tw: "在計算機，平板電腦或手機上寫下有關角色對手和玩家對手的註釋，以便您隨時隨地都可以訪問它們。筆記Z自動執行此操作，因此您不必擔心在新手機上恢復筆記！匹配並過濾音符以適應更具體的情況，而不僅僅是對手，因此您始終可以記住比賽中該做什麼。",
-  sg: "在計算機，平板電腦或手機上寫下有關角色對手和玩家對手的註釋，以便您隨時隨地都可以訪問它們。筆記Z自動執行此操作，因此您不必擔心在新手機上恢復筆記！匹配並過濾音符以適應更具體的情況，而不僅僅是對手，因此您始終可以記住比賽中該做什麼。",
-  hk: "喺电脑，平板电脑或者手机上写下有关角色对手同玩家对手嘅注解嚟你随时随地都可以访问佢哋。筆記Z自动执行此用，就你唔使担心喺新手机上恢复碌士！匹配并隔音符以适应更具体嘅情况而不仅仅系对手，就你始终可以记住比赛中要做啲咩。"
-}
+  ja:
+    "コンピューター、タブレット、または携帯電話でキャラクターとプレイヤーの両方の対戦相手についてメモを書き、どこにいてもアクセスできるようにします。 ノートZが自動的に行うので、新しい電話でメモを復元することを心配する必要はありません！ 一致して、対戦相手だけでなく、より特定の状況に合わせてノートをフィルターできるので、プレイ中に何をすべきかを常に思い出すことができます。",
+  ko:
+    "컴퓨터, 태블릿 또는 휴대 전화에서 캐릭터와 플레이어 모두 상대에 대해 메모를 쓰고 어디에서나 액세스 할 수 있도록합니다. 노트Z가 자동으로하기 때문에 새로운 전화 메모를 복원하는 것을 걱정할 필요가 없습니다! 일치하여 상대뿐만 아니라보다 구체적인 상황에 맞게 노트를 필터링 할 수 있으므로, 플레이 중에 무엇을해야 하는가를 항상 기억할 수 있습니다.",
+  cn:
+    "在计算机，平板电脑或手机上写下有关角色对手和玩家对手的注释，以便您随时随地都可以访问它们。 笔记Z自动执行此操作，因此您不必担心在新手机上恢复笔记！ 匹配并过滤音符以适应更具体的情况，而不仅仅是对手，因此您始终可以记住比赛中该做什么。",
+  tw:
+    "在計算機，平板電腦或手機上寫下有關角色對手和玩家對手的註釋，以便您隨時隨地都可以訪問它們。筆記Z自動執行此操作，因此您不必擔心在新手機上恢復筆記！匹配並過濾音符以適應更具體的情況，而不僅僅是對手，因此您始終可以記住比賽中該做什麼。",
+  sg:
+    "在計算機，平板電腦或手機上寫下有關角色對手和玩家對手的註釋，以便您隨時隨地都可以訪問它們。筆記Z自動執行此操作，因此您不必擔心在新手機上恢復筆記！匹配並過濾音符以適應更具體的情況，而不僅僅是對手，因此您始終可以記住比賽中該做什麼。",
+  hk:
+    "喺电脑，平板电脑或者手机上写下有关角色对手同玩家对手嘅注解嚟你随时随地都可以访问佢哋。筆記Z自动执行此用，就你唔使担心喺新手机上恢复碌士！匹配并隔音符以适应更具体嘅情况而不仅仅系对手，就你始终可以记住比赛中要做啲咩。",
+};
 
 export const closing = {
   en: `Take your game to the next level with NoteZ today!`,
@@ -935,8 +948,8 @@ export const closing = {
   cn: "使用笔记Z将你的游戏玩法提升到新的水平！",
   tw: "使用筆記Z將你的遊戲玩法提升到新的水平！",
   sg: "使用筆記Z將你的遊戲玩法提升到新的水平！",
-  hk: "使用筆記Z将你嘅游戏玩法提升到新嘅水平！"
-}
+  hk: "使用筆記Z将你嘅游戏玩法提升到新嘅水平！",
+};
 
 export const existingUsers = {
   en: `Existing users`,
@@ -945,8 +958,8 @@ export const existingUsers = {
   cn: "现有用户",
   tw: "現有用戶",
   sg: "現有用戶",
-  hk: "現有用戶"
-}
+  hk: "現有用戶",
+};
 
 export const newUsers = {
   en: `New users`,
@@ -955,5 +968,35 @@ export const newUsers = {
   cn: "新用户",
   tw: "新用戶",
   sg: "新用戶",
-  hk: "新用戶"
-}
+  hk: "新用戶",
+};
+
+export const inviteUser = {
+  en: `Invite User`,
+  ja: "ユーザーを招待",
+  ko: "사용자 초대",
+  cn: "邀请用户",
+  tw: "邀請用戶",
+  sg: "邀請用戶",
+  hk: "邀請用戶",
+};
+
+export const inviteToPremium = {
+  en: `Invite to Premium Service`,
+  ja: "プレミアムサービスに招待",
+  ko: "프리미엄 서비스에 초대",
+  cn: "邀请高级服务",
+  tw: "邀請高級服務",
+  sg: "邀請高級服務",
+  hk: "邀請高級服務",
+};
+
+export const inviteSent = {
+  en: `Invite Sent`,
+  ja: "送信した招待",
+  ko: "초대를 보냈습니다",
+  cn: "邀请已发送",
+  tw: "邀請已發送",
+  sg: "邀請已發送",
+  hk: "邀請已發送",
+};

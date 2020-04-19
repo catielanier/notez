@@ -1,23 +1,21 @@
 import React, { useState, useContext } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import {
-  TextField,
-  Button,
   Typography,
   Container,
-  CircularProgress,
   makeStyles,
+  TextField,
+  CircularProgress,
+  Button,
 } from "@material-ui/core";
+import axios from "axios";
 import localeSelect from "../services/localeSelect";
-import {
-  email as emailLocale,
-  goBack,
-  forgotPassword,
-  checkEmailPassword,
-  requestReset as requestResetLocale,
-} from "../data/locales";
-import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import {
+  inviteToPremium,
+  inviteSent,
+  email as emailLocale,
+  inviteUser,
+} from "../data/locales";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,27 +43,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ForgotPassword() {
+export default function Invite() {
   const classes = useStyles();
-  const { loading, error, success, requestReset } = useContext(UserContext);
   const { language } = useContext(LanguageContext);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
   return (
-    <section>
+    <section className="invite-user">
       <Container maxWidth="sm">
-        <Typography className={classes.header} variant="h5">
-          {localeSelect(language, forgotPassword)}
+        <Typography variant="h5" className={classes.header}>
+          {localeSelect(language, inviteToPremium)}
         </Typography>
         <form
           disabled={loading}
-          onSubmit={(e) => {
-            e.preventDefault();
-            requestReset(email);
-          }}
           className={classes.container}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setLoading(true);
+            await axios({
+              method: "POST",
+              url: "/api/invites",
+              body: {
+                data: {
+                  email,
+                },
+              },
+            })
+              .then((res) => {
+                setLoading(false);
+                setSuccess(true);
+              })
+              .catch((err) => {
+                console.error(err);
+                setLoading(false);
+                setError(err.message);
+              });
+          }}
         >
           <Container maxWidth="sm">
-            {success && <p>{localeSelect(language, checkEmailPassword)}</p>}
+            {success && <p>{localeSelect(language, inviteSent)}</p>}
             {error && (
               <p className="error">
                 <span>Error:</span> {error}
@@ -90,7 +108,7 @@ export default function ForgotPassword() {
                   color="primary"
                   disabled={loading}
                 >
-                  {localeSelect(language, requestResetLocale)}
+                  {localeSelect(language, inviteUser)}
                 </Button>
                 {loading && (
                   <CircularProgress
@@ -99,15 +117,6 @@ export default function ForgotPassword() {
                     className={classes.buttonProgress}
                   />
                 )}
-              </div>
-              <div className={classes.wrapper}>
-                <Button
-                  component={React.forwardRef((props, ref) => (
-                    <RouterLink innerRef={ref} to="/login" {...props} />
-                  ))}
-                >
-                  {localeSelect(language, goBack)}
-                </Button>
               </div>
             </Container>
           </Container>

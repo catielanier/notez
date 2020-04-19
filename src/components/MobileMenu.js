@@ -34,6 +34,7 @@ import {
   userSettings,
   profile,
   logout,
+  inviteUser,
 } from "../data/locales";
 import localeSelect from "../services/localeSelect";
 import { UserContext } from "../contexts/UserContext";
@@ -220,6 +221,19 @@ export default function MobileMenu() {
                   </ListItemIcon>
                   <ListItemText>
                     {localeSelect(language, userSettings)}
+                  </ListItemText>
+                </ListItem>
+                <ListItem
+                  button
+                  component={React.forwardRef((props, ref) => (
+                    <RouterLink innerRef={ref} to="/invite" {...props} />
+                  ))}
+                >
+                  <ListItemIcon>
+                    <Settings />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {localeSelect(language, inviteUser)}
                   </ListItemText>
                 </ListItem>
               </>
