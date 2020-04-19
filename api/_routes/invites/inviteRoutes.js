@@ -42,6 +42,25 @@ router.route("/:id").get(async (req, res) => {
   }
 });
 
-router.route("/signup").post(async (req, res) => {});
+router.route("/signup").post(async (req, res) => {
+  const { data: newUser } = req.body;
+  const { token } = newUser;
+  delete newUser.token;
+  newUser.premium = true;
+  try {
+    const invite = await inviteService.getInvite(token);
+    if (invite) {
+      const user = await userService.createUser(newUser);
+      if (user) {
+        const finished = await inviteService.deleteInvite(token);
+        res.status(201).json({
+          data: user,
+        });
+      }
+    }
+  } catch (e) {
+    res.status(401).send(e);
+  }
+});
 
 exports.router = router;

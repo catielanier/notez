@@ -16,3 +16,11 @@ exports.getInvite = async (id) => {
     throw e;
   }
 };
+
+exports.deleteInvite = async (id) => {
+  try {
+    return await Invite.findByIdAndDelete({ _id: id });
+  } catch (e) {
+    throw e;
+  }
+};
