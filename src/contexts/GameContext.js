@@ -16,15 +16,15 @@ const GameContextProvider = (props) => {
   const [filters, setFilters] = useState([]);
   const { language } = useContext(LanguageContext);
   const { user } = useContext(UserContext);
+  const fetchData = async function () {
+    await axios.get("/api/games").then((res) => {
+      sort(res.data.data, language);
+      setGames(res.data.data);
+    });
+  };
   useEffect(() => {
-    const fetchData = async function () {
-      await axios.get("/api/games").then((res) => {
-        sort(res.data.data, language);
-        setGames(res.data.data);
-      });
-    };
     fetchData();
-  }, [language]);
+  });
   const updateDropdowns = (game, type) => {
     const index = games.findIndex((x) => x._id === game);
     if (type === "game") {
@@ -108,8 +108,7 @@ const GameContextProvider = (props) => {
         characters,
         game,
       });
-      const index = games.findIndex((x) => x._id === game);
-      games[index].characters = res.data.data.characters;
+      await fetchData();
     } catch (e) {
       setLoading(false);
       setError(e.message);
