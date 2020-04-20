@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import axios from "axios";
 import { LanguageContext } from "./LanguageContext";
 import sort from "../services/sort";
@@ -16,15 +22,15 @@ const GameContextProvider = (props) => {
   const [filters, setFilters] = useState([]);
   const { language } = useContext(LanguageContext);
   const { user } = useContext(UserContext);
-  const fetchData = async function () {
+  const fetchData = useCallback(async () => {
     await axios.get("/api/games").then((res) => {
       sort(res.data.data, language);
       setGames(res.data.data);
     });
-  };
+  }, [language]);
   useEffect(() => {
     fetchData();
-  });
+  }, [fetchData]);
   const updateDropdowns = (game, type) => {
     const index = games.findIndex((x) => x._id === game);
     if (type === "game") {
