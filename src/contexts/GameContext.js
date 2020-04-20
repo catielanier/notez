@@ -125,8 +125,7 @@ const GameContextProvider = (props) => {
         filters,
         game,
       });
-      const index = games.findIndex((x) => x._id === game);
-      games[index].filters = res.data.data.filters;
+      await fetchData();
     } catch (e) {
       setLoading(false);
       setError(e.message);
