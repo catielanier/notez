@@ -90,7 +90,7 @@ export default function LinkCharacter() {
               });
             });
             const unselected = [];
-            characters.map((character) => {
+            characters.forEach((character) => {
               const index = selected.findIndex((id) => character._id === id);
               if (index === -1) {
                 unselected.push(character);
