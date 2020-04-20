@@ -27,7 +27,7 @@ router.route("/").post(async (req, res) => {
         <h3>NoteZ</h3>
         <h5>Hello!</h5>
         <p>You've been invited to our service! Come join everyone in taking notes to help improve your game!</p>
-        <p>Please click <a href="http://localhost:3000/invite/${finished._id}">here</a> to get started.</p>
+        <p>Please click <a href="https://checkthenotez.com/invite/${finished._id}">here</a> to get started.</p>
         <p>Regards,<br />The NoteZ Team</p>
       `;
       const mailOptions = {

@@ -61,7 +61,9 @@
       "PORT": "4000",
       "SECRET": "@secret_notez",
       "MONGODB_URI": "@mongodb_uri_notez",
-      "MAILSERVER": "@mailserver_notez"
+      "SERVICE": "@service_notez",
+      "USER": "@user_notez",
+      "PASS": "@pass_notez"
     },
     "routes": [
       {

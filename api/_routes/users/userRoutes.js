@@ -20,7 +20,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_en = `
       <h3>NoteZ</h3>
       <h5>Welcome to NoteZ, ${newUser.username}!</h5>
-      <p>We're happy to have you. Please click <a href="http://localhost:3000/verify/${newUser.verification}">here</a> to get underway.</p>
+      <p>We're happy to have you. Please click <a href="https://checkthenotez.com/verify/${newUser.verification}">here</a> to get underway.</p>
       <p>Regards,<br />The NoteZ Team</p>
     `;
     const mailOptions_en = {
@@ -32,7 +32,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_ja = `
       <h3>ノートZ</h3>
       <h5>ノートZへようこそ、${newUser.username}！</h5>
-      <p>喜んでお迎えします。 <a href="http://localhost:3000/verify/${newUser.verification}">ここを</a>クリックして開始してください。</p>
+      <p>喜んでお迎えします。 <a href="https://checkthenotez.com/verify/${newUser.verification}">ここを</a>クリックして開始してください。</p>
       <p>よろしく、<br />ノートZチーム</p>
     `;
     const mailOptions_ja = {
@@ -44,7 +44,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_ko = `
       <h3>노트Z</h3>
       <h5>노트Z 오신 것을 환영합니다, ${newUser.username}!</h5>
-      <p>기꺼이 맞이합니다. <a href="http://localhost:3000/verify/${newUser.verification}">여기를</a> 클릭하여 시작하십시오.</p>
+      <p>기꺼이 맞이합니다. <a href="https://checkthenotez.com/verify/${newUser.verification}">여기를</a> 클릭하여 시작하십시오.</p>
       <p>감사합니다,<br />노트Z 팀</p>
     `;
     const mailOptions_ko = {
@@ -56,7 +56,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_cn = `
       <h3>笔记Z</h3>
       <h5>欢迎使用笔记Z，${newUser.username}！</h5>
-      <p>我们很高兴欢迎您。单击<a href="http://localhost:3000/verify/${newUser.verification}">此处</a>开始。</p>
+      <p>我们很高兴欢迎您。单击<a href="https://checkthenotez.com/verify/${newUser.verification}">此处</a>开始。</p>
       <p>我们的问候，<br />笔记Z团队</p>
     `;
     const mailOptions_cn = {
@@ -68,7 +68,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_tw = `
       <h3>筆記Z</h3>
       <h5>歡迎使用筆記Z，${newUser.username}！</h5>
-      <p>我們很高興歡迎您。單擊<a href="http://localhost:3000/verify/${newUser.verification}">此處</a>開始。</p>
+      <p>我們很高興歡迎您。單擊<a href="https://checkthenotez.com/verify/${newUser.verification}">此處</a>開始。</p>
       <p>我們的問候，<br />筆記Z團隊</p>
     `;
     const mailOptions_tw = {
@@ -80,7 +80,7 @@ router.route("/signup").post(async (req, res, next) => {
     const messageBody_hk = `
       <h3>筆記Z</h3>
       <h5>歡迎使用筆記Z，${newUser.username}！</h5>
-      <p>我哋好開心歡迎你。單擊<a href="http://localhost:3000/verify/${newUser.verification}">此處</a>開始。</p>
+      <p>我哋好開心歡迎你。單擊<a href="https://checkthenotez.com/verify/${newUser.verification}">此處</a>開始。</p>
       <p>我哋嘅打招呼，<br />筆記Z團隊</p>
     `;
     const mailOptions_hk = {
@@ -269,7 +269,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_en = `
         <h3>NoteZ</h3>
         <h5>Hello ${checkUser.username}:</h5>
-        <p>It seems you have forgotten your password. Please click <a href="http://localhost:3000/forgot/${token}">here</a> to go in to reset it.</p>
+        <p>It seems you have forgotten your password. Please click <a href="https://checkthenotez.com/forgot/${token}">here</a> to go in to reset it.</p>
         <p>Regards,<br />The NoteZ Team</p>
       `;
       const mailOptions_en = {
@@ -281,7 +281,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_ja = `
         <h3>ノートZ</h3>
         <h5>こんにちは${checkUser.username}:</h5>
-        <p>パスワードを忘れたようです。<a href="http://localhost:3000/forgot/${token}">ここを</a>クリックしてリセットしてください。</p>
+        <p>パスワードを忘れたようです。<a href="https://checkthenotez.com/forgot/${token}">ここを</a>クリックしてリセットしてください。</p>
         <p>よろしく、<br />ノートZチーム</p>
       `;
       const mailOptions_ja = {
@@ -293,7 +293,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_ko = `
         <h3>노트Z</h3>
         <h5>안녕하세요 ${checkUser.username}:</h5>
-        <p>비밀번호를 잊어 같습니다. <a href="http://localhost:3000/forgot/${token}">여기를</a> 클릭하여 재설정하십시오.</p>
+        <p>비밀번호를 잊어 같습니다. <a href="https://checkthenotez.com/forgot/${token}">여기를</a> 클릭하여 재설정하십시오.</p>
         <p>감사합니다,<br />노트Z 팀</p>
       `;
       const mailOptions_ko = {
@@ -305,7 +305,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_cn = `
         <h3>笔记Z</h3>
         <h5>你好${checkUser.username}:</h5>
-        <p>你好像忘记了密码。 单击<a href="http://localhost:3000/forgot/${token}">此处</a>重置。</p>
+        <p>你好像忘记了密码。 单击<a href="https://checkthenotez.com/forgot/${token}">此处</a>重置。</p>
         <p>我们的问候，<br />笔记Z团队</p>
       `;
       const mailOptions_cn = {
@@ -317,7 +317,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_tw = `
         <h3>筆記Z</h3>
         <h5>你好${checkUser.username}:</h5>
-        <p>你好像忘記了密碼。 單擊<a href="http://localhost:3000/forgot/${token}">此處</a>重置。</p>
+        <p>你好像忘記了密碼。 單擊<a href="https://checkthenotez.com/forgot/${token}">此處</a>重置。</p>
         <p>我們的問候，<br />筆記Z團隊</p>
       `;
       const mailOptions_tw = {
@@ -329,7 +329,7 @@ router.route("/forgot").post(async (req, res) => {
       const messageBody_hk = `
         <h3>筆記Z</h3>
         <h5>你好${checkUser.username}:</h5>
-        <p>你好似唔記得咗密碼。 單擊<a href="http://localhost:3000/forgot/${token}">此處</a>重置。</p>
+        <p>你好似唔記得咗密碼。 單擊<a href="https://checkthenotez.com/forgot/${token}">此處</a>重置。</p>
         <p>我哋嘅打招呼，<br />筆記Z團隊</p>
       `;
       const mailOptions_hk = {
