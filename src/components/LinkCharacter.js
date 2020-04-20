@@ -187,6 +187,7 @@ export default function LinkCharacter() {
                 <Button
                   variant="contained"
                   color="primary"
+                  disabled={loading}
                   onClick={(e) => {
                     e.preventDefault();
                     connectCharacters(game, selectedCharacters);
