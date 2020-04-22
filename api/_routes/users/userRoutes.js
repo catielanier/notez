@@ -283,98 +283,115 @@ router.route("/forgot").post(async (req, res) => {
     if (checkUser) {
       const token = await userService.addValidation();
       const updated = await userService.setForgotToken(checkUser._id, token);
+
+      const subject_en = "Password reset link";
+      const subject_ja = "パスワードリセットリンク";
+      const subject_ko = "비밀번호 재설정 링크";
+      const subject_cn = "密码重置链接";
+      const subject_tw = "密码重置链接";
+      const subject_hk = "密码重置链接";
+
+      const sender_en = "NoteZ";
+      const sender_ja = "ノートZ";
+      const sender_ko = "노트Z";
+      const sender_cn = "笔记Z";
+      const sender_tw = "筆記Z";
+      const sender_hk = "筆記Z";
+
       const messageBody_en = `
         <h3>NoteZ</h3>
         <h5>Hello ${checkUser.username}:</h5>
         <p>It seems you have forgotten your password. Please click <a href="https://checkthenotez.com/forgot/${token}">here</a> to go in to reset it.</p>
         <p>Regards,<br />The NoteZ Team</p>
       `;
-      const mailOptions_en = {
-        from: '"NoteZ" <admin@checkthenotez.com>',
-        to: email,
-        subject: "Password reset link",
-        html: messageBody_en,
-      };
+
       const messageBody_ja = `
         <h3>ノートZ</h3>
         <h5>こんにちは${checkUser.username}:</h5>
         <p>パスワードを忘れたようです。<a href="https://checkthenotez.com/forgot/${token}">ここを</a>クリックしてリセットしてください。</p>
         <p>よろしく、<br />ノートZチーム</p>
       `;
-      const mailOptions_ja = {
-        from: '"ノートZ" <admin@checkthenotez.com>',
-        to: email,
-        subject: "パスワードリセットリンク",
-        html: messageBody_ja,
-      };
+
       const messageBody_ko = `
         <h3>노트Z</h3>
         <h5>안녕하세요 ${checkUser.username}:</h5>
         <p>비밀번호를 잊어 같습니다. <a href="https://checkthenotez.com/forgot/${token}">여기를</a> 클릭하여 재설정하십시오.</p>
         <p>감사합니다,<br />노트Z 팀</p>
       `;
-      const mailOptions_ko = {
-        from: '"노트Z" <admin@checkthenotez.com>',
-        to: email,
-        subject: "암호 재설정 링크",
-        html: messageBody_ko,
-      };
+
       const messageBody_cn = `
         <h3>笔记Z</h3>
         <h5>你好${checkUser.username}:</h5>
         <p>你好像忘记了密码。 单击<a href="https://checkthenotez.com/forgot/${token}">此处</a>重置。</p>
         <p>我们的问候，<br />笔记Z团队</p>
       `;
-      const mailOptions_cn = {
-        from: '"笔记Z" <admin@checkthenotez.com>',
-        to: email,
-        subject: "密码重置链接",
-        html: messageBody_cn,
-      };
+
       const messageBody_tw = `
         <h3>筆記Z</h3>
         <h5>你好${checkUser.username}:</h5>
         <p>你好像忘記了密碼。 單擊<a href="https://checkthenotez.com/forgot/${token}">此處</a>重置。</p>
         <p>我們的問候，<br />筆記Z團隊</p>
       `;
-      const mailOptions_tw = {
-        from: '"筆記Z" <admin@checkthenotez.com>',
-        to: email,
-        subject: "密码重置链接",
-        html: messageBody_tw,
-      };
+
       const messageBody_hk = `
         <h3>筆記Z</h3>
         <h5>你好${checkUser.username}:</h5>
         <p>你好似唔記得咗密碼。 單擊<a href="https://checkthenotez.com/forgot/${token}">此處</a>重置。</p>
         <p>我哋嘅打招呼，<br />筆記Z團隊</p>
       `;
-      const mailOptions_hk = {
-        from: '"筆記Z" <admin@checkthenotez.com>',
-        to: email,
-        subject: "密码重置链接",
-        html: messageBody_hk,
-      };
-      let mailOptions = {};
+
+      let sender = ``;
+      let subject = ``;
+      let messageBody = ``;
       if (language === "ja") {
-        mailOptions = mailOptions_ja;
+        messageBody = messageBody_ja;
+        sender = sender_ja;
+        subject = subject_ja;
       } else if (language === "ko") {
-        mailOptions = mailOptions_ko;
+        messageBody = messageBody_ko;
+        sender = sender_ko;
+        subject = subject_ko;
       } else if (language === "zh-CN") {
-        mailOptions = mailOptions_cn;
-      } else if (language === "zh-TW") {
-        mailOptions = mailOptions_tw;
+        messageBody = messageBody_cn;
+        sender = sender_cn;
+        subject = subject_cn;
+      } else if (language === "zh-TW" || "zh-SG") {
+        messageBody = messageBody_tw;
+        sender = sender_tw;
+        subject = subject_tw;
       } else if (language === "zh-HK") {
-        mailOptions = mailOptions_hk;
+        messageBody = messageBody_hk;
+        sender = sender_hk;
+        subject = subject_hk;
       } else {
-        mailOptions = mailOptions_en;
+        messageBody = messageBody_en;
+        sender = sender_en;
+        subject = subject_en;
       }
-      await transport.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-        console.log(`Message sent: ${info.messageId}`);
+      const request = mailjet.post("send", { version: "v3.1" }).request({
+        Messages: [
+          {
+            From: {
+              Email: "no-reply@checkthenotez.com",
+              Name: sender,
+            },
+            To: [
+              {
+                Email: email,
+              },
+            ],
+            Subject: subject,
+            HTMLPart: messageBody,
+          },
+        ],
       });
+      request
+        .then((result) => {
+          console.log(result.body);
+        })
+        .catch((err) => {
+          console.log(err.statusCode);
+        });
       res.status(201).json({
         data: updated,
       });
