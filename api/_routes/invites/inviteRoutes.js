@@ -4,12 +4,16 @@ const userService = require("../users/userServices");
 const inviteService = require("./inviteServices");
 const middleWare = require("../../_middleware");
 const { applyMiddleware } = require("../../_utils");
-const nodemailer = require("nodemailer");
-const { MAILSERVER } = require("../../_utils/constants");
+const {
+  MJ_APIKEY_PRIVATE,
+  MJ_APIKEY_PUBLIC,
+} = require("../../_utils/constants");
+const mailjet = require("node-mailjet").connect(
+  MJ_APIKEY_PUBLIC,
+  MJ_APIKEY_PRIVATE
+);
 
 applyMiddleware(middleWare, router);
-
-const transport = nodemailer.createTransport(MAILSERVER);
 
 router.route("/").post(async (req, res) => {
   const { email } = req.body.data;
@@ -30,18 +34,30 @@ router.route("/").post(async (req, res) => {
         <p>Please click <a href="https://checkthenotez.com/invite/${finished._id}">here</a> to get started.</p>
         <p>Regards,<br />The NoteZ Team</p>
       `;
-      const mailOptions = {
-        from: '"NoteZ" <admin@checkthenotez.com>',
-        to: email,
-        subject: "You've been invited to NoteZ!",
-        html: messageBody,
-      };
-      await transport.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-        console.log(`Message sent: ${info.messageId}`);
+      const request = mailjet.post("send", { version: "v3.1" }).request({
+        Messages: [
+          {
+            From: {
+              Email: "no-reply@checkthenotez.com",
+              Name: "NoteZ",
+            },
+            To: [
+              {
+                Email: email,
+              },
+            ],
+            Subject: "You've been invited to NoteZ!",
+            HTMLPart: messageBody,
+          },
+        ],
       });
+      request
+        .then((result) => {
+          console.log(result.body);
+        })
+        .catch((err) => {
+          console.log(err.statusCode);
+        });
       res.status(201).json({
         data: finished,
       });

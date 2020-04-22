@@ -17,7 +17,7 @@
     "http": "0.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.5",
-    "nodemailer": "^6.3.1",
+    "node-mailjet": "^3.3.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
@@ -62,8 +62,8 @@
       "SECRET": "@secret_notez",
       "MONGODB_URI": "@mongodb_uri_notez",
       "SERVICE": "@service_notez",
-      "USER": "@user_notez",
-      "PASS": "@pass_notez"
+      "MJ_APIKEY_PUBLIC": "@mj_apikey_public",
+      "MJ_APIKEY_PRIVATE": "@mj_apikey_private"
     },
     "routes": [
       {
