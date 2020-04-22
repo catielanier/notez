@@ -2,14 +2,18 @@ const express = require("express");
 const router = express.Router();
 const userService = require("./userServices");
 const tokenService = require("../../_utils/tokenService");
-const nodemailer = require("nodemailer");
-const { MAILSERVER } = require("../../_utils/constants");
+const {
+  MJ_APIKEY_PRIVATE,
+  MJ_APIKEY_PUBLIC,
+} = require("../../_utils/constants");
+const mailjet = require("node-mailjet").connect(
+  MJ_APIKEY_PUBLIC,
+  MJ_APIKEY_PRIVATE
+);
 const middleWare = require("../../_middleware");
 const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
-
-const transport = nodemailer.createTransport(MAILSERVER);
 
 router.route("/signup").post(async (req, res, next) => {
   try {
@@ -17,98 +21,111 @@ router.route("/signup").post(async (req, res, next) => {
     const { language } = req.params;
     newUser.verification = await userService.addValidation();
     const user = await userService.createUser(newUser);
+
+    const subject_en = "Welcome to NoteZ!";
+    const subject_ja = "ノートZへようこそ！";
+    const subject_ko = "노트Z 오신 것을 환영합니다!";
+    const subject_cn = "欢迎使用笔记Z！";
+    const subject_tw = "歡迎使用筆記Z！";
+    const subject_hk = "歡迎使用筆記Z！";
+
+    const sender_en = "NoteZ";
+    const sender_ja = "ノートZ";
+    const sender_ko = "노트Z";
+    const sender_cn = "笔记Z";
+    const sender_tw = "筆記Z";
+    const sender_hk = "筆記Z";
+
     const messageBody_en = `
       <h3>NoteZ</h3>
       <h5>Welcome to NoteZ, ${newUser.username}!</h5>
       <p>We're happy to have you. Please click <a href="https://checkthenotez.com/verify/${newUser.verification}">here</a> to get underway.</p>
       <p>Regards,<br />The NoteZ Team</p>
     `;
-    const mailOptions_en = {
-      from: '"NoteZ" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "Welcome to NoteZ!",
-      html: messageBody_en,
-    };
     const messageBody_ja = `
       <h3>ノートZ</h3>
       <h5>ノートZへようこそ、${newUser.username}！</h5>
       <p>喜んでお迎えします。 <a href="https://checkthenotez.com/verify/${newUser.verification}">ここを</a>クリックして開始してください。</p>
       <p>よろしく、<br />ノートZチーム</p>
     `;
-    const mailOptions_ja = {
-      from: '"ノートZ" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "ノートZへようこそ！",
-      html: messageBody_ja,
-    };
     const messageBody_ko = `
       <h3>노트Z</h3>
       <h5>노트Z 오신 것을 환영합니다, ${newUser.username}!</h5>
       <p>기꺼이 맞이합니다. <a href="https://checkthenotez.com/verify/${newUser.verification}">여기를</a> 클릭하여 시작하십시오.</p>
       <p>감사합니다,<br />노트Z 팀</p>
     `;
-    const mailOptions_ko = {
-      from: '"노트Z" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "노트Z 오신 것을 환영합니다!",
-      html: messageBody_ko,
-    };
     const messageBody_cn = `
       <h3>笔记Z</h3>
       <h5>欢迎使用笔记Z，${newUser.username}！</h5>
       <p>我们很高兴欢迎您。单击<a href="https://checkthenotez.com/verify/${newUser.verification}">此处</a>开始。</p>
       <p>我们的问候，<br />笔记Z团队</p>
     `;
-    const mailOptions_cn = {
-      from: '"笔记Z" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "欢迎使用笔记Z！",
-      html: messageBody_cn,
-    };
     const messageBody_tw = `
       <h3>筆記Z</h3>
       <h5>歡迎使用筆記Z，${newUser.username}！</h5>
       <p>我們很高興歡迎您。單擊<a href="https://checkthenotez.com/verify/${newUser.verification}">此處</a>開始。</p>
       <p>我們的問候，<br />筆記Z團隊</p>
     `;
-    const mailOptions_tw = {
-      from: '"笔记Z" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "欢迎使用笔记Z！",
-      html: messageBody_tw,
-    };
     const messageBody_hk = `
       <h3>筆記Z</h3>
       <h5>歡迎使用筆記Z，${newUser.username}！</h5>
       <p>我哋好開心歡迎你。單擊<a href="https://checkthenotez.com/verify/${newUser.verification}">此處</a>開始。</p>
       <p>我哋嘅打招呼，<br />筆記Z團隊</p>
     `;
-    const mailOptions_hk = {
-      from: '"笔记Z" <admin@checkthenotez.com>',
-      to: newUser.email,
-      subject: "欢迎使用笔记Z！",
-      html: messageBody_hk,
-    };
-    let mailOptions = {};
+
+    let sender = ``;
+    let subject = ``;
+    let messageBody = ``;
     if (language === "ja") {
-      mailOptions = mailOptions_ja;
+      messageBody = messageBody_ja;
+      sender = sender_ja;
+      subject = subject_ja;
     } else if (language === "ko") {
-      mailOptions = mailOptions_ko;
+      messageBody = messageBody_ko;
+      sender = sender_ko;
+      subject = subject_ko;
     } else if (language === "zh-CN") {
-      mailOptions = mailOptions_cn;
-    } else if (language === "zh-TW") {
-      mailOptions = mailOptions_tw;
+      messageBody = messageBody_cn;
+      sender = sender_cn;
+      subject = subject_cn;
+    } else if (language === "zh-TW" || "zh-SG") {
+      messageBody = messageBody_tw;
+      sender = sender_tw;
+      subject = subject_tw;
     } else if (language === "zh-HK") {
-      mailOptions = mailOptions_hk;
+      messageBody = messageBody_hk;
+      sender = sender_hk;
+      subject = subject_hk;
     } else {
-      mailOptions = mailOptions_en;
+      messageBody = messageBody_en;
+      sender = sender_en;
+      subject = subject_en;
     }
-    await transport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log(`Message sent: ${info.messageId}`);
+
+    const request = mailjet.post("send", { version: "v3.1" }).request({
+      Messages: [
+        {
+          From: {
+            Email: "no-reply@checkthenotez.com",
+            Name: sender,
+          },
+          To: [
+            {
+              Email: newUser.email,
+            },
+          ],
+          Subject: subject,
+          HTMLPart: messageBody,
+        },
+      ],
     });
+    request
+      .then((result) => {
+        console.log(result.body);
+      })
+      .catch((err) => {
+        console.log(err.statusCode);
+      });
     res.status(201).json({
       data: [user],
     });
