@@ -61,7 +61,6 @@
       "PORT": "4000",
       "SECRET": "@secret_notez",
       "MONGODB_URI": "@mongodb_uri_notez",
-      "SERVICE": "@service_notez",
       "MJ_APIKEY_PUBLIC": "@mj_apikey_public",
       "MJ_APIKEY_PRIVATE": "@mj_apikey_private"
     },

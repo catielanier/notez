@@ -10,6 +10,7 @@ import { LanguageContext } from "./LanguageContext";
 import sort from "../services/sort";
 import { UserContext } from "./UserContext";
 import { getToken } from "../services/tokenService";
+import { set } from "mongoose";
 
 export const GameContext = createContext();
 
@@ -115,6 +116,8 @@ const GameContextProvider = (props) => {
         game,
       });
       await fetchData();
+      setLoading(false);
+      setSuccess(true);
     } catch (e) {
       setLoading(false);
       setError(e.message);
@@ -132,6 +135,8 @@ const GameContextProvider = (props) => {
         game,
       });
       await fetchData();
+      setLoading(false);
+      setSuccess(true);
     } catch (e) {
       setLoading(false);
       setError(e.message);
