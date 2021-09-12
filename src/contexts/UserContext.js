@@ -16,7 +16,6 @@ const UserContextProvider = (props) => {
 	const [success, setSuccess] = useState(false);
 	const { language } = useContext(LanguageContext);
 	const apiUrl = process.env.REACT_APP_NOTEZ_API;
-	console.log(apiUrl);
 
 	useEffect(() => {
 		if (user) {
