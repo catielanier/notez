@@ -40,7 +40,9 @@ const NoteContextProvider = (props) => {
 			const resFilters = await axios.get(`${apiUrl}/filters/player`);
 			setPlayerFilters(resFilters.data.data);
 		};
-		fetchData();
+		if (user) {
+			fetchData();
+		}
 	}, [user]);
 	useEffect(() => {
 		const playerList = [];
