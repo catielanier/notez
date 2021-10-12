@@ -12,5 +12,34 @@
     },
     "existing": "Existing users",
     "new": "New users"
+  },
+  "header": {
+    "login": "Login",
+    "signup": "Signup",
+    "notes": {
+      "game": "Game Notes",
+      "player": "Player Notes"
+    },
+    "settings": "Settings",
+    "game": {
+      "add": "Add Game",
+      "edit": "Edit Game"
+    },
+    "character": {
+      "add": "Add Character",
+      "edit": "Edit Character",
+      "link": "Link Characters"
+    },
+    "filter": {
+      "add": "Add Filter",
+      "edit": "Edit Filter",
+      "link": "Link Filter"
+    },
+    "user": {
+      "settings": "User Settings",
+      "invite": "Invite User"
+    },
+    "profile": "Profile",
+    "logout": "Logout"
   }
 }
