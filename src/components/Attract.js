@@ -1,17 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import Particles from "react-particles-js";
 import { Container, Typography, Grid, Button, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
-import { LanguageContext } from "../contexts/LanguageContext";
-import localeSelect from "../services/localeSelect";
 import { useTranslation } from "react-i18next";
-import {
-	paragraphTwo,
-	closing,
-	existingUsers,
-	newUsers,
-} from "../data/locales";
 import logo from "../assets/logo.png";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Attract(props) {
 	const classes = useStyles();
-	const { language } = useContext(LanguageContext);
 	const { t } = useTranslation();
 	return (
 		<>
@@ -85,7 +76,7 @@ function Attract(props) {
 								))}
 								className={classes.wrapper}
 							>
-								{localeSelect(language, existingUsers)}
+								{t("home.existing")}
 							</Button>
 							<Button
 								variant="outlined"
@@ -95,7 +86,7 @@ function Attract(props) {
 									<RouterLink innerRef={ref} to="/signup" {...props} />
 								))}
 							>
-								{localeSelect(language, newUsers)}
+								{t("home.new")}
 							</Button>
 						</Container>
 					</Grid>

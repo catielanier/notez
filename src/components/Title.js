@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Helmet from "react-helmet";
-import { title } from "../data/locales";
-import localeSelect from "../services/localeSelect";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 export default function Title() {
-  const { language } = useContext(LanguageContext);
-  return (
-    <Helmet>
-      <title>{localeSelect(language, title)}</title>
-    </Helmet>
-  );
+	const { t } = useTranslation();
+	return (
+		<Helmet>
+			<title>{t("app.name")}</title>
+		</Helmet>
+	);
 }
