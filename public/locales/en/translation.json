@@ -49,9 +49,13 @@
     "username": "Username",
     "realname": "Real Name",
     "country": "Country",
-    "forgot": "Forgot your password?"
+    "forgot": "Forgot your password?",
+    "success": {
+      "signup": "Registration success! Please check your email."
+    }
   },
   "common": {
-    "goBack": "Go Back"
+    "goBack": "Go Back",
+    "error": "Error:"
   }
 }

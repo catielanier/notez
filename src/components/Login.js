@@ -64,7 +64,7 @@ export default function Login() {
 					<Container maxWidth="xs">
 						{error && (
 							<p className="error">
-								<span>Error:</span> {error}
+								<span>{t("common.error")}</span> {error}
 							</p>
 						)}
 						<Container maxWidth="xs">
