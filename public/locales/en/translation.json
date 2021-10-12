@@ -41,5 +41,17 @@
     },
     "profile": "Profile",
     "logout": "Logout"
+  },
+  "account": {
+    "email": "Email",
+    "password": "Password",
+    "verify": "Verify Password",
+    "username": "Username",
+    "realname": "Real Name",
+    "country": "Country",
+    "forgot": "Forgot your password?"
+  },
+  "common": {
+    "goBack": "Go Back"
   }
 }
