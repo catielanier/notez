@@ -1,0 +1,14 @@
+{
+  "app": {
+    "name": "NoteZ"
+  },
+  "home": {
+    "title": "Welcome to NoteZ",
+    "subtitle": "Your premiere fighting game note app!",
+    "description": {
+      "partOne": "Elevate your game like the pros! With comprehensive matchup notes, you'll always be on top of your knowledge! And no app on the planet is tailored to fighting game notes like NoteZ.",
+      "partTwo": "Write notes for both character and player matchups on your computer, tablet, or mobile phone, then have access to them wherever you are. No need to worry about restoring your notes on a new phone, as NoteZ will do it for you! In match, be able to filter down your notes to more specific circumstances than just your opponent, so that you'll always remember what to do as you play.",
+      "partThree": "Take your game to the next level with NoteZ today!"
+    }
+  }
+}
