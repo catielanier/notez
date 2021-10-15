@@ -57,5 +57,18 @@
   "common": {
     "goBack": "Go Back",
     "error": "Error:"
+  },
+  "notes": {
+    "common": {
+      "quickAdd": "Quick Add:",
+      "clickSearch": "Click the search button to find your notes.",
+      "notes": "Notes:",
+      "notice": "Notice",
+      "noNotes": "You do not have any notes for this matchup. Add some below!",
+      "editing": "Editing Note",
+      "fiilter": "Filter",
+      "edit": "Edit Note",
+      "cancel": "Cancel"
+    }
   }
 }
