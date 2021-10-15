@@ -68,7 +68,16 @@
       "editing": "Editing Note",
       "fiilter": "Filter",
       "edit": "Edit Note",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "game": "Choose a game:"
+    },
+    "character": {
+      "you": "Choose your character:",
+      "opponent": "Choose your opponent's character:"
+    },
+    "filter": {
+      "choose": "Choose your filter (optional):",
+      "clear": "Clear Filter"
     }
   }
 }
