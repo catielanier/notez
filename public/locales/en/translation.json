@@ -69,7 +69,13 @@
       "fiilter": "Filter",
       "edit": "Edit Note",
       "cancel": "Cancel",
-      "game": "Choose a game:"
+      "game": "Choose a game:",
+      "universal": "This note should be displayed across all opponents.",
+    },
+    "new": {
+      "filter": "New note filter:",
+      "new": "New note:",
+      "submit": "Create Note"
     },
     "character": {
       "you": "Choose your character:",
