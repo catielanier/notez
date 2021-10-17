@@ -56,7 +56,8 @@
   },
   "common": {
     "goBack": "Go Back",
-    "error": "Error:"
+    "error": "Error:",
+    "clear": "Clear Form"
   },
   "notes": {
     "common": {
@@ -85,6 +86,29 @@
     "filter": {
       "choose": "Choose your filter (optional):",
       "clear": "Clear Filter"
+    }
+  },
+  "character": {
+    "add": {
+      "name": {
+        "en": "English name",
+        "ja": "Japanese name",
+        "ko": "Korean name",
+        "cn": "Simplified Chinese name",
+        "tw": "Traditional Chinese name"
+      }
+    }
+  },
+  "game": {
+    "add": {
+      "title": {
+        "en": "English title",
+        "ja": "Japanese title",
+        "ko": "Korean title",
+        "cn": "Simplified Chinese title",
+        "tw": "Traditional Chinese title"
+      },
+      "created": "Game created successfully."
     }
   }
 }
