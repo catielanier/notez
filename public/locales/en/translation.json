@@ -51,8 +51,10 @@
     "country": "Country",
     "forgot": "Forgot your password?",
     "success": {
-      "signup": "Registration success! Please check your email."
-    }
+      "signup": "Registration success! Please check your email.",
+      "invite": "Invite Sent"
+    },
+    "invite": "Invite to Premium Service"
   },
   "common": {
     "goBack": "Go Back",
