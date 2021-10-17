@@ -111,5 +111,18 @@
       },
       "created": "Game created successfully."
     }
+  },
+  "filter": {
+    "add": {
+      "type": {
+        "en": "English filter type",
+        "ja": "Japanese filter type",
+        "ko": "Korean filter type",
+        "cn": "Simplified Chinese filter type",
+        "tw": "Traditional Chinese filter type"
+      },
+      "player": "Player Filter",
+      "created": "Filter created successfully."
+    }
   }
 }
