@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import {
 	Container,
@@ -11,18 +12,8 @@ import {
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import Select from "react-select";
 import { LanguageContext } from "../contexts/LanguageContext";
-import localeSelect from "../services/localeSelect";
 import dbLocale from "../services/dbLocale";
 import countries from "../data/countries";
-import {
-	signup,
-	goBack,
-	password as passwordLocale,
-	verifyPassword as verifyPasswordLocale,
-	username as usernameLocale,
-	realName as realNameLocale,
-	country as countryLocale,
-} from "../data/locales";
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -54,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function InviteSignup() {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -78,7 +70,7 @@ export default function InviteSignup() {
 		<section className="signup">
 			<Container maxWidth="xs">
 				<Typography className={classes.header} variant="h5">
-					{localeSelect(language, signup)}
+					{t("header.signup")}
 				</Typography>
 				<form
 					disabled={loading}
@@ -111,11 +103,11 @@ export default function InviteSignup() {
 				>
 					{error && (
 						<p className="error">
-							<span>Error:</span> {error}
+							<span>{t("common.error")}</span> {error}
 						</p>
 					)}
 					<TextField
-						label={localeSelect(language, passwordLocale)}
+						label={t("account.passowrd")}
 						required
 						onChange={(e) => {
 							setPassword(e.target.value);
@@ -126,7 +118,7 @@ export default function InviteSignup() {
 						className={classes.input}
 					/>
 					<TextField
-						label={localeSelect(language, verifyPasswordLocale)}
+						label={t("account.verify")}
 						required
 						onChange={(e) => {
 							setVerifyPassword(e.target.value);
@@ -137,7 +129,7 @@ export default function InviteSignup() {
 						className={classes.input}
 					/>
 					<TextField
-						label={localeSelect(language, usernameLocale)}
+						label={t("account.username")}
 						required
 						name="username"
 						onChange={(e) => {
@@ -148,7 +140,7 @@ export default function InviteSignup() {
 						className={classes.input}
 					/>
 					<TextField
-						label={localeSelect(language, realNameLocale)}
+						label={t("account.realname")}
 						name="realName"
 						onChange={(e) => {
 							setRealName(e.target.value);
@@ -165,7 +157,7 @@ export default function InviteSignup() {
 							};
 						})}
 						value={country}
-						placeholder={localeSelect(language, countryLocale)}
+						placeholder={t("account.country")}
 						onChange={(e) => {
 							setCountry(e.value);
 						}}
@@ -174,7 +166,7 @@ export default function InviteSignup() {
 					<Container className={classes.buttonRow}>
 						<div className={classes.wrapper}>
 							<Button color="primary" variant="contained" type="submit">
-								{localeSelect(language, signup)}
+								{t("header.signup")}
 							</Button>
 							{loading && (
 								<CircularProgress
@@ -190,7 +182,7 @@ export default function InviteSignup() {
 									<RouterLink innerRef={ref} to="/" {...props} />
 								))}
 							>
-								{localeSelect(language, goBack)}
+								{t("common.goBack")}
 							</Button>
 						</div>
 					</Container>
