@@ -96,7 +96,8 @@
         "ko": "Korean name",
         "cn": "Simplified Chinese name",
         "tw": "Traditional Chinese name"
-      }
+      },
+      "created": "Character created successfully."
     }
   },
   "game": {

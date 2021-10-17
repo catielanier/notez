@@ -67,7 +67,7 @@ export default function AddGame() {
 					{success && <p>{t("game.add.created")}</p>}
 					{error && (
 						<p className="error">
-							<span>Error:</span> {error}
+							<span>{t("common.error")}</span> {error}
 						</p>
 					)}
 					<TextField
