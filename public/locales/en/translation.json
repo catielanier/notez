@@ -81,6 +81,7 @@
       "you": "Choose your character:",
       "opponent": "Choose your opponent's character:"
     },
+    "opponent": "Choose your opponent:",
     "filter": {
       "choose": "Choose your filter (optional):",
       "clear": "Clear Filter"
