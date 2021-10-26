@@ -88,7 +88,7 @@ export default function EditFilter() {
 						}}
 					>
 						<TextField
-							label={t("filter.add.name.en")}
+							label={t("filter.add.type.en")}
 							id="standard-name-required"
 							value={name}
 							onChange={(e) => {
@@ -99,7 +99,7 @@ export default function EditFilter() {
 							required
 						/>
 						<TextField
-							label={t("filter.add.name.ja")}
+							label={t("filter.add.type.ja")}
 							value={nameJa}
 							onChange={(e) => {
 								setNameJa(e.target.value);
@@ -108,7 +108,7 @@ export default function EditFilter() {
 							placeholder="フィルタータイプ"
 						/>
 						<TextField
-							label={t("filter.add.name.ko")}
+							label={t("filter.add.type.ko")}
 							value={nameKo}
 							onChange={(e) => {
 								setNameKo(e.target.value);
@@ -117,7 +117,7 @@ export default function EditFilter() {
 							placeholder="필터 타입"
 						/>
 						<TextField
-							label={t("filter.add.name.cn")}
+							label={t("filter.add.type.cn")}
 							value={nameCn}
 							onChange={(e) => {
 								setNameCn(e.target.value);
@@ -126,7 +126,7 @@ export default function EditFilter() {
 							placeholder="过滤器类型"
 						/>
 						<TextField
-							label={t("filter.add.name.tw")}
+							label={t("filter.add.type.tw")}
 							value={nameTw}
 							onChange={(e) => {
 								setNameTw(e.target.value);
