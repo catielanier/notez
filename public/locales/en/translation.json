@@ -1,130 +1,133 @@
 {
-  "app": {
-    "name": "NoteZ"
-  },
-  "home": {
-    "title": "Welcome to NoteZ",
-    "subtitle": "Your premiere fighting game note app!",
-    "description": {
-      "partOne": "Elevate your game like the pros! With comprehensive matchup notes, you'll always be on top of your knowledge! And no app on the planet is tailored to fighting game notes like NoteZ.",
-      "partTwo": "Write notes for both character and player matchups on your computer, tablet, or mobile phone, then have access to them wherever you are. No need to worry about restoring your notes on a new phone, as NoteZ will do it for you! In match, be able to filter down your notes to more specific circumstances than just your opponent, so that you'll always remember what to do as you play.",
-      "partThree": "Take your game to the next level with NoteZ today!"
-    },
-    "existing": "Existing users",
-    "new": "New users"
-  },
-  "header": {
-    "login": "Login",
-    "signup": "Signup",
-    "notes": {
-      "game": "Game Notes",
-      "player": "Player Notes"
-    },
-    "settings": "Settings",
-    "game": {
-      "add": "Add Game",
-      "edit": "Edit Game"
-    },
-    "character": {
-      "add": "Add Character",
-      "edit": "Edit Character",
-      "link": "Link Characters"
-    },
-    "filter": {
-      "add": "Add Filter",
-      "edit": "Edit Filter",
-      "link": "Link Filter"
-    },
-    "user": {
-      "settings": "User Settings",
-      "invite": "Invite User"
-    },
-    "profile": "Profile",
-    "logout": "Logout"
-  },
-  "account": {
-    "email": "Email",
-    "password": "Password",
-    "verify": "Verify Password",
-    "username": "Username",
-    "realname": "Real Name",
-    "country": "Country",
-    "forgot": "Forgot your password?",
-    "success": {
-      "signup": "Registration success! Please check your email.",
-      "invite": "Invite Sent"
-    },
-    "invite": "Invite to Premium Service"
-  },
-  "common": {
-    "goBack": "Go Back",
-    "error": "Error:",
-    "clear": "Clear Form"
-  },
-  "notes": {
-    "common": {
-      "quickAdd": "Quick Add:",
-      "clickSearch": "Click the search button to find your notes.",
-      "notes": "Notes:",
-      "notice": "Notice",
-      "noNotes": "You do not have any notes for this matchup. Add some below!",
-      "editing": "Editing Note",
-      "fiilter": "Filter",
-      "edit": "Edit Note",
-      "cancel": "Cancel",
-      "game": "Choose a game:",
-      "universal": "This note should be displayed across all opponents."
-    },
-    "new": {
-      "filter": "New note filter:",
-      "new": "New note:",
-      "submit": "Create Note"
-    },
-    "character": {
-      "you": "Choose your character:",
-      "opponent": "Choose your opponent's character:"
-    },
-    "opponent": "Choose your opponent:",
-    "filter": {
-      "choose": "Choose your filter (optional):",
-      "clear": "Clear Filter"
-    }
-  },
-  "character": {
-    "add": {
-      "name": {
-        "en": "English name",
-        "ja": "Japanese name",
-        "ko": "Korean name",
-        "cn": "Simplified Chinese name",
-        "tw": "Traditional Chinese name"
-      },
-      "created": "Character created successfully."
-    }
-  },
-  "game": {
-    "add": {
-      "title": {
-        "en": "English title",
-        "ja": "Japanese title",
-        "ko": "Korean title",
-        "cn": "Simplified Chinese title",
-        "tw": "Traditional Chinese title"
-      },
-      "created": "Game created successfully."
-    }
-  },
-  "filter": {
-    "add": {
-      "type": {
-        "en": "English filter type",
-        "ja": "Japanese filter type",
-        "ko": "Korean filter type",
-        "cn": "Simplified Chinese filter type",
-        "tw": "Traditional Chinese filter type"
-      },
-      "player": "Player Filter",
-      "created": "Filter created successfully."
-    }
-  }
+	"app": {
+		"name": "NoteZ"
+	},
+	"home": {
+		"title": "Welcome to NoteZ",
+		"subtitle": "Your premiere fighting game note app!",
+		"description": {
+			"partOne": "Elevate your game like the pros! With comprehensive matchup notes, you'll always be on top of your knowledge! And no app on the planet is tailored to fighting game notes like NoteZ.",
+			"partTwo": "Write notes for both character and player matchups on your computer, tablet, or mobile phone, then have access to them wherever you are. No need to worry about restoring your notes on a new phone, as NoteZ will do it for you! In match, be able to filter down your notes to more specific circumstances than just your opponent, so that you'll always remember what to do as you play.",
+			"partThree": "Take your game to the next level with NoteZ today!"
+		},
+		"existing": "Existing users",
+		"new": "New users"
+	},
+	"header": {
+		"login": "Login",
+		"signup": "Signup",
+		"notes": {
+			"game": "Game Notes",
+			"player": "Player Notes"
+		},
+		"settings": "Settings",
+		"game": {
+			"add": "Add Game",
+			"edit": "Edit Game"
+		},
+		"character": {
+			"add": "Add Character",
+			"edit": "Edit Character",
+			"link": "Link Characters"
+		},
+		"filter": {
+			"add": "Add Filter",
+			"edit": "Edit Filter",
+			"link": "Link Filter"
+		},
+		"user": {
+			"settings": "User Settings",
+			"invite": "Invite User"
+		},
+		"profile": "Profile",
+		"logout": "Logout"
+	},
+	"account": {
+		"email": "Email",
+		"password": "Password",
+		"verify": "Verify Password",
+		"username": "Username",
+		"realname": "Real Name",
+		"country": "Country",
+		"forgot": "Forgot your password?",
+		"requestReset": "Request reset",
+		"checkEmail": "Please check your email for your reset link.",
+		"success": {
+			"signup": "Registration success! Please check your email.",
+			"invite": "Invite Sent"
+		},
+		"invite": "Invite to Premium Service"
+	},
+	"common": {
+		"goBack": "Go Back",
+		"error": "Error:",
+		"clear": "Clear Form"
+	},
+	"notes": {
+		"common": {
+			"quickAdd": "Quick Add:",
+			"clickSearch": "Click the search button to find your notes.",
+			"notes": "Notes:",
+			"notice": "Notice",
+			"noNotes": "You do not have any notes for this matchup. Add some below!",
+			"editing": "Editing Note",
+			"fiilter": "Filter",
+			"edit": "Edit Note",
+			"cancel": "Cancel",
+			"game": "Choose a game:",
+			"universal": "This note should be displayed across all opponents."
+		},
+		"new": {
+			"filter": "New note filter:",
+			"new": "New note:",
+			"submit": "Create Note"
+		},
+		"character": {
+			"you": "Choose your character:",
+			"opponent": "Choose your opponent's character:"
+		},
+		"opponent": "Choose your opponent:",
+		"filter": {
+			"choose": "Choose your filter (optional):",
+			"clear": "Clear Filter"
+		}
+	},
+	"character": {
+		"add": {
+			"name": {
+				"en": "English name",
+				"ja": "Japanese name",
+				"ko": "Korean name",
+				"cn": "Simplified Chinese name",
+				"tw": "Traditional Chinese name"
+			},
+			"created": "Character created successfully."
+		}
+	},
+	"game": {
+		"add": {
+			"title": {
+				"en": "English title",
+				"ja": "Japanese title",
+				"ko": "Korean title",
+				"cn": "Simplified Chinese title",
+				"tw": "Traditional Chinese title"
+			},
+			"created": "Game created successfully."
+		}
+	},
+	"filter": {
+		"add": {
+			"type": {
+				"en": "English filter type",
+				"ja": "Japanese filter type",
+				"ko": "Korean filter type",
+				"cn": "Simplified Chinese filter type",
+				"tw": "Traditional Chinese filter type"
+			},
+			"player": "Player Filter",
+			"created": "Filter created successfully."
+		}
+	}
 }
+
