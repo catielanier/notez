@@ -134,6 +134,12 @@
 			},
 			"player": "Player Filter",
 			"created": "Filter created successfully."
+		},
+		"link": {
+			"title": "Link Filters to Game",
+			"success": "Filters successfully linked",
+			"select": "Select Filters",
+			"selected": "Selected Filters"
 		}
 	}
 }

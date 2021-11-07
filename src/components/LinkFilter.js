@@ -11,13 +11,12 @@ import {
 import ClearIcon from "@material-ui/icons/Clear";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
-import localeSelect from "../services/localeSelect";
-import { linkFiltersToGame, filterLinked, linkFilters } from "../data/locales";
 import dbLocale from "../services/dbLocale";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
 import { GameContext } from "../contexts/GameContext";
 import { FilterContext } from "../contexts/FilterContext";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
 	spaced: {
@@ -37,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LinkFilter() {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
@@ -54,15 +54,13 @@ export default function LinkFilter() {
 	return (
 		<section className="link-filter">
 			<Container maxWidth="sm">
-				<Typography variant="h5">
-					{localeSelect(language, linkFiltersToGame)}
-				</Typography>
+				<Typography variant="h5">{t("filter.link.title")}</Typography>
 				{error && (
 					<p className="error">
-						<span>Error:</span> {error}
+						<span>{t("common.error")}</span> {error}
 					</p>
 				)}
-				{success && <p>{localeSelect(language, filterLinked)}</p>}
+				{success && <p>{t("filter.link.success")}</p>}
 				<Select
 					options={games.map((game) => {
 						return {
@@ -100,7 +98,7 @@ export default function LinkFilter() {
 				{game !== "" && (
 					<>
 						<Container maxWidth="sm" className={classes.spaced}>
-							<Typography variant="h6">Select Filters</Typography>
+							<Typography variant="h6">{t("filter.link.select")}</Typography>
 							<Select
 								className={classes.spaced}
 								options={unselectedFilters.map((filter) => {
@@ -126,7 +124,7 @@ export default function LinkFilter() {
 									setUnselectedFilters(unselected);
 								}}
 							/>
-							<Typography variant="h6">Selected Filters:</Typography>
+							<Typography variant="h6">{t("filter.link.selected")}</Typography>
 							{renderedSelectedFilters.map((filter) => (
 								<Grid
 									container
@@ -186,7 +184,7 @@ export default function LinkFilter() {
 										connectFilters(game, selectedFilters);
 									}}
 								>
-									{localeSelect(language, linkFilters)}
+									{t("header.filter.link")}
 								</Button>
 								{loading && (
 									<CircularProgress
