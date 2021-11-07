@@ -52,6 +52,7 @@
 		"forgot": "Forgot your password?",
 		"requestReset": "Request reset",
 		"checkEmail": "Please check your email for your reset link.",
+		"reset": "Reset Password",
 		"success": {
 			"signup": "Registration success! Please check your email.",
 			"invite": "Invite Sent"
