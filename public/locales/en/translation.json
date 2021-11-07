@@ -44,18 +44,24 @@
 	},
 	"account": {
 		"email": "Email",
+		"oldPassword": "Old Password",
+		"newPassword": "New Password",
 		"password": "Password",
 		"verify": "Verify Password",
+		"verifyNew": "Verify New Password",
 		"username": "Username",
 		"realname": "Real Name",
 		"country": "Country",
 		"forgot": "Forgot your password?",
+		"noMatch": "Your passwords do not match.",
 		"requestReset": "Request reset",
 		"checkEmail": "Please check your email for your reset link.",
 		"reset": "Reset Password",
+		"editProfile": "Edit Profile",
 		"success": {
 			"signup": "Registration success! Please check your email.",
-			"invite": "Invite Sent"
+			"invite": "Invite Sent",
+			"profile": "Profile successfully updated."
 		},
 		"invite": "Invite to Premium Service"
 	},
@@ -81,6 +87,7 @@
 		"new": {
 			"filter": "New note filter:",
 			"new": "New note:",
+			"selectFilter": "Please specify a filter.",
 			"submit": "Create Note"
 		},
 		"character": {
@@ -141,6 +148,18 @@
 			"select": "Select Filters",
 			"selected": "Selected Filters"
 		}
+	},
+	"settings": {
+		"user": {
+			"select": "Select User:",
+			"role": {
+				"assign": "Assign Role:",
+				"user": "User",
+				"admin": "Admin",
+				"banned": "Banned",
+				"edit": "Edit User Roles"
+			},
+			"update": "Update User"
+		}
 	}
 }
-
