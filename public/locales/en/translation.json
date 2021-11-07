@@ -103,6 +103,12 @@
 				"tw": "Traditional Chinese name"
 			},
 			"created": "Character created successfully."
+		},
+		"link": {
+			"title": "Link Characters to Game",
+			"success": "Characters successfully linked.",
+			"select": "Select Characters",
+			"selected": "Selected Characters:"
 		}
 	},
 	"game": {
