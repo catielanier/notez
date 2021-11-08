@@ -1,0 +1,165 @@
+{
+	"app": {
+		"name": "笔记Z"
+	},
+	"home": {
+		"title": "欢迎到笔记Z",
+		"subtitle": "你的首映格斗游戏笔记应用！",
+		"description": {
+			"partOne": "像专业人士一样增强你的游戏！ 借助全面的比赛记录，你始终可以充分利用自己的知识！ 此外，没有专门针对战斗笔记Z的应用。",
+			"partTwo": "在计算机，平板电脑或手机上写下有关角色对手和玩家对手的注释，以便您随时随地都可以访问它们。 笔记Z自动执行此操作，因此您不必担心在新手机上恢复笔记！ 匹配并过滤音符以适应更具体的情况，而不仅仅是对手，因此您始终可以记住比赛中该做什么。",
+			"partThree": "使用笔记Z将你的游戏玩法提升到新的水平！"
+		},
+		"existing": "现有用户",
+		"new": "新用户"
+	},
+	"header": {
+		"login": "登录",
+		"signup": "注册",
+		"notes": {
+			"game": "游戏笔记",
+			"player": "玩家笔记"
+		},
+		"settings": "设定值",
+		"game": {
+			"add": "新增游戏",
+			"edit": "编辑游戏"
+		},
+		"character": {
+			"add": "新增角色",
+			"edit": "编辑角色",
+			"link": "连接角色"
+		},
+		"filter": {
+			"add": "新增过滤器",
+			"edit": "编辑过滤器",
+			"link": "连接过滤器"
+		},
+		"user": {
+			"settings": "用户设置",
+			"invite": "邀请用户"
+		},
+		"profile": "个人资料",
+		"logout": "登出"
+	},
+	"account": {
+		"email": "电邮地址",
+		"oldPassword": "旧密码",
+		"newPassword": "新密码",
+		"password": "密码",
+		"verify": "验证密码",
+		"verifyNew": "验证新密码",
+		"username": "用户名",
+		"realname": "真正的名字",
+		"country": "国家",
+		"forgot": "你忘记密码了吗",
+		"noMatch": "你的密码不匹配。",
+		"requestReset": "要求重设",
+		"checkEmail": "请检查您的电子邮件以获取重置链接。",
+		"reset": "重设密码",
+		"editProfile": "编辑个人资料",
+		"success": {
+			"signup": "注册成功！ 请检查您的电子邮件。",
+			"invite": "邀请已发送",
+			"profile": "个人资料已成功更新。"
+		},
+		"invite": "邀请高级服务"
+	},
+	"common": {
+		"goBack": "回去",
+		"error": "错误：",
+		"clear": "清除表格"
+	},
+	"notes": {
+		"common": {
+			"quickAdd": "快速添加：",
+			"clickSearch": "单击搜索按钮以查找你的笔记。",
+			"notes": "笔记：",
+			"notice": "注意",
+			"noNotes": "你没有关于这场比赛的任何笔记。 在下面添加一些！",
+			"editing": "编辑笔记",
+			"fiilter": "过滤器",
+			"edit": "编辑笔记",
+			"cancel": "取消",
+			"game": "选择一个游戏：",
+			"universal": "此笔记应在所有对手中显示。"
+		},
+		"new": {
+			"filter": "新笔记过滤器：",
+			"new": "新笔记：",
+			"selectFilter": "请指定一个过滤器。",
+			"submit": "加笔记"
+		},
+		"character": {
+			"you": "选择你的角色：",
+			"opponent": "选择对手的角色："
+		},
+		"opponent": "选择你的对手：",
+		"filter": {
+			"choose": "（可选）选择你的过滤器：",
+			"clear": "清除过滤器"
+		}
+	},
+	"character": {
+		"add": {
+			"name": {
+				"en": "英文名字",
+				"ja": "日语名字",
+				"ko": "朝鲜语名字",
+				"cn": "简体中文名字",
+				"tw": "繁体中文角色名字"
+			},
+			"created": "角色创建成功。"
+		},
+		"link": {
+			"title": "角色连接到游戏",
+			"success": "角色成功链接。",
+			"select": "选择角色",
+			"selected": "所选角色："
+		}
+	},
+	"game": {
+		"add": {
+			"title": {
+				"en": "英文标题",
+				"ja": "日语标题",
+				"ko": "朝鲜语标题",
+				"cn": "简体中文标题",
+				"tw": "繁体中文标题"
+			},
+			"created": "游戏创建成功。"
+		}
+	},
+	"filter": {
+		"add": {
+			"type": {
+				"en": "英文过滤器类型",
+				"ja": "日语过滤器类型",
+				"ko": "朝鲜语过滤器类型",
+				"cn": "简体中文过滤器类型",
+				"tw": "繁体中文过滤器类型"
+			},
+			"player": "玩家过滤器",
+			"created": "过滤器创建成功。"
+		},
+		"link": {
+			"title": "过滤器连接到游戏",
+			"success": "过滤器成功链接。",
+			"select": "选择过滤器",
+			"selected": "所选过滤器："
+		}
+	},
+	"settings": {
+		"user": {
+			"select": "选择用户：",
+			"role": {
+				"assign": "分配角色：",
+				"user": "用户",
+				"admin": "管理员",
+				"banned": "被放逐",
+				"edit": "编辑用户角色"
+			},
+			"update": "更新用户"
+		}
+	}
+}
