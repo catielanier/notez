@@ -1,0 +1,165 @@
+{
+	"app": {
+		"name": "筆記Z "
+	},
+	"home": {
+		"title": "歡迎到筆記Z",
+		"subtitle": "你的首映格鬥遊戲筆記應用！",
+		"description": {
+			"partOne": "像專業人士一樣增強你的遊戲！借助全面的比賽記錄，你始終可以充分利用自己的知識！此外，沒有專門針對戰鬥筆記Z的應用。",
+			"partTwo": "在計算機，平板電腦或手機上寫下有關角色對手和玩家對手的註釋，以便您隨時隨地都可以訪問它們。筆記Z自動執行此操作，因此您不必擔心在新手機上恢復筆記！匹配並過濾音符以適應更具體的情況，而不僅僅是對手，因此您始終可以記住比賽中該做什麼。",
+			"partThree": "使用筆記Z將你的遊戲玩法提升到新的水平！"
+		},
+		"existing": "現有用戶",
+		"new": "新用戶"
+	},
+	"header": {
+		"login": "登錄",
+		"signup": "註冊",
+		"notes": {
+			"game": "遊戲筆記",
+			"player": "玩家筆記"
+		},
+		"settings": "設定值",
+		"game": {
+			"add": "新增遊戲",
+			"edit": "編輯遊戲"
+		},
+		"character": {
+			"add": "新增角色",
+			"edit": "編輯角色",
+			"link": "連接角色"
+		},
+		"filter": {
+			"add": "新增過濾器",
+			"edit": "編輯過濾器",
+			"link": "連接過濾器"
+		},
+		"user": {
+			"settings": "用戶設置",
+			"invite": "邀請用戶"
+		},
+		"profile": "個人資料",
+		"logout": "登出"
+	},
+	"account": {
+		"email": "電郵地址",
+		"oldPassword": "舊密碼",
+		"newPassword": "新密碼",
+		"password": "密碼",
+		"verify": "驗證密碼",
+		"verifyNew": "驗證新密碼",
+		"username": "用戶名",
+		"realname": "真正的名字",
+		"country": "國家",
+		"forgot": "你忘記密碼了嗎",
+		"noMatch": "你的密碼不匹配。",
+		"requestReset": "要求重設",
+		"checkEmail": "請檢查您的電子郵件以獲取重置鏈接。",
+		"reset": "重設密碼",
+		"editProfile": "編輯個人資料",
+		"success": {
+			"signup": "註冊成功！請檢查您的電子郵件。",
+			"invite": "邀請已發送",
+			"profile": "個人資料已成功更新。"
+		},
+		"invite": "邀請高級服務"
+	},
+	"common": {
+		"goBack": "回去",
+		"error": "錯誤：",
+		"clear": "清除表格"
+	},
+	"notes": {
+		"common": {
+			"quickAdd": "快速添加：",
+			"clickSearch": "單擊搜索按鈕以查找你的筆記。",
+			"notes": "筆記：",
+			"notice": "注意",
+			"noNotes": "你沒有關於這場比賽的任何筆記。在下面添加一些！",
+			"editing": "編輯筆記",
+			"fiilter": "過濾器",
+			"edit": "編輯筆記",
+			"cancel": "取消",
+			"game": "選擇一個遊戲：：",
+			"universal": "此筆記應在所有對手中顯示。"
+		},
+		"new": {
+			"filter": "新筆記過濾器：",
+			"new": "新筆記：",
+			"selectFilter": "請指定一個過濾器。",
+			"submit": "加筆記"
+		},
+		"character": {
+			"you": "選擇你的角色：",
+			"opponent": "選擇對手的角色："
+		},
+		"opponent": "選擇你的對手：",
+		"filter": {
+			"choose": "（可選）選擇你的過濾器：",
+			"clear": "清除過濾器"
+		}
+	},
+	"character": {
+		"add": {
+			"name": {
+				"en": "英文名字",
+				"ja": "日語名字",
+				"ko": "朝鮮語名字",
+				"cn": "簡體中文名字",
+				"tw": "繁體中文角色名字"
+			},
+			"created": "角色創建成功。"
+		},
+		"link": {
+			"title": "角色連接到遊戲",
+			"success": "角色成功鏈接。",
+			"select": "選擇角色",
+			"selected": "所選角色："
+		}
+	},
+	"game": {
+		"add": {
+			"title": {
+				"en": "英文標題",
+				"ja": "日語標題",
+				"ko": "朝鮮語標題",
+				"cn": "簡體中文標題",
+				"tw": "繁體中文標題"
+			},
+			"created": "遊戲創建成功。"
+		}
+	},
+	"filter": {
+		"add": {
+			"type": {
+				"en": "英文過濾器類型",
+				"ja": "日语过滤器类型",
+				"ko": "朝鮮語過濾器類型",
+				"cn": "簡體中文過濾器類型",
+				"tw": "繁體中文過濾器類型"
+			},
+			"player": "玩家過濾器",
+			"created": "過濾器創建成功。"
+		},
+		"link": {
+			"title": "過濾器連接到遊戲",
+			"success": "過濾器成功鏈接。",
+			"select": "選擇過濾器",
+			"selected": "所选过滤器："
+		}
+	},
+	"settings": {
+		"user": {
+			"select": "選擇用戶：",
+			"role": {
+				"assign": "分配角色：",
+				"user": "用戶",
+				"admin": "管理員",
+				"banned": "被放逐",
+				"edit": "編輯用戶角色"
+			},
+			"update": "更新用戶"
+		}
+	}
+}
