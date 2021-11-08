@@ -23,10 +23,17 @@ const CountryContextProvider = (props) => {
 							value: country.cca3,
 						};
 					case "zh":
-						return {
-							label: country.translations.zho.common,
-							value: country.cca3,
-						};
+						if (country.name.nativeName.zho) {
+							return {
+								label: country.name.nativeName.zho.common,
+								value: country.cca3,
+							};
+						} else {
+							return {
+								label: country.translations.zho.common,
+								value: country.cca3,
+							};
+						}
 					case "es":
 						return {
 							label: country.translations.spa.common,
