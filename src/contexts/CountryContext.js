@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 export const CountryContext = createContext();
 
 const CountryContextProvider = (props) => {
-	const { language } = useTranslation();
+	const { i18n } = useTranslation();
 	const [countries, setCountries] = useState([]);
 
 	const fetchData = useCallback(async () => {
 		await axios.get(`https://restcountries.com/v3.1/all`).then((res) => {
 			const unsortedCountries = res.data;
 			const countryData = unsortedCountries.map((country) => {
-				switch (language) {
+				switch (i18n.language) {
 					case "ko":
 						return {
 							label: country.translations.kor.common,
@@ -66,7 +66,7 @@ const CountryContextProvider = (props) => {
 			});
 			setCountries(countryData);
 		});
-	}, [language]);
+	}, [i18n]);
 
 	useEffect(() => {
 		fetchData();
