@@ -36,64 +36,67 @@ import NoteContextProvider from "./contexts/NoteContext";
 import GameContextProvider from "./contexts/GameContext";
 import CharacterContextProvider from "./contexts/CharacterContext";
 import FilterContextProvider from "./contexts/FilterContext";
+import CountryContextProvider from "./contexts/CountryContext";
 import { UserContext } from "./contexts/UserContext";
 
 // Styles
 import "./App.css";
 
 const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: orange,
-  },
+	palette: {
+		primary: blue,
+		secondary: orange,
+	},
 });
 
 export default function App() {
-  const { user } = useContext(UserContext);
-  return (
-    <ThemeProvider theme={theme}>
-      <Title />
-      <div className={!user ? "App attract-main" : "App"}>
-        <MenuContextProvider>
-          <Router>
-            <MobileMenu />
-            <Header />
-            <main>
-              <GameContextProvider>
-                <NoteContextProvider>
-                  {user ? (
-                    <Route exact path="/" component={GameNotes} />
-                  ) : (
-                    <Route exact path="/" component={Attract} />
-                  )}
-                  <Route path="/player" component={PlayerNotes} />
-                </NoteContextProvider>
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/add-game" component={AddGame} />
-                <Route path="/edit-game" component={EditGame} />
-                <CharacterContextProvider>
-                  <Route path="/add-character" component={AddCharacter} />
-                  <Route path="/link-character" component={LinkCharacter} />
-                  <Route path="/edit-character" component={EditCharacter} />
-                </CharacterContextProvider>
-                <FilterContextProvider>
-                  <Route path="/add-filter" component={AddFilter} />
-                  <Route path="/link-filter" component={LinkFilter} />
-                  <Route path="/edit-filter" component={EditFilter} />
-                </FilterContextProvider>
-              </GameContextProvider>
-              <Route path="/user-settings" component={UserSettings} />
-              <Route path="/profile" component={Profile} />
-              <Route exact path="/forgot" component={ForgotPassword} />
-              <Route path="/forgot/:key" component={ResetPassword} />
-              <Route path="/verify/:key" component={VerifyUser} />
-              <Route exact path="/invite" component={Invite} />
-              <Route path="/invite/:id" component={InviteSignup} />
-            </main>
-          </Router>
-        </MenuContextProvider>
-      </div>
-    </ThemeProvider>
-  );
+	const { user } = useContext(UserContext);
+	return (
+		<ThemeProvider theme={theme}>
+			<Title />
+			<div className={!user ? "App attract-main" : "App"}>
+				<CountryContextProvider>
+					<MenuContextProvider>
+						<Router>
+							<MobileMenu />
+							<Header />
+							<main>
+								<GameContextProvider>
+									<NoteContextProvider>
+										{user ? (
+											<Route exact path="/" component={GameNotes} />
+										) : (
+											<Route exact path="/" component={Attract} />
+										)}
+										<Route path="/player" component={PlayerNotes} />
+									</NoteContextProvider>
+									<Route path="/login" component={Login} />
+									<Route path="/signup" component={Signup} />
+									<Route path="/add-game" component={AddGame} />
+									<Route path="/edit-game" component={EditGame} />
+									<CharacterContextProvider>
+										<Route path="/add-character" component={AddCharacter} />
+										<Route path="/link-character" component={LinkCharacter} />
+										<Route path="/edit-character" component={EditCharacter} />
+									</CharacterContextProvider>
+									<FilterContextProvider>
+										<Route path="/add-filter" component={AddFilter} />
+										<Route path="/link-filter" component={LinkFilter} />
+										<Route path="/edit-filter" component={EditFilter} />
+									</FilterContextProvider>
+								</GameContextProvider>
+								<Route path="/user-settings" component={UserSettings} />
+								<Route path="/profile" component={Profile} />
+								<Route exact path="/forgot" component={ForgotPassword} />
+								<Route path="/forgot/:key" component={ResetPassword} />
+								<Route path="/verify/:key" component={VerifyUser} />
+								<Route exact path="/invite" component={Invite} />
+								<Route path="/invite/:id" component={InviteSignup} />
+							</main>
+						</Router>
+					</MenuContextProvider>
+				</CountryContextProvider>
+			</div>
+		</ThemeProvider>
+	);
 }
