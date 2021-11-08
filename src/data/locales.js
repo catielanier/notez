@@ -748,16 +748,6 @@ export const createNote = {
 	hk: "加筆記",
 };
 
-export const forgotPassword = {
-	en: "Forgot Password",
-	ja: "パスワードをお忘れです",
-	ko: "비밀번호를 잊으입니다",
-	cn: "忘记密码",
-	tw: "忘記密碼",
-	sg: "忘記密碼",
-	hk: "忘記密碼",
-};
-
 export const checkEmailPassword = {
 	en: "Please check your email for your reset link.",
 	ja: "リセットリンクのメールを確認してください。",
