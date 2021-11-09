@@ -3,12 +3,12 @@ import axios from "axios";
 import { removeToken, setToken, getToken } from "../services/tokenService";
 import { useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
-import localeSelect from "../services/localeSelect";
-import { noMatch } from "../data/locales";
+import { useTranslation } from "react-i18next";
 
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
+	const { t } = useTranslation();
 	const [user, setUser] = useState(localStorage.getItem("notezId") || null);
 	const [role, setRole] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -91,7 +91,7 @@ const UserContextProvider = (props) => {
 			}
 		} else {
 			setLoading(false);
-			setError(localeSelect(language, noMatch));
+			setError(t("account.noMatch"));
 		}
 	};
 
@@ -212,7 +212,7 @@ const UserContextProvider = (props) => {
 				});
 		} else {
 			setLoading(false);
-			setError(localeSelect(language, noMatch));
+			setError(t("account.noMatch"));
 		}
 	};
 

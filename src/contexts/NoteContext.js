@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
-import localeSelect from "../services/localeSelect";
 import { LanguageContext } from "./LanguageContext";
-import { specifyFilter } from "../data/locales";
+import { useTranslation } from "react-i18next";
 
 export const NoteContext = createContext();
 
 const NoteContextProvider = (props) => {
+	const { t } = useTranslation();
 	const [gameNotes, setGameNotes] = useState([]);
 	const [playerNotes, setPlayerNotes] = useState([]);
 	const [players, setPlayers] = useState([]);
@@ -168,7 +168,7 @@ const NoteContextProvider = (props) => {
 			}
 		} else {
 			setLoading(false);
-			setError(localeSelect(language, specifyFilter));
+			setError(t("notes.new.selectFilter"));
 		}
 	};
 	return (
