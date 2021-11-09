@@ -9,10 +9,8 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
-import dbLocale from "../services/dbLocale";
-import countries from "../data/countries";
 import { UserContext } from "../contexts/UserContext";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { CountryContext } from "../contexts/CountryContext";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +52,7 @@ export default function Signup() {
 	const [country, setCountry] = useState("");
 	const [username, setUsername] = useState("");
 	const { loading, success, error, signup: doSignup } = useContext(UserContext);
-	const { language } = useContext(LanguageContext);
+	const countries = useContext(CountryContext);
 	return (
 		<section className="signup">
 			<Container maxWidth="xs">
@@ -136,12 +134,7 @@ export default function Signup() {
 						className={classes.input}
 					/>
 					<Select
-						options={countries.map((item) => {
-							return {
-								value: item.value,
-								label: dbLocale(language, item),
-							};
-						})}
+						options={countries}
 						value={country}
 						placeholder={t("account.country")}
 						onChange={(e) => {

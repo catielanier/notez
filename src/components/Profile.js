@@ -9,10 +9,8 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
-import dbLocale from "../services/dbLocale";
-import countries from "../data/countries";
+import { CountryContext } from "../contexts/CountryContext";
 import { UserContext } from "../contexts/UserContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +48,6 @@ export default function Profile() {
 	const { user, loading, error, success, updateProfile } = useContext(
 		UserContext
 	);
-	const { language } = useContext(LanguageContext);
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [verifyNewPassword, setVerifyNewPassword] = useState("");
@@ -58,6 +55,7 @@ export default function Profile() {
 	const [country, setCountry] = useState({});
 	const [username, setUsername] = useState("");
 	const [realName, setRealName] = useState("");
+	const { countries } = useContext(CountryContext);
 	useEffect(() => {
 		async function fetchData() {
 			const res = await axios.get(`/api/users/${user}`);
@@ -67,10 +65,7 @@ export default function Profile() {
 			const index = countries.findIndex(
 				(x) => x.value === res.data.data.country
 			);
-			setCountry({
-				label: dbLocale(language, countries[index]),
-				value: countries[index].value,
-			});
+			setCountry(countries[index]);
 		}
 		fetchData();
 	}, [user]);
@@ -164,12 +159,7 @@ export default function Profile() {
 						className={classes.input}
 					/>
 					<Select
-						options={countries.map((x) => {
-							return {
-								value: x.value,
-								label: dbLocale(language, x),
-							};
-						})}
+						options={countries}
 						value={country}
 						onChange={(e) => {
 							setCountry({

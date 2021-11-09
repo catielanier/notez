@@ -11,9 +11,7 @@ import {
 } from "@material-ui/core";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import Select from "react-select";
-import { LanguageContext } from "../contexts/LanguageContext";
-import dbLocale from "../services/dbLocale";
-import countries from "../data/countries";
+import { CountryContext } from "../contexts/CountryContext";
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -56,7 +54,7 @@ export default function InviteSignup() {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
-	const { language } = useContext(LanguageContext);
+	const { countries } = useContext(CountryContext);
 	const id = window.location.pathname.replace("/invite/", "");
 	useEffect(() => {
 		axios.get(`/api/invites/${id}`).then((res) => {
@@ -150,12 +148,7 @@ export default function InviteSignup() {
 						className={classes.input}
 					/>
 					<Select
-						options={countries.map((item) => {
-							return {
-								value: item.value,
-								label: dbLocale(language, item),
-							};
-						})}
+						options={countries}
 						value={country}
 						placeholder={t("account.country")}
 						onChange={(e) => {
