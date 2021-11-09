@@ -63,7 +63,7 @@ const CountryContextProvider = (props) => {
 				}
 			});
 			countryData.sort((a, b) => {
-				a.label.localeCompare(b.label);
+				return a.label.localeCompare(b.label);
 			});
 			setCountries(countryData);
 		});
