@@ -94,6 +94,7 @@ const CharacterContextProvider = (props) => {
 				error,
 				createCharacter,
 				editCharacter,
+				setSuccess,
 			}}
 		>
 			{props.children}

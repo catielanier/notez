@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	Container,
 	Typography,
@@ -40,9 +40,8 @@ export default function LinkCharacter() {
 	const classes = useStyles();
 	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
-	const { games, loading, error, success, connectCharacters } = useContext(
-		GameContext
-	);
+	const { games, loading, error, success, connectCharacters, setSuccess } =
+		useContext(GameContext);
 	const { characters } = useContext(CharacterContext);
 	const [game, setGame] = useState("");
 	const [selectedCharacters, setSelectedCharacters] = useState([]);
@@ -50,6 +49,11 @@ export default function LinkCharacter() {
 		[]
 	);
 	const [unselectedCharacters, setUnselectedCharacters] = useState([]);
+	useEffect(() => {
+		return function cleanup() {
+			setSuccess(false);
+		};
+	});
 	if (!user) {
 		return <Redirect to="/" />;
 	}

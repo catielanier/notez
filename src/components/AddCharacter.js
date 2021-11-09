@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	TextField,
 	Button,
@@ -42,13 +42,18 @@ export default function AddCharacter() {
 	const { t } = useTranslation();
 	const classes = useStyles();
 	const { user } = useContext(UserContext);
-	const { loading, error, success, createCharacter } =
+	const { loading, error, success, createCharacter, setSuccess } =
 		useContext(CharacterContext);
 	const [name, setName] = useState("");
 	const [nameJa, setNameJa] = useState("");
 	const [nameKo, setNameKo] = useState("");
 	const [nameCn, setNameCn] = useState("");
 	const [nameTw, setNameTw] = useState("");
+	useEffect(() => {
+		return function cleanup() {
+			setSuccess(false);
+		};
+	});
 	if (!user) {
 		return <Redirect to="/" />;
 	}

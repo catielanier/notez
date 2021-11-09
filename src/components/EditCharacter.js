@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import {
 	TextField,
@@ -45,7 +45,7 @@ export default function EditCharacter() {
 	const { t } = useTranslation();
 	const classes = useStyles();
 	const { language } = useContext(LanguageContext);
-	const { characters, loading, error, editCharacter, success } =
+	const { characters, loading, error, editCharacter, success, setSuccess } =
 		useContext(CharacterContext);
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
@@ -54,6 +54,11 @@ export default function EditCharacter() {
 	const [nameCn, setNameCn] = useState("");
 	const [nameTw, setNameTw] = useState("");
 	const [character, setCharacter] = useState("");
+	useEffect(() => {
+		return function cleanup() {
+			setSuccess(false);
+		};
+	});
 	if (!user) {
 		return <Redirect to="/" />;
 	}
