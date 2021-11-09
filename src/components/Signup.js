@@ -52,7 +52,7 @@ export default function Signup() {
 	const [country, setCountry] = useState("");
 	const [username, setUsername] = useState("");
 	const { loading, success, error, signup: doSignup } = useContext(UserContext);
-	const countries = useContext(CountryContext);
+	const { countries } = useContext(CountryContext);
 	return (
 		<section className="signup">
 			<Container maxWidth="xs">
