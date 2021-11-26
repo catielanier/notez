@@ -116,6 +116,9 @@
 			"success": "Characters successfully linked.",
 			"select": "Select Characters",
 			"selected": "Selected Characters:"
+		},
+		"edit": {
+			"success": "Character edited successfully."
 		}
 	},
 	"game": {
@@ -128,6 +131,9 @@
 				"tw": "Traditional Chinese title"
 			},
 			"created": "Game created successfully."
+		},
+		"edit": {
+			"success": "Game edited successfully."
 		}
 	},
 	"filter": {
@@ -147,6 +153,9 @@
 			"success": "Filters successfully linked",
 			"select": "Select Filters",
 			"selected": "Selected Filters"
+		},
+		"edit": {
+			"success": "Filter edited successfully."
 		}
 	},
 	"settings": {

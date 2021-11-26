@@ -68,6 +68,12 @@ export default function EditCharacter() {
 				{t("header.character.edit")}
 			</Typography>
 			<Container maxWidth="sm">
+				{success && <p>{t("character.edit.success")}</p>}
+				{error && (
+					<p className="error">
+						<span>{t("common.error")}</span> {error}
+					</p>
+				)}
 				<Select
 					options={characters.map((character) => {
 						return {

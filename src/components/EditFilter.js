@@ -63,6 +63,12 @@ export default function EditFilter() {
 				{t("header.filter.edit")}
 			</Typography>
 			<Container maxWidth="sm">
+				{success && <p>{t("filter.edit.success")}</p>}
+				{error && (
+					<p className="error">
+						<span>{t("common.error")}</span> {error}
+					</p>
+				)}
 				<Select
 					options={filters.map((filter) => {
 						return {

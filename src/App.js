@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { blue, orange } from "@material-ui/core/colors";
 
 // Components
@@ -42,7 +42,7 @@ import { UserContext } from "./contexts/UserContext";
 // Styles
 import "./App.css";
 
-const theme = createMuiTheme({
+const theme = createTheme({
 	palette: {
 		primary: blue,
 		secondary: orange,

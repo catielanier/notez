@@ -62,6 +62,12 @@ export default function EditGame() {
 				{t("header.game.edit")}
 			</Typography>
 			<Container maxWidth="sm">
+				{success && <p>{t("game.edit.success")}</p>}
+				{error && (
+					<p className="error">
+						<span>{t("common.error")}</span> {error}
+					</p>
+				)}
 				<Select
 					options={games.map((game) => {
 						return {

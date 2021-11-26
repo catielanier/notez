@@ -46,8 +46,8 @@
 		]
 	},
 	"now": {
-		"alias": "notez",
-		"name": "notez",
+		"alias": "notez-test",
+		"name": "notez-test",
 		"routes": [
 			{
 				"src": "/",
