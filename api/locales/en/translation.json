@@ -1,5 +1,16 @@
 {
   "closing": "Regards,",
+  "error": {
+    "notActivated": "You have not activated your account yet. Please check your email to do so.",
+    "invalidOldPassword": "Invalid password. Please confirm your old password.",
+    "didNotUpdate": "User did not update.",
+    "viewUsers": "You are not authorized to view all users",
+    "updateRoles": "You are not authorized to update user roles.",
+    "notLoggedIn": "You are not logged in.",
+    "invalidToken": "Unable to reset password due to invalid token.",
+    "noSuchToken": "There was no such token.",
+    "noEmail": "No user is associated with this email address."
+  },
   "sender": "NoteZ",
   "signup": {
     "body1": "We're happy to have you. Please click ",

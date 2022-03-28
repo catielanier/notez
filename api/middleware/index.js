@@ -1,3 +1,3 @@
-const { handleBodyRequestParsing } = require("./common");
+const { handleBodyRequestParsing, i18n } = require("./common");
 
-module.exports = [handleBodyRequestParsing];
+module.exports = [handleBodyRequestParsing, i18n];
