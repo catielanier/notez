@@ -40,7 +40,7 @@ router.use("/api/notes/player", playerNoteRouter);
 router.use("/api/invites", inviteRouter);
 
 if (ENVIRONMENT !== "prod") {
-	router.use("/", express.static(path.join(__dirname, "./build")));
+	router.use("/", express.static(path.join(__dirname, "build")));
 }
 
 // Setup server
