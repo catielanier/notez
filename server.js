@@ -39,8 +39,8 @@ router.use("/api/notes/game", gameNoteRouter);
 router.use("/api/notes/player", playerNoteRouter);
 router.use("/api/invites", inviteRouter);
 
-if (ENVIRONMENT !== "prod") {
-	router.use("/", express.static(path.join(__dirname, "build")));
+if (ENVIRONMENT === "prod") {
+	router.use("/", express.static(path.join(__dirname, "./build")));
 }
 
 // Setup server
