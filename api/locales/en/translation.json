@@ -1,0 +1,12 @@
+{
+  "closing": "Regards,",
+  "sender": "NoteZ",
+  "signup": {
+    "body1": "We're happy to have you. Please click ",
+    "body2": " to get underway.",
+    "greeting": "Welcome to NoteZ, {username}!",
+    "linkText": "here",
+    "subject": "Welcome to NoteZ!"
+  },
+  "team": "The NoteZ Team"
+}
