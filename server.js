@@ -8,10 +8,14 @@ const router = express();
 
 // Middleware
 require("dotenv").config({ path: __dirname + "/.env" });
-const { URL, PORT } = require("./api/utils/constants");
+const {
+	URL,
+	PORT,
+	ENVIRONMENT,
+	SERVER_PORT,
+} = require("./api/utils/constants");
 const middleWare = require("./api/middleware");
 const { applyMiddleware } = require("./api/utils");
-const { ENVIRONMENT } = require("./api/utils/constants");
 
 applyMiddleware(middleWare, router);
 
@@ -50,8 +54,8 @@ const server = http.createServer(router);
 mongoose
 	.connect(URL, { useNewUrlParser: true })
 	.then(() => {
-		server.listen(PORT, () => {
-			console.log(`server running on port ${PORT}`);
+		server.listen(SERVER_PORT ?? PORT, () => {
+			console.log(`server running on port ${SERVER_PORT ?? PORT}`);
 		});
 	})
 	.catch((err) => {
