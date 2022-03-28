@@ -15,10 +15,9 @@ const FilterContextProvider = (props) => {
 	const [success, setSuccess] = useState(false);
 	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
-	const apiUrl = process.env.REACT_APP_NOTEZ_API;
 	useEffect(() => {
 		const fetchData = async function () {
-			await axios.get(`${apiUrl}/filters`).then((res) => {
+			await axios.get(`/api/filters`).then((res) => {
 				sort(res.data.data, language);
 				setFilters(res.data.data);
 				const games = [];
@@ -46,7 +45,7 @@ const FilterContextProvider = (props) => {
 			playerFilter: player,
 		};
 		try {
-			const res = await axios.post(`${apiUrl}/filters/new`, {
+			const res = await axios.post(`/api/filters/new`, {
 				user,
 				token,
 				filter,
@@ -77,7 +76,7 @@ const FilterContextProvider = (props) => {
 		setError(null);
 		const token = getToken();
 		try {
-			const res = await axios.put(`${apiUrl}/filters/`, {
+			const res = await axios.put(`/api/filters/`, {
 				data: {
 					token,
 					user,

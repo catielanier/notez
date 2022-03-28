@@ -22,9 +22,8 @@ const GameContextProvider = (props) => {
 	const [filters, setFilters] = useState([]);
 	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
-	const apiUrl = process.env.REACT_APP_NOTEZ_API;
 	const fetchData = useCallback(async () => {
-		await axios.get(`${apiUrl}/games`).then((res) => {
+		await axios.get(`/api/games`).then((res) => {
 			sort(res.data.data, language);
 			setGames(res.data.data);
 		});
@@ -55,7 +54,7 @@ const GameContextProvider = (props) => {
 			"name_zh-hk": hk,
 		};
 		try {
-			const res = await axios.post(`${apiUrl}/games/new`, {
+			const res = await axios.post(`/api/games/new`, {
 				user,
 				token,
 				game,
@@ -82,7 +81,7 @@ const GameContextProvider = (props) => {
 		setError(null);
 		const token = getToken();
 		try {
-			const res = await axios.put(`${apiUrl}/games/`, {
+			const res = await axios.put(`/api/games/`, {
 				data: {
 					token,
 					user,
@@ -109,7 +108,7 @@ const GameContextProvider = (props) => {
 		setError(null);
 		const token = getToken();
 		try {
-			const res = await axios.put(`${apiUrl}/games/${game}/character`, {
+			const res = await axios.put(`/api/games/${game}/character`, {
 				user,
 				token,
 				characters,
@@ -129,7 +128,7 @@ const GameContextProvider = (props) => {
 		setError(null);
 		const token = getToken();
 		try {
-			const res = await axios.put(`${apiUrl}/games/${game}/filter`, {
+			const res = await axios.put(`/api/games/${game}/filter`, {
 				user,
 				token,
 				filters,

@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 import { getToken } from "../services/tokenService";
-import { LanguageContext } from "./LanguageContext";
 import { useTranslation } from "react-i18next";
 
 export const NoteContext = createContext();
@@ -27,17 +26,15 @@ const NoteContextProvider = (props) => {
 	const [displayedGameNotes, setDisplayedGameNotes] = useState([]);
 	const [displayedPlayerNotes, setDisplayedPlayerNotes] = useState([]);
 	const { user } = useContext(UserContext);
-	const { language } = useContext(LanguageContext);
-	const apiUrl = process.env.REACT_APP_NOTEZ_API;
 	const toggleNoteEditor = () => {
 		setNoteEditor(!noteEditor);
 	};
 	useEffect(() => {
 		const fetchData = async function () {
-			const resUser = await axios.get(`${apiUrl}/users/${user}`);
+			const resUser = await axios.get(`/api/users/${user}`);
 			setGameNotes(resUser.data.data.gameNotes);
 			setPlayerNotes(resUser.data.data.playerNotes);
-			const resFilters = await axios.get(`${apiUrl}/filters/player`);
+			const resFilters = await axios.get(`/api/filters/player`);
 			setPlayerFilters(resFilters.data.data);
 		};
 		if (user) {
@@ -65,7 +62,7 @@ const NoteContextProvider = (props) => {
 		const token = getToken();
 		if (type === "Game Note") {
 			try {
-				const res = await axios.put(`${apiUrl}/notes/game/${id}`, {
+				const res = await axios.put(`/api/notes/game/${id}`, {
 					filter,
 					token,
 					note,
@@ -81,7 +78,7 @@ const NoteContextProvider = (props) => {
 			}
 		} else if (type === "Player Note") {
 			try {
-				const res = await axios.put(`${apiUrl}/notes/player/${id}`, {
+				const res = await axios.put(`/api/notes/player/${id}`, {
 					filter: filter.value,
 					token,
 					note,
@@ -131,7 +128,7 @@ const NoteContextProvider = (props) => {
 					};
 				}
 				try {
-					const res = await axios.post(`${apiUrl}/notes/game`, {
+					const res = await axios.post(`/api/notes/game`, {
 						token,
 						user,
 						note,
@@ -152,7 +149,7 @@ const NoteContextProvider = (props) => {
 					game,
 				};
 				try {
-					const res = await axios.post(`${apiUrl}/notes/player`, {
+					const res = await axios.post(`/api/notes/player`, {
 						token,
 						user,
 						note,

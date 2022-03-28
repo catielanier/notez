@@ -22,10 +22,20 @@
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.2.0",
 		"react-select": "^3.0.8",
-		"util": "^0.12.1"
+		"bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "node-mailjet": "^3.3.4",
+    "util": "^0.12.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"start:server": "nodemon server.js",
+		"start:client": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"

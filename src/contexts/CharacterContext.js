@@ -14,10 +14,9 @@ const CharacterContextProvider = (props) => {
 	const [error, setError] = useState(null);
 	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
-	const apiUrl = process.env.REACT_APP_NOTEZ_API;
 	useEffect(() => {
 		async function fetchData() {
-			const result = await axios.get(`${apiUrl}/characters`);
+			const result = await axios.get(`/api/characters`);
 			sort(result.data.data, language);
 			setCharacters(result.data.data);
 		}
@@ -36,7 +35,7 @@ const CharacterContextProvider = (props) => {
 			"name_zh-hk": hk,
 		};
 		try {
-			const res = await axios.post(`${apiUrl}/characters/new`, {
+			const res = await axios.post(`/api/characters/new`, {
 				user,
 				token,
 				character,
@@ -63,7 +62,7 @@ const CharacterContextProvider = (props) => {
 		setError(null);
 		const token = getToken();
 		try {
-			const res = await axios.put(`${apiUrl}/characters/`, {
+			const res = await axios.put(`$/api/characters/`, {
 				data: {
 					token,
 					user,

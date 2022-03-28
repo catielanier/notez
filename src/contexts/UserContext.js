@@ -15,11 +15,10 @@ const UserContextProvider = (props) => {
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(false);
 	const { language } = useContext(LanguageContext);
-	const apiUrl = process.env.REACT_APP_NOTEZ_API;
 
 	useEffect(() => {
 		if (user) {
-			axios.get(`${apiUrl}/users/${user}`).then((res) => {
+			axios.get(`/api/users/${user}`).then((res) => {
 				const { role: userRole } = res.data.data;
 				setRole(userRole);
 			});
@@ -39,7 +38,7 @@ const UserContextProvider = (props) => {
 		setError(null);
 
 		try {
-			const res = await axios.post(`${apiUrl}/users/login`, {
+			const res = await axios.post(`/api/users/login`, {
 				data: {
 					email,
 					password,
@@ -71,7 +70,7 @@ const UserContextProvider = (props) => {
 		setError(null);
 		if (password === verifyPassword) {
 			try {
-				const res = await axios.post(`${apiUrl}/users/signup`, {
+				const res = await axios.post(`/api/users/signup`, {
 					data: {
 						email,
 						username,
@@ -101,7 +100,7 @@ const UserContextProvider = (props) => {
 		setError(false);
 		try {
 			await axios
-				.put(`${apiUrl}/users/role`, {
+				.put(`/api/users/role`, {
 					data: {
 						id,
 						role,
@@ -134,7 +133,7 @@ const UserContextProvider = (props) => {
 		if (oldPassword !== "") {
 			if (newPassword !== "" && newPassword === verifyNewPassword) {
 				await axios
-					.put(`${apiUrl}/users/${user}`, {
+					.put(`/api/users/${user}`, {
 						data: {
 							username,
 							email,
@@ -161,7 +160,7 @@ const UserContextProvider = (props) => {
 			}
 		} else {
 			await axios
-				.put(`${apiUrl}/users/${user}`, {
+				.put(`/api/users/${user}`, {
 					data: {
 						username,
 						email,
@@ -185,7 +184,7 @@ const UserContextProvider = (props) => {
 		this.loading(false);
 		this.error(null);
 		await axios
-			.post(`${apiUrl}/users/forgot`, { email, language })
+			.post(`/api/users/forgot`, { email, language })
 			.then(() => {
 				setLoading(false);
 				setSuccess(true);
@@ -201,7 +200,7 @@ const UserContextProvider = (props) => {
 		setError(null);
 		if (password === verifyPassword) {
 			await axios
-				.post(`${apiUrl}/users/reset`, { key, password })
+				.post(`/api/users/reset`, { key, password })
 				.then((_) => {
 					setLoading(false);
 					setSuccess(true);
