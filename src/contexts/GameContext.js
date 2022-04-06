@@ -41,17 +41,12 @@ const GameContextProvider = (props) => {
 			setFilters(allFilters);
 		}
 	};
-	const createGame = async (en, ja, ko, cn, tw, hk) => {
+	const createGame = async (name) => {
 		setLoading(true);
 		setError(null);
 		const token = getToken();
 		const game = {
-			name: en,
-			name_ja: ja,
-			name_ko: ko,
-			"name_zh-cn": cn,
-			"name_zh-tw": tw,
-			"name_zh-hk": hk,
+			name,
 		};
 		try {
 			const res = await axios.post(`/api/games/new`, {

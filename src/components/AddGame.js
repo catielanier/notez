@@ -44,10 +44,6 @@ export default function AddGame() {
 	const { loading, error, createGame, success } = useContext(GameContext);
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
-	const [nameJa, setNameJa] = useState("");
-	const [nameKo, setNameKo] = useState("");
-	const [nameCn, setNameCn] = useState("");
-	const [nameTw, setNameTw] = useState("");
 	if (!user) {
 		return <Redirect to="/" />;
 	}
@@ -59,7 +55,7 @@ export default function AddGame() {
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
-					createGame(name, nameJa, nameKo, nameCn, nameTw);
+					createGame(name);
 				}}
 				disabled={loading}
 			>
@@ -71,51 +67,15 @@ export default function AddGame() {
 						</p>
 					)}
 					<TextField
-						label={t("game.add.title.en")}
+						label={t("game.add.title.locale")}
 						id="standard-name-required"
 						value={name}
 						onChange={(e) => {
 							setName(e.target.value);
 						}}
 						fullWidth="true"
-						placeholder="Game Title"
+						placeholder={t("game.add.title.locale")}
 						required
-					/>
-					<TextField
-						label={t("game.add.title.ja")}
-						value={nameJa}
-						onChange={(e) => {
-							setNameJa(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="ゲームタイトル"
-					/>
-					<TextField
-						label={t("game.add.title.ko")}
-						value={nameKo}
-						onChange={(e) => {
-							setNameKo(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="게임 제목"
-					/>
-					<TextField
-						label={t("game.add.title.cn")}
-						value={nameCn}
-						onChange={(e) => {
-							setNameCn(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="电子游戏标题"
-					/>
-					<TextField
-						label={t("game.add.title.tw")}
-						value={nameTw}
-						onChange={(e) => {
-							setNameTw(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="電子遊戲標題"
 					/>
 					<Container className={classes.buttonRow}>
 						<div className={classes.wrapper}>
@@ -139,10 +99,6 @@ export default function AddGame() {
 							<Button
 								onClick={() => {
 									setName("");
-									setNameJa("");
-									setNameKo("");
-									setNameCn("");
-									setNameTw("");
 								}}
 							>
 								{t("common.clear")}
