@@ -41,9 +41,10 @@ const useStyles = makeStyles((theme) => ({
 export default function AddGame() {
 	const { t } = useTranslation();
 	const classes = useStyles();
-	const { loading, error, createGame, success } = useContext(GameContext);
+	const { loading, error, createGame } = useContext(GameContext);
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
+	const [success, setSuccess] = useState(false);
 	if (!user) {
 		return <Redirect to="/" />;
 	}
@@ -53,9 +54,10 @@ export default function AddGame() {
 				{t("header.game.add")}
 			</Typography>
 			<form
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault();
-					createGame(name);
+					await createGame(name);
+					if (!error) setSuccess(true);
 				}}
 				disabled={loading}
 			>

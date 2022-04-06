@@ -63,15 +63,7 @@ const GameContextProvider = (props) => {
 			setError(e.message);
 		}
 	};
-	const editGame = async (
-		game,
-		name,
-		name_ja,
-		name_ko,
-		name_cn,
-		name_tw,
-		name_hk
-	) => {
+	const editGame = async (game, name) => {
 		setLoading(true);
 		setError(null);
 		const token = getToken();
@@ -81,11 +73,6 @@ const GameContextProvider = (props) => {
 					token,
 					user,
 					name,
-					name_ja,
-					name_ko,
-					name_cn,
-					name_tw,
-					name_hk,
 					game,
 				},
 			});
