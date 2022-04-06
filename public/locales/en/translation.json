@@ -124,16 +124,33 @@
 	"game": {
 		"add": {
 			"title": {
-				"en": "English title",
-				"ja": "Japanese title",
-				"ko": "Korean title",
-				"cn": "Simplified Chinese title",
-				"tw": "Traditional Chinese title"
+				"locale": "Locale key"
 			},
 			"created": "Game created successfully."
 		},
 		"edit": {
 			"success": "Game edited successfully."
+		},
+		"titles": {
+			"kof15": "The King of Fighters XV",
+			"kof14": "The King of Fighters XIV",
+			"kof13": "The King of Fighters XIII",
+			"kof11": "The King of Fighters XI",
+			"kof98": "The King of Fighters '98",
+			"kof98umfe": "The King of Fighters '98 Unlimited Match Final Edition",
+			"kof02": "The King of Fighters 2002",
+			"kof02um": "The King of Fighters 2002 Unlimited Match",
+			"kof97": "The King of Fighters '97",
+			"sfv": "Street Fighter V",
+			"sf4": "Street Fighter IV",
+			"sf33s": "Street Fighter III: Third Strike",
+			"st": "Super Street Fighter II Turbo",
+			"ggst": "Guilty Gear Strive",
+			"ggxxac": "Guilty Gear XX Accent Core",
+			"mbtl": "Melty Blood Type Lumina",
+			"maab": "Million Arthur Arcana Blood",
+			"sms": "Bishoujo Senshi Sailor Moon S",
+			"tmnt": "Teenage Mutant Ninja Turtles: Tournament Fighters"
 		}
 	},
 	"filter": {
