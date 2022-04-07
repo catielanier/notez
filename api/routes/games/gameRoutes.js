@@ -102,19 +102,7 @@ router.route("/:id/filter").put(async (req, res) => {
 });
 
 router.route("/").put(async (req, res) => {
-	const {
-		user: id,
-		token,
-		name_ja,
-		name_ko,
-		name,
-		name_cn,
-		name_tw,
-		name_hk,
-		game,
-	} = req.body.data;
-
-	console.log(name_cn, name_tw, name_hk);
+	const { user: id, token, game, name } = req.body.data;
 
 	const loggedIn = await tokenService.verifyToken(token);
 	if (!loggedIn) {
@@ -126,15 +114,7 @@ router.route("/").put(async (req, res) => {
 		res.status(503).send("Only admins can create characters.");
 	}
 
-	const result = await gameServices.updateGame(
-		game,
-		name,
-		name_ja,
-		name_ko,
-		name_cn,
-		name_tw,
-		name_hk
-	);
+	const result = await gameServices.updateGame(game, name);
 
 	res.status(201).json({
 		data: result,
