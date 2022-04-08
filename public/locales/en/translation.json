@@ -103,11 +103,8 @@
 	"character": {
 		"add": {
 			"name": {
-				"en": "English name",
-				"ja": "Japanese name",
-				"ko": "Korean name",
-				"cn": "Simplified Chinese name",
-				"tw": "Traditional Chinese name"
+				"locale": "Locale key",
+				"company": "Company name"
 			},
 			"created": "Character created successfully."
 		},
