@@ -7,10 +7,12 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
+import Select from "react-select";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { useTranslation } from "react-i18next";
+import { COMPANY_NAME } from "../services/constants";
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -45,10 +47,7 @@ export default function AddCharacter() {
 	const { loading, error, success, createCharacter, setSuccess } =
 		useContext(CharacterContext);
 	const [name, setName] = useState("");
-	const [nameJa, setNameJa] = useState("");
-	const [nameKo, setNameKo] = useState("");
-	const [nameCn, setNameCn] = useState("");
-	const [nameTw, setNameTw] = useState("");
+	const [company, setCompany] = useState("");
 	useEffect(() => {
 		return function cleanup() {
 			setSuccess(false);
@@ -65,7 +64,7 @@ export default function AddCharacter() {
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
-					createCharacter(name, nameJa, nameKo, nameCn, nameTw);
+					createCharacter(name, company);
 				}}
 				disabled={loading}
 			>
@@ -77,51 +76,27 @@ export default function AddCharacter() {
 						</p>
 					)}
 					<TextField
-						label={t("character.add.name.en")}
+						label={t("character.add.name.locale")}
 						id="standard-name-required"
 						value={name}
 						onChange={(e) => {
 							setName(e.target.value);
 						}}
 						fullWidth="true"
-						placeholder="Character Name"
+						placeholder={t("character.add.name.locale")}
 						required
 					/>
-					<TextField
-						label={t("character.add.name.ja")}
-						value={nameJa}
+					<Select
+						options={COMPANY_NAME.map((company) => {
+							return {
+								label: company,
+								value: company,
+							};
+						})}
 						onChange={(e) => {
-							setNameJa(e.target.value);
+							setCompany(e.value);
 						}}
-						fullWidth="true"
-						placeholder="キャラクター名"
-					/>
-					<TextField
-						label={t("character.add.name.ko")}
-						value={nameKo}
-						onChange={(e) => {
-							setNameKo(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="캐릭터 이름"
-					/>
-					<TextField
-						label={t("character.add.name.cn")}
-						value={nameCn}
-						onChange={(e) => {
-							setNameCn(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="角色名字"
-					/>
-					<TextField
-						label={t("character.add.name.tw")}
-						value={nameTw}
-						onChange={(e) => {
-							setNameTw(e.target.value);
-						}}
-						fullWidth="true"
-						placeholder="角色名字"
+						placeholder={t("character.add.name.company")}
 					/>
 					<Container className={classes.buttonRow}>
 						<div className={classes.wrapper}>
@@ -145,10 +120,7 @@ export default function AddCharacter() {
 							<Button
 								onClick={() => {
 									setName("");
-									setNameJa("");
-									setNameKo("");
-									setNameCn("");
-									setNameTw("");
+									setCompany("");
 								}}
 							>
 								{t("common.clear")}
