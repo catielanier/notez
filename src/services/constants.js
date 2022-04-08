@@ -25,4 +25,9 @@ export const COMPANY_NAME = [
 	"Examu",
 	"Lab Zero",
 	"Mane6",
+	"Sector-K",
+	"Marvel",
+	"Takeuchi",
+	"Kodansha",
+	"DC",
 ];
