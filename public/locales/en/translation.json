@@ -589,6 +589,27 @@
 				"scorpion": "Scorpion",
 				"subzero": "Sub-Zero"
 			},
+			"sega": {
+				"akira": "Akira",
+				"aoi": "Aoi",
+				"blaze": "El Blaze",
+				"brad": "Brad",
+				"eileen": "Eileen",
+				"goh": "Goh",
+				"jacky": "Jacky",
+				"jean": "Jean",
+				"jeffry": "Jeffry",
+				"kage": "Kage-Maru",
+				"lau": "Lau",
+				"lei": "Lei-Fei",
+				"lion": "Lion",
+				"pai": "Pai",
+				"sarah": "Sarah",
+				"shun": "Shun Di",
+				"taka": "Taka-Arashi",
+				"vanessa": "Vanessa",
+				"wolf": "Wolf"
+			},
 			"snk": {
 				"adelheid": "Adelheid",
 				"akari": "Akari",
