@@ -516,6 +516,18 @@
 				"zankuro": "Zankuro",
 				"zantetsu": "Zantetsu",
 				"zarina": "Zarina"
+			},
+			"takeuchi": {
+				"chibi": "Sailor Chibi Moon",
+				"jupiter": "Sailor Jupiter",
+				"mars": "Sailor Mars",
+				"mercury": "Sailor Mercury",
+				"moon": "Sailor Moon",
+				"neptune": "Sailor Neptune",
+				"pluto": "Sailor Pluto",
+				"saturn": "Sailor Saturn",
+				"uranus": "Sailor Uranus",
+				"venus": "Sailor Venus"
 			}
 		}
 	},
