@@ -30,4 +30,5 @@ export const COMPANY_NAME = [
 	"Takeuchi",
 	"Kodansha",
 	"DC",
+	"Ubisoft",
 ];
