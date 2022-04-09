@@ -46,13 +46,7 @@ router.route("/").get(async (_, res) => {
 });
 
 router.route("/").put(async (req, res) => {
-	const {
-		user: id,
-		token,
-		name,
-		company.
-		character,
-	} = req.body.data;
+	const { user: id, token, name, company, character } = req.body.data;
 
 	const loggedIn = await tokenService.verifyToken(token);
 	if (!loggedIn) {
