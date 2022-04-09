@@ -57,15 +57,7 @@ const CharacterContextProvider = (props) => {
 			setError(e.message);
 		}
 	};
-	const editCharacter = async (
-		character,
-		name,
-		name_ja,
-		name_ko,
-		name_cn,
-		name_tw,
-		name_hk
-	) => {
+	const editCharacter = async (character, name, company) => {
 		setLoading(true);
 		setError(null);
 		const token = getToken();
@@ -75,11 +67,7 @@ const CharacterContextProvider = (props) => {
 					token,
 					user,
 					name,
-					name_ja,
-					name_ko,
-					name_cn,
-					name_tw,
-					name_hk,
+					company,
 					character,
 				},
 			});

@@ -9,10 +9,9 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import dbLocale from "../services/dbLocale";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
 import { CharacterContext } from "../contexts/CharacterContext";
+import { COMPANY_NAME } from "../services/constants";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,15 +43,11 @@ const useStyles = makeStyles((theme) => ({
 export default function EditCharacter() {
 	const { t } = useTranslation();
 	const classes = useStyles();
-	const { language } = useContext(LanguageContext);
 	const { characters, loading, error, editCharacter, success, setSuccess } =
 		useContext(CharacterContext);
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
-	const [nameJa, setNameJa] = useState("");
-	const [nameKo, setNameKo] = useState("");
-	const [nameCn, setNameCn] = useState("");
-	const [nameTw, setNameTw] = useState("");
+	const [company, setCompany] = useState("");
 	const [character, setCharacter] = useState("");
 	useEffect(() => {
 		return function cleanup() {
@@ -77,7 +72,7 @@ export default function EditCharacter() {
 				<Select
 					options={characters.map((character) => {
 						return {
-							label: dbLocale(language, character),
+							label: `${t(character.name)} (${character.company})`,
 							value: character._id,
 						};
 					})}
@@ -85,17 +80,14 @@ export default function EditCharacter() {
 						setCharacter(e.value);
 						const index = characters.findIndex((x) => x._id === e.value);
 						setName(characters[index].name);
-						setNameKo(characters[index].name_ko);
-						setNameJa(characters[index].name_ja);
-						setNameCn(characters[index]["name_zh-cn"]);
-						setNameTw(characters[index]["name_zh-tw"]);
+						setCompany(characters[index].company);
 					}}
 				/>
 				{character !== "" && (
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							editCharacter(character, name, nameJa, nameKo, nameCn, nameTw);
+							editCharacter(character, name, company);
 						}}
 					>
 						<TextField
@@ -109,41 +101,18 @@ export default function EditCharacter() {
 							placeholder="Character Name"
 							required
 						/>
-						<TextField
-							label={t("character.add.name.ja")}
-							value={nameJa}
+						<Select
+							options={COMPANY_NAME.map((company) => {
+								return {
+									label: company,
+									value: company,
+								};
+							})}
+							value={{ label: company, value: company }}
 							onChange={(e) => {
-								setNameJa(e.target.value);
+								setCompany(e.value);
 							}}
-							fullWidth="true"
-							placeholder="キャラクター名"
-						/>
-						<TextField
-							label={t("character.add.name.ko")}
-							value={nameKo}
-							onChange={(e) => {
-								setNameKo(e.target.value);
-							}}
-							fullWidth="true"
-							placeholder="캐릭터 이름"
-						/>
-						<TextField
-							label={t("character.add.name.cn")}
-							value={nameCn}
-							onChange={(e) => {
-								setNameCn(e.target.value);
-							}}
-							fullWidth="true"
-							placeholder="角色名字"
-						/>
-						<TextField
-							label={t("character.add.name.tw")}
-							value={nameTw}
-							onChange={(e) => {
-								setNameTw(e.target.value);
-							}}
-							fullWidth="true"
-							placeholder="角色名字"
+							placeholder={t("character.add.name.company")}
 						/>
 						<Container className={classes.buttonRow}>
 							<div className={classes.wrapper}>

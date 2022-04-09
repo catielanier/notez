@@ -49,12 +49,8 @@ router.route("/").put(async (req, res) => {
 	const {
 		user: id,
 		token,
-		name_ja,
-		name_ko,
 		name,
-		name_cn,
-		name_tw,
-		name_hk,
+		company.
 		character,
 	} = req.body.data;
 
@@ -71,11 +67,7 @@ router.route("/").put(async (req, res) => {
 	const result = await characterServices.updateCharacter(
 		character,
 		name,
-		name_ja,
-		name_ko,
-		name_cn,
-		name_tw,
-		name_hk
+		company
 	);
 
 	res.status(201).json({
