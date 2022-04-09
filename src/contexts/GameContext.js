@@ -5,29 +5,30 @@ import React, {
 	useContext,
 	useCallback,
 } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { LanguageContext } from "./LanguageContext";
-import sort from "../services/sort";
 import { UserContext } from "./UserContext";
 import { getToken } from "../services/tokenService";
 
 export const GameContext = createContext();
 
 const GameContextProvider = (props) => {
+	const { t } = useTranslation();
 	const [games, setGames] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(false);
 	const [characters, setCharacters] = useState([]);
 	const [filters, setFilters] = useState([]);
-	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
 	const fetchData = useCallback(async () => {
 		await axios.get(`/api/games`).then((res) => {
-			sort(res.data.data, language);
+			res.data.data.sort((x, y) => {
+				return t(x.name).localeCompare(t(y.name));
+			});
 			setGames(res.data.data);
 		});
-	}, [language]);
+	}, [t]);
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
@@ -35,8 +36,12 @@ const GameContextProvider = (props) => {
 		const index = games.findIndex((x) => x._id === game);
 		if (type === "game") {
 			const { characters: allCharacters, filters: allFilters } = games[index];
-			sort(allCharacters, language);
-			sort(allFilters, language);
+			allCharacters.sort((x, y) => {
+				return t(x.name).localeCompare(t(y.name));
+			});
+			allFilters.sort((x, y) => {
+				return t(x.name).localeCompare(t(y.name));
+			});
 			setCharacters(allCharacters);
 			setFilters(allFilters);
 		}
@@ -55,7 +60,9 @@ const GameContextProvider = (props) => {
 				game,
 			});
 			games.push(res.data.data);
-			sort(games, language);
+			games.sort((x, y) => {
+				return t(x.name).localeCompare(t(y.name));
+			});
 			setLoading(false);
 			setSuccess(true);
 		} catch (e) {

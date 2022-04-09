@@ -6,26 +6,27 @@ import React, {
 	useCallback,
 } from "react";
 import axios from "axios";
-import { LanguageContext } from "./LanguageContext";
 import { UserContext } from "./UserContext";
 import { getToken } from "../services/tokenService";
-import sort from "../services/sort";
+import { useTranslation } from "react-i18next";
 
 export const CharacterContext = createContext();
 
 const CharacterContextProvider = (props) => {
+	const { t } = useTranslation();
 	const [characters, setCharacters] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [error, setError] = useState(null);
-	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
 
 	const fetchData = useCallback(async () => {
 		const result = await axios.get(`/api/characters`);
-		sort(result.data.data, language);
+		result.data.data.sort((x, y) => {
+			return t(x.name).localeCompare(t(y.name));
+		});
 		setCharacters(result.data.data);
-	}, [language]);
+	}, [t]);
 
 	useEffect(() => {
 		fetchData();
@@ -46,7 +47,9 @@ const CharacterContextProvider = (props) => {
 				character,
 			});
 			characters.push(res.data.data);
-			sort(characters, language);
+			characters.sort((x, y) => {
+				return t(x.name).localeCompare(t(y.name));
+			});
 			setLoading(false);
 			setSuccess(true);
 		} catch (e) {
