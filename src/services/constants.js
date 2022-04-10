@@ -35,4 +35,5 @@ export const COMPANY_NAME = [
 	"Square Enix",
 	"Lucas Arts",
 	"CD Projekt Red",
+	"Shueisha",
 ];
