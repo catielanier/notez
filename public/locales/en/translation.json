@@ -545,6 +545,9 @@
 				"wlen": "White Len",
 				"yuzuriha": "Yuzuriha"
 			},
+			"image": {
+				"spawn": "Spawn"
+			},
 			"lucasarts": {
 				"apprentice": "The Apprentice",
 				"darthvader": "Darth Vader",
@@ -600,6 +603,9 @@
 				"wintersoldier": "Winter Soldier",
 				"wolverine": "Wolverine",
 				"x23": "X-23"
+			},
+			"mgm": {
+				"robocop": "RoboCop"
 			},
 			"namco": {
 				"aking": "Armor King",
@@ -732,8 +738,37 @@
 				"zwei": "Z.W.E.I."
 			},
 			"netherrealm": {
+				"baraka": "Baraka",
+				"cassie": "Cassie Cage",
+				"cetrion": "Cetrion",
+				"dvorah": "D'Vorah",
+				"erron": "Erron Black",
+				"frost": "Frost",
+				"fujin": "Fujin",
+				"geras": "Geras",
+				"jacqui": "Jacqui Briggs",
+				"jade": "Jade",
+				"jax": "Jax Briggs",
+				"johnny": "Johnny Cage",
+				"kabal": "Kabal",
+				"kano": "Kano",
+				"kitana": "Kitana",
+				"kollector": "Kollector",
+				"kotal": "Kotal Khan",
+				"kung": "Kung Lao",
+				"liu": "Liu Kang",
+				"mileena": "Mileena",
+				"nightwolf": "Nightwolf",
+				"noob": "Noob Saibot",
 				"raiden": "Raiden",
+				"rain": "Rain",
 				"scorpion": "Scorpion",
+				"shang": "Shang Tsung",
+				"sheeva": "Sheeva",
+				"sindel": "Sindel",
+				"shao": "Shao Khan",
+				"skarlet": "Skarlet",
+				"sonya": "Sonya Blade",
 				"subzero": "Sub-Zero"
 			},
 			"projektred": {
@@ -1018,6 +1053,10 @@
 			"ubisoft": {
 				"ezio": "Ezio",
 				"warden": "Warden"
+			},
+			"vivendi": {
+				"rambo": "John Rambo",
+				"terminator": "Terminator"
 			}
 		}
 	},

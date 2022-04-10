@@ -36,4 +36,7 @@ export const COMPANY_NAME = [
 	"Lucas Arts",
 	"CD Projekt Red",
 	"Shueisha",
+	"MGM",
+	"Vivendi",
+	"Image",
 ];
