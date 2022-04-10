@@ -569,6 +569,25 @@
 			"image": {
 				"spawn": "Spawn"
 			},
+			"labzero": {
+				"annie": "Annie",
+				"beowulf": "Beowulf",
+				"bigband": "Big Band",
+				"cerebella": "Cerebella",
+				"dhalia": "Black Dhalia",
+				"double": "Double",
+				"eliza": "Eliza",
+				"filia": "Filia",
+				"fukua": "Fukua",
+				"fortune": "Ms. Fortune",
+				"painwheel": "Painwheel",
+				"parasoul": "Parasoul",
+				"peacock": "Peacock",
+				"rfortune": "Robo-Fortune",
+				"squigly": "Squigly",
+				"umbrella": "Umbrella",
+				"valentine": "Valentine"
+			},
 			"lucasarts": {
 				"apprentice": "The Apprentice",
 				"darthvader": "Darth Vader",
