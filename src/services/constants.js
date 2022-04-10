@@ -32,4 +32,7 @@ export const COMPANY_NAME = [
 	"DC",
 	"Ubisoft",
 	"Eighting",
+	"Square Enix",
+	"Lucas Arts",
+	"CD Projekt Red",
 ];
