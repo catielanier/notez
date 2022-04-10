@@ -129,7 +129,14 @@ export default function GameNotes() {
 			});
 			setDisplayedNotes(notes);
 		}
-	}, [myFilter, myCharacter, opponentCharacter, gameNotes, game]);
+	}, [
+		myFilter,
+		myCharacter,
+		opponentCharacter,
+		gameNotes,
+		game,
+		setDisplayedNotes,
+	]);
 
 	return (
 		<section className="game-notes">

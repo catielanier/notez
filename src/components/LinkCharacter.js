@@ -10,8 +10,6 @@ import {
 } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import Select from "react-select";
-import dbLocale from "../services/dbLocale";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
 import { GameContext } from "../contexts/GameContext";
 import { CharacterContext } from "../contexts/CharacterContext";
@@ -38,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 export default function LinkCharacter() {
 	const { t } = useTranslation();
 	const classes = useStyles();
-	const { language } = useContext(LanguageContext);
 	const { user } = useContext(UserContext);
 	const { games, loading, error, success, connectCharacters, setSuccess } =
 		useContext(GameContext);
@@ -71,7 +68,7 @@ export default function LinkCharacter() {
 					className={classes.spaced}
 					options={games.map((game) => {
 						return {
-							label: dbLocale(language, game),
+							label: t(game.name),
 							value: game._id,
 						};
 					})}
@@ -83,7 +80,7 @@ export default function LinkCharacter() {
 						games[index].characters.forEach((character) => {
 							selected.push(character._id);
 							selectedRender.push({
-								label: dbLocale(language, character),
+								label: `${t(character.name)} (${character.company})`,
 								value: character._id,
 							});
 						});
@@ -111,7 +108,7 @@ export default function LinkCharacter() {
 								options={unselectedCharacters.map((character) => {
 									return {
 										value: character._id,
-										label: dbLocale(language, character),
+										label: `${t(character.name)} (${character.company})`,
 									};
 								})}
 								onChange={(e) => {
@@ -167,8 +164,8 @@ export default function LinkCharacter() {
 												);
 												unselected.push(characters[index]);
 												unselected.sort((x, y) =>
-													dbLocale(language, x).localeCompare(
-														dbLocale(language, y)
+													`${t(x.name)} (${x.company})`.localeCompare(
+														`${t(y.name)} (${y.company})`
 													)
 												);
 												setUnselectedCharacters(unselected);

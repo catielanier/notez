@@ -38,7 +38,16 @@ export default function GameNotesSearch() {
 			setDisplayedNotes([]);
 			updateDropdowns(game, "game");
 		}
-	}, [game, games, language]);
+	}, [
+		game,
+		games,
+		language,
+		setMyCharacter,
+		setMyFilter,
+		setOpponentCharacter,
+		setDisplayedNotes,
+		updateDropdowns,
+	]);
 
 	return (
 		<>
@@ -46,7 +55,7 @@ export default function GameNotesSearch() {
 			<Select
 				options={games.map((game) => {
 					return {
-						label: dbLocale(language, game),
+						label: t(game.name),
 						value: game._id,
 					};
 				})}
@@ -59,7 +68,7 @@ export default function GameNotesSearch() {
 			<Select
 				options={characters.map((character) => {
 					return {
-						label: dbLocale(language, character),
+						label: t(character.name),
 						value: character._id,
 					};
 				})}
@@ -72,7 +81,7 @@ export default function GameNotesSearch() {
 			<Select
 				options={characters.map((character) => {
 					return {
-						label: dbLocale(language, character),
+						label: t(character.name),
 						value: character._id,
 					};
 				})}
