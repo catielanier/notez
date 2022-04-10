@@ -458,6 +458,7 @@
 				"bane": "Bane",
 				"batgirl": "Batgirl",
 				"batman": "Batman",
+				"bizarro": "Bizarro",
 				"blackadam": "Black Adam",
 				"blackcanary": "Black Canary",
 				"blackmanta": "Black Manta",
@@ -469,6 +470,7 @@
 				"cyborg": "Cyborg",
 				"darkseid": "Darkseid",
 				"deadshot": "Deadshot",
+				"despero": "Despero",
 				"doctorfate": "Doctor Fate",
 				"enchantress": "Enchantress",
 				"firestorm": "Firestorm",
@@ -492,7 +494,8 @@
 				"swampthing": "Swamp Thing",
 				"wonderwoman": "Wonder Woman",
 				"zatanna": "Zatanna",
-				"zod": "Zod"
+				"zod": "Zod",
+				"zoom": "Zoom"
 			},
 			"delphine": {
 				"auroch": "Auroch",
@@ -568,6 +571,23 @@
 			},
 			"image": {
 				"spawn": "Spawn"
+			},
+			"konami": {
+				"april": "April",
+				"armaggon": "Armaggon",
+				"aska": "Aska",
+				"casey": "Casey Jones",
+				"chrome": "Chrome Dome",
+				"donatello": "Donatello",
+				"kirby": "Kirby",
+				"leonardo": "Leonardo",
+				"michaelangelo": "Michaelangelo",
+				"oshredder": "Ω Shredder",
+				"raphael": "Raphael",
+				"ratking": "Rat King",
+				"shredder": "Shredder",
+				"war": "War",
+				"wingnut": "Wingnut"
 			},
 			"labzero": {
 				"annie": "Annie",
