@@ -247,6 +247,9 @@
 				"zappa": "Zappa",
 				"zato": "Zato-1"
 			},
+			"bungie": {
+				"arbiter": "Arbiter"
+			},
 			"capcom": {
 				"abel": "Abel",
 				"abigail": "Abigail",
@@ -505,6 +508,9 @@
 			},
 			"eighting": {
 				"saber": "Saber"
+			},
+			"epic": {
+				"raam": "General RAAM"
 			},
 			"frenchbread": {
 				"akiha": "Akiha",
@@ -788,6 +794,35 @@
 			},
 			"projektred": {
 				"geralt": "Geralt"
+			},
+			"rare": {
+				"aganos": "Aganos",
+				"aria": "ARIA",
+				"cinder": "Cinder",
+				"combo": "T.J. Combo",
+				"eagle": "Eagle",
+				"eyedol": "Eyedol",
+				"jago": "Jago",
+				"fulgore": "Fulgore",
+				"gargos": "Gargos",
+				"glacius": "Glacius",
+				"hisako": "Hisako",
+				"kanra": "Kan-Ra",
+				"kilgore": "Kilgore",
+				"kimwu": "Kim Wu",
+				"maya": "Maya",
+				"mira": "Mira",
+				"omen": "Omen",
+				"orchid": "Orchid",
+				"rash": "Rash",
+				"riptor": "Riptor",
+				"sabrewulf": "Sabrewulf",
+				"sadira": "Sadira",
+				"shisako": "Shin Hisako",
+				"sjago": "Shadow Jago",
+				"spinal": "Spinal",
+				"thunder": "Thunder",
+				"tusk": "Tusk"
 			},
 			"sega": {
 				"akira": "Akira",
