@@ -528,7 +528,23 @@
 				"shaq": "Shaq"
 			},
 			"eighting": {
-				"saber": "Saber"
+				"archer": "Archer",
+				"assassin": "Assassin",
+				"bazett": "Bazett",
+				"berserker": "Berserker",
+				"caster": "Caster",
+				"gilgamesh": "Gilgamesh",
+				"kirei": "Kirei",
+				"lancer": "Lancer",
+				"leysritt": "Leysritt",
+				"luviagelita": "Luviagelita",
+				"rider": "Rider",
+				"rin": "Rin",
+				"saber": "Saber",
+				"sabera": "Saber Alter",
+				"sakura": "Sakura",
+				"shiro": "Shiro",
+				"zlancer": "Zero Lancer"
 			},
 			"epic": {
 				"raam": "General RAAM"
@@ -1238,11 +1254,23 @@
 			},
 			"square": {
 				"2b": "2B",
+				"arthurbp": "Arthur Blade Protector",
+				"bisclarvet": "Bisclarvet",
 				"cloud": "Cloud",
+				"eflame": "Eternal Flame",
 				"hero": "Hero",
+				"iai": "Iai Arthur",
+				"koume": "Koume Sakiyama",
+				"nimue": "Nimue",
 				"noctis": "Noctis",
+				"riesz": "Riesz",
 				"sephiroth": "Sephiroth",
-				"sora": "Sora"
+				"snowwhite": "Snow White",
+				"sora": "Sora",
+				"thief": "Thief Arthur",
+				"twinblade": "Twinblade Arthur",
+				"wildcat": "Wildcat Arthur",
+				"zechs": "Zechs Siegfried"
 			},
 			"takeuchi": {
 				"chibi": "Sailor Chibi Moon",
