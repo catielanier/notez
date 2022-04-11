@@ -433,6 +433,7 @@
 				"strider": "Strider Hiryu",
 				"talbain": "Talbain",
 				"tbonne": "Tron Bonne",
+				"tessa": "Tessa",
 				"thawk": "T. Hawk",
 				"tiffany": "Tiffany",
 				"trish": "Trish",
@@ -649,6 +650,26 @@
 				"apprentice": "The Apprentice",
 				"darthvader": "Darth Vader",
 				"yoda": "Yoda"
+			},
+			"ludocity": {
+				"aang": "Aang",
+				"catdog": "CatDog",
+				"danny": "Danny Phantom",
+				"garfield": "Garfield",
+				"helga": "Helga",
+				"korra": "Korra",
+				"lincoln": "Lincoln",
+				"lucy": "Lucy",
+				"nigel": "Nigel",
+				"oblina": "Oblina",
+				"patrick": "Patrick",
+				"powdered": "Powdered Toast Man",
+				"renstimpy": "Ren & Stimpy",
+				"reptar": "Reptar",
+				"sandy": "Sandy",
+				"spongebob": "Spongebob",
+				"toph": "Toph",
+				"zim": "Zim"
 			},
 			"marvel": {
 				"bcwolverine": "Bone Claw Wolverine",
@@ -1403,7 +1424,8 @@
 			"ssb": "Super Smash Bros.",
 			"ssbb": "Super Smash Bros. Brawl",
 			"ssbw": "Super Smash Bros. for Wii U",
-			"pl": "Project L"
+			"pl": "Project L",
+			"nasb": "Nickelodeon All-Stars Brawl"
 		}
 	},
 	"filter": {

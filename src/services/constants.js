@@ -43,4 +43,5 @@ export const COMPANY_NAME = [
 	"Epic",
 	"Mojang",
 	"Monolith",
+	"Ludocity",
 ];
