@@ -1355,6 +1355,22 @@
 				"uranus": "Sailor Uranus",
 				"venus": "Sailor Venus"
 			},
+			"tatsunoko": {
+				"casshan": "Casshan",
+				"daimao": "Hakushon Daimao",
+				"doronjo": "Doronjo",
+				"ippatsuman": "Ippatsuman",
+				"joe": "Joe the Condor",
+				"jun": "Jun the Swan",
+				"karas": "Karas",
+				"ken": "Ken the Eagle",
+				"lightan": "Gold Lightan",
+				"polimar": "Polimar",
+				"tekkaman": "Tekkaman",
+				"takkamanb": "Tekkaman Blade",
+				"yatterman1": "Yatterman-1",
+				"yatterman2": "Yatterman-2"
+			},
 			"ubisoft": {
 				"ezio": "Ezio",
 				"warden": "Warden"
