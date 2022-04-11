@@ -1272,6 +1272,30 @@
 				"wildcat": "Wildcat Arthur",
 				"zechs": "Zechs Siegfried"
 			},
+			"subtlestyle": {
+				"adler": "Adler",
+				"akatsuki": "Akatsuki",
+				"anonym": "Anonym",
+				"blitztank": "Blitztank",
+				"elektrosoldat": "Elektrosoldat",
+				"fritz": "Fritz",
+				"kanae": "Kanae",
+				"marilyn": "Marilyn Sue",
+				"murakumo": "Murakumo",
+				"mycale": "Mycale",
+				"perfecti": "Perfecti",
+				"sai": "Sai",
+				"wei": "Wei"
+			},
+			"sunsoft": {
+				"arina": "Arina",
+				"dandy": "Dandy-J",
+				"mauru": "Mauru",
+				"politank": "Politank-Z",
+				"rai": "Rai",
+				"slash": "Slash",
+				"tesse": "Tesse"
+			},
 			"takeuchi": {
 				"chibi": "Sailor Chibi Moon",
 				"jupiter": "Sailor Jupiter",
