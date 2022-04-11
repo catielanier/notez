@@ -607,6 +607,17 @@
 			"image": {
 				"spawn": "Spawn"
 			},
+			"kaneko": {
+				"dmjackie": "Drunken Master Jackie",
+				"kimmaree": "Kim-Maree",
+				"lau": "Lau",
+				"lion": "Mysterious Lion",
+				"pajackie": "Project A Jackie",
+				"sam": "Sam",
+				"skfjackie": "Spiritual Kung Fu Jackie",
+				"yeung": "Yeung",
+				"thorsten": "Thorsten"
+			},
 			"konami": {
 				"april": "April",
 				"armaggon": "Armaggon",
