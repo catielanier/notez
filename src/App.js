@@ -41,18 +41,15 @@ import { UserContext } from "./contexts/UserContext";
 
 // Styles
 import "./App.css";
-
-const theme = createTheme({
-	palette: {
-		primary: blue,
-		secondary: orange,
-	},
-});
+import neonColorsDark from "./themes/neonColorsDark";
+import neonColorsLight from "./themes/neonColorsLight";
 
 export default function App() {
 	const { user } = useContext(UserContext);
+	const [isDarkTheme, setIsDarkTheme] = useState(true);
+	const toggleDarkTheme = setIsDarkTheme((prev) => !prev);
 	return (
-		<ThemeProvider theme={theme}>
+		<ThemeProvider theme={isDarkTheme ? neonColorsDark : neonColorsLight}>
 			<Title />
 			<div className={!user ? "App attract-main" : "App"}>
 				<CountryContextProvider>
