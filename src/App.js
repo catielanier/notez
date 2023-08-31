@@ -83,7 +83,12 @@ export default function App() {
 									</FilterContextProvider>
 								</GameContextProvider>
 								<Route path="/user-settings" component={UserSettings} />
-								<Route path="/profile" component={Profile} />
+								<Route
+									path="/profile"
+									component={() => (
+										<Profile toggleDarkTheme={toggleDarkTheme} />
+									)}
+								/>
 								<Route exact path="/forgot" component={ForgotPassword} />
 								<Route path="/forgot/:key" component={ResetPassword} />
 								<Route path="/verify/:key" component={VerifyUser} />
