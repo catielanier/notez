@@ -1,6 +1,17 @@
 {
-  "closing": "Regards,",
-  "error": {
+  "emails": {
+    "closing": "Regards,",
+    "sender": "NoteZ",
+    "signup": {
+      "body1": "We're happy to have you. Please click ",
+      "body2": " to get underway.",
+      "greeting": "Welcome to NoteZ, {username}!",
+      "linkText": "here",
+      "subject": "Welcome to NoteZ!"
+    },
+    "team": "The NoteZ Team"
+  },
+  "errors": {
     "notActivated": "You have not activated your account yet. Please check your email to do so.",
     "invalidOldPassword": "Invalid password. Please confirm your old password.",
     "didNotUpdate": "User did not update.",
@@ -9,15 +20,6 @@
     "notLoggedIn": "You are not logged in.",
     "invalidToken": "Unable to reset password due to invalid token.",
     "noSuchToken": "There was no such token.",
-    "noEmail": "No user is associated with this email address."
-  },
-  "sender": "NoteZ",
-  "signup": {
-    "body1": "We're happy to have you. Please click ",
-    "body2": " to get underway.",
-    "greeting": "Welcome to NoteZ, {username}!",
-    "linkText": "here",
-    "subject": "Welcome to NoteZ!"
-  },
-  "team": "The NoteZ Team"
+    "invalidCredentials": "Invalid email address or password."
+  }
 }
