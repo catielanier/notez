@@ -1,9 +1,7 @@
 // Libraries
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
-import { createTheme } from "@material-ui/core/styles";
-import { blue, orange } from "@material-ui/core/colors";
 
 // Components
 import Header from "./components/Header";
@@ -47,7 +45,7 @@ import neonColorsLight from "./themes/neonColorsLight";
 export default function App() {
 	const { user } = useContext(UserContext);
 	const [isDarkTheme, setIsDarkTheme] = useState(true);
-	const toggleDarkTheme = setIsDarkTheme((prev) => !prev);
+	const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
 	return (
 		<ThemeProvider theme={isDarkTheme ? neonColorsDark : neonColorsLight}>
 			<Title />

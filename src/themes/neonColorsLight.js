@@ -1,3 +1,5 @@
+import { createTheme } from "@material-ui/core/styles";
+
 const neonColorsLightPalette = {
 	primary: {
 		main: "#ff0066", // Neon pink
@@ -35,10 +37,7 @@ const neonColorsLightPalette = {
 };
 
 const neonColorsLight = createTheme({
-	palette: {
-		primary: blue,
-		secondary: orange,
-	},
+	palette: neonColorsLightPalette,
 });
 
 export default neonColorsLight;

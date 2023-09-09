@@ -1,3 +1,5 @@
+import { createTheme } from "@material-ui/core/styles";
+
 const neonColorsDarkPalette = {
 	primary: {
 		main: "#ff00cc", // Hot pink
