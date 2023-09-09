@@ -16,6 +16,7 @@ const {
 } = require("./api/utils/constants");
 const middleWare = require("./api/middleware");
 const { applyMiddleware } = require("./api/utils");
+const path = require("path");
 
 applyMiddleware(middleWare, router);
 
@@ -33,7 +34,6 @@ const {
 	router: playerNoteRouter,
 } = require("./api/routes/notes/players/playerNoteRoutes");
 const { router: inviteRouter } = require("./api/routes/invites/inviteRoutes");
-const path = require("path");
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
@@ -54,8 +54,8 @@ const server = http.createServer(router);
 mongoose
 	.connect(URL, { useNewUrlParser: true })
 	.then(() => {
-		server.listen(SERVER_PORT ?? PORT, () => {
-			console.log(`server running on port ${SERVER_PORT ?? PORT}`);
+		server.listen(SERVER_PORT || PORT, () => {
+			console.log(`server running on port ${SERVER_PORT || PORT}`);
 		});
 	})
 	.catch((err) => {
