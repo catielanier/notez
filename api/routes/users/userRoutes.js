@@ -31,21 +31,13 @@ router.route("/signup").post(async (req, res, next) => {
       <p>${req.t("emails.signup.body", {
 				url: `https://checkthenotez.com/verify/${newUser.verification}`,
 			})}</p>
-      <p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>
-			
+      <p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>		
 		`;
 
-		const sender_ko = "노트Z";
 		const sender_cn = "笔记Z";
 		const sender_tw = "筆記Z";
 		const sender_hk = "筆記Z";
 
-		const messageBody_ko = `
-      <h3>노트Z</h3>
-      <h5>노트Z 오신 것을 환영합니다, ${newUser.username}!</h5>
-      <p>기꺼이 맞이합니다. <a href="https://checkthenotez.com/verify/${newUser.verification}">여기를</a> 클릭하여 시작하십시오.</p>
-      <p>감사합니다,<br />노트Z 팀</p>
-    `;
 		const messageBody_cn = `
       <h3>笔记Z</h3>
       <h5>欢迎使用笔记Z，${newUser.username}！</h5>
