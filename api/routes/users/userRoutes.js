@@ -18,36 +18,28 @@ applyMiddleware(middleWare, router);
 router.route("/signup").post(async (req, res, next) => {
 	try {
 		const newUser = req.body.data;
-		const { language } = req.params;
 		newUser.verification = await userService.addValidation();
 		const user = await userService.createUser(newUser);
 
-		const subject_en = "Welcome to NoteZ!";
-		const subject_ja = "ノートZへようこそ！";
-		const subject_ko = "노트Z 오신 것을 환영합니다!";
-		const subject_cn = "欢迎使用笔记Z！";
-		const subject_tw = "歡迎使用筆記Z！";
-		const subject_hk = "歡迎使用筆記Z！";
+		const subject = req.t("emails.signup.subject");
 
-		const sender_en = "NoteZ";
-		const sender_ja = "ノートZ";
+		const messageBody = `
+			<h3>${req.t("emails.sender")}</h3>
+      <h5>${req.t("emails.signup.greeting", {
+				username: newUser.username,
+			})}</h5>
+      <p>${req.t("emails.signup.body", {
+				url: `https://checkthenotez.com/verify/${newUser.verification}`,
+			})}</p>
+      <p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>
+			
+		`;
+
 		const sender_ko = "노트Z";
 		const sender_cn = "笔记Z";
 		const sender_tw = "筆記Z";
 		const sender_hk = "筆記Z";
 
-		const messageBody_en = `
-      <h3>NoteZ</h3>
-      <h5>Welcome to NoteZ, ${newUser.username}!</h5>
-      <p>We're happy to have you. Please click <a href="https://checkthenotez.com/verify/${newUser.verification}">here</a> to get underway.</p>
-      <p>Regards,<br />The NoteZ Team</p>
-    `;
-		const messageBody_ja = `
-      <h3>ノートZ</h3>
-      <h5>ノートZへようこそ、${newUser.username}！</h5>
-      <p>喜んでお迎えします。 <a href="https://checkthenotez.com/verify/${newUser.verification}">ここを</a>クリックして開始してください。</p>
-      <p>よろしく、<br />ノートZチーム</p>
-    `;
 		const messageBody_ko = `
       <h3>노트Z</h3>
       <h5>노트Z 오신 것을 환영합니다, ${newUser.username}!</h5>
@@ -73,34 +65,7 @@ router.route("/signup").post(async (req, res, next) => {
       <p>我哋嘅打招呼，<br />筆記Z團隊</p>
     `;
 
-		let sender = ``;
-		let subject = ``;
-		let messageBody = ``;
-		if (language === "ja") {
-			messageBody = messageBody_ja;
-			sender = sender_ja;
-			subject = subject_ja;
-		} else if (language === "ko") {
-			messageBody = messageBody_ko;
-			sender = sender_ko;
-			subject = subject_ko;
-		} else if (language === "zh-CN") {
-			messageBody = messageBody_cn;
-			sender = sender_cn;
-			subject = subject_cn;
-		} else if (language === "zh-TW" || "zh-SG") {
-			messageBody = messageBody_tw;
-			sender = sender_tw;
-			subject = subject_tw;
-		} else if (language === "zh-HK") {
-			messageBody = messageBody_hk;
-			sender = sender_hk;
-			subject = subject_hk;
-		} else {
-			messageBody = messageBody_en;
-			sender = sender_en;
-			subject = subject_en;
-		}
+		const sender = req.t("emails.sender");
 
 		const request = mailjet.post("send", { version: "v3.1" }).request({
 			Messages: [

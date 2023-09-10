@@ -70,7 +70,9 @@ const UserContextProvider = (props) => {
 		setError(null);
 		if (password === verifyPassword) {
 			try {
-				const res = await axios.post(`/api/users/signup`, {
+				await axios({
+					method: "POST",
+					url: `/api/users/signup`,
 					data: {
 						email,
 						username,
@@ -78,8 +80,8 @@ const UserContextProvider = (props) => {
 						realName,
 						country,
 					},
-					params: {
-						language,
+					headers: {
+						"Accept-Language": language,
 					},
 				});
 				setLoading(false);

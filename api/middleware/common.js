@@ -12,7 +12,7 @@ i18next
 			loadPath: __dirname + "/locales/{{lng}}/{{ns}}.json",
 		},
 		fallbackLng: "en",
-		preload: ["en"],
+		preload: ["en", "es", "fr", "ja", "ko", "zh", "zh-CN", "pt", "ru", "it"],
 	});
 
 const corsOptions = {
