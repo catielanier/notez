@@ -234,33 +234,24 @@ router.route("/role").put(async (req, res) => {
 });
 
 router.route("/forgot").post(async (req, res) => {
-	const { email, language } = req.body;
+	const { email } = req.body;
 	try {
 		const checkUser = await userService.findUser(email);
 		if (checkUser) {
 			const token = await userService.addValidation();
 			const updated = await userService.setForgotToken(checkUser._id, token);
 
-			const subject_en = "Password reset link";
 			const subject_ja = "パスワードリセットリンク";
 			const subject_ko = "비밀번호 재설정 링크";
 			const subject_cn = "密码重置链接";
 			const subject_tw = "密码重置链接";
 			const subject_hk = "密码重置链接";
 
-			const sender_en = "NoteZ";
 			const sender_ja = "ノートZ";
 			const sender_ko = "노트Z";
 			const sender_cn = "笔记Z";
 			const sender_tw = "筆記Z";
 			const sender_hk = "筆記Z";
-
-			const messageBody_en = `
-        <h3>NoteZ</h3>
-        <h5>Hello ${checkUser.username}:</h5>
-        <p>It seems you have forgotten your password. Please click <a href="https://checkthenotez.com/forgot/${token}">here</a> to go in to reset it.</p>
-        <p>Regards,<br />The NoteZ Team</p>
-      `;
 
 			const messageBody_ja = `
         <h3>ノートZ</h3>
@@ -297,34 +288,19 @@ router.route("/forgot").post(async (req, res) => {
         <p>我哋嘅打招呼，<br />筆記Z團隊</p>
       `;
 
-			let sender = ``;
-			let subject = ``;
-			let messageBody = ``;
-			if (language === "ja") {
-				messageBody = messageBody_ja;
-				sender = sender_ja;
-				subject = subject_ja;
-			} else if (language === "ko") {
-				messageBody = messageBody_ko;
-				sender = sender_ko;
-				subject = subject_ko;
-			} else if (language === "zh-CN") {
-				messageBody = messageBody_cn;
-				sender = sender_cn;
-				subject = subject_cn;
-			} else if (language === "zh-TW" || "zh-SG") {
-				messageBody = messageBody_tw;
-				sender = sender_tw;
-				subject = subject_tw;
-			} else if (language === "zh-HK") {
-				messageBody = messageBody_hk;
-				sender = sender_hk;
-				subject = subject_hk;
-			} else {
-				messageBody = messageBody_en;
-				sender = sender_en;
-				subject = subject_en;
-			}
+			const sender = req.t("emails.sender");
+			const subject = req.t("emails.forgotPassword.subject");
+			const messageBody = `
+				<h3>${req.t("emails.sender")}</h3>
+				<h5>${req.t("emails.forgotPassword.greeting", {
+					username: checkUser.username,
+				})}</h5>
+				<p>${req.t("emails.signup.body", {
+					url: `https://checkthenotez.com/forgot/${token}`,
+				})}</p>
+				<p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>
+			`;
+
 			const request = mailjet.post("send", { version: "v3.1" }).request({
 				Messages: [
 					{

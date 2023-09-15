@@ -7,6 +7,11 @@
       "greeting": "Welcome to NoteZ, {{ username }}!",
       "subject": "Welcome to NoteZ!"
     },
+    "forgotPassowrd": {
+      "body": "It seems you have forgotten your password. Please click <a href=\"{{ url }}\">here</a> to go in to reset it.",
+      "greeting": "Hello {{ username }:",
+      "subject": "Password reset link"
+    },
     "team": "The NoteZ Team"
   },
   "errors": {
