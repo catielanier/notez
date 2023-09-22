@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
 import { removeToken, setToken, getToken } from "../services/tokenService";
 import { useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
 import { useTranslation } from "react-i18next";
+import { AxiosContext } from "./AxiosContext";
 
 export const UserContext = createContext();
 
@@ -15,6 +15,7 @@ const UserContextProvider = (props) => {
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(false);
 	const { language } = useContext(LanguageContext);
+	const { axios } = useContext(AxiosContext);
 
 	useEffect(() => {
 		if (user) {
@@ -79,9 +80,6 @@ const UserContextProvider = (props) => {
 						password,
 						realName,
 						country,
-					},
-					headers: {
-						"Accept-Language": language,
 					},
 				});
 				setLoading(false);

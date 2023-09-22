@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
+import AxiosContextProvider from "./contexts/AxiosContext";
 import * as serviceWorker from "./serviceWorker";
 
 import "./i18n";
@@ -11,9 +12,11 @@ import "./i18n";
 ReactDOM.render(
 	<Suspense fallback="loading">
 		<LanguageContextProvider>
-			<UserContextProvider>
-				<App />
-			</UserContextProvider>
+			<AxiosContextProvider>
+				<UserContextProvider>
+					<App />
+				</UserContextProvider>
+			</AxiosContextProvider>
 		</LanguageContextProvider>
 	</Suspense>,
 	document.getElementById("root")
