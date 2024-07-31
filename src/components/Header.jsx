@@ -69,7 +69,7 @@ export default function Header() {
 						<Hidden xsDown>
 							<Button
 								component={React.forwardRef((props, ref) => (
-									<RouterLink innerRef={ref} to="/login" {...props} />
+									<RouterLink ref={ref} to="/login" {...props} />
 								))}
 								color="inherit"
 							>
@@ -77,7 +77,7 @@ export default function Header() {
 							</Button>
 							<Button
 								component={React.forwardRef((props, ref) => (
-									<RouterLink innerRef={ref} to="/signup" {...props} />
+									<RouterLink ref={ref} to="/signup" {...props} />
 								))}
 								color="inherit"
 							>
@@ -89,7 +89,7 @@ export default function Header() {
 						<Hidden xsDown>
 							<Button
 								component={React.forwardRef((props, ref) => (
-									<RouterLink innerRef={ref} to="/" {...props} />
+									<RouterLink ref={ref} to="/" {...props} />
 								))}
 								color="inherit"
 							>
@@ -97,7 +97,7 @@ export default function Header() {
 							</Button>
 							<Button
 								component={React.forwardRef((props, ref) => (
-									<RouterLink innerRef={ref} to="/player" {...props} />
+									<RouterLink ref={ref} to="/player" {...props} />
 								))}
 								color="inherit"
 							>
@@ -117,7 +117,7 @@ export default function Header() {
 									>
 										<Link
 											component={React.forwardRef((props, ref) => (
-												<RouterLink innerRef={ref} to="/add-game" {...props} />
+												<RouterLink ref={ref} to="/add-game" {...props} />
 											))}
 										>
 											<MenuItem onClick={handleClose}>
@@ -127,7 +127,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/add-character"
 													{...props}
 												/>
@@ -140,7 +140,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/add-filter"
 													{...props}
 												/>
@@ -152,7 +152,7 @@ export default function Header() {
 										</Link>
 										<Link
 											component={React.forwardRef((props, ref) => (
-												<RouterLink innerRef={ref} to="/edit-game" {...props} />
+												<RouterLink ref={ref} to="/edit-game" {...props} />
 											))}
 										>
 											<MenuItem onClick={handleClose}>
@@ -162,7 +162,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/edit-character"
 													{...props}
 												/>
@@ -175,7 +175,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/edit-filter"
 													{...props}
 												/>
@@ -188,7 +188,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/link-character"
 													{...props}
 												/>
@@ -201,7 +201,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/link-filter"
 													{...props}
 												/>
@@ -214,7 +214,7 @@ export default function Header() {
 										<Link
 											component={React.forwardRef((props, ref) => (
 												<RouterLink
-													innerRef={ref}
+													ref={ref}
 													to="/user-settings"
 													{...props}
 												/>
@@ -226,7 +226,7 @@ export default function Header() {
 										</Link>
 										<Link
 											component={React.forwardRef((props, ref) => (
-												<RouterLink innerRef={ref} to="/invite" {...props} />
+												<RouterLink ref={ref} to="/invite" {...props} />
 											))}
 										>
 											<MenuItem onClick={handleClose}>
@@ -239,7 +239,7 @@ export default function Header() {
 							<Button
 								color="inherit"
 								component={React.forwardRef((props, ref) => (
-									<RouterLink innerRef={ref} to="/profile" {...props} />
+									<RouterLink ref={ref} to="/profile" {...props} />
 								))}
 							>
 								{t("header.profile")}
