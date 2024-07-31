@@ -1498,8 +1498,11 @@
 			"ssb": "Super Smash Bros.",
 			"ssbb": "Super Smash Bros. Brawl",
 			"ssbw": "Super Smash Bros. for Wii U",
-			"pl": "Project L",
-			"nasb": "Nickelodeon All-Stars Brawl"
+			"2x": "2XKO",
+			"nasb": "Nickelodeon All-Stars Brawl",
+			"mk1": "Mortal Kombat 1",
+			"t8": "Tekken 8",
+			"sf6": "Street Fighter 6"
 		}
 	},
 	"filter": {
