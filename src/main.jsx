@@ -9,26 +9,25 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./i18n";
 
-function main() {
+function Main() {
+	console.log('running main')
 	return (
-		<React>
-			<Suspense fallback="loading">
-				<LanguageContextProvider>
-					<AxiosContextProvider>
-						<UserContextProvider>
-							<App />
-						</UserContextProvider>
-					</AxiosContextProvider>
-				</LanguageContextProvider>
-			</Suspense>
-		</React>
+		<React.StrictMode>
+			<LanguageContextProvider>
+				<AxiosContextProvider>
+					<UserContextProvider>
+						<App />
+					</UserContextProvider>
+				</AxiosContextProvider>
+			</LanguageContextProvider>
+		</React.StrictMode>
 	);
 }
 
 
 const container = document.getElementById("root")
 const root = createRoot(container);
-root.render(main)
+root.render(<Main />)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
