@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client"
-import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import UserContextProvider from "./contexts/UserContext";
@@ -10,17 +9,22 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./i18n";
 
-const main = (
-	<Suspense fallback="loading">
-		<LanguageContextProvider>
-			<AxiosContextProvider>
-				<UserContextProvider>
-					<App />
-				</UserContextProvider>
-			</AxiosContextProvider>
-		</LanguageContextProvider>
-	</Suspense>
-);
+function main() {
+	return (
+		<React>
+			<Suspense fallback="loading">
+				<LanguageContextProvider>
+					<AxiosContextProvider>
+						<UserContextProvider>
+							<App />
+						</UserContextProvider>
+					</AxiosContextProvider>
+				</LanguageContextProvider>
+			</Suspense>
+		</React>
+	);
+}
+
 
 const container = document.getElementById("root")
 const root = createRoot(container);

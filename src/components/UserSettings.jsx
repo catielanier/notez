@@ -9,7 +9,7 @@ import {
 	RadioGroup,
 	FormControlLabel,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { getToken } from "../services/tokenService";
 import { UserContext } from "../contexts/UserContext";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ export default function UserSettings() {
 		fetchData();
 	}, [user]);
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section>

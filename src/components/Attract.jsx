@@ -1,5 +1,5 @@
 import React from "react";
-import Particles from "react-particles-js";
+import Particles from "react-particles";
 import { Container, Typography, Grid, Button, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";

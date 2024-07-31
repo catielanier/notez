@@ -2542,11 +2542,6 @@ lodash.once@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
 
-lodash@^4.17.11:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -2977,12 +2972,12 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-particles-js@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/react-particles-js/-/react-particles-js-3.6.0.tgz#3c9c22fbf93150d1fd1a190cd060ec1d6dcaa373"
-  integrity sha512-gQzUKZgPpjdplhAtskLnn9frLyei6uGuWabNtBGWnr3eZpHXfXJO1F8sedPhO29xfpKixE3HEejwGQAld8K16Q==
+react-particles@^2.12.2:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/react-particles/-/react-particles-2.12.2.tgz#0ab12b72428d3b89537d3422fa8bf725175cfd4d"
+  integrity sha512-Bo9DdrBRPFy8uiT7BA8P36Rdmz6GhB/RG9kkWUyZGIsS8AxWyuUjpVxw9Lr23K0LVE2aenAJ0vnqEbbLDpBgQw==
   dependencies:
-    lodash "^4.17.11"
+    tsparticles-engine "^2.12.0"
 
 react-refresh@^0.14.2:
   version "0.14.2"
@@ -3413,6 +3408,11 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+tsparticles-engine@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/tsparticles-engine/-/tsparticles-engine-2.12.0.tgz#4a52a8de4ab6085180abf27f4720f47caa1455fc"
+  integrity sha512-ZjDIYex6jBJ4iMc9+z0uPe7SgBnmb6l+EJm83MPIsOny9lPpetMsnw/8YJ3xdxn8hV+S3myTpTN1CkOVmFv0QQ==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

@@ -8,7 +8,7 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import Select from "react-select";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { useTranslation } from "react-i18next";
@@ -54,7 +54,7 @@ export default function AddCharacter() {
 		};
 	});
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section className="add-character">

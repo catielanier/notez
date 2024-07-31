@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import axios from "axios";
 
 class VerifyUser extends React.Component {
@@ -25,7 +25,7 @@ class VerifyUser extends React.Component {
 	render() {
 		if (this.state.success) {
 			if (this.state.success) {
-				return <Redirect to="/login" />;
+				return redirect('/');
 			}
 		} else {
 			return <section>Error: No Valid token.</section>;

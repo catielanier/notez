@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import {
 	TextField,
 	Button,
@@ -45,7 +45,7 @@ export default function ResetPassword() {
 	const [verifyPassword, setVerifyPassword] = useState("");
 	const token = window.location.pathname.replace("/forgot/", "");
 	if (success) {
-		return <Redirect to="/login" />;
+		return redirect('/');
 	}
 	return (
 		<section className="signup">

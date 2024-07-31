@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect, Link as RouterLink } from "react-router-dom";
+import { redirect, Link as RouterLink } from "react-router-dom";
 import {
 	TextField,
 	Button,
@@ -44,7 +44,7 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 	const { doLogin, loading, error, success } = useContext(UserContext);
 	if (success) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section>

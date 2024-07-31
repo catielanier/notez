@@ -10,7 +10,7 @@ i18n
 	.init({
 		fallbackLng: "en",
 		// turn off debug in prod
-		debug: process.env.REACT_APP_NOTEZ_ENV !== "production",
+		debug: import.meta.env.VITE_REACT_APP_NOTEZ_ENV !== "production",
 		interpolation: {
 			escapeValue: false,
 		},

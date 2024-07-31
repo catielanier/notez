@@ -13,7 +13,7 @@ import Select from "react-select";
 import { UserContext } from "../contexts/UserContext";
 import { GameContext } from "../contexts/GameContext";
 import { CharacterContext } from "../contexts/CharacterContext";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +52,7 @@ export default function LinkCharacter() {
 		};
 	});
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section className="link-character">
