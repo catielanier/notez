@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client"
 import "./index.css";
 import App from "./App";
 import UserContextProvider from "./contexts/UserContext";
@@ -9,18 +9,25 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./i18n";
 
-ReactDOM.render(
-	<Suspense fallback="loading">
-		<LanguageContextProvider>
-			<AxiosContextProvider>
-				<UserContextProvider>
-					<App />
-				</UserContextProvider>
-			</AxiosContextProvider>
-		</LanguageContextProvider>
-	</Suspense>,
-	document.getElementById("root")
-);
+function Main() {
+	console.log('running main')
+	return (
+		<React.StrictMode>
+			<LanguageContextProvider>
+				<AxiosContextProvider>
+					<UserContextProvider>
+						<App />
+					</UserContextProvider>
+				</AxiosContextProvider>
+			</LanguageContextProvider>
+		</React.StrictMode>
+	);
+}
+
+
+const container = document.getElementById("root")
+const root = createRoot(container);
+root.render(<Main />)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	TextField,
 	Button,
@@ -7,10 +7,12 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import Select from "react-select";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { GameContext } from "../contexts/GameContext";
+import { CharacterContext } from "../contexts/CharacterContext";
 import { useTranslation } from "react-i18next";
+import { COMPANY_NAME } from "../services/constants";
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -38,46 +40,63 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AddGame() {
+export default function AddCharacter() {
 	const { t } = useTranslation();
 	const classes = useStyles();
-	const { loading, error, createGame } = useContext(GameContext);
 	const { user } = useContext(UserContext);
+	const { loading, error, success, createCharacter, setSuccess } =
+		useContext(CharacterContext);
 	const [name, setName] = useState("");
-	const [success, setSuccess] = useState(false);
+	const [company, setCompany] = useState("");
+	useEffect(() => {
+		return function cleanup() {
+			setSuccess(false);
+		};
+	});
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
-		<section className="add-game">
+		<section className="add-character">
 			<Typography className={classes.header} variant="h5">
-				{t("header.game.add")}
+				{t("header.character.add")}
 			</Typography>
 			<form
-				onSubmit={async (e) => {
+				onSubmit={(e) => {
 					e.preventDefault();
-					await createGame(name);
-					if (!error) setSuccess(true);
+					createCharacter(name, company);
 				}}
 				disabled={loading}
 			>
 				<Container maxWidth="sm">
-					{success && <p>{t("game.add.created")}</p>}
+					{success && <p>{t("character.add.created")}</p>}
 					{error && (
 						<p className="error">
 							<span>{t("common.error")}</span> {error}
 						</p>
 					)}
 					<TextField
-						label={t("game.add.title.locale")}
+						label={t("character.add.name.locale")}
 						id="standard-name-required"
 						value={name}
 						onChange={(e) => {
 							setName(e.target.value);
 						}}
 						fullWidth="true"
-						placeholder={t("game.add.title.locale")}
+						placeholder={t("character.add.name.locale")}
 						required
+					/>
+					<Select
+						options={COMPANY_NAME.map((company) => {
+							return {
+								label: company,
+								value: company,
+							};
+						})}
+						onChange={(e) => {
+							setCompany(e.value);
+						}}
+						placeholder={t("character.add.name.company")}
 					/>
 					<Container className={classes.buttonRow}>
 						<div className={classes.wrapper}>
@@ -87,7 +106,7 @@ export default function AddGame() {
 								color="primary"
 								disabled={loading}
 							>
-								{t("header.game.add")}
+								{t("header.character.add")}
 							</Button>
 							{loading && (
 								<CircularProgress
@@ -101,6 +120,7 @@ export default function AddGame() {
 							<Button
 								onClick={() => {
 									setName("");
+									setCompany("");
 								}}
 							>
 								{t("common.clear")}

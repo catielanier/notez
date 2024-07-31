@@ -8,7 +8,7 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import dbLocale from "../services/dbLocale";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { UserContext } from "../contexts/UserContext";
@@ -55,7 +55,7 @@ export default function EditFilter() {
 	const [nameTw, setNameTw] = useState("");
 	const [filter, setFilter] = useState("");
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section>

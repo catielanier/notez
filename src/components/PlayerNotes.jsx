@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Select from "react-select";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import QuickAddNote from "./QuickAddNote";
 import PopulateNotes from "./PopulateNotes";
 import PlayerNoteSearch from "./PlayerNoteSearch";
@@ -107,7 +107,7 @@ export default function PlayerNotes() {
 		}
 	}, [playerNotes, game, player, filter]);
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section className="player-notes">

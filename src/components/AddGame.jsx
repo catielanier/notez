@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import {
 	TextField,
 	Button,
@@ -8,7 +7,9 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { GameContext } from "../contexts/GameContext";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,62 +38,56 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function ResetPassword() {
+export default function AddGame() {
 	const { t } = useTranslation();
 	const classes = useStyles();
-	const { success, error, loading, resetPassword } = useContext(UserContext);
-	const [password, setPassword] = useState("");
-	const [verifyPassword, setVerifyPassword] = useState("");
-	const token = window.location.pathname.replace("/forgot/", "");
-	if (success) {
-		return <Redirect to="/login" />;
+	const { loading, error, createGame } = useContext(GameContext);
+	const { user } = useContext(UserContext);
+	const [name, setName] = useState("");
+	const [success, setSuccess] = useState(false);
+	if (!user) {
+		return redirect('/');
 	}
 	return (
-		<section className="signup">
-			<Container maxWidth="sm">
-				<Typography className={classes.header} variant="h5">
-					{t("account.reset")}
-				</Typography>
-				<form
-					disabled={loading}
-					onSubmit={(e) => {
-						resetPassword(password, verifyPassword, token);
-					}}
-				>
+		<section className="add-game">
+			<Typography className={classes.header} variant="h5">
+				{t("header.game.add")}
+			</Typography>
+			<form
+				onSubmit={async (e) => {
+					e.preventDefault();
+					await createGame(name);
+					if (!error) setSuccess(true);
+				}}
+				disabled={loading}
+			>
+				<Container maxWidth="sm">
+					{success && <p>{t("game.add.created")}</p>}
 					{error && (
 						<p className="error">
 							<span>{t("common.error")}</span> {error}
 						</p>
 					)}
 					<TextField
-						label={t("account.password")}
-						required
+						label={t("game.add.title.locale")}
+						id="standard-name-required"
+						value={name}
 						onChange={(e) => {
-							setPassword(e.target.value);
+							setName(e.target.value);
 						}}
-						fullWidth
-						value={password}
-						type="password"
-					/>
-					<TextField
-						label={t("account.verify")}
+						fullWidth="true"
+						placeholder={t("game.add.title.locale")}
 						required
-						onChange={(e) => {
-							setVerifyPassword(e.target.value);
-						}}
-						fullWidth
-						value={verifyPassword}
-						type="password"
 					/>
 					<Container className={classes.buttonRow}>
 						<div className={classes.wrapper}>
 							<Button
-								color="primary"
 								variant="contained"
 								type="submit"
+								color="primary"
 								disabled={loading}
 							>
-								{t("account.reset")}
+								{t("header.game.add")}
 							</Button>
 							{loading && (
 								<CircularProgress
@@ -102,9 +97,18 @@ export default function ResetPassword() {
 								/>
 							)}
 						</div>
+						<div className={classes.wrapper}>
+							<Button
+								onClick={() => {
+									setName("");
+								}}
+							>
+								{t("common.clear")}
+							</Button>
+						</div>
 					</Container>
-				</form>
-			</Container>
+				</Container>
+			</form>
 		</section>
 	);
 }

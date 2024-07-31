@@ -9,7 +9,7 @@ import {
 	CircularProgress,
 } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import Select from "react-select";
 import dbLocale from "../services/dbLocale";
 import { LanguageContext } from "../contexts/LanguageContext";
@@ -49,7 +49,7 @@ export default function LinkFilter() {
 	const [renderedSelectedFilters, setRenderedSelectedFilters] = useState([]);
 	const [unselectedFilters, setUnselectedFilters] = useState([]);
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section className="link-filter">

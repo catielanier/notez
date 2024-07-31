@@ -8,7 +8,7 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { CharacterContext } from "../contexts/CharacterContext";
 import { COMPANY_NAME } from "../services/constants";
@@ -55,7 +55,7 @@ export default function EditCharacter() {
 		};
 	});
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section>

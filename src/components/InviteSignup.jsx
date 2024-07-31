@@ -9,7 +9,7 @@ import {
 	makeStyles,
 	CircularProgress,
 } from "@material-ui/core";
-import { Link as RouterLink, Redirect } from "react-router-dom";
+import { Link as RouterLink, redirect } from "react-router-dom";
 import Select from "react-select";
 import { CountryContext } from "../contexts/CountryContext";
 
@@ -62,7 +62,7 @@ export default function InviteSignup() {
 		});
 	}, [id]);
 	if (success) {
-		return <Redirect to="/login" />;
+		return redirect('/');
 	}
 	return (
 		<section className="signup">

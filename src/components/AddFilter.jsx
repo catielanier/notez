@@ -9,7 +9,7 @@ import {
 	Checkbox,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { FilterContext } from "../contexts/FilterContext";
 import { useTranslation } from "react-i18next";
@@ -55,7 +55,7 @@ export default function AddFilter() {
 		setPlayerFilter(!playerFilter);
 	};
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section className="add-character">

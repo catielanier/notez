@@ -8,7 +8,7 @@ import {
 	CircularProgress,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { GameContext } from "../contexts/GameContext";
 import { useTranslation } from "react-i18next";
@@ -47,7 +47,7 @@ export default function EditGame() {
 	const [name, setName] = useState("");
 	const [game, setGame] = useState("");
 	if (!user) {
-		return <Redirect to="/" />;
+		return redirect('/');
 	}
 	return (
 		<section>
