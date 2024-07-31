@@ -41,6 +41,56 @@ import "./App.css";
 import neonColorsDark from "./themes/neonColorsDark";
 import neonColorsLight from "./themes/neonColorsLight";
 
+function Contexts({ children }) {
+	return (
+			<GameContextProvider>
+				<NoteContextProvider>
+					<CharacterContextProvider>
+						<FilterContextProvider>
+							{children}
+						</FilterContextProvider>
+					</CharacterContextProvider>
+				</NoteContextProvider>
+			</GameContextProvider>
+		);
+}
+
+function ProtectedRoutes({ toggleDarkTheme }) {
+	return (
+			<Routes>
+				{/* Protected Routes */}
+				<Route path="/" element={<GameNotes />} />
+				<Route path="/player" element={<PlayerNotes />} />
+				<Route path="/add-game" element={<AddGame />} />
+				<Route path="/edit-game" element={<EditGame />} />
+				<Route path="/add-character" element={<AddCharacter />} />
+				<Route path="/link-character" element={<LinkCharacter />} />
+				<Route path="/edit-character" element={<EditCharacter />} />
+				<Route path="/add-filter" element={<AddFilter />} />
+				<Route path="/link-filter" element={<LinkFilter />} />
+				<Route path="/edit-filter" element={<EditFilter />} />
+				<Route path="/user-settings" element={<UserSettings />} />
+				<Route path="/profile" element={<Profile toggleDarkTheme={toggleDarkTheme} />} />
+			</Routes>
+		)
+}
+
+function PublicRoutes() {
+	return (
+		<Routes>
+			{/* Public Routes */}
+			<Route path="/" element={<Attract />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/signup" element={<Signup />} />
+			<Route path="/forgot" element={<ForgotPassword />} />
+			<Route path="/forgot/:key" element={<ResetPassword />} />
+			<Route path="/verify/:key" element={<VerifyUser />} />
+			<Route path="/invite" element={<Invite />} />
+			<Route path="/invite/:id" element={<InviteSignup />} />
+		</Routes>
+	)
+}
+
 export default function App() {
 	const { user } = useContext(UserContext);
 	const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -57,41 +107,11 @@ export default function App() {
 							<Header />
 							<main>
 								{user ? (
-									<GameContextProvider>
-										<NoteContextProvider>
-											<CharacterContextProvider>
-												<FilterContextProvider>
-													<Routes>
-														{/* Protected Routes */}
-														<Route path="/" element={<GameNotes />} />
-														<Route path="/player" element={<PlayerNotes />} />
-														<Route path="/add-game" element={<AddGame />} />
-														<Route path="/edit-game" element={<EditGame />} />
-														<Route path="/add-character" element={<AddCharacter />} />
-														<Route path="/link-character" element={<LinkCharacter />} />
-														<Route path="/edit-character" element={<EditCharacter />} />
-														<Route path="/add-filter" element={<AddFilter />} />
-														<Route path="/link-filter" element={<LinkFilter />} />
-														<Route path="/edit-filter" element={<EditFilter />} />
-														<Route path="/user-settings" element={<UserSettings />} />
-														<Route path="/profile" element={<Profile toggleDarkTheme={toggleDarkTheme} />} />
-													</Routes>
-												</FilterContextProvider>
-											</CharacterContextProvider>
-										</NoteContextProvider>
-									</GameContextProvider>
+									<Contexts>
+										<ProtectedRoutes toggleDarkTheme={toggleDarkTheme} />
+									</Contexts>
 								) : (
-									<Routes>
-										{/* Public Routes */}
-										<Route path="/" element={<Attract />} />
-										<Route path="/login" element={<Login />} />
-										<Route path="/signup" element={<Signup />} />
-										<Route path="/forgot" element={<ForgotPassword />} />
-										<Route path="/forgot/:key" element={<ResetPassword />} />
-										<Route path="/verify/:key" element={<VerifyUser />} />
-										<Route path="/invite" element={<Invite />} />
-										<Route path="/invite/:id" element={<InviteSignup />} />
-									</Routes>
+									<PublicRoutes />
 								)}
 							</main>
 						</Router>
