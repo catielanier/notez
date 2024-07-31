@@ -1,6 +1,5 @@
-// Libraries
 import React, { useContext, useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 
 // Components
@@ -46,6 +45,7 @@ export default function App() {
 	const { user } = useContext(UserContext);
 	const [isDarkTheme, setIsDarkTheme] = useState(true);
 	const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
+
 	return (
 		<ThemeProvider theme={isDarkTheme ? neonColorsDark : neonColorsLight}>
 			<Title />
@@ -56,42 +56,43 @@ export default function App() {
 							<MobileMenu />
 							<Header />
 							<main>
-								<GameContextProvider>
-									<NoteContextProvider>
-										{user ? (
-											<Route exact path="/" component={GameNotes} />
-										) : (
-											<Route exact path="/" component={Attract} />
-										)}
-										<Route path="/player" component={PlayerNotes} />
-									</NoteContextProvider>
-									<Route path="/login" component={Login} />
-									<Route path="/signup" component={Signup} />
-									<Route path="/add-game" component={AddGame} />
-									<Route path="/edit-game" component={EditGame} />
-									<CharacterContextProvider>
-										<Route path="/add-character" component={AddCharacter} />
-										<Route path="/link-character" component={LinkCharacter} />
-										<Route path="/edit-character" component={EditCharacter} />
-									</CharacterContextProvider>
-									<FilterContextProvider>
-										<Route path="/add-filter" component={AddFilter} />
-										<Route path="/link-filter" component={LinkFilter} />
-										<Route path="/edit-filter" component={EditFilter} />
-									</FilterContextProvider>
-								</GameContextProvider>
-								<Route path="/user-settings" component={UserSettings} />
-								<Route
-									path="/profile"
-									component={() => (
-										<Profile toggleDarkTheme={toggleDarkTheme} />
-									)}
-								/>
-								<Route exact path="/forgot" component={ForgotPassword} />
-								<Route path="/forgot/:key" component={ResetPassword} />
-								<Route path="/verify/:key" component={VerifyUser} />
-								<Route exact path="/invite" component={Invite} />
-								<Route path="/invite/:id" component={InviteSignup} />
+								{user ? (
+									<GameContextProvider>
+										<NoteContextProvider>
+											<CharacterContextProvider>
+												<FilterContextProvider>
+													<Routes>
+														{/* Protected Routes */}
+														<Route path="/" element={<GameNotes />} />
+														<Route path="/player" element={<PlayerNotes />} />
+														<Route path="/add-game" element={<AddGame />} />
+														<Route path="/edit-game" element={<EditGame />} />
+														<Route path="/add-character" element={<AddCharacter />} />
+														<Route path="/link-character" element={<LinkCharacter />} />
+														<Route path="/edit-character" element={<EditCharacter />} />
+														<Route path="/add-filter" element={<AddFilter />} />
+														<Route path="/link-filter" element={<LinkFilter />} />
+														<Route path="/edit-filter" element={<EditFilter />} />
+														<Route path="/user-settings" element={<UserSettings />} />
+														<Route path="/profile" element={<Profile toggleDarkTheme={toggleDarkTheme} />} />
+													</Routes>
+												</FilterContextProvider>
+											</CharacterContextProvider>
+										</NoteContextProvider>
+									</GameContextProvider>
+								) : (
+									<Routes>
+										{/* Public Routes */}
+										<Route path="/" element={<Attract />} />
+										<Route path="/login" element={<Login />} />
+										<Route path="/signup" element={<Signup />} />
+										<Route path="/forgot" element={<ForgotPassword />} />
+										<Route path="/forgot/:key" element={<ResetPassword />} />
+										<Route path="/verify/:key" element={<VerifyUser />} />
+										<Route path="/invite" element={<Invite />} />
+										<Route path="/invite/:id" element={<InviteSignup />} />
+									</Routes>
+								)}
 							</main>
 						</Router>
 					</MenuContextProvider>
