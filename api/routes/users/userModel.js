@@ -66,6 +66,11 @@ const userSchema = new Schema({
       ref: PlayerNote,
     },
   ],
+	validTokens: [
+		{
+			type: String
+		}
+	]
 });
 
 userSchema.pre("save", async function (next) {

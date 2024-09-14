@@ -12,6 +12,7 @@ const mailjet = require("node-mailjet").connect(
 );
 const middleWare = require("../../middleware");
 const { applyMiddleware } = require("../../utils");
+const userServices = require("./userServices.js");
 
 applyMiddleware(middleWare, router);
 
@@ -361,6 +362,30 @@ router.route("/reset").post(async (req, res) => {
 		}
 	} catch (e) {
 		res.status(401).send("Unable to reset password due to invalid token.");
+	}
+});
+
+router.route('/init').get(async (req, res) => {
+	const token = req.headers.Authorization.replace('Bearer ', '');
+	const { userId, issuedAt, expiresAt } = tokenService.decodeToken(token);
+	try {
+		const { tokens } = await userServices.getUserById(userId);
+		if (tokens && tokens.include(token)) {
+			if (expiresAt < Date.now()) {
+				const newToken = tokenService.issueToken(userId);
+				res.status(200).json({
+					isLoggedIn: true,
+					token: newToken
+				})
+			}
+			res.status(200).json({
+				isLoggedIn: true
+			})
+		} else {
+			res.status(400).send("Invalid JWT")
+		}
+	} catch (e) {
+		res.status(400).send("Unable to validate user.");
 	}
 });
 
