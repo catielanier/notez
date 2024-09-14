@@ -116,6 +116,17 @@ exports.updateUser = async (id, realName, username, country, email) => {
 	}
 };
 
+exports.updateUserTokens = async (id, tokens) => {
+	try {
+		return await User.findByIdAndUpdate(
+			{ _id: id },
+			{ $set: { tokens }}
+		)
+	} catch (e) {
+		throw e;
+	}
+}
+
 exports.getAllUsers = async () => {
 	try {
 		return await User.find({});

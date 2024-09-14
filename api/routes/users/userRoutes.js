@@ -97,11 +97,12 @@ router.route("/login").post(async (req, res, next) => {
 		const user = await userService.isUser(req.body.data);
 		if (user) {
 			if (user.active) {
-				const token = await tokenService.issueToken(user);
+				const token = await tokenService.issueToken(user.userId);
+				user.tokens.push(token);
+				userServices.updateUserTokens(user.userId, user.tokens);
 				res.status(200).json({
 					data: {
-						token,
-						id: user._id,
+						token
 					},
 				});
 			} else {
@@ -373,6 +374,7 @@ router.route('/init').get(async (req, res) => {
 		if (tokens && tokens.include(token)) {
 			if (expiresAt < Date.now()) {
 				const newToken = tokenService.issueToken(userId);
+				tokens[tokens.indexOf(token)] = newToken;
 				res.status(200).json({
 					isLoggedIn: true,
 					token: newToken
@@ -382,10 +384,10 @@ router.route('/init').get(async (req, res) => {
 				isLoggedIn: true
 			})
 		} else {
-			res.status(400).send("Invalid JWT")
+			res.status(400).send("JWT_VALIDATION_ERROR")
 		}
 	} catch (e) {
-		res.status(400).send("Unable to validate user.");
+		res.status(400).send("USER_VALIDATION_ERROR");
 	}
 });
 
