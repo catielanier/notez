@@ -98,8 +98,8 @@ router.route("/login").post(async (req, res, next) => {
 		if (user) {
 			if (user.active) {
 				const token = await tokenService.issueToken(user.userId);
-				user.tokens.push(token);
-				userServices.updateUserTokens(user.userId, user.tokens);
+				user.validTokens.push(token);
+				userServices.updateUserTokens(user.userId, user.validTokens);
 				res.status(200).json({
 					data: {
 						token
@@ -370,11 +370,12 @@ router.route('/init').get(async (req, res) => {
 	const token = req.headers.Authorization.replace('Bearer ', '');
 	const { userId, issuedAt, expiresAt } = tokenService.decodeToken(token);
 	try {
-		const { tokens } = await userServices.getUserById(userId);
-		if (tokens && tokens.include(token)) {
+		const { validTokens } = await userServices.getUserById(userId);
+		if (validTokens && validTokens.include(token)) {
 			if (expiresAt < Date.now()) {
 				const newToken = tokenService.issueToken(userId);
-				tokens[tokens.indexOf(token)] = newToken;
+				validTokens[validTokens.indexOf(token)] = newToken;
+				userServices.updateUserTokens(userId, validTokens)
 				res.status(200).json({
 					isLoggedIn: true,
 					token: newToken

@@ -116,11 +116,11 @@ exports.updateUser = async (id, realName, username, country, email) => {
 	}
 };
 
-exports.updateUserTokens = async (id, tokens) => {
+exports.updateUserTokens = async (id, validTokens) => {
 	try {
 		return await User.findByIdAndUpdate(
 			{ _id: id },
-			{ $set: { tokens }}
+			{ $set: { validTokens }}
 		)
 	} catch (e) {
 		throw e;
