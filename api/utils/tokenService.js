@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import {SECRET} from "./constants";
+import {SECRET} from "./constants.js";
 
 export const issueToken = async (userId) => {
 	const payload = {
