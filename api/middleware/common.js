@@ -4,6 +4,12 @@ import i18next from "i18next";
 import Backend from "i18next-node-fs-backend";
 import i18nextMiddleware from "i18next-express-middleware";
 
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 i18next
 	.use(Backend)
 	.use(i18nextMiddleware.LanguageDetector)
