@@ -1,6 +1,6 @@
-const { model: Game } = require("./gameModel");
+import {model as Game} from './gameModel';
 
-exports.createGame = async (gameData) => {
+export const createGame = async (gameData) => {
 	try {
 		const game = new Game(gameData);
 		return await game.save();
@@ -9,7 +9,7 @@ exports.createGame = async (gameData) => {
 	}
 };
 
-exports.getAllGames = async () => {
+export const getAllGames = async () => {
 	try {
 		const games = await Game.find({})
 			.populate("characters")
@@ -22,7 +22,7 @@ exports.getAllGames = async () => {
 	}
 };
 
-exports.linkCharacters = async (game, characters) => {
+export const linkCharacters = async (game, characters) => {
 	try {
 		const updatedGame = await Game.findByIdAndUpdate(game, {
 			$set: {
@@ -37,7 +37,7 @@ exports.linkCharacters = async (game, characters) => {
 	}
 };
 
-exports.linkFilters = async (game, filters) => {
+export const linkFilters = async (game, filters) => {
 	try {
 		const updatedGame = await Game.findByIdAndUpdate(game, {
 			$set: {
@@ -52,10 +52,10 @@ exports.linkFilters = async (game, filters) => {
 	}
 };
 
-exports.updateGame = async (id, name) => {
+export const updateGame = async (id, name) => {
 	try {
 		return await Game.findByIdAndUpdate(
-			{ _id: id },
+			{_id: id},
 			{
 				$set: {
 					name,

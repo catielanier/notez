@@ -1,32 +1,33 @@
 "use strict";
-const { model: Filter } = require("../../filters/filterModel");
-const { model: Game } = require("../../games/gameModel");
+import {model as Filter} from "../../filters/filterModel";
+import {model as Game} from "../../games/gameModel";
 
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+import mongoose from "mongoose";
+
+const {Schema} = mongoose;
 const playerNoteSchema = new Schema({
-  game: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Game,
-    required: true
-  },
-  player: {
-    type: String,
-    required: true
-  },
-  filter: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Filter,
-    required: true
-  },
-  note: {
-    type: String,
-    required: true
-  },
-  noteDate: {
-    type: Date,
-    default: Date.now()
-  }
+	game: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: Game,
+		required: true
+	},
+	player: {
+		type: String,
+		required: true
+	},
+	filter: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: Filter,
+		required: true
+	},
+	note: {
+		type: String,
+		required: true
+	},
+	noteDate: {
+		type: Date,
+		default: Date.now()
+	}
 });
 
-exports.model = mongoose.model("PlayerNote", playerNoteSchema);
+export const model = mongoose.model("PlayerNote", playerNoteSchema);

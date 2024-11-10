@@ -1,23 +1,22 @@
-const express = require("express");
-const router = express.Router();
-const tokenService = require("../../../utils/tokenService");
-const userServices = require("../../users/userServices");
-const playerNoteServices = require("./playerNoteServices");
-const middleWare = require("../../../middleware");
-const { applyMiddleware } = require("../../../utils");
+import express from "express";
+import * as tokenService from "../../../utils/tokenService";
+import * as userServices from "../../users/userServices";
+import * as playerNoteServices from "./playerNoteServices";
 
-applyMiddleware(middleWare, router);
+const router = express.Router();
 
 router.route("/").post(async (req, res) => {
-	const { note, token, user: id } = req.body;
+	const {note, token, user: id} = req.body;
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
 			res.status(503).send("You are not logged in.");
+			return;
 		}
 		const user = await userServices.getUserById(id);
 		if (user.role === "Banned") {
 			res.status(503).send("You are banned and cannot use our service.");
+			return;
 		}
 		const newNote = await playerNoteServices.createNote(note);
 		if (newNote) {
@@ -36,19 +35,19 @@ router.route("/").post(async (req, res) => {
 });
 
 router.route("/").delete(async (req, res) => {
-	const { user: userId, token, noteId } = req.body;
+	const {user: userId, token, noteId} = req.body;
 	try {
-		Promise.all(async () => {
-			const loggedIn = await tokenService.verifyToken(token);
-			if (!loggedIn) {
-				res.status(503).send("You are not logged in.");
-			}
-			const user = await userServices.getUserById(userId);
-			const relationship = await playerNoteServices.unlinkPlayerNote(
-				userId,
-				noteId
-			);
-		});
+		await Promise.all([
+			(async () => {
+				const loggedIn = await tokenService.verifyToken(token);
+				if (!loggedIn) {
+					res.status(503).send("You are not logged in.");
+					return;
+				}
+				await userServices.getUserById(userId);
+				await playerNoteServices.unlinkPlayerNote(userId, noteId);
+			})()
+		]);
 		const note = await playerNoteServices.deleteNote(noteId);
 		res.status(200).json({
 			data: note,
@@ -59,12 +58,13 @@ router.route("/").delete(async (req, res) => {
 });
 
 router.route("/:id").put(async (req, res) => {
-	const { id: noteId } = req.params;
-	const { token, note, filter } = req.body;
+	const {id: noteId} = req.params;
+	const {token, note, filter} = req.body;
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
 			res.status(503).send("You are not logged in.");
+			return;
 		}
 		const results = await playerNoteServices.updateNote(noteId, note, filter);
 		if (results) {
@@ -78,4 +78,4 @@ router.route("/:id").put(async (req, res) => {
 	}
 });
 
-exports.router = router;
+export default router;

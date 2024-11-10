@@ -1,10 +1,11 @@
 "use strict";
 
-const { model: GameNote } = require("../notes/games/gameNoteModel");
-const { model: PlayerNote } = require("../notes/players/playerNoteModel");
+import {model as GameNote} from "../notes/games/gameNoteModel";
+import {model as PlayerNote} from "../notes/players/playerNoteModel";
 
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+
 const { Schema } = mongoose;
 const userSchema = new Schema({
   email: {
@@ -78,8 +79,7 @@ userSchema.pre("save", async function (next) {
 
   if (user.isModified("password") || user.isNew) {
     try {
-      const hash = await bcrypt.hash(user.password, 10);
-      user.password = hash;
+			user.password = await bcrypt.hash(user.password, 10);
       return next();
     } catch (e) {
       return next(e);
@@ -93,4 +93,4 @@ userSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-exports.model = mongoose.model("User", userSchema);
+export const model = mongoose.model("User", userSchema);

@@ -1,39 +1,37 @@
 "use strict";
 
+
 // Imports and defs
-const mongoose = require("mongoose");
-const express = require("express");
-const http = require("http");
+import mongoose from 'mongoose';
+import express from 'express';
+import http from 'http';
 const router = express();
 
 // Middleware
-require("dotenv").config({ path: __dirname + "/.env" });
-const {
+import dotenv from 'dotenv';
+
+dotenv.config({path: __dirname + "/.env"});
+import {
 	URL,
 	PORT,
 	ENVIRONMENT,
 	SERVER_PORT,
-} = require("./api/utils/constants");
+	IP
+} from "./api/utils/constants";
 const middleWare = require("./api/middleware");
-const { applyMiddleware } = require("./api/utils");
-const path = require("path");
+import {applyMiddleware} from "./api/utils";
+import path from "path";
 
 applyMiddleware(middleWare, router);
 
 // Routes
-const { router: userRouter } = require("./api/routes/users/userRoutes");
-const { router: gameRouter } = require("./api/routes/games/gameRoutes");
-const {
-	router: characterRouter,
-} = require("./api/routes/characters/characterRoutes");
-const { router: filterRouter } = require("./api/routes/filters/filterRoutes");
-const {
-	router: gameNoteRouter,
-} = require("./api/routes/notes/games/gameNoteRoutes");
-const {
-	router: playerNoteRouter,
-} = require("./api/routes/notes/players/playerNoteRoutes");
-const { router: inviteRouter } = require("./api/routes/invites/inviteRoutes");
+import {router as userRouter} from './api/routes/users/userRoutes';
+import {router as gameRouter} from "./api/routes/games/gameRoutes";
+import {router as characterRouter} from "./api/routes/characters/characterRoutes";
+import {router as filterRouter} from "./api/routes/filters/filterRoutes";
+import {router as gameNoteRouter} from "./api/routes/notes/games/gameNoteRoutes";
+import {router as playerNoteRouter} from "./api/routes/notes/players/playerNoteRoutes";
+import {router as inviteRouter} from "./api/routes/invites/inviteRoutes";
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
@@ -54,7 +52,7 @@ const server = http.createServer(router);
 mongoose
 	.connect(URL, { useNewUrlParser: true })
 	.then(() => {
-		server.listen(SERVER_PORT || PORT, () => {
+		server.listen(`http://${IP}:${SERVER_PORT || PORT}`, () => {
 			console.log(`server running on port ${SERVER_PORT || PORT}`);
 		});
 	})

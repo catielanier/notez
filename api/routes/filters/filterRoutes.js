@@ -1,16 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const userServices = require("../users/userServices");
-const tokenService = require("../../utils/tokenService");
-const filterServices = require("./filterServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+import express from "express";
+import * as userServices from "../users/userServices";
+import * as tokenService from "../../utils/tokenService";
+import * as filterServices from "./filterServices";
 
-applyMiddleware(middleWare, router);
+const router = express.Router();
 
 router.route("/new").post(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
-	const { token, user: id, filter } = req.body;
+	const {token, user: id, filter} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
@@ -94,7 +91,7 @@ router.route("/").put(async (req, res) => {
 		res.status(503).send("Only admins can create characters.");
 	}
 
-	const result = await filterServices.updateCharacter(
+	const result = await filterServices.updateFilter(
 		filter,
 		name,
 		name_ja,
@@ -109,4 +106,4 @@ router.route("/").put(async (req, res) => {
 	});
 });
 
-exports.router = router;
+export default router;

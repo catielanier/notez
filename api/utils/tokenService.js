@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const { SECRET } = require("./constants");
+import jwt from "jsonwebtoken";
+import {SECRET} from "./constants";
 
-exports.issueToken = async (userId) => {
+export const issueToken = async (userId) => {
 	const payload = {
 		userId,
 		issuedAt: Date.now(),
@@ -10,10 +10,10 @@ exports.issueToken = async (userId) => {
 	return jwt.sign(payload, SECRET);
 };
 
-exports.verifyToken = async (token) => {
+export const verifyToken = async (token) => {
 	return jwt.verify(token, SECRET);
 };
 
-exports.decodeToken = async (token) => {
+export const decodeToken = async (token) => {
 	return jwt.decode(token, SECRET);
 };

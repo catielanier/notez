@@ -1,16 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const userServices = require("../users/userServices");
-const tokenService = require("../../utils/tokenService");
-const gameServices = require("./gameServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+import express from "express";
+import * as userServices from "../users/userServices";
+import * as tokenService from "../../utils/tokenService";
+import * as gameServices from "./gameServices";
 
-applyMiddleware(middleWare, router);
+const router = express.Router();
 
 router.route("/new").post(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
-	const { token, user: id, game } = req.body;
+	const {token, user: id, game} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
@@ -45,13 +42,15 @@ router.route("/").get(async (_, res) => {
 	}
 });
 
-router.route("/:id").get(async (req, res) => {});
+router.route("/:id").get(async (req, res) => {
+});
 
-router.route("/:id").put(async (req, res) => {});
+router.route("/:id").put(async (req, res) => {
+});
 
 router.route("/:id/character").put(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
-	const { token, user: id, characters, game } = req.body;
+	const {token, user: id, characters, game} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
@@ -64,7 +63,7 @@ router.route("/:id/character").put(async (req, res) => {
 			res.status(503).send("Only admins can link characters to games.");
 		}
 		// Take the game and characters to update the character array on the document
-		const update = gameServices.linkCharacters(game, characters);
+		const update = await gameServices.linkCharacters(game, characters);
 		if (update) {
 			res.status(201).json({
 				data: update,
@@ -77,7 +76,7 @@ router.route("/:id/character").put(async (req, res) => {
 
 router.route("/:id/filter").put(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
-	const { token, user: id, filters, game } = req.body;
+	const {token, user: id, filters, game} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
@@ -90,7 +89,7 @@ router.route("/:id/filter").put(async (req, res) => {
 			res.status(503).send("Only admins can link filters to games.");
 		}
 		// Take the game and characters to update the character array on the document
-		const update = gameServices.linkFilters(game, filters);
+		const update = await gameServices.linkFilters(game, filters);
 		if (update) {
 			res.status(201).json({
 				data: update,
@@ -102,7 +101,7 @@ router.route("/:id/filter").put(async (req, res) => {
 });
 
 router.route("/").put(async (req, res) => {
-	const { user: id, token, game, name } = req.body.data;
+	const {user: id, token, game, name} = req.body.data;
 
 	const loggedIn = await tokenService.verifyToken(token);
 	if (!loggedIn) {
@@ -121,4 +120,4 @@ router.route("/").put(async (req, res) => {
 	});
 });
 
-exports.router = router;
+export {router};

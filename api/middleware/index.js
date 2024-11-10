@@ -1,3 +1,3 @@
-const { handleBodyRequestParsing, i18n } = require("./common");
+import {handleBodyRequestParsing, i18n} from './common';
 
-module.exports = [handleBodyRequestParsing, i18n];
+export default [handleBodyRequestParsing, i18n];

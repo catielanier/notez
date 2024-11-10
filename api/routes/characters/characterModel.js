@@ -1,7 +1,7 @@
 "use strict";
 
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+import mongoose, {Schema} from "mongoose";
+
 const characterSchema = new Schema({
 	name: {
 		type: String,
@@ -14,4 +14,4 @@ const characterSchema = new Schema({
 	},
 });
 
-exports.model = mongoose.model("Character", characterSchema);
+export const model = mongoose.model("Character", characterSchema);

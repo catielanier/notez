@@ -1,15 +1,15 @@
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const i18next = require("i18next");
-const Backend = require("i18next-node-fs-backend");
-const i18nextMiddleware = require("i18next-express-middleware");
+import bodyParser from "body-parser";
+import cors from "cors";
+import i18next from "i18next";
+import Backend from "i18next-node-fs-backend";
+import i18nextMiddleware from "i18next-express-middleware";
 
 i18next
 	.use(Backend)
 	.use(i18nextMiddleware.LanguageDetector)
 	.init({
 		backend: {
-			loadPath: __dirname + "/locales/{{lng}}/{{ns}}.json",
+			loadPath: `${__dirname}/locales/{{lng}}/{{ns}}.json`,
 		},
 		fallbackLng: "en",
 		preload: ["en", "es", "fr", "ja", "ko", "zh", "zh-CN", "pt", "ru", "it"],
@@ -23,12 +23,12 @@ const corsOptions = {
 	],
 };
 
-exports.handleBodyRequestParsing = (router) => {
-	router.use(bodyParser.urlencoded({ extended: true }));
+export const handleBodyRequestParsing = (router) => {
+	router.use(bodyParser.urlencoded({extended: true}));
 	router.use(bodyParser.json());
 	router.use(cors(corsOptions));
 };
 
-exports.i18n = (router) => {
+export const i18n = (router) => {
 	router.use(i18nextMiddleware.handle(i18next));
 };

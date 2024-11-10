@@ -1,10 +1,10 @@
-const { model: User } = require("./userModel");
-const bcrypt = require("bcryptjs");
-const { promisify } = require("util");
-const { randomBytes } = require("crypto");
-const tokenService = require("../../utils/tokenService");
+import {model as User} from "./userModel";
+import bcrypt from "bcryptjs";
+import {promisify} from "util";
+import {randomBytes} from "crypto";
+import {decodeToken} from "../../utils/tokenService";
 
-exports.createUser = async (userData) => {
+export const createUser = async (userData) => {
 	try {
 		const user = new User(userData);
 		return await user.save();
@@ -13,14 +13,14 @@ exports.createUser = async (userData) => {
 	}
 };
 
-exports.addValidation = async () => {
+export const addValidation = async () => {
 	const randomBytesPromisified = promisify(randomBytes);
 	return (await randomBytesPromisified(20)).toString("hex");
 };
 
-exports.isUser = async ({ email, password }) => {
+export const isUser = async ({email, password}) => {
 	try {
-		const [user] = await User.find({ email });
+		const [user] = await User.find({email});
 		if (user) {
 			const match = await user.comparePassword(password);
 			if (match) {
@@ -32,7 +32,7 @@ exports.isUser = async ({ email, password }) => {
 	}
 };
 
-exports.getUserById = async (id, populateNotes = true) => {
+export const getUserById = async (id, populateNotes = true) => {
 	try {
 		let user;
 		switch (populateNotes) {
@@ -41,8 +41,8 @@ exports.getUserById = async (id, populateNotes = true) => {
 				break;
 			default:
 				user = await User.findById(id)
-					.populate({ path: "gameNotes", populate: { path: "filter" } })
-					.populate({ path: "playerNotes", populate: { path: "filter" } });
+					.populate({path: "gameNotes", populate: {path: "filter"}})
+					.populate({path: "playerNotes", populate: {path: "filter"}});
 				break;
 		}
 		if (user) {
@@ -53,14 +53,14 @@ exports.getUserById = async (id, populateNotes = true) => {
 	}
 };
 
-exports.checkUserRoles = async (token, roles) => {
-	const decodedJwt = await tokenService.decodeToken(token);
+export const checkUserRoles = async (token, roles) => {
+	const decodedJwt = await decodeToken(token);
 	const {
 		payload: {
-			user: { id, role },
+			user: {id, role},
 		},
 	} = decodedJwt;
-	const currentUser = await exports.getUserById(id, false);
+	const currentUser = await getUserById(id, false);
 	if (currentUser.role !== role) {
 		throw new Error("you have modified your token. gtab");
 	}
@@ -74,9 +74,9 @@ exports.checkUserRoles = async (token, roles) => {
 	}
 };
 
-exports.verifyOldPassword = async (id, password) => {
+export const verifyOldPassword = async (id, password) => {
 	try {
-		const user = await User.findById({ _id: id });
+		const user = await User.findById({_id: id});
 		if (user) {
 			const match = await user.comparePassword(password);
 			if (match) {
@@ -88,11 +88,11 @@ exports.verifyOldPassword = async (id, password) => {
 	}
 };
 
-exports.updatePassword = async (id, password) => {
+export const updatePassword = async (id, password) => {
 	try {
 		const hash = await bcrypt.hash(password, 10);
 		return await User.findByIdAndUpdate(
-			{ _id: id },
+			{_id: id},
 			{
 				$set: {
 					password: hash,
@@ -105,29 +105,29 @@ exports.updatePassword = async (id, password) => {
 	}
 };
 
-exports.updateUser = async (id, realName, username, country, email) => {
+export const updateUser = async (id, realName, username, country, email) => {
 	try {
 		return await User.findByIdAndUpdate(
-			{ _id: id },
-			{ $set: { realName, username, country, email } }
+			{_id: id},
+			{$set: {realName, username, country, email}}
 		);
 	} catch (e) {
 		throw e;
 	}
 };
 
-exports.updateUserTokens = async (id, validTokens) => {
+export const updateUserTokens = async (id, validTokens) => {
 	try {
 		return await User.findByIdAndUpdate(
-			{ _id: id },
-			{ $set: { validTokens }}
+			{_id: id},
+			{$set: {validTokens}}
 		)
 	} catch (e) {
 		throw e;
 	}
 }
 
-exports.getAllUsers = async () => {
+export const getAllUsers = async () => {
 	try {
 		return await User.find({});
 	} catch (e) {
@@ -135,28 +135,28 @@ exports.getAllUsers = async () => {
 	}
 };
 
-exports.updateRole = async (id, role) => {
+export const updateRole = async (id, role) => {
 	try {
-		return await User.findByIdAndUpdate({ _id: id }, { $set: { role } });
+		return await User.findByIdAndUpdate({_id: id}, {$set: {role}});
 	} catch (e) {
 		throw e;
 	}
 };
 
-exports.findUser = async (email) => {
+export const findUser = async (email) => {
 	try {
-		return await User.findOne({ email });
+		return await User.findOne({email});
 	} catch (e) {
 		throw e;
 	}
 };
 
-exports.setForgotToken = async (id, token) => {
+export const setForgotToken = async (id, token) => {
 	try {
 		console.log("running update");
 		console.log(token);
 		return await User.findByIdAndUpdate(
-			{ _id: id },
+			{_id: id},
 			{
 				$set: {
 					forgotPassword: token,
@@ -168,20 +168,20 @@ exports.setForgotToken = async (id, token) => {
 	}
 };
 
-exports.verifyUser = async (key) => {
+export const verifyUser = async (key) => {
 	try {
 		return await User.findOneAndUpdate(
-			{ verification: key },
-			{ $set: { verification: "", active: true } }
+			{verification: key},
+			{$set: {verification: "", active: true}}
 		);
 	} catch (e) {
 		throw e;
 	}
 };
 
-exports.findUserByResetToken = async (key) => {
+export const findUserByResetToken = async (key) => {
 	try {
-		return await User.findOne({ forgotPassword: key });
+		return await User.findOne({forgotPassword: key});
 	} catch (e) {
 		throw e;
 	}

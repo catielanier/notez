@@ -1,9 +1,10 @@
 "use strict";
-const { model: Character } = require("../characters/characterModel");
-const { model: Filter } = require("../filters/filterModel");
+import {model as Character} from "../characters/characterModel";
+import {model as Filter} from "../filters/filterModel";
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const {Schema} = mongoose;
+
 const gameSchema = new Schema({
 	name: {
 		type: String,
@@ -24,4 +25,4 @@ const gameSchema = new Schema({
 	],
 });
 
-exports.model = mongoose.model("Game", gameSchema);
+export const model = mongoose.model("Game", gameSchema);
