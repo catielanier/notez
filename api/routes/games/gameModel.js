@@ -1,6 +1,6 @@
 "use strict";
-import {model as Character} from "../characters/characterModel";
-import {model as Filter} from "../filters/filterModel";
+import {model as Character} from "../characters/characterModel.js";
+import {model as Filter} from "../filters/filterModel.js";
 import mongoose from "mongoose";
 
 const {Schema} = mongoose;

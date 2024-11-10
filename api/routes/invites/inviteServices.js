@@ -1,4 +1,4 @@
-import {model as Invite} from './inviteModel';
+import {model as Invite} from './inviteModel.js';
 
 export const createInvite = async (newInvite) => {
 	try {

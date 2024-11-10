@@ -1,8 +1,8 @@
 "use strict";
 import mongoose, {Schema} from "mongoose";
-import {model as Character} from "../../characters/characterModel";
-import {model as Filter} from "../../filters/filterModel";
-import {model as Game} from "../../games/gameModel";
+import {model as Character} from "../../characters/characterModel.js";
+import {model as Filter} from "../../filters/filterModel.js";
+import {model as Game} from "../../games/gameModel.js";
 
 const gameNoteSchema = new Schema({
 	game: {

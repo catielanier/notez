@@ -1,7 +1,7 @@
 "use strict";
 
-import {model as GameNote} from "../notes/games/gameNoteModel";
-import {model as PlayerNote} from "../notes/players/playerNoteModel";
+import {model as GameNote} from "../notes/games/gameNoteModel.js";
+import {model as PlayerNote} from "../notes/players/playerNoteModel.js";
 
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";

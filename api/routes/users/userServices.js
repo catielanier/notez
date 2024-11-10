@@ -1,8 +1,8 @@
-import {model as User} from "./userModel";
+import {model as User} from "./userModel.js";
 import bcrypt from "bcryptjs";
 import {promisify} from "util";
 import {randomBytes} from "crypto";
-import {decodeToken} from "../../utils/tokenService";
+import {decodeToken} from "../../utils/tokenService.js";
 
 export const createUser = async (userData) => {
 	try {

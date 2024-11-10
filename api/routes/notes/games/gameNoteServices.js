@@ -1,5 +1,5 @@
-import {model as GameNote} from './gameNoteModel';
-import {model as User} from '../../users/userModel';
+import {model as GameNote} from './gameNoteModel.js';
+import {model as User} from '../../users/userModel.js';
 
 export const createNote = async newNote => {
 	try {

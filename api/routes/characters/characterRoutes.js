@@ -1,9 +1,9 @@
 import express from "express";
 
 const router = express.Router();
-import * as userServices from "../users/userServices";
-import * as tokenService from "../../utils/tokenService";
-import * as characterServices from "./characterServices";
+import * as userServices from "../users/userServices.js";
+import * as tokenService from "../../utils/tokenService.js";
+import * as characterServices from "./characterServices.js";
 
 router.route("/new").post(async (req, res) => {
 	// Grab the token, user id, and game from frontend.

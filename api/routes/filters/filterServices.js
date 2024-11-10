@@ -1,4 +1,4 @@
-import {model as Filter} from "./filterModel";
+import {model as Filter} from "./filterModel.js";
 
 export const createFilter = async (filterData) => {
 	try {

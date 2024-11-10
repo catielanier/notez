@@ -1,7 +1,7 @@
 import express from "express";
-import * as userServices from "../users/userServices";
-import * as tokenService from "../../utils/tokenService";
-import * as gameServices from "./gameServices";
+import * as userServices from "../users/userServices.js";
+import * as tokenService from "../../utils/tokenService.js";
+import * as gameServices from "./gameServices.js";
 
 const router = express.Router();
 

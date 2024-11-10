@@ -1,6 +1,6 @@
 "use strict";
-import {model as Filter} from "../../filters/filterModel";
-import {model as Game} from "../../games/gameModel";
+import {model as Filter} from "../../filters/filterModel.js";
+import {model as Game} from "../../games/gameModel.js";
 
 import mongoose from "mongoose";
 

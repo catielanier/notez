@@ -1,9 +1,9 @@
 import express from "express";
 
 const router = express.Router();
-import * as tokenService from "../../../utils/tokenService";
-import * as userServices from "../../users/userServices";
-import * as gameNoteServices from "./gameNoteServices";
+import * as tokenService from "../../../utils/tokenService.js";
+import * as userServices from "../../users/userServices.js";
+import * as gameNoteServices from "./gameNoteServices.js";
 
 router.route("/").post(async (req, res) => {
 	const {note} = req.body;

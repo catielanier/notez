@@ -1,3 +1,3 @@
-import {handleBodyRequestParsing, i18n} from './common';
+import {handleBodyRequestParsing, i18n} from './common.js';
 
 export default [handleBodyRequestParsing, i18n];

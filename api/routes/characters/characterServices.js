@@ -1,4 +1,4 @@
-import {model as Character} from "./characterModel";
+import {model as Character} from "./characterModel.js";
 
 export const createCharacter = async (characterData) => {
 	try {

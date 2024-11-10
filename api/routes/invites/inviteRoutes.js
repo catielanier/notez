@@ -1,7 +1,7 @@
 import express from 'express';
-import * as userService from '../users/userServices';
-import * as inviteService from './inviteServices';
-import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants';
+import * as userService from '../users/userServices.js';
+import * as inviteService from './inviteServices.js';
+import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants.js';
 import mailjet from 'node-mailjet';
 
 const router = express.Router();

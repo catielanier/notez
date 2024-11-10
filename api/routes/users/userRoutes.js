@@ -16,12 +16,12 @@ import {
 	setForgotToken,
 	verifyUser,
 	findUserByResetToken
-} from "./userServices";
-import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants";
+} from "./userServices.js";
+import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
 import mailjet from "node-mailjet";
 
 mailjet.connect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
-import * as tokenService from "../../utils/tokenService";
+import * as tokenService from "../../utils/tokenService.js";
 
 router.route("/signup").post(async (req, res, next) => {
 	try {
