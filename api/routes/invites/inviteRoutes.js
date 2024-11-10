@@ -5,10 +5,7 @@ import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants.js';
 import Mailjet from 'node-mailjet';
 
 const router = express.Router();
-const mailjetClient = new Mailjet({
-	apiKey: MJ_APIKEY_PUBLIC,
-	apiSecret: MJ_APIKEY_PRIVATE
-});
+const mailjet = Mailjet.apiConnect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
 
 router.route('/').post(async (req, res) => {
 	const {email} = req.body.data;
@@ -29,7 +26,7 @@ router.route('/').post(async (req, res) => {
 								<p>Please click <a href="https://checkthenotez.com/invite/${finished._id}">here</a> to get started.</p>
 								<p>Regards,<br />The NoteZ Team</p>
 						`;
-			const request = mailjetClient.post('send', {version: 'v3.1'}).request({
+			const request = mailjet.post('send', {version: 'v3.1'}).request({
 				Messages: [
 					{
 						From: {

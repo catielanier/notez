@@ -20,10 +20,7 @@ import {
 import Mailjet from "node-mailjet";
 import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
 
-const mailjet = new Mailjet({
-	apiKey: MJ_APIKEY_PUBLIC,
-	apiSecret: MJ_APIKEY_PRIVATE
-})
+const mailjet = Mailjet.apiConnect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
 
 import * as tokenService from "../../utils/tokenService.js";
 
