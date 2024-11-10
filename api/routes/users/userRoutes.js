@@ -17,12 +17,13 @@ import {
 	verifyUser,
 	findUserByResetToken
 } from "./userServices.js";
-import Mailjet from "node-mailjet";
-import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
-
-const mailjet = Mailjet.apiConnect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
 
 import * as tokenService from "../../utils/tokenService.js";
+import axios from "axios";
+import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
+
+const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('base64');
+
 
 router.route("/signup").post(async (req, res, next) => {
 	try {
@@ -42,6 +43,8 @@ router.route("/signup").post(async (req, res, next) => {
 		})}</p>
 			<p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>		
 		`;
+
+
 
 		const sender_cn = "笔记Z";
 		const sender_tw = "筆記Z";
@@ -68,30 +71,31 @@ router.route("/signup").post(async (req, res, next) => {
 
 		const sender = req.t("emails.sender");
 
-		const request = mailjet.post("send", {version: "v3.1"}).request({
-			Messages: [
+		try {
+			const response = await axios.post(
+				'https://api.mailjet.com/v3/send',
 				{
-					From: {
-						Email: "no-reply@checkthenotez.com",
-						Name: sender,
-					},
-					To: [
+					FromEmail: 'no-reply@checkthenotez.com',
+					FromName: sender,
+					Subject: subject,
+					'Html-part': messageBody,
+					Recipients: [
 						{
-							Email: newUser.email,
+							Email: user.email,
 						},
 					],
-					Subject: subject,
-					HTMLPart: messageBody,
 				},
-			],
-		});
-		request
-			.then((result) => {
-				console.log(result.body);
-			})
-			.catch((err) => {
-				console.log(err.statusCode);
-			});
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Basic ${auth}`
+					}
+				}
+			)
+			console.log(response.data);
+		} catch (e) {
+			console.error(e);
+		}
 		res.status(201).json({
 			data: [user],
 		});
@@ -311,30 +315,31 @@ router.route("/forgot").post(async (req, res) => {
 				<p>${req.t("emails.closing")}<br />${req.t("emails.team")}</p>
 			`;
 
-			const request = mailjet.post("send", {version: "v3.1"}).request({
-				Messages: [
+			try {
+				const response = await axios.post(
+					'https://api.mailjet.com/v3/send',
 					{
-						From: {
-							Email: "no-reply@checkthenotez.com",
-							Name: sender,
-						},
-						To: [
+						FromEmail: 'no-reply@checkthenotez.com',
+						FromName: sender,
+						Subject: subject,
+						'Html-part': messageBody,
+						Recipients: [
 							{
-								Email: email,
+								Email: checkUser.email,
 							},
 						],
-						Subject: subject,
-						HTMLPart: messageBody,
 					},
-				],
-			});
-			request
-				.then((result) => {
-					console.log(result.body);
-				})
-				.catch((err) => {
-					console.log(err.statusCode);
-				});
+					{
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Basic ${auth}`
+						}
+					}
+				)
+				console.log(response.data);
+			} catch (e) {
+				console.error(e);
+			}
 			res.status(201).json({
 				data: updated,
 			});

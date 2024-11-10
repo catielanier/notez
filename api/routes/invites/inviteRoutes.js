@@ -2,10 +2,11 @@ import express from 'express';
 import * as userService from '../users/userServices.js';
 import * as inviteService from './inviteServices.js';
 import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants.js';
-import Mailjet from 'node-mailjet';
+import axios from "axios";
 
 const router = express.Router();
-const mailjet = Mailjet.apiConnect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
+
+const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('base64');
 
 router.route('/').post(async (req, res) => {
 	const {email} = req.body.data;
@@ -26,30 +27,31 @@ router.route('/').post(async (req, res) => {
 								<p>Please click <a href="https://checkthenotez.com/invite/${finished._id}">here</a> to get started.</p>
 								<p>Regards,<br />The NoteZ Team</p>
 						`;
-			const request = mailjet.post('send', {version: 'v3.1'}).request({
-				Messages: [
+			try {
+				const response = await axios.post(
+					'https://api.mailjet.com/v3/send',
 					{
-						From: {
-							Email: 'no-reply@checkthenotez.com',
-							Name: 'NoteZ',
-						},
-						To: [
+						FromEmail: 'no-reply@checkthenotez.com',
+						FromName: req.t('email.sender'),
+						Subject: "You've been invited to NoteZ",
+						'Html-part': messageBody,
+						Recipients: [
 							{
-								Email: email,
+								Email: user.email,
 							},
 						],
-						Subject: "You've been invited to NoteZ!",
-						HTMLPart: messageBody,
 					},
-				],
-			});
-			request
-				.then((result) => {
-					console.log(result.body);
-				})
-				.catch((err) => {
-					console.log(err.statusCode);
-				});
+					{
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Basic ${auth}`
+						}
+					}
+				)
+				console.log(response.data);
+			} catch (e) {
+				console.error(e);
+			}
 			res.status(201).json({
 				data: finished,
 			});
