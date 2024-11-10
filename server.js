@@ -11,7 +11,7 @@ const router = express();
 import dotenv from 'dotenv';
 
 dotenv.config({path: `${__dirname}/.env`});
-import {URL, PORT, ENVIRONMENT, SERVER_PORT, IP} from "./api/utils/constants";
+import {URL, PORT, ENVIRONMENT, SERVER_PORT, IP} from "./api/utils/constants.js";
 import middleWare from "./api/middleware";
 import {applyMiddleware} from "./api/utils";
 import path from "path";
@@ -19,13 +19,13 @@ import path from "path";
 applyMiddleware(middleWare, router);
 
 // Routes
-import {router as userRouter} from './api/routes/users/userRoutes';
-import {router as gameRouter} from "./api/routes/games/gameRoutes";
-import {router as characterRouter} from "./api/routes/characters/characterRoutes";
-import {router as filterRouter} from "./api/routes/filters/filterRoutes";
-import {router as gameNoteRouter} from "./api/routes/notes/games/gameNoteRoutes";
-import {router as playerNoteRouter} from "./api/routes/notes/players/playerNoteRoutes";
-import {router as inviteRouter} from "./api/routes/invites/inviteRoutes";
+import {router as userRouter} from './api/routes/users/userRoutes.js';
+import {router as gameRouter} from "./api/routes/games/gameRoutes.js";
+import {router as characterRouter} from "./api/routes/characters/characterRoutes.js";
+import {router as filterRouter} from "./api/routes/filters/filterRoutes.js";
+import {router as gameNoteRouter} from "./api/routes/notes/games/gameNoteRoutes.js";
+import {router as playerNoteRouter} from "./api/routes/notes/players/playerNoteRoutes.js";
+import {router as inviteRouter} from "./api/routes/invites/inviteRoutes.js";
 
 router.use("/api/users", userRouter);
 router.use("/api/games", gameRouter);
@@ -36,7 +36,7 @@ router.use("/api/notes/player", playerNoteRouter);
 router.use("/api/invites", inviteRouter);
 
 if (ENVIRONMENT === "prod") {
-	router.use("/", express.static(path.join(__dirname, "./build")));
+	router.use("/", express.static(path.join(__dirname, "./dist")));
 }
 
 // Setup server
