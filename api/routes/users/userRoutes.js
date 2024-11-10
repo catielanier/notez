@@ -17,10 +17,14 @@ import {
 	verifyUser,
 	findUserByResetToken
 } from "./userServices.js";
+import Mailjet from "node-mailjet";
 import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
-import mailjet from "node-mailjet";
 
-mailjet.connect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE);
+const mailjet = new Mailjet({
+	apiKey: MJ_APIKEY_PUBLIC,
+	apiSecret: MJ_APIKEY_PRIVATE
+})
+
 import * as tokenService from "../../utils/tokenService.js";
 
 router.route("/signup").post(async (req, res, next) => {

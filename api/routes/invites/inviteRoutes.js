@@ -2,13 +2,13 @@ import express from 'express';
 import * as userService from '../users/userServices.js';
 import * as inviteService from './inviteServices.js';
 import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants.js';
-import mailjet from 'node-mailjet';
+import Mailjet from 'node-mailjet';
 
 const router = express.Router();
-const mailjetClient = mailjet.connect(
-	MJ_APIKEY_PUBLIC,
-	MJ_APIKEY_PRIVATE
-);
+const mailjetClient = new Mailjet({
+	apiKey: MJ_APIKEY_PUBLIC,
+	apiSecret: MJ_APIKEY_PRIVATE
+});
 
 router.route('/').post(async (req, res) => {
 	const {email} = req.body.data;
