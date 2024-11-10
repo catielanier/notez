@@ -12,8 +12,8 @@ import dotenv from 'dotenv';
 
 dotenv.config({path: `${__dirname}/.env`});
 import {URL, PORT, ENVIRONMENT, SERVER_PORT, IP} from "./api/utils/constants.js";
-import middleWare from "./api/middleware";
-import {applyMiddleware} from "./api/utils";
+import middleWare from "./api/middleware/index.js";
+import {applyMiddleware} from "./api/utils/index.js";
 import path from "path";
 
 applyMiddleware(middleWare, router);
