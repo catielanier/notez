@@ -1,24 +1,18 @@
 "use strict";
 
-
 // Imports and defs
 import mongoose from 'mongoose';
 import express from 'express';
 import http from 'http';
+
 const router = express();
 
 // Middleware
 import dotenv from 'dotenv';
 
-dotenv.config({path: __dirname + "/.env"});
-import {
-	URL,
-	PORT,
-	ENVIRONMENT,
-	SERVER_PORT,
-	IP
-} from "./api/utils/constants";
-const middleWare = require("./api/middleware");
+dotenv.config({path: `${__dirname}/.env`});
+import {URL, PORT, ENVIRONMENT, SERVER_PORT, IP} from "./api/utils/constants";
+import middleWare from "./api/middleware";
 import {applyMiddleware} from "./api/utils";
 import path from "path";
 
@@ -50,7 +44,7 @@ const server = http.createServer(router);
 
 // Connect to MongoDB
 mongoose
-	.connect(URL, { useNewUrlParser: true })
+	.connect(URL, {useNewUrlParser: true})
 	.then(() => {
 		server.listen(`http://${IP}:${SERVER_PORT || PORT}`, () => {
 			console.log(`server running on port ${SERVER_PORT || PORT}`);
