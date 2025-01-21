@@ -1,0 +1,35 @@
+{
+  "emails": {
+    "closing": "我们的问候，",
+    "sender": "笔记Z",
+    "signup": {
+      "body": "我们很高兴欢迎您。单击<a href=\"{{ url }}\">此处</a>开始。",
+      "greeting": "欢迎使用笔记Z，{{ username }}!",
+      "subject": "欢迎笔记Z"
+    },
+		"forgotPassword": {
+			"body": "看起来您忘记了密码。请点击<a href=\"{{ url }}\">此处</a>以重置它。",
+			"greeting": "您好 {{ username }}：",
+			"subject": "密码重置链接"
+		},
+		"invite": {
+			"greeting": "您好！",
+			"body1": "您已被邀请加入我们的服务！快来加入大家，一起通过记笔记提高您的水平！",
+			"body2": "请点击<a href=\"{{ url }}\">此处</a>开始。",
+			"subject": "您已被邀请加入笔记Z"
+		},
+    "team": "笔记Z团队"
+  },
+	"errors": {
+		"notActivated": "您尚未激活您的帐户。请检查您的电子邮件进行激活。",
+		"invalidOldPassword": "密码无效。请确认您的旧密码。",
+		"didNotUpdate": "用户未更新。",
+		"viewUsers": "您无权查看所有用户",
+		"updateRoles": "您无权更新用户角色。",
+		"notLoggedIn": "您尚未登录。",
+		"invalidToken": "由于令牌无效，无法重置密码。",
+		"noSuchToken": "没有这样的令牌。",
+		"invalidCredentials": "电子邮件地址或密码无效。",
+		"alreadySignedUp": "使用此电子邮件的用户已存在。"
+	}
+}

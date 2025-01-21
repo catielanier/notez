@@ -7,11 +7,17 @@
       "greeting": "Welcome to NoteZ, {{ username }}!",
       "subject": "Welcome to NoteZ!"
     },
-    "forgotPassowrd": {
+    "forgotPassword": {
       "body": "It seems you have forgotten your password. Please click <a href=\"{{ url }}\">here</a> to go in to reset it.",
-      "greeting": "Hello {{ username }:",
+      "greeting": "Hello {{ username }}:",
       "subject": "Password reset link"
     },
+		"invite": {
+			"greeting": "Hello!",
+			"body1": "You've been invited to our service! Come join everyone in taking notes to help improve your game!",
+			"body2": "Please click <a href=\"{{ url }}\">here</a> to get started.",
+			"subject": "You've been invited to NoteZ"
+		},
     "team": "The NoteZ Team"
   },
   "errors": {
@@ -23,6 +29,7 @@
     "notLoggedIn": "You are not logged in.",
     "invalidToken": "Unable to reset password due to invalid token.",
     "noSuchToken": "There was no such token.",
-    "invalidCredentials": "Invalid email address or password."
+    "invalidCredentials": "Invalid email address or password.",
+		"alreadySignedUp": "A user with this email already exists."
   }
 }

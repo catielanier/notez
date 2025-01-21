@@ -7,17 +7,29 @@
       "greeting": "ノートZへようこそ、{{ username }}！",
       "subject": "ノートZへようこそ！"
     },
+		"forgotPassword": {
+			"body": "パスワードをお忘れのようです。パスワードをリセットするには、<a href=\"{{ url }}\">こちら</a>をクリックしてください。",
+			"greeting": "こんにちは {{ username }} さん:",
+			"subject": "パスワードリセットリンク"
+		},
+		"invite": {
+			"greeting": "こんにちは！",
+			"body1": "私たちのサービスに招待されました！みんなと一緒にメモを取り、あなたのスキルを向上させましょう！",
+			"body2": "開始するには、<a href=\"{{ url }}\">こちら</a>をクリックしてください。",
+			"subject": "ノートZへの招待"
+		},
     "team": "ノートZチーム"
   },
-  "errors": {
-    "notActivated": "You have not activated your account yet. Please check your email to do so.",
-    "invalidOldPassword": "Invalid password. Please confirm your old password.",
-    "didNotUpdate": "User did not update.",
-    "viewUsers": "You are not authorized to view all users",
-    "updateRoles": "You are not authorized to update user roles.",
-    "notLoggedIn": "You are not logged in.",
-    "invalidToken": "Unable to reset password due to invalid token.",
-    "noSuchToken": "There was no such token.",
-    "invalidCredentials": "Invalid email address or password."
-  }
+	"errors": {
+		"notActivated": "あなたのアカウントはまだ有効化されていません。メールを確認して有効化してください。",
+		"invalidOldPassword": "無効なパスワードです。古いパスワードを確認してください。",
+		"didNotUpdate": "ユーザーが更新されませんでした。",
+		"viewUsers": "すべてのユーザーを表示する権限がありません",
+		"updateRoles": "ユーザーのロールを更新する権限がありません。",
+		"notLoggedIn": "ログインしていません。",
+		"invalidToken": "無効なトークンのため、パスワードをリセットできません。",
+		"noSuchToken": "そのようなトークンはありませんでした。",
+		"invalidCredentials": "無効なメールアドレスまたはパスワードです。",
+		"alreadySignedUp": "このメールアドレスで登録されたユーザーはすでに存在します。"
+	}
 }

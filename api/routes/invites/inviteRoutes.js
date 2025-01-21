@@ -10,6 +10,7 @@ const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('b
 
 router.route('/').post(async (req, res) => {
 	const {email} = req.body.data;
+	const t = req.t;
 	try {
 		const user = await userService.findUser(email);
 		if (user) {
@@ -21,19 +22,21 @@ router.route('/').post(async (req, res) => {
 			const finished = await inviteService.createInvite(newInvite);
 			// write email for sending invites
 			const messageBody = `
-								<h3>NoteZ</h3>
-								<h5>Hello!</h5>
-								<p>You've been invited to our service! Come join everyone in taking notes to help improve your game!</p>
-								<p>Please click <a href="https://checkthenotez.com/invite/${finished._id}">here</a> to get started.</p>
-								<p>Regards,<br />The NoteZ Team</p>
+								<h3>${t('emails.sender')}</h3>
+								<h5>${t('emails.invite.greeting')}</h5>
+								<p>${t('emails.invite.body1')}</p>
+								<p>${t('emails.invite.body1', {
+									url: `https://checkthenotez.com/invite/${finished._id}`
+								})}</p>
+								<p>${t('emails.closing')}<br />${t('emails.team')}</p>
 						`;
 			try {
 				const response = await axios.post(
 					'https://api.mailjet.com/v3/send',
 					{
 						FromEmail: 'no-reply@checkthenotez.com',
-						FromName: req.t('email.sender'),
-						Subject: "You've been invited to NoteZ",
+						FromName: t('email.sender'),
+						Subject: t('emails.invite.subject'),
 						'Html-part': messageBody,
 						Recipients: [
 							{

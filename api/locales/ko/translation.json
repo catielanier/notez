@@ -7,17 +7,29 @@
       "greeting": "노트Z 오신 것을 환영합니다, {{ username }}!",
       "subject": "노트Z 오신 것을 환영합니다!"
     },
+		"forgotPassword": {
+			"body": "비밀번호를 잊으신 것 같습니다. <a href=\"{{ url }}\">여기</a>를 클릭하여 재설정하십시오.",
+			"greeting": "안녕하세요 {{ username }}:",
+			"subject": "비밀번호 재설정 링크"
+		},
+		"invite": {
+			"greeting": "안녕하세요!",
+			"body1": "우리 서비스에 초대되었습니다! 모두와 함께 메모를 하며 게임을 향상시켜보세요!",
+			"body2": "시작하려면 <a href=\"{{ url }}\">여기</a>를 클릭하세요.",
+			"subject": "노트Z로 초대되었습니다"
+		},
     "team": "노트Z 팀"
   },
-  "errors": {
-    "notActivated": "You have not activated your account yet. Please check your email to do so.",
-    "invalidOldPassword": "Invalid password. Please confirm your old password.",
-    "didNotUpdate": "User did not update.",
-    "viewUsers": "You are not authorized to view all users",
-    "updateRoles": "You are not authorized to update user roles.",
-    "notLoggedIn": "You are not logged in.",
-    "invalidToken": "Unable to reset password due to invalid token.",
-    "noSuchToken": "There was no such token.",
-    "invalidCredentials": "Invalid email address or password."
-  }
+	"errors": {
+		"notActivated": "계정을 아직 활성화하지 않았습니다. 이메일을 확인하십시오.",
+		"invalidOldPassword": "잘못된 비밀번호입니다. 이전 비밀번호를 확인하십시오.",
+		"didNotUpdate": "사용자가 업데이트되지 않았습니다.",
+		"viewUsers": "모든 사용자를 볼 권한이 없습니다.",
+		"updateRoles": "사용자 역할을 업데이트할 권한이 없습니다.",
+		"notLoggedIn": "로그인하지 않았습니다.",
+		"invalidToken": "잘못된 토큰으로 인해 비밀번호를 재설정할 수 없습니다.",
+		"noSuchToken": "해당 토큰이 없습니다.",
+		"invalidCredentials": "잘못된 이메일 주소 또는 비밀번호입니다.",
+		"alreadySignedUp": "이 이메일을 가진 사용자가 이미 존재합니다."
+	}
 }
