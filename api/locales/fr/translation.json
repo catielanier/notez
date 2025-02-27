@@ -1,0 +1,52 @@
+{
+	"emails": {
+		"closing": "Cordialement,",
+		"sender": "NoteZ",
+		"signup": {
+			"body": "Nous sommes ravis de vous accueillir. Veuillez cliquer <a href=\"{{ url }}\">ici</a> pour commencer.",
+			"greeting": "Bienvenue sur NoteZ, {{ username }} !",
+			"subject": "Bienvenue sur NoteZ !"
+		},
+		"forgotPassword": {
+			"body": "Il semble que vous ayez oublié votre mot de passe. Veuillez cliquer <a href=\"{{ url }}\">ici</a> pour accéder à la réinitialisation.",
+			"greeting": "Bonjour {{ username }} :",
+			"subject": "Lien de réinitialisation du mot de passe"
+		},
+		"invite": {
+			"greeting": "Bonjour !",
+			"body1": "Vous avez été invité à notre service ! Rejoignez tout le monde pour prendre des notes et améliorer votre jeu !",
+			"body2": "Veuillez cliquer <a href=\"{{ url }}\">ici</a> pour commencer.",
+			"subject": "Vous avez été invité sur NoteZ"
+		},
+		"team": "L'équipe de NoteZ"
+	},
+	"errors": {
+		"notActivated": "Vous n'avez pas encore activé votre compte. Veuillez consulter votre email pour le faire.",
+		"invalidOldPassword": "Mot de passe invalide. Veuillez confirmer votre ancien mot de passe.",
+		"didNotUpdate": "L'utilisateur n'a pas été mis à jour.",
+		"viewUsers": "Vous n'êtes pas autorisé à voir tous les utilisateurs.",
+		"updateRoles": "Vous n'êtes pas autorisé à mettre à jour les rôles des utilisateurs.",
+		"notLoggedIn": "Vous n'êtes pas connecté.",
+		"invalidToken": "Impossible de réinitialiser le mot de passe en raison d'un jeton invalide.",
+		"noSuchToken": "Il n'y avait aucun jeton correspondant.",
+		"invalidCredentials": "Adresse email ou mot de passe invalide.",
+		"alreadySignedUp": "Un utilisateur avec cet email existe déjà.",
+		"banned": "Vous êtes banni et ne pouvez pas utiliser notre service.",
+		"characters": {
+			"create": "Seuls les administrateurs peuvent créer des personnages.",
+			"update": "Seuls les administrateurs peuvent mettre à jour les personnages."
+		},
+		"filters": {
+			"create": "Seuls les administrateurs peuvent créer des filtres.",
+			"update": "Seuls les administrateurs peuvent mettre à jour les filtres."
+		},
+		"games": {
+			"create": "Seuls les administrateurs peuvent créer des jeux.",
+			"update": "Seuls les administrateurs peuvent mettre à jour les jeux.",
+			"link": {
+				"characters": "Seuls les administrateurs peuvent lier des personnages aux jeux.",
+				"filters": "Seuls les administrateurs peuvent lier des filtres aux jeux."
+			}
+		}
+	}
+}

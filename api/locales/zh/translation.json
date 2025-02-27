@@ -30,6 +30,23 @@
 		"invalidToken": "由於令牌無效，無法重置密碼。",
 		"noSuchToken": "沒有這樣的令牌。",
 		"invalidCredentials": "電子郵件地址或密碼無效。",
-		"alreadySignedUp": "使用此電子郵件的用戶已存在。"
+		"alreadySignedUp": "使用此電子郵件的用戶已存在。",
+		"banned": "您已被禁止使用我們的服務。",
+		"characters": {
+			"create": "只有管理員可以創建角色。",
+			"update": "只有管理員可以更新角色。"
+		},
+		"filters": {
+			"create": "只有管理員可以創建篩選器。",
+			"update": "只有管理員可以更新篩選器。"
+		},
+		"games": {
+			"create": "只有管理員可以創建遊戲。",
+			"update": "只有管理員可以更新遊戲。",
+			"link": {
+				"characters": "只有管理員可以將角色連結到遊戲。",
+				"filters": "只有管理員可以將篩選器連結到遊戲。"
+			}
+		}
 	}
 }

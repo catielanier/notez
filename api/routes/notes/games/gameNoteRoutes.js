@@ -6,17 +6,18 @@ import * as userServices from "../../users/userServices.js";
 import * as gameNoteServices from "./gameNoteServices.js";
 
 router.route("/").post(async (req, res) => {
+	const {t} = req;
 	const {note} = req.body;
 	const token = req.headers.Authorization.replace("Bearer ", "");
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		const {id} = await tokenService.decodeToken(token);
 		const user = await userServices.getUserById(id);
 		if (user.role === "Banned") {
-			res.status(503).send("You are banned and cannot use our service.");
+			res.status(503).send(t('errors.banned'));
 		}
 		const newNote = await gameNoteServices.createNote(note);
 		if (newNote) {
@@ -36,12 +37,13 @@ router.route("/").post(async (req, res) => {
 
 router.route("/").delete(async (req, res) => {
 	const {noteId} = req.body;
+	const {t} = req;
 	const token = req.headers.Authorization.replace("Bearer ", "");
 	try {
 		await Promise.all(async () => {
 			const loggedIn = await tokenService.verifyToken(token);
 			if (!loggedIn) {
-				res.status(503).send("You are not logged in.");
+				res.status(503).send(t('errors.notLoggedIn'));
 			}
 			const {userId} = await tokenService.decodeToken(token);
 			const user = await userServices.getUserById(userId);
@@ -61,11 +63,12 @@ router.route("/").delete(async (req, res) => {
 
 router.route("/:id").put(async (req, res) => {
 	const {id: noteId} = req.params;
+	const {t} = req;
 	const {token, note, filter} = req.body;
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		const results = await gameNoteServices.updateNote(noteId, note, filter);
 		if (results) {

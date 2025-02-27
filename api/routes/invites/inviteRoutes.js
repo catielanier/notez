@@ -14,7 +14,7 @@ router.route('/').post(async (req, res) => {
 	try {
 		const user = await userService.findUser(email);
 		if (user) {
-			res.status(401).send('A user with this email already exists.');
+			res.status(401).send(t('errors.alreadySignedUp'));
 		} else {
 			const newInvite = {
 				email,

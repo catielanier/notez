@@ -6,18 +6,19 @@ import * as filterServices from "./filterServices.js";
 const router = express.Router();
 
 router.route("/new").post(async (req, res) => {
+	const {t} = req;
 	// Grab the token, user id, and game from frontend.
 	const {token, user: id, filter} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		// Query the user and check for admin privileges.
 		const user = await userServices.getUserById(id);
 		if (user.role !== "Admin") {
-			res.status(503).send("Only admins can create games.");
+			res.status(503).send(t('errors.filters.create'));
 		}
 		// Create new filter.
 		const newFilter = await filterServices.createFilter(filter);
@@ -80,15 +81,16 @@ router.route("/").put(async (req, res) => {
 		name_hk,
 		filter,
 	} = req.body.data;
+	const {t} = req;
 
 	const loggedIn = await tokenService.verifyToken(token);
 	if (!loggedIn) {
-		res.status(503).send("You are not logged in.");
+		res.status(503).send(t('errors.notLoggedIn'));
 	}
 	// Query the user and check for admin privileges.
 	const user = await userServices.getUserById(id);
 	if (user.role !== "Admin") {
-		res.status(503).send("Only admins can create characters.");
+		res.status(503).send(t('errors.filters.update'));
 	}
 
 	const result = await filterServices.updateFilter(

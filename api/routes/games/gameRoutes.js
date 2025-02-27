@@ -8,16 +8,17 @@ const router = express.Router();
 router.route("/new").post(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
 	const {token, user: id, game} = req.body;
+	const {t} = req;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		// Query the user and check for admin privileges.
 		const user = await userServices.getUserById(id);
 		if (user.role !== "Admin") {
-			res.status(503).send("Only admins can create games.");
+			res.status(503).send(t('errors.games.create'));
 		}
 		// Create new game.
 		const newGame = await gameServices.createGame(game);
@@ -51,16 +52,17 @@ router.route("/:id").put(async (req, res) => {
 router.route("/:id/character").put(async (req, res) => {
 	// Grab the token, user id, and game from frontend.
 	const {token, user: id, characters, game} = req.body;
+	const {t} = req;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		// Query the user and check for admin privileges.
 		const user = await userServices.getUserById(id);
 		if (user.role !== "Admin") {
-			res.status(503).send("Only admins can link characters to games.");
+			res.status(503).send(t('errors.games.link.characters'));
 		}
 		// Take the game and characters to update the character array on the document
 		const update = await gameServices.linkCharacters(game, characters);
@@ -75,18 +77,19 @@ router.route("/:id/character").put(async (req, res) => {
 });
 
 router.route("/:id/filter").put(async (req, res) => {
+	const {t} = req;
 	// Grab the token, user id, and game from frontend.
 	const {token, user: id, filters, game} = req.body;
 	try {
 		// Check if the login is valid
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 		}
 		// Query the user and check for admin privileges.
 		const user = await userServices.getUserById(id);
 		if (user.role !== "Admin") {
-			res.status(503).send("Only admins can link filters to games.");
+			res.status(503).send(t('errors.games.link.filters'));
 		}
 		// Take the game and characters to update the character array on the document
 		const update = await gameServices.linkFilters(game, filters);
@@ -102,15 +105,16 @@ router.route("/:id/filter").put(async (req, res) => {
 
 router.route("/").put(async (req, res) => {
 	const {user: id, token, game, name} = req.body.data;
+	const {t} = req;
 
 	const loggedIn = await tokenService.verifyToken(token);
 	if (!loggedIn) {
-		res.status(503).send("You are not logged in.");
+		res.status(503).send(t('errors.notLoggedIn'));
 	}
 	// Query the user and check for admin privileges.
 	const user = await userServices.getUserById(id);
 	if (user.role !== "Admin") {
-		res.status(503).send("Only admins can create characters.");
+		res.status(503).send(t('errors.games.update'));
 	}
 
 	const result = await gameServices.updateGame(game, name);

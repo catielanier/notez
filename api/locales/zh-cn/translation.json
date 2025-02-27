@@ -30,6 +30,23 @@
 		"invalidToken": "由于令牌无效，无法重置密码。",
 		"noSuchToken": "没有这样的令牌。",
 		"invalidCredentials": "电子邮件地址或密码无效。",
-		"alreadySignedUp": "使用此电子邮件的用户已存在。"
+		"alreadySignedUp": "使用此电子邮件的用户已存在。",
+		"banned": "您已被禁止，无法使用我们的服务。",
+		"characters": {
+			"create": "只有管理员可以创建角色。",
+			"update": "只有管理员可以更新角色。"
+		},
+		"filters": {
+			"create": "只有管理员可以创建过滤器。",
+			"update": "只有管理员可以更新过滤器。"
+		},
+		"games": {
+			"create": "只有管理员可以创建游戏。",
+			"update": "只有管理员可以更新游戏。",
+			"link": {
+				"characters": "只有管理员可以将角色链接到游戏。",
+				"filters": "只有管理员可以将过滤器链接到游戏。"
+			}
+		}
 	}
 }

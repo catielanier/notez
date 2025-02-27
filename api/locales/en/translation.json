@@ -30,6 +30,23 @@
     "invalidToken": "Unable to reset password due to invalid token.",
     "noSuchToken": "There was no such token.",
     "invalidCredentials": "Invalid email address or password.",
-		"alreadySignedUp": "A user with this email already exists."
+		"alreadySignedUp": "A user with this email already exists.",
+		"banned": "You are banned and cannot use our service.",
+		"characters": {
+			"create": "Only admins can create characters.",
+			"update": "Only admins can update characters."
+		},
+		"filters": {
+			"create": "Only admins can create filters.",
+			"update": "Only admins can update filters."
+		},
+		"games": {
+			"create": "Only admins can create games.",
+			"update": "Only admins can update games",
+			"link": {
+				"characters": "Only admins can link characters to games.",
+				"filters": "Only admins can link filters to games."
+			}
+		}
   }
 }

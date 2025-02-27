@@ -6,16 +6,17 @@ import * as playerNoteServices from "./playerNoteServices.js";
 const router = express.Router();
 
 router.route("/").post(async (req, res) => {
+	const {t} = req;
 	const {note, token, user: id} = req.body;
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 			return;
 		}
 		const user = await userServices.getUserById(id);
 		if (user.role === "Banned") {
-			res.status(503).send("You are banned and cannot use our service.");
+			res.status(503).send(t('errors.banned'));
 			return;
 		}
 		const newNote = await playerNoteServices.createNote(note);
@@ -36,12 +37,13 @@ router.route("/").post(async (req, res) => {
 
 router.route("/").delete(async (req, res) => {
 	const {user: userId, token, noteId} = req.body;
+	const {t} = req;
 	try {
 		await Promise.all([
 			(async () => {
 				const loggedIn = await tokenService.verifyToken(token);
 				if (!loggedIn) {
-					res.status(503).send("You are not logged in.");
+					res.status(503).send(t('errors.notLoggedIn'));
 					return;
 				}
 				await userServices.getUserById(userId);
@@ -59,11 +61,12 @@ router.route("/").delete(async (req, res) => {
 
 router.route("/:id").put(async (req, res) => {
 	const {id: noteId} = req.params;
+	const {t} = req;
 	const {token, note, filter} = req.body;
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(503).send("You are not logged in.");
+			res.status(503).send(t('errors.notLoggedIn'));
 			return;
 		}
 		const results = await playerNoteServices.updateNote(noteId, note, filter);
