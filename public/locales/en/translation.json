@@ -1475,7 +1475,7 @@
 			"fexl": "Fighting EX Layer",
 			"fuc": "Fate/Unlimited Codes",
 			"garou": "Garou: Mark of the Wolves",
-			"vf5": "Virtua Fighter 5: Ultimate Showdown",
+			"vf5": "Virtua Fighter 5 R.E.V.O.",
 			"smss": "Bishoujo Senshi Sailor Moon SuperS",
 			"ki2013": "Killer Instinct (2013)",
 			"mvci": "Marvel Vs. Capcom Infinite",
@@ -1502,7 +1502,8 @@
 			"nasb": "Nickelodeon All-Stars Brawl",
 			"mk1": "Mortal Kombat 1",
 			"t8": "Tekken 8",
-			"sf6": "Street Fighter 6"
+			"sf6": "Street Fighter 6",
+			"cotw": "Fatal Fury: City of the Wolves"
 		}
 	},
 	"filter": {
@@ -1512,7 +1513,8 @@
 				"ja": "Japanese filter type",
 				"ko": "Korean filter type",
 				"cn": "Simplified Chinese filter type",
-				"tw": "Traditional Chinese filter type"
+				"tw": "Traditional Chinese filter type",
+				"fr": "French filter type"
 			},
 			"player": "Player Filter",
 			"created": "Filter created successfully."
