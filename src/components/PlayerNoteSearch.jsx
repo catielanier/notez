@@ -3,75 +3,64 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Select from "react-select";
 import Creatable from "react-select/creatable";
-import { GameContext } from "../contexts/GameContext";
-import { LanguageContext } from "../contexts/LanguageContext";
 import { NoteContext } from "../contexts/NoteContext";
-import dbLocale from "../services/dbLocale";
 
 const useStyles = makeStyles((theme) => ({
-  spaced: {
-    marginBottom: theme.spacing(2),
-  },
+  spaced: { marginBottom: theme.spacing(2) },
 }));
 
 export default function PlayerNoteSearch() {
-  const { t } = useTranslation();
   const classes = useStyles();
-  const { language } = useContext(LanguageContext);
+  const { t } = useTranslation();
+
   const {
     setPlayerNotesGame: setGame,
     setPlayer,
     setPlayerNotesFilter: setFilter,
     players,
-    playerFilters: filters,
     playerNotesFilter: filter,
   } = useContext(NoteContext);
-  const { games } = useContext(GameContext);
+
+  const games = t("games", { returnObjects: true });
+
+  const filters = t("notes.common.filters.players", {
+    returnObjects: true,
+  });
+
   return (
     <>
       <Typography variant="h6">{t("notes.opponent")}</Typography>
       <Creatable
-        options={players.map((player) => {
-          return { label: player, value: player };
-        })}
-        onChange={(e) => {
-          setPlayer(e.value);
-        }}
+        options={players.map((p) => ({ label: p, value: p }))}
+        onChange={(e) => setPlayer(e?.value ?? "")}
         className={classes.spaced}
       />
+
       <Typography variant="h6">{t("notes.common.game")}</Typography>
       <Select
-        options={games.map((game) => {
-          return {
-            label: dbLocale(language, game),
-            value: game._id,
-          };
-        })}
-        onChange={(e) => {
-          setGame(e.value);
-        }}
+        options={games.map((g) => ({
+          label: g.name, // already localised
+          value: g.id, // stable identifier from the JSON
+        }))}
+        onChange={(e) => setGame(e?.value ?? "")}
         className={classes.spaced}
       />
+
       <Typography variant="h6">{t("notes.filter.choose")}</Typography>
       <Select
-        options={filters.map((filter) => {
-          return {
-            label: dbLocale(language, filter),
-            value: filter._id,
-          };
-        })}
-        onChange={(e) => {
-          setFilter(e.value);
-        }}
+        options={filters.map((f) => ({
+          label: typeof f === "string" ? f : f.label ?? f.name, // flexible
+          value: typeof f === "string" ? f : f.value ?? f.id ?? f, // flexible
+        }))}
+        onChange={(e) => setFilter(e?.value ?? "")}
         className={classes.spaced}
       />
+
       {filter !== "" && (
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => {
-            setFilter("");
-          }}
+          onClick={() => setFilter("")}
         >
           {t("notes.filter.clear")}
         </Button>
