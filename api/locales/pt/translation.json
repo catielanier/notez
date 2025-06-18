@@ -1,0 +1,52 @@
+{
+	"emails": {
+		"closing": "Atenciosamente,",
+		"sender": "NoteZ",
+		"signup": {
+			"body": "Estamos felizes em tê-lo conosco. Clique <a href=\"{{ url }}\">aqui</a> para começar.",
+			"greeting": "Bem-vindo ao NoteZ, {{ username }}!",
+			"subject": "Bem-vindo ao NoteZ!"
+		},
+		"forgotPassword": {
+			"body": "Parece que você esqueceu sua senha. Clique <a href=\"{{ url }}\">aqui</a> para redefini-la.",
+			"greeting": "Olá {{ username }}:",
+			"subject": "Link para redefinição de senha"
+		},
+		"invite": {
+			"greeting": "Olá!",
+			"body1": "Você foi convidado para o nosso serviço! Junte-se a todos para tomar notas que ajudarão a melhorar o seu jogo!",
+			"body2": "Clique <a href=\"{{ url }}\">aqui</a> para começar.",
+			"subject": "Você foi convidado para o NoteZ"
+		},
+		"team": "Equipe NoteZ"
+	},
+	"errors": {
+		"notActivated": "Você ainda não ativou sua conta. Verifique seu e-mail para fazê-lo.",
+		"invalidOldPassword": "Senha inválida. Confirme sua senha antiga.",
+		"didNotUpdate": "Usuário não foi atualizado.",
+		"viewUsers": "Você não tem autorização para visualizar todos os usuários.",
+		"updateRoles": "Você não tem autorização para atualizar funções de usuário.",
+		"notLoggedIn": "Você não está conectado.",
+		"invalidToken": "Não foi possível redefinir a senha devido a token inválido.",
+		"noSuchToken": "Esse token não existe.",
+		"invalidCredentials": "Endereço de e-mail ou senha inválidos.",
+		"alreadySignedUp": "Já existe um usuário com este e-mail.",
+		"banned": "Você está banido e não pode usar nosso serviço.",
+		"characters": {
+			"create": "Somente administradores podem criar personagens.",
+			"update": "Somente administradores podem atualizar personagens."
+		},
+		"filters": {
+			"create": "Somente administradores podem criar filtros.",
+			"update": "Somente administradores podem atualizar filtros."
+		},
+		"games": {
+			"create": "Somente administradores podem criar jogos.",
+			"update": "Somente administradores podem atualizar jogos",
+			"link": {
+				"characters": "Somente administradores podem vincular personagens aos jogos.",
+				"filters": "Somente administradores podem vincular filtros aos jogos."
+			}
+		}
+	}
+}

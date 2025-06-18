@@ -1,0 +1,52 @@
+{
+	"emails": {
+		"closing": "Saludos,",
+		"sender": "NoteZ",
+		"signup": {
+			"body": "Nos alegra tenerte. Haz clic <a href=\"{{ url }}\">aquí</a> para comenzar.",
+			"greeting": "¡Bienvenido/a a NoteZ, {{ username }}!",
+			"subject": "¡Bienvenido/a a NoteZ!"
+		},
+		"forgotPassword": {
+			"body": "Parece que has olvidado tu contraseña. Haz clic <a href=\"{{ url }}\">aquí</a> para restablecerla.",
+			"greeting": "Hola {{ username }}:",
+			"subject": "Enlace para restablecer la contraseña"
+		},
+		"invite": {
+			"greeting": "¡Hola!",
+			"body1": "¡Te han invitado a nuestro servicio! Únete a todos para tomar notas que te ayudarán a mejorar tu juego.",
+			"body2": "Haz clic <a href=\"{{ url }}\">aquí</a> para empezar.",
+			"subject": "Has sido invitado a NoteZ"
+		},
+		"team": "El equipo de NoteZ"
+	},
+	"errors": {
+		"notActivated": "Aún no has activado tu cuenta. Por favor, revisa tu correo electrónico para hacerlo.",
+		"invalidOldPassword": "Contraseña inválida. Confirma tu contraseña anterior.",
+		"didNotUpdate": "El usuario no se actualizó.",
+		"viewUsers": "No estás autorizado para ver todos los usuarios.",
+		"updateRoles": "No estás autorizado para actualizar los roles de usuario.",
+		"notLoggedIn": "No has iniciado sesión.",
+		"invalidToken": "No se puede restablecer la contraseña debido a un token inválido.",
+		"noSuchToken": "No existe tal token.",
+		"invalidCredentials": "Dirección de correo o contraseña inválida.",
+		"alreadySignedUp": "Ya existe un usuario con este correo electrónico.",
+		"banned": "Estás bloqueado y no puedes usar nuestro servicio.",
+		"characters": {
+			"create": "Solo los administradores pueden crear personajes.",
+			"update": "Solo los administradores pueden actualizar personajes."
+		},
+		"filters": {
+			"create": "Solo los administradores pueden crear filtros.",
+			"update": "Solo los administradores pueden actualizar filtros."
+		},
+		"games": {
+			"create": "Solo los administradores pueden crear juegos.",
+			"update": "Solo los administradores pueden actualizar juegos",
+			"link": {
+				"characters": "Solo los administradores pueden vincular personajes a los juegos.",
+				"filters": "Solo los administradores pueden vincular filtros a los juegos."
+			}
+		}
+	}
+}
