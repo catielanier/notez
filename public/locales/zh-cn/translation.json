@@ -82,7 +82,11 @@
 			"edit": "编辑笔记",
 			"cancel": "取消",
 			"game": "选择游戏：",
-			"universal": "此笔记应在所有对手中显示。"
+			"universal": "此笔记应在所有对手中显示。",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "新笔记筛选：",

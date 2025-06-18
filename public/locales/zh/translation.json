@@ -82,7 +82,11 @@
 			"edit": "編輯筆記",
 			"cancel": "取消",
 			"game": "選擇遊戲：",
-			"universal": "此筆記將顯示於所有對手之間。"
+			"universal": "此筆記將顯示於所有對手之間。",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "新筆記篩選器：",

@@ -82,7 +82,11 @@
 			"edit": "Modifier la note",
 			"cancel": "Annuler",
 			"game": "Choisissez un jeu :",
-			"universal": "Cette note doit être affichée pour tous les adversaires."
+			"universal": "Cette note doit être affichée pour tous les adversaires.",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "Nouveau filtre de note :",

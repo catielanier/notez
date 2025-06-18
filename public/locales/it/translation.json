@@ -80,7 +80,11 @@
 			"edit": "Modifica nota",
 			"cancel": "Annulla",
 			"game": "Scegli un gioco:",
-			"universal": "Questa nota sarà mostrata contro tutti gli avversari."
+			"universal": "Questa nota sarà mostrata contro tutti gli avversari.",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "Nuovo filtro nota:",

@@ -82,7 +82,11 @@
 			"edit": "노트 편집",
 			"cancel": "취소",
 			"game": "게임 선택:",
-			"universal": "이 노트는 모든 상대에게 표시됩니다."
+			"universal": "이 노트는 모든 상대에게 표시됩니다.",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "새 노트 필터:",

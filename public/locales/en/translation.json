@@ -82,7 +82,11 @@
 			"edit": "Edit Note",
 			"cancel": "Cancel",
 			"game": "Choose a game:",
-			"universal": "This note should be displayed across all opponents."
+			"universal": "This note should be displayed across all opponents.",
+			"filters": {
+				"games": [],
+				"players": []
+			}
 		},
 		"new": {
 			"filter": "New note filter:",
