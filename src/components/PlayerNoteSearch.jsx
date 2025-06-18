@@ -39,8 +39,8 @@ export default function PlayerNoteSearch() {
       <Typography variant="h6">{t("notes.common.game")}</Typography>
       <Select
         options={games.map((g) => ({
-          label: g.name, // already localised
-          value: g.id, // stable identifier from the JSON
+          label: g.name,
+          value: g.id,
         }))}
         onChange={(e) => setGame(e?.value ?? "")}
         className={classes.spaced}
@@ -49,8 +49,8 @@ export default function PlayerNoteSearch() {
       <Typography variant="h6">{t("notes.filter.choose")}</Typography>
       <Select
         options={filters.map((f) => ({
-          label: typeof f === "string" ? f : f.label ?? f.name, // flexible
-          value: typeof f === "string" ? f : f.value ?? f.id ?? f, // flexible
+          label: f.name,
+          value: f.id,
         }))}
         onChange={(e) => setFilter(e?.value ?? "")}
         className={classes.spaced}
