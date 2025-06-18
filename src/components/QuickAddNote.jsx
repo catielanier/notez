@@ -1,105 +1,107 @@
-import React, { useState, useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { useTranslation } from "react-i18next";
 import {
-	Typography,
-	TextField,
-	Checkbox,
-	FormControlLabel,
-	Button,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Select from "react-select";
-import dbLocale from "../services/dbLocale";
-import { LanguageContext } from "../contexts/LanguageContext";
+
 import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
-	spaced: {
-		marginBottom: theme.spacing(2),
-	},
+  spaced: {
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function QuickAddNote(props) {
-	const { t } = useTranslation();
-	const classes = useStyles();
-	const { language } = useContext(LanguageContext);
-	const { postNote, loading, error } = useContext(NoteContext);
-	const [note, setNote] = useState("");
-	const [filter, setFilter] = useState("");
-	const [universal, setUniversal] = useState(false);
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const { postNote, error } = useContext(NoteContext);
 
-	const toggleUniversal = () => {
-		setUniversal(!universal);
-	};
+  /* local state */
+  const [note, setNote] = useState("");
+  const [filter, setFilter] = useState < string > "";
+  const [universal, setUniversal] = useState(false);
 
-	return (
-		<div className="quick-add">
-			<Typography variant="h5" className={classes.spaced}>
-				{t("notes.common.quickAdd")}
-			</Typography>
-			{error && (
-				<p>
-					<span>Error:</span> {error}
-				</p>
-			)}
-			{props.type === "Game Note" && (
-				<FormControlLabel
-					control={
-						<Checkbox
-							checked={universal}
-							onChange={toggleUniversal}
-							value={universal}
-							color="primary"
-						/>
-					}
-					label={t("notes.common.universal")}
-					className={classes.spaced}
-				/>
-			)}
-			<Typography variant="h6">{t("notes.new.filter")}</Typography>
-			<Select
-				options={props.filters.map((filter) => {
-					return {
-						label: dbLocale(language, filter),
-						value: filter._id,
-					};
-				})}
-				onChange={(e) => {
-					setFilter(e.target.value);
-				}}
-				className={classes.spaced}
-			/>
-			<Typography variant="h6">{t("notes.new.note")}</Typography>
-			<TextField
-				multiline
-				value={note}
-				onChange={(e) => {
-					setNote(e.target.value);
-				}}
-				fullWidth
-				className={classes.spaced}
-			/>
-			<Button
-				onClick={() => {
-					if (props.type === "Game Note") {
-						postNote(
-							props.type,
-							props.game,
-							props.opponentCharacter,
-							filter,
-							note,
-							props.myCharacter,
-							universal
-						);
-					} else if (props.type === "Player Note") {
-						postNote(props.type, props.game, props.player, filter, note);
-					}
-				}}
-				variant="contained"
-				color="primary"
-			>
-				{t("notes.new.submit")}
-			</Button>
-		</div>
-	);
+  return (
+    <div className="quick-add">
+      <Typography variant="h5" className={classes.spaced}>
+        {t("notes.common.quickAdd")}
+      </Typography>
+
+      {error && (
+        <Typography color="error" variant="body2">
+          {`Error: ${error}`}
+        </Typography>
+      )}
+
+      {/* Game-note–only “universal” checkbox */}
+      {props.type === "Game Note" && (
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={universal}
+              onChange={() => setUniversal((u) => !u)}
+              color="primary"
+            />
+          }
+          label={t("notes.common.universal")}
+          className={classes.spaced}
+        />
+      )}
+
+      <Typography variant="h6">{t("notes.new.filter")}</Typography>
+      <Select
+        options={props.filters.map((f) => ({
+          label: f.name,
+          value: f.id,
+        }))}
+        onChange={(opt) => setFilter(opt ? opt.value : "")}
+        className={classes.spaced}
+      />
+
+      <Typography variant="h6">{t("notes.new.note")}</Typography>
+      <TextField
+        multiline
+        fullWidth
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+        className={classes.spaced}
+      />
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          if (!note || !filter) return;
+
+          if (props.type === "Game Note") {
+            postNote(
+              "Game Note",
+              props.game,
+              props.opponentCharacter,
+              filter,
+              note,
+              props.myCharacter,
+              universal
+            );
+          } else {
+            postNote("Player Note", props.game, props.player, filter, note);
+          }
+
+          // optional: clear local state after successful post
+          setNote("");
+          setFilter("");
+          if (props.type === "Game Note") setUniversal(false);
+        }}
+      >
+        {t("notes.new.submit")}
+      </Button>
+    </div>
+  );
 }
