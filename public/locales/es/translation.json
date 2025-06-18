@@ -1,0 +1,1823 @@
+{
+	"app": { "name": "NoteZ" },
+	"home": {
+		"title": "Bienvenido a NoteZ",
+		"subtitle": "¡Tu aplicación de notas para juegos de lucha por excelencia!",
+		"description": {
+			"partOne": "¡Eleva tu juego como los profesionales! Con notas de enfrentamiento completas, siempre mantendrás tu conocimiento al día. Ninguna otra app está tan adaptada a las notas de juegos de lucha como NoteZ.",
+			"partTwo": "Escribe notas sobre enfrentamientos de personajes y jugadores desde tu ordenador, tableta o teléfono móvil y accede a ellas dondequiera que estés. No te preocupes por restaurar tus notas en un nuevo teléfono: ¡NoteZ lo hará por ti! Durante la partida, filtra tus notas con criterios más específicos que solo el oponente para recordar siempre qué hacer mientras juegas.",
+			"partThree": "¡Lleva tu juego al siguiente nivel con NoteZ hoy mismo!"
+		},
+		"existing": "Usuarios existentes",
+		"new": "Nuevos usuarios"
+	},
+	"header": {
+		"login": "Iniciar sesión",
+		"signup": "Registrarse",
+		"notes": {
+			"game": "Notas de juego",
+			"player": "Notas de jugador"
+		},
+		"settings": "Configuración",
+		"game": {
+			"add": "Añadir juego",
+			"edit": "Editar juego"
+		},
+		"character": {
+			"add": "Añadir personaje",
+			"edit": "Editar personaje",
+			"link": "Vincular personajes"
+		},
+		"filter": {
+			"add": "Añadir filtro",
+			"edit": "Editar filtro",
+			"link": "Vincular filtro"
+		},
+		"user": {
+			"settings": "Configuración de usuario",
+			"invite": "Invitar usuario"
+		},
+		"profile": "Perfil",
+		"logout": "Cerrar sesión"
+	},
+	"account": {
+		"email": "Correo electrónico",
+		"oldPassword": "Contraseña anterior",
+		"newPassword": "Nueva contraseña",
+		"password": "Contraseña",
+		"verify": "Verificar contraseña",
+		"verifyNew": "Verificar nueva contraseña",
+		"username": "Nombre de usuario",
+		"realname": "Nombre real",
+		"country": "País",
+		"forgot": "¿Olvidaste tu contraseña?",
+		"noMatch": "Las contraseñas no coinciden.",
+		"requestReset": "Solicitar restablecimiento",
+		"checkEmail": "Revisa tu correo electrónico para el enlace de restablecimiento.",
+		"reset": "Restablecer contraseña",
+		"editProfile": "Editar perfil",
+		"success": {
+			"signup": "¡Registro exitoso! Revisa tu correo electrónico.",
+			"invite": "Invitación enviada",
+			"profile": "Perfil actualizado correctamente."
+		},
+		"invite": "Invitar al servicio Premium"
+	},
+	"common": {
+		"goBack": "Volver",
+		"error": "Error:",
+		"clear": "Limpiar formulario"
+	},
+	"notes": {
+		"common": {
+			"quickAdd": "Añadir rápido:",
+			"clickSearch": "Haz clic en el botón de búsqueda para encontrar tus notas.",
+			"notes": "Notas:",
+			"notice": "Aviso",
+			"noNotes": "No tienes notas para este enfrentamiento. ¡Añade algunas abajo!",
+			"editing": "Editando nota",
+			"filter": "Filtro",
+			"edit": "Editar nota",
+			"cancel": "Cancelar",
+			"game": "Elige un juego:",
+			"universal": "Esta nota se mostrará para todos los oponentes."
+		},
+		"new": {
+			"filter": "Nuevo filtro de nota:",
+			"new": "Nueva nota:",
+			"selectFilter": "Por favor, especifica un filtro.",
+			"submit": "Crear nota"
+		},
+		"character": {
+			"you": "Elige tu personaje:",
+			"opponent": "Elige el personaje del oponente:"
+		},
+		"opponent": "Elige tu oponente:",
+		"filter": {
+			"choose": "Elige tu filtro (opcional):",
+			"clear": "Borrar filtro"
+		}
+	},
+	"games": [
+		{
+			"name": "Blazblue Central Fiction",
+			"id": "bbcf",
+			"characters": [
+				{
+					"name": "Amane",
+					"id": "amane"
+				},
+				{
+					"name": "Arakune",
+					"id": "arakune"
+				},
+				{
+					"name": "Azrael",
+					"id": "azrael"
+				},
+				{
+					"name": "Bang",
+					"id": "bang"
+				},
+				{
+					"name": "Bullet",
+					"id": "bullet"
+				},
+				{
+					"name": "Carl",
+					"id": "carl"
+				},
+				{
+					"name": "Celica",
+					"id": "celica"
+				},
+				{
+					"name": "Es",
+					"id": "es"
+				},
+				{
+					"name": "Hakumen",
+					"id": "hakumen"
+				},
+				{
+					"name": "Hazama",
+					"id": "hazama"
+				},
+				{
+					"name": "Hibiki",
+					"id": "hibiki"
+				},
+				{
+					"name": "Izanami",
+					"id": "Izanami"
+				},
+				{
+					"name": "Izayoi",
+					"id": "izayoi"
+				},
+				{
+					"name": "Jin",
+					"id": "jin"
+				},
+				{
+					"name": "Jubei",
+					"id": "jubei"
+				},
+				{
+					"name": "Kagura",
+					"id": "kagura"
+				},
+				{
+					"name": "Kokonoe",
+					"id": "kokonoe"
+				},
+				{
+					"name": "Lambda",
+					"id": "lambda"
+				},
+				{
+					"name": "Litchi",
+					"id": "litchi"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Mu",
+					"id": "mu"
+				},
+				{
+					"name": "Naoto",
+					"id": "naoto"
+				},
+				{
+					"name": "Nine",
+					"id": "nine"
+				},
+				{
+					"name": "Noel",
+					"id": "noel"
+				},
+				{
+					"name": "Nu",
+					"id": "nu"
+				},
+				{
+					"name": "Platinum",
+					"id": "platinum"
+				},
+				{
+					"name": "Rachel",
+					"id": "rachel"
+				},
+				{
+					"name": "Ragna",
+					"id": "ragna"
+				},
+				{
+					"name": "Relius",
+					"id": "relius"
+				},
+				{
+					"name": "Susano'o",
+					"id": "susanoo"
+				},
+				{
+					"name": "Tager",
+					"id": "tager"
+				},
+				{
+					"name": "Taokaka",
+					"id": "taokaka"
+				},
+				{
+					"name": "Terumi",
+					"id": "terumi"
+				},
+				{
+					"name": "Tsubaki",
+					"id": "tsubaki"
+				},
+				{
+					"name": "Valkenhayn",
+					"id": "valkenhayn"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Fatal Fury: City of the Wolves",
+			"id": "cotw",
+			"characters": [
+				{
+					"name": "Andy",
+					"id": "andy"
+				},
+				{
+					"name": "B. Jenet",
+					"id": "jenet"
+				},
+				{
+					"name": "Billy",
+					"id": "billy"
+				},
+				{
+					"name": "Dong Hawn",
+					"id": "donghwan"
+				},
+				{
+					"name": "Gato",
+					"id": "gato"
+				},
+				{
+					"name": "Hokutomaru",
+					"id": "hokutomaru"
+				},
+				{
+					"name": "Hotaru",
+					"id": "hotaru"
+				},
+				{
+					"name": "Kain",
+					"id": "kain"
+				},
+				{
+					"name": "Kevin",
+					"id": "kevin"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Marco",
+					"id": "marco"
+				},
+				{
+					"name": "Preecha",
+					"id": "preecha"
+				},
+				{
+					"name": "Rock",
+					"id": "rock"
+				},
+				{
+					"name": "Ronaldo",
+					"id": "ronaldo"
+				},
+				{
+					"name": "Salvatore",
+					"id": "salvatore"
+				},
+				{
+					"name": "Terry",
+					"id": "terry"
+				},
+				{
+					"name": "Tizoc",
+					"id": "tizoc"
+				},
+				{
+					"name": "Vox",
+					"id": "vox"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Granblue Fantasy Versus: Rising",
+			"id": "gbvs",
+			"characters": [
+				{
+					"name": "2B",
+					"id": "2b"
+				},
+				{
+					"name": "Anila",
+					"id": "anila"
+				},
+				{
+					"name": "Anre",
+					"id": "anre"
+				},
+				{
+					"name": "Avatar Belial",
+					"id": "abelial"
+				},
+				{
+					"name": "Beatrix",
+					"id": "beatrix"
+				},
+				{
+					"name": "Beelzebub",
+					"id": "beelzebub"
+				},
+				{
+					"name": "Belial",
+					"id": "belial"
+				},
+				{
+					"name": "Cagliostro",
+					"id": "cagliostro"
+				},
+				{
+					"name": "Charlotta",
+					"id": "charlotta"
+				},
+				{
+					"name": "Djeeta",
+					"id": "djeeta"
+				},
+				{
+					"name": "Eustace",
+					"id": "eustace"
+				},
+				{
+					"name": "Ferry",
+					"id": "ferry"
+				},
+				{
+					"name": "Galleon",
+					"id": "galleon"
+				},
+				{
+					"name": "Gran",
+					"id": "gran"
+				},
+				{
+					"name": "Grimnir",
+					"id": "grimnir"
+				},
+				{
+					"name": "Ilsa",
+					"id": "ilsa"
+				},
+				{
+					"name": "Katalina",
+					"id": "Katalina"
+				},
+				{
+					"name": "Ladiva",
+					"id": "ladiva"
+				},
+				{
+					"name": "Lancelot",
+					"id": "lancelot"
+				},
+				{
+					"name": "Lowain",
+					"id": "lowain"
+				},
+				{
+					"name": "Lucilius",
+					"id": "lucilius"
+				},
+				{
+					"name": "Lunalu",
+					"id": "lunalu"
+				},
+				{
+					"name": "Meg",
+					"id": "meg"
+				},
+				{
+					"name": "Metera",
+					"id": "metera"
+				},
+				{
+					"name": "Narmaya",
+					"id": "narmaya"
+				},
+				{
+					"name": "Nier",
+					"id": "nier"
+				},
+				{
+					"name": "Percival",
+					"id": "percival"
+				},
+				{
+					"name": "Sandalphon",
+					"id": "sandalphon"
+				},
+				{
+					"name": "Seox",
+					"id": "seox"
+				},
+				{
+					"name": "Siegfried",
+					"id": "siegfried"
+				},
+				{
+					"name": "Soriz",
+					"id": "soriz"
+				},
+				{
+					"name": "Vane",
+					"id": "vane"
+				},
+				{
+					"name": "Vaseraga",
+					"id": "vaseraga"
+				},
+				{
+					"name": "Versusia",
+					"id": "versusia"
+				},
+				{
+					"name": "Vikala",
+					"id": "vikala"
+				},
+				{
+					"name": "Vira",
+					"id": "vira"
+				},
+				{
+					"name": "Yuel",
+					"id": "yuel"
+				},
+				{
+					"name": "Wilnas",
+					"id": "Wilnas"
+				},
+				{
+					"name": "Zeta",
+					"id": "zeta"
+				},
+				{
+					"name": "Zooey",
+					"id": "zooey"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Guilty Gear Strive",
+			"id": "ggst",
+			"characters": [
+				{
+					"name": "A.B.A.",
+					"id": "aba"
+				},
+				{
+					"name": "Anji",
+					"id": "anji"
+				},
+				{
+					"name": "Axl",
+					"id": "axl"
+				},
+				{
+					"name": "Asuka",
+					"id": "asuka"
+				},
+				{
+					"name": "Baiken",
+					"id": "baiken"
+				},
+				{
+					"name": "Bedman",
+					"id": "bedman"
+				},
+				{
+					"name": "Bridget",
+					"id": "bridget"
+				},
+				{
+					"name": "Chipp",
+					"id": "chipp"
+				},
+				{
+					"name": "Elphelt",
+					"id": "elphelt"
+				},
+				{
+					"name": "Faust",
+					"id": "faust"
+				},
+				{
+					"name": "Giovanna",
+					"id": "giovanna"
+				},
+				{
+					"name": "Goldlewis",
+					"id": "goldlewis"
+				},
+				{
+					"name": "Happy Chaos",
+					"id": "chaos"
+				},
+				{
+					"name": "I-No",
+					"id": "ino"
+				},
+				{
+					"name": "Jack-O",
+					"id": "jacko"
+				},
+				{
+					"name": "Johnny",
+					"id": "johnny"
+				},
+				{
+					"name": "Ky",
+					"id": "ky"
+				},
+				{
+					"name": "Leo",
+					"id": "leo"
+				},
+				{
+					"name": "Lucy",
+					"id": "lucy"
+				},
+				{
+					"name": "May",
+					"id": "may"
+				},
+				{
+					"name": "Millia",
+					"id": "millia"
+				},
+				{
+					"name": "Nagoriyuki",
+					"id": "nagoriyuki"
+				},
+				{
+					"name": "Potemkin",
+					"id": "potemkin"
+				},
+				{
+					"name": "Queen Dizzy",
+					"id": "qdizzy"
+				},
+				{
+					"name": "Ramlethal",
+					"id": "ramlethal"
+				},
+				{
+					"name": "Sin",
+					"id": "sin"
+				},
+				{
+					"name": "Slayer",
+					"id": "slayer"
+				},
+				{
+					"name": "Sol",
+					"id": "sol"
+				},
+				{
+					"name": "Testament",
+					"id": "testament"
+				},
+				{
+					"name": "Unika",
+					"id": "Unika"
+				},
+				{
+					"name": "Venom",
+					"id": "venom"
+				},
+				{
+					"name": "Zato-1",
+					"id": "zato"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Killer Instinct",
+			"id": "ki",
+			"characters": [
+				{
+					"name": "Aganos",
+					"id": "aganos"
+				},
+				{
+					"name": "Arbiter",
+					"id": "arbiter"
+				},
+				{
+					"name": "ARIA",
+					"id": "aria"
+				},
+				{
+					"name": "Cinder",
+					"id": "cinder"
+				},
+				{
+					"name": "Eagle",
+					"id": "eagle"
+				},
+				{
+					"name": "Eyedol",
+					"id": "eyedol"
+				},
+				{
+					"name": "Fulgore",
+					"id": "fulgore"
+				},
+				{
+					"name": "Gargos",
+					"id": "gargos"
+				},
+				{
+					"name": "General RAAM",
+					"id": "raam"
+				},
+				{
+					"name": "Glacius",
+					"id": "glacius"
+				},
+				{
+					"name": "Hisako",
+					"id": "hisako"
+				},
+				{
+					"name": "Jago",
+					"id": "jago"
+				},
+				{
+					"name": "Kan-Ra",
+					"id": "kanra"
+				},
+				{
+					"name": "Kilgore",
+					"id": "kilgore"
+				},
+				{
+					"name": "Kim Wu",
+					"id": "kimwu"
+				},
+				{
+					"name": "Maya",
+					"id": "maya"
+				},
+				{
+					"name": "Mira",
+					"id": "mira"
+				},
+				{
+					"name": "Omen",
+					"id": "omen"
+				},
+				{
+					"name": "Orchid",
+					"id": "orchid"
+				},
+				{
+					"name": "Rash",
+					"id": "rash"
+				},
+				{
+					"name": "Riptor",
+					"id": "riptor"
+				},
+				{
+					"name": "Sabrewulf",
+					"id": "sabrewulf"
+				},
+				{
+					"name": "Sadira",
+					"id": "sadira"
+				},
+				{
+					"name": "Shadow Jago",
+					"id": "sjago"
+				},
+				{
+					"name": "Shin Hisako",
+					"id": "shisako"
+				},
+				{
+					"name": "Spinal",
+					"id": "spinal"
+				},
+				{
+					"name": "T.J. Combo",
+					"id": "combo"
+				},
+				{
+					"name": "Thunder",
+					"id": "thunder"
+				},
+				{
+					"name": "Tusk",
+					"id": "tusk"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Super Street Fighter II Turbo",
+			"id": "st",
+			"characters": [
+				{
+					"name": "N. Balrog",
+					"id": "xboxer"
+				},
+				{
+					"name": "N. Blanka",
+					"id": "xblanka"
+				},
+				{
+					"name": "N. Cammy",
+					"id": "xcammy"
+				},
+				{
+					"name": "N. Chun-Li",
+					"id": "xchun"
+				},
+				{
+					"name": "N. Dee Jay",
+					"id": "xdeejay"
+				},
+				{
+					"name": "N. Dhalsim",
+					"id": "xdhalsim"
+				},
+				{
+					"name": "N. E. Honda",
+					"id": "xhonda"
+				},
+				{
+					"name": "N. Fei Long",
+					"id": "xfei"
+				},
+				{
+					"name": "N. Guile",
+					"id": "xguile"
+				},
+				{
+					"name": "N. Ken",
+					"id": "xken"
+				},
+				{
+					"name": "N. M. Bison",
+					"id": "xdictator"
+				},
+				{
+					"name": "N. Ryu",
+					"id": "xryu"
+				},
+				{
+					"name": "N. Sagat",
+					"id": "xsagat"
+				},
+				{
+					"name": "N. T. Hawk",
+					"id": "xhawk"
+				},
+				{
+					"name": "N. Vega",
+					"id": "xclaw"
+				},
+				{
+					"name": "N. Zangief",
+					"id": "xzangief"
+				},
+				{
+					"name": "O. Balrog",
+					"id": "sboxer"
+				},
+				{
+					"name": "O. Blanka",
+					"id": "sblanka"
+				},
+				{
+					"name": "O. Cammy",
+					"id": "scammy"
+				},
+				{
+					"name": "O. Chun-Li",
+					"id": "schun"
+				},
+				{
+					"name": "O. Dee Jay",
+					"id": "sdeejay"
+				},
+				{
+					"name": "O. Dhalsim",
+					"id": "sdhalsim"
+				},
+				{
+					"name": "O. E. Honda",
+					"id": "shonda"
+				},
+				{
+					"name": "O. Fei Long",
+					"id": "sfei"
+				},
+				{
+					"name": "O. Guile",
+					"id": "sguile"
+				},
+				{
+					"name": "O. Ken",
+					"id": "sken"
+				},
+				{
+					"name": "O. M. Bison",
+					"id": "sdictator"
+				},
+				{
+					"name": "O. Ryu",
+					"id": "sryu"
+				},
+				{
+					"name": "O. Sagat",
+					"id": "ssagat"
+				},
+				{
+					"name": "O. T. Hawk",
+					"id": "shawk"
+				},
+				{
+					"name": "O. Vega",
+					"id": "sclaw"
+				},
+				{
+					"name": "O. Zangief",
+					"id": "szangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter Alpha 2",
+			"id": "sfa2",
+			"characters": [
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Charlie",
+					"id": "nash"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Sodom",
+					"id": "sodom"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter Alpha 3",
+			"id": "sfa3",
+			"characters": [
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Charlie",
+					"id": "nash"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Juli",
+					"id": "juli"
+				},
+				{
+					"name": "Juni",
+					"id": "juni"
+				},
+				{
+					"name": "Karin",
+					"id": "karin"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "R. Mika",
+					"id": "mika"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Sodom",
+					"id": "sodom"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter III: 3rd Strike",
+			"id": "3s",
+			"characters": [
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Alex",
+					"id": "alex"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dudley",
+					"id": "dudley"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Hugo",
+					"id": "hugo"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Necro",
+					"id": "necro"
+				},
+				{
+					"name": "Oro",
+					"id": "oro"
+				},
+				{
+					"name": "Q",
+					"id": "q"
+				},
+				{
+					"name": "Remy",
+					"id": "remy"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sean",
+					"id": "sean"
+				},
+				{
+					"name": "Twelve",
+					"id": "twelve"
+				},
+				{
+					"name": "Urien",
+					"id": "urien"
+				},
+				{
+					"name": "Yang",
+					"id": "yang"
+				},
+				{
+					"name": "Yun",
+					"id": "yun"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Ultra Street Fighter IV",
+			"id": "usf4",
+			"characters": [
+				{
+					"name": "Abel",
+					"id": "abel"
+				},
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "C. Viper",
+					"id": "viper"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Decapre",
+					"id": "decapre"
+				},
+				{
+					"name": "Dee Jay",
+					"id": "dj"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "Dudley",
+					"id": "dudley"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "El Fuerte",
+					"id": "fuerte"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Evil Ryu",
+					"id": "eryu"
+				},
+				{
+					"name": "Fei Long",
+					"id": "fei"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Gouken",
+					"id": "gouken"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Hakan",
+					"id": "hakan"
+				},
+				{
+					"name": "Hugo",
+					"id": "hugo"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Oni",
+					"id": "oni"
+				},
+				{
+					"name": "Poison",
+					"id": "poison"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Rufus",
+					"id": "rufus"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Seth",
+					"id": "seth"
+				},
+				{
+					"name": "T. Hawk",
+					"id": "hawk"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Yang",
+					"id": "yang"
+				},
+				{
+					"name": "Yun",
+					"id": "yun"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter V",
+			"id": "sf5",
+			"characters": [
+				{
+					"name": "Abigail",
+					"id": "abigail"
+				},
+				{
+					"name": "Akira",
+					"id": "akira"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Alex",
+					"id": "alex"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Ed",
+					"id": "ed"
+				},
+				{
+					"name": "F.A.N.G.",
+					"id": "fang"
+				},
+				{
+					"name": "Falke",
+					"id": "falke"
+				},
+				{
+					"name": "G",
+					"id": "g"
+				},
+				{
+					"name": "Gill",
+					"id": "gill"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Kage",
+					"id": "kage"
+				},
+				{
+					"name": "Karin",
+					"id": "karin"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Kolin",
+					"id": "kolin"
+				},
+				{
+					"name": "Laura",
+					"id": "laura"
+				},
+				{
+					"name": "Lucia",
+					"id": "lucia"
+				},
+				{
+					"name": "Luke",
+					"id": "luke"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Menat",
+					"id": "menat"
+				},
+				{
+					"name": "Nash",
+					"id": "nash"
+				},
+				{
+					"name": "Necalli",
+					"id": "necalli"
+				},
+				{
+					"name": "Oro",
+					"id": "oro"
+				},
+				{
+					"name": "Poison",
+					"id": "poison"
+				},
+				{
+					"name": "R. Mika",
+					"id": "mika"
+				},
+				{
+					"name": "Rashid",
+					"id": "rashid"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Seth",
+					"id": "seth"
+				},
+				{
+					"name": "Urien",
+					"id": "urien"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				},
+				{
+					"name": "Zeku",
+					"id": "zeku"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter 6",
+			"id": "sf6",
+			"characters": [
+				{
+					"name": "A.K.I.",
+					"id": "aki"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dee Jay",
+					"id": "dj"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Ed",
+					"id": "ed"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Jamie",
+					"id": "jamie"
+				},
+				{
+					"name": "JP",
+					"id": "jp"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Kimberly",
+					"id": "kimberly"
+				},
+				{
+					"name": "Lily",
+					"id": "lily"
+				},
+				{
+					"name": "Luke",
+					"id": "luke"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Manon",
+					"id": "manon"
+				},
+				{
+					"name": "Marisa",
+					"id": "marisa"
+				},
+				{
+					"name": "Rashid",
+					"id": "rashid"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Terry",
+					"id": "terry"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Tekken 8",
+			"id": "t8",
+			"characters": [
+				{
+					"name": "Alisa",
+					"id": "alica"
+				},
+				{
+					"name": "Anna",
+					"id": "anna"
+				},
+				{
+					"name": "Armor King",
+					"id": "aking"
+				},
+				{
+					"name": "Asuka",
+					"id": "asuka"
+				},
+				{
+					"name": "Azucena",
+					"id": "azucena"
+				},
+				{
+					"name": "Bryan",
+					"id": "bryan"
+				},
+				{
+					"name": "Claudio",
+					"id": "claudio"
+				},
+				{
+					"name": "Clive",
+					"id": "clive"
+				},
+				{
+					"name": "Devil Jin",
+					"id": "djin"
+				},
+				{
+					"name": "Dragunov",
+					"id": "dragunov"
+				},
+				{
+					"name": "Eddy",
+					"id": "eddy"
+				},
+				{
+					"name": "Fahkumram",
+					"id": "fahkumram"
+				},
+				{
+					"name": "Feng",
+					"id": "feng"
+				},
+				{
+					"name": "Heihachi",
+					"id": "heihachi"
+				},
+				{
+					"name": "Hwoarang",
+					"id": "hwoarang"
+				},
+				{
+					"name": "JACK-8",
+					"id": "jack"
+				},
+				{
+					"name": "Jin",
+					"id": "jin"
+				},
+				{
+					"name": "Jun",
+					"id": "jun"
+				},
+				{
+					"name": "Kazuya",
+					"id": "kazuya"
+				},
+				{
+					"name": "King",
+					"id": "king"
+				},
+				{
+					"name": "Kuma",
+					"id": "kuma"
+				},
+				{
+					"name": "Lars",
+					"id": "lars"
+				},
+				{
+					"name": "Law",
+					"id": "law"
+				},
+				{
+					"name": "Lee",
+					"id": "lee"
+				},
+				{
+					"name": "Leo",
+					"id": "leo"
+				},
+				{
+					"name": "Leroy",
+					"id": "leroy"
+				},
+				{
+					"name": "Lidia",
+					"id": "lidia"
+				},
+				{
+					"name": "Lili",
+					"id": "lili"
+				},
+				{
+					"name": "Nina",
+					"id": "nina"
+				},
+				{
+					"name": "Panda",
+					"id": "panda"
+				},
+				{
+					"name": "Paul",
+					"id": "paul"
+				},
+				{
+					"name": "Raven",
+					"id": "raven"
+				},
+				{
+					"name": "Reina",
+					"id": "reina"
+				},
+				{
+					"name": "Shaheen",
+					"id": "shaheen"
+				},
+				{
+					"name": "Steve",
+					"id": "steve"
+				},
+				{
+					"name": "Victor",
+					"id": "victor"
+				},
+				{
+					"name": "Yoshimitsu",
+					"id": "yoshimitsu"
+				},
+				{
+					"name": "Zafina",
+					"id": "zafina"
+				}
+			],
+			"filters": []
+		}
+	],
+	"settings": {
+		"user": {
+			"select": "Seleccionar usuario:",
+			"role": {
+				"assign": "Asignar rol:",
+				"user": "Usuario",
+				"admin": "Administrador",
+				"banned": "Prohibido",
+				"edit": "Editar roles de usuario"
+			},
+			"update": "Actualizar usuario"
+		}
+	}
+}

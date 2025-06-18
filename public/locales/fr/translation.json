@@ -3,22 +3,22 @@
 		"name": "NoteZ"
 	},
 	"home": {
-		"title": "Bienvenue dans NoteZ",
-		"subtitle": "Votre application de notes pour jeux de combat par excellence !",
+		"title": "Bienvenue sur NoteZ",
+		"subtitle": "Votre application de prises de notes dédiée aux jeux de combat !",
 		"description": {
-			"partOne": "Améliorez votre jeu comme les pros ! Avec des notes complètes sur les matchups, vous serez toujours au sommet de vos connaissances ! Et aucune application au monde n'est aussi adaptée aux notes de jeux de combat que NoteZ.",
-			"partTwo": "Écrivez des notes pour les matchups de personnages et de joueurs sur votre ordinateur, tablette ou téléphone mobile, et accédez-y où que vous soyez. Pas besoin de vous inquiéter de restaurer vos notes sur un nouveau téléphone, NoteZ le fera pour vous ! En match, filtrez vos notes selon des circonstances plus spécifiques que simplement votre adversaire, pour que vous vous souveniez toujours de quoi faire pendant que vous jouez.",
-			"partThree": "Faites passer votre jeu au niveau supérieur avec NoteZ dès aujourd'hui !"
+			"partOne": "Élevez votre niveau comme les pros ! Grâce à des notes de match-up complètes, vous resterez toujours au sommet de vos connaissances. Aucune autre appli n’est aussi adaptée aux notes de jeux de combat que NoteZ.",
+			"partTwo": "Rédigez des notes pour les affrontements entre personnages et joueurs depuis votre ordinateur, tablette ou téléphone, puis accédez-y où que vous soyez. Plus besoin de vous inquiéter pour restaurer vos notes sur un nouveau téléphone : NoteZ s’en charge ! Pendant un match, filtrez vos notes selon des critères plus précis que le simple adversaire afin de toujours savoir quoi faire en jouant.",
+			"partThree": "Passez au niveau supérieur dès aujourd’hui avec NoteZ !"
 		},
 		"existing": "Utilisateurs existants",
 		"new": "Nouveaux utilisateurs"
 	},
 	"header": {
-		"login": "Se connecter",
-		"signup": "S'inscrire",
+		"login": "Connexion",
+		"signup": "Inscription",
 		"notes": {
 			"game": "Notes de jeu",
-			"player": "Notes des joueurs"
+			"player": "Notes de joueur"
 		},
 		"settings": "Paramètres",
 		"game": {
@@ -28,7 +28,7 @@
 		"character": {
 			"add": "Ajouter un personnage",
 			"edit": "Modifier le personnage",
-			"link": "Lier les personnages"
+			"link": "Lier des personnages"
 		},
 		"filter": {
 			"add": "Ajouter un filtre",
@@ -40,7 +40,7 @@
 			"invite": "Inviter un utilisateur"
 		},
 		"profile": "Profil",
-		"logout": "Se déconnecter"
+		"logout": "Déconnexion"
 	},
 	"account": {
 		"email": "E-mail",
@@ -53,8 +53,8 @@
 		"realname": "Nom réel",
 		"country": "Pays",
 		"forgot": "Mot de passe oublié ?",
-		"noMatch": "Les mots de passe ne correspondent pas.",
-		"requestReset": "Demander une réinitialisation",
+		"noMatch": "Vos mots de passe ne correspondent pas.",
+		"requestReset": "Demander la réinitialisation",
 		"checkEmail": "Veuillez vérifier votre e-mail pour le lien de réinitialisation.",
 		"reset": "Réinitialiser le mot de passe",
 		"editProfile": "Modifier le profil",
@@ -63,7 +63,7 @@
 			"invite": "Invitation envoyée",
 			"profile": "Profil mis à jour avec succès."
 		},
-		"invite": "Inviter au service premium"
+		"invite": "Inviter à la version Premium"
 	},
 	"common": {
 		"goBack": "Retour",
@@ -76,1459 +76,1739 @@
 			"clickSearch": "Cliquez sur le bouton de recherche pour trouver vos notes.",
 			"notes": "Notes :",
 			"notice": "Remarque",
-			"noNotes": "Vous n'avez aucune note pour ce matchup. Ajoutez-en ci-dessous !",
+			"noNotes": "Vous n'avez aucune note pour ce match-up. Ajoutez-en ci-dessous !",
 			"editing": "Modification de la note",
-			"fiilter": "Filtre",
+			"filter": "Filtre",
 			"edit": "Modifier la note",
 			"cancel": "Annuler",
 			"game": "Choisissez un jeu :",
-			"universal": "Cette note doit s'afficher pour tous les adversaires."
+			"universal": "Cette note doit être affichée pour tous les adversaires."
 		},
 		"new": {
 			"filter": "Nouveau filtre de note :",
 			"new": "Nouvelle note :",
-			"selectFilter": "Veuillez spécifier un filtre.",
-			"submit": "Créer une note"
+			"selectFilter": "Veuillez préciser un filtre.",
+			"submit": "Créer la note"
 		},
 		"character": {
 			"you": "Choisissez votre personnage :",
-			"opponent": "Choisissez le personnage de votre adversaire :"
+			"opponent": "Choisissez le personnage adverse :"
 		},
 		"opponent": "Choisissez votre adversaire :",
 		"filter": {
-			"choose": "Choisissez votre filtre (facultatif) :",
+			"choose": "Choisissez votre filtre (optionnel) :",
 			"clear": "Effacer le filtre"
 		}
 	},
-	"character": {
-		"add": {
-			"name": {
-				"locale": "Clé de locale",
-				"company": "Nom de l'entreprise"
-			},
-			"created": "Personnage créé avec succès."
+	"games": [
+		{
+			"name": "Blazblue Central Fiction",
+			"id": "bbcf",
+			"characters": [
+				{
+					"name": "Amane",
+					"id": "amane"
+				},
+				{
+					"name": "Arakune",
+					"id": "arakune"
+				},
+				{
+					"name": "Azrael",
+					"id": "azrael"
+				},
+				{
+					"name": "Bang",
+					"id": "bang"
+				},
+				{
+					"name": "Bullet",
+					"id": "bullet"
+				},
+				{
+					"name": "Carl",
+					"id": "carl"
+				},
+				{
+					"name": "Celica",
+					"id": "celica"
+				},
+				{
+					"name": "Es",
+					"id": "es"
+				},
+				{
+					"name": "Hakumen",
+					"id": "hakumen"
+				},
+				{
+					"name": "Hazama",
+					"id": "hazama"
+				},
+				{
+					"name": "Hibiki",
+					"id": "hibiki"
+				},
+				{
+					"name": "Izanami",
+					"id": "Izanami"
+				},
+				{
+					"name": "Izayoi",
+					"id": "izayoi"
+				},
+				{
+					"name": "Jin",
+					"id": "jin"
+				},
+				{
+					"name": "Jubei",
+					"id": "jubei"
+				},
+				{
+					"name": "Kagura",
+					"id": "kagura"
+				},
+				{
+					"name": "Kokonoe",
+					"id": "kokonoe"
+				},
+				{
+					"name": "Lambda",
+					"id": "lambda"
+				},
+				{
+					"name": "Litchi",
+					"id": "litchi"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Mu",
+					"id": "mu"
+				},
+				{
+					"name": "Naoto",
+					"id": "naoto"
+				},
+				{
+					"name": "Nine",
+					"id": "nine"
+				},
+				{
+					"name": "Noel",
+					"id": "noel"
+				},
+				{
+					"name": "Nu",
+					"id": "nu"
+				},
+				{
+					"name": "Platinum",
+					"id": "platinum"
+				},
+				{
+					"name": "Rachel",
+					"id": "rachel"
+				},
+				{
+					"name": "Ragna",
+					"id": "ragna"
+				},
+				{
+					"name": "Relius",
+					"id": "relius"
+				},
+				{
+					"name": "Susano'o",
+					"id": "susanoo"
+				},
+				{
+					"name": "Tager",
+					"id": "tager"
+				},
+				{
+					"name": "Taokaka",
+					"id": "taokaka"
+				},
+				{
+					"name": "Terumi",
+					"id": "terumi"
+				},
+				{
+					"name": "Tsubaki",
+					"id": "tsubaki"
+				},
+				{
+					"name": "Valkenhayn",
+					"id": "valkenhayn"
+				}
+			],
+			"filters": []
 		},
-		"link": {
-			"title": "Lier des personnages au jeu",
-			"success": "Personnages liés avec succès.",
-			"select": "Sélectionnez des personnages",
-			"selected": "Personnages sélectionnés :"
+		{
+			"name": "Fatal Fury: City of the Wolves",
+			"id": "cotw",
+			"characters": [
+				{
+					"name": "Andy",
+					"id": "andy"
+				},
+				{
+					"name": "B. Jenet",
+					"id": "jenet"
+				},
+				{
+					"name": "Billy",
+					"id": "billy"
+				},
+				{
+					"name": "Dong Hawn",
+					"id": "donghwan"
+				},
+				{
+					"name": "Gato",
+					"id": "gato"
+				},
+				{
+					"name": "Hokutomaru",
+					"id": "hokutomaru"
+				},
+				{
+					"name": "Hotaru",
+					"id": "hotaru"
+				},
+				{
+					"name": "Kain",
+					"id": "kain"
+				},
+				{
+					"name": "Kevin",
+					"id": "kevin"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Marco",
+					"id": "marco"
+				},
+				{
+					"name": "Preecha",
+					"id": "preecha"
+				},
+				{
+					"name": "Rock",
+					"id": "rock"
+				},
+				{
+					"name": "Ronaldo",
+					"id": "ronaldo"
+				},
+				{
+					"name": "Salvatore",
+					"id": "salvatore"
+				},
+				{
+					"name": "Terry",
+					"id": "terry"
+				},
+				{
+					"name": "Tizoc",
+					"id": "tizoc"
+				},
+				{
+					"name": "Vox",
+					"id": "vox"
+				}
+			],
+			"filters": []
 		},
-		"edit": {
-			"success": "Personnage modifié avec succès."
+		{
+			"name": "Granblue Fantasy Versus: Rising",
+			"id": "gbvs",
+			"characters": [
+				{
+					"name": "2B",
+					"id": "2b"
+				},
+				{
+					"name": "Anila",
+					"id": "anila"
+				},
+				{
+					"name": "Anre",
+					"id": "anre"
+				},
+				{
+					"name": "Avatar Belial",
+					"id": "abelial"
+				},
+				{
+					"name": "Beatrix",
+					"id": "beatrix"
+				},
+				{
+					"name": "Beelzebub",
+					"id": "beelzebub"
+				},
+				{
+					"name": "Belial",
+					"id": "belial"
+				},
+				{
+					"name": "Cagliostro",
+					"id": "cagliostro"
+				},
+				{
+					"name": "Charlotta",
+					"id": "charlotta"
+				},
+				{
+					"name": "Djeeta",
+					"id": "djeeta"
+				},
+				{
+					"name": "Eustace",
+					"id": "eustace"
+				},
+				{
+					"name": "Ferry",
+					"id": "ferry"
+				},
+				{
+					"name": "Galleon",
+					"id": "galleon"
+				},
+				{
+					"name": "Gran",
+					"id": "gran"
+				},
+				{
+					"name": "Grimnir",
+					"id": "grimnir"
+				},
+				{
+					"name": "Ilsa",
+					"id": "ilsa"
+				},
+				{
+					"name": "Katalina",
+					"id": "Katalina"
+				},
+				{
+					"name": "Ladiva",
+					"id": "ladiva"
+				},
+				{
+					"name": "Lancelot",
+					"id": "lancelot"
+				},
+				{
+					"name": "Lowain",
+					"id": "lowain"
+				},
+				{
+					"name": "Lucilius",
+					"id": "lucilius"
+				},
+				{
+					"name": "Lunalu",
+					"id": "lunalu"
+				},
+				{
+					"name": "Meg",
+					"id": "meg"
+				},
+				{
+					"name": "Metera",
+					"id": "metera"
+				},
+				{
+					"name": "Narmaya",
+					"id": "narmaya"
+				},
+				{
+					"name": "Nier",
+					"id": "nier"
+				},
+				{
+					"name": "Percival",
+					"id": "percival"
+				},
+				{
+					"name": "Sandalphon",
+					"id": "sandalphon"
+				},
+				{
+					"name": "Seox",
+					"id": "seox"
+				},
+				{
+					"name": "Siegfried",
+					"id": "siegfried"
+				},
+				{
+					"name": "Soriz",
+					"id": "soriz"
+				},
+				{
+					"name": "Vane",
+					"id": "vane"
+				},
+				{
+					"name": "Vaseraga",
+					"id": "vaseraga"
+				},
+				{
+					"name": "Versusia",
+					"id": "versusia"
+				},
+				{
+					"name": "Vikala",
+					"id": "vikala"
+				},
+				{
+					"name": "Vira",
+					"id": "vira"
+				},
+				{
+					"name": "Yuel",
+					"id": "yuel"
+				},
+				{
+					"name": "Wilnas",
+					"id": "Wilnas"
+				},
+				{
+					"name": "Zeta",
+					"id": "zeta"
+				},
+				{
+					"name": "Zooey",
+					"id": "zooey"
+				}
+			],
+			"filters": []
 		},
-		"names": {
-			"arika": {
-				"ace": "Ace",
-				"allen": "Allen",
-				"area": "Area",
-				"blair": "Blair",
-				"cjack": "C. Jack",
-				"darun": "Darun",
-				"ddark": "D. Dark",
-				"garuda": "Garuda",
-				"hayate": "Hayate",
-				"hokuto": "Hokuto",
-				"kairi": "Kairi",
-				"nanase": "Nanase",
-				"pullum": "Pullum",
-				"sanane": "Sanane",
-				"shadow": "Shadowgeist",
-				"sharon": "Sharon",
-				"shirase": "Shirase",
-				"skullo": "Skullomania",
-				"vrosso": "V. Rosso"
-			},
-			"asw": {
-				"aba": "A.B.A",
-				"aigis": "Aigis",
-				"akihiko": "Akihiko",
-				"amane": "Amane",
-				"anji": "Anji",
-				"answer": "Answer",
-				"arakune": "Arakune",
-				"axl": "Axl",
-				"azrael": "Azrael",
-				"baiken": "Baiken",
-				"bang": "Bang",
-				"bedman": "Bedman",
-				"bridget": "Bridget",
-				"bullet": "Bullet",
-				"carl": "Carl",
-				"celica": "Celica",
-				"chie": "Chie",
-				"chipp": "Chipp",
-				"dizzy": "Dizzy",
-				"eddie": "Eddie",
-				"elizabeth": "Elizabeth",
-				"elphelt": "Elphelt",
-				"es": "Es",
-				"faust": "Faust",
-				"giovanna": "Giovanna",
-				"goldlewis": "Goldlewis",
-				"hakumen": "Hakumen",
-				"happychaos": "Happy Chaos",
-				"hazama": "Hazama",
-				"heart": "Heart",
-				"hibiki": "Hibiki",
-				"hosol": "Holy-Older Sol",
-				"ino": "I-No",
-				"izanami": "Izanami",
-				"izayoi": "Izayoi",
-				"jacko": "Jack-O",
-				"jagi": "Jagi",
-				"jam": "Jam",
-				"jin": "Jin",
-				"johnny": "Johnny",
-				"joker": "Joker",
-				"jubei": "Jubei",
-				"juda": "Juda",
-				"junpei": "Junpei",
-				"justice": "Justice",
-				"kagura": "Kagura",
-				"kanji": "Kanji",
-				"ken": "Ken",
-				"kenshiro": "Kenshiro",
-				"kliff": "Kliff",
-				"kokonoe": "Kokonoe",
-				"kum": "Kum Haehyun",
-				"ky": "Ky",
-				"labrys": "Labrys",
-				"lambda": "Lambda-11",
-				"leo": "Leo",
-				"litchi": "Litchi",
-				"mai": "Mai",
-				"makoto": "Makoto",
-				"mamiya": "Mamiya",
-				"margaret": "Margaret",
-				"marie": "Marie",
-				"may": "May",
-				"millia": "Millia",
-				"mu": "Mu-12",
-				"nagoriyuki": "Nagoriyuki",
-				"naotok": "Naoto Kurogane",
-				"naotos": "Naoto Shirogane",
-				"nine": "Nine",
-				"noel": "Noel",
-				"nu": "Nu-13",
-				"platinum": "Platinum",
-				"potemkin": "Potemkin",
-				"rachel": "Rachel",
-				"ragna": "Ragna",
-				"ramlethal": "Ramlethal",
-				"raoh": "Raoh",
-				"raven": "Raven",
-				"rei": "Rei",
-				"relius": "Relius",
-				"rise": "Rise",
-				"roboky": "Robo-Ky",
-				"sho1": "SHO Minazuki",
-				"sho2": "Sho MINAZUKI",
-				"shin": "Shin",
-				"sin": "Sin",
-				"slabrys": "Shadow Labrys",
-				"slayer": "Slayer",
-				"sol": "Sol",
-				"susanoo": "Susano'o",
-				"tager": "Tager",
-				"taokaka": "Taokaka",
-				"teddie": "Teddie",
-				"terumi": "Terumi",
-				"testament": "Testament",
-				"thouther": "Thouther",
-				"tohru": "Tohru",
-				"toki": "Toki",
-				"tsubaki": "Tsubaki",
-				"valkenhayn": "Valkenhayn",
-				"venom": "Venom",
-				"yosuke": "Yosuke",
-				"yu": "Yu",
-				"yukari": "Yukari",
-				"yukiko": "Yukiko",
-				"zappa": "Zappa",
-				"zato": "Zato-1"
-			},
-			"baseson": {
-				"bachou": "Bachou",
-				"chouhi": "Chouhi",
-				"chouryou": "Chouryou",
-				"chouun": "Chou'un",
-				"gakushin": "Gakushin",
-				"jokou": "Jokou",
-				"kakouen": "Kakouen",
-				"kakouton": "Kakouton",
-				"kannei": "Kannei",
-				"kanu": "Kan'u",
-				"ryofu": "Ryofu",
-				"shuutai": "Shuutai",
-				"sonken": "Sonken",
-				"sonshoukou": "Sonshoukou",
-				"sousou": "Sousou"
-			},
-			"bungie": {
-				"arbiter": "Arbiter"
-			},
-			"capcom": {
-				"abel": "Abel",
-				"abigail": "Abigail",
-				"adon": "Adon",
-				"aki": "A.K.I.",
-				"akira": "Akira",
-				"akuma": "Akuma",
-				"alex": "Alex",
-				"amaterasu": "Amaterasu",
-				"amingo": "Amingo",
-				"anakaris": "Anakaris",
-				"arthur": "Arthur",
-				"batsu": "Batsu",
-				"bbatsu": "Burning Batsu",
-				"bbhood": "B. B. Hood",
-				"birdie": "Birdie",
-				"bishamon": "Bishamon",
-				"blade": "Blade",
-				"blanka": "Blanka",
-				"boman": "Boman",
-				"boxer": "Balrog",
-				"cammy": "Cammy",
-				"capcom": "Captain Commando",
-				"chairperson": "Chairperson",
-				"chris": "Chris",
-				"chun": "Chun-Li",
-				"cody": "Cody",
-				"claw": "Vega",
-				"cviper": "C. Viper",
-				"daigo": "Daigo",
-				"dan": "Dan",
-				"dante": "Dante",
-				"decapre": "Decapre",
-				"demitri": "Demitri",
-				"dhalsim": "Dhalsim",
-				"dhyo": "Demon Hyo",
-				"dictator": "M. Bison",
-				"dj": "Deejay",
-				"dudley": "Dudley",
-				"eagle": "Eagle",
-				"ed": "Ed",
-				"edge": "Edge",
-				"ehonda": "E. Honda",
-				"elena": "Elena",
-				"eryu": "Evil Ryu",
-				"falke": "Falke",
-				"fang": "F.A.N.G.",
-				"fei": "Fei-Long",
-				"felicia": "Felicia",
-				"firebrand": "Firebrand",
-				"frankwest": "Frank West",
-				"fuckptx": "PTX-40A",
-				"fuerte": "El Fuerte",
-				"g": "G",
-				"gan": "Gan",
-				"gen": "Gen",
-				"gill": "Gill",
-				"gouken": "Gouken",
-				"guy": "Guy",
-				"guile": "Guile",
-				"haggar": "Haggar",
-				"hakan": "Hakan",
-				"hayato": "Hayato",
-				"hideo": "Hideo",
-				"hinata": "Hinata",
-				"hsienko": "Hsien-ko",
-				"hugo": "Hugo",
-				"hyo": "Hyo",
-				"ibuki": "Ibuki",
-				"jamie": "Jamie",
-				"jedah": "Jedah",
-				"jill": "Jill",
-				"jin": "Jin",
-				"jp": "JP",
-				"juli": "Juli",
-				"juni": "Juni",
-				"juri": "Juri",
-				"kage": "Kage",
-				"karin": "Karin",
-				"ken": "Ken",
-				"kimberly": "Kimberly",
-				"kolin": "Kolin",
-				"kurow": "Kurow",
-				"kyoko": "Kyoko",
-				"kyosuke": "Kyosuke",
-				"laura": "Laura",
-				"lili": "Lili",
-				"lilith": "Lilith",
-				"lucia": "Lucia",
-				"luke": "Luke",
-				"maki": "Maki",
-				"makoto": "Makoto",
-				"manon": "Manon",
-				"marisa": "Marisa",
-				"megaman": "Mega Man",
-				"menat": "Menat",
-				"momo": "Momo",
-				"monhun": "Monster Hunter",
-				"morrigan": "Morrigan",
-				"nagare": "Nagare",
-				"nash": "Nash",
-				"natsu": "Natsu",
-				"nblanka": "N. Blanka",
-				"nboxer": "N. Balrog",
-				"ncammy": "N. Cammy",
-				"nchun": "N. Chun-Li",
-				"nclaw": "N. Vega",
-				"ndhalsim": "N. Dhalsim",
-				"ndictator": "N. M. Bison",
-				"ndj": "N. Deejay",
-				"nfei": "N. Fei-Long",
-				"nguile": "N. Guile",
-				"nhawk": "N. T. Hawk",
-				"necalli": "Necalli",
-				"necro": "Necro",
-				"nemesis": "Nemesis T-Type",
-				"nhonda": "N. E. Honda",
-				"nken": "N. Ken",
-				"nryu": "N. Ryu",
-				"nsagat": "N. Sagat",
-				"nzangief": "N. Zangief",
-				"oblanka": "O. Blanka",
-				"oboxer": "O. Balrog",
-				"ocammy": "O. Cammy",
-				"ochun": "O. Chun-Li",
-				"oclaw": "O. Vega",
-				"odhalsim": "O. Dhalsim",
-				"odictator": "O. M. Bison",
-				"odj": "O. Deejay",
-				"ofei": "O. Fei-Long",
-				"oguile": "O. Guile",
-				"ohawk": "O. T. Hawk",
-				"ohonda": "O. E. Honda",
-				"oken": "O. Ken",
-				"oni": "Oni",
-				"oro": "Oro",
-				"oryu": "O. Ryu",
-				"osagat": "O. Sagat",
-				"ozangief": "O. Zangief",
-				"pakira": "Powered Akira",
-				"poison": "Poison",
-				"pwright": "Phoenix Wright",
-				"q": "Q",
-				"qbee": "Q. Bee",
-				"ran": "Ran",
-				"raptor": "Lord Raptor",
-				"rashid": "Rashid",
-				"remy": "Remy",
-				"roy": "Roy",
-				"rikuo": "Rikuo",
-				"rmika": "R. Mika",
-				"roberto": "Roberto",
-				"rolento": "Rolento",
-				"roll": "Roll",
-				"rose": "Rose",
-				"rufus": "Rufus",
-				"ryu": "Ryu",
-				"sagat": "Sagat",
-				"saki": "Saki",
-				"sakura": "Sakura",
-				"sasquatch": "Sasquatch",
-				"sawada": "Sawada",
-				"sean": "Sean",
-				"servbot": "Servbot",
-				"seth": "Seth",
-				"shoma": "Shoma",
-				"sigma": "Sigma",
-				"sodom": "Sodom",
-				"soki": "Soki",
-				"sonson": "SonSon",
-				"spencer": "Spencer",
-				"strider": "Strider Hiryu",
-				"talbain": "Talbain",
-				"tbonne": "Tron Bonne",
-				"tessa": "Tessa",
-				"thawk": "T. Hawk",
-				"tiffany": "Tiffany",
-				"trish": "Trish",
-				"twelve": "Twelve",
-				"urien": "Urien",
-				"vatsu": "Vatsu",
-				"vergil": "Vergil",
-				"victor": "Victor",
-				"vjoe": "Viewtiful Joe",
-				"volnutt": "Mega Man Volnutt",
-				"wesker": "Wesker",
-				"wdaigo": "Wild Daigo",
-				"x": "X",
-				"yang": "Yang",
-				"yun": "Yun",
-				"yurika": "Yurika",
-				"zaki": "Zaki",
-				"zangief": "Zangief",
-				"zeku": "Zeku",
-				"zero": "Zero"
-			},
-			"dataeast": {
-				"clown": "Clown",
-				"feilin": "Feilin",
-				"jean": "Jean",
-				"karnov": "Karnov",
-				"lee": "Lee",
-				"marstorius": "Marstorius",
-				"matlok": "Matlok",
-				"mizoguchi": "Mizoguchi",
-				"ray": "Ray",
-				"ryoko": "Ryoko",
-				"samchay": "Samchay",
-				"yungmie": "Yungmie",
-				"zazie": "Zazie"
-			},
-			"dc": {
-				"aquaman": "Aquaman",
-				"atom": "Atom",
-				"atrocitus": "Atrocitus",
-				"bane": "Bane",
-				"batgirl": "Batgirl",
-				"batman": "Batman",
-				"bizarro": "Bizarro",
-				"blackadam": "Black Adam",
-				"blackcanary": "Black Canary",
-				"blackmanta": "Black Manta",
-				"bluebeetle": "Blue Beetle",
-				"brainiac": "Brainiac",
-				"captaincold": "Captain Cold",
-				"catwoman": "Catwoman",
-				"cheetah": "Cheetah",
-				"cyborg": "Cyborg",
-				"darkseid": "Darkseid",
-				"deadshot": "Deadshot",
-				"despero": "Despero",
-				"doctorfate": "Doctor Fate",
-				"enchantress": "Enchantress",
-				"firestorm": "Firestorm",
-				"flash": "Flash",
-				"gorillagrodd": "Gorilla Grodd",
-				"greenarrow": "Green Arrow",
-				"greenlantern": "Green Lantern",
-				"harley": "Harley Quinn",
-				"hellboy": "Hellboy",
-				"joker": "Joker",
-				"lobo": "Lobo",
-				"martian": "Martian Manhunter",
-				"nightwing": "Nightwing",
-				"poisonivy": "Poison Ivy",
-				"redhood": "Red Hood",
-				"robin": "Robin",
-				"scarecrow": "Scarecrow",
-				"starfire": "Starfire",
-				"supergirl": "Supergirl",
-				"superman": "Superman",
-				"swampthing": "Swamp Thing",
-				"wonderwoman": "Wonder Woman",
-				"zatanna": "Zatanna",
-				"zod": "Zod",
-				"zoom": "Zoom"
-			},
-			"delphine": {
-				"auroch": "Auroch",
-				"colonel": "Colonel",
-				"diesel": "Diesel",
-				"kaori": "Kaori",
-				"leotsu": "Leotsu",
-				"mephis": "Mephis",
-				"nezu": "Nezu",
-				"rajah": "Rajah",
-				"settra": "Sett Ra",
-				"shaq": "Shaq"
-			},
-			"eighting": {
-				"archer": "Archer",
-				"assassin": "Assassin",
-				"bazett": "Bazett",
-				"berserker": "Berserker",
-				"caster": "Caster",
-				"gilgamesh": "Gilgamesh",
-				"kirei": "Kirei",
-				"lancer": "Lancer",
-				"leysritt": "Leysritt",
-				"luviagelita": "Luviagelita",
-				"rider": "Rider",
-				"rin": "Rin",
-				"saber": "Saber",
-				"sabera": "Saber Alter",
-				"sakura": "Sakura",
-				"shiro": "Shiro",
-				"zlancer": "Zero Lancer"
-			},
-			"epic": {
-				"raam": "General RAAM"
-			},
-			"frenchbread": {
-				"akiha": "Akiha",
-				"aoko": "Aoko",
-				"arcueid": "Arcueid",
-				"carmine": "Carmine",
-				"chaos": "Chaos",
-				"ciel": "Ciel",
-				"danoel": "Dead Apostle Noel",
-				"eltnam": "Eltnam",
-				"enkidu": "Enkidu",
-				"gordeau": "Gordeau",
-				"hilda": "Hilda",
-				"hime": "Hime",
-				"hisui": "Hisui",
-				"hisuikohaku": "Hisui & Kohaku",
-				"hyde": "Hyde",
-				"kmech": "Koha-Mech",
-				"kohaku": "Kohaku",
-				"kouma": "Kouma",
-				"len": "Len",
-				"linne": "Linne",
-				"londrekia": "Londrekia",
-				"merkava": "Merkava",
-				"mhisui": "Mech-Hisui",
-				"mika": "Mika",
-				"miyako": "Miyako",
-				"nac": "NAC",
-				"nanase": "Nanase",
-				"nanaya": "Nanaya",
-				"necoarc": "Neco-Arc",
-				"nero": "Nero",
-				"nmech": "Neco-Mech",
-				"noel": "Noel",
-				"orie": "Orie",
-				"pciel": "Powered Ciel",
-				"phonon": "Phonon",
-				"rarcuied": "Red Arcueid",
-				"riesbyfe": "Riesbyfe",
-				"roa": "Roa",
-				"satsuki": "Satsuki",
-				"seifuku": "Seifuku",
-				"seth": "Seth",
-				"sion": "Sion",
-				"tohno": "Tohno",
-				"vakiha": "V. Akiha",
-				"vatista": "Vatista",
-				"vlov": "Vlov",
-				"vsion": "V.Sion",
-				"wagner": "Wagner",
-				"waldstein": "Waldstein",
-				"warachia": "Warachia",
-				"wlen": "White Len",
-				"yuzuriha": "Yuzuriha"
-			},
-			"image": {
-				"spawn": "Spawn"
-			},
-			"kaneko": {
-				"dmjackie": "Drunken Master Jackie",
-				"kimmaree": "Kim-Maree",
-				"lau": "Lau",
-				"lion": "Mysterious Lion",
-				"pajackie": "Project A Jackie",
-				"sam": "Sam",
-				"skfjackie": "Spiritual Kung Fu Jackie",
-				"yeung": "Yeung",
-				"thorsten": "Thorsten"
-			},
-			"konami": {
-				"april": "April",
-				"armaggon": "Armaggon",
-				"aska": "Aska",
-				"casey": "Casey Jones",
-				"chrome": "Chrome Dome",
-				"donatello": "Donatello",
-				"kirby": "Kirby",
-				"leonardo": "Leonardo",
-				"michaelangelo": "Michaelangelo",
-				"oshredder": "Ω Shredder",
-				"raphael": "Raphael",
-				"ratking": "Rat King",
-				"richter": "Richter",
-				"shredder": "Shredder",
-				"simon": "Simon",
-				"snake": "Solid Snake",
-				"war": "War",
-				"wingnut": "Wingnut"
-			},
-			"labzero": {
-				"annie": "Annie",
-				"beowulf": "Beowulf",
-				"bigband": "Big Band",
-				"cerebella": "Cerebella",
-				"dhalia": "Black Dhalia",
-				"double": "Double",
-				"eliza": "Eliza",
-				"filia": "Filia",
-				"fukua": "Fukua",
-				"fortune": "Ms. Fortune",
-				"painwheel": "Painwheel",
-				"parasoul": "Parasoul",
-				"peacock": "Peacock",
-				"rfortune": "Robo-Fortune",
-				"squigly": "Squigly",
-				"umbrella": "Umbrella",
-				"valentine": "Valentine"
-			},
-			"lucasarts": {
-				"apprentice": "The Apprentice",
-				"darthvader": "Darth Vader",
-				"yoda": "Yoda"
-			},
-			"ludocity": {
-				"aang": "Aang",
-				"catdog": "CatDog",
-				"danny": "Danny Phantom",
-				"garfield": "Garfield",
-				"helga": "Helga",
-				"korra": "Korra",
-				"lincoln": "Lincoln",
-				"lucy": "Lucy",
-				"nigel": "Nigel",
-				"oblina": "Oblina",
-				"patrick": "Patrick",
-				"powdered": "Powdered Toast Man",
-				"renstimpy": "Ren & Stimpy",
-				"reptar": "Reptar",
-				"sandy": "Sandy",
-				"spongebob": "Spongebob",
-				"toph": "Toph",
-				"zim": "Zim"
-			},
-			"marvel": {
-				"bcwolverine": "Bone Claw Wolverine",
-				"blackheart": "Blackheart",
-				"blackpanther": "Black Panther",
-				"blackwidow": "Black Widow",
-				"cable": "Cable",
-				"capam": "Captain America",
-				"capmar": "Captain Marvel",
-				"colossus": "Colossus",
-				"cyclops": "Cyclops",
-				"deadpool": "Deadpool",
-				"doctordoom": "Doctor Doom",
-				"doctorstrange": "Doctor Strange",
-				"dormammu": "Dormammu",
-				"gambit": "Gambit",
-				"gamora": "Gamora",
-				"ghostrider": "Ghost Rider",
-				"hawkeye": "Hawkeye",
-				"hulk": "Hulk",
-				"iceman": "Iceman",
-				"ironfist": "Iron Fist",
-				"ironman": "Iron Man",
-				"juggernaut": "Juggernaut",
-				"magneto": "Magneto",
-				"marrow": "Marrow",
-				"modok": "MODOK",
-				"nova": "Nova",
-				"omegared": "Omega Red",
-				"phoenix": "Phoenix",
-				"psylocke": "Psylocke",
-				"rocket": "Rocket Raccoon",
-				"rogue": "Rogue",
-				"sabretooth": "Sabretooth",
-				"sentinel": "Sentinel",
-				"shehulk": "She-Hulk",
-				"shuma": "Shuma Gorath",
-				"silsam": "Silver Samurai",
-				"skrull": "Super Skrull",
-				"spiderman": "Spider-Man",
-				"spiral": "Spiral",
-				"storm": "Storm",
-				"taskmaster": "Taskmaster",
-				"thanos": "Thanos",
-				"thor": "Thor",
-				"ultron": "Ultron",
-				"venom": "Venom",
-				"warmachine": "War Machine",
-				"wintersoldier": "Winter Soldier",
-				"wolverine": "Wolverine",
-				"x23": "X-23"
-			},
-			"mgm": {
-				"robocop": "RoboCop"
-			},
-			"mojang": {
-				"steve": "Steve"
-			},
-			"monolith": {
-				"mythra": "Mythra",
-				"pyra": "Pyra",
-				"shulk": "Shulk"
-			},
-			"namco": {
-				"aking": "Armor King",
-				"algol": "Algol",
-				"alisa": "Alisa",
-				"amy": "Amy",
-				"anna": "Anna",
-				"aogre": "Ancient Ogre",
-				"apatroklos": "α Patroklos",
-				"arthur": "Arthur",
-				"astaroth": "Astaroth",
-				"asuka": "Asuka",
-				"azwel": "Azwel",
-				"baek": "Baek",
-				"bob": "Bob",
-				"bosconovitch": "Dr. Bosconovitch",
-				"bruce": "Bruce",
-				"bryan": "Bryan",
-				"cassandra": "Cassandra",
-				"cervantes": "Cervantes",
-				"charade": "Charade",
-				"christie": "Christie",
-				"claudio": "Claudio",
-				"dampierre": "Dampierre",
-				"devil": "Devil",
-				"djin": "Devil Jin",
-				"dragunov": "Dragunov",
-				"eddy": "Eddy",
-				"eliza": "Eliza",
-				"elysium": "Elysium",
-				"emaster": "Edge Master",
-				"fahkumram": "Fahkumram",
-				"feng": "Feng",
-				"forest": "Forest",
-				"ganryu": "Ganryu",
-				"gigas": "Gigas",
-				"gjack": "Gun Jack",
-				"groh": "Grøh",
-				"hanmyeong": "Seong Han-myeong",
-				"heihachi": "Heihachi",
-				"hilde": "Hilde",
-				"hwang": "Hwang",
-				"hwoarang": "Hwoarang",
-				"inferno": "Inferno",
-				"ivy": "Ivy",
-				"jack": "Jack",
-				"jack2": "Jack-2",
-				"jack3": "Jack-3",
-				"jack4": "Jack-4",
-				"jack5": "Jack-5",
-				"jack6": "Jack-6",
-				"jack7": "Jack-7",
-				"jackx": "Jack-X",
-				"jaycee": "Jaycee",
-				"jin": "Jin",
-				"jinpachi": "Jinpachi",
-				"josie": "Josie",
-				"julia": "Julia",
-				"jun": "Jun",
-				"katarina": "Katarina",
-				"kazumi": "Kazumi",
-				"kazuya": "Kazuya",
-				"kilik": "Kilik",
-				"king": "King",
-				"kuma": "Kuma",
-				"kunimitsu": "Kunimitsu",
-				"lars": "Lars",
-				"law": "Law",
-				"lee": "Lee",
-				"lei": "Lei",
-				"leixia": "Leixia",
-				"leo": "Leo",
-				"leroy": "Leroy",
-				"lidia": "Lidia",
-				"lili": "Lili",
-				"lilong": "Li Long",
-				"lizardman": "Lizardman",
-				"luckychloe": "Lucky Chloe",
-				"marduk": "Marduk",
-				"mraven": "Master Raven",
-				"maxi": "Maxi",
-				"michelle": "Michelle",
-				"miguel": "Miguel",
-				"miharu": "Miharu",
-				"mina": "Seong Mi-na",
-				"mitsurugi": "Mitsurugi",
-				"mokujin": "Mokujin",
-				"natsu": "Natsu",
-				"necrid": "Necrid",
-				"negan": "Negan",
-				"nightmare": "Nightmare",
-				"nina": "Nina",
-				"nterror": "Night Terror",
-				"olcadan": "Olcadan",
-				"pacman": "Pac-Man",
-				"panda": "Panda",
-				"patroklos": "Patroklos",
-				"paul": "Paul",
-				"pjack": "Prototype Jack",
-				"pyrrha": "Pyrrha",
-				"pyrrhao": "Pyrrha Ω",
-				"raphael": "Raphael",
-				"raven": "Raven",
-				"rock": "Rock",
-				"roger": "Roger",
-				"rogerjr": "Roger Jr.",
-				"sbob": "Slim Bob",
-				"seonggyeong": "Seong-Gyeong",
-				"setsuka": "Setsuka",
-				"shaheen": "Shaheen",
-				"siegfried": "Siegfried",
-				"sophitia": "Sophitia",
-				"steve": "Steve",
-				"taki": "Taki",
-				"talim": "Talim",
-				"tetsujin": "Tetsujin",
-				"tiger": "Tiger",
-				"tira": "Tira",
-				"togre": "True Ogre",
-				"viola": "Viola",
-				"violet": "Violet",
-				"voldo": "Voldo",
-				"wang": "Wang",
-				"xianghua": "Xianghua",
-				"xiaoyu": "Xiaoyu",
-				"xiba": "Xiba",
-				"yoshimitsu": "Yoshimitsu",
-				"yunseong": "Yun-seong",
-				"zafina": "Zafina",
-				"zasalamel": "Zasalamel",
-				"zwei": "Z.W.E.I."
-			},
-			"netherrealm": {
-				"baraka": "Baraka",
-				"cassie": "Cassie Cage",
-				"cetrion": "Cetrion",
-				"dvorah": "D'Vorah",
-				"erron": "Erron Black",
-				"frost": "Frost",
-				"fujin": "Fujin",
-				"geras": "Geras",
-				"jacqui": "Jacqui Briggs",
-				"jade": "Jade",
-				"jax": "Jax Briggs",
-				"johnny": "Johnny Cage",
-				"kabal": "Kabal",
-				"kano": "Kano",
-				"kitana": "Kitana",
-				"kollector": "Kollector",
-				"kotal": "Kotal Khan",
-				"kung": "Kung Lao",
-				"liu": "Liu Kang",
-				"mileena": "Mileena",
-				"nightwolf": "Nightwolf",
-				"noob": "Noob Saibot",
-				"raiden": "Raiden",
-				"rain": "Rain",
-				"scorpion": "Scorpion",
-				"shang": "Shang Tsung",
-				"sheeva": "Sheeva",
-				"sindel": "Sindel",
-				"shao": "Shao Khan",
-				"skarlet": "Skarlet",
-				"sonya": "Sonya Blade",
-				"subzero": "Sub-Zero"
-			},
-			"nintendo": {
-				"bowser": "Bowser",
-				"bowserjr": "Bowser Jr.",
-				"brawler": "Mii Brawler",
-				"byleth": "Byleth",
-				"charizard": "Charizard",
-				"chrom": "Chrom",
-				"climbers": "Ice Climbers",
-				"corrin": "Corrin",
-				"daisy": "Daisy",
-				"dedede": "King Dedede",
-				"diddy": "Diddy Kong",
-				"dk": "Donkey Kong",
-				"dpit": "Dark Pit",
-				"drmario": "Dr. Mario",
-				"dsamus": "Dark Samus",
-				"duckhunt": "Duck Hunt",
-				"falco": "Falco",
-				"falcon": "Captain Falcon",
-				"fox": "Fox",
-				"ganondorf": "Ganondorf",
-				"gaw": "Mr. Game & Watch",
-				"greninja": "Greninja",
-				"gunner": "Mii Gunner",
-				"ike": "Ike",
-				"inceneroar": "Inceneroar",
-				"inkling": "Inkling",
-				"isabelle": "Isabelle",
-				"ivysaur": "Ivysaur",
-				"jigglypuff": "Jigglypuff",
-				"kirby": "Kirby",
-				"krool": "King K. Rool",
-				"link": "Link",
-				"lucario": "Lucario",
-				"lucas": "Lucas",
-				"lucina": "Lucina",
-				"luigi": "Luigi",
-				"mac": "Little Mac",
-				"mario": "Mario",
-				"marth": "Marth",
-				"meta": "Meta Knight",
-				"mewtwo": "Mewtwo",
-				"minmin": "Min Min",
-				"ness": "Ness",
-				"olimar": "Olimar",
-				"palutena": "Palutena",
-				"peach": "Peach",
-				"pichu": "Pichu",
-				"pikachu": "Pikachu",
-				"pit": "Pit",
-				"plant": "Piranha Plant",
-				"ridley": "Ridley",
-				"rob": "R.O.B.",
-				"robin": "Robin",
-				"rosalina": "Rosalina & Luma",
-				"roy": "Roy",
-				"samus": "Samus",
-				"sheik": "Sheik",
-				"squirtle": "Squirtle",
-				"swordfighter": "Mii Swordfighter",
-				"tlink": "Toon Link",
-				"trainer": "Wii Fit Trainer",
-				"villager": "Villager",
-				"wario": "Wario",
-				"wolf": "Wolf",
-				"ylink": "Young Link",
-				"yoshi": "Yoshi",
-				"zelda": "Zelda",
-				"zss": "Zero Suit Samus"
-			},
-			"nway": {
-				"anubis": "Anubis Cruger",
-				"adam": "Adam Park",
-				"cbr": "Cenozoic Blue Ranger",
-				"daishi": "Dai Shi",
-				"drakkon": "Lord Drakkon",
-				"eric": "Eric Myers",
-				"gia": "Gia Moran",
-				"goldar": "Goldar",
-				"jason": "Jason Lee Scott",
-				"jen": "Jen Scotts",
-				"kat": "Kat Manx",
-				"kimberly": "Kimberly Ann Hart",
-				"lauren": "Lauren Shiba",
-				"mastodon": "Mastodon Sentry",
-				"mike": "Mike Corbett",
-				"poisandra": "Poisandra",
-				"rita": "Rita Repulsa",
-				"robert": "Robert James",
-				"scorpina": "Scorpina",
-				"tommy": "Tommy Oliver",
-				"trey": "Trey of Triforia",
-				"trini": "Trini Kwan",
-				"udonna": "Udonna",
-				"zedd": "Lord Zedd"
-			},
-			"projektred": {
-				"geralt": "Geralt"
-			},
-			"rare": {
-				"aganos": "Aganos",
-				"aria": "ARIA",
-				"banjo": "Banjo & Kazooie",
-				"cinder": "Cinder",
-				"combo": "T.J. Combo",
-				"eagle": "Eagle",
-				"eyedol": "Eyedol",
-				"jago": "Jago",
-				"fulgore": "Fulgore",
-				"gargos": "Gargos",
-				"glacius": "Glacius",
-				"hisako": "Hisako",
-				"kanra": "Kan-Ra",
-				"kilgore": "Kilgore",
-				"kimwu": "Kim Wu",
-				"maya": "Maya",
-				"mira": "Mira",
-				"omen": "Omen",
-				"orchid": "Orchid",
-				"rash": "Rash",
-				"riptor": "Riptor",
-				"sabrewulf": "Sabrewulf",
-				"sadira": "Sadira",
-				"shisako": "Shin Hisako",
-				"sjago": "Shadow Jago",
-				"spinal": "Spinal",
-				"thunder": "Thunder",
-				"tusk": "Tusk"
-			},
-			"sectork": {
-				"arn01d": "arn01d",
-				"agent": "Agent-G",
-				"cid": "Cid",
-				"dog": "Dog",
-				"gat": "Gat",
-				"maxx": "Maxx",
-				"roy": "Roy",
-				"tyara": "Tyara"
-			},
-			"sega": {
-				"akira": "Akira",
-				"aoi": "Aoi",
-				"bayonetta": "Bayonetta",
-				"blaze": "El Blaze",
-				"brad": "Brad",
-				"eileen": "Eileen",
-				"goh": "Goh",
-				"jacky": "Jacky",
-				"jean": "Jean",
-				"jeffry": "Jeffry",
-				"kage": "Kage-Maru",
-				"lau": "Lau",
-				"lei": "Lei-Fei",
-				"lion": "Lion",
-				"pai": "Pai",
-				"sarah": "Sarah",
-				"shun": "Shun Di",
-				"sonic": "Sonic",
-				"taka": "Taka-Arashi",
-				"vanessa": "Vanessa",
-				"wolf": "Wolf"
-			},
-			"shueisha": {
-				"agohan": "Gohan (Adult)",
-				"android16": "Android 16",
-				"android17": "Android 17",
-				"android18": "Android 18",
-				"android21": "Android 21",
-				"bardock": "Bardock",
-				"beerus": "Beerus",
-				"broly": "Broly",
-				"cell": "Cell",
-				"cginyu": "Captain Ginyu",
-				"cooler": "Cooler",
-				"dbsbroly": "Broly (DBS)",
-				"frieza": "Frieza",
-				"goku": "Goku",
-				"gokublack": "Goku Black",
-				"gotenks": "Gotenks",
-				"gtgoku": "GT Goku",
-				"hit": "Hit",
-				"janemba": "Janemba",
-				"jiren": "Jiren",
-				"kefla": "Kefla",
-				"kidbuu": "Kid Buu",
-				"krillin": "Krillin",
-				"lcandroid21": "Android 21 (Lab Coat)",
-				"majinbuu": "Majin Buu",
-				"nappa": "Nappa",
-				"piccolo": "Piccolo",
-				"roshi": "Master Roshi",
-				"ssgoku": "Goku (Super Saiyan)",
-				"ss4gogeta": "Gogeta (SS4)",
-				"ss4goku": "Goku (SS4)",
-				"ssgssgogeta": "Gogeta (SSGSS)",
-				"ssgssgoku": "Goku (SSGSS)",
-				"ssgssvegita": "Vegita (SSGSS)",
-				"ssgssvegito": "Vegito (SSGSS)",
-				"ssvegita": "Vegita (Super Saiyan)",
-				"superbaby2": "Super Baby 2",
-				"tgohan": "Gohan (Teen)",
-				"tien": "Tien",
-				"trunks": "Trunks",
-				"uigoku": "Goku (Ultra Instinct)",
-				"vegeta": "Vegeta",
-				"videl": "Videl",
-				"yamcha": "Yamcha",
-				"zamasu": "Zamasu (Fused)"
-			},
-			"snk": {
-				"adelheid": "Adelheid",
-				"akari": "Akari",
-				"alice": "Alice",
-				"amakusa": "Amakusa",
-				"amano": "Amano",
-				"andy": "Andy",
-				"angel": "Angel",
-				"antonov": "Antonov",
-				"ash": "Ash",
-				"athena": "Athena",
-				"bandeiras": "Bandeiras",
-				"bao": "Bao",
-				"basara": "Basara",
-				"benimaru": "Benimaru",
-				"billy": "Billy",
-				"bjenet": "B. Jenet",
-				"bluemary": "Blue Mary",
-				"brian": "Brian",
-				"butt": "Butt",
-				"chamcham": "Cham Cham",
-				"chang": "Chang",
-				"charlotte": "Charlotte",
-				"chin": "Chin",
-				"chizuru": "Chizuru",
-				"choi": "Choi",
-				"chris": "Chris",
-				"clark": "Clark",
-				"daimon": "Daimon",
-				"darli": "Darli",
-				"dinosaur": "The King of Dinosaurs",
-				"dolores": "Dolores",
-				"donghwan": "Donghwan",
-				"duckking": "Duck King",
-				"duolon": "Duo Lon",
-				"earthquake": "Earthquake",
-				"eiji": "Eiji",
-				"elisabeth": "Elisabeth",
-				"enja": "Enja",
-				"exandy": "EX Andy",
-				"exbilly": "EX Billy",
-				"exbluemary": "EX Blue Mary",
-				"exgeese": "EX Geese",
-				"exiori": "EX Iori",
-				"exjoe": "EX Joe",
-				"exkensou": "EX Kensou",
-				"exking": "EX King",
-				"exkyo": "EX Kyo",
-				"exmai": "EX Mai",
-				"exrobert": "EX Robert",
-				"exryo": "EX Ryo",
-				"extakuma": "EX Takuma",
-				"exterry": "EX Terry",
-				"exyamazaki": "EX Yamazaki",
-				"exyuri": "EX Yuri",
-				"foxy": "Foxy",
-				"freeman": "Freeman",
-				"gai": "Gai",
-				"gaira": "Gaira",
-				"galford": "Galford",
-				"gangil": "Gang-Il",
-				"gaoh": "Gaoh",
-				"gato": "Gato",
-				"genjuro": "Genjuro",
-				"geese": "Geese",
-				"goenitz": "Goenitz",
-				"gongsun": "Gongsun",
-				"grant": "Grant",
-				"griffon": "Griffon",
-				"hanzo": "Hanzo",
-				"haohmaru": "Haohmaru",
-				"hayate": "Hayate",
-				"heavy": "Heavy D!",
-				"heidern": "Heidern",
-				"hein": "Hein",
-				"hibiki": "Hibiki",
-				"hinako": "Hinako",
-				"hokutomaru": "Hokutomaru",
-				"hotaru": "Hotaru",
-				"hwajai": "Hwa Jai",
-				"iori": "Iori",
-				"iroha": "Iroha",
-				"isla": "Isla",
-				"jaehoon": "Jaehoon",
-				"jhun": "Jhun",
-				"joe": "Joe",
-				"jubei": "Jubei",
-				"juzoh": "Juzoh",
-				"jyazu": "Jyazu",
-				"k": "K'",
-				"kaede": "Kaede",
-				"kagami": "Kagami",
-				"kain": "Kain",
-				"karate": "Mr. Karate",
-				"kasumi": "Kasumi",
-				"kazuki": "Kazuki",
-				"kensou": "Kensou",
-				"kevin": "Kevin",
-				"kim": "Kim",
-				"king": "King",
-				"kojiro": "Kojiro",
-				"krauser": "Krauser",
-				"krohnen": "Krohnen",
-				"kukri": "Kukri",
-				"kula": "Kula",
-				"kusaregedo": "Kusaregedo",
-				"kusanagi": "Kusanagi",
-				"kyo": "Kyo",
-				"kyo1": "Kyo-1",
-				"kyo2": "Kyo-2",
-				"kyoshiro": "Kyoshiro",
-				"lee": "Lee",
-				"leona": "Leona",
-				"lin": "Lin",
-				"loveheart": "Love Heart",
-				"lucky": "Lucky",
-				"luong": "Luong",
-				"mai": "Mai",
-				"malin": "Malin",
-				"mature": "Mature",
-				"maxima": "Maxima",
-				"maylee": "May Lee",
-				"meitenkun": "Meitenkun",
-				"mian": "Mian",
-				"mina": "Mina",
-				"mizuki": "Mizuki",
-				"momoko": "Momoko",
-				"moriya": "Moriya",
-				"mrbig": "Mr. Big",
-				"muimui": "Mui Mui",
-				"mukuro": "Mukuro",
-				"nakoruru": "Nakoruru",
-				"nameless": "Nameless",
-				"nelson": "Nelson",
-				"ochris": "Orochi Chris",
-				"okaede": "O. Kaede",
-				"okina": "Okina",
-				"oshermie": "Orochi Shermie",
-				"oswald": "Oswald",
-				"oyashiro": "Orochi Yashiro",
-				"raiden": "Raiden",
-				"ralf": "Ralf",
-				"ramon": "Ramon",
-				"rera": "Rera",
-				"resetsuamru": "Resetsumaru",
-				"rimururu": "Rimururu",
-				"robert": "Robert",
-				"rock": "Rock",
-				"rugal": "Rugal",
-				"ruixiang": "Ruixiang",
-				"ryo": "Ryo",
-				"saiki": "Saiki",
-				"saisyu": "Saisyu",
-				"seth": "Seth",
-				"setsuna": "Setsuna",
-				"shen": "Shen",
-				"shigen": "Shigen",
-				"shiki": "Shiki",
-				"shunei": "Shun'ei",
-				"shermie": "Shermie",
-				"shingo": "Shingo",
-				"shizumaru": "Shizumaru",
-				"silber": "Silber",
-				"sogetsu": "Sogetsu",
-				"suija": "Suija",
-				"sylvie": "Sylvie",
-				"takuma": "Takuma",
-				"tamtam": "Tam Tam",
-				"terry": "Terry",
-				"tizoc": "Tizoc",
-				"todoh": "Todoh",
-				"tung": "Tung Fu Rue",
-				"ukyo": "Ukyo",
-				"vanessa": "Vanessa",
-				"verse": "Verse",
-				"vice": "Vice",
-				"wanfu": "Wan-Fu",
-				"washizuka": "Washizuka",
-				"whip": "Whip",
-				"xanadu": "Xanadu",
-				"xiangfei": "Xiangfei",
-				"yamazaki": "Yamazaki",
-				"yashamaru": "Yashamaru",
-				"yashiro": "Yashiro",
-				"yoshitora": "Yoshitora",
-				"yuki": "Yuki",
-				"yunfei": "Yunfei",
-				"yuri": "Yuri",
-				"zankuro": "Zankuro",
-				"zantetsu": "Zantetsu",
-				"zarina": "Zarina"
-			},
-			"square": {
-				"2b": "2B",
-				"arthurbp": "Arthur Blade Protector",
-				"bisclarvet": "Bisclarvet",
-				"cloud": "Cloud",
-				"eflame": "Eternal Flame",
-				"hero": "Hero",
-				"iai": "Iai Arthur",
-				"koume": "Koume Sakiyama",
-				"nimue": "Nimue",
-				"noctis": "Noctis",
-				"riesz": "Riesz",
-				"sephiroth": "Sephiroth",
-				"snowwhite": "Snow White",
-				"sora": "Sora",
-				"thief": "Thief Arthur",
-				"twinblade": "Twinblade Arthur",
-				"wildcat": "Wildcat Arthur",
-				"zechs": "Zechs Siegfried"
-			},
-			"subtlestyle": {
-				"adler": "Adler",
-				"akatsuki": "Akatsuki",
-				"anonym": "Anonym",
-				"blitztank": "Blitztank",
-				"elektrosoldat": "Elektrosoldat",
-				"fritz": "Fritz",
-				"kanae": "Kanae",
-				"marilyn": "Marilyn Sue",
-				"murakumo": "Murakumo",
-				"mycale": "Mycale",
-				"perfecti": "Perfecti",
-				"sai": "Sai",
-				"wei": "Wei"
-			},
-			"sunsoft": {
-				"arina": "Arina",
-				"dandy": "Dandy-J",
-				"mauru": "Mauru",
-				"politank": "Politank-Z",
-				"rai": "Rai",
-				"slash": "Slash",
-				"tesse": "Tesse"
-			},
-			"takeuchi": {
-				"chibi": "Sailor Chibi Moon",
-				"jupiter": "Sailor Jupiter",
-				"mars": "Sailor Mars",
-				"mercury": "Sailor Mercury",
-				"moon": "Sailor Moon",
-				"neptune": "Sailor Neptune",
-				"pluto": "Sailor Pluto",
-				"saturn": "Sailor Saturn",
-				"uranus": "Sailor Uranus",
-				"venus": "Sailor Venus"
-			},
-			"tatsunoko": {
-				"casshan": "Casshan",
-				"daimao": "Hakushon Daimao",
-				"doronjo": "Doronjo",
-				"ippatsuman": "Ippatsuman",
-				"joe": "Joe the Condor",
-				"jun": "Jun the Swan",
-				"karas": "Karas",
-				"ken": "Ken the Eagle",
-				"lightan": "Gold Lightan",
-				"polimar": "Polimar",
-				"tekkaman": "Tekkaman",
-				"takkamanb": "Tekkaman Blade",
-				"yatterman1": "Yatterman-1",
-				"yatterman2": "Yatterman-2"
-			},
-			"ubisoft": {
-				"ezio": "Ezio",
-				"warden": "Warden"
-			},
-			"visco": {
-				"alsion": "Alsion III",
-				"baihu": "Bai-Hu",
-				"condor": "Condor",
-				"daolong": "Dao-Long",
-				"maherl": "Maherl",
-				"pielle": "Pielle",
-				"rila": "Rila",
-				"saizo": "Saizo",
-				"sho": "Sho",
-				"tia": "Tia"
-			},
-			"vivendi": {
-				"rambo": "John Rambo",
-				"terminator": "Terminator"
-			}
+		{
+			"name": "Guilty Gear Strive",
+			"id": "ggst",
+			"characters": [
+				{
+					"name": "A.B.A.",
+					"id": "aba"
+				},
+				{
+					"name": "Anji",
+					"id": "anji"
+				},
+				{
+					"name": "Axl",
+					"id": "axl"
+				},
+				{
+					"name": "Asuka",
+					"id": "asuka"
+				},
+				{
+					"name": "Baiken",
+					"id": "baiken"
+				},
+				{
+					"name": "Bedman",
+					"id": "bedman"
+				},
+				{
+					"name": "Bridget",
+					"id": "bridget"
+				},
+				{
+					"name": "Chipp",
+					"id": "chipp"
+				},
+				{
+					"name": "Elphelt",
+					"id": "elphelt"
+				},
+				{
+					"name": "Faust",
+					"id": "faust"
+				},
+				{
+					"name": "Giovanna",
+					"id": "giovanna"
+				},
+				{
+					"name": "Goldlewis",
+					"id": "goldlewis"
+				},
+				{
+					"name": "Happy Chaos",
+					"id": "chaos"
+				},
+				{
+					"name": "I-No",
+					"id": "ino"
+				},
+				{
+					"name": "Jack-O",
+					"id": "jacko"
+				},
+				{
+					"name": "Johnny",
+					"id": "johnny"
+				},
+				{
+					"name": "Ky",
+					"id": "ky"
+				},
+				{
+					"name": "Leo",
+					"id": "leo"
+				},
+				{
+					"name": "Lucy",
+					"id": "lucy"
+				},
+				{
+					"name": "May",
+					"id": "may"
+				},
+				{
+					"name": "Millia",
+					"id": "millia"
+				},
+				{
+					"name": "Nagoriyuki",
+					"id": "nagoriyuki"
+				},
+				{
+					"name": "Potemkin",
+					"id": "potemkin"
+				},
+				{
+					"name": "Queen Dizzy",
+					"id": "qdizzy"
+				},
+				{
+					"name": "Ramlethal",
+					"id": "ramlethal"
+				},
+				{
+					"name": "Sin",
+					"id": "sin"
+				},
+				{
+					"name": "Slayer",
+					"id": "slayer"
+				},
+				{
+					"name": "Sol",
+					"id": "sol"
+				},
+				{
+					"name": "Testament",
+					"id": "testament"
+				},
+				{
+					"name": "Unika",
+					"id": "Unika"
+				},
+				{
+					"name": "Venom",
+					"id": "venom"
+				},
+				{
+					"name": "Zato-1",
+					"id": "zato"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Killer Instinct",
+			"id": "ki",
+			"characters": [
+				{
+					"name": "Aganos",
+					"id": "aganos"
+				},
+				{
+					"name": "Arbiter",
+					"id": "arbiter"
+				},
+				{
+					"name": "ARIA",
+					"id": "aria"
+				},
+				{
+					"name": "Cinder",
+					"id": "cinder"
+				},
+				{
+					"name": "Eagle",
+					"id": "eagle"
+				},
+				{
+					"name": "Eyedol",
+					"id": "eyedol"
+				},
+				{
+					"name": "Fulgore",
+					"id": "fulgore"
+				},
+				{
+					"name": "Gargos",
+					"id": "gargos"
+				},
+				{
+					"name": "General RAAM",
+					"id": "raam"
+				},
+				{
+					"name": "Glacius",
+					"id": "glacius"
+				},
+				{
+					"name": "Hisako",
+					"id": "hisako"
+				},
+				{
+					"name": "Jago",
+					"id": "jago"
+				},
+				{
+					"name": "Kan-Ra",
+					"id": "kanra"
+				},
+				{
+					"name": "Kilgore",
+					"id": "kilgore"
+				},
+				{
+					"name": "Kim Wu",
+					"id": "kimwu"
+				},
+				{
+					"name": "Maya",
+					"id": "maya"
+				},
+				{
+					"name": "Mira",
+					"id": "mira"
+				},
+				{
+					"name": "Omen",
+					"id": "omen"
+				},
+				{
+					"name": "Orchid",
+					"id": "orchid"
+				},
+				{
+					"name": "Rash",
+					"id": "rash"
+				},
+				{
+					"name": "Riptor",
+					"id": "riptor"
+				},
+				{
+					"name": "Sabrewulf",
+					"id": "sabrewulf"
+				},
+				{
+					"name": "Sadira",
+					"id": "sadira"
+				},
+				{
+					"name": "Shadow Jago",
+					"id": "sjago"
+				},
+				{
+					"name": "Shin Hisako",
+					"id": "shisako"
+				},
+				{
+					"name": "Spinal",
+					"id": "spinal"
+				},
+				{
+					"name": "T.J. Combo",
+					"id": "combo"
+				},
+				{
+					"name": "Thunder",
+					"id": "thunder"
+				},
+				{
+					"name": "Tusk",
+					"id": "tusk"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Super Street Fighter II Turbo",
+			"id": "st",
+			"characters": [
+				{
+					"name": "N. Balrog",
+					"id": "xboxer"
+				},
+				{
+					"name": "N. Blanka",
+					"id": "xblanka"
+				},
+				{
+					"name": "N. Cammy",
+					"id": "xcammy"
+				},
+				{
+					"name": "N. Chun-Li",
+					"id": "xchun"
+				},
+				{
+					"name": "N. Dee Jay",
+					"id": "xdeejay"
+				},
+				{
+					"name": "N. Dhalsim",
+					"id": "xdhalsim"
+				},
+				{
+					"name": "N. E. Honda",
+					"id": "xhonda"
+				},
+				{
+					"name": "N. Fei Long",
+					"id": "xfei"
+				},
+				{
+					"name": "N. Guile",
+					"id": "xguile"
+				},
+				{
+					"name": "N. Ken",
+					"id": "xken"
+				},
+				{
+					"name": "N. M. Bison",
+					"id": "xdictator"
+				},
+				{
+					"name": "N. Ryu",
+					"id": "xryu"
+				},
+				{
+					"name": "N. Sagat",
+					"id": "xsagat"
+				},
+				{
+					"name": "N. T. Hawk",
+					"id": "xhawk"
+				},
+				{
+					"name": "N. Vega",
+					"id": "xclaw"
+				},
+				{
+					"name": "N. Zangief",
+					"id": "xzangief"
+				},
+				{
+					"name": "O. Balrog",
+					"id": "sboxer"
+				},
+				{
+					"name": "O. Blanka",
+					"id": "sblanka"
+				},
+				{
+					"name": "O. Cammy",
+					"id": "scammy"
+				},
+				{
+					"name": "O. Chun-Li",
+					"id": "schun"
+				},
+				{
+					"name": "O. Dee Jay",
+					"id": "sdeejay"
+				},
+				{
+					"name": "O. Dhalsim",
+					"id": "sdhalsim"
+				},
+				{
+					"name": "O. E. Honda",
+					"id": "shonda"
+				},
+				{
+					"name": "O. Fei Long",
+					"id": "sfei"
+				},
+				{
+					"name": "O. Guile",
+					"id": "sguile"
+				},
+				{
+					"name": "O. Ken",
+					"id": "sken"
+				},
+				{
+					"name": "O. M. Bison",
+					"id": "sdictator"
+				},
+				{
+					"name": "O. Ryu",
+					"id": "sryu"
+				},
+				{
+					"name": "O. Sagat",
+					"id": "ssagat"
+				},
+				{
+					"name": "O. T. Hawk",
+					"id": "shawk"
+				},
+				{
+					"name": "O. Vega",
+					"id": "sclaw"
+				},
+				{
+					"name": "O. Zangief",
+					"id": "szangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter Alpha 2",
+			"id": "sfa2",
+			"characters": [
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Charlie",
+					"id": "nash"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Sodom",
+					"id": "sodom"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter Alpha 3",
+			"id": "sfa3",
+			"characters": [
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Charlie",
+					"id": "nash"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Juli",
+					"id": "juli"
+				},
+				{
+					"name": "Juni",
+					"id": "juni"
+				},
+				{
+					"name": "Karin",
+					"id": "karin"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "R. Mika",
+					"id": "mika"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Sodom",
+					"id": "sodom"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter III: 3rd Strike",
+			"id": "3s",
+			"characters": [
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Alex",
+					"id": "alex"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dudley",
+					"id": "dudley"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Hugo",
+					"id": "hugo"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Necro",
+					"id": "necro"
+				},
+				{
+					"name": "Oro",
+					"id": "oro"
+				},
+				{
+					"name": "Q",
+					"id": "q"
+				},
+				{
+					"name": "Remy",
+					"id": "remy"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sean",
+					"id": "sean"
+				},
+				{
+					"name": "Twelve",
+					"id": "twelve"
+				},
+				{
+					"name": "Urien",
+					"id": "urien"
+				},
+				{
+					"name": "Yang",
+					"id": "yang"
+				},
+				{
+					"name": "Yun",
+					"id": "yun"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Ultra Street Fighter IV",
+			"id": "usf4",
+			"characters": [
+				{
+					"name": "Abel",
+					"id": "abel"
+				},
+				{
+					"name": "Adon",
+					"id": "adon"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "C. Viper",
+					"id": "viper"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Decapre",
+					"id": "decapre"
+				},
+				{
+					"name": "Dee Jay",
+					"id": "dj"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "Dudley",
+					"id": "dudley"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "El Fuerte",
+					"id": "fuerte"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Evil Ryu",
+					"id": "eryu"
+				},
+				{
+					"name": "Fei Long",
+					"id": "fei"
+				},
+				{
+					"name": "Gen",
+					"id": "gen"
+				},
+				{
+					"name": "Gouken",
+					"id": "gouken"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Guy",
+					"id": "guy"
+				},
+				{
+					"name": "Hakan",
+					"id": "hakan"
+				},
+				{
+					"name": "Hugo",
+					"id": "hugo"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Makoto",
+					"id": "makoto"
+				},
+				{
+					"name": "Oni",
+					"id": "oni"
+				},
+				{
+					"name": "Poison",
+					"id": "poison"
+				},
+				{
+					"name": "Rolento",
+					"id": "rolento"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Rufus",
+					"id": "rufus"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Seth",
+					"id": "seth"
+				},
+				{
+					"name": "T. Hawk",
+					"id": "hawk"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Yang",
+					"id": "yang"
+				},
+				{
+					"name": "Yun",
+					"id": "yun"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter V",
+			"id": "sf5",
+			"characters": [
+				{
+					"name": "Abigail",
+					"id": "abigail"
+				},
+				{
+					"name": "Akira",
+					"id": "akira"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Alex",
+					"id": "alex"
+				},
+				{
+					"name": "Balrog",
+					"id": "boxer"
+				},
+				{
+					"name": "Birdie",
+					"id": "birdie"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Cody",
+					"id": "cody"
+				},
+				{
+					"name": "Dan",
+					"id": "dan"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Ed",
+					"id": "ed"
+				},
+				{
+					"name": "F.A.N.G.",
+					"id": "fang"
+				},
+				{
+					"name": "Falke",
+					"id": "falke"
+				},
+				{
+					"name": "G",
+					"id": "g"
+				},
+				{
+					"name": "Gill",
+					"id": "gill"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Ibuki",
+					"id": "ibuki"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Kage",
+					"id": "kage"
+				},
+				{
+					"name": "Karin",
+					"id": "karin"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Kolin",
+					"id": "kolin"
+				},
+				{
+					"name": "Laura",
+					"id": "laura"
+				},
+				{
+					"name": "Lucia",
+					"id": "lucia"
+				},
+				{
+					"name": "Luke",
+					"id": "luke"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Menat",
+					"id": "menat"
+				},
+				{
+					"name": "Nash",
+					"id": "nash"
+				},
+				{
+					"name": "Necalli",
+					"id": "necalli"
+				},
+				{
+					"name": "Oro",
+					"id": "oro"
+				},
+				{
+					"name": "Poison",
+					"id": "poison"
+				},
+				{
+					"name": "R. Mika",
+					"id": "mika"
+				},
+				{
+					"name": "Rashid",
+					"id": "rashid"
+				},
+				{
+					"name": "Rose",
+					"id": "rose"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Sagat",
+					"id": "sagat"
+				},
+				{
+					"name": "Sakura",
+					"id": "sakura"
+				},
+				{
+					"name": "Seth",
+					"id": "seth"
+				},
+				{
+					"name": "Urien",
+					"id": "urien"
+				},
+				{
+					"name": "Vega",
+					"id": "claw"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				},
+				{
+					"name": "Zeku",
+					"id": "zeku"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Street Fighter 6",
+			"id": "sf6",
+			"characters": [
+				{
+					"name": "A.K.I.",
+					"id": "aki"
+				},
+				{
+					"name": "Akuma",
+					"id": "akuma"
+				},
+				{
+					"name": "Blanka",
+					"id": "blanka"
+				},
+				{
+					"name": "Cammy",
+					"id": "cammy"
+				},
+				{
+					"name": "Chun-Li",
+					"id": "chun"
+				},
+				{
+					"name": "Dee Jay",
+					"id": "dj"
+				},
+				{
+					"name": "Dhalsim",
+					"id": "dhalsim"
+				},
+				{
+					"name": "E. Honda",
+					"id": "honda"
+				},
+				{
+					"name": "Ed",
+					"id": "ed"
+				},
+				{
+					"name": "Elena",
+					"id": "elena"
+				},
+				{
+					"name": "Guile",
+					"id": "guile"
+				},
+				{
+					"name": "Jamie",
+					"id": "jamie"
+				},
+				{
+					"name": "JP",
+					"id": "jp"
+				},
+				{
+					"name": "Juri",
+					"id": "juri"
+				},
+				{
+					"name": "Ken",
+					"id": "ken"
+				},
+				{
+					"name": "Kimberly",
+					"id": "kimberly"
+				},
+				{
+					"name": "Lily",
+					"id": "lily"
+				},
+				{
+					"name": "Luke",
+					"id": "luke"
+				},
+				{
+					"name": "M. Bison",
+					"id": "dictator"
+				},
+				{
+					"name": "Mai",
+					"id": "mai"
+				},
+				{
+					"name": "Manon",
+					"id": "manon"
+				},
+				{
+					"name": "Marisa",
+					"id": "marisa"
+				},
+				{
+					"name": "Rashid",
+					"id": "rashid"
+				},
+				{
+					"name": "Ryu",
+					"id": "ryu"
+				},
+				{
+					"name": "Terry",
+					"id": "terry"
+				},
+				{
+					"name": "Zangief",
+					"id": "zangief"
+				}
+			],
+			"filters": []
+		},
+		{
+			"name": "Tekken 8",
+			"id": "t8",
+			"characters": [
+				{
+					"name": "Alisa",
+					"id": "alica"
+				},
+				{
+					"name": "Anna",
+					"id": "anna"
+				},
+				{
+					"name": "Armor King",
+					"id": "aking"
+				},
+				{
+					"name": "Asuka",
+					"id": "asuka"
+				},
+				{
+					"name": "Azucena",
+					"id": "azucena"
+				},
+				{
+					"name": "Bryan",
+					"id": "bryan"
+				},
+				{
+					"name": "Claudio",
+					"id": "claudio"
+				},
+				{
+					"name": "Clive",
+					"id": "clive"
+				},
+				{
+					"name": "Devil Jin",
+					"id": "djin"
+				},
+				{
+					"name": "Dragunov",
+					"id": "dragunov"
+				},
+				{
+					"name": "Eddy",
+					"id": "eddy"
+				},
+				{
+					"name": "Fahkumram",
+					"id": "fahkumram"
+				},
+				{
+					"name": "Feng",
+					"id": "feng"
+				},
+				{
+					"name": "Heihachi",
+					"id": "heihachi"
+				},
+				{
+					"name": "Hwoarang",
+					"id": "hwoarang"
+				},
+				{
+					"name": "JACK-8",
+					"id": "jack"
+				},
+				{
+					"name": "Jin",
+					"id": "jin"
+				},
+				{
+					"name": "Jun",
+					"id": "jun"
+				},
+				{
+					"name": "Kazuya",
+					"id": "kazuya"
+				},
+				{
+					"name": "King",
+					"id": "king"
+				},
+				{
+					"name": "Kuma",
+					"id": "kuma"
+				},
+				{
+					"name": "Lars",
+					"id": "lars"
+				},
+				{
+					"name": "Law",
+					"id": "law"
+				},
+				{
+					"name": "Lee",
+					"id": "lee"
+				},
+				{
+					"name": "Leo",
+					"id": "leo"
+				},
+				{
+					"name": "Leroy",
+					"id": "leroy"
+				},
+				{
+					"name": "Lidia",
+					"id": "lidia"
+				},
+				{
+					"name": "Lili",
+					"id": "lili"
+				},
+				{
+					"name": "Nina",
+					"id": "nina"
+				},
+				{
+					"name": "Panda",
+					"id": "panda"
+				},
+				{
+					"name": "Paul",
+					"id": "paul"
+				},
+				{
+					"name": "Raven",
+					"id": "raven"
+				},
+				{
+					"name": "Reina",
+					"id": "reina"
+				},
+				{
+					"name": "Shaheen",
+					"id": "shaheen"
+				},
+				{
+					"name": "Steve",
+					"id": "steve"
+				},
+				{
+					"name": "Victor",
+					"id": "victor"
+				},
+				{
+					"name": "Yoshimitsu",
+					"id": "yoshimitsu"
+				},
+				{
+					"name": "Zafina",
+					"id": "zafina"
+				}
+			],
+			"filters": []
 		}
-	},
-	"game": {
-		"add": {
-			"title": {
-				"locale": "Clé de locale"
-			},
-			"created": "Jeu créé avec succès."
-		},
-		"edit": {
-			"success": "Jeu modifié avec succès."
-		},
-		"titles": {
-			"kof15": "The King of Fighters XV",
-			"kof14": "The King of Fighters XIV",
-			"kof13": "The King of Fighters XIII",
-			"kof11": "The King of Fighters XI",
-			"kof98": "The King of Fighters '98",
-			"kof98umfe": "The King of Fighters '98 Unlimited Match Final Edition",
-			"kof02": "The King of Fighters 2002",
-			"kof02um": "The King of Fighters 2002 Unlimited Match",
-			"kof97": "The King of Fighters '97",
-			"sfv": "Street Fighter V",
-			"usf4": "Ultra Street Fighter IV",
-			"sf33s": "Street Fighter III: Third Strike",
-			"st": "Super Street Fighter II Turbo",
-			"ggst": "Guilty Gear Strive",
-			"ggxxac": "Guilty Gear XX Accent Core",
-			"ggxrd": "Guilty Gear Xrd -Rev 2-",
-			"mbtl": "Melty Blood Type Lumina",
-			"maab": "Million Arthur Arcana Blood",
-			"sms": "Bishoujo Senshi Sailor Moon S",
-			"tmnt": "Teenage Mutant Ninja Turtles: Tournament Fighters",
-			"shaq": "Shaq Fu",
-			"cvs2": "Capcom Vs. SNK 2",
-			"mvc2": "Marvel Vs. Capcom 2",
-			"umvc3": "Ultimate Marvel Vs. Capcom 3",
-			"tvc": "Tatsunoko Vs. Capcom",
-			"breakrev": "Breakers Revenge",
-			"karnov": "Karnov's Revenge",
-			"punchplanet": "Punch Planet",
-			"koihime": "Koihime Enbu RyoRyoRai",
-			"tmntxjl": "Teenage Mutant Ninja Turtles X Justice League",
-			"sfxt": "Street Fighter X Tekken",
-			"ssbu": "Super Smash Bros. Ultimate",
-			"dnf": "DNF Duel",
-			"gbvs": "Granblue Fantasy Versus",
-			"ss7": "Samurai Shodown (2019)",
-			"ss5sp": "Samurai Shodown V Special",
-			"pj": "Project Justice",
-			"bbcf": "Blazblue Central Fiction",
-			"bbctb": "Blazblue Cross Tag Battle",
-			"dbfz": "Dragon Ball FighterZ",
-			"vsav": "Vampire Savior",
-			"fs": "Fantasy Strike",
-			"jcfof": "Jackie Chan in Fists of Fire",
-			"ab": "Akatsuki Blitzkampf",
-			"uni": "Under Night In-Birth Exe:Late[cl-r]",
-			"waku": "Waku Waku 7",
-			"hnk": "Hokuto no Ken",
-			"doa6": "Dead or Alive 6",
-			"fexl": "Fighting EX Layer",
-			"fuc": "Fate/Unlimited Codes",
-			"garou": "Garou: Mark of the Wolves",
-			"vf5": "Virtua Fighter 5 R.E.V.O.",
-			"smss": "Bishoujo Senshi Sailor Moon SuperS",
-			"ki2013": "Killer Instinct (2013)",
-			"mvci": "Marvel Vs. Capcom Infinite",
-			"bftg": "Power Rangers: Battle for the Grid",
-			"sg": "Skullgirls",
-			"pm": "Project M",
-			"ssbm": "Super Smash Bros. Melee",
-			"sc2": "Soulcalibur II",
-			"sc4": "Soulcalibur IV",
-			"sc5": "Soulcalibur V",
-			"sc6": "Soulcalibur VI",
-			"sfa2": "Street Fighter Alpha 2",
-			"sfa3": "Street Fighter Alpha 3",
-			"sfex2": "Street Fighter EX 2",
-			"t7": "Tekken 7",
-			"ttt2": "Tekken Tag Tournament 2",
-			"ttt": "Tekken Tag Tournament",
-			"ij2": "Injustice 2",
-			"mk11": "Mortal Kombat 11",
-			"ssb": "Super Smash Bros.",
-			"ssbb": "Super Smash Bros. Brawl",
-			"ssbw": "Super Smash Bros. for Wii U",
-			"2x": "2XKO",
-			"nasb": "Nickelodeon All-Stars Brawl",
-			"mk1": "Mortal Kombat 1",
-			"t8": "Tekken 8",
-			"sf6": "Street Fighter 6",
-			"cotw": "Fatal Fury: City of the Wolves"
-		}
-	},
-	"filter": {
-		"add": {
-			"type": {
-				"en": "Type de filtre en anglais",
-				"ja": "Type de filtre en japonais",
-				"ko": "Type de filtre en coréen",
-				"cn": "Type de filtre en chinois simplifié",
-				"tw": "Type de filtre en chinois traditionnel",
-				"fr": "Type de filtre en français"
-			},
-			"player": "Filtre joueur",
-			"created": "Filtre créé avec succès."
-		},
-		"link": {
-			"title": "Lier des filtres au jeu",
-			"success": "Filtres liés avec succès",
-			"select": "Sélectionner des filtres",
-			"selected": "Filtres sélectionnés"
-		},
-		"edit": {
-			"success": "Filtre modifié avec succès."
-		}
-	},
+	],
 	"settings": {
 		"user": {
 			"select": "Sélectionner un utilisateur :",
@@ -1537,7 +1817,7 @@
 				"user": "Utilisateur",
 				"admin": "Administrateur",
 				"banned": "Banni",
-				"edit": "Modifier les rôles des utilisateurs"
+				"edit": "Modifier les rôles utilisateur"
 			},
 			"update": "Mettre à jour l'utilisateur"
 		}
