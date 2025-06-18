@@ -20,10 +20,7 @@ import UserSettings from "./components/UserSettings";
 import VerifyUser from "./components/VerifyUser";
 
 // Contexts
-import CharacterContextProvider from "./contexts/CharacterContext";
 import CountryContextProvider from "./contexts/CountryContext";
-import FilterContextProvider from "./contexts/FilterContext";
-import GameContextProvider from "./contexts/GameContext";
 import MenuContextProvider from "./contexts/MenuContext";
 import NoteContextProvider from "./contexts/NoteContext";
 import { UserContext } from "./contexts/UserContext";
@@ -34,15 +31,7 @@ import neonColorsDark from "./themes/neonColorsDark";
 import neonColorsLight from "./themes/neonColorsLight";
 
 function Contexts({ children }) {
-  return (
-    <GameContextProvider>
-      <NoteContextProvider>
-        <CharacterContextProvider>
-          <FilterContextProvider>{children}</FilterContextProvider>
-        </CharacterContextProvider>
-      </NoteContextProvider>
-    </GameContextProvider>
-  );
+  return <NoteContextProvider>{children}</NoteContextProvider>;
 }
 
 function ProtectedRoutes({ toggleDarkTheme }) {
