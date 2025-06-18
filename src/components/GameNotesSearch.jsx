@@ -35,22 +35,28 @@ export default function GameNotesSearch() {
     }
 
     const selected = games.find((g) => g.id === game);
-    if (!selected) return; // should never happen
+    if (!selected) return;
 
     setCharOptions(
       selected.characters.map((c) => ({
-        label: c.name, // already localised inside i18n JSON
+        label: c.name,
         value: c.id,
       }))
     );
 
+    const commonGameFilters = t("notes.common.filters.games", {
+      returnObjects: true,
+    });
+
+    const combinedFilters = [...selected.filters, ...commonGameFilters];
+
     setFilterOptions(
-      selected.filters.map((f) => ({
-        label: f.name, // db-driven localisation helper
-        value: f.id, // tolerate either style
+      combinedFilters.map((f) => ({
+        label: f.name,
+        value: f.id,
       }))
     );
-  }, [game, language, games]);
+  }, [game, language, games, t]);
 
   useEffect(() => {
     if (!game) return;
