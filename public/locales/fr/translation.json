@@ -352,7 +352,20 @@
 					"id": "vox"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "Annulation de garde",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "Surchauffe",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "Granblue Fantasy Versus: Rising",

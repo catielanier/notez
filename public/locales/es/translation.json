@@ -350,7 +350,20 @@
 					"id": "vox"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "Cancelación de Guardia",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "Sobrecalentamiento",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "Granblue Fantasy Versus: Rising",

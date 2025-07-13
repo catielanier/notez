@@ -403,7 +403,20 @@
 					"id": "vox"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "Guard Cancel",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "Overheat",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "Granblue Fantasy Versus: Rising",

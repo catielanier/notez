@@ -190,7 +190,20 @@
 				{ "name": "提佐克", "id": "tizoc" },
 				{ "name": "沃克斯", "id": "vox" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "防御取消",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "过热",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "碧蓝幻想 Versus - 崛起",

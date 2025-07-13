@@ -190,7 +190,20 @@
 				{ "name": "提佐克", "id": "tizoc" },
 				{ "name": "沃克斯", "id": "vox" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "防禦取消",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "過熱",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "碧藍幻想 Versus: Rising",

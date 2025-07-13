@@ -191,7 +191,20 @@
 				{ "name": "Тизок", "id": "tizoc" },
 				{ "name": "Вокс", "id": "vox" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "Гард-кансел",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "Оверхит",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "Granblue Fantasy Versus: Rising",

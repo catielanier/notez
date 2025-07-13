@@ -190,7 +190,20 @@
 				{ "name": "ティゾック", "id": "tizoc" },
 				{ "name": "ヴォックス", "id": "vox" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "ガードキャンセル",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "オーバーヒート",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "グランブルーファンタジー ヴァーサス ライジング",

@@ -190,7 +190,20 @@
 				{ "name": "티자크", "id": "tizoc" },
 				{ "name": "복스", "id": "vox" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "S.P.G.",
+					"id": "spg"
+				},
+				{
+					"name": "가드 캔슬",
+					"id": "guard-cancel"
+				},
+				{
+					"name": "오버히트",
+					"id": "overheat"
+				}
+			]
 		},
 		{
 			"name": "그랑블루 판타지 버서스: 라이징",
