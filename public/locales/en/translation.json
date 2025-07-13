@@ -84,8 +84,78 @@
 			"game": "Choose a game:",
 			"universal": "This note should be displayed across all opponents.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{
+						"name": "Punish",
+						"id": "punish"
+					},
+					{
+						"name": "Neutral",
+						"id": "neutral"
+					},
+					{
+						"name": "Movement",
+						"id": "movement"
+					},
+					{
+						"name": "Full Screen",
+						"id": "full-screen"
+					},
+					{
+						"name": "Strategy",
+						"id": "strategy"
+					},
+					{
+						"name": "Close Range",
+						"id": "close-range"
+					},
+					{
+						"name": "Mixup",
+						"id": "mixup"
+					},
+					{
+						"name": "Option Select",
+						"id": "os"
+					},
+					{
+						"name": "Frame Trap",
+						"id": "frame-trap"
+					},
+					{
+						"name": "Anti-air",
+						"id": "aa"
+					},
+					{
+						"name": "Air-to-Air",
+						"id": "a2a"
+					}
+				],
+				"players": [
+					{
+						"name": "Main Character",
+						"id": "main"
+					},
+					{
+						"name": "Secondary Characters",
+						"id": "secondary"
+					},
+					{
+						"name": "Pattern",
+						"id": "pattern"
+					},
+					{
+						"name": "Online ID",
+						"id": "onlineid"
+					},
+					{
+						"name": "Player Knowledge",
+						"id": "knowledge"
+					},
+					{
+						"name": "Player Tendency",
+						"id": "tendency"
+					}
+				]
 			}
 		},
 		"new": {

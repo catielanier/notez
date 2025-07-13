@@ -84,8 +84,27 @@
 			"game": "選擇遊戲：",
 			"universal": "此筆記將顯示於所有對手之間。",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "懲罰", "id": "punish" },
+					{ "name": "中立", "id": "neutral" },
+					{ "name": "移動", "id": "movement" },
+					{ "name": "全螢幕", "id": "full-screen" },
+					{ "name": "策略", "id": "strategy" },
+					{ "name": "近距離", "id": "close-range" },
+					{ "name": "混合進攻", "id": "mixup" },
+					{ "name": "選項選擇 (OS)", "id": "os" },
+					{ "name": "卡幀陷阱", "id": "frame-trap" },
+					{ "name": "對空", "id": "aa" },
+					{ "name": "空對空", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "主力角色", "id": "main" },
+					{ "name": "副角色", "id": "secondary" },
+					{ "name": "套路", "id": "pattern" },
+					{ "name": "線上 ID", "id": "onlineid" },
+					{ "name": "玩家知識", "id": "knowledge" },
+					{ "name": "玩家傾向", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

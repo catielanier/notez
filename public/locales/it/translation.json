@@ -82,8 +82,27 @@
 			"game": "Scegli un gioco:",
 			"universal": "Questa nota sarà mostrata contro tutti gli avversari.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "Punizione", "id": "punish" },
+					{ "name": "Neutro", "id": "neutral" },
+					{ "name": "Movimento", "id": "movement" },
+					{ "name": "Tutto schermo", "id": "full-screen" },
+					{ "name": "Strategia", "id": "strategy" },
+					{ "name": "Distanza ravvicinata", "id": "close-range" },
+					{ "name": "Mix-up", "id": "mixup" },
+					{ "name": "Option Select", "id": "os" },
+					{ "name": "Frame Trap", "id": "frame-trap" },
+					{ "name": "Anti-air", "id": "aa" },
+					{ "name": "Air-to-air", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "Personaggio principale", "id": "main" },
+					{ "name": "Personaggi secondari", "id": "secondary" },
+					{ "name": "Pattern", "id": "pattern" },
+					{ "name": "ID online", "id": "onlineid" },
+					{ "name": "Conoscenza del giocatore", "id": "knowledge" },
+					{ "name": "Tendenza del giocatore", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

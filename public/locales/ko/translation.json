@@ -84,8 +84,27 @@
 			"game": "게임 선택:",
 			"universal": "이 노트는 모든 상대에게 표시됩니다.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "확정 반격", "id": "punish" },
+					{ "name": "뉴트럴", "id": "neutral" },
+					{ "name": "이동", "id": "movement" },
+					{ "name": "풀스크린", "id": "full-screen" },
+					{ "name": "전략", "id": "strategy" },
+					{ "name": "근거리", "id": "close-range" },
+					{ "name": "믹스업", "id": "mixup" },
+					{ "name": "옵션 셀렉트", "id": "os" },
+					{ "name": "프레임 트랩", "id": "frame-trap" },
+					{ "name": "대공", "id": "aa" },
+					{ "name": "공대공", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "메인 캐릭터", "id": "main" },
+					{ "name": "서브 캐릭터", "id": "secondary" },
+					{ "name": "패턴", "id": "pattern" },
+					{ "name": "온라인 ID", "id": "onlineid" },
+					{ "name": "플레이어 지식", "id": "knowledge" },
+					{ "name": "플레이어 성향", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

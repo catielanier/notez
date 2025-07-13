@@ -84,8 +84,27 @@
 			"game": "Choisissez un jeu :",
 			"universal": "Cette note doit être affichée pour tous les adversaires.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "Punition", "id": "punish" },
+					{ "name": "Neutre", "id": "neutral" },
+					{ "name": "Déplacement", "id": "movement" },
+					{ "name": "Écran complet", "id": "full-screen" },
+					{ "name": "Stratégie", "id": "strategy" },
+					{ "name": "Corps à corps", "id": "close-range" },
+					{ "name": "Mix-up", "id": "mixup" },
+					{ "name": "Option Select", "id": "os" },
+					{ "name": "Frame Trap", "id": "frame-trap" },
+					{ "name": "Anti-air", "id": "aa" },
+					{ "name": "Air-to-air", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "Personnage principal", "id": "main" },
+					{ "name": "Personnages secondaires", "id": "secondary" },
+					{ "name": "Pattern", "id": "pattern" },
+					{ "name": "ID en ligne", "id": "onlineid" },
+					{ "name": "Connaissance du joueur", "id": "knowledge" },
+					{ "name": "Tendance du joueur", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

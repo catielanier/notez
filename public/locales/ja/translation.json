@@ -84,8 +84,27 @@
 			"game": "ゲームを選択:",
 			"universal": "このノートをすべての対戦相手に表示する。",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "確定反撃", "id": "punish" },
+					{ "name": "ニュートラル", "id": "neutral" },
+					{ "name": "移動", "id": "movement" },
+					{ "name": "フルスクリーン", "id": "full-screen" },
+					{ "name": "戦略", "id": "strategy" },
+					{ "name": "近距離", "id": "close-range" },
+					{ "name": "ミックスアップ", "id": "mixup" },
+					{ "name": "オプションセレクト", "id": "os" },
+					{ "name": "フレームトラップ", "id": "frame-trap" },
+					{ "name": "対空", "id": "aa" },
+					{ "name": "空対空", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "メインキャラ", "id": "main" },
+					{ "name": "サブキャラ", "id": "secondary" },
+					{ "name": "パターン", "id": "pattern" },
+					{ "name": "オンラインID", "id": "onlineid" },
+					{ "name": "プレイヤー知識", "id": "knowledge" },
+					{ "name": "プレイヤー傾向", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

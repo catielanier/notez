@@ -82,8 +82,27 @@
 			"game": "Elige un juego:",
 			"universal": "Esta nota se mostrará para todos los oponentes.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "Castigo", "id": "punish" },
+					{ "name": "Neutral", "id": "neutral" },
+					{ "name": "Movimiento", "id": "movement" },
+					{ "name": "Pantalla completa", "id": "full-screen" },
+					{ "name": "Estrategia", "id": "strategy" },
+					{ "name": "Corta distancia", "id": "close-range" },
+					{ "name": "Mixup", "id": "mixup" },
+					{ "name": "Option Select", "id": "os" },
+					{ "name": "Frame Trap", "id": "frame-trap" },
+					{ "name": "Antiaéreo", "id": "aa" },
+					{ "name": "Aire a aire", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "Personaje principal", "id": "main" },
+					{ "name": "Personajes secundarios", "id": "secondary" },
+					{ "name": "Patrón", "id": "pattern" },
+					{ "name": "ID online", "id": "onlineid" },
+					{ "name": "Conocimiento del jugador", "id": "knowledge" },
+					{ "name": "Tendencias del jugador", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

@@ -85,8 +85,27 @@
 			"game": "Выберите игру:",
 			"universal": "Эта заметка отображается против всех соперников.",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "Наказание", "id": "punish" },
+					{ "name": "Нейтрал", "id": "neutral" },
+					{ "name": "Передвижение", "id": "movement" },
+					{ "name": "Полный экран", "id": "full-screen" },
+					{ "name": "Стратегия", "id": "strategy" },
+					{ "name": "Ближняя дистанция", "id": "close-range" },
+					{ "name": "Миксап", "id": "mixup" },
+					{ "name": "Опшн селект", "id": "os" },
+					{ "name": "Фрейм-трап", "id": "frame-trap" },
+					{ "name": "Анти-эйр", "id": "aa" },
+					{ "name": "Эйр-ту-эйр", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "Основной персонаж", "id": "main" },
+					{ "name": "Второстепенные персонажи", "id": "secondary" },
+					{ "name": "Паттерн", "id": "pattern" },
+					{ "name": "Онлайн ID", "id": "onlineid" },
+					{ "name": "Знание игрока", "id": "knowledge" },
+					{ "name": "Тенденции игрока", "id": "tendency" }
+				]
 			}
 		},
 		"new": {

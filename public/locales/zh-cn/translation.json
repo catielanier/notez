@@ -84,8 +84,27 @@
 			"game": "选择游戏：",
 			"universal": "此笔记应在所有对手中显示。",
 			"filters": {
-				"games": [],
-				"players": []
+				"games": [
+					{ "name": "惩罚", "id": "punish" },
+					{ "name": "中立", "id": "neutral" },
+					{ "name": "移动", "id": "movement" },
+					{ "name": "全屏", "id": "full-screen" },
+					{ "name": "策略", "id": "strategy" },
+					{ "name": "近距离", "id": "close-range" },
+					{ "name": "混合进攻", "id": "mixup" },
+					{ "name": "选项选择 (OS)", "id": "os" },
+					{ "name": "卡帧陷阱", "id": "frame-trap" },
+					{ "name": "对空", "id": "aa" },
+					{ "name": "空对空", "id": "a2a" }
+				],
+				"players": [
+					{ "name": "主力角色", "id": "main" },
+					{ "name": "副角色", "id": "secondary" },
+					{ "name": "套路", "id": "pattern" },
+					{ "name": "在线ID", "id": "onlineid" },
+					{ "name": "玩家知识", "id": "knowledge" },
+					{ "name": "玩家倾向", "id": "tendency" }
+				]
 			}
 		},
 		"new": {
