@@ -95,7 +95,8 @@
 					{ "name": "选项选择 (OS)", "id": "os" },
 					{ "name": "卡帧陷阱", "id": "frame-trap" },
 					{ "name": "对空", "id": "aa" },
-					{ "name": "空对空", "id": "a2a" }
+					{ "name": "空对空", "id": "a2a" },
+					{ "name": "假压制", "id": "fake-pressure" }
 				],
 				"players": [
 					{ "name": "主力角色", "id": "main" },

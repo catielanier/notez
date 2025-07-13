@@ -95,7 +95,8 @@
 					{ "name": "옵션 셀렉트", "id": "os" },
 					{ "name": "프레임 트랩", "id": "frame-trap" },
 					{ "name": "대공", "id": "aa" },
-					{ "name": "공대공", "id": "a2a" }
+					{ "name": "공대공", "id": "a2a" },
+					{ "name": "페이크 프레셔", "id": "fake-pressure" }
 				],
 				"players": [
 					{ "name": "메인 캐릭터", "id": "main" },

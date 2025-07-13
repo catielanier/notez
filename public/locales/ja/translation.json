@@ -95,7 +95,8 @@
 					{ "name": "オプションセレクト", "id": "os" },
 					{ "name": "フレームトラップ", "id": "frame-trap" },
 					{ "name": "対空", "id": "aa" },
-					{ "name": "空対空", "id": "a2a" }
+					{ "name": "空対空", "id": "a2a" },
+					{ "name": "フェイクプレッシャー", "id": "fake-pressure" }
 				],
 				"players": [
 					{ "name": "メインキャラ", "id": "main" },

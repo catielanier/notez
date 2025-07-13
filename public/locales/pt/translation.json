@@ -93,7 +93,8 @@
 					{ "name": "Option Select", "id": "os" },
 					{ "name": "Frame Trap", "id": "frame-trap" },
 					{ "name": "Anti-aéreo", "id": "aa" },
-					{ "name": "Ar-a-ar", "id": "a2a" }
+					{ "name": "Ar-a-ar", "id": "a2a" },
+					{ "name": "Pressão Falsa", "id": "fake-pressure" }
 				],
 				"players": [
 					{ "name": "Personagem principal", "id": "main" },
