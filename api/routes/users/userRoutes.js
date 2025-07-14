@@ -112,19 +112,31 @@ router.route("/login").post(async (req, res, next) => {
 
 router.route("/:id").get(async (req, res, next) => {
 	const {id} = req.params;
+	const token = req.headers.Authorization.replace("Bearer ", "");
 	try {
+		const loggedIn = await tokenService.verifyToken(token);
+		if (!loggedIn) {
+			res.status(403).send(t('errors.notLoggedIn'));
+		}
+		const {requestingUserId} = await tokenService.decodeToken(token);
+		const requestingUser = await userServices.getUserById(requestingUserId);
+		if (requestingUserId !== id || requestingUser.role !== 'ADMIN') {
+			res.status(503).send(t('errors.notLoggedIn'));
+		}
 		const user = await getUserById(id);
 		const {playerNotes, gameNotes} = user;
-		let decryptedPlayerNotes = playerNotes.map(note => {
-			note.note = decrypt(note.note);
-			return note;
-		})
-		let decryptedGameNotes = gameNotes.map(note => {
-			note.note = decrypt(note.note);
-			return note;
-		})
-		user.playerNotes = decryptedPlayerNotes;
-		user.gameNotes = decryptedGameNotes;
+		if (requestingUserId === id) {
+			let decryptedPlayerNotes = playerNotes.map(note => {
+				note.note = decrypt(note.note);
+				return note;
+			})
+			let decryptedGameNotes = gameNotes.map(note => {
+				note.note = decrypt(note.note);
+				return note;
+			})
+			user.playerNotes = decryptedPlayerNotes;
+			user.gameNotes = decryptedGameNotes;
+		}
 		res.status(200).json({
 			data: user,
 		});
