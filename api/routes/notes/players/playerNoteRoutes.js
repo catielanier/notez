@@ -2,6 +2,7 @@ import express from "express";
 import * as tokenService from "../../../utils/tokenService.js";
 import * as userServices from "../../users/userServices.js";
 import * as playerNoteServices from "./playerNoteServices.js";
+import { encrypt } from "../../../utils/crypto.js";
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.route("/").post(async (req, res) => {
 			res.status(503).send(t('errors.banned'));
 			return;
 		}
+		note.note = encrypt(note.note);
 		const newNote = await playerNoteServices.createNote(note);
 		if (newNote) {
 			const noteId = newNote._id;

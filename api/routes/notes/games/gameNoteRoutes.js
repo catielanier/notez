@@ -4,6 +4,7 @@ const router = express.Router();
 import * as tokenService from "../../../utils/tokenService.js";
 import * as userServices from "../../users/userServices.js";
 import * as gameNoteServices from "./gameNoteServices.js";
+import { encrypt } from "../../../utils/crypto.js";
 
 router.route("/").post(async (req, res) => {
 	const {t} = req;
@@ -19,6 +20,7 @@ router.route("/").post(async (req, res) => {
 		if (user.role === "Banned") {
 			res.status(503).send(t('errors.banned'));
 		}
+		note.note = encrypt(note.note);
 		const newNote = await gameNoteServices.createNote(note);
 		if (newNote) {
 			const noteId = newNote._id;
