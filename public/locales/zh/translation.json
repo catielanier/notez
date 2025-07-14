@@ -96,7 +96,8 @@
 					{ "name": "卡幀陷阱", "id": "frame-trap" },
 					{ "name": "對空", "id": "aa" },
 					{ "name": "空對空", "id": "a2a" },
-					{ "name": "假壓制", "id": "fake-pressure" }
+					{ "name": "假壓制", "id": "fake-pressure" },
+					{ "name": "Character Dependent Combo", "id": "character-dependent" }
 				],
 				"players": [
 					{ "name": "主力角色", "id": "main" },
@@ -326,7 +327,12 @@
 				{ "name": "雷霆", "id": "thunder" },
 				{ "name": "塔斯克", "id": "tusk" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Combo Breaker",
+					"id": "combo-breaker"
+				}
+			]
 		},
 		{
 			"name": "超級街頭霸王II X",
@@ -391,7 +397,12 @@
 				{ "name": "蘇多姆", "id": "sodom" },
 				{ "name": "桑吉爾夫", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "原創反擊",
+					"id": "alpha-counter"
+				}
+			]
 		},
 		{
 			"name": "街頭霸王ZERO 3",
@@ -425,7 +436,12 @@
 				{ "name": "巴洛克", "id": "claw" },
 				{ "name": "桑吉爾夫", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "ISM",
+					"id": "ism"
+				}
+			]
 		},
 		{
 			"name": "街頭霸王III 3rd Strike",
@@ -451,7 +467,12 @@
 				{ "name": "楊", "id": "yang" },
 				{ "name": "雲", "id": "yun" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Super Art",
+					"id": "super-art"
+				}
+			]
 		},
 		{
 			"name": "終極街頭霸王IV",
@@ -502,7 +523,12 @@
 				{ "name": "雲", "id": "yun" },
 				{ "name": "桑吉爾夫", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Ultra Combo",
+					"id": "ultra-combo"
+				}
+			]
 		},
 		{
 			"name": "街頭霸王V",
@@ -554,7 +580,24 @@
 				{ "name": "桑吉爾夫", "id": "zangief" },
 				{ "name": "澤庫", "id": "zeku" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "V-Trigger",
+					"id": "v-trigger"
+				},
+				{
+					"name": "V-Skill",
+					"id": "v-skill"
+				},
+				{
+					"name": "V-Shift",
+					"id": "v-shift"
+				},
+				{
+					"name": "V-Reversal",
+					"id": "v-reversal"
+				}
+			]
 		},
 		{
 			"name": "街頭霸王6",
@@ -587,7 +630,20 @@
 				{ "name": "泰瑞", "id": "terry" },
 				{ "name": "桑吉爾夫", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Drive Impact",
+					"id": "drive-impact"
+				},
+				{
+					"name": "Drive Parry",
+					"id": "drive-parry"
+				},
+				{
+					"name": "Drive Reversal",
+					"id": "drive-reversal"
+				}
+			]
 		},
 		{
 			"name": "鐵拳8",
@@ -632,7 +688,24 @@
 				{ "name": "義經", "id": "yoshimitsu" },
 				{ "name": "紮菲娜", "id": "zafina" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Stage Preference",
+					"id": "stage-preference"
+				},
+				{
+					"name": "Sidestep",
+					"id": "sidestep"
+				},
+				{
+					"name": "Heat",
+					"id": "heat"
+				},
+				{
+					"name": "Rage Art",
+					"id": "rage-art"
+				}
+			]
 		}
 	],
 	"settings": {

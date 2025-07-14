@@ -96,7 +96,8 @@
 					{ "name": "フレームトラップ", "id": "frame-trap" },
 					{ "name": "対空", "id": "aa" },
 					{ "name": "空対空", "id": "a2a" },
-					{ "name": "フェイクプレッシャー", "id": "fake-pressure" }
+					{ "name": "フェイクプレッシャー", "id": "fake-pressure" },
+					{ "name": "Character Dependent Combo", "id": "character-dependent" }
 				],
 				"players": [
 					{ "name": "メインキャラ", "id": "main" },
@@ -326,7 +327,12 @@
 				{ "name": "サンダー", "id": "thunder" },
 				{ "name": "タスク", "id": "tusk" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Combo Breaker",
+					"id": "combo-breaker"
+				}
+			]
 		},
 		{
 			"name": "スーパーストリートファイターII X",
@@ -390,7 +396,12 @@
 				{ "name": "ソドム", "id": "sodom" },
 				{ "name": "ザンギエフ", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "オリジナルカウンター",
+					"id": "alpha-counter"
+				}
+			]
 		},
 		{
 			"name": "ストリートファイターZERO3",
@@ -424,7 +435,12 @@
 				{ "name": "バルログ", "id": "claw" },
 				{ "name": "ザンギエフ", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "ISM",
+					"id": "ism"
+				}
+			]
 		},
 		{
 			"name": "ストリートファイターIII 3rd STRIKE",
@@ -450,7 +466,12 @@
 				{ "name": "ヤン", "id": "yang" },
 				{ "name": "ユン", "id": "yun" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Super Art",
+					"id": "super-art"
+				}
+			]
 		},
 		{
 			"name": "ウルトラストリートファイターIV",
@@ -501,7 +522,12 @@
 				{ "name": "ユン", "id": "yun" },
 				{ "name": "ザンギエフ", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Ultra Combo",
+					"id": "ultra-combo"
+				}
+			]
 		},
 		{
 			"name": "ストリートファイターV",
@@ -553,7 +579,24 @@
 				{ "name": "ザンギエフ", "id": "zangief" },
 				{ "name": "是空", "id": "zeku" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "V-Trigger",
+					"id": "v-trigger"
+				},
+				{
+					"name": "V-Skill",
+					"id": "v-skill"
+				},
+				{
+					"name": "V-Shift",
+					"id": "v-shift"
+				},
+				{
+					"name": "V-Reversal",
+					"id": "v-reversal"
+				}
+			]
 		},
 		{
 			"name": "ストリートファイター6",
@@ -586,7 +629,20 @@
 				{ "name": "テリー", "id": "terry" },
 				{ "name": "ザンギエフ", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Drive Impact",
+					"id": "drive-impact"
+				},
+				{
+					"name": "Drive Parry",
+					"id": "drive-parry"
+				},
+				{
+					"name": "Drive Reversal",
+					"id": "drive-reversal"
+				}
+			]
 		},
 		{
 			"name": "鉄拳8",
@@ -631,7 +687,24 @@
 				{ "name": "吉光", "id": "yoshimitsu" },
 				{ "name": "ザフィーナ", "id": "zafina" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Stage Preference",
+					"id": "stage-preference"
+				},
+				{
+					"name": "Sidestep",
+					"id": "sidestep"
+				},
+				{
+					"name": "Heat",
+					"id": "heat"
+				},
+				{
+					"name": "Rage Art",
+					"id": "rage-art"
+				}
+			]
 		}
 	],
 	"settings": {

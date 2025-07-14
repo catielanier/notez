@@ -132,6 +132,10 @@
 					{
 						"name": "Fake Pressure",
 						"id": "fake-pressure"
+					},
+					{
+						"name": "Character Dependent Combo",
+						"id": "character-dependent"
 					}
 				],
 				"players": [
@@ -845,7 +849,12 @@
 					"id": "tusk"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Combo Breaker",
+					"id": "combo-breaker"
+				}
+			]
 		},
 		{
 			"name": "Super Street Fighter II Turbo",
@@ -1059,7 +1068,12 @@
 					"id": "zangief"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Alpha Counter",
+					"id": "alpha-counter"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter Alpha 3",
@@ -1174,7 +1188,12 @@
 					"id": "zangief"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "ISM",
+					"id": "ism"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter III: 3rd Strike",
@@ -1257,7 +1276,12 @@
 					"id": "yun"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Super Art",
+					"id": "super-art"
+				}
+			]
 		},
 		{
 			"name": "Ultra Street Fighter IV",
@@ -1440,7 +1464,12 @@
 					"id": "zangief"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Ultra Combo",
+					"id": "ultra-combo"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter V",
@@ -1627,7 +1656,24 @@
 					"id": "zeku"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "V-Trigger",
+					"id": "v-trigger"
+				},
+				{
+					"name": "V-Skill",
+					"id": "v-skill"
+				},
+				{
+					"name": "V-Shift",
+					"id": "v-shift"
+				},
+				{
+					"name": "V-Reversal",
+					"id": "v-reversal"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter 6",
@@ -1738,7 +1784,20 @@
 					"id": "zangief"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Drive Impact",
+					"id": "drive-impact"
+				},
+				{
+					"name": "Drive Parry",
+					"id": "drive-parry"
+				},
+				{
+					"name": "Drive Reversal",
+					"id": "drive-reversal"
+				}
+			]
 		},
 		{
 			"name": "Tekken 8",
@@ -1897,7 +1956,24 @@
 					"id": "zafina"
 				}
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Stage Preference",
+					"id": "stage-preference"
+				},
+				{
+					"name": "Sidestep",
+					"id": "sidestep"
+				},
+				{
+					"name": "Heat",
+					"id": "heat"
+				},
+				{
+					"name": "Rage Art",
+					"id": "rage-art"
+				}
+			]
 		}
 	],
 	"settings": {

@@ -97,7 +97,8 @@
 					{ "name": "Фрейм-трап", "id": "frame-trap" },
 					{ "name": "Анти-эйр", "id": "aa" },
 					{ "name": "Эйр-ту-эйр", "id": "a2a" },
-					{ "name": "Фейк прессинг", "id": "fake-pressure" }
+					{ "name": "Фейк прессинг", "id": "fake-pressure" },
+					{ "name": "Character Dependent Combo", "id": "character-dependent" }
 				],
 				"players": [
 					{ "name": "Основной персонаж", "id": "main" },
@@ -327,7 +328,12 @@
 				{ "name": "Тандер", "id": "thunder" },
 				{ "name": "Таск", "id": "tusk" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Combo Breaker",
+					"id": "combo-breaker"
+				}
+			]
 		},
 		{
 			"name": "Super Street Fighter II Turbo",
@@ -391,7 +397,12 @@
 				{ "name": "Содом", "id": "sodom" },
 				{ "name": "Зангиев", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Alpha Counter",
+					"id": "alpha-counter"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter Alpha 3",
@@ -425,7 +436,12 @@
 				{ "name": "Вега", "id": "claw" },
 				{ "name": "Зангиев", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "ISM",
+					"id": "ism"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter III: 3rd Strike",
@@ -451,7 +467,12 @@
 				{ "name": "Янг", "id": "yang" },
 				{ "name": "Юн", "id": "yun" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Super Art",
+					"id": "super-art"
+				}
+			]
 		},
 		{
 			"name": "Ultra Street Fighter IV",
@@ -502,7 +523,12 @@
 				{ "name": "Юн", "id": "yun" },
 				{ "name": "Зангиев", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Ultra Combo",
+					"id": "ultra-combo"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter V",
@@ -554,7 +580,24 @@
 				{ "name": "Зангиев", "id": "zangief" },
 				{ "name": "Зэку", "id": "zeku" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "V-Trigger",
+					"id": "v-trigger"
+				},
+				{
+					"name": "V-Skill",
+					"id": "v-skill"
+				},
+				{
+					"name": "V-Shift",
+					"id": "v-shift"
+				},
+				{
+					"name": "V-Reversal",
+					"id": "v-reversal"
+				}
+			]
 		},
 		{
 			"name": "Street Fighter 6",
@@ -587,7 +630,20 @@
 				{ "name": "Терри", "id": "terry" },
 				{ "name": "Зангиев", "id": "zangief" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Drive Impact",
+					"id": "drive-impact"
+				},
+				{
+					"name": "Drive Parry",
+					"id": "drive-parry"
+				},
+				{
+					"name": "Drive Reversal",
+					"id": "drive-reversal"
+				}
+			]
 		},
 		{
 			"name": "Tekken 8",
@@ -632,7 +688,24 @@
 				{ "name": "Йошимицу", "id": "yoshimitsu" },
 				{ "name": "Зафина", "id": "zafina" }
 			],
-			"filters": []
+			"filters": [
+				{
+					"name": "Stage Preference",
+					"id": "stage-preference"
+				},
+				{
+					"name": "Sidestep",
+					"id": "sidestep"
+				},
+				{
+					"name": "Heat",
+					"id": "heat"
+				},
+				{
+					"name": "Rage Art",
+					"id": "rage-art"
+				}
+			]
 		}
 	],
 	"settings": {
