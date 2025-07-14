@@ -7,4 +7,4 @@ export const MJ_APIKEY_PRIVATE = process.env.MJ_APIKEY_PRIVATE;
 export const ENVIRONMENT = process.env.ENVIRONMENT;
 export const IP = process.env.IP;
 export const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
-export const IV_LENGTH = 16;
+export const IV_LENGTH = process.env.IV_LENGTH;
