@@ -21,6 +21,7 @@ import {
 import * as tokenService from "../../utils/tokenService.js";
 import axios from "axios";
 import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
+import { decrypt } from "../../utils/crypto.js";
 
 const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('base64');
 
@@ -113,6 +114,17 @@ router.route("/:id").get(async (req, res, next) => {
 	const {id} = req.params;
 	try {
 		const user = await getUserById(id);
+		const {playerNotes, gameNotes} = user;
+		let decryptedPlayerNotes = playerNotes.map(note => {
+			note.note = decrypt(note.note);
+			return note;
+		})
+		let decryptedGameNotes = gameNotes.map(note => {
+			note.note = decrypt(note.note);
+			return note;
+		})
+		user.playerNotes = decryptedPlayerNotes;
+		user.gameNotes = decryptedGameNotes;
 		res.status(200).json({
 			data: user,
 		});
