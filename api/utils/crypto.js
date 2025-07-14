@@ -1,7 +1,5 @@
 import crypto from 'crypto';
-
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
-const IV_LENGTH = 16;
+import { ENCRYPTION_KEY, IV_LENGTH } from './constants';
 
 export const encrypt = text => {
     const iv = crypto.randomBytes(IV_LENGTH);
