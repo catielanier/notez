@@ -1,8 +1,12 @@
 {
   "name": "notez",
   "private": true,
-  "version": "0.9.1",
+  "version": "1.0.0",
   "type": "module",
+  "author": {
+    "name": "Catie Lanier",
+    "email": "admin@checkthenotez.com"
+  },
   "scripts": {
     "dev:client": "vite",
     "dev:server": "nodemon server.js",
