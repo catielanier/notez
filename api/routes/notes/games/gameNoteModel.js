@@ -12,7 +12,9 @@ const gameNoteSchema = new Schema({
 	},
 	opponentCharacter: {
 		type: String,
-		required: this.opponentCharacter === false,
+		required: function() {
+			return this.universal === false;
+		},
 	},
 	universal: {
 		type: Boolean,
