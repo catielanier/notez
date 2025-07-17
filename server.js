@@ -1,4 +1,5 @@
 "use strict";
+import "dotenv/config"
 
 // Imports and defs
 import express from "express";
@@ -14,7 +15,6 @@ const __dirname = dirname(__filename);
 const router = express();
 
 // Middleware
-import dotenv from "dotenv";
 import path from "path";
 import middleWare from "./api/middleware/index.js";
 import {
@@ -26,7 +26,6 @@ import {
 } from "./api/utils/constants.js";
 import { applyMiddleware } from "./api/utils/index.js";
 
-dotenv.config({ path: `${__dirname}/.env` });
 
 applyMiddleware(middleWare, router);
 
