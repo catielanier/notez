@@ -22,39 +22,21 @@ router.route('/').post(async (req, res) => {
 			const finished = await inviteService.createInvite(newInvite);
 			// write email for sending invites
 			const messageBody = `
-								<h3>${t('emails.sender')}</h3>
-								<h5>${t('emails.invite.greeting')}</h5>
-								<p>${t('emails.invite.body1')}</p>
-								<p>${t('emails.invite.body1', {
-									url: `https://checkthenotez.com/invite/${finished._id}`
+								<h3>${t("emails.sender")}</h3>
+								<h5>${t("emails.invite.greeting")}</h5>
+								<p>${t("emails.invite.body1")}</p>
+								<p>${t("emails.invite.body1", {
+									url: `https://checkthenotez.com/invite/${finished._id}`,
 								})}</p>
-								<p>${t('emails.closing')}<br />${t('emails.team')}</p>
+								<p>${t("emails.closing")}<br />${t("emails.team")}</p>
 						`;
-			try {
-				const response = await axios.post(
-					'https://api.mailjet.com/v3/send',
-					{
-						FromEmail: 'no-reply@checkthenotez.com',
-						FromName: t('email.sender'),
-						Subject: t('emails.invite.subject'),
-						'Html-part': messageBody,
-						Recipients: [
-							{
-								Email: user.email,
-							},
-						],
-					},
-					{
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Basic ${auth}`
-						}
-					}
-				)
-				console.log(response.data);
-			} catch (e) {
-				console.error(e);
-			}
+
+			resend.emails.send({
+				from: `${t("email.sender")} <no-reply@checkthenotez.com>`,
+				to: [newInvite.email],
+				subject,
+				html: messageBody,
+			});
 			res.status(201).json({
 				data: finished,
 			});

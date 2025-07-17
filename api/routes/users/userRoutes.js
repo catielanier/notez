@@ -15,16 +15,12 @@ import {
 	findUser,
 	setForgotToken,
 	verifyUser,
-	findUserByResetToken
+	findUserByResetToken,
 } from "./userServices.js";
 
 import * as tokenService from "../../utils/tokenService.js";
-import axios from "axios";
-import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from "../../utils/constants.js";
+import { resend } from "../../utils/resend.js";
 import { decrypt } from "../../utils/crypto.js";
-
-const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('base64');
-
 
 router.route("/signup").post(async (req, res, next) => {
 	const t = req.t;
@@ -38,41 +34,23 @@ router.route("/signup").post(async (req, res, next) => {
 		const messageBody = `
 			<h3>${t("emails.sender")}</h3>
 			<h5>${t("emails.signup.greeting", {
-			username: newUser.username,
-		})}</h5>
+				username: newUser.username,
+			})}</h5>
 			<p>${t("emails.signup.body", {
-			url: `https://checkthenotez.com/verify/${newUser.verification}`,
-		})}</p>
+				url: `https://checkthenotez.com/verify/${newUser.verification}`,
+			})}</p>
 			<p>${t("emails.closing")}<br />${t("emails.team")}</p>		
 		`;
 
 		const sender = t("emails.sender");
 
-		try {
-			const response = await axios.post(
-				'https://api.mailjet.com/v3/send',
-				{
-					FromEmail: 'no-reply@checkthenotez.com',
-					FromName: sender,
-					Subject: subject,
-					'Html-part': messageBody,
-					Recipients: [
-						{
-							Email: user.email,
-						},
-					],
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Basic ${auth}`
-					}
-				}
-			)
-			console.log(response.data);
-		} catch (e) {
-			console.error(e);
-		}
+		resend.emails.send({
+			from: `${sender} <no-reply@checkthenotez.com>`,
+			to: [user.email],
+			subject,
+			html: messageBody,
+		});
+
 		res.status(201).json({
 			data: [user],
 		});
@@ -92,15 +70,11 @@ router.route("/login").post(async (req, res, next) => {
 				await updateUserTokens(user.userId, user.validTokens);
 				res.status(200).json({
 					data: {
-						token
+						token,
 					},
 				});
 			} else {
-				res
-					.status(400)
-					.send(
-						t('errors.notActivated')
-					);
+				res.status(400).send(t("errors.notActivated"));
 			}
 		} else {
 			next();
@@ -111,29 +85,29 @@ router.route("/login").post(async (req, res, next) => {
 });
 
 router.route("/:id").get(async (req, res, next) => {
-	const {id} = req.params;
+	const { id } = req.params;
 	const token = req.headers.Authorization.replace("Bearer ", "");
 	try {
 		const loggedIn = await tokenService.verifyToken(token);
 		if (!loggedIn) {
-			res.status(403).send(t('errors.notLoggedIn'));
+			res.status(403).send(t("errors.notLoggedIn"));
 		}
-		const {requestingUserId} = await tokenService.decodeToken(token);
+		const { requestingUserId } = await tokenService.decodeToken(token);
 		const requestingUser = await userServices.getUserById(requestingUserId);
-		if (requestingUserId !== id || requestingUser.role !== 'ADMIN') {
-			res.status(503).send(t('errors.notLoggedIn'));
+		if (requestingUserId !== id || requestingUser.role !== "ADMIN") {
+			res.status(503).send(t("errors.notLoggedIn"));
 		}
 		const user = await getUserById(id);
-		const {playerNotes, gameNotes} = user;
+		const { playerNotes, gameNotes } = user;
 		if (requestingUserId === id) {
-			let decryptedPlayerNotes = playerNotes.map(note => {
+			let decryptedPlayerNotes = playerNotes.map((note) => {
 				note.note = decrypt(note.note);
 				return note;
-			})
-			let decryptedGameNotes = gameNotes.map(note => {
+			});
+			let decryptedGameNotes = gameNotes.map((note) => {
 				note.note = decrypt(note.note);
 				return note;
-			})
+			});
 			user.playerNotes = decryptedPlayerNotes;
 			user.gameNotes = decryptedGameNotes;
 		}
@@ -146,7 +120,7 @@ router.route("/:id").get(async (req, res, next) => {
 });
 
 router.route("/:id").put(async (req, res) => {
-	const {id: user} = req.params;
+	const { id: user } = req.params;
 	const {
 		username,
 		realName,
@@ -160,33 +134,25 @@ router.route("/:id").put(async (req, res) => {
 	const loggedIn = await tokenService.verifyToken(token);
 	if (loggedIn) {
 		if (oldPassword) {
-			const validPassword = await verifyOldPassword(
-				user,
-				oldPassword
-			);
+			const validPassword = await verifyOldPassword(user, oldPassword);
 			if (validPassword) {
-				const passwordChange = await updatePassword(
-					user,
-					newPassword
-				);
+				const passwordChange = await updatePassword(user, newPassword);
 				const userUpdate = await updateUser(
 					user,
 					realName,
 					username,
 					country,
-					email
+					email,
 				);
 				if (userUpdate && passwordChange) {
 					res.status(201).json({
 						data: userUpdate,
 					});
 				} else {
-					res.status(401).send(t('errors.didNotUpdate'));
+					res.status(401).send(t("errors.didNotUpdate"));
 				}
 			} else {
-				res
-					.status(401)
-					.send(t('errors.invalidOldPassword'));
+				res.status(401).send(t("errors.invalidOldPassword"));
 			}
 		} else {
 			const userUpdate = await updateUser(
@@ -194,24 +160,24 @@ router.route("/:id").put(async (req, res) => {
 				realName,
 				username,
 				country,
-				email
+				email,
 			);
 			if (userUpdate) {
 				res.status(201).json({
 					data: userUpdate,
 				});
 			} else {
-				res.status(401).send(t('errors.didNotUpdate'));
+				res.status(401).send(t("errors.didNotUpdate"));
 			}
 		}
 	} else {
-		res.status(401).send(t('errors.notLoggedIn'));
+		res.status(401).send(t("errors.notLoggedIn"));
 	}
 });
 
 router.route("/").get(async (req, res) => {
 	const t = req.t;
-	const {token, user: id} = req.query;
+	const { token, user: id } = req.query;
 	const loggedIn = await tokenService.verifyToken(token);
 	if (loggedIn) {
 		const user = await getUserById(id);
@@ -223,16 +189,16 @@ router.route("/").get(async (req, res) => {
 				});
 			}
 		} else {
-			res.status(503).send(t('errors.viewUsers'));
+			res.status(503).send(t("errors.viewUsers"));
 		}
 	} else {
-		res.status(400).send(t('errors.notLoggedIn'));
+		res.status(400).send(t("errors.notLoggedIn"));
 	}
 });
 
 router.route("/role").put(async (req, res) => {
 	const t = req.t;
-	const {token, user: userId, id, role} = req.body;
+	const { token, user: userId, id, role } = req.body;
 	const loggedIn = await tokenService.verifyToken(token);
 	if (loggedIn) {
 		const user = await getUserById(userId);
@@ -252,7 +218,7 @@ router.route("/role").put(async (req, res) => {
 });
 
 router.route("/forgot").post(async (req, res) => {
-	const {email} = req.body;
+	const { email } = req.body;
 	const t = req.t;
 	try {
 		const checkUser = await findUser(email);
@@ -265,39 +231,21 @@ router.route("/forgot").post(async (req, res) => {
 			const messageBody = `
 				<h3>${t("emails.sender")}</h3>
 				<h5>${t("emails.forgotPassword.greeting", {
-				username: checkUser.username,
-			})}</h5>
+					username: checkUser.username,
+				})}</h5>
 				<p>${t("emails.signup.body", {
-				url: `https://checkthenotez.com/forgot/${token}`,
-			})}</p>
+					url: `https://checkthenotez.com/forgot/${token}`,
+				})}</p>
 				<p>${t("emails.closing")}<br />${t("emails.team")}</p>
 			`;
 
-			try {
-				const response = await axios.post(
-					'https://api.mailjet.com/v3/send',
-					{
-						FromEmail: 'no-reply@checkthenotez.com',
-						FromName: sender,
-						Subject: subject,
-						'Html-part': messageBody,
-						Recipients: [
-							{
-								Email: checkUser.email,
-							},
-						],
-					},
-					{
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Basic ${auth}`
-						}
-					}
-				)
-				console.log(response.data);
-			} catch (e) {
-				console.error(e);
-			}
+			resend.emails.send({
+				from: `${sender} <no-reply@checkthenotez.com>`,
+				to: [checkUser.email],
+				subject,
+				html: messageBody,
+			});
+
 			res.status(201).json({
 				data: updated,
 			});
@@ -309,7 +257,7 @@ router.route("/forgot").post(async (req, res) => {
 
 router.route("/verify").post(async (req, res) => {
 	const t = req.t;
-	const {key} = req.body;
+	const { key } = req.body;
 	const user = await verifyUser(key);
 	if (user) {
 		res.status(201).json({
@@ -322,7 +270,7 @@ router.route("/verify").post(async (req, res) => {
 
 router.route("/reset").post(async (req, res) => {
 	const t = req.t;
-	const {key, password} = req.body;
+	const { key, password } = req.body;
 	try {
 		const user = await findUserByResetToken(key);
 		if (user) {
@@ -339,31 +287,31 @@ router.route("/reset").post(async (req, res) => {
 	}
 });
 
-router.route('/init').get(async (req, res) => {
+router.route("/init").get(async (req, res) => {
 	const t = req.t;
-	const token = req.headers.Authorization.replace('Bearer ', '');
-	const {userId, issuedAt, expiresAt} = tokenService.decodeToken(token);
+	const token = req.headers.Authorization.replace("Bearer ", "");
+	const { userId, issuedAt, expiresAt } = tokenService.decodeToken(token);
 	try {
-		const {validTokens} = await getUserById(userId);
+		const { validTokens } = await getUserById(userId);
 		if (validTokens && validTokens.include(token)) {
 			if (expiresAt < Date.now()) {
 				const newToken = tokenService.issueToken(userId);
 				validTokens[validTokens.indexOf(token)] = newToken;
-				await updateUserTokens(userId, validTokens)
+				await updateUserTokens(userId, validTokens);
 				res.status(200).json({
 					isLoggedIn: true,
-					token: newToken
-				})
+					token: newToken,
+				});
 			}
 			res.status(200).json({
-				isLoggedIn: true
-			})
+				isLoggedIn: true,
+			});
 		} else {
-			res.status(400).send('JWT_VALIDATION_ERROR')
+			res.status(400).send("JWT_VALIDATION_ERROR");
 		}
 	} catch (e) {
-		res.status(400).send('USER_VALIDATION_ERROR');
+		res.status(400).send("USER_VALIDATION_ERROR");
 	}
 });
 
-export {router};
+export { router };
