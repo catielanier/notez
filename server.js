@@ -51,8 +51,9 @@ const server = http.createServer(router);
 mongoose
 	.connect(URL, { useNewUrlParser: true })
 	.then(() => {
-		server.listen(`http://${IP}:${SERVER_PORT || PORT}`, () => {
-			console.log(`server running on port ${SERVER_PORT || PORT}`);
+		const port = Number(SERVER_PORT) || Number(PORT) || 3000;
+		server.listen(port, IP, () => {
+			console.log(`server running on port ${port}`);
 		});
 	})
 	.catch((err) => {
