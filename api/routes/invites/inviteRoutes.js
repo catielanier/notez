@@ -1,20 +1,22 @@
-import express from 'express';
-import * as userService from '../users/userServices.js';
-import * as inviteService from './inviteServices.js';
-import {MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC} from '../../utils/constants.js';
+import express from "express";
+import * as userService from "../users/userServices.js";
+import * as inviteService from "./inviteServices.js";
+import { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } from "../../utils/constants.js";
 import axios from "axios";
 
 const router = express.Router();
 
-const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString('base64');
+const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString(
+	"base64",
+);
 
-router.route('/').post(async (req, res) => {
-	const {email} = req.body.data;
+router.route("/").post(async (req, res) => {
+	const { email } = req.body.data;
 	const t = req.t;
 	try {
 		const user = await userService.findUser(email);
 		if (user) {
-			res.status(401).send(t('errors.alreadySignedUp'));
+			res.status(401).send(t("errors.alreadySignedUp"));
 		} else {
 			const newInvite = {
 				email,
@@ -46,8 +48,8 @@ router.route('/').post(async (req, res) => {
 	}
 });
 
-router.route('/:id').get(async (req, res) => {
-	const {id} = req.params;
+router.route("/:id").get(async (req, res) => {
+	const { id } = req.params;
 	// get invite
 	try {
 		const invite = await inviteService.getInvite(id);
@@ -59,11 +61,10 @@ router.route('/:id').get(async (req, res) => {
 	}
 });
 
-router.route('/signup').post(async (req, res) => {
-	const {data: newUser} = req.body;
-	const {token} = newUser;
+router.route("/signup").post(async (req, res) => {
+	const { data: newUser } = req.body;
+	const { token } = newUser;
 	delete newUser.token;
-	newUser.premium = true;
 	newUser.active = true;
 	try {
 		const invite = await inviteService.getInvite(token);
@@ -83,4 +84,4 @@ router.route('/signup').post(async (req, res) => {
 	}
 });
 
-export {router};
+export { router };

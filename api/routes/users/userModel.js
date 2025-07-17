@@ -50,11 +50,6 @@ const userSchema = new Schema({
   forgotPassword: {
     type: String,
   },
-  premium: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
   gameNotes: [
     {
       type: mongoose.Schema.Types.ObjectId,
