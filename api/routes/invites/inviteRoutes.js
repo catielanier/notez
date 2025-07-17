@@ -1,6 +1,7 @@
 import express from "express";
 import * as userService from "../users/userServices.js";
 import * as inviteService from "./inviteServices.js";
+import resend from "../../utils/resend.js";
 
 const router = express.Router();
 

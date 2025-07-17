@@ -19,7 +19,7 @@ import {
 } from "./userServices.js";
 
 import * as tokenService from "../../utils/tokenService.js";
-import { resend } from "../../utils/resend.js";
+import resend from "../../utils/resend.js";
 import { decrypt } from "../../utils/crypto.js";
 
 router.route("/signup").post(async (req, res, next) => {
