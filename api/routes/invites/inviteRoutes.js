@@ -1,14 +1,8 @@
 import express from "express";
 import * as userService from "../users/userServices.js";
 import * as inviteService from "./inviteServices.js";
-import { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } from "../../utils/constants.js";
-import axios from "axios";
 
 const router = express.Router();
-
-const auth = Buffer.from(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`).toString(
-	"base64",
-);
 
 router.route("/").post(async (req, res) => {
 	const { email } = req.body.data;
