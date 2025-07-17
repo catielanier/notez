@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { ENCRYPTION_KEY, IV_LENGTH } from './constants';
+import { ENCRYPTION_KEY, IV_LENGTH } from './constants.js';
 
 export const encrypt = text => {
     const iv = crypto.randomBytes(IV_LENGTH);
