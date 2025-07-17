@@ -1,5 +1,5 @@
 import { resend } from 'resend';
-import { RESEND_API_KEY } from './constants';
+import { RESEND_API_KEY } from './constants.js';
 
 const resendConfig = new resend(RESEND_API_KEY);
 
