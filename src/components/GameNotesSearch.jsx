@@ -1,12 +1,17 @@
-import { Button, makeStyles, Typography } from "@material-ui/core";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+// src/components/GameNotesSearch.js
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Button, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
+
 import { LanguageContext } from "../contexts/LanguageContext";
 import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
-  spaced: { marginBottom: theme.spacing(2) },
+  spaced: {
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function GameNotesSearch() {
@@ -33,7 +38,6 @@ export default function GameNotesSearch() {
       setFilterOptions([]);
       return;
     }
-
     const selected = games.find((g) => g.id === game);
     if (!selected) return;
 
@@ -47,7 +51,6 @@ export default function GameNotesSearch() {
     const commonGameFilters = t("notes.common.filters.games", {
       returnObjects: true,
     });
-
     const combinedFilters = [...selected.filters, ...commonGameFilters];
 
     setFilterOptions(
@@ -64,14 +67,13 @@ export default function GameNotesSearch() {
     setOpponentCharacter("");
     setMyFilter("");
     setDisplayedNotes([]);
-    updateDropdowns(game, "game");
+    // preserve any dropdown-reset logic here
   }, [
     game,
     setMyCharacter,
     setOpponentCharacter,
     setMyFilter,
     setDisplayedNotes,
-    updateDropdowns,
   ]);
 
   const gameOptions = useMemo(
