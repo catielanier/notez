@@ -6,6 +6,31 @@ import { encrypt } from "../../../utils/crypto.js";
 
 const router = express.Router();
 
+router.route("/user").get(async (req, res) => {
+	const {t} = req;
+	const token = req.headers.Authorization.replace("Bearer ", "");
+	try {
+		const isLoggedIn = await tokenService.verifyToken(token);
+		if (!isLoggedIn) {
+			res.status(503).send(t('errors.notLoggedIn'));
+		}
+		const {id} = await tokenService.decodeToken(token);
+		const user = await userServices.getUserById(id);
+		if (user.role === "Banned") {
+			res.status(503).send(t('errors.banned'));
+		}
+		const gameNotes = (await playerNoteServices.getUserNotes(id)).map(note => {
+			note.note = decrypt(note.note);
+			return note;
+		});
+		res.status(200).json({
+			gameNotes
+		})
+	} catch (e) {
+		res.status(400).send(e);
+	}
+});
+
 router.route("/").post(async (req, res) => {
 	const {t} = req;
 	const {note, token, user: id} = req.body;
