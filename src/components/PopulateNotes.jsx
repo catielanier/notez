@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Grid, IconButton, Typography, Hidden } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import { Grid, IconButton, Typography, Hidden } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,38 +22,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PopulateNotes(props) {
+export default function PopulateNotes({
+  filter,
+  filterId,
+  note,
+  id,
+  setEditFilter,
+  setNoteBody,
+  setNoteId,
+  deleteNote,
+}) {
   const classes = useStyles();
   const { toggleNoteEditor } = useContext(NoteContext);
+
+  const startEdit = () => {
+    setEditFilter({ label: filter, value: filterId });
+    setNoteBody(note);
+    setNoteId(id);
+    toggleNoteEditor();
+  };
+
   return (
     <>
       <Hidden xsDown>
         <Grid item md={3} className={classes.padding}>
           <Typography
-            variant="span"
+            component="span"
             color="secondary"
             className={classes.filterName}
           >
-            {props.filter}:
+            {filter}:
           </Typography>
         </Grid>
       </Hidden>
       <Hidden smUp>
         <Grid item xs={9} className={classes.paddingWithoutBorder}>
           <Typography
-            variant="span"
+            component="span"
             color="secondary"
             className={classes.filterName}
           >
-            {props.filter}:
+            {filter}:
           </Typography>
         </Grid>
       </Hidden>
-      {props.filter !== "Notice" ? (
+
+      {filter !== "Notice" ? (
         <>
           <Hidden xsDown>
             <Grid item md={7} className={classes.padding}>
-              {props.note}
+              {note}
             </Grid>
             <Grid item md={2} className={classes.border}>
               <Grid container>
@@ -61,15 +79,7 @@ function PopulateNotes(props) {
                   <IconButton
                     color="secondary"
                     size="small"
-                    onClick={() => {
-                      props.setEditFilter({
-                        label: props.filter,
-                        value: props.filterId,
-                      });
-                      props.setNoteBody(props.note);
-                      props.setNoteId(props.id);
-                      toggleNoteEditor();
-                    }}
+                    onClick={startEdit}
                   >
                     <EditIcon />
                   </IconButton>
@@ -78,7 +88,7 @@ function PopulateNotes(props) {
                   <IconButton
                     color="secondary"
                     size="small"
-                    onClick={() => props.deleteNote(props.id)}
+                    onClick={() => deleteNote(id)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -86,31 +96,24 @@ function PopulateNotes(props) {
               </Grid>
             </Grid>
           </Hidden>
+
           <Hidden smUp>
             <Grid item xs={3}>
               <Grid container>
-                <Grid item md={6}>
+                <Grid item xs={6}>
                   <IconButton
                     color="secondary"
                     size="small"
-                    onClick={() => {
-                      props.setEditFilter({
-                        label: props.filter,
-                        value: props.filterId,
-                      });
-                      props.setNoteBody(props.note);
-                      props.setNoteId(props.id);
-                      toggleNoteEditor();
-                    }}
+                    onClick={startEdit}
                   >
                     <EditIcon />
                   </IconButton>
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={6}>
                   <IconButton
                     color="secondary"
                     size="small"
-                    onClick={() => props.deleteNote(props.id)}
+                    onClick={() => deleteNote(id)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -118,17 +121,15 @@ function PopulateNotes(props) {
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.padding}>
-              {props.note}
+              {note}
             </Grid>
           </Hidden>
         </>
       ) : (
         <Grid item md={9} xs={12} className={classes.padding}>
-          {props.note}
+          {note}
         </Grid>
       )}
     </>
   );
 }
-
-export default PopulateNotes;
