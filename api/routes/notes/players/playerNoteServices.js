@@ -23,23 +23,6 @@ export const getUserNotes = async id => {
 	}
 };
 
-export const linkNoteToUser = async (userId, noteId) => {
-	try {
-		return await User.findByIdAndUpdate(
-			{_id: userId},
-			{
-				$push: {
-					playerNotes: {
-						_id: noteId
-					}
-				}
-			}
-		);
-	} catch (e) {
-		throw e;
-	}
-};
-
 export const getNoteById = async (noteId) => {
 	try {
 		return await PlayerNote.findById({_id: noteId}).populate({
@@ -70,17 +53,6 @@ export const updateNote = async (id, note, filter) => {
 					note
 				}
 			}
-		);
-	} catch (e) {
-		throw e;
-	}
-};
-
-export const unlinkPlayerNote = async (userId, noteId) => {
-	try {
-		return await User.findByIdAndUpdate(
-			{_id: userId},
-			{$pull: {playerNotes: {_id: noteId}}}
 		);
 	} catch (e) {
 		throw e;

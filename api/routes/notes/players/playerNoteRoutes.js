@@ -48,14 +48,11 @@ router.route("/").post(async (req, res) => {
 		note.note = encrypt(note.note);
 		const newNote = await playerNoteServices.createNote(note);
 		if (newNote) {
-			const noteId = newNote._id;
-			const relationship = await playerNoteServices.linkNoteToUser(id, noteId);
-			if (relationship) {
-				const fullNote = await playerNoteServices.getNoteById(noteId);
-				res.status(201).json({
-					data: fullNote,
-				});
-			}
+			res.status(201).json({
+				data:  {
+					fullNote: newNote
+				},
+			});
 		}
 	} catch (e) {
 		res.status(401).send(e);
@@ -74,7 +71,6 @@ router.route("/").delete(async (req, res) => {
 					return;
 				}
 				await userServices.getUserById(userId);
-				await playerNoteServices.unlinkPlayerNote(userId, noteId);
 			})()
 		]);
 		const note = await playerNoteServices.deleteNote(noteId);
