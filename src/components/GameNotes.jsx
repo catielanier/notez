@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Button,
   Container,
@@ -5,15 +6,15 @@ import {
   Fab,
   Grid,
   Hidden,
-  makeStyles,
   Modal,
   TextField,
   Typography,
-} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import { useContext, useEffect, useMemo, useState } from "react";
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import Select from "react-select";
+
 import { NoteContext } from "../contexts/NoteContext";
 import GameNotesSearch from "./GameNotesSearch";
 import PopulateNotes from "./PopulateNotes";
@@ -49,13 +50,14 @@ const useStyles = makeStyles((theme) => ({
   },
   noteList: {
     marginLeft: `-${theme.spacing(2)}px`,
-    marginBottom: theme.spacing() * 8,
+    marginBottom: theme.spacing(8),
   },
 }));
 
 export default function GameNotes() {
   const { t } = useTranslation();
   const classes = useStyles();
+
   const {
     gameNotes,
     noteEditor,
@@ -74,11 +76,9 @@ export default function GameNotes() {
   const [editFilter, setEditFilter] = useState({});
   const [noteBody, setNoteBody] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
+  const toggleDrawer = () => setDrawerOpen((o) => !o);
 
   const gamesTx = t("games", { returnObjects: true });
-
   const selectedGame = useMemo(
     () => gamesTx.find((g) => g.id === game) || { filters: [] },
     [gamesTx, game]
@@ -86,7 +86,7 @@ export default function GameNotes() {
 
   const commonFilters = t("notes.common.filters.games", {
     returnObjects: true,
-  }); // always an array
+  });
 
   const filters = useMemo(() => {
     const seen = new Set();
@@ -99,7 +99,6 @@ export default function GameNotes() {
 
   useEffect(() => {
     if (!game || !myCharacter || !opponentCharacter) return;
-
     const matches = gameNotes.filter((n) => {
       const sameGame = n.game === game;
       const sameChars =
@@ -108,7 +107,6 @@ export default function GameNotes() {
       const sameFilter = myFilter ? n.filter.id === myFilter : true;
       return sameGame && sameChars && sameFilter;
     });
-
     setDisplayedNotes(matches);
   }, [
     game,
@@ -150,7 +148,6 @@ export default function GameNotes() {
 
       <Container>
         <Grid container spacing={2}>
-          {/* left column : search controls (desktop) */}
           <Hidden xsDown>
             <Grid item md={6} xs={12}>
               <Typography variant="h5" className={classes.spaced}>
@@ -160,17 +157,16 @@ export default function GameNotes() {
             </Grid>
           </Hidden>
 
-          {/* right column : notes list */}
           <Grid item md={6} xs={12}>
             <Hidden smUp>
               <Typography variant="h5" className={classes.spaced}>
                 {t("header.notes.game")}
               </Typography>
-              {(!game || !myCharacter || !opponentCharacter) && (
+              {!game || !myCharacter || !opponentCharacter ? (
                 <Typography variant="subtitle1">
                   {t("notes.common.clickSearch")}
                 </Typography>
-              )}
+              ) : null}
             </Hidden>
 
             {game && myCharacter && opponentCharacter && (
@@ -203,7 +199,6 @@ export default function GameNotes() {
                   )}
                 </Grid>
 
-                {/* desktop quick-add */}
                 <Hidden xsDown>
                   <QuickAddNote
                     game={game}

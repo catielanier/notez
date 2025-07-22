@@ -1,3 +1,6 @@
+// src/components/PlayerNotes.js
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Navigate, Link as RouterLink } from "react-router-dom";
 import {
   Button,
   Container,
@@ -5,16 +8,14 @@ import {
   Fab,
   Grid,
   Hidden,
-  makeStyles,
   Modal,
   TextField,
   Typography,
-} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { redirect } from "react-router-dom";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import AddIcon from "@mui/icons-material/Add";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 
 import PlayerNoteSearch from "./PlayerNoteSearch";
 import PopulateNotes from "./PopulateNotes";
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   noteList: {
     marginLeft: `-${theme.spacing(2)}px`,
-    marginBottom: theme.spacing() * 8,
+    marginBottom: theme.spacing(8),
   },
 }));
 
@@ -62,7 +63,6 @@ export default function PlayerNotes() {
   const classes = useStyles();
 
   const { user } = useContext(UserContext);
-
   const {
     playerNotes,
     error,
@@ -81,32 +81,31 @@ export default function PlayerNotes() {
     return raw.map((f) => ({ _id: f.id, name: f.name }));
   }, [t]);
 
-  const filterNameById = (id) => filters.find((f) => f._id === id)?.name || id; // graceful fallback
+  const filterNameById = (id) => filters.find((f) => f._id === id)?.name || id;
 
-  const [editFilter, setEditFilter] =
-    (useState < { label, value }) | (null > null);
+  const [editFilter, setEditFilter] = useState(null);
   const [noteBody, setNoteBody] = useState("");
   const [noteId, setNoteId] = useState("");
   const [noteDrawer, setNoteDrawer] = useState(false);
-  const toggleNoteDrawer = () => setNoteDrawer(!noteDrawer);
+  const toggleNoteDrawer = () => setNoteDrawer((o) => !o);
 
   useEffect(() => {
     if (!game || !player) {
       setDisplayedNotes([]);
       return;
     }
-
     const notes = playerNotes.filter((n) => {
       const sameGame = n.game === game;
       const samePlayer = n.player === player;
       const sameFilter = filter ? n.filter._id === filter : true;
       return sameGame && samePlayer && sameFilter;
     });
-
     setDisplayedNotes(notes);
   }, [playerNotes, game, player, filter, setDisplayedNotes]);
 
-  if (!user) return redirect("/");
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <section className="player-notes">
@@ -135,6 +134,7 @@ export default function PlayerNotes() {
       )}
 
       <SearchBar noteType="player" />
+
       <Container>
         <Grid container spacing={2}>
           <Hidden xsDown>
@@ -173,7 +173,7 @@ export default function PlayerNotes() {
                         key={n._id}
                         id={n._id}
                         note={n.note}
-                        filter={filterNameById(n.filter.id)}
+                        filter={filterNameById(n.filter._id)}
                         filterId={n.filter._id}
                         setEditFilter={setEditFilter}
                         setNoteBody={setNoteBody}
@@ -217,11 +217,18 @@ export default function PlayerNotes() {
             {t("notes.common.editing")}
           </Typography>
 
-          {error && <Typography color="error">{`Error: ${error}`}</Typography>}
+          {error && (
+            <Typography variant="body1" color="error">
+              Error: {error}
+            </Typography>
+          )}
 
           <Typography variant="h6">{t("notes.common.filter")}</Typography>
           <Select
-            options={filters.map((f) => ({ label: f.name, value: f.id }))}
+            options={filters.map((f) => ({
+              label: f.name,
+              value: f._id,
+            }))}
             onChange={(e) =>
               setEditFilter(e ? { label: e.label, value: e.value } : null)
             }
