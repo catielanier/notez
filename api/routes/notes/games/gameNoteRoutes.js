@@ -5,6 +5,7 @@ import * as tokenService from "../../../utils/tokenService.js";
 import * as userServices from "../../users/userServices.js";
 import * as gameNoteServices from "./gameNoteServices.js";
 import { decrypt, encrypt } from "../../../utils/crypto.js";
+import { ErrorSharp } from "@material-ui/icons";
 
 router.route("/user").get(async (req, res) => {
 	const {t} = req;
@@ -48,14 +49,11 @@ router.route("/").post(async (req, res) => {
 		note.note = encrypt(note.note);
 		const newNote = await gameNoteServices.createNote(note);
 		if (newNote) {
-			const noteId = newNote._id;
-			const relationship = await gameNoteServices.linkNoteToUser(id, noteId);
-			if (relationship) {
-				const fullNote = await gameNoteServices.getNoteById(noteId);
-				res.status(201).json({
-					data: fullNote,
-				});
-			}
+			res.status(201).json({
+				data: {
+					fullNote: newNote
+				},
+			});
 		}
 	} catch (e) {
 		res.status(401).send(e);
@@ -73,15 +71,16 @@ router.route("/").delete(async (req, res) => {
 				res.status(503).send(t('errors.notLoggedIn'));
 			}
 			const {userId} = await tokenService.decodeToken(token);
-			const user = await userServices.getUserById(userId);
-			await gameNoteServices.unlinkGameNote(
-				userId,
-				noteId
-			);
-		});
-		const note = await gameNoteServices.deleteNote(noteId);
-		res.status(200).json({
-			data: note,
+			const note = await gameNoteServices.getNoteById(noteId);
+			if (note.author !== userId && !note.sharedWith.includes(userId)) {
+				res.status(401).send(t('errors.noOwnership'));
+			}
+			if (note.author === userId) {
+				await gameNoteServices.deleteNote(noteId);
+			} else {
+				await gameNoteServices.removeShare(noteId, userId);
+			}
+			res.status(200).send('success');
 		});
 	} catch (e) {
 		res.status(401).send(e);

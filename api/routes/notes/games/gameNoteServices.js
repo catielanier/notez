@@ -23,34 +23,6 @@ export const getUserNotes = async id => {
 	}
 };
 
-export const linkNoteToUser = async (userId, noteId) => {
-	try {
-		return await User.findByIdAndUpdate(
-			userId,
-			{
-				$push: {
-					gameNotes: {
-						_id: noteId
-					}
-				}
-			}
-		);
-	} catch (e) {
-		throw e;
-	}
-};
-
-export const unlinkGameNote = async (userId, noteId) => {
-	try {
-		return await User.findByIdAndUpdate(
-			userId,
-			{$pull: {gameNotes: {_id: noteId}}}
-		);
-	} catch (e) {
-		throw e;
-	}
-};
-
 export const deleteNote = async noteId => {
 	try {
 		return await GameNote.findByIdAndDelete(noteId);
@@ -59,11 +31,26 @@ export const deleteNote = async noteId => {
 	}
 };
 
+export const removeShare = async (noteid, userId) => {
+	try {
+		return await GameNote.findByIdAndUpdate(
+			noteId,
+			{
+				$pull: {
+					sharedWith: {
+						_id: userId
+					}
+				}
+			}
+		)
+	} catch (e) {
+		throw e;
+	}
+}
+
 export const getNoteById = async noteId => {
 	try {
-		return await GameNote.findById(noteId).populate({
-			path: 'filter'
-		});
+		return await GameNote.findById(noteId);
 	} catch (e) {
 		throw e;
 	}
@@ -75,9 +62,7 @@ export const updateNote = async (id, note, filter) => {
 			id,
 			{
 				$set: {
-					filter: {
-						_id: filter
-					},
+					filter,
 					note
 				}
 			}
