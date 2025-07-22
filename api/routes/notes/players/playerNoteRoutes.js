@@ -77,11 +77,11 @@ router.route("/").delete(async (req, res) => {
 				if (note.author === userId) {
 					await playerNoteServices.deleteNote(noteId);
 				} else {
-
+					await playerNoteServices.removeShare(noteId, userId);
 				}
 			})()
 		]);
-		res.status(200).send('success');
+		res.status(201).send('success');
 	} catch (e) {
 		res.status(401).send(e);
 	}
