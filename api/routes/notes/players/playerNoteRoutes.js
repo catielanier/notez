@@ -70,13 +70,18 @@ router.route("/").delete(async (req, res) => {
 					res.status(503).send(t('errors.notLoggedIn'));
 					return;
 				}
-				await userServices.getUserById(userId);
+				const note = await playerNoteServices.getNoteById(noteId);
+				if (note.author !== userId && !note.sharedWith.includes(userId)) {
+					res.status(401).send(t('errors.noOwnership'));
+				}
+				if (note.author === userId) {
+					await playerNoteServices.deleteNote(noteId);
+				} else {
+
+				}
 			})()
 		]);
-		const note = await playerNoteServices.deleteNote(noteId);
-		res.status(200).json({
-			data: note,
-		});
+		res.status(200).send('success');
 	} catch (e) {
 		res.status(401).send(e);
 	}

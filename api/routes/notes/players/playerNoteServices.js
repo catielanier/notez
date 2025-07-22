@@ -23,6 +23,23 @@ export const getUserNotes = async id => {
 	}
 };
 
+export const removeShare = async (noteid, userId) => {
+	try {
+		return await PlayerNote.findByIdAndUpdate(
+			noteId,
+			{
+				$pull: {
+					sharedWith: {
+						_id: userId
+					}
+				}
+			}
+		)
+	} catch (e) {
+		throw e;
+	}
+}
+
 export const getNoteById = async (noteId) => {
 	try {
 		return await PlayerNote.findById({_id: noteId}).populate({
@@ -47,9 +64,7 @@ export const updateNote = async (id, note, filter) => {
 			{_id: id},
 			{
 				$set: {
-					filter: {
-						_id: filter
-					},
+					filter,
 					note
 				}
 			}
