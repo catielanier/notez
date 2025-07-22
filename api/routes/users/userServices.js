@@ -32,19 +32,9 @@ export const isUser = async ({email, password}) => {
 	}
 };
 
-export const getUserById = async (id, populateNotes = true) => {
+export const getUserById = async (id) => {
 	try {
-		let user;
-		switch (populateNotes) {
-			case false:
-				user = await User.findById(id);
-				break;
-			default:
-				user = await User.findById(id)
-					.populate({path: "gameNotes", populate: {path: "filter"}})
-					.populate({path: "playerNotes", populate: {path: "filter"}});
-				break;
-		}
+		user = await User.findById(id).select('-password');
 		if (user) {
 			return user;
 		}

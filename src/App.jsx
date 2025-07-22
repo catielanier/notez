@@ -1,14 +1,16 @@
-import { ThemeProvider } from "@material-ui/styles";
-import { useContext, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+// src/App.js
+import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// MUI 5 imports
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // Components
 import Attract from "./components/Attract";
 import ForgotPassword from "./components/ForgotPassword";
 import GameNotes from "./components/GameNotes";
 import Header from "./components/Header";
-import Invite from "./components/Invite";
-import InviteSignup from "./components/InviteSignup";
 import Login from "./components/Login";
 import MobileMenu from "./components/MobileMenu";
 import PlayerNotes from "./components/PlayerNotes";
@@ -22,22 +24,19 @@ import VerifyUser from "./components/VerifyUser";
 // Contexts
 import CountryContextProvider from "./contexts/CountryContext";
 import MenuContextProvider from "./contexts/MenuContext";
-import NoteContextProvider from "./contexts/NoteContext";
 import { UserContext } from "./contexts/UserContext";
 
 // Styles
 import "./App.css";
+
+// Your custom MUI theme objects (built via createTheme from @mui/material/styles)
 import neonColorsDark from "./themes/neonColorsDark";
 import neonColorsLight from "./themes/neonColorsLight";
-
-function Contexts({ children }) {
-  return <NoteContextProvider>{children}</NoteContextProvider>;
-}
 
 function ProtectedRoutes({ toggleDarkTheme }) {
   return (
     <Routes>
-      {/* Protected Routes */}
+      {/* Protected */}
       <Route path="/" element={<GameNotes />} />
       <Route path="/player" element={<PlayerNotes />} />
       <Route path="/user-settings" element={<UserSettings />} />
@@ -52,15 +51,13 @@ function ProtectedRoutes({ toggleDarkTheme }) {
 function PublicRoutes() {
   return (
     <Routes>
-      {/* Public Routes */}
+      {/* Public */}
       <Route path="/" element={<Attract />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot" element={<ForgotPassword />} />
       <Route path="/forgot/:key" element={<ResetPassword />} />
       <Route path="/verify/:key" element={<VerifyUser />} />
-      <Route path="/invite" element={<Invite />} />
-      <Route path="/invite/:id" element={<InviteSignup />} />
     </Routes>
   );
 }
@@ -70,28 +67,33 @@ export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
 
+  const theme = isDarkTheme ? neonColorsDark : neonColorsLight;
+
   return (
-    <ThemeProvider theme={isDarkTheme ? neonColorsDark : neonColorsLight}>
-      <Title />
-      <div className={!user ? "App attract-main" : "App"}>
-        <CountryContextProvider>
-          <MenuContextProvider>
-            <Router>
-              <MobileMenu />
-              <Header />
-              <main>
-                {user ? (
-                  <Contexts>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        {/* Normalize & reset browser CSS */}
+        <CssBaseline />
+
+        <Title />
+        <div className={!user ? "App attract-main" : "App"}>
+          <CountryContextProvider>
+            <MenuContextProvider>
+              <Router>
+                <MobileMenu />
+                <Header />
+                <main>
+                  {user ? (
                     <ProtectedRoutes toggleDarkTheme={toggleDarkTheme} />
-                  </Contexts>
-                ) : (
-                  <PublicRoutes />
-                )}
-              </main>
-            </Router>
-          </MenuContextProvider>
-        </CountryContextProvider>
-      </div>
-    </ThemeProvider>
+                  ) : (
+                    <PublicRoutes />
+                  )}
+                </main>
+              </Router>
+            </MenuContextProvider>
+          </CountryContextProvider>
+        </div>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }

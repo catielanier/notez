@@ -1,5 +1,5 @@
 "use strict";
-import "dotenv/config"
+import "dotenv/config";
 
 // Imports and defs
 import express from "express";
@@ -26,11 +26,9 @@ import {
 } from "./api/utils/constants.js";
 import { applyMiddleware } from "./api/utils/index.js";
 
-
 applyMiddleware(middleWare, router);
 
 // Routes
-import { router as inviteRouter } from "./api/routes/invites/inviteRoutes.js";
 import { router as gameNoteRouter } from "./api/routes/notes/games/gameNoteRoutes.js";
 import { router as playerNoteRouter } from "./api/routes/notes/players/playerNoteRoutes.js";
 import { router as userRouter } from "./api/routes/users/userRoutes.js";
@@ -38,7 +36,6 @@ import { router as userRouter } from "./api/routes/users/userRoutes.js";
 router.use("/api/users", userRouter);
 router.use("/api/notes/game", gameNoteRouter);
 router.use("/api/notes/player", playerNoteRouter);
-router.use("/api/invites", inviteRouter);
 
 if (ENVIRONMENT === "prod") {
 	router.use("/", express.static(path.join(__dirname, "./dist")));

@@ -6,6 +6,31 @@ import { encrypt } from "../../../utils/crypto.js";
 
 const router = express.Router();
 
+router.route("/user").get(async (req, res) => {
+	const {t} = req;
+	const token = req.headers.Authorization.replace("Bearer ", "");
+	try {
+		const isLoggedIn = await tokenService.verifyToken(token);
+		if (!isLoggedIn) {
+			res.status(503).send(t('errors.notLoggedIn'));
+		}
+		const {id} = await tokenService.decodeToken(token);
+		const user = await userServices.getUserById(id);
+		if (user.role === "Banned") {
+			res.status(503).send(t('errors.banned'));
+		}
+		const gameNotes = (await playerNoteServices.getUserNotes(id)).map(note => {
+			note.note = decrypt(note.note);
+			return note;
+		});
+		res.status(200).json({
+			gameNotes
+		})
+	} catch (e) {
+		res.status(400).send(e);
+	}
+});
+
 router.route("/").post(async (req, res) => {
 	const {t} = req;
 	const {note, token, user: id} = req.body;
@@ -23,14 +48,11 @@ router.route("/").post(async (req, res) => {
 		note.note = encrypt(note.note);
 		const newNote = await playerNoteServices.createNote(note);
 		if (newNote) {
-			const noteId = newNote._id;
-			const relationship = await playerNoteServices.linkNoteToUser(id, noteId);
-			if (relationship) {
-				const fullNote = await playerNoteServices.getNoteById(noteId);
-				res.status(201).json({
-					data: fullNote,
-				});
-			}
+			res.status(201).json({
+				data:  {
+					fullNote: newNote
+				},
+			});
 		}
 	} catch (e) {
 		res.status(401).send(e);
@@ -48,14 +70,18 @@ router.route("/").delete(async (req, res) => {
 					res.status(503).send(t('errors.notLoggedIn'));
 					return;
 				}
-				await userServices.getUserById(userId);
-				await playerNoteServices.unlinkPlayerNote(userId, noteId);
+				const note = await playerNoteServices.getNoteById(noteId);
+				if (note.author !== userId && !note.sharedWith.includes(userId)) {
+					res.status(401).send(t('errors.noOwnership'));
+				}
+				if (note.author === userId) {
+					await playerNoteServices.deleteNote(noteId);
+				} else {
+					await playerNoteServices.removeShare(noteId, userId);
+				}
 			})()
 		]);
-		const note = await playerNoteServices.deleteNote(noteId);
-		res.status(200).json({
-			data: note,
-		});
+		res.status(201).send('success');
 	} catch (e) {
 		res.status(401).send(e);
 	}
