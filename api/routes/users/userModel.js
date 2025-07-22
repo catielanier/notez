@@ -50,18 +50,6 @@ const userSchema = new Schema({
   forgotPassword: {
     type: String,
   },
-  gameNotes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: GameNote,
-    },
-  ],
-  playerNotes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: PlayerNote,
-    },
-  ],
 	validTokens: [
 		{
 			type: String

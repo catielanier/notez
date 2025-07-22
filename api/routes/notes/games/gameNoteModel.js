@@ -1,7 +1,20 @@
 "use strict";
+import UserModel from '../../users/userModel'
 import mongoose, { Schema } from "mongoose";
 
 const gameNoteSchema = new Schema({
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: UserModel,
+		required: true
+	},
+	sharedWith: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: UserModel,
+			index: true
+		}
+	],
 	game: {
 		type: String,
 		required: true,
