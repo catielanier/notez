@@ -65,8 +65,6 @@ function PublicRoutes() {
       <Route path="/forgot" element={<ForgotPassword />} />
       <Route path="/forgot/:key" element={<ResetPassword />} />
       <Route path="/verify/:key" element={<VerifyUser />} />
-      <Route path="/invite" element={<Invite />} />
-      <Route path="/invite/:id" element={<InviteSignup />} />
     </Routes>
   );
 }
