@@ -10,6 +10,19 @@ export const createNote = async newNote => {
 	}
 };
 
+export const getUserNotes = async id => {
+	try {
+		return await GameNote.find({
+			$or: [
+				{ author: id },
+				{ sharedWith: id }
+			]
+		});
+	} catch (e) {
+		throw e;
+	}
+};
+
 export const linkNoteToUser = async (userId, noteId) => {
 	try {
 		return await User.findByIdAndUpdate(
