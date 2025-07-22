@@ -98,19 +98,6 @@ router.route("/:id").get(async (req, res, next) => {
 			res.status(503).send(t("errors.notLoggedIn"));
 		}
 		const user = await getUserById(id);
-		const { playerNotes, gameNotes } = user;
-		if (requestingUserId === id) {
-			let decryptedPlayerNotes = playerNotes.map((note) => {
-				note.note = decrypt(note.note);
-				return note;
-			});
-			let decryptedGameNotes = gameNotes.map((note) => {
-				note.note = decrypt(note.note);
-				return note;
-			});
-			user.playerNotes = decryptedPlayerNotes;
-			user.gameNotes = decryptedGameNotes;
-		}
 		res.status(200).json({
 			data: user,
 		});
