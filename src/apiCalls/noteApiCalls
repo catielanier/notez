@@ -21,9 +21,7 @@ export function deleteGameNote(noteId) {
 }
 
 export function createPlayerNote(note) {
-  return api
-    .post("/notes/player", { user: userId, note })
-    .then((res) => res.data.data);
+  return api.post("/notes/player", { note }).then((res) => res.data.data);
 }
 
 export function updatePlayerNote(id, changes) {
