@@ -11,8 +11,6 @@ import Attract from "./components/Attract";
 import ForgotPassword from "./components/ForgotPassword";
 import GameNotes from "./components/GameNotes";
 import Header from "./components/Header";
-import Invite from "./components/Invite";
-import InviteSignup from "./components/InviteSignup";
 import Login from "./components/Login";
 import MobileMenu from "./components/MobileMenu";
 import PlayerNotes from "./components/PlayerNotes";
@@ -26,7 +24,6 @@ import VerifyUser from "./components/VerifyUser";
 // Contexts
 import CountryContextProvider from "./contexts/CountryContext";
 import MenuContextProvider from "./contexts/MenuContext";
-import NoteContextProvider from "./contexts/NoteContext";
 import { UserContext } from "./contexts/UserContext";
 
 // Styles
@@ -35,10 +32,6 @@ import "./App.css";
 // Your custom MUI theme objects (built via createTheme from @mui/material/styles)
 import neonColorsDark from "./themes/neonColorsDark";
 import neonColorsLight from "./themes/neonColorsLight";
-
-function Contexts({ children }) {
-  return <NoteContextProvider>{children}</NoteContextProvider>;
-}
 
 function ProtectedRoutes({ toggleDarkTheme }) {
   return (
@@ -91,9 +84,7 @@ export default function App() {
                 <Header />
                 <main>
                   {user ? (
-                    <Contexts>
-                      <ProtectedRoutes toggleDarkTheme={toggleDarkTheme} />
-                    </Contexts>
+                    <ProtectedRoutes toggleDarkTheme={toggleDarkTheme} />
                   ) : (
                     <PublicRoutes />
                   )}
