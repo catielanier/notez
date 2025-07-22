@@ -1,5 +1,5 @@
 "use strict";
-import UserModel from '../../users/userModel'
+import { model as UserModel } from '../../users/userModel'
 import mongoose, {Schema} from "mongoose";
 
 const playerNoteSchema = new Schema({
