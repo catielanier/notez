@@ -8,21 +8,19 @@ export default function usePlayerNotes(userId) {
 		data: notes = [],
 		isLoading,
 		error,
-	} = useQuery(["playerNotes", userId], () => svc.fetchPlayerNotes(userId), {
-		enabled: Boolean(userId),
-	});
+	} = useQuery(["playerNotes"], () => svc.fetchPlayerNotes());
 
-	const create = useMutation((note) => svc.createGameNote(userId, note), {
-		onSuccess: () => qc.invalidateQueries(["playerNotes", userId]),
+	const create = useMutation((note) => svc.createGameNote(note), {
+		onSuccess: () => qc.invalidateQueries(["playerNotes"]),
 	});
 
 	const update = useMutation(
 		({ id, changes }) => svc.updateGameNote(id, changes),
-		{ onSuccess: () => qc.invalidateQueries(["playerNotes", userId]) },
+		{ onSuccess: () => qc.invalidateQueries(["playerNotes"]) },
 	);
 
 	const deleteNote = useMutation(({ noteId }) => svc.deleteGameNote(noteId), {
-		onSuccess: () => qc.invalidateQueries(["playerNotes", userId]),
+		onSuccess: () => qc.invalidateQueries(["playerNotes"]),
 	});
 
 	return { notes, isLoading, error, create, update, deleteNote };
