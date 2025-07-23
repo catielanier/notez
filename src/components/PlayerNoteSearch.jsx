@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Select from "react-select";
-import Creatable from "react-select/creatable";
+import CreatableSelect from "react-select/creatable";
 import { useTranslation } from "react-i18next";
-import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
   spaced: {
@@ -12,30 +11,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PlayerNoteSearch() {
+export default function PlayerNoteSearch({ playerOptions, onSelect }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const {
-    setPlayerNotesGame: setGame,
-    setPlayer,
-    setPlayerNotesFilter: setFilter,
-    players,
-    playerNotesFilter: filter,
-  } = useContext(NoteContext);
 
+  // local selection state
+  const [selectedPlayer, setSelectedPlayer] = useState("");
+  const [selectedGame, setSelectedGame] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+  // build dropdown options from translations
   const games = t("games", { returnObjects: true });
-  const filters = t("notes.common.filters.players", {
+  const gameOptions = useMemo(
+    () => games.map((g) => ({ label: g.name, value: g.id })),
+    [games]
+  );
+  const filterList = t("notes.common.filters.players", {
     returnObjects: true,
   });
+  const filterOptions = useMemo(
+    () => filterList.map((f) => ({ label: f.name, value: f.id })),
+    [filterList]
+  );
+
+  // whenever any selection changes, notify parent
+  useEffect(() => {
+    onSelect({
+      game: selectedGame,
+      player: selectedPlayer,
+      filter: selectedFilter,
+    });
+  }, [selectedGame, selectedPlayer, selectedFilter, onSelect]);
 
   return (
     <>
       <Typography variant="h6" className={classes.spaced}>
         {t("notes.opponent")}
       </Typography>
-      <Creatable
-        options={players.map((p) => ({ label: p, value: p }))}
-        onChange={(e) => setPlayer(e?.value ?? "")}
+      <CreatableSelect
+        isClearable
+        options={playerOptions}
+        value={playerOptions.find((o) => o.value === selectedPlayer) || null}
+        onChange={(opt) => setSelectedPlayer(opt?.value || "")}
         className={classes.spaced}
       />
 
@@ -43,8 +60,10 @@ export default function PlayerNoteSearch() {
         {t("notes.common.game")}
       </Typography>
       <Select
-        options={games.map((g) => ({ label: g.name, value: g.id }))}
-        onChange={(e) => setGame(e?.value ?? "")}
+        isClearable
+        options={gameOptions}
+        value={gameOptions.find((o) => o.value === selectedGame) || null}
+        onChange={(opt) => setSelectedGame(opt?.value || "")}
         className={classes.spaced}
       />
 
@@ -52,16 +71,18 @@ export default function PlayerNoteSearch() {
         {t("notes.filter.choose")}
       </Typography>
       <Select
-        options={filters.map((f) => ({ label: f.name, value: f.id }))}
-        onChange={(e) => setFilter(e?.value ?? "")}
+        isClearable
+        options={filterOptions}
+        value={filterOptions.find((o) => o.value === selectedFilter) || null}
+        onChange={(opt) => setSelectedFilter(opt?.value || "")}
         className={classes.spaced}
       />
 
-      {filter !== "" && (
+      {selectedFilter && (
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => setFilter("")}
+          onClick={() => setSelectedFilter("")}
         >
           {t("notes.filter.clear")}
         </Button>

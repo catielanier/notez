@@ -1,12 +1,9 @@
-// src/components/GameNotesSearch.js
-import React, { useContext, useEffect, useMemo, useState } from "react";
+// src/components/GameNotesSearch.jsx
+import React, { useState, useEffect, useMemo } from "react";
 import { Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
-
-import { LanguageContext } from "../contexts/LanguageContext";
-import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
   spaced: {
@@ -14,112 +11,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GameNotesSearch() {
+export default function GameNotesSearch({ onSelect }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { language } = useContext(LanguageContext);
-  const {
-    gameNotesGame: game,
-    setGameNotesGame: setGame,
-    setMyCharacter,
-    setOpponentCharacter,
-    gameNotesFilter: myFilter,
-    setGameNotesFilter: setMyFilter,
-    setDisplayedGameNotes: setDisplayedNotes,
-  } = useContext(NoteContext);
 
+  // master games list from translations
   const games = t("games", { returnObjects: true });
+
+  // local selection state
+  const [selectedGame, setSelectedGame] = useState("");
+  const [selectedMe, setSelectedMe] = useState("");
+  const [selectedOpp, setSelectedOpp] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+  // dynamic options
   const [charOptions, setCharOptions] = useState([]);
   const [filterOptions, setFilterOptions] = useState([]);
 
-  useEffect(() => {
-    if (!game) {
-      setCharOptions([]);
-      setFilterOptions([]);
-      return;
-    }
-    const selected = games.find((g) => g.id === game);
-    if (!selected) return;
-
-    setCharOptions(
-      selected.characters.map((c) => ({
-        label: c.name,
-        value: c.id,
-      }))
-    );
-
-    const commonGameFilters = t("notes.common.filters.games", {
-      returnObjects: true,
-    });
-    const combinedFilters = [...selected.filters, ...commonGameFilters];
-
-    setFilterOptions(
-      combinedFilters.map((f) => ({
-        label: f.name,
-        value: f.id,
-      }))
-    );
-  }, [game, language, games, t]);
-
-  useEffect(() => {
-    if (!game) return;
-    setMyCharacter("");
-    setOpponentCharacter("");
-    setMyFilter("");
-    setDisplayedNotes([]);
-    // preserve any dropdown-reset logic here
-  }, [
-    game,
-    setMyCharacter,
-    setOpponentCharacter,
-    setMyFilter,
-    setDisplayedNotes,
-  ]);
-
+  // build game dropdown options
   const gameOptions = useMemo(
     () => games.map((g) => ({ label: g.name, value: g.id })),
     [games]
   );
+
+  // when the selected game changes, reset downstream state and rebuild options
+  useEffect(() => {
+    if (!selectedGame) {
+      setCharOptions([]);
+      setFilterOptions([]);
+      setSelectedMe("");
+      setSelectedOpp("");
+      setSelectedFilter("");
+      onSelect({ game: "", me: "", opp: "", filter: "" });
+      return;
+    }
+
+    const sel = games.find((g) => g.id === selectedGame);
+    if (!sel) return;
+
+    // characters for both "you" and "opponent"
+    setCharOptions(sel.characters.map((c) => ({ label: c.name, value: c.id })));
+
+    // combine game‑specific and common filters
+    const commonGameFilters = t("notes.common.filters.games", {
+      returnObjects: true,
+    });
+    const combined = [...sel.filters, ...commonGameFilters];
+    setFilterOptions(combined.map((f) => ({ label: f.name, value: f.id })));
+
+    // notify parent about reset
+    onSelect({ game: sel.id, me: "", opp: "", filter: "" });
+  }, [selectedGame, games, t, onSelect]);
+
+  // whenever any selection updates, propagate to parent
+  useEffect(() => {
+    onSelect({
+      game: selectedGame,
+      me: selectedMe,
+      opp: selectedOpp,
+      filter: selectedFilter,
+    });
+  }, [selectedGame, selectedMe, selectedOpp, selectedFilter, onSelect]);
 
   return (
     <>
       <Typography variant="h6">{t("notes.common.game")}</Typography>
       <Select
         options={gameOptions}
-        value={gameOptions.find((o) => o.value === game) || null}
-        onChange={(e) => setGame(e?.value || "")}
+        value={gameOptions.find((o) => o.value === selectedGame) || null}
+        onChange={(e) => setSelectedGame(e?.value || "")}
         className={classes.spaced}
       />
 
       <Typography variant="h6">{t("notes.character.you")}</Typography>
       <Select
-        isDisabled={!game}
+        isDisabled={!selectedGame}
         options={charOptions}
-        onChange={(e) => setMyCharacter(e?.value || "")}
+        value={charOptions.find((o) => o.value === selectedMe) || null}
+        onChange={(e) => setSelectedMe(e?.value || "")}
         className={classes.spaced}
       />
 
       <Typography variant="h6">{t("notes.character.opponent")}</Typography>
       <Select
-        isDisabled={!game}
+        isDisabled={!selectedGame}
         options={charOptions}
-        onChange={(e) => setOpponentCharacter(e?.value || "")}
+        value={charOptions.find((o) => o.value === selectedOpp) || null}
+        onChange={(e) => setSelectedOpp(e?.value || "")}
         className={classes.spaced}
       />
 
       <Typography variant="h6">{t("notes.filter.choose")}</Typography>
       <Select
-        isDisabled={!game}
+        isDisabled={!selectedGame}
         options={filterOptions}
-        onChange={(e) => setMyFilter(e?.value || "")}
+        value={filterOptions.find((o) => o.value === selectedFilter) || null}
+        onChange={(e) => setSelectedFilter(e?.value || "")}
         className={classes.spaced}
       />
 
-      {myFilter && (
+      {selectedFilter && (
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => setMyFilter("")}
+          onClick={() => setSelectedFilter("")}
         >
           {t("notes.filter.clear")}
         </Button>

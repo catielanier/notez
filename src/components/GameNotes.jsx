@@ -1,3 +1,4 @@
+// src/components/GameNotes.jsx
 import React, { useState, useMemo } from "react";
 import {
   Box,
@@ -14,10 +15,8 @@ import { makeStyles } from "@mui/styles";
 import AddIcon from "@mui/icons-material/Add";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
 
 import useGameNotes from "../hooks/useGameNotes";
-import { useUser } from "../contexts/UserContext";
 import SearchBar from "./SearchBar";
 import GameNotesSearch from "./GameNotesSearch";
 import PopulateNotes from "./PopulateNotes";
@@ -59,10 +58,9 @@ const useStyles = makeStyles((theme) => ({
 export default function GameNotes() {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { user, isLoading: userLoading } = useUser();
   const {
     notes,
-    isLoading: notesLoading,
+    isLoading,
     error,
     create: createNote,
     update: updateNote,
@@ -114,9 +112,7 @@ export default function GameNotes() {
   }, [notes, game, myCharacter, opponentCharacter, filterId]);
 
   // early guards
-  if (userLoading) return <Typography>Loading user…</Typography>;
-  if (!user) return <Navigate to="/" replace />;
-  if (notesLoading) return <Typography>Loading notes…</Typography>;
+  if (isLoading) return <Typography>Loading notes…</Typography>;
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
@@ -135,11 +131,9 @@ export default function GameNotes() {
           <Drawer anchor="bottom" open={drawerOpen} onClose={toggleDrawer}>
             <Container className={classes.wrapper}>
               <QuickAddNote
-                game={game}
-                myCharacter={myCharacter}
-                opponentCharacter={opponentCharacter}
-                filters={filters}
                 type="Game Note"
+                filters={filters.map((f) => ({ label: f.name, value: f.id }))}
+                error={createNote.error}
                 onAdd={({ filter, note, universal }) =>
                   createNote.mutate(
                     {
@@ -213,10 +207,8 @@ export default function GameNotes() {
                     displayedNotes.map((n) => (
                       <PopulateNotes
                         key={n.id}
-                        id={n.id}
-                        note={n.note}
                         filter={n.filter.name}
-                        filterId={n.filter.id}
+                        note={n.note}
                         onEdit={() => {
                           setEditId(n.id);
                           setEditBody(n.note);
@@ -233,28 +225,28 @@ export default function GameNotes() {
                     <PopulateNotes
                       filter={t("notes.common.notice")}
                       note={t("notes.common.noNotes")}
+                      onEdit={() => {}}
+                      onDelete={() => {}}
                     />
                   )}
                 </Grid>
                 <Box sx={{ display: { xs: "none", sm: "block" } }}>
                   <QuickAddNote
-                    game={game}
-                    myCharacter={myCharacter}
-                    opponentCharacter={opponentCharacter}
-                    filters={filters}
                     type="Game Note"
+                    filters={filters.map((f) => ({
+                      label: f.name,
+                      value: f.id,
+                    }))}
+                    error={createNote.error}
                     onAdd={({ filter, note, universal }) =>
-                      createNote.mutate(
-                        {
-                          filter,
-                          note,
-                          game,
-                          myCharacter,
-                          opponentCharacter,
-                          universal,
-                        },
-                        { onSuccess: toggleEditor }
-                      )
+                      createNote.mutate({
+                        filter,
+                        note,
+                        game,
+                        myCharacter,
+                        opponentCharacter,
+                        universal,
+                      })
                     }
                   />
                 </Box>
@@ -281,7 +273,7 @@ export default function GameNotes() {
           </Typography>
           <Typography variant="h6">{t("notes.common.filter")}</Typography>
           <Select
-            options={filters}
+            options={filters.map((f) => ({ label: f.name, value: f.id }))}
             value={editFilter}
             onChange={(e) =>
               setEditFilter(e ? { label: e.label, value: e.value } : null)

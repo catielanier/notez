@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Checkbox,
@@ -9,7 +9,6 @@ import {
 import { makeStyles } from "@mui/styles";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
-import { NoteContext } from "../contexts/NoteContext";
 
 const useStyles = makeStyles((theme) => ({
   spaced: {
@@ -17,17 +16,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuickAddNote({
-  type,
-  game,
-  player,
-  opponentCharacter,
-  propsFilters,
-  myCharacter,
-}) {
+export default function QuickAddNote({ type, filters, onAdd, error }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { postNote, error } = useContext(NoteContext);
 
   const [note, setNote] = useState("");
   const [filter, setFilter] = useState("");
@@ -35,22 +26,10 @@ export default function QuickAddNote({
 
   const handleSubmit = () => {
     if (!note || !filter) return;
-    if (type === "Game Note") {
-      postNote(
-        "Game Note",
-        game,
-        opponentCharacter,
-        filter,
-        note,
-        myCharacter,
-        universal
-      );
-      setUniversal(false);
-    } else {
-      postNote("Player Note", game, player, filter, note);
-    }
+    onAdd({ filter, note, universal });
     setNote("");
     setFilter("");
+    setUniversal(false);
   };
 
   return (
@@ -61,7 +40,7 @@ export default function QuickAddNote({
 
       {error && (
         <Typography color="error" variant="body2" className={classes.spaced}>
-          {`Error: ${error}`}
+          {error}
         </Typography>
       )}
 
@@ -83,15 +62,8 @@ export default function QuickAddNote({
         {t("notes.new.filter")}
       </Typography>
       <Select
-        options={propsFilters.map((f) => ({ label: f.name, value: f.id }))}
-        value={
-          filter
-            ? {
-                label: propsFilters.find((f) => f.id === filter)?.name,
-                value: filter,
-              }
-            : null
-        }
+        options={filters}
+        value={filters.find((f) => f.value === filter) || null}
         onChange={(opt) => setFilter(opt?.value || "")}
         className={classes.spaced}
       />
