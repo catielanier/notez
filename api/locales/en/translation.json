@@ -1,35 +1,36 @@
 {
-  "emails": {
-    "closing": "Regards,",
-    "sender": "NoteZ",
-    "signup": {
-      "body": "We're happy to have you. Please click <a href=\"{{ url }}\">here</a> to get underway.",
-      "greeting": "Welcome to NoteZ, {{ username }}!",
-      "subject": "Welcome to NoteZ!"
-    },
-    "forgotPassword": {
-      "body": "It seems you have forgotten your password. Please click <a href=\"{{ url }}\">here</a> to go in to reset it.",
-      "greeting": "Hello {{ username }}:",
-      "subject": "Password reset link"
-    },
+	"emails": {
+		"closing": "Regards,",
+		"sender": "NoteZ",
+		"signup": {
+			"body": "We're happy to have you. Please click <a href=\"{{ url }}\">here</a> to get underway.",
+			"greeting": "Welcome to NoteZ, {{ username }}!",
+			"subject": "Welcome to NoteZ!"
+		},
+		"forgotPassword": {
+			"body": "It seems you have forgotten your password. Please click <a href=\"{{ url }}\">here</a> to go in to reset it.",
+			"greeting": "Hello {{ username }}:",
+			"subject": "Password reset link"
+		},
 		"invite": {
 			"greeting": "Hello!",
 			"body1": "You've been invited to our service! Come join everyone in taking notes to help improve your game!",
 			"body2": "Please click <a href=\"{{ url }}\">here</a> to get started.",
 			"subject": "You've been invited to NoteZ"
 		},
-    "team": "The NoteZ Team"
-  },
-  "errors": {
-    "notActivated": "You have not activated your account yet. Please check your email to do so.",
-    "invalidOldPassword": "Invalid password. Please confirm your old password.",
-    "didNotUpdate": "User did not update.",
-    "viewUsers": "You are not authorized to view all users",
-    "updateRoles": "You are not authorized to update user roles.",
-    "notLoggedIn": "You are not logged in.",
-    "invalidToken": "Unable to reset password due to invalid token.",
-    "noSuchToken": "There was no such token.",
-    "invalidCredentials": "Invalid email address or password.",
+		"team": "The NoteZ Team"
+	},
+	"errors": {
+		"notActivated": "You have not activated your account yet. Please check your email to do so.",
+		"invalidOldPassword": "Invalid password. Please confirm your old password.",
+		"didNotUpdate": "User did not update.",
+		"viewUsers": "You are not authorized to view all users",
+		"viewUser": "You are not authorized to view this user",
+		"updateRoles": "You are not authorized to update user roles.",
+		"notLoggedIn": "You are not logged in.",
+		"invalidToken": "Unable to reset password due to invalid token.",
+		"noSuchToken": "There was no such token.",
+		"invalidCredentials": "Invalid email address or password.",
 		"alreadySignedUp": "A user with this email already exists.",
 		"banned": "You are banned and cannot use our service.",
 		"characters": {
@@ -48,5 +49,5 @@
 				"filters": "Only admins can link filters to games."
 			}
 		}
-  }
+	}
 }
