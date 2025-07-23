@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import LanguageContextProvider from "./contexts/LanguageContext";
-import AxiosContextProvider from "./contexts/AxiosContext";
 import * as serviceWorker from "./serviceWorker";
 
 import "./i18n";
@@ -13,9 +12,7 @@ function Main() {
   return (
     <React.StrictMode>
       <LanguageContextProvider>
-        <AxiosContextProvider>
-          <App />
-        </AxiosContextProvider>
+        <App />
       </LanguageContextProvider>
     </React.StrictMode>
   );
