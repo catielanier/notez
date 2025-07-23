@@ -6,12 +6,13 @@ import {
   Drawer,
   Fab,
   Grid,
-  Hidden,
+  Box,
   Modal,
   TextField,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import Select from "react-select";
@@ -118,7 +119,7 @@ export default function PlayerNotes() {
     <section className="player-notes">
       {/* Mobile Quick‑Add */}
       {game && player && (
-        <Hidden smUp>
+        <Box sx={{ display: { xs: "block", sm: "none" } }}>
           <Fab
             className={classes.fab}
             color="primary"
@@ -143,7 +144,7 @@ export default function PlayerNotes() {
               />
             </Container>
           </Drawer>
-        </Hidden>
+        </Box>
       )}
 
       {/* Search controls */}
@@ -152,18 +153,18 @@ export default function PlayerNotes() {
       <Container>
         <Grid container spacing={2}>
           {/* Desktop search */}
-          <Hidden xsDown>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Grid item md={6} xs={12}>
               <Typography variant="h5" className={classes.spaced}>
                 {t("header.notes.player")}
               </Typography>
               <PlayerNoteSearch onSelect={handleSearchSelect} />
             </Grid>
-          </Hidden>
+          </Box>
 
           {/* Notes list + desktop quick‑add */}
           <Grid item md={6} xs={12}>
-            <Hidden smUp>
+            <Box sx={{ display: { xs: "block", sm: "none" } }}>
               <Typography variant="h5" className={classes.spaced}>
                 {t("header.notes.player")}
               </Typography>
@@ -172,15 +173,15 @@ export default function PlayerNotes() {
                   {t("notes.common.clickSearch")}
                 </Typography>
               )}
-            </Hidden>
+            </Box>
 
             {game && player && (
               <>
-                <Hidden xsDown>
+                <Box sx={{ display: { xs: "none", sm: "block" } }}>
                   <Typography variant="h5" className={classes.spaced}>
                     {t("notes.common.notes")}
                   </Typography>
-                </Hidden>
+                </Box>
 
                 <Grid container className={classes.noteList}>
                   {displayedNotes.length > 0 ? (
@@ -211,7 +212,7 @@ export default function PlayerNotes() {
                   )}
                 </Grid>
 
-                <Hidden xsDown>
+                <Box sx={{ display: { xs: "none", sm: "block" } }}>
                   <QuickAddNote
                     game={game}
                     player={player}
@@ -221,7 +222,7 @@ export default function PlayerNotes() {
                       createNote.mutate({ filter, note, game, player })
                     }
                   />
-                </Hidden>
+                </Box>
               </>
             )}
           </Grid>

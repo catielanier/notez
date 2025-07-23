@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
-import Hidden from "@mui/material/Hidden";
+import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -44,10 +44,11 @@ export default function Header() {
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <div className={(classes.root, "header")}>
+    <div className={`${classes.root} header`}>
       <AppBar position="static">
         <Toolbar>
-          <Hidden smUp>
+          {/* menu button: mobile only */}
+          <Box sx={{ display: { xs: "block", sm: "none" } }}>
             <IconButton
               edge="start"
               color="inherit"
@@ -57,25 +58,26 @@ export default function Header() {
             >
               <MenuIcon />
             </IconButton>
-          </Hidden>
+          </Box>
 
           <Typography variant="h6" className={classes.title}>
             {t("app.name")}
           </Typography>
 
+          {/* desktop links */}
           {user === null && (
-            <Hidden xsDown>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button component={RouterLink} to="/login" color="inherit">
                 {t("header.login")}
               </Button>
               <Button component={RouterLink} to="/signup" color="inherit">
                 {t("header.signup")}
               </Button>
-            </Hidden>
+            </Box>
           )}
 
           {user !== null && (
-            <Hidden xsDown>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button component={RouterLink} to="/" color="inherit">
                 {t("header.notes.game")}
               </Button>
@@ -94,20 +96,15 @@ export default function Header() {
                     onClose={handleClose}
                     keepMounted
                   >
-                    {[["user.settings", "/user-settings"]].map(
-                      ([key, path]) => (
-                        <Link
-                          component={RouterLink}
-                          to={path}
-                          key={path}
-                          underline="none"
-                        >
-                          <MenuItem onClick={handleClose}>
-                            {t(`header.${key}`)}
-                          </MenuItem>
-                        </Link>
-                      )
-                    )}
+                    <Link
+                      component={RouterLink}
+                      to="/user-settings"
+                      underline="none"
+                    >
+                      <MenuItem onClick={handleClose}>
+                        {t("header.user.settings")}
+                      </MenuItem>
+                    </Link>
                   </Menu>
                 </>
               )}
@@ -118,11 +115,12 @@ export default function Header() {
               <Button color="inherit" onClick={doLogout}>
                 {t("header.logout")}
               </Button>
-            </Hidden>
+            </Box>
           )}
 
+          {/* mobile search icon */}
           {user !== null && (
-            <Hidden smUp>
+            <Box sx={{ display: { xs: "block", sm: "none" } }}>
               <IconButton
                 edge="start"
                 color="inherit"
@@ -132,7 +130,7 @@ export default function Header() {
               >
                 <SearchIcon />
               </IconButton>
-            </Hidden>
+            </Box>
           )}
         </Toolbar>
       </AppBar>

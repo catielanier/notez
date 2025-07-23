@@ -1,5 +1,9 @@
+// src/components/PopulateNotes.jsx
 import React, { useContext } from "react";
-import { Grid, IconButton, Typography, Hidden } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -44,7 +48,8 @@ export default function PopulateNotes({
 
   return (
     <>
-      <Hidden xsDown>
+      {/* filter label */}
+      <Box sx={{ display: { xs: "none", sm: "block" } }}>
         <Grid item md={3} className={classes.padding}>
           <Typography
             component="span"
@@ -54,8 +59,8 @@ export default function PopulateNotes({
             {filter}:
           </Typography>
         </Grid>
-      </Hidden>
-      <Hidden smUp>
+      </Box>
+      <Box sx={{ display: { xs: "block", sm: "none" } }}>
         <Grid item xs={9} className={classes.paddingWithoutBorder}>
           <Typography
             component="span"
@@ -65,11 +70,12 @@ export default function PopulateNotes({
             {filter}:
           </Typography>
         </Grid>
-      </Hidden>
+      </Box>
 
       {filter !== "Notice" ? (
         <>
-          <Hidden xsDown>
+          {/* desktop note + actions */}
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Grid item md={7} className={classes.padding}>
               {note}
             </Grid>
@@ -95,9 +101,10 @@ export default function PopulateNotes({
                 </Grid>
               </Grid>
             </Grid>
-          </Hidden>
+          </Box>
 
-          <Hidden smUp>
+          {/* mobile actions + note */}
+          <Box sx={{ display: { xs: "block", sm: "none" } }}>
             <Grid item xs={3}>
               <Grid container>
                 <Grid item xs={6}>
@@ -123,9 +130,10 @@ export default function PopulateNotes({
             <Grid item xs={12} className={classes.padding}>
               {note}
             </Grid>
-          </Hidden>
+          </Box>
         </>
       ) : (
+        /* Notice-only row */
         <Grid item md={9} xs={12} className={classes.padding}>
           {note}
         </Grid>

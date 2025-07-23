@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Hidden from "@mui/material/Hidden";
+import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -56,7 +56,7 @@ export default function Attract() {
               {t("home.subtitle")}
             </Typography>
 
-            <Hidden xsDown>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Typography variant="body2" gutterBottom>
                 {t("home.description.partOne")}
               </Typography>
@@ -66,7 +66,7 @@ export default function Attract() {
               <Typography variant="body2" gutterBottom>
                 {t("home.description.partThree")}
               </Typography>
-            </Hidden>
+            </Box>
 
             <div className={classes.buttonRow}>
               <Button

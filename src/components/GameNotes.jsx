@@ -1,57 +1,89 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
+  Box,
   Button,
   Container,
   Drawer,
   Fab,
   Grid,
-  Hidden,
   Modal,
   TextField,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import AddIcon from "@mui/icons-material/Add";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
+import { Navigate } from "react-router-dom";
 
 import useGameNotes from "../hooks/useGameNotes";
+import { useUser } from "../contexts/UserContext";
+import SearchBar from "./SearchBar";
 import GameNotesSearch from "./GameNotesSearch";
 import PopulateNotes from "./PopulateNotes";
 import QuickAddNote from "./QuickAddNote";
-import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
-  /* …your styles… */
+  paper: {
+    position: "absolute",
+    width: "50%",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  button: {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+  spaced: {
+    marginBottom: theme.spacing(2),
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  wrapper: {
+    padding: theme.spacing(3),
+  },
+  noteList: {
+    marginLeft: `-${theme.spacing(2)}px`,
+    marginBottom: theme.spacing(8),
+  },
 }));
 
 export default function GameNotes() {
-  const { t } = useTranslation();
   const classes = useStyles();
-
+  const { t } = useTranslation();
+  const { user, isLoading: userLoading } = useUser();
   const {
     notes,
-    isLoading,
+    isLoading: notesLoading,
     error,
     create: createNote,
     update: updateNote,
     deleteNote,
   } = useGameNotes();
 
-  // all your existing UI state:
+  // local UI state
   const [game, setGame] = useState("");
   const [myCharacter, setMyCharacter] = useState("");
-  const [opponentCharacter, setOppCharacter] = useState("");
+  const [opponentCharacter, setOpponentCharacter] = useState("");
   const [filterId, setFilterId] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const toggleDrawer = () => setDrawerOpen((o) => !o);
-  const [noteEditor, setNoteEditor] = useState(false);
-  const toggleNoteEditor = () => setNoteEditor((o) => !o);
-  const [noteId, setNoteId] = useState("");
-  const [editFilter, setEditFilter] = useState({});
-  const [noteBody, setNoteBody] = useState("");
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editId, setEditId] = useState("");
+  const [editFilter, setEditFilter] = useState(null);
+  const [editBody, setEditBody] = useState("");
 
-  // filters logic (unchanged)…
+  const toggleDrawer = () => setDrawerOpen((o) => !o);
+  const toggleEditor = () => setEditorOpen((o) => !o);
+
+  // build filter list
   const gamesTx = t("games", { returnObjects: true });
   const selectedGame = useMemo(
     () => gamesTx.find((g) => g.id === game) || { filters: [] },
@@ -69,28 +101,29 @@ export default function GameNotes() {
     });
   }, [commonFilters, selectedGame]);
 
-  // display logic
+  // compute displayed notes
   const displayedNotes = useMemo(() => {
     if (!game || !myCharacter || !opponentCharacter) return [];
-    return notes.filter((n) => {
-      const sameGame = n.game === game;
-      const sameChars =
+    return notes.filter(
+      (n) =>
+        n.game === game &&
         n.myCharacter === myCharacter &&
-        (n.universal || n.opponentCharacter === opponentCharacter);
-      const sameFilter = filterId ? n.filter.id === filterId : true;
-      return sameGame && sameChars && sameFilter;
-    });
+        (n.universal || n.opponentCharacter === opponentCharacter) &&
+        (!filterId || n.filter.id === filterId)
+    );
   }, [notes, game, myCharacter, opponentCharacter, filterId]);
 
-  // early renders
-  if (isLoading) return <Typography>Loading…</Typography>;
+  // early guards
+  if (userLoading) return <Typography>Loading user…</Typography>;
+  if (!user) return <Navigate to="/" replace />;
+  if (notesLoading) return <Typography>Loading notes…</Typography>;
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
     <section className="game-notes">
-      {/* Quick‑add FAB on mobile */}
+      {/* mobile quick‑add */}
       {game && myCharacter && opponentCharacter && (
-        <Hidden smUp>
+        <Box sx={{ display: { xs: "block", sm: "none" } }}>
           <Fab
             className={classes.fab}
             color="primary"
@@ -123,49 +156,166 @@ export default function GameNotes() {
               />
             </Container>
           </Drawer>
-        </Hidden>
+        </Box>
       )}
 
-      {/* SearchBar (make sure to lift out game/myCharacter/oppCharacter via onSelect) */}
+      {/* top‑level search bar */}
       <SearchBar
         noteType="game"
         onSelect={({ game: g, me, opp, filter: f }) => {
           setGame(g);
           setMyCharacter(me);
-          setOppCharacter(opp);
+          setOpponentCharacter(opp);
           setFilterId(f || "");
         }}
       />
 
-      {/* …the rest of your grid/layout… */}
+      <Container>
+        <Grid container spacing={2}>
+          {/* desktop search controls */}
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Grid item md={6} xs={12}>
+              <Typography variant="h5" className={classes.spaced}>
+                {t("header.notes.game")}
+              </Typography>
+              <GameNotesSearch
+                onSelect={({ game: g, me, opp }) => {
+                  setGame(g);
+                  setMyCharacter(me);
+                  setOpponentCharacter(opp);
+                }}
+              />
+            </Grid>
+          </Box>
 
-      <Grid container className={classes.noteList}>
-        {displayedNotes.length ? (
-          displayedNotes.map((n) => (
-            <PopulateNotes
-              key={n.id}
-              id={n.id}
-              note={n.note}
-              filter={n.filter.name}
-              filterId={n.filter.id}
-              onEdit={() => {
-                setNoteId(n.id);
-                setNoteBody(n.note);
-                setEditFilter({ label: n.filter.name, value: n.filter.id });
-                toggleNoteEditor();
-              }}
-              onDelete={() => deleteNote.mutate({ noteId: n.id })}
-            />
-          ))
-        ) : (
-          <PopulateNotes
-            filter={t("notes.common.notice")}
-            note={t("notes.common.noNotes")}
+          {/* notes list & desktop quick‑add */}
+          <Grid item md={6} xs={12}>
+            <Box sx={{ display: { xs: "block", sm: "none" } }}>
+              <Typography variant="h5" className={classes.spaced}>
+                {t("header.notes.game")}
+              </Typography>
+              {(!game || !myCharacter || !opponentCharacter) && (
+                <Typography variant="subtitle1">
+                  {t("notes.common.clickSearch")}
+                </Typography>
+              )}
+            </Box>
+
+            {game && myCharacter && opponentCharacter && (
+              <>
+                <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                  <Typography variant="h5" className={classes.spaced}>
+                    {t("notes.common.notes")}
+                  </Typography>
+                </Box>
+                <Grid container className={classes.noteList}>
+                  {displayedNotes.length > 0 ? (
+                    displayedNotes.map((n) => (
+                      <PopulateNotes
+                        key={n.id}
+                        id={n.id}
+                        note={n.note}
+                        filter={n.filter.name}
+                        filterId={n.filter.id}
+                        onEdit={() => {
+                          setEditId(n.id);
+                          setEditBody(n.note);
+                          setEditFilter({
+                            label: n.filter.name,
+                            value: n.filter.id,
+                          });
+                          toggleEditor();
+                        }}
+                        onDelete={() => deleteNote.mutate({ noteId: n.id })}
+                      />
+                    ))
+                  ) : (
+                    <PopulateNotes
+                      filter={t("notes.common.notice")}
+                      note={t("notes.common.noNotes")}
+                    />
+                  )}
+                </Grid>
+                <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                  <QuickAddNote
+                    game={game}
+                    myCharacter={myCharacter}
+                    opponentCharacter={opponentCharacter}
+                    filters={filters}
+                    type="Game Note"
+                    onAdd={({ filter, note, universal }) =>
+                      createNote.mutate(
+                        {
+                          filter,
+                          note,
+                          game,
+                          myCharacter,
+                          opponentCharacter,
+                          universal,
+                        },
+                        { onSuccess: toggleEditor }
+                      )
+                    }
+                  />
+                </Box>
+              </>
+            )}
+          </Grid>
+        </Grid>
+      </Container>
+
+      {/* edit modal */}
+      <Modal
+        open={editorOpen}
+        onClose={() => {
+          toggleEditor();
+          setEditId("");
+          setEditFilter(null);
+          setEditBody("");
+        }}
+        aria-labelledby="editor-title"
+      >
+        <Container className={classes.paper}>
+          <Typography variant="h5" id="editor-title" className={classes.spaced}>
+            {t("notes.common.editing")}
+          </Typography>
+          <Typography variant="h6">{t("notes.common.filter")}</Typography>
+          <Select
+            options={filters}
+            value={editFilter}
+            onChange={(e) =>
+              setEditFilter(e ? { label: e.label, value: e.value } : null)
+            }
+            className={classes.spaced}
           />
-        )}
-      </Grid>
-
-      {/* …edit Modal (unchanged aside from updateNote.mutate)… */}
+          <TextField
+            multiline
+            fullWidth
+            value={editBody}
+            onChange={(e) => setEditBody(e.target.value)}
+            className={classes.spaced}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              updateNote.mutate(
+                {
+                  id: editId,
+                  changes: { filter: editFilter.value, note: editBody },
+                },
+                { onSuccess: toggleEditor }
+              );
+            }}
+          >
+            {t("notes.common.edit")}
+          </Button>
+          <Button onClick={toggleEditor} className={classes.button}>
+            {t("notes.common.cancel")}
+          </Button>
+        </Container>
+      </Modal>
     </section>
   );
 }
