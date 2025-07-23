@@ -1,15 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
+  Container,
+  Typography,
   TextField,
   Button,
-  Typography,
-  Container,
   CircularProgress,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { UserContext } from "../contexts/UserContext";
 import { useTranslation } from "react-i18next";
+
+import useAuth from "../hooks/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,67 +42,71 @@ const useStyles = makeStyles((theme) => ({
 export default function ForgotPassword() {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { loading, error, success, requestReset } = useContext(UserContext);
   const [email, setEmail] = useState("");
+
+  const {
+    requestReset,
+    requestResetLoading,
+    requestResetError,
+    requestResetSuccess,
+  } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    requestReset(email);
+    requestReset({ email });
   };
 
   return (
-    <section>
-      <Container maxWidth="sm">
-        <Typography className={classes.header} variant="h5">
-          {t("account.forgot")}
+    <Container maxWidth="sm">
+      <Typography className={classes.header} variant="h5">
+        {t("account.forgot")}
+      </Typography>
+
+      {requestResetSuccess && (
+        <Typography color="primary" gutterBottom>
+          {t("account.checkEmail")}
         </Typography>
+      )}
+      {requestResetError && (
+        <Typography color="error" gutterBottom>
+          {t("common.error")}: {requestResetError.message}
+        </Typography>
+      )}
 
-        <form onSubmit={handleSubmit} className={classes.container}>
-          <Container maxWidth="sm">
-            {success && <p>{t("account.checkEmail")}</p>}
-            {error && (
-              <p className="error">
-                <span>{t("common.error")}</span> {error}
-              </p>
-            )}
+      <form onSubmit={handleSubmit} className={classes.container}>
+        <TextField
+          label={t("account.email")}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+        />
 
-            <Container maxWidth="sm">
-              <TextField
-                label={t("account.email")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
+        <div className={classes.buttonRow}>
+          <div className={classes.wrapper}>
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              disabled={requestResetLoading}
+            >
+              {t("account.requestReset")}
+            </Button>
+            {requestResetLoading && (
+              <CircularProgress
+                size={20}
+                color="secondary"
+                className={classes.buttonProgress}
               />
-            </Container>
+            )}
+          </div>
 
-            <Container className={classes.buttonRow}>
-              <div className={classes.wrapper}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  disabled={loading}
-                >
-                  {t("account.requestReset")}
-                </Button>
-                {loading && (
-                  <CircularProgress
-                    size={20}
-                    color="secondary"
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
-
-              <div className={classes.wrapper}>
-                <Button component={RouterLink} to="/login">
-                  {t("common.goBack")}
-                </Button>
-              </div>
-            </Container>
-          </Container>
-        </form>
-      </Container>
-    </section>
+          <div className={classes.wrapper}>
+            <Button component={RouterLink} to="/login">
+              {t("common.goBack")}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </Container>
   );
 }

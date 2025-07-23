@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link as RouterLink, Navigate } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -9,21 +9,28 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
 
-import { UserContext } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 import { CountryContext } from "../contexts/CountryContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
   header: {
     textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
+  input: {
+    marginTop: theme.spacing(1),
+  },
+  countrySelect: {
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
   buttonRow: {
@@ -42,18 +49,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -12,
     marginLeft: -12,
   },
-  input: {
-    marginTop: theme.spacing(1),
-  },
-  countrySelect: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-  },
 }));
 
 export default function Signup() {
-  const { t } = useTranslation();
   const classes = useStyles();
+  const { t } = useTranslation();
+  const { countries } = useContext(CountryContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,54 +65,62 @@ export default function Signup() {
   const [realName, setRealName] = useState("");
   const [country, setCountry] = useState("");
 
-  const { loading, success, error, signup: doSignup } = useContext(UserContext);
-  const { countries } = useContext(CountryContext);
+  const { user, signup, signupLoading, signupError, signupSuccess } = useAuth();
+
+  // if already signed up/logged in, go home
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    doSignup(
-      email.toLowerCase(),
+    signup({
+      email: email.toLowerCase(),
       password,
       verifyPassword,
       username,
       realName,
-      country
-    );
+      country,
+    });
   };
 
   return (
-    <section className="signup">
-      <Container maxWidth="xs">
-        <Typography className={classes.header} variant="h5">
-          {t("header.signup")}
+    <Container maxWidth="xs">
+      <Typography className={classes.header} variant="h5">
+        {t("header.signup")}
+      </Typography>
+
+      {signupSuccess && (
+        <Typography color="primary" gutterBottom>
+          {t("account.success.signup")}
         </Typography>
+      )}
+      {signupError && (
+        <Typography color="error" gutterBottom>
+          {t("common.error")}: {signupError.message}
+        </Typography>
+      )}
 
-        <form onSubmit={handleSubmit} className={classes.container}>
-          {success && <p>{t("account.success.signup")}</p>}
-          {error && (
-            <p className="error">
-              <span>{t("common.error")}</span> {error}
-            </p>
-          )}
+      <form onSubmit={handleSubmit} className={classes.container}>
+        <TextField
+          label={t("account.email")}
+          required
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.email")}
-            required
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={classes.input}
-          />
-
-          <TextField
-            label={t("account.password")}
-            required
-            fullWidth
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={classes.input}
-            InputProps={{
+        <TextField
+          label={t("account.password")}
+          required
+          fullWidth
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={classes.input}
+          slotProps={{
+            input: {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
@@ -121,24 +130,26 @@ export default function Signup() {
                         ? t("account.hidePassword")
                         : t("account.showPassword")
                     }
-                    onClick={() => setShowPassword((show) => !show)}
+                    onClick={() => setShowPassword((s) => !s)}
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
-            }}
-          />
+            },
+          }}
+        />
 
-          <TextField
-            label={t("account.verify")}
-            required
-            fullWidth
-            type={showVerifyPassword ? "text" : "password"}
-            value={verifyPassword}
-            onChange={(e) => setVerifyPassword(e.target.value)}
-            className={classes.input}
-            InputProps={{
+        <TextField
+          label={t("account.verify")}
+          required
+          fullWidth
+          type={showVerifyPassword ? "text" : "password"}
+          value={verifyPassword}
+          onChange={(e) => setVerifyPassword(e.target.value)}
+          className={classes.input}
+          slotProps={{
+            input: {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
@@ -148,67 +159,67 @@ export default function Signup() {
                         ? t("account.hidePassword")
                         : t("account.showPassword")
                     }
-                    onClick={() => setShowVerifyPassword((show) => !show)}
+                    onClick={() => setShowVerifyPassword((s) => !s)}
                   >
                     {showVerifyPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
-            }}
-          />
+            },
+          }}
+        />
 
-          <TextField
-            label={t("account.username")}
-            required
-            fullWidth
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.username")}
+          required
+          fullWidth
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.realname")}
-            fullWidth
-            value={realName}
-            onChange={(e) => setRealName(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.realname")}
+          fullWidth
+          value={realName}
+          onChange={(e) => setRealName(e.target.value)}
+          className={classes.input}
+        />
 
-          <Select
-            options={countries}
-            value={countries.find((c) => c.value === country) || null}
-            placeholder={t("account.country")}
-            onChange={(opt) => setCountry(opt?.value || "")}
-            className={classes.countrySelect}
-          />
+        <Select
+          options={countries}
+          value={countries.find((c) => c.value === country) || null}
+          placeholder={t("account.country")}
+          onChange={(opt) => setCountry(opt?.value || "")}
+          className={classes.countrySelect}
+        />
 
-          <Container className={classes.buttonRow}>
-            <div className={classes.wrapper}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={loading}
-              >
-                {t("header.signup")}
-              </Button>
-              {loading && (
-                <CircularProgress
-                  size={20}
-                  color="secondary"
-                  className={classes.buttonProgress}
-                />
-              )}
-            </div>
+        <div className={classes.buttonRow}>
+          <div className={classes.wrapper}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={signupLoading}
+            >
+              {t("header.signup")}
+            </Button>
+            {signupLoading && (
+              <CircularProgress
+                size={20}
+                color="secondary"
+                className={classes.buttonProgress}
+              />
+            )}
+          </div>
 
-            <div className={classes.wrapper}>
-              <Button component={RouterLink} to="/">
-                {t("common.goBack")}
-              </Button>
-            </div>
-          </Container>
-        </form>
-      </Container>
-    </section>
+          <div className={classes.wrapper}>
+            <Button component={RouterLink} to="/">
+              {t("common.goBack")}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </Container>
   );
 }

@@ -1,42 +1,34 @@
-// src/App.js
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// MUI 5 imports
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import CircularProgress from "@mui/material/CircularProgress";
 
-// Components
 import Attract from "./components/Attract";
-import ForgotPassword from "./components/ForgotPassword";
-import GameNotes from "./components/GameNotes";
-import Header from "./components/Header";
 import Login from "./components/Login";
-import MobileMenu from "./components/MobileMenu";
-import PlayerNotes from "./components/PlayerNotes";
-import Profile from "./components/Profile";
-import ResetPassword from "./components/ResetPassword";
 import Signup from "./components/Signup";
-import Title from "./components/Title";
-import UserSettings from "./components/UserSettings";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import VerifyUser from "./components/VerifyUser";
+import GameNotes from "./components/GameNotes";
+import PlayerNotes from "./components/PlayerNotes";
+import UserSettings from "./components/UserSettings";
+import Profile from "./components/Profile";
+import Title from "./components/Title";
+import Header from "./components/Header";
+import MobileMenu from "./components/MobileMenu";
 
-// Contexts
 import CountryContextProvider from "./contexts/CountryContext";
 import MenuContextProvider from "./contexts/MenuContext";
-import { UserContext } from "./contexts/UserContext";
+import useAuth from "./hooks/useAuth";
 
-// Styles
-import "./App.css";
-
-// Your custom MUI theme objects (built via createTheme from @mui/material/styles)
 import neonColorsDark from "./themes/neonColorsDark";
 import neonColorsLight from "./themes/neonColorsLight";
+import "./App.css";
 
 function ProtectedRoutes({ toggleDarkTheme }) {
   return (
     <Routes>
-      {/* Protected */}
       <Route path="/" element={<GameNotes />} />
       <Route path="/player" element={<PlayerNotes />} />
       <Route path="/user-settings" element={<UserSettings />} />
@@ -51,7 +43,6 @@ function ProtectedRoutes({ toggleDarkTheme }) {
 function PublicRoutes() {
   return (
     <Routes>
-      {/* Public */}
       <Route path="/" element={<Attract />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
@@ -63,27 +54,28 @@ function PublicRoutes() {
 }
 
 export default function App() {
-  const { user } = useContext(UserContext);
+  const { user, userLoading } = useAuth();
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
-
   const theme = isDarkTheme ? neonColorsDark : neonColorsLight;
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        {/* Normalize & reset browser CSS */}
         <CssBaseline />
 
         <Title />
-        <div className={!user ? "App attract-main" : "App"}>
+
+        <div className={user ? "App" : "App attract-main"}>
           <CountryContextProvider>
             <MenuContextProvider>
               <Router>
                 <MobileMenu />
                 <Header />
                 <main>
-                  {user ? (
+                  {userLoading ? (
+                    <CircularProgress />
+                  ) : user ? (
                     <ProtectedRoutes toggleDarkTheme={toggleDarkTheme} />
                   ) : (
                     <PublicRoutes />

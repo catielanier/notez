@@ -1,36 +1,42 @@
-import React from "react";
-import { redirect } from "react-router-dom";
-import axios from "axios";
+// src/components/VerifyUser.jsx
+import React, { useEffect, useState } from "react";
+import { useParams, Navigate } from "react-router-dom";
+import { Container, Typography, CircularProgress } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import useAuth from "../hooks/useAuth";
 
-class VerifyUser extends React.Component {
-	state = {
-		success: false,
-		error: null,
-	};
-	async componentWillMount() {
-		const key = window.location.pathname.replace("/verify/", "");
-		await axios
-			.post("/api/users/verify", { key })
-			.then((_) => {
-				this.setState({
-					success: true,
-				});
-			})
-			.catch((error) => {
-				this.setState({
-					error,
-				});
-			});
-	}
-	render() {
-		if (this.state.success) {
-			if (this.state.success) {
-				return redirect('/');
-			}
-		} else {
-			return <section>Error: No Valid token.</section>;
-		}
-	}
+export default function VerifyUser() {
+  const { key } = useParams(); // grabs ":key" from /verify/:key
+  const { t } = useTranslation();
+  const { verifyAccount, verifyLoading, verifyError } = useAuth();
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (key) {
+      verifyAccount({ key }, { onSuccess: () => setSuccess(true) });
+    }
+  }, [key, verifyAccount]);
+
+  if (verifyLoading) {
+    return (
+      <Container>
+        <CircularProgress />
+        <Typography>{t("account.verifying")}</Typography>
+      </Container>
+    );
+  }
+
+  if (success) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (verifyError) {
+    return (
+      <Container>
+        <Typography color="error">{t("errors.noToken")}</Typography>
+      </Container>
+    );
+  }
+
+  return null;
 }
-
-export default VerifyUser;
