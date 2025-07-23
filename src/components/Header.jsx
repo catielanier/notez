@@ -1,5 +1,4 @@
-// src/components/Header.js
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@mui/styles";
 import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -14,7 +13,7 @@ import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { UserContext } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 import { MenuContext } from "../contexts/MenuContext";
 import { useTranslation } from "react-i18next";
 
@@ -36,18 +35,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { user, role, logout: doLogout } = useContext(UserContext);
+  const { user, userLoading, logout } = useAuth();
+  const role = user?.role;
   const { showMenu, showSearchBar } = useContext(MenuContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (e) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
+  if (userLoading) return null;
+
   return (
-    <div className={`${classes.root} header`}>
+    <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* menu button: mobile only */}
+          {/* mobile menu button */}
           <Box sx={{ display: { xs: "block", sm: "none" } }}>
             <IconButton
               edge="start"
@@ -65,7 +67,7 @@ export default function Header() {
           </Typography>
 
           {/* desktop links */}
-          {user === null && (
+          {user == null && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button component={RouterLink} to="/login" color="inherit">
                 {t("header.login")}
@@ -76,7 +78,7 @@ export default function Header() {
             </Box>
           )}
 
-          {user !== null && (
+          {user != null && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button component={RouterLink} to="/" color="inherit">
                 {t("header.notes.game")}
@@ -112,14 +114,14 @@ export default function Header() {
               <Button component={RouterLink} to="/profile" color="inherit">
                 {t("header.profile")}
               </Button>
-              <Button color="inherit" onClick={doLogout}>
+              <Button color="inherit" onClick={logout}>
                 {t("header.logout")}
               </Button>
             </Box>
           )}
 
-          {/* mobile search icon */}
-          {user !== null && (
+          {/* mobile search */}
+          {user != null && (
             <Box sx={{ display: { xs: "block", sm: "none" } }}>
               <IconButton
                 edge="start"
