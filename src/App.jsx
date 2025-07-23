@@ -64,7 +64,7 @@ function PublicRoutes() {
 
 export default function App() {
   const { user } = useContext(UserContext);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
 
   const theme = isDarkTheme ? neonColorsDark : neonColorsLight;
