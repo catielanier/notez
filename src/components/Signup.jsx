@@ -65,20 +65,14 @@ export default function Signup() {
   const [realName, setRealName] = useState("");
   const [country, setCountry] = useState("");
 
-  const {
-    user,
-    signup,
-    signupLoading,
-    signupError,
-    signupSuccess,
-  } = useAuth();
+  const { user, signup, signupLoading, signupError, signupSuccess } = useAuth();
 
   // if already signed up/logged in, go home
   if (user) {
     return <Navigate to="/" replace />;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     signup({
       email: email.toLowerCase(),
