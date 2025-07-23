@@ -1,4 +1,3 @@
-// src/themes/neonColorsDark.js
 import { createTheme } from "@mui/material/styles";
 
 const neonColorsDarkPalette = {
