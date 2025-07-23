@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import {
+  Container,
+  Typography,
   TextField,
   Button,
-  Typography,
-  Container,
   CircularProgress,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { UserContext } from "../contexts/UserContext";
 import { useTranslation } from "react-i18next";
+import useAuth from "../hooks/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,74 +41,80 @@ const useStyles = makeStyles((theme) => ({
 export default function ResetPassword() {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { success, error, loading, resetPassword } = useContext(UserContext);
+  const { token } = useParams(); // Route should be defined as '/forgot/:token'
+
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
-  const token = window.location.pathname.replace("/forgot/", "");
 
-  if (success) {
+  const {
+    resetPassword,
+    resetPasswordLoading,
+    resetPasswordError,
+    resetPasswordSuccess,
+  } = useAuth();
+
+  // Redirect on successful reset
+  if (resetPasswordSuccess) {
     return <Navigate to="/" replace />;
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    resetPassword(password, verifyPassword, token);
+    resetPassword({ key: token, password, verifyPassword });
   };
 
   return (
-    <section className="signup">
-      <Container maxWidth="sm">
-        <Typography className={classes.header} variant="h5">
-          {t("account.reset")}
+    <Container maxWidth="sm">
+      <Typography className={classes.header} variant="h5">
+        {t("account.reset")}
+      </Typography>
+
+      {resetPasswordError && (
+        <Typography color="error" gutterBottom>
+          {t("common.error")}: {resetPasswordError.message}
         </Typography>
+      )}
 
-        <form onSubmit={handleSubmit} className={classes.container}>
-          {error && (
-            <p className="error">
-              <span>{t("common.error")}</span> {error}
-            </p>
-          )}
+      <form onSubmit={handleSubmit} className={classes.container}>
+        <TextField
+          label={t("account.password")}
+          required
+          fullWidth
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-          <TextField
-            label={t("account.password")}
-            required
-            fullWidth
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <TextField
+          label={t("account.verify")}
+          required
+          fullWidth
+          type="password"
+          value={verifyPassword}
+          onChange={(e) => setVerifyPassword(e.target.value)}
+          style={{ marginTop: 16 }}
+        />
 
-          <TextField
-            label={t("account.verify")}
-            required
-            fullWidth
-            type="password"
-            value={verifyPassword}
-            onChange={(e) => setVerifyPassword(e.target.value)}
-            style={{ marginTop: 16 }}
-          />
-
-          <Container className={classes.buttonRow}>
-            <div className={classes.wrapper}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={loading}
-              >
-                {t("account.reset")}
-              </Button>
-              {loading && (
-                <CircularProgress
-                  size={20}
-                  color="secondary"
-                  className={classes.buttonProgress}
-                />
-              )}
-            </div>
-          </Container>
-        </form>
-      </Container>
-    </section>
+        <div className={classes.buttonRow}>
+          <div className={classes.wrapper}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={resetPasswordLoading}
+            >
+              {t("account.reset")}
+            </Button>
+            {resetPasswordLoading && (
+              <CircularProgress
+                size={20}
+                color="secondary"
+                className={classes.buttonProgress}
+              />
+            )}
+          </div>
+        </div>
+      </form>
+    </Container>
   );
 }
