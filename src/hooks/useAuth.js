@@ -1,88 +1,113 @@
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import * as svc from "../apiCalls/userApiCalls";
+import * as userSvc from "../apiCalls/userApiCalls";
+import * as tokenService from "../utils/tokenService";
 
 export default function useAuth() {
 	const qc = useQueryClient();
 
+	// 1️⃣ Attempt token‑validation on mount
+	const initToken = tokenService.getToken();
+	const [userId, setUserId] = useState(
+		initToken ? tokenService.decodeToken(initToken).userId : null,
+	);
+
+	// 2️⃣ Fetch current user profile when we have an ID
 	const {
 		data: user,
 		isLoading: userLoading,
 		error: userError,
-	} = useQuery(["currentUser"], svc.fetchCurrentUser, {
-		retry: false,
-		onError: () => {
-			// if 401, we clear token
-			svc.logout();
-			qc.setQueryData(["currentUser"], null);
+	} = useQuery(["user", userId], () => userSvc.fetchUserById(userId), {
+		enabled: Boolean(userId),
+	});
+
+	// 3️⃣ Login mutation
+	const loginMut = useMutation(userSvc.login, {
+		onSuccess: ({ token }) => {
+			tokenService.setToken(token);
+			const { userId: id } = tokenService.decodeToken(token);
+			setUserId(id);
+			qc.invalidateQueries(["user"]);
 		},
 	});
 
-	const loginMut = useMutation(svc.login, {
-		onSuccess: ({ token, id }) => {
-			localStorage.setItem("notezToken", token);
-			svc.logout(); // clear old header
-			svc.login({ token }); // set new header via httpClient interceptor
-			qc.invalidateQueries(["currentUser"]);
+	// 4️⃣ Signup mutation
+	const signupMut = useMutation(userSvc.signup, {
+		onSuccess: (newUser) => {
+			// optional: auto‑login after signup?
+			qc.invalidateQueries(["user"]);
 		},
 	});
 
-	const signupMut = useMutation(svc.signup, {
-		onSuccess: () => qc.invalidateQueries(["currentUser"]),
+	// 5️⃣ Update profile mutation
+	const updateProfileMut = useMutation(
+		(payload) => userSvc.updateProfile(userId, payload),
+		{ onSuccess: () => qc.invalidateQueries(["user"]) },
+	);
+
+	// 6️⃣ Update role
+	const updateRoleMut = useMutation((payload) => userSvc.updateRole(payload), {
+		onSuccess: () => qc.invalidateQueries(["user"]),
 	});
 
-	const updateRoleMut = useMutation(svc.updateRole, {
-		onSuccess: () => qc.invalidateQueries(["currentUser"]),
-	});
+	// 7️⃣ Fetch all users (admin)
+	const fetchAllUsersMut = useMutation(userSvc.fetchAllUsers);
 
-	const updateProfileMut = useMutation(svc.updateProfile, {
-		onSuccess: () => qc.invalidateQueries(["currentUser"]),
-	});
+	// 8️⃣ Request password reset
+	const requestResetMut = useMutation(userSvc.requestPasswordReset);
 
-	const requestResetMut = useMutation(svc.requestReset);
+	// 9️⃣ Verify account
+	const verifyMut = useMutation(userSvc.verifyAccount);
 
-	const resetPasswordMut = useMutation(svc.resetPassword);
+	// 🔟 Reset password
+	const resetMut = useMutation(userSvc.resetPassword);
 
+	// logout fn
 	const doLogout = () => {
-		svc.logout();
-		qc.setQueryData(["currentUser"], null);
+		userSvc.logout();
+		setUserId(null);
+		qc.setQueryData(["user"], null);
 	};
 
 	return {
-		// user state
+		// 🎯 user state
 		user,
 		userLoading,
 		userError,
 
-		// login
+		// 🔐 auth actions
 		login: loginMut.mutate,
 		loginLoading: loginMut.isLoading,
 		loginError: loginMut.error,
 
-		// signup
 		signup: signupMut.mutate,
 		signupLoading: signupMut.isLoading,
 		signupError: signupMut.error,
 
-		// updateRole
-		updateRole: updateRoleMut.mutate,
-		updateRoleLoading: updateRoleMut.isLoading,
-		updateRoleError: updateRoleMut.error,
-
-		// updateProfile
 		updateProfile: updateProfileMut.mutate,
 		updateProfileLoading: updateProfileMut.isLoading,
 		updateProfileError: updateProfileMut.error,
 
-		// password reset flows
+		updateRole: updateRoleMut.mutate,
+		updateRoleLoading: updateRoleMut.isLoading,
+		updateRoleError: updateRoleMut.error,
+
+		fetchAllUsers: fetchAllUsersMut.mutate,
+		fetchAllUsersLoading: fetchAllUsersMut.isLoading,
+		fetchAllUsersError: fetchAllUsersMut.error,
+
 		requestReset: requestResetMut.mutate,
 		requestResetLoading: requestResetMut.isLoading,
 		requestResetError: requestResetMut.error,
 
-		resetPassword: resetPasswordMut.mutate,
-		resetPasswordLoading: resetPasswordMut.isLoading,
-		resetPasswordError: resetPasswordMut.error,
+		verifyAccount: verifyMut.mutate,
+		verifyLoading: verifyMut.isLoading,
+		verifyError: verifyMut.error,
 
-		// logout
+		resetPassword: resetMut.mutate,
+		resetPasswordLoading: resetMut.isLoading,
+		resetPasswordError: resetMut.error,
+
 		logout: doLogout,
 	};
 }

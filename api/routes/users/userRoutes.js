@@ -20,8 +20,8 @@ import {
 
 import * as tokenService from "../../utils/tokenService.js";
 import resend from "../../utils/resend.js";
-import { decrypt } from "../../utils/crypto.js";
 
+// signup
 router.route("/signup").post(async (req, res, next) => {
 	const t = req.t;
 	try {
@@ -59,6 +59,7 @@ router.route("/signup").post(async (req, res, next) => {
 	}
 });
 
+// login
 router.route("/login").post(async (req, res, next) => {
 	const t = req.t;
 	try {
@@ -84,6 +85,7 @@ router.route("/login").post(async (req, res, next) => {
 	}
 });
 
+// get single user
 router.route("/:id").get(async (req, res, next) => {
 	const { id } = req.params;
 	const token = req.headers.Authorization.replace("Bearer ", "");
@@ -95,7 +97,7 @@ router.route("/:id").get(async (req, res, next) => {
 		const { requestingUserId } = await tokenService.decodeToken(token);
 		const requestingUser = await userServices.getUserById(requestingUserId);
 		if (requestingUserId !== id || requestingUser.role !== "ADMIN") {
-			res.status(503).send(t("errors.notLoggedIn"));
+			res.status(503).send(t("errors.viewUser"));
 		}
 		const user = await getUserById(id);
 		res.status(200).json({
@@ -106,6 +108,7 @@ router.route("/:id").get(async (req, res, next) => {
 	}
 });
 
+// update profile
 router.route("/:id").put(async (req, res) => {
 	const { id: user } = req.params;
 	const {
@@ -162,6 +165,7 @@ router.route("/:id").put(async (req, res) => {
 	}
 });
 
+// get all users
 router.route("/").get(async (req, res) => {
 	const t = req.t;
 	const { token, user: id } = req.query;
@@ -183,6 +187,7 @@ router.route("/").get(async (req, res) => {
 	}
 });
 
+// update role
 router.route("/role").put(async (req, res) => {
 	const t = req.t;
 	const { token, user: userId, id, role } = req.body;
@@ -204,6 +209,7 @@ router.route("/role").put(async (req, res) => {
 	}
 });
 
+// forgot password request
 router.route("/forgot").post(async (req, res) => {
 	const { email } = req.body;
 	const t = req.t;
@@ -242,6 +248,7 @@ router.route("/forgot").post(async (req, res) => {
 	}
 });
 
+// verify account
 router.route("/verify").post(async (req, res) => {
 	const t = req.t;
 	const { key } = req.body;
@@ -255,6 +262,7 @@ router.route("/verify").post(async (req, res) => {
 	}
 });
 
+// reset password
 router.route("/reset").post(async (req, res) => {
 	const t = req.t;
 	const { key, password } = req.body;
@@ -274,6 +282,7 @@ router.route("/reset").post(async (req, res) => {
 	}
 });
 
+// user check
 router.route("/init").get(async (req, res) => {
 	const t = req.t;
 	const token = req.headers.Authorization.replace("Bearer ", "");
