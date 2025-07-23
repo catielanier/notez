@@ -5,13 +5,13 @@ import mongoose, { Schema } from "mongoose";
 const gameNoteSchema = new Schema({
 	author: {
 		type: Schema.Types.ObjectId,
-		ref: UserModel,
+		ref: "User",
 		required: true,
 	},
 	sharedWith: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: UserModel,
+			ref: "User",
 			index: true,
 		},
 	],
