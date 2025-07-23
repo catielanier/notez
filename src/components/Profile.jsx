@@ -1,17 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import {
+  Container,
+  Typography,
   TextField,
   Button,
-  Typography,
-  Container,
   CircularProgress,
 } from "@mui/material";
-import Select from "react-select";
 import { makeStyles } from "@mui/styles";
-import { CountryContext } from "../contexts/CountryContext";
-import { UserContext } from "../contexts/UserContext";
+import Select from "react-select";
 import { useTranslation } from "react-i18next";
+
+import useAuth from "../hooks/useAuth";
+import { CountryContext } from "../contexts/CountryContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,9 +50,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Profile() {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { user, loading, error, success, updateProfile } =
-    useContext(UserContext);
   const { countries } = useContext(CountryContext);
+
+  const {
+    user,
+    userLoading,
+    userError,
+    updateProfile,
+    updateProfileLoading,
+    updateProfileError,
+    updateProfileSuccess,
+  } = useAuth();
 
   const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
@@ -61,131 +70,134 @@ export default function Profile() {
   const [realName, setRealName] = useState("");
   const [country, setCountry] = useState(null);
 
+  // populate form when user data arrives
   useEffect(() => {
     if (!user) return;
-    axios.get(`/api/users/${user}`).then((res) => {
-      const data = res.data.data;
-      setUsername(data.username);
-      setEmail(data.email);
-      setRealName(data.realName);
-      const found = countries.find((c) => c.value === data.country);
-      setCountry(found || null);
-    });
+    setEmail(user.email);
+    setUsername(user.username);
+    setRealName(user.realName || "");
+    const found = countries.find((c) => c.value === user.country);
+    setCountry(found || null);
   }, [user, countries]);
+
+  // auth & loading guards
+  if (userLoading) return <CircularProgress />;
+  if (userError)
+    return <Typography color="error">{userError.message}</Typography>;
+  if (!user) return <Navigate to="/" replace />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateProfile(
+    updateProfile({
       email,
       oldPassword,
       newPassword,
       verifyNewPassword,
       username,
       realName,
-      country?.value
-    );
+      country: country?.value,
+    });
   };
 
   return (
-    <section>
-      <Container maxWidth="xs">
-        <Typography className={classes.header} variant="h5">
-          {t("header.profile")}
+    <Container maxWidth="xs">
+      <Typography className={classes.header} variant="h5">
+        {t("header.profile")}
+      </Typography>
+
+      {updateProfileSuccess && (
+        <Typography color="primary" gutterBottom>
+          {t("account.success.profile")}
         </Typography>
+      )}
+      {updateProfileError && (
+        <Typography color="error" gutterBottom>
+          {t("common.error")}: {updateProfileError.message}
+        </Typography>
+      )}
 
-        <form onSubmit={handleSubmit} className={classes.container}>
-          {success && <p>{t("account.success.profile")}</p>}
-          {error && (
-            <p className="error">
-              <span>{t("common.error")}</span> {error}
-            </p>
-          )}
+      <form onSubmit={handleSubmit} className={classes.container}>
+        <TextField
+          label={t("account.email")}
+          required
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.email")}
-            required
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.oldPassword")}
+          type="password"
+          fullWidth
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.oldPassword")}
-            required
-            type="password"
-            fullWidth
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.newPassword")}
+          type="password"
+          fullWidth
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.newPassword")}
-            required
-            type="password"
-            fullWidth
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.verifyNew")}
+          type="password"
+          fullWidth
+          value={verifyNewPassword}
+          onChange={(e) => setVerifyNewPassword(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.verifyNew")}
-            required
-            type="password"
-            fullWidth
-            value={verifyNewPassword}
-            onChange={(e) => setVerifyNewPassword(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.username")}
+          required
+          fullWidth
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.username")}
-            required
-            fullWidth
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={classes.input}
-          />
+        <TextField
+          label={t("account.realname")}
+          fullWidth
+          value={realName}
+          onChange={(e) => setRealName(e.target.value)}
+          className={classes.input}
+        />
 
-          <TextField
-            label={t("account.realname")}
-            fullWidth
-            value={realName}
-            onChange={(e) => setRealName(e.target.value)}
-            className={classes.input}
-          />
+        <Select
+          options={countries}
+          value={country}
+          onChange={(opt) => setCountry(opt)}
+          placeholder={t("account.country")}
+          className={classes.countrySelect}
+        />
 
-          <Select
-            options={countries}
-            value={country}
-            onChange={(opt) => setCountry(opt)}
-            placeholder={t("account.country")}
-            className={classes.countrySelect}
-          />
-
-          <Container className={classes.buttonRow}>
-            <div className={classes.wrapper}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={loading}
-              >
-                {t("account.editProfile")}
-              </Button>
-              {loading && (
-                <CircularProgress
-                  size={20}
-                  color="secondary"
-                  className={classes.buttonProgress}
-                />
-              )}
-            </div>
-          </Container>
-        </form>
-      </Container>
-    </section>
+        <div className={classes.buttonRow}>
+          <div className={classes.wrapper}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={updateProfileLoading}
+            >
+              {t("account.editProfile")}
+            </Button>
+            {updateProfileLoading && (
+              <CircularProgress
+                size={20}
+                color="secondary"
+                className={classes.buttonProgress}
+              />
+            )}
+          </div>
+        </div>
+      </form>
+    </Container>
   );
 }
