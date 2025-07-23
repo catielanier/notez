@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import UserContextProvider from "./contexts/UserContext";
 import LanguageContextProvider from "./contexts/LanguageContext";
 import AxiosContextProvider from "./contexts/AxiosContext";
 import * as serviceWorker from "./serviceWorker";
@@ -15,9 +14,7 @@ function Main() {
     <React.StrictMode>
       <LanguageContextProvider>
         <AxiosContextProvider>
-          <UserContextProvider>
-            <App />
-          </UserContextProvider>
+          <App />
         </AxiosContextProvider>
       </LanguageContextProvider>
     </React.StrictMode>
