@@ -1,36 +1,50 @@
-import React from "react";
-import { redirect } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useParams, Navigate } from "react-router-dom";
+import { Typography, CircularProgress, Container } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useMutation } from "@tanstack/react-query";
+import { verifyAccount } from "../api/userService";
 
-class VerifyUser extends React.Component {
-	state = {
-		success: false,
-		error: null,
-	};
-	async componentWillMount() {
-		const key = window.location.pathname.replace("/verify/", "");
-		await axios
-			.post("/api/users/verify", { key })
-			.then((_) => {
-				this.setState({
-					success: true,
-				});
-			})
-			.catch((error) => {
-				this.setState({
-					error,
-				});
-			});
-	}
-	render() {
-		if (this.state.success) {
-			if (this.state.success) {
-				return redirect('/');
-			}
-		} else {
-			return <section>Error: No Valid token.</section>;
-		}
-	}
+export default function VerifyUser() {
+  const { key } = useParams(); // grabs ":key" from /verify/:key
+  const { t } = useTranslation();
+
+  const {
+    mutate: doVerify,
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+  } = useMutation(() => verifyAccount({ key }));
+
+  useEffect(() => {
+    if (key) {
+      doVerify();
+    }
+  }, [key, doVerify]);
+
+  if (isLoading) {
+    return (
+      <Container>
+        <CircularProgress />
+        <Typography>{t("account.verifying")}</Typography>
+      </Container>
+    );
+  }
+
+  if (isSuccess) {
+    // automatically redirect to home on successful verification
+    return <Navigate to="/" replace />;
+  }
+
+  if (isError) {
+    return (
+      <Container>
+        <Typography color="error">{t("errors.noToken")}</Typography>
+      </Container>
+    );
+  }
+
+  // avoid rendering anything before mutate kicks off
+  return null;
 }
-
-export default VerifyUser;
