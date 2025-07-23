@@ -1,28 +1,23 @@
-import React, { useEffect } from "react";
+// src/components/VerifyUser.jsx
+import React, { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import { Typography, CircularProgress, Container } from "@mui/material";
+import { Container, Typography, CircularProgress } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@tanstack/react-query";
-import { verifyAccount } from "../api/userService";
+import useAuth from "../hooks/useAuth";
 
 export default function VerifyUser() {
   const { key } = useParams(); // grabs ":key" from /verify/:key
   const { t } = useTranslation();
-
-  const {
-    mutate: doVerify,
-    isLoading,
-    isError,
-    isSuccess,
-  } = useMutation(() => verifyAccount({ key }));
+  const { verifyAccount, verifyLoading, verifyError } = useAuth();
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (key) {
-      doVerify();
+      verifyAccount({ key }, { onSuccess: () => setSuccess(true) });
     }
-  }, [key, doVerify]);
+  }, [key, verifyAccount]);
 
-  if (isLoading) {
+  if (verifyLoading) {
     return (
       <Container>
         <CircularProgress />
@@ -31,12 +26,11 @@ export default function VerifyUser() {
     );
   }
 
-  if (isSuccess) {
-    // automatically redirect to home on successful verification
+  if (success) {
     return <Navigate to="/" replace />;
   }
 
-  if (isError) {
+  if (verifyError) {
     return (
       <Container>
         <Typography color="error">{t("errors.noToken")}</Typography>
@@ -44,6 +38,5 @@ export default function VerifyUser() {
     );
   }
 
-  // avoid rendering anything before mutate kicks off
   return null;
 }
