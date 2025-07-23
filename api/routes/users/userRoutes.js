@@ -108,6 +108,23 @@ router.route("/:id").get(async (req, res, next) => {
 	}
 });
 
+router.route("/current").get(async (req, res) => {
+	const token = req.headers.Authorization.replace("Bearer ", "");
+	try {
+		const loggedIn = await tokenService.verifyToken(token);
+		if (!loggedIn) {
+			res.status(403).send(t("errors.notLoggedIn"));
+		}
+		const { id } = await tokenService.decodeToken(token);
+		const user = await getUserById(id);
+		res.status(200).json({
+			data: user,
+		});
+	} catch (e) {
+		next(e);
+	}
+});
+
 // update profile
 router.route("/:id").put(async (req, res) => {
 	const { id: user } = req.params;
