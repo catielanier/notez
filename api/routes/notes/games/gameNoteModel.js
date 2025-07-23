@@ -1,5 +1,4 @@
 "use strict";
-import { model as UserModel } from "../../users/userModel.js";
 import mongoose, { Schema } from "mongoose";
 
 const gameNoteSchema = new Schema({
