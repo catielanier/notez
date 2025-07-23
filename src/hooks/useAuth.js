@@ -1,131 +1,147 @@
-import React, { useState, useEffect } from "react";
-import {
-	Container,
-	Typography,
-	CircularProgress,
-	Button,
-	RadioGroup,
-	FormControlLabel,
-	Radio,
-} from "@mui/material";
-import Select from "react-select";
-import { useTranslation } from "react-i18next";
-import useAuth from "../hooks/useAuth";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import * as userSvc from "../apiCalls/userApiCalls";
+import * as tokenService from "../services/tokenService";
 
-export default function UserSettings() {
-	const { t } = useTranslation();
+export default function useAuth() {
+	const qc = useQueryClient();
+
+	// Logout helper
+	const logout = () => {
+		userSvc.logout();
+		qc.setQueryData(["authInit"], {});
+		qc.setQueryData(["userProfile"], null);
+		qc.setQueryData(["allUsers"], []);
+	};
+
+	// 1️⃣ Validate token & refresh via backend; on any error, force logout
 	const {
+		data: initData = {},
+		isLoading: initLoading,
+		error: initError,
+	} = useQuery(["authInit"], () => userSvc.init(), {
+		retry: false,
+		onError: () => logout(),
+	});
+
+	// If backend returned a refreshed token, store it
+	if (initData.token) {
+		tokenService.setToken(initData.token);
+		qc.invalidateQueries(["authInit"]);
+	}
+
+	// 2️⃣ Fetch current user when backend says we're logged in; on error, logout
+	const {
+		data: user,
+		isLoading: userLoading,
+		error: userError,
+	} = useQuery(["userProfile"], () => userSvc.fetchCurrentUser(), {
+		enabled: initData.isLoggedIn === true,
+		onError: () => logout(),
+	});
+
+	// 3️⃣ Login
+	const loginMut = useMutation(userSvc.login, {
+		onSuccess: ({ token }) => {
+			tokenService.setToken(token);
+			qc.invalidateQueries(["authInit", "userProfile", "allUsers"]);
+		},
+		onError: () => logout(),
+	});
+
+	// 4️⃣ Signup
+	const signupMut = useMutation(userSvc.signup, {
+		onSuccess: ({ token }) => {
+			tokenService.setToken(token);
+			qc.invalidateQueries(["authInit", "userProfile", "allUsers"]);
+		},
+		onError: () => logout(),
+	});
+
+	// 5️⃣ Update own profile
+	const updateProfileMut = useMutation(userSvc.updateProfile, {
+		onSuccess: () => qc.invalidateQueries(["userProfile"]),
+		onError: () => logout(),
+	});
+
+	// 6️⃣ Update another user’s role
+	const updateRoleMut = useMutation(userSvc.updateRole, {
+		onSuccess: () => qc.invalidateQueries(["allUsers"]),
+		onError: () => logout(),
+	});
+
+	// 7️⃣ Fetch all users (admin)
+	const {
+		data: allUsers,
+		isLoading: allUsersLoading,
+		error: allUsersError,
+	} = useQuery(["allUsers"], () => userSvc.fetchAllUsers(), {
+		enabled: user?.role === "Admin",
+		onError: () => logout(),
+	});
+
+	// 8️⃣ Request password reset
+	const requestResetMut = useMutation(userSvc.requestPasswordReset, {
+		onError: () => logout(),
+	});
+
+	// 9️⃣ Verify account
+	const verifyMut = useMutation(userSvc.verifyAccount, {
+		onError: () => logout(),
+	});
+
+	// 🔟 Reset password
+	const resetMut = useMutation(userSvc.resetPassword, {
+		onError: () => logout(),
+	});
+
+	return {
+		// initialization state
+		initLoading,
+		initError,
+
+		// user profile
 		user,
 		userLoading,
 		userError,
-		fetchAllUsers,
-		fetchAllUsersLoading,
-		fetchAllUsersError,
-		updateRole,
-		updateRoleLoading,
-		updateRoleError,
-	} = useAuth();
 
-	const [users, setUsers] = useState([]);
-	const [selectedUser, setSelectedUser] = useState(null);
-	const [role, setRole] = useState("");
+		// login/signup
+		login: loginMut.mutate,
+		loginLoading: loginMut.isLoading,
+		loginError: loginMut.error,
 
-	// Load all users once we're sure the current user is an admin
-	useEffect(() => {
-		if (user?.role !== "Admin") return;
-		fetchAllUsers(undefined, {
-			onSuccess: (data) => setUsers(data),
-		});
-	}, [user, fetchAllUsers]);
+		signup: signupMut.mutate,
+		signupLoading: signupMut.isLoading,
+		signupError: signupMut.error,
 
-	// Authentication & authorization guards
-	if (userLoading) return <CircularProgress />;
-	if (userError)
-		return <Typography color="error">{userError.message}</Typography>;
-	if (!user || user.role !== "Admin") {
-		return (
-			<Typography color="error">
-				{t("errors.unauthorizedRoleUpdate")}
-			</Typography>
-		);
-	}
+		// profile update
+		updateProfile: updateProfileMut.mutate,
+		updateProfileLoading: updateProfileMut.isLoading,
+		updateProfileError: updateProfileMut.error,
 
-	// Loading / error for users list
-	if (fetchAllUsersLoading) return <CircularProgress />;
-	if (fetchAllUsersError)
-		return <Typography color="error">{fetchAllUsersError.message}</Typography>;
+		// admin role update
+		updateRole: updateRoleMut.mutate,
+		updateRoleLoading: updateRoleMut.isLoading,
+		updateRoleError: updateRoleMut.error,
 
-	return (
-		<Container maxWidth="sm">
-			<Typography variant="h5" gutterBottom>
-				{t("settings.user.role.edit")}
-			</Typography>
+		// all users list
+		allUsers,
+		allUsersLoading,
+		allUsersError,
 
-			{updateRoleError && (
-				<Typography color="error" gutterBottom>
-					{updateRoleError.message}
-				</Typography>
-			)}
-			{updateRoleLoading && <CircularProgress size={24} />}
+		// password flows
+		requestReset: requestResetMut.mutate,
+		requestResetLoading: requestResetMut.isLoading,
+		requestResetError: requestResetMut.error,
 
-			<Typography variant="h6">{t("settings.user.select")}</Typography>
-			<Select
-				options={users.map((u) => ({
-					label: `${u.username} (${u.realName} – ${u.country})`,
-					value: u._id,
-				}))}
-				value={
-					selectedUser
-						? { label: selectedUser.username, value: selectedUser._id }
-						: null
-				}
-				onChange={(opt) => {
-					const u = users.find((u) => u._id === opt.value);
-					setSelectedUser(u);
-					setRole(u.role);
-				}}
-				placeholder={t("settings.user.selectPlaceholder")}
-				styles={{ menu: (base) => ({ ...base, zIndex: 9999 }) }}
-			/>
+		verifyAccount: verifyMut.mutate,
+		verifyLoading: verifyMut.isLoading,
+		verifyError: verifyMut.error,
 
-			{selectedUser && (
-				<>
-					<Typography variant="h6" sx={{ mt: 2 }}>
-						{t("settings.user.role.assign")}
-					</Typography>
-					<RadioGroup
-						row
-						value={role}
-						onChange={(e) => setRole(e.target.value)}
-					>
-						<FormControlLabel
-							value="User"
-							control={<Radio />}
-							label={t("settings.user.role.user")}
-						/>
-						<FormControlLabel
-							value="Admin"
-							control={<Radio />}
-							label={t("settings.user.role.admin")}
-						/>
-						<FormControlLabel
-							value="Banned"
-							control={<Radio />}
-							label={t("settings.user.role.banned")}
-						/>
-					</RadioGroup>
+		resetPassword: resetMut.mutate,
+		resetPasswordLoading: resetMut.isLoading,
+		resetPasswordError: resetMut.error,
 
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={() => updateRole({ id: selectedUser._id, role })}
-						disabled={updateRoleLoading}
-						sx={{ mt: 2 }}
-					>
-						{t("settings.user.update")}
-					</Button>
-				</>
-			)}
-		</Container>
-	);
+		// logout
+		logout,
+	};
 }
