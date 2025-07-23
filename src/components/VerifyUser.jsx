@@ -14,7 +14,6 @@ export default function VerifyUser() {
     isLoading,
     isError,
     isSuccess,
-    error,
   } = useMutation(() => verifyAccount({ key }));
 
   useEffect(() => {
