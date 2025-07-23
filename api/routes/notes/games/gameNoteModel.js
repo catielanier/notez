@@ -1,19 +1,19 @@
 "use strict";
-import {model as UserModel} from '../../users/userModel'
+import { model as UserModel } from "../../users/userModel.js";
 import mongoose, { Schema } from "mongoose";
 
 const gameNoteSchema = new Schema({
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: UserModel,
-		required: true
+		required: true,
 	},
 	sharedWith: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: UserModel,
-			index: true
-		}
+			index: true,
+		},
 	],
 	game: {
 		type: String,
@@ -25,7 +25,7 @@ const gameNoteSchema = new Schema({
 	},
 	opponentCharacter: {
 		type: String,
-		required: function() {
+		required: function () {
 			return this.universal === false;
 		},
 	},
