@@ -16,13 +16,19 @@ import { useTranslation } from "react-i18next";
 import useAuth from "../hooks/useAuth";
 
 const useStyles = makeStyles((theme) => ({
-  header: { textAlign: "center", marginBottom: theme.spacing(2) },
+  header: {
+    textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
   buttonRow: {
     display: "flex",
     alignItems: "center",
     marginTop: theme.spacing(2),
   },
-  wrapper: { margin: theme.spacing(1), position: "relative" },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: "relative",
+  },
   buttonProgress: {
     position: "absolute",
     top: "50%",
@@ -35,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const { t } = useTranslation();
   const classes = useStyles();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +49,7 @@ export default function Login() {
   const { user, userLoading, userError, login, loginLoading, loginError } =
     useAuth();
 
-  // redirect on success
+  // Redirect if already logged in
   if (user) return <Navigate to="/" replace />;
 
   const handleSubmit = (e) => {
@@ -77,18 +84,19 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
+          margin="normal"
           slotProps={{
             input: {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
+                    edge="end"
                     aria-label={
                       showPassword
                         ? t("account.hidePassword")
                         : t("account.showPassword")
                     }
                     onClick={() => setShowPassword((s) => !s)}
-                    edge="end"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -112,6 +120,7 @@ export default function Login() {
               <CircularProgress size={20} className={classes.buttonProgress} />
             )}
           </div>
+
           <div className={classes.wrapper}>
             <Button component={RouterLink} to="/">
               {t("common.goBack")}
