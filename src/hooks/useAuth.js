@@ -1,113 +1,131 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import * as userSvc from "../apiCalls/userApiCalls";
-import * as tokenService from "../utils/tokenService";
+import React, { useState, useEffect } from "react";
+import {
+	Container,
+	Typography,
+	CircularProgress,
+	Button,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+} from "@mui/material";
+import Select from "react-select";
+import { useTranslation } from "react-i18next";
+import useAuth from "../hooks/useAuth";
 
-export default function useAuth() {
-	const qc = useQueryClient();
-
-	// 1️⃣ Attempt token‑validation on mount
-	const initToken = tokenService.getToken();
-	const [userId, setUserId] = useState(
-		initToken ? tokenService.decodeToken(initToken).userId : null,
-	);
-
-	// 2️⃣ Fetch current user profile when we have an ID
+export default function UserSettings() {
+	const { t } = useTranslation();
 	const {
-		data: user,
-		isLoading: userLoading,
-		error: userError,
-	} = useQuery(["user", userId], () => userSvc.fetchUserById(userId), {
-		enabled: Boolean(userId),
-	});
-
-	// 3️⃣ Login mutation
-	const loginMut = useMutation(userSvc.login, {
-		onSuccess: ({ token }) => {
-			tokenService.setToken(token);
-			const { userId: id } = tokenService.decodeToken(token);
-			setUserId(id);
-			qc.invalidateQueries(["user"]);
-		},
-	});
-
-	// 4️⃣ Signup mutation
-	const signupMut = useMutation(userSvc.signup, {
-		onSuccess: (newUser) => {
-			// optional: auto‑login after signup?
-			qc.invalidateQueries(["user"]);
-		},
-	});
-
-	// 5️⃣ Update profile mutation
-	const updateProfileMut = useMutation(
-		(payload) => userSvc.updateProfile(userId, payload),
-		{ onSuccess: () => qc.invalidateQueries(["user"]) },
-	);
-
-	// 6️⃣ Update role
-	const updateRoleMut = useMutation((payload) => userSvc.updateRole(payload), {
-		onSuccess: () => qc.invalidateQueries(["user"]),
-	});
-
-	// 7️⃣ Fetch all users (admin)
-	const fetchAllUsersMut = useMutation(userSvc.fetchAllUsers);
-
-	// 8️⃣ Request password reset
-	const requestResetMut = useMutation(userSvc.requestPasswordReset);
-
-	// 9️⃣ Verify account
-	const verifyMut = useMutation(userSvc.verifyAccount);
-
-	// 🔟 Reset password
-	const resetMut = useMutation(userSvc.resetPassword);
-
-	// logout fn
-	const doLogout = () => {
-		userSvc.logout();
-		setUserId(null);
-		qc.setQueryData(["user"], null);
-	};
-
-	return {
-		// 🎯 user state
 		user,
 		userLoading,
 		userError,
+		fetchAllUsers,
+		fetchAllUsersLoading,
+		fetchAllUsersError,
+		updateRole,
+		updateRoleLoading,
+		updateRoleError,
+	} = useAuth();
 
-		// 🔐 auth actions
-		login: loginMut.mutate,
-		loginLoading: loginMut.isLoading,
-		loginError: loginMut.error,
+	const [users, setUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState(null);
+	const [role, setRole] = useState("");
 
-		signup: signupMut.mutate,
-		signupLoading: signupMut.isLoading,
-		signupError: signupMut.error,
+	// Load all users once we're sure the current user is an admin
+	useEffect(() => {
+		if (user?.role !== "Admin") return;
+		fetchAllUsers(undefined, {
+			onSuccess: (data) => setUsers(data),
+		});
+	}, [user, fetchAllUsers]);
 
-		updateProfile: updateProfileMut.mutate,
-		updateProfileLoading: updateProfileMut.isLoading,
-		updateProfileError: updateProfileMut.error,
+	// Authentication & authorization guards
+	if (userLoading) return <CircularProgress />;
+	if (userError)
+		return <Typography color="error">{userError.message}</Typography>;
+	if (!user || user.role !== "Admin") {
+		return (
+			<Typography color="error">
+				{t("errors.unauthorizedRoleUpdate")}
+			</Typography>
+		);
+	}
 
-		updateRole: updateRoleMut.mutate,
-		updateRoleLoading: updateRoleMut.isLoading,
-		updateRoleError: updateRoleMut.error,
+	// Loading / error for users list
+	if (fetchAllUsersLoading) return <CircularProgress />;
+	if (fetchAllUsersError)
+		return <Typography color="error">{fetchAllUsersError.message}</Typography>;
 
-		fetchAllUsers: fetchAllUsersMut.mutate,
-		fetchAllUsersLoading: fetchAllUsersMut.isLoading,
-		fetchAllUsersError: fetchAllUsersMut.error,
+	return (
+		<Container maxWidth="sm">
+			<Typography variant="h5" gutterBottom>
+				{t("settings.user.role.edit")}
+			</Typography>
 
-		requestReset: requestResetMut.mutate,
-		requestResetLoading: requestResetMut.isLoading,
-		requestResetError: requestResetMut.error,
+			{updateRoleError && (
+				<Typography color="error" gutterBottom>
+					{updateRoleError.message}
+				</Typography>
+			)}
+			{updateRoleLoading && <CircularProgress size={24} />}
 
-		verifyAccount: verifyMut.mutate,
-		verifyLoading: verifyMut.isLoading,
-		verifyError: verifyMut.error,
+			<Typography variant="h6">{t("settings.user.select")}</Typography>
+			<Select
+				options={users.map((u) => ({
+					label: `${u.username} (${u.realName} – ${u.country})`,
+					value: u._id,
+				}))}
+				value={
+					selectedUser
+						? { label: selectedUser.username, value: selectedUser._id }
+						: null
+				}
+				onChange={(opt) => {
+					const u = users.find((u) => u._id === opt.value);
+					setSelectedUser(u);
+					setRole(u.role);
+				}}
+				placeholder={t("settings.user.selectPlaceholder")}
+				styles={{ menu: (base) => ({ ...base, zIndex: 9999 }) }}
+			/>
 
-		resetPassword: resetMut.mutate,
-		resetPasswordLoading: resetMut.isLoading,
-		resetPasswordError: resetMut.error,
+			{selectedUser && (
+				<>
+					<Typography variant="h6" sx={{ mt: 2 }}>
+						{t("settings.user.role.assign")}
+					</Typography>
+					<RadioGroup
+						row
+						value={role}
+						onChange={(e) => setRole(e.target.value)}
+					>
+						<FormControlLabel
+							value="User"
+							control={<Radio />}
+							label={t("settings.user.role.user")}
+						/>
+						<FormControlLabel
+							value="Admin"
+							control={<Radio />}
+							label={t("settings.user.role.admin")}
+						/>
+						<FormControlLabel
+							value="Banned"
+							control={<Radio />}
+							label={t("settings.user.role.banned")}
+						/>
+					</RadioGroup>
 
-		logout: doLogout,
-	};
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={() => updateRole({ id: selectedUser._id, role })}
+						disabled={updateRoleLoading}
+						sx={{ mt: 2 }}
+					>
+						{t("settings.user.update")}
+					</Button>
+				</>
+			)}
+		</Container>
+	);
 }
