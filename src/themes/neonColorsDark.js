@@ -1,4 +1,5 @@
-import { createTheme } from "@material-ui/core/styles";
+// src/themes/neonColorsDark.js
+import { createTheme } from "@mui/material/styles";
 
 const neonColorsDarkPalette = {
 	primary: {
