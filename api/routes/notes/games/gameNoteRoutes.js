@@ -20,7 +20,7 @@ router.route("/user").get(async (req, res) => {
 			res.status(503).send(t("errors.banned"));
 		}
 		const gameNotes = (await gameNoteServices.getUserNotes(id)).map((note) => {
-			note.note = decrypt(note.note);
+			note.note = decrypt(note.note, user.cypherCode);
 			return note;
 		});
 		res.status(200).json({
@@ -45,7 +45,7 @@ router.route("/").post(async (req, res) => {
 		if (user.role === "Banned") {
 			res.status(503).send(t("errors.banned"));
 		}
-		note.note = encrypt(note.note);
+		note.note = encrypt(note.note, user.cypherCode);
 		const newNote = await gameNoteServices.createNote(note);
 		if (newNote) {
 			res.status(201).json({
@@ -95,6 +95,7 @@ router.route("/:id").put(async (req, res) => {
 		if (!loggedIn) {
 			res.status(503).send(t("errors.notLoggedIn"));
 		}
+		note.note = encrypt(note.note, user.cypherCode);
 		const results = await gameNoteServices.updateNote(noteId, note, filter);
 		if (results) {
 			const updatedNote = await gameNoteServices.getNoteById(noteId);

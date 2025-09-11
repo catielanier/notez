@@ -16,6 +16,7 @@ import {
 	setForgotToken,
 	verifyUser,
 	findUserByResetToken,
+	createNoteHash
 } from "./userServices.js";
 
 import * as tokenService from "../../utils/tokenService.js";
@@ -27,6 +28,7 @@ router.route("/signup").post(async (req, res, next) => {
 	try {
 		const newUser = req.body.data;
 		newUser.verification = await addValidation();
+		newUser.cypherCode = createNoteHash();
 		const user = await createUser(newUser);
 
 		const subject = t("emails.signup.subject");

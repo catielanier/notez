@@ -32,6 +32,11 @@ export const isUser = async ({email, password}) => {
 	}
 };
 
+export const createNoteHash = () => {
+	const bytes = 32;
+	return randomBytes(bytes).toString("base64url");
+}
+
 export const getUserById = async (id) => {
 	try {
 		user = await User.findById(id).select('-password');

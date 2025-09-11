@@ -50,6 +50,10 @@ const userSchema = new Schema({
   forgotPassword: {
     type: String,
   },
+  cypherCode: {
+    type: String,
+    required: true
+  },
 	validTokens: [
 		{
 			type: String
