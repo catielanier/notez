@@ -181,3 +181,11 @@ export const findUserByResetToken = async (key) => {
 		throw e;
 	}
 };
+
+export const resetUserNoteHash = async (id, cypherCode) => {
+	try {
+		return await User.findByIdAndUpdate({_id: id}, {$set: {cypherCode}})
+	} catch (e) {
+		throw e;
+	}
+}

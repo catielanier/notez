@@ -16,8 +16,18 @@ import {
 	setForgotToken,
 	verifyUser,
 	findUserByResetToken,
-	createNoteHash
+	createNoteHash,
+	resetUserNoteHash
 } from "./userServices.js";
+import {
+	getUserNotes as getUserPlayerNotes,
+	updateNote as updatePlayerNote
+} from '../notes/players/playerNoteServices.js'
+import {
+	getUserNotes as getUserGameNotes,
+	updateNote as updateGameNote
+} from '../notes/games/gameNoteServices.js'
+import { decrypt, encrypt } from "../../utils/crypto.js";
 
 import * as tokenService from "../../utils/tokenService.js";
 import resend from "../../utils/resend.js";
@@ -183,6 +193,34 @@ router.route("/:id").put(async (req, res) => {
 		res.status(401).send(t("errors.notLoggedIn"));
 	}
 });
+
+router.route("/:id/regen").put(async (req, res) => {
+	const { id: user } = req.params;
+	const { token } = req.body;
+	const loggedIn = await tokenService.verifyToken(token);
+	if (!loggedIn) {
+		res.status(403).send(t("errors.notLoggedIn"));
+	}
+	const { requestingUserId } = await tokenService.decodeToken(token);
+	const requestingUser = await userServices.getUserById(requestingUserId);
+	if (requestingUserId !== id || requestingUser.role !== "ADMIN") {
+		res.status(503).send(t("errors.viewUser"));
+	}
+	const oldCypherCode = requestingUser.cypherCode;
+	const cypherCode = createNoteHash();
+	await resetUserNoteHash(id, cypherCode);
+	(await getUserPlayerNotes(id)).forEach(async note => {
+		const decodedNote = decrypt(note.note, oldCypherCode);
+		note.note = encrypt(note.note, cypherCode);
+		await updatePlayerNote(note._id, note.note, note.filter);
+	})
+	(await getUserGameNotes(id)).forEach(async note => {
+		const decodedNote = decrypt(note.note, oldCypherCode);
+		note.note = encrypt(note.note, cypherCode);
+		await updateGameNote(note._id, note.note, note.filter);
+	})
+	res.status(200);
+}) 
 
 // get all users
 router.route("/").get(async (req, res) => {
